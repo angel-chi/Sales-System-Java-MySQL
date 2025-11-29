@@ -37,11 +37,10 @@ public class MenuController {
     public void openNewStage(String fxmlFileName, String title) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
-            Scene scene = new Scene(fxmlLoader.load());
+            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
-            configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
         } catch (IOException | NullPointerException e) {
@@ -49,7 +48,7 @@ public class MenuController {
         }
     }
 
-    private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
+    /*private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
                 openNewStage(getFxmlFather(fxmlFileName),title);
@@ -59,7 +58,7 @@ public class MenuController {
 
     String getFxmlFather(String fxml){
         return filePaths.get(fxml);
-    }
+    }*/
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
