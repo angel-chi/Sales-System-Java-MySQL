@@ -32,7 +32,7 @@ public class ManagementController extends MenuController implements Initializabl
 
     @FXML
     void openSeller(ActionEvent actionEvent){
-        openNewStage(SELLER_VIEW_FXML,"Vendedor");
+        openNewStage(SELLER_VIEW_FXML,"Vendedor", 650, 600);
         closeCurrentStage((Button) actionEvent.getSource());
     }
 
@@ -60,23 +60,23 @@ public class ManagementController extends MenuController implements Initializabl
 
 
     public void openCustomer(ActionEvent actionEvent) {
-        openNewStage(CUSTOMER_VIEW_FXML, "Clientes");
+        openNewStage(CUSTOMER_VIEW_FXML, "Clientes", 800, 800);
         closeCurrentStage((Button) actionEvent.getSource());
     }
 
     public void openProduct(ActionEvent actionEvent) {
-        openNewStage(PRODUCT_VIEW_FXML,"Productos");
+        openNewStage(PRODUCT_VIEW_FXML,"Productos", 800, 800);
         closeCurrentStage((Button) actionEvent.getSource());
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
 
-        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compra");
+        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compra", 600, 700);
         closeCurrentStage((Button) actionEvent.getSource());
     }
 
     public void openSalesReport(ActionEvent actionEvent) {
-        openNewStage(REPORT_VIEW_FXML,"Ventas");
+        openNewStage(REPORT_VIEW_FXML,"Ventas", 1500, 1025);
         closeCurrentStage((Button) actionEvent.getSource());
 
     }
@@ -88,7 +88,7 @@ public class ManagementController extends MenuController implements Initializabl
     public void exit(ActionEvent actionEvent) {
 
         closeCurrentStage((Button) actionEvent.getSource());
-        openNewStage(MAIN_VIEW_FXML, "Inicio de sesión");
+        openNewStage(MAIN_VIEW_FXML, "Inicio de sesión", 400, 500);
     }
 
 

@@ -29,7 +29,7 @@ public class Main extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(MAIN_VIEW_FXML));
         Scene scene = new Scene(loader.load(), 400, 500);
-        stage.setTitle("Login");
+        stage.setTitle("Inicio de sesión");
         stage.setScene(scene);
         stage.show();
 

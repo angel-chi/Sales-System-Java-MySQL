@@ -33,18 +33,20 @@ public class MenuController {
         stage.close();
     }
 
-
-    public void openNewStage(String fxmlFileName, String title) {
+    //Esto se encarga de cada nueva ventana creada
+    public static void openNewStage(String fxmlPath, String title, double width, double height) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
-            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+            FXMLLoader loader = new FXMLLoader(MenuController.class.getResource(fxmlPath));
+            Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
-            stage.show();
+            stage.setMinWidth(width);
+            stage.setMinHeight(height);
 
-        } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            stage.show();
+        } catch (IOException e) {
+            setAlert(Alert.AlertType.ERROR, "Error al abrir ventana: " + e.getMessage());
         }
     }
 
