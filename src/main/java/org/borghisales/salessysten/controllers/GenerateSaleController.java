@@ -48,7 +48,8 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
-
+    @FXML
+    private Button closeWindow;
     @FXML
     private TextField serial;
     @FXML
@@ -318,6 +319,12 @@ public class GenerateSaleController extends MenuController implements Initializa
         idSale = 1+salesDAO.IdSale();
         String formattedId= String.format("%04d", idSale);
         serial.setText(formattedId);
+    }
+    @FXML
+    private void exitWindow(ActionEvent actionEvent) {
+        Button button = (Button) actionEvent.getSource();
+        closeCurrentStage(button);
+        openNewStage(MANAGEMENT_VIEW_FXML, "Control del punto de venta", 600, 800);
     }
 
 
