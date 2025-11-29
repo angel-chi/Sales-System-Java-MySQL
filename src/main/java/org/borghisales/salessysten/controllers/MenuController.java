@@ -34,6 +34,7 @@ public class MenuController {
     }
 
 
+    //Abrir una nueva ventana
     public void openNewStage(String fxmlFileName, String title) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
@@ -41,11 +42,16 @@ public class MenuController {
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
+
+            //Tamaño para la ventana
+            stage.setWidth(800);
+            stage.setHeight(600);
+
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error: cargando la vista: "+ e.getMessage());
         }
     }
 

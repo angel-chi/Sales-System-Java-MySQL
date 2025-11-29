@@ -6,6 +6,9 @@ import javafx.scene.control.TextField;
 import org.borghisales.salessysten.model.Seller;
 import org.borghisales.salessysten.model.SellerDAO;
 
+//Para usar el metodo Platform.exit() que cierra la aplicación de forma controlada.
+import javafx.application.Platform;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,6 +39,11 @@ public class MainController extends MenuController implements Initializable {
             openNewStage(MANAGEMENT_VIEW_FXML, "Management");
             closeCurrentStage(user);
         }
+    }
+
+    @FXML
+    private void closeApp() {
+        Platform.exit();
     }
 
 }
