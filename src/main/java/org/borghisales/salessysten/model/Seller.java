@@ -3,10 +3,10 @@ package org.borghisales.salessysten.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public record Seller(int idSeller, String dni, String name, String phoneNumber, State state, String user) {
+public record Seller(int idSeller, String dni, String name, String phoneNumber, State state, String user, String password) {
     public enum State {ACTIVE(), DISACTIVE()}
-    public Seller(String dni, String name, String phoneNumber, State state, String user) {
-        this(0, dni, name, phoneNumber, state, user);
+    public Seller(String dni, String name, String phoneNumber, State state, String user, String password) {
+        this(0, dni, name, phoneNumber, state, user, password);
     }
 
     public static Seller fromResultSet(ResultSet rs) throws SQLException {
@@ -16,7 +16,8 @@ public record Seller(int idSeller, String dni, String name, String phoneNumber, 
         String phoneNumber = rs.getString("phone_number");
         State state = Seller.State.valueOf(rs.getString("state"));
         String user = rs.getString("user");
-        return new Seller(id, dni, name, phoneNumber, state, user);
+        String password = rs.getString("password");
+        return new Seller(id, dni, name, phoneNumber, state, user, password);
     }
 }
 

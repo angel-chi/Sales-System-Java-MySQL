@@ -4,6 +4,10 @@
 -- ------------------------------------------------------
 -- Server version	8.0.36
 
+CREATE DATABASE salesystem IF NOT EXISTS;
+-- Para comprobar, ejecutar el siguiente comando: SHOW DATABASES;
+USE salesystem;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -144,11 +148,11 @@ DROP TABLE IF EXISTS `seller`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `seller` (
   `idSeller` int NOT NULL AUTO_INCREMENT,
-  `dni` varchar(8) NOT NULL,
+  `dni` varchar(8) NOT NULL UNIQUE,
   `name` varchar(20) NOT NULL,
   `phone_number` varchar(10) DEFAULT NULL,
   `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
-  `user` varchar(16) DEFAULT NULL,
+  `user` varchar(16) DEFAULT NULL UNIQUE,
   PRIMARY KEY (`idSeller`),
   UNIQUE KEY `idx_uk` (`dni`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3;

@@ -67,13 +67,14 @@ public class SalesDAO {
         try (Connection conn = DBConnection.connection()){
 
             for (ShoppingCart e:products) {
-                String sql = "INSERT INTO sales_details (idSales,idProduct,quantity, priceSale) values(?,?,?,?)";
+                String sql = "INSERT INTO sales_details (idSales,idProduct,quantity, priceSale, subtotal) values(?,?,?,?,?)";
                 try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
                     pstmt.setInt(1, id);
                     pstmt.setInt(2, Integer.parseInt(e.cod()));
                     pstmt.setInt(3, e.quantity());
                     pstmt.setDouble(4, e.price());
+                    pstmt.setDouble(5, e.price() * e.quantity());
 
                     pstmt.executeUpdate();
 

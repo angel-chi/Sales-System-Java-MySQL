@@ -31,6 +31,8 @@ public class SellerController implements Initializable {
     @FXML
     private TextField user;
     @FXML
+    private TextField password;
+    @FXML
     private ComboBox<Seller.State> cbState;
     @FXML
     private TableView<Seller> tableSellers;
@@ -44,7 +46,8 @@ public class SellerController implements Initializable {
     private TableColumn<Seller,String> colPhone;
     @FXML
     private TableColumn<Seller, Seller.State> colState;
-
+    @FXML
+    private TableColumn<Seller, String> colPassword;
 
 
 
@@ -86,17 +89,29 @@ public class SellerController implements Initializable {
 
 
     public void addSeller(ActionEvent actionEvent){
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
-        if (sellerDAO.create(seller)) {
-            MenuController.cleanCells(dni, name, phone, user);
-            updateTable();
+        if (dni.getText().isEmpty() || name.getText().isEmpty() || phone.getText().isEmpty() || user.getText().isEmpty() || password.getText().isEmpty()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Debe llenar los datos po weon");
+            ;
+        }
+        else {
+            Seller seller = new Seller(dni.getText(), name.getText(), phone.getText(), cbState.getValue(), user.getText(), password.getText());
+            if (sellerDAO.create(seller)) {
+                MenuController.cleanCells(dni, name, phone, user, password);
+                updateTable();
+            }
         }
     }
     public void updateSeller(ActionEvent actionEvent) {
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
-        if (sellerDAO.update(seller)) {
-            MenuController.cleanCells(dni, name, phone, user);
-            updateTable();
+        if (dni.getText().isEmpty() || user.getText().isEmpty() || password.getText().isEmpty()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Los campos DNI, Usuario o contraseña no pueden ser vacios");
+            ;
+        }
+        else {
+            Seller seller = new Seller(dni.getText(), name.getText(), phone.getText(), (Seller.State) cbState.getValue(), user.getText(), password.getText());
+            if (sellerDAO.update(seller)) {
+                MenuController.cleanCells(dni, name, phone, user, password);
+                updateTable();
+            }
         }
     }
 
@@ -105,7 +120,7 @@ public class SellerController implements Initializable {
             MenuController.setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller");
             return;
         }
-        if (sellerDAO.delete(dni.getText())){
+        if (sellerDAO.delete(user.getText())){
             MenuController.cleanCells(dni,name,phone,user);
             updateTable();
         }
@@ -120,6 +135,7 @@ public class SellerController implements Initializable {
         name.setText(seller.name());
         phone.setText(seller.phoneNumber());
         user.setText(seller.user());
+        password.setText(seller.password());
         cbState.setValue(seller.state());
     }
 

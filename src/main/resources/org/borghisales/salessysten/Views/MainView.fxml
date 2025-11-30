@@ -17,12 +17,12 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="94.0" layoutY="111.0" prefHeight="45.0" prefWidth="119.0" text="DNI" textAlignment="CENTER" wrapText="true">
+      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="94.0" layoutY="111.0" prefHeight="45.0" prefWidth="119.0" text="Usuario" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="54.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="PASSWORD">
+      <Label alignment="CENTER" layoutX="54.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="Contraseña">
          <font>
             <Font size="28.0" />
          </font>

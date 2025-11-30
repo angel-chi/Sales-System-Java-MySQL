@@ -54,15 +54,15 @@
       <Button layoutX="53.0" layoutY="561.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="102.0" text="CANCEL" />
       <Button layoutX="192.0" layoutY="561.0" mnemonicParsing="false" onAction="#generateSale" text="GENERATE SALE" />
       <TextField fx:id="total" editable="false" layoutX="472.0" layoutY="561.0" prefWidth="88.0" />
-      <Label layoutX="21.0" layoutY="170.0" text="DNI CUSTOMER:" wrapText="true" />
-      <Label layoutX="21.0" layoutY="204.0" text="COD PROD:" wrapText="true" />
-      <Label layoutX="22.0" layoutY="238.0" text="PRICE:" wrapText="true" />
-      <Label layoutX="22.0" layoutY="274.0" text="QUANTITY:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="170.0" text="CUSTOMER:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="204.0" text="PRODUCT:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="238.0" text="STOCK:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="273.0" text="SELLER:" wrapText="true" />
-      <Label layoutX="397.0" layoutY="565.0" text="TOTAL SALE" wrapText="true" />
+      <Label layoutX="21.0" layoutY="170.0" text="DNI (Cliente):" wrapText="true" />
+      <Label layoutX="21.0" layoutY="204.0" text="ID producto:" wrapText="true" />
+      <Label layoutX="22.0" layoutY="238.0" text="Precio:" wrapText="true" />
+      <Label layoutX="22.0" layoutY="274.0" text="Cantidad:" wrapText="true" />
+      <Label layoutX="347.0" layoutY="170.0" text="Cliente:" wrapText="true" />
+      <Label layoutX="347.0" layoutY="204.0" text="Producto:" wrapText="true" />
+      <Label layoutX="347.0" layoutY="238.0" text="En almacen:" wrapText="true" />
+      <Label layoutX="347.0" layoutY="273.0" text="Vendedor:" wrapText="true" />
+      <Label layoutX="397.0" layoutY="565.0" text="Total" wrapText="true" />
       <TextField fx:id="date" editable="false" layoutX="251.0" layoutY="270.0" prefHeight="25.0" prefWidth="80.0" />
    </AnchorPane>
 </AnchorPane>
