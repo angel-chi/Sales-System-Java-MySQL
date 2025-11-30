@@ -43,6 +43,8 @@ public class MenuController {
             stage.setScene(scene);
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
+            stage.setWidth(500);
+            stage.setHeight(500);
 
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
