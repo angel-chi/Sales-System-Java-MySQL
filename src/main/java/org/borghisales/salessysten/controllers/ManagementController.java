@@ -56,7 +56,7 @@ public class ManagementController extends MenuController implements Initializabl
     }
     public void openSalesReport(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(REPORT_VIEW_FXML,"Ventas", 1470, 1030);
+        openNewStage(REPORT_VIEW_FXML,"Ventas", 1470, 1060);
         closeCurrentStage(sellerButton);
 
     }
