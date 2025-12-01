@@ -79,7 +79,6 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>org.borghisales.salessysten.Main
@@ -108,7 +107,6 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <!--mainClass>mypackage.gui.menuInicial.JFrameGestorEstudiantes_app</mainClass-->
                             <mainClass>org.borghisales.salessysten.Main</mainClass>
                         </manifest>
                     </archive>
