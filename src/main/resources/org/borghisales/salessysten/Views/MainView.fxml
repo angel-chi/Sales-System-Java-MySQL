@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
    <children>
       <ImageView fitHeight="71.0" fitWidth="73.0" layoutX="224.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/img.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="22.0" prefHeight="45.0" prefWidth="200.0" text="SALES SYSTEM" underline="true">
+      <Label alignment="CENTER" layoutX="14.0" layoutY="22.0" prefHeight="70.0" prefWidth="200.0" text="SISTEMA DE VENTAS" underline="true">
          <font>
             <Font size="28.0" />
          </font>
@@ -22,13 +22,13 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="54.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="PASSWORD">
+      <Label alignment="CENTER" layoutX="54.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="CONTRASEÑA">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
       <TextField fx:id="user" layoutX="79.0" layoutY="163.0" />
-      <Button layoutX="94.0" layoutY="331.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="SIGN IN" />
+      <Button layoutX="94.0" layoutY="331.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="INGRESAR" />
       <PasswordField fx:id="password" layoutX="79.0" layoutY="260.0" />
    </children>
 </AnchorPane>

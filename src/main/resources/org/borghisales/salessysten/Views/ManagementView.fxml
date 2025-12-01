@@ -7,7 +7,7 @@
    <children>
       <TabPane fx:id="tabPaneManage" prefHeight="400.0" prefWidth="315.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="MENU">
+          <Tab text="MENÚ">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="525.0">
                      <children>
@@ -17,18 +17,18 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="SALES">
+          <Tab text="VENTAS">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="240.0">
                      <children>
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openGenerateSale" prefHeight="70.0" prefWidth="160.0" text="GENERATE SALE" />
+                        <Button layoutX="90.0" layoutY="180.0" mnemonicParsing="false" onAction="#openGenerateSale" prefHeight="70.0" prefWidth="160.0" text="GENERATE SALE" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="MANAGEMENT">
+            <Tab text="ADMINISTRACIÓN">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="250.0">
                      <children>
                         <Button layoutX="78.0" layoutY="46.0" mnemonicParsing="false" onAction="#openCustomer" prefHeight="70.0" prefWidth="160.0" text="CUSTOMER" />
                         <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="160.0" text="PRODUCT" />
@@ -37,7 +37,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="REPORTS">
+            <Tab text="REPORTES">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
