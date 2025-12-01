@@ -37,3 +37,9 @@ build/
 ### Mac OS ###
 .DS_Store
 /src/main/java/org/borghisales/salessysten/model/config.properties
+
+### Docker ###
+docker-compose.yml
+
+### Se agrega el config.properties ya que contiene el usuari que cree en mi maquina para sql y puede variar ###
+src/main/resources/config.properties
