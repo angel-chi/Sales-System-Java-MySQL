@@ -5,68 +5,95 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="596.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.GenerateSaleController">
-   <AnchorPane prefHeight="596.0" prefWidth="590.0">
-      <Label layoutX="265.0" layoutY="11.0" prefHeight="39.0" prefWidth="279.0" text="PUNTO DE VENTA" underline="true">
-         <font>
-            <Font name="System Bold" size="17.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="111.0" fitWidth="117.0" layoutX="50.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../../../images/img_1.png" />
-      </ImageView>
-      <Separator layoutX="6.0" layoutY="135.0" prefHeight="16.0" prefWidth="584.0" />
-      <Label layoutX="195.0" layoutY="43.0" prefHeight="21.0" prefWidth="300.0" text="VENTA DE PRODUCTOS TECNOLÓGICOS">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="300.0" layoutY="66.0" prefHeight="17.0" prefWidth="94.0" text="TEL: 8383-03939" />
-      <Label layoutX="258.0" layoutY="104.0" prefHeight="17.0" prefWidth="137.0" text="SERIAL NR:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TextField fx:id="serial" editable="false" layoutX="336.0" layoutY="101.0" prefHeight="16.0" prefWidth="117.0" />
-      <TextField fx:id="codCustomer" layoutX="125.0" layoutY="166.0" prefHeight="25.0" prefWidth="117.0" />
-      <TextField fx:id="codProduct" layoutX="124.0" layoutY="200.0" prefHeight="25.0" prefWidth="117.0" />
-      <TextField fx:id="price" layoutX="125.0" layoutY="234.0" prefHeight="25.0" prefWidth="117.0" />
-      <TextField fx:id="customerName" editable="false" layoutX="425.0" layoutY="166.0" prefHeight="25.0" prefWidth="148.0" />
-      <TextField fx:id="productName" editable="false" layoutX="425.0" layoutY="199.0" prefHeight="25.0" prefWidth="148.0" />
-      <TextField fx:id="stock" editable="false" layoutX="424.0" layoutY="234.0" prefHeight="25.0" prefWidth="148.0" />
-      <TextField fx:id="seller" editable="false" layoutX="424.0" layoutY="269.0" prefHeight="25.0" prefWidth="148.0" />
-      <Spinner fx:id="quantity" layoutX="125.0" layoutY="269.0" prefHeight="21.0" prefWidth="117.0" />
-      <Button layoutX="250.0" layoutY="166.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="25.0" prefWidth="80.0" text="BUSCAR" />
-      <Button layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="25.0" prefWidth="80.0" text="BUSCAR" />
-      <Button layoutX="250.0" layoutY="234.0" mnemonicParsing="false" onAction="#addShoppingCart" prefHeight="25.0" prefWidth="80.0" text="AGREGAR" />
-      <Separator layoutX="-2.0" layoutY="318.0" prefHeight="16.0" prefWidth="590.0" />
-      <TableView fx:id="tableSale" layoutX="12.0" layoutY="335.0" prefHeight="208.0" prefWidth="568.0">
-         <columns>
-            <TableColumn fx:id="colNro" prefWidth="71.0" sortable="false" style="-fx-alignment: CENTER;" text="NR" />
-            <TableColumn fx:id="colCod" prefWidth="92.0" sortable="false" style="-fx-alignment: CENTER;" text="COD" />
-            <TableColumn fx:id="colProduct" prefWidth="77.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCTO" />
-            <TableColumn fx:id="colQuantity" prefWidth="100.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
-            <TableColumn fx:id="colPrice" prefWidth="135.0" style="-fx-alignment: CENTER;" text="PRECIO POR UNIDAD" />
-            <TableColumn fx:id="colTotal" prefWidth="103.0" style="-fx-alignment: CENTER;" text="TOTAL" />
-         </columns>
-      </TableView>
-      <Separator layoutX="-4.0" layoutY="551.0" prefHeight="2.0" prefWidth="590.0" />
-      <Button layoutX="53.0" layoutY="561.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="102.0" text="CANCELAR" />
-      <Button layoutX="192.0" layoutY="561.0" mnemonicParsing="false" onAction="#generateSale" text="GENERAR VENTA" />
-      <TextField fx:id="total" editable="false" layoutX="472.0" layoutY="561.0" prefWidth="88.0" />
-      <Label layoutX="12.0" layoutY="170.0" text="CORREO CLIENTE:" wrapText="true" />
-      <Label layoutX="21.0" layoutY="204.0" text="COD PROD:" wrapText="true" />
-      <Label layoutX="22.0" layoutY="238.0" text="PRECIO:" wrapText="true" />
-      <Label layoutX="22.0" layoutY="274.0" text="CANTIDAD:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="170.0" text="CLIENTE:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="204.0" text="PRODUCTO:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="238.0" text="STOCK:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="273.0" text="VENDEDOR:" wrapText="true" />
-       <Label layoutX="380.0" layoutY="565.0" text="PAGO TOTAL" wrapText="true">
-           <font>
-               <Font name="System Bold" size="14.0"/>
-           </font>
-       </Label>
-      <TextField fx:id="date" editable="false" layoutX="251.0" layoutY="270.0" prefHeight="25.0" prefWidth="80.0" />
-   </AnchorPane>
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.GenerateSaleController">
+    <children>
+        <!-- Eliminé prefHeight y prefWidth, para que el AnchorPane ocupe toda la pantalla -->
+        <AnchorPane>
+            <children>
+                <!-- Título -->
+                <Label layoutX="265.0" layoutY="11.0" prefHeight="39.0" prefWidth="279.0" text="PUNTO DE VENTA" underline="true">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+
+                <!-- Imagen -->
+                <ImageView fitHeight="111.0" fitWidth="117.0" layoutX="50.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../../images/img_1.png" />
+                </ImageView>
+
+                <!-- Separador -->
+                <Separator layoutX="6.0" layoutY="135.0" prefHeight="16.0" prefWidth="584.0" />
+
+                <!-- Texto -->
+                <Label layoutX="195.0" layoutY="43.0" prefHeight="21.0" prefWidth="300.0" text="VENTA DE PRODUCTOS TECNOLÓGICOS">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label layoutX="300.0" layoutY="66.0" prefHeight="17.0" prefWidth="94.0" text="TEL: 8383-03939" />
+                <Label layoutX="258.0" layoutY="104.0" prefHeight="17.0" prefWidth="137.0" text="SERIAL NR:">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+
+                <!-- Campos de texto -->
+                <TextField fx:id="serial" editable="false" layoutX="336.0" layoutY="101.0" prefHeight="16.0" prefWidth="117.0" />
+                <TextField fx:id="codCustomer" layoutX="125.0" layoutY="166.0" prefHeight="25.0" prefWidth="117.0" />
+                <TextField fx:id="codProduct" layoutX="124.0" layoutY="200.0" prefHeight="25.0" prefWidth="117.0" />
+                <TextField fx:id="price" layoutX="125.0" layoutY="234.0" prefHeight="25.0" prefWidth="117.0" />
+                <TextField fx:id="customerName" editable="false" layoutX="425.0" layoutY="166.0" prefHeight="25.0" prefWidth="148.0" />
+                <TextField fx:id="productName" editable="false" layoutX="425.0" layoutY="199.0" prefHeight="25.0" prefWidth="148.0" />
+                <TextField fx:id="stock" editable="false" layoutX="424.0" layoutY="234.0" prefHeight="25.0" prefWidth="148.0" />
+                <TextField fx:id="seller" editable="false" layoutX="424.0" layoutY="269.0" prefHeight="25.0" prefWidth="148.0" />
+                <Spinner fx:id="quantity" layoutX="125.0" layoutY="269.0" prefHeight="21.0" prefWidth="117.0" />
+
+                <!-- Botones -->
+                <Button layoutX="250.0" layoutY="166.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="25.0" prefWidth="80.0" text="BUSCAR" />
+                <Button layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="25.0" prefWidth="80.0" text="BUSCAR" />
+                <Button layoutX="250.0" layoutY="234.0" mnemonicParsing="false" onAction="#addShoppingCart" prefHeight="25.0" prefWidth="80.0" text="AGREGAR" />
+
+                <!-- Separador -->
+                <Separator layoutX="-2.0" layoutY="318.0" prefHeight="16.0" prefWidth="590.0" />
+
+                <!-- Tabla de ventas -->
+                <TableView fx:id="tableSale" layoutX="12.0" layoutY="335.0" prefHeight="208.0" prefWidth="568.0">
+                    <columns>
+                        <TableColumn fx:id="colNro" prefWidth="71.0" sortable="false" style="-fx-alignment: CENTER;" text="NR" />
+                        <TableColumn fx:id="colCod" prefWidth="92.0" sortable="false" style="-fx-alignment: CENTER;" text="COD" />
+                        <TableColumn fx:id="colProduct" prefWidth="77.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCTO" />
+                        <TableColumn fx:id="colQuantity" prefWidth="100.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
+                        <TableColumn fx:id="colPrice" prefWidth="135.0" style="-fx-alignment: CENTER;" text="PRECIO POR UNIDAD" />
+                        <TableColumn fx:id="colTotal" prefWidth="103.0" style="-fx-alignment: CENTER;" text="TOTAL" />
+                    </columns>
+                </TableView>
+
+                <!-- Separador -->
+                <Separator layoutX="-4.0" layoutY="551.0" prefHeight="2.0" prefWidth="590.0" />
+
+                <!-- Botones de acción -->
+                <Button layoutX="53.0" layoutY="561.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="102.0" text="CANCELAR" />
+                <Button layoutX="192.0" layoutY="561.0" mnemonicParsing="false" onAction="#generateSale" text="GENERAR VENTA" />
+
+                <!-- Total y fecha -->
+                <TextField fx:id="total" editable="false" layoutX="472.0" layoutY="561.0" prefWidth="88.0" />
+                <Label layoutX="12.0" layoutY="170.0" text="CORREO CLIENTE:" wrapText="true" />
+                <Label layoutX="21.0" layoutY="204.0" text="COD PROD:" wrapText="true" />
+                <Label layoutX="22.0" layoutY="238.0" text="PRECIO:" wrapText="true" />
+                <Label layoutX="22.0" layoutY="274.0" text="CANTIDAD:" wrapText="true" />
+                <Label layoutX="347.0" layoutY="170.0" text="CLIENTE:" wrapText="true" />
+                <Label layoutX="347.0" layoutY="204.0" text="PRODUCTO:" wrapText="true" />
+                <Label layoutX="347.0" layoutY="238.0" text="STOCK:" wrapText="true" />
+                <Label layoutX="347.0" layoutY="273.0" text="VENDEDOR:" wrapText="true" />
+                <Label layoutX="380.0" layoutY="565.0" text="PAGO TOTAL" wrapText="true">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="date" editable="false" layoutX="251.0" layoutY="270.0" prefHeight="25.0" prefWidth="80.0" />
+            </children>
+        </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+    </children>
 </AnchorPane>

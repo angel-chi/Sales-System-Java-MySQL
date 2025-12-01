@@ -35,7 +35,7 @@ public class MenuController {
 
 
     //Abrir una nueva ventana
-    public void openNewStage(String fxmlFileName, String title) {
+    public void openNewStage(String fxmlFileName, String title, double width, double height) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
             Scene scene = new Scene(fxmlLoader.load());
@@ -43,11 +43,13 @@ public class MenuController {
             stage.setTitle(title);
             stage.setScene(scene);
 
-            //Tamaño para la ventana
-            stage.setWidth(800);
-            stage.setHeight(600);
+            //Se setea el tamaño para la ventana
+            stage.setWidth(width);
+            stage.setHeight(height);
 
-            configureStageCloseEvent(stage, fxmlFileName, title);
+            stage.setResizable(false);
+
+            configureStageCloseEvent(stage, fxmlFileName, title, width, height);
             stage.show();
 
         } catch (IOException | NullPointerException e) {
@@ -55,10 +57,10 @@ public class MenuController {
         }
     }
 
-    private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
+    private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title, double width, double height) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
+                openNewStage(getFxmlFather(fxmlFileName),title, width, height);
             });
         }
     }
@@ -80,6 +82,4 @@ public class MenuController {
         for (TextField e:cells)
             e.clear();
     }
-
-
 }
