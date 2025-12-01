@@ -72,7 +72,7 @@ public class ManagementController extends MenuController implements Initializabl
     }
 
     public void exit(ActionEvent actionEvent) {
-        openNewStage(MAIN_VIEW_FXML,"Login");
+        openNewStage(MAIN_VIEW_FXML,"Inicio");
         closeCurrentStage(sellerButton);
     }
 

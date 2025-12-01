@@ -63,7 +63,7 @@ public class MenuController {
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("Información");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);

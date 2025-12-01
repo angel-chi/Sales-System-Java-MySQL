@@ -130,7 +130,7 @@ public class SellerDAO implements CRUD<Seller> {
     public static boolean login(String dni,String user){
 
         if (dni ==null || user ==null || dni.isEmpty()||user.isEmpty() ){
-            MenuController.setAlert(Alert.AlertType.ERROR,"User or passsword empty");
+            MenuController.setAlert(Alert.AlertType.ERROR,"Usuario o contraseña vacíos");
             return false;
         }
 
@@ -152,7 +152,7 @@ public class SellerDAO implements CRUD<Seller> {
 
                     return true;
                 }else{
-                    MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;
+                    MenuController.setAlert(Alert.AlertType.ERROR, "Datos incorrectos, favor de verificar") ;
                     return false;
                 }
             }

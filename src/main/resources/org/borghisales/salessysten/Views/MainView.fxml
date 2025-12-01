@@ -12,23 +12,28 @@
             <Image url="@../../../../images/img.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="22.0" prefHeight="45.0" prefWidth="200.0" text="SALES SYSTEM" underline="true">
+      <Label alignment="CENTER" layoutX="14.0" layoutY="15.0" prefHeight="45.0" prefWidth="200.0" text="SISTEMA DE" underline="true">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="94.0" layoutY="111.0" prefHeight="45.0" prefWidth="119.0" text="DNI" textAlignment="CENTER" wrapText="true">
+       <Label alignment="CENTER" layoutX="14.0" layoutY="50.0" prefHeight="45.0" prefWidth="200.0" text="VENTAS" underline="true" textAlignment="CENTER">
+           <font>
+               <Font size="28.0" />
+           </font>
+       </Label>
+      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="84.0" layoutY="111.0" prefHeight="45.0" prefWidth="150.0" text="USUARIO" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="54.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="PASSWORD">
+      <Label alignment="CENTER" layoutX="54.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="CONTRASEÑA">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
       <TextField fx:id="user" layoutX="79.0" layoutY="163.0" />
-      <Button layoutX="94.0" layoutY="331.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="SIGN IN" />
+      <Button layoutX="94.0" layoutY="331.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="INGRESAR" />
       <PasswordField fx:id="password" layoutX="79.0" layoutY="260.0" />
    </children>
 </AnchorPane>

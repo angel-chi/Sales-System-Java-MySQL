@@ -62,7 +62,7 @@ CREATE TABLE `product` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `product`
+-- Dumping data for table `product` aqui te quedaste wey
 --
 
 LOCK TABLES `product` WRITE;
