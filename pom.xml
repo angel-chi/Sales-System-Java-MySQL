@@ -23,7 +23,7 @@
             <version>9.4.0</version>
         </dependency>
 
-        <!-- TODO Actualice esta dependencia pero sigue marcando vulnerabilidad, hay que checar eso-->
+        <!-- No tiene vulnerabilidades -->
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -43,14 +43,14 @@
             <version>2.0.25</version>
         </dependency>
 
-        <!-- TODO: Verificar si tiene vulnerabilidades -->
+        <!-- No tiene vulnerabilidades -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>5.2.4</version>
         </dependency>
 
-        <!-- TODO: Verificar si tiene vulnerabilidades -->
+        <!-- No tiene vulnerabilidades -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>

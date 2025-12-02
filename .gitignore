@@ -8,6 +8,7 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/workspace.xml
 .idea/copilot.data.migration.agent.xml
 .idea/copilot.data.migration.ask.xml
 .idea/copilot.data.migration.ask2agent.xml
@@ -41,6 +42,5 @@ build/
 ### Mac OS ###
 .DS_Store
 
-### DATABAE ###
+### DATABASE ###
 /src/main/java/org/borghisales/salessysten/model/config.properties
-.idea/workspace.xml
