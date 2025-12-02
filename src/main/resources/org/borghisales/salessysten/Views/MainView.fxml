@@ -5,30 +5,32 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
-   <children>
-      <ImageView fitHeight="71.0" fitWidth="73.0" layoutX="224.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/img.png" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="22.0" prefHeight="45.0" prefWidth="200.0" text="SALES SYSTEM" underline="true">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="94.0" layoutY="111.0" prefHeight="45.0" prefWidth="119.0" text="DNI" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="54.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="PASSWORD">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <TextField fx:id="user" layoutX="79.0" layoutY="163.0" />
-      <Button layoutX="94.0" layoutY="331.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="SIGN IN" />
-      <PasswordField fx:id="password" layoutX="79.0" layoutY="260.0" />
-   </children>
-</AnchorPane>
+<VBox alignment="CENTER" spacing="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
+    <children>
+        <ImageView fitHeight="71.0" fitWidth="73.0" layoutX="50" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../../images/img.png" />
+            </image>
+        </ImageView>
+        <Label  alignment="CENTER" layoutX="14.0" layoutY="22.0" prefHeight="45.0" prefWidth="200.0" text="SISTEMA DE VENTAS" underline="true">
+            <font>
+                <Font name="System Bold" size="20.0"/>
+            </font>
+        </Label>
+        <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="94.0" layoutY="111.0" prefHeight="45.0" prefWidth="119.0" text="ID USUARIO" textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <TextField style="-fx-font-size: 15px;"  fx:id="user" layoutX="79.0" layoutY="163.0" maxWidth="200.0" maxHeight="20.0"/>
+        <Label alignment="CENTER" layoutX="54.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="CONTRASEÑA">
+            <font>
+                <Font  size="20.0" />
+            </font>
+        </Label>
+        <PasswordField style="-fx-font-size: 15px;" fx:id="password" layoutX="79.0" layoutY="260.0" maxWidth="200.0" maxHeight="20.0"/>
+
+        <Button layoutX="94.0" layoutY="331.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="INICIAR SESION" />
+
+    </children>
+</VBox>
