@@ -23,16 +23,15 @@ public class MenuController {
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
 
-
     static Alert defaultAlert;
     static ButtonType acceptButton = new ButtonType("Accept");
-    public static HashMap<String, String > filePaths = new HashMap<>();
+
+    public static HashMap<String, String> filePaths = new HashMap<>();
 
     void closeCurrentStage(Node node) {
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
     }
-
 
     public void openNewStage(String fxmlFileName, String title) {
         try {
@@ -41,27 +40,54 @@ public class MenuController {
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
+
+            stage.setMinWidth(305);
+            stage.setMinHeight(415);
+
+            stage.setWidth(305);
+            stage.setHeight(415);
+
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
+            stage.centerOnScreen();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error loading the view: " + e.getMessage());
+        }
+    }
+
+    public void openAutoSizeStage(String fxmlFileName, String title) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(scene);
+
+            stage.setMaximized(true);
+
+            configureStageCloseEvent(stage, fxmlFileName, title);
+            stage.show();
+            stage.centerOnScreen();
+
+        } catch (IOException | NullPointerException e) {
+            setAlert(Alert.AlertType.WARNING, "Error loading the view: " + e.getMessage());
         }
     }
 
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
+                openNewStage(getFxmlFather(fxmlFileName), title);
             });
         }
     }
 
-    String getFxmlFather(String fxml){
+    String getFxmlFather(String fxml) {
         return filePaths.get(fxml);
     }
 
-    static public void setAlert(Alert.AlertType alertType,String argument){
+    public static void setAlert(Alert.AlertType alertType, String argument) {
         defaultAlert = new Alert(alertType);
         defaultAlert.setTitle("Information");
         defaultAlert.setHeaderText(null);
@@ -70,10 +96,8 @@ public class MenuController {
         defaultAlert.showAndWait();
     }
 
-    static public void cleanCells(TextField...cells){
-        for (TextField e:cells)
+    public static void cleanCells(TextField... cells) {
+        for (TextField e : cells)
             e.clear();
     }
-
-
 }
