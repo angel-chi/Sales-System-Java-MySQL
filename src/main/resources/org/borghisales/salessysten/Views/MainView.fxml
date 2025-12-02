@@ -30,7 +30,7 @@
         </Label>
         <PasswordField style="-fx-font-size: 15px;" fx:id="password" layoutX="79.0" layoutY="260.0" maxWidth="200.0" maxHeight="20.0"/>
 
-        <Button layoutX="94.0" layoutY="331.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="INICIAR SESION" />
+        <Button layoutX="94.0" layoutY="331.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="INICIAR SESIÓN" />
 
     </children>
 </VBox>

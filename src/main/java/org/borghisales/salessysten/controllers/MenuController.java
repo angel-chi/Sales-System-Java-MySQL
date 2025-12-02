@@ -23,7 +23,7 @@ public class MenuController {
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
 
     static Alert defaultAlert;
-    static ButtonType acceptButton = new ButtonType("Accept");
+    static ButtonType acceptButton = new ButtonType("Aceptar");
 
     public static HashMap<String, String> filePaths = new HashMap<>();
 
@@ -51,7 +51,7 @@ public class MenuController {
             stage.centerOnScreen();
 
         } catch (IOException | NullPointerException e){
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: " + e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error para cargar la ventana: " + e.getMessage());
         }
     }
 
@@ -70,7 +70,7 @@ public class MenuController {
             stage.centerOnScreen();
 
         } catch (IOException | NullPointerException e){
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: " + e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error para cargar la ventana: " + e.getMessage());
         }
     }
 
@@ -88,7 +88,7 @@ public class MenuController {
 
     public static void setAlert(Alert.AlertType alertType, String argument) {
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("Información");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);
