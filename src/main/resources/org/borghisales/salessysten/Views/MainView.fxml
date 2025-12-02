@@ -27,7 +27,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="125.0" layoutY="225.0" prefHeight="45.0" prefWidth="250.0" text="DNI" textAlignment="CENTER" wrapText="true">
+      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="125.0" layoutY="225.0" prefHeight="45.0" prefWidth="250.0" text="USUARIO" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="28.0" />
          </font>
@@ -38,7 +38,7 @@
          </font>
       </Label>
       <TextField fx:id="user" layoutX="170.0" layoutY="270.0" />
-      <Button layoutX="180.0" layoutY="420.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="INICIAR SESION" />
+      <Button layoutX="190.0" layoutY="420.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="INICIAR SESIÓN" />
       <PasswordField fx:id="password" layoutX="170.0" layoutY="365.0" />
    </children>
 </AnchorPane>

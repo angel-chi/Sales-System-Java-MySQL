@@ -4,49 +4,50 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
-   <children>
-      <TabPane fx:id="tabPaneManage" prefHeight="500.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="MENU">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="525.0">
-                     <children>
-                        <Button layoutX="180.0" layoutY="76.0" mnemonicParsing="false" onAction="#help" prefHeight="70.0" prefWidth="160.0" text="HELP" />
-                        <Button layoutX="180.0" layoutY="219.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="160.0" text="EXIT" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="SALES">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openGenerateSale" prefHeight="70.0" prefWidth="160.0" text="GENERATE SALE" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="MANAGEMENT">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="78.0" layoutY="46.0" mnemonicParsing="false" onAction="#openCustomer" prefHeight="70.0" prefWidth="160.0" text="CUSTOMER" />
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="160.0" text="PRODUCT" />
-                        <Button fx:id="sellerButton" layoutX="78.0" layoutY="264.0" mnemonicParsing="false" onAction="#openSeller" prefHeight="70.0" prefWidth="160.0" text="SELLER" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="REPORTS">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openSalesReport" prefHeight="70.0" prefWidth="160.0" text="SALES REPORT" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+    <children>
+        <TabPane fx:id="tabPaneManage" prefHeight="500.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="MENÚ">
+                    <content>
+                        <VBox alignment="CENTER" spacing="20">
+                            <children>
+                                <Button text="AYUDA" prefWidth="160" prefHeight="70" onAction="#help"/>
+                                <Button text="SALIR" prefWidth="160" prefHeight="70" onAction="#exit"/>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="VENTAS">
+                    <content>
+                        <VBox alignment="CENTER" spacing="20">
+                            <children>
+                                <Button text="GENERAR VENTA" prefWidth="160" prefHeight="70" onAction="#openGenerateSale"/>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="GESTIÓN">
+                    <content>
+                        <VBox alignment="CENTER" spacing="20">
+                            <children>
+                                <Button text="CLIENTE" prefWidth="160" prefHeight="70" onAction="#openCustomer"/>
+                                <Button text="PRODUCTO" prefWidth="160" prefHeight="70" onAction="#openProduct"/>
+                                <Button fx:id="sellerButton" text="VENDEDOR" prefWidth="160" prefHeight="70" onAction="#openSeller"/>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="REPORTES">
+                    <content>
+                        <VBox alignment="CENTER" spacing="20">
+                            <children>
+                                <Button text="REPORTE DE VENTAS" prefWidth="160" prefHeight="70" onAction="#openSalesReport"/>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>
+
