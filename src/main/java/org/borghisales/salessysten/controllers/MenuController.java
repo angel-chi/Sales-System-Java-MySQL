@@ -7,7 +7,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -51,7 +50,7 @@ public class MenuController {
             stage.show();
             stage.centerOnScreen();
 
-        } catch (IOException | NullPointerException e) {
+        } catch (IOException | NullPointerException e){
             setAlert(Alert.AlertType.WARNING, "Error loading the view: " + e.getMessage());
         }
     }
@@ -70,7 +69,7 @@ public class MenuController {
             stage.show();
             stage.centerOnScreen();
 
-        } catch (IOException | NullPointerException e) {
+        } catch (IOException | NullPointerException e){
             setAlert(Alert.AlertType.WARNING, "Error loading the view: " + e.getMessage());
         }
     }
@@ -96,8 +95,8 @@ public class MenuController {
         defaultAlert.showAndWait();
     }
 
-    public static void cleanCells(TextField... cells) {
-        for (TextField e : cells)
+    public static void cleanCells(TextField...cells) {
+        for (TextField e:cells)
             e.clear();
     }
 }
