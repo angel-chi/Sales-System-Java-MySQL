@@ -49,6 +49,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
 
+    private double currentTotal = 0;
+
     @FXML
     private TextField serial;
     @FXML
@@ -129,11 +131,12 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void searchCustomer(ActionEvent actionEvent) {
+
         int customerId = Integer.parseInt(codCustomer.getText());
         customer = customerDAO.searchCustomer(customerId);
 
         if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
+            setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + customer.name());
             customerName.setText(customer.name());
         } else {
             handleCustomerNotFound();
@@ -215,7 +218,9 @@ public class GenerateSaleController extends MenuController implements Initializa
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
         MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
-        total.clear();
+        currentTotal = 0.0;
+        total.setText("0.0");
+        products.clear();
     }
 
     public void generateSale(ActionEvent actionEvent) {
@@ -230,6 +235,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             cleanFieldsAndTable();
             setSerial();
             total.setText("0.0");
+
             products.clear();
             updateReportsController();
         }
@@ -237,7 +243,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Sales createSalesObject() {
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
+                LocalDate.parse(date.getText()), currentTotal,
                 Sales.State.ACTIVE);
     }
 
@@ -268,8 +274,9 @@ public class GenerateSaleController extends MenuController implements Initializa
     public static void setIdSeller(int idSeller) {
         GenerateSaleController.idSeller = idSeller;
     }
-
+    @FXML
     public void addShoppingCart(ActionEvent actionEvent) {
+
         String errorMessage = validateInputs();
 
         if (errorMessage != null) {
@@ -277,8 +284,8 @@ public class GenerateSaleController extends MenuController implements Initializa
             return;
         }
 
-        ShoppingCart product = createShoppingCartObject();
 
+        ShoppingCart product = createShoppingCartObject();
         if (isProductAlreadyInCart(product)) {
             MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
             return;
@@ -300,7 +307,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
-        double currentTotal = Double.parseDouble(total.getText()) + product.total();
+        currentTotal += product.total();
         total.setText(String.format("%.2f", currentTotal));
     }
 
