@@ -36,7 +36,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/src/main/java/org/borghisales/salessysten/model/config.properties
+/src/main/resources/config.properties
 
 ### Docker ###
 docker-compose.yml

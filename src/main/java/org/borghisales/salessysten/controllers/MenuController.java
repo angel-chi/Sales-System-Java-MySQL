@@ -3,6 +3,7 @@ package org.borghisales.salessysten.controllers;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
@@ -25,7 +26,7 @@ public class MenuController {
 
 
     static Alert defaultAlert;
-    static ButtonType acceptButton = new ButtonType("Accept");
+    static ButtonType acceptButton = new ButtonType("Aceptar");
     public static HashMap<String, String > filePaths = new HashMap<>();
 
     void closeCurrentStage(Node node) {
@@ -35,21 +36,48 @@ public class MenuController {
 
 
     //Abrir una nueva ventana
-    public void openNewStage(String fxmlFileName, String title, double width, double height) {
+    public void openNewStage(String fxmlFileName, String title) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
-            Scene scene = new Scene(fxmlLoader.load());
+            Parent root = fxmlLoader.load();
+
+            Scene scene;
             Stage stage = new Stage();
+
+            switch (fxmlFileName) {
+                case MAIN_VIEW_FXML, MANAGEMENT_VIEW_FXML:
+                    scene = new Scene(root, 800, 600);
+                    stage.setResizable(false);
+                    break;
+
+                case GENERATE_SALE_VIEW_FXML:             // ejemplo
+                    scene = new Scene(root, 590, 600);
+                    stage.setResizable(false);
+                    break;
+
+                case REPORT_VIEW_FXML:            // ejemplo
+                    scene = new Scene(root, 1470, 1040);
+                    stage.setResizable(false);
+                    break;
+
+                case PRODUCT_VIEW_FXML, SELLER_VIEW_FXML:            // ejemplo
+                    scene = new Scene(root, 650, 500);
+                    stage.setResizable(false);
+                    break;
+
+                case CUSTOMER_VIEW_FXML:            // ejemplo
+                    scene = new Scene(root, 665, 510);
+                    stage.setResizable(false);
+                    break;
+
+                // Si ningún título coincide, usa tamaño genérico
+                default:
+                   scene = new Scene(root, 800, 600);
+            }
+
             stage.setTitle(title);
             stage.setScene(scene);
-
-            //Se setea el tamaño para la ventana
-            stage.setWidth(width);
-            stage.setHeight(height);
-
-            stage.setResizable(false);
-
-            configureStageCloseEvent(stage, fxmlFileName, title, width, height);
+            configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
         } catch (IOException | NullPointerException e) {
@@ -57,10 +85,10 @@ public class MenuController {
         }
     }
 
-    private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title, double width, double height) {
+    private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title, width, height);
+                openNewStage(getFxmlFather(fxmlFileName),title);
             });
         }
     }
@@ -71,7 +99,7 @@ public class MenuController {
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("Información");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);

@@ -25,7 +25,7 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     void openSeller(ActionEvent actionEvent){
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(SELLER_VIEW_FXML,"Seller", 650, 500);
+        openNewStage(SELLER_VIEW_FXML,"Vendedor");
         closeCurrentStage(sellerButton);
     }
 
@@ -37,26 +37,26 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void openCustomer(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(CUSTOMER_VIEW_FXML, "Cliente", 665, 510);
+        openNewStage(CUSTOMER_VIEW_FXML, "Cliente");
         closeCurrentStage(sellerButton);
 
     }
 
     public void openProduct(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(PRODUCT_VIEW_FXML,"Producto", 650, 500);
+        openNewStage(PRODUCT_VIEW_FXML,"Producto");
         closeCurrentStage(sellerButton);
 
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de Compras", 590, 600);
+        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de Compras");
         closeCurrentStage(sellerButton);
     }
     public void openSalesReport(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(REPORT_VIEW_FXML,"Ventas", 1470, 1060);
+        openNewStage(REPORT_VIEW_FXML,"Ventas");
         closeCurrentStage(sellerButton);
 
     }
@@ -72,7 +72,7 @@ public class ManagementController extends MenuController implements Initializabl
     }
 
     public void exit(ActionEvent actionEvent) {
-        openNewStage(MAIN_VIEW_FXML,"Iniciar Sesión", 800, 600);
+        openNewStage(MAIN_VIEW_FXML,"Iniciar Sesión");
         closeCurrentStage(sellerButton);
     }
 }
