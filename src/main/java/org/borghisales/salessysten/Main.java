@@ -23,7 +23,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        mc.openNewStage(MAIN_VIEW_FXML,"Inicio de sesión");
+        openNewStage(MAIN_VIEW_FXML,"Inicio de sesión", 500, 500);
     }
 
     public static void main(String[] args) {

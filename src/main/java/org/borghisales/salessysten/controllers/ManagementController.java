@@ -25,7 +25,7 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     void openSeller(ActionEvent actionEvent){
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(SELLER_VIEW_FXML,"Vendedor");
+        openNewStage(SELLER_VIEW_FXML,"Vendedor", 700, 700);
         closeCurrentStage(sellerButton);
     }
 
@@ -37,42 +37,37 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void openCustomer(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(CUSTOMER_VIEW_FXML, "Cliente");
+        openNewStage(CUSTOMER_VIEW_FXML, "Cliente", 700, 700);
         closeCurrentStage(sellerButton);
 
     }
 
     public void openProduct(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(PRODUCT_VIEW_FXML,"Productos");
+        openNewStage(PRODUCT_VIEW_FXML,"Productos", 700, 700);
         closeCurrentStage(sellerButton);
 
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compras");
+        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compras", 700, 700);
         closeCurrentStage(sellerButton);
     }
     public void openSalesReport(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(REPORT_VIEW_FXML,"Ventas");
+        openNewStage(REPORT_VIEW_FXML,"Ventas", 700, 700);
         closeCurrentStage(sellerButton);
 
     }
 
     public void help(ActionEvent actionEvent) {
-        try {
-            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"The URL could not be opened. Check your internet connection.");
-        }
-
+        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        openNewStage(HELP_DETAIL_VIEW_FXML,"Ayuda", 700, 700);
     }
 
     public void exit(ActionEvent actionEvent) {
-        openNewStage(MAIN_VIEW_FXML,"Login");
+        openNewStage(MAIN_VIEW_FXML,"Login", 500, 500);
         closeCurrentStage(sellerButton);
     }
 
