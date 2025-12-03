@@ -12,7 +12,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
 
-        <Label text="MANAGEMENT PRODUCT" underline="true">
+        <Label text="Control de productos" underline="true">
             <font>
                 <Font size="24.0" />
             </font>
@@ -32,10 +32,10 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
 
-                <Label text="NAME:" underline="true" style="-fx-font-weight: bold; -fx-font-size: 15px;" GridPane.rowIndex="0" />
-                <Label text="PRICE:" underline="true" style="-fx-font-weight: bold; -fx-font-size: 15px;" GridPane.rowIndex="1" />
-                <Label text="STOCK:" underline="true" style="-fx-font-weight: bold; -fx-font-size: 15px;" GridPane.rowIndex="2" />
-                <Label text="STATE:" underline="true" style="-fx-font-weight: bold; -fx-font-size: 15px;" GridPane.rowIndex="3" />
+                <Label text="Nombre:" underline="true" style="-fx-font-weight: bold; -fx-font-size: 15px;" GridPane.rowIndex="0" />
+                <Label text="Precio:" underline="true" style="-fx-font-weight: bold; -fx-font-size: 15px;" GridPane.rowIndex="1" />
+                <Label text="Unidades:" underline="true" style="-fx-font-weight: bold; -fx-font-size: 15px;" GridPane.rowIndex="2" />
+                <Label text="Estado:" underline="true" style="-fx-font-weight: bold; -fx-font-size: 15px;" GridPane.rowIndex="3" />
 
                 <TextField fx:id="name" prefHeight="25.0" prefWidth="289.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <TextField fx:id="price" prefHeight="25.0" prefWidth="289.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -44,20 +44,20 @@
             </GridPane>
 
             <VBox alignment="TOP_CENTER" spacing="10.0" AnchorPane.topAnchor="60.0">
-                <Button mnemonicParsing="false" onAction="#addProduct" prefHeight="35.0" prefWidth="120.0" text="ADD" />
-                <Button mnemonicParsing="false" onAction="#updateProduct" prefHeight="35.0" prefWidth="120.0" text="UPDATE" />
-                <Button mnemonicParsing="false" onAction="#deleteProduct" prefHeight="35.0" prefWidth="120.0" text="DELETE" />
-                <Button mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="35.0" prefWidth="120.0" text="CLEAN CELLS" />
+                <Button mnemonicParsing="false" onAction="#addProduct" prefHeight="35.0" prefWidth="120.0" text="Añadir" />
+                <Button mnemonicParsing="false" onAction="#updateProduct" prefHeight="35.0" prefWidth="120.0" text="Actualizar" />
+                <Button mnemonicParsing="false" onAction="#deleteProduct" prefHeight="35.0" prefWidth="120.0" text="Eliminar" />
+                <Button mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="35.0" prefWidth="120.0" text="Limpiar Celdas" />
             </VBox>
         </HBox>
 
         <TableView fx:id="tableProducts" prefHeight="221.0" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="colId" prefWidth="100.0" text="idProduct" />
-                <TableColumn fx:id="colName" prefWidth="150.0" text="name" />
-                <TableColumn fx:id="colPrice" prefWidth="120.0" text="price" />
-                <TableColumn fx:id="colStock" prefWidth="120.0" text="stock" />
-                <TableColumn fx:id="colState" prefWidth="120.0" text="state" />
+                <TableColumn fx:id="colId" prefWidth="100.0" text="idProducto" />
+                <TableColumn fx:id="colName" prefWidth="150.0" text="Nombre" />
+                <TableColumn fx:id="colPrice" prefWidth="120.0" text="Precio" />
+                <TableColumn fx:id="colStock" prefWidth="120.0" text="Unidades" />
+                <TableColumn fx:id="colState" prefWidth="120.0" text="Estado" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -12,14 +12,14 @@
 <AnchorPane prefHeight="474.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SellerController">
    <children>
        <Button text="Cerrar ventana" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10" prefHeight="35" prefWidth="120" onAction="#exitWindow" />
-      <Button layoutX="458.0" layoutY="52.0" mnemonicParsing="false" onAction="#addSeller" prefHeight="32.0" prefWidth="101.0" text="ADD" />
+      <Button layoutX="458.0" layoutY="52.0" mnemonicParsing="false" onAction="#addSeller" prefHeight="32.0" prefWidth="101.0" text="Añadir" />
       <TableView fx:id="tableSellers" layoutX="26.0" layoutY="228.0" prefHeight="221.0" prefWidth="602.0">
         <columns>
-          <TableColumn fx:id="colId" prefWidth="120.0" text="idSeller" />
-          <TableColumn fx:id="colDni" prefWidth="111.0" text="dni" />
-            <TableColumn fx:id="colName" prefWidth="124.0" text="name" />
-            <TableColumn fx:id="colPhone" prefWidth="124.0" text="phone" />
-            <TableColumn fx:id="colState" prefWidth="122.0" text="state" />
+          <TableColumn fx:id="colId" prefWidth="120.0" text="idVendedor" />
+          <TableColumn fx:id="colDni" prefWidth="111.0" text="DNI" />
+            <TableColumn fx:id="colName" prefWidth="124.0" text="Nombre" />
+            <TableColumn fx:id="colPhone" prefWidth="124.0" text="Teléfono" />
+            <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />
         </columns>
       </TableView>
       <Label layoutX="51.0" layoutY="62.0" prefHeight="17.0" prefWidth="54.0" text="DNI:" underline="true">
@@ -27,17 +27,17 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="88.0" prefHeight="17.0" prefWidth="54.0" text="NAME:" underline="true">
+      <Label layoutX="51.0" layoutY="88.0" prefHeight="17.0" prefWidth="54.0" text="Nombre:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="114.0" prefHeight="26.0" prefWidth="68.0" text="PHONE:" underline="true">
+      <Label layoutX="51.0" layoutY="114.0" prefHeight="26.0" prefWidth="68.0" text="Teléfono:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="140.0" prefHeight="17.0" prefWidth="54.0" text="USER:" underline="true">
+      <Label layoutX="51.0" layoutY="140.0" prefHeight="17.0" prefWidth="54.0" text="Usuario:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
@@ -46,16 +46,16 @@
       <TextField fx:id="name" layoutX="120.0" layoutY="84.0" prefHeight="25.0" prefWidth="289.0" />
       <TextField fx:id="phone" layoutX="121.0" layoutY="114.0" prefHeight="25.0" prefWidth="289.0" />
       <TextField fx:id="user" layoutX="120.0" layoutY="144.0" prefHeight="25.0" prefWidth="289.0" />
-      <Button layoutX="458.0" layoutY="90.0" mnemonicParsing="false" onAction="#updateSeller" prefHeight="32.0" prefWidth="101.0" text="UPDATE" />
-      <Button layoutX="458.0" layoutY="127.0" mnemonicParsing="false" onAction="#deleteSeller" prefHeight="32.0" prefWidth="101.0" text="DELETE" />
-      <Button layoutX="458.0" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="101.0" text="CLEAN CELLS" />
+      <Button layoutX="458.0" layoutY="90.0" mnemonicParsing="false" onAction="#updateSeller" prefHeight="32.0" prefWidth="101.0" text="Actualizar" />
+      <Button layoutX="458.0" layoutY="127.0" mnemonicParsing="false" onAction="#deleteSeller" prefHeight="32.0" prefWidth="101.0" text="Eliminar" />
+      <Button layoutX="458.0" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="101.0" text="Limpiar Celdas" />
       <ComboBox fx:id="cbState" layoutX="121.0" layoutY="176.0" prefHeight="25.0" prefWidth="283.0" />
-      <Label layoutX="51.0" layoutY="173.0" prefHeight="17.0" prefWidth="54.0" text="STATE:" underline="true">
+      <Label layoutX="51.0" layoutY="173.0" prefHeight="17.0" prefWidth="54.0" text="Estado:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="204.0" layoutY="10.0" prefHeight="17.0" prefWidth="232.0" text="MANAGEMENT SELLERS" underline="true">
+      <Label alignment="CENTER" layoutX="204.0" layoutY="10.0" prefHeight="17.0" prefWidth="232.0" text="Control de productos" underline="true">
          <font>
             <Font size="20.0" />
          </font>
