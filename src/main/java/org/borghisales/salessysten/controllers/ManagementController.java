@@ -2,14 +2,10 @@ package org.borghisales.salessysten.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -81,8 +77,9 @@ public class ManagementController extends MenuController implements Initializabl
 
     }
 
-    public void help(ActionEvent actionEvent) {
-        setAlert(Alert.AlertType.INFORMATION, "SE ENCUENTRA EN MANTENIMIENTO");
+    public void openHelp(ActionEvent actionEvent) {
+        openNewStage(HELP_VIEW_FXML,"Ayuda", 700, 700);
+        closeCurrentStage((Button) actionEvent.getSource());
     }
 
     public void exit(ActionEvent actionEvent) {

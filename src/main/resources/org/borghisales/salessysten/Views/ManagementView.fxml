@@ -21,7 +21,7 @@
             AnchorPane.topAnchor="10"
             prefHeight="50"
     >
-        <Button text="Ayuda" prefWidth="90" prefHeight="30" onAction="#help"/>
+        <Button text="Ayuda" prefWidth="90" prefHeight="30" onAction="#openHelp"/>
         <Button text="Cerrar Sesión" prefHeight="30" prefWidth="120" onAction="#exit"/>
     </HBox>
     <VBox   alignment="CENTER"

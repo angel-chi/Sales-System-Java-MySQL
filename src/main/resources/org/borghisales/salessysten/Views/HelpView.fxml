@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.borghisales.salessysten.controllers.HelpController">
+    <Button text="Cerrar ventana" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10" prefHeight="35" prefWidth="120" onAction="#exitWindow" />
+
+    <Label text="Control de clientes" underline="true">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Label>
+
+</AnchorPane>
