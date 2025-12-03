@@ -43,4 +43,4 @@ build/
 .DS_Store
 
 ### DATABASE ###
-/src/main/java/org/borghisales/salessysten/model/config.properties
+/src/main/java/org/borghisales/salessysten/model/config.properties.idea/workspace.xml
