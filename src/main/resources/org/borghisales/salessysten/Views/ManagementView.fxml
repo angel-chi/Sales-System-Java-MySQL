@@ -21,7 +21,7 @@
             AnchorPane.topAnchor="10"
             prefHeight="50"
     >
-        <Button text="HELP" prefWidth="90" prefHeight="30" onAction="#help"/>
+        <Button text="Ayuda" prefWidth="90" prefHeight="30" onAction="#help"/>
         <Button text="Cerrar Sesión" prefHeight="30" prefWidth="120" onAction="#exit"/>
     </HBox>
     <VBox   alignment="CENTER"
@@ -44,16 +44,16 @@
         </HBox>
 
         <HBox spacing="5" alignment="CENTER">
-            <Button text="CLIENTES" prefWidth="110" prefHeight="50" onAction="#openCustomer"/>
-            <Button text="PRODUCTOS" prefWidth="110" prefHeight="50" onAction="#openProduct"/>
-            <Button text="VENDEDORES" prefWidth="110" prefHeight="50" onAction="#openSeller"/>
+            <Button text="Clientes" prefWidth="110" prefHeight="50" onAction="#openCustomer"/>
+            <Button text="Productos" prefWidth="110" prefHeight="50" onAction="#openProduct"/>
+            <Button text="Vendedores" prefWidth="110" prefHeight="50" onAction="#openSeller"/>
         </HBox>
 
         <HBox alignment="CENTER" spacing="5">
             <ImageView fx:id="reportes" fitWidth="32" fitHeight="32" preserveRatio="true"/>
             <Label text="REPORTES" style="-fx-font-size: 25px; -fx-font-weight: bold;"/>
         </HBox>
-        <Button text="GENERAR REPORTE" prefWidth="150" prefHeight="50" onAction="#openSalesReport"/>
+        <Button text="Generar reporte" prefWidth="150" prefHeight="50" onAction="#openSalesReport"/>
 
 
 
