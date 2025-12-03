@@ -1,5 +1,6 @@
 package org.borghisales.salessysten.controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -60,15 +61,24 @@ public class ManagementController extends MenuController implements Initializabl
         closeCurrentStage(sellerButton);
 
     }
-
+//corrigiendo el problema de que se traba al darle en help
     public void help(ActionEvent actionEvent) {
-        try {
-            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"The URL could not be opened. Check your internet connection.");
-        }
-
+        new Thread(() -> {
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Platform.runLater(() -> {
+                        setAlert(Alert.AlertType.ERROR, "No se pudo abrir la URL. Verifica tu conexión o configuración del sistema.");
+                    });
+                }
+            } else {
+                Platform.runLater(() -> {
+                    setAlert(Alert.AlertType.ERROR, "La funcionalidad de escritorio (abrir navegador) no está disponible en este sistema.");
+                });
+            }
+        }).start();
     }
 
     public void exit(ActionEvent actionEvent) {
