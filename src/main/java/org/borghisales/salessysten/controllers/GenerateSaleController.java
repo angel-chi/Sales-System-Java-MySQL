@@ -212,10 +212,10 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     public void cancel(ActionEvent actionEvent) {
         if (products.isEmpty())return;
-        MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
+        cleanCells(codCustomer,codProduct,customerName,productName,price,stock);        //por si rompo el codigo, aqui habia un MenuController.
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
+        setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");              //por si rompo el codigo, aqui habia un MenuController.
         total.clear();
     }
 
@@ -249,7 +249,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void cleanFieldsAndTable() {
-        MenuController.cleanCells(codCustomer, codProduct, customerName, productName, price, stock);
+        cleanCells(codCustomer, codProduct, customerName, productName, price, stock);               //por si rompo el codigo, aqui habia un MenuController.
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
     }
@@ -274,14 +274,14 @@ public class GenerateSaleController extends MenuController implements Initializa
         String errorMessage = validateInputs();
 
         if (errorMessage != null) {
-            MenuController.setAlert(Alert.AlertType.ERROR, errorMessage);
+            setAlert(Alert.AlertType.ERROR, errorMessage);                  //por si rompo el codigo, aqui habia un MenuController.
             return;
         }
 
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");        //por si rompo el codigo, aqui habia un MenuController.
             return;
         }
 

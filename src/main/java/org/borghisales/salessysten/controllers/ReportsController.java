@@ -203,7 +203,7 @@ public class ReportsController extends MenuController implements Initializable {
 
     public void onFilter(ActionEvent actionEvent) {
         if (sales.isEmpty()){
-            MenuController.setAlert(Alert.AlertType.WARNING,"There are no sales");
+            setAlert(Alert.AlertType.WARNING,"There are no sales"); //por si rompo el codigo, aqui habia un MenuController.
             return;
         }
 
@@ -217,11 +217,11 @@ public class ReportsController extends MenuController implements Initializable {
 
 
             if (minAmount >= maxAmount) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct amount intervals");
+                setAlert(Alert.AlertType.ERROR,"Set correct amount intervals");     //por si rompo el codigo, aqui habia un MenuController.
                 return;
             }
             if (minDate.isAfter(maxDate)) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct date intervals");
+                setAlert(Alert.AlertType.ERROR,"Set correct date intervals");   //por si rompo el codigo, aqui habia un MenuController.
                 return;
             }
 
@@ -234,7 +234,7 @@ public class ReportsController extends MenuController implements Initializable {
                     .toList()));
 
         } catch (NumberFormatException e) {
-            MenuController.setAlert(Alert.AlertType.WARNING,e.getMessage());
+            setAlert(Alert.AlertType.WARNING,e.getMessage());           //por si rompo el codigo, aqui habia un MenuController.
         }
     }
 

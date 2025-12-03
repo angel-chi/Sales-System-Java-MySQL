@@ -143,4 +143,32 @@ public class CustomerDAO implements CRUD<Customer> {
         }
 
     }
+
+    public Customer searchById(int id) {
+        String query = "SELECT * FROM customer WHERE idCustomer = ?";
+
+        try (Connection connection = DBConnection.connection();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return Customer.fromResultSet(rs);
+            } else {
+                return null; // No encontrado
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
+
+
+
 }
