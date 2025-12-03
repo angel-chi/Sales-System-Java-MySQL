@@ -12,8 +12,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.apache.commons.collections4.splitmap.AbstractIterableGetMapDecorator;
 import org.borghisales.salessysten.model.*;
 
+//Para que se tome siempre los números con punto decimal.
+import java.util.Locale;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,7 +43,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SÍ");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
@@ -94,15 +97,16 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void initializeUIElements() {
-        total.setText("0.0");
+        //Se setea con decimal
+        total.setText(String.format(Locale.US, "%.2f", 0.0));
         setSerial();
         seller.setText(sellerName);
         date.setText(String.valueOf(now));
     }
 
     private void configureAlerts() {
-        configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
-        configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+        configureAlert(alertCustomer, "Nuevo cliente", "El cliente no existe", "Quieres añadirlo?");
+        configureAlert(alertProduct, "Nuevo producto", "El producto no existe", "Quieres añadirlo?");
     }
 
     private void configureTable() {
@@ -133,7 +137,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         customer = customerDAO.searchCustomer(customerId);
 
         if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
+            setAlert(Alert.AlertType.CONFIRMATION, "Cliente econtrado: " + customer.name());
             customerName.setText(customer.name());
         } else {
             handleCustomerNotFound();
@@ -176,7 +180,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto Econtrado: " + product.name());
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
@@ -214,8 +218,9 @@ public class GenerateSaleController extends MenuController implements Initializa
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
-        total.clear();
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta Cancelada");
+        //En vez del total.clear() mejor se deja la variable en 0.0 para que no tengamos problemas con contenido vacío
+        total.setText(String.format(Locale.US, "%.2f", 0.0));
     }
 
     public void generateSale(ActionEvent actionEvent) {
@@ -236,8 +241,12 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private Sales createSalesObject() {
+        //Se reemplaza la coma por punto decimal
+        String totalText = total.getText().trim().replace(',', '.');
+        //Se convierte a double
+        double totalValue = Double.parseDouble(totalText);
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
+                LocalDate.parse(date.getText()), totalValue,
                 Sales.State.ACTIVE);
     }
 
@@ -280,7 +289,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya está en tu carrito de compras");
             return;
         }
 
@@ -300,16 +309,19 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
+        //Para asegurar se reemplaza una coma por punto decimal
+        String totalText = total.getText().trim().replace(',','.');
         double currentTotal = Double.parseDouble(total.getText()) + product.total();
-        total.setText(String.format("%.2f", currentTotal));
+        //Siempre escribimos usando Locale.US
+        total.setText(String.format(Locale.US, "%.2f", currentTotal));
     }
 
 
     private String validateInputs() {
         if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Missing customer name or product name.";
+            return "Falta nombre del cliente o producto";
         } else if (quantity.getValue() == 0) {
-            return "Quantity can't be 0.";
+            return "La cantidad no puede ser 0";
         }
         return null;
     }
