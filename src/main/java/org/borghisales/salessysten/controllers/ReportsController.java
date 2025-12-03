@@ -10,10 +10,6 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 import java.time.LocalDate;
 
-
-
-
-
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -124,8 +120,8 @@ public class ReportsController implements Initializable {
 
         x_time.setAutoRanging(false);
         x_time.setCategories(FXCollections.observableArrayList(categories));
-        x_time.setLabel("Days of the month");
-        y_amountSales.setLabel("Sales amount");
+        x_time.setLabel("Dias del Mes");
+        y_amountSales.setLabel("Monto de ventas");
 
         year.setText(String.valueOf(yearsShowed));
         month.setText(monthsShowed[idxMonth]);
@@ -147,7 +143,7 @@ public class ReportsController implements Initializable {
             pieChartData.forEach(data ->
                     data.nameProperty().bind(
                             Bindings.concat(
-                                    data.getName(), " amount: ", (int) data.pieValueProperty().doubleValue()
+                                    data.getName(), " cantidad: ", (int) data.pieValueProperty().doubleValue()
                             )
                     )
             );
@@ -185,7 +181,7 @@ public class ReportsController implements Initializable {
                 try {
                     Scene scene = new Scene(fxmlLoaderSaleDetails.load());
                     Stage stage = new Stage();
-                    stage.setTitle("Sale detail");
+                    stage.setTitle("Detalles de venta");
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException e) {
@@ -203,7 +199,7 @@ public class ReportsController implements Initializable {
 
     public void onFilter(ActionEvent actionEvent) {
         if (sales.isEmpty()){
-            MenuController.setAlert(Alert.AlertType.WARNING,"There are no sales");
+            MenuController.setAlert(Alert.AlertType.WARNING,"Ventas no existentes");
             return;
         }
 
@@ -217,11 +213,11 @@ public class ReportsController implements Initializable {
 
 
             if (minAmount >= maxAmount) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct amount intervals");
+                MenuController.setAlert(Alert.AlertType.ERROR,"Establece los intervalos de cantidad de manera correcta");
                 return;
             }
             if (minDate.isAfter(maxDate)) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct date intervals");
+                MenuController.setAlert(Alert.AlertType.ERROR,"Establece los intervalos de fecha de manera correcta");
                 return;
             }
 
@@ -268,10 +264,10 @@ public class ReportsController implements Initializable {
                 series.setName(monthsShowed[idxMonth]);
                 yearData.put(month, series);
             } else {
-                System.out.println("There is already a series for the year" + year + " and the month " + month + ". No new series will be added");
+                System.out.println("Ya existe una serie para el año "+ year + " y el mes "+ month + "No se añadirán nuevas series.");
             }
         } else {
-            System.out.println("Error: lineChartData is null. Cannot add to cache map.");
+            System.out.println("Error: lineChartData es nulo. No se puede agregar al mapa de caché.");
         }
 
         recorrerHashMap();
@@ -306,7 +302,6 @@ public class ReportsController implements Initializable {
 
         salesLineChart.getData().clear();
         salesLineChart.getData().add(lineChartData);
-
 
         year.setText(String.valueOf(yearsShowed));
     }
@@ -395,15 +390,15 @@ public class ReportsController implements Initializable {
 
     public static void recorrerHashMap() {
         for (Integer year : cacheReportLineChart.keySet()) {
-            System.out.println("Year: " + year);
+            System.out.println("Año: " + year);
             HashMap<Integer, XYChart.Series<String, Integer>> yearData = cacheReportLineChart.get(year);
             for (Integer month : yearData.keySet()) {
-                System.out.println("  Month: " + month);
+                System.out.println("  Mes: " + month);
                 XYChart.Series<String, Integer> series = yearData.get(month);
                 if (series != null) {
                     System.out.println("    Series: " + series.getName());
                     for (XYChart.Data<String, Integer> data : series.getData()) {
-                        System.out.println("      Data: " + data.getXValue() + ", " + data.getYValue());
+                        System.out.println("      Datos: " + data.getXValue() + ", " + data.getYValue());
                     }
                 } else {
                     System.out.println("    No hay serie asociada para este mes.");
