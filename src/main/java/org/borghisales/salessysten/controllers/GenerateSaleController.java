@@ -40,7 +40,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SI");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
@@ -101,8 +101,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void configureAlerts() {
-        configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
-        configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+        configureAlert(alertCustomer, "Nuevo cliente", "Este cliente no existe", "¿Quieres agregarlo?");
+        configureAlert(alertProduct, "Nuevo producto", "Este producto no existe", "¿Quieres agregarlo?");
     }
 
     private void configureTable() {
@@ -133,7 +133,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         customer = customerDAO.searchCustomer(customerId);
 
         if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
+            setAlert(Alert.AlertType.CONFIRMATION, "Cliente seleccionado: " + customer.name());
             customerName.setText(customer.name());
         } else {
             handleCustomerNotFound();
@@ -158,13 +158,14 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Customer");
+        stage.setTitle("Administración de clientes");
         stage.setScene(scene);
         stage.show();
     }
 
 
     public void searchProduct(ActionEvent actionEvent) {
+
         int productId = Integer.parseInt(codProduct.getText());
         Product product = productDAO.searchProduct(productId);
 
@@ -176,7 +177,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto seleccionado: " + product.name());
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
@@ -203,7 +204,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Product");
+        stage.setTitle("Administración de productos");
         stage.setScene(scene);
         stage.show();
     }
@@ -214,7 +215,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
         total.clear();
     }
 
@@ -280,7 +281,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Ya tienes este producto en tu carrito de compras");
             return;
         }
 
@@ -307,9 +308,9 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private String validateInputs() {
         if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Missing customer name or product name.";
+            return "Falta el nombre del cliente o del producto";
         } else if (quantity.getValue() == 0) {
-            return "Quantity can't be 0.";
+            return "Elige una cantidad lógica";
         }
         return null;
     }
