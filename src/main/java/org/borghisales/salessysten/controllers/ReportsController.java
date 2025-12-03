@@ -32,7 +32,7 @@ import java.time.Month;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class ReportsController implements Initializable {
+public class ReportsController extends MenuController implements Initializable {
 
     private static final String[] monthsShowed = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     private static int idxMonth = LocalDate.now().getMonth().getValue()-1;

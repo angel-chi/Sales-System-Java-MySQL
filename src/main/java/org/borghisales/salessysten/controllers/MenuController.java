@@ -1,5 +1,7 @@
 package org.borghisales.salessysten.controllers;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -9,7 +11,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -76,6 +77,13 @@ public class MenuController {
     static public void cleanCells(TextField...cells){
         for (TextField e:cells)
             e.clear();
+    }
+
+    @FXML
+    public void exitWindow(ActionEvent actionEvent) {
+        Button button = (Button) actionEvent.getSource();
+        closeCurrentStage(button);
+        openNewStage(MANAGEMENT_VIEW_FXML, "Control del punto de venta", 600, 800);
     }
 
 

@@ -6,8 +6,8 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="484.0" prefWidth="663.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ProductController">
-
-    <VBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <Button text="Cerrar ventana" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10" prefHeight="35" prefWidth="120" onAction="#exitWindow" />
+    <VBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
@@ -43,7 +43,7 @@
                 <ComboBox fx:id="cbState" prefHeight="25.0" prefWidth="283.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </GridPane>
 
-            <VBox alignment="TOP_CENTER" spacing="10.0">
+            <VBox alignment="TOP_CENTER" spacing="10.0" AnchorPane.topAnchor="60.0">
                 <Button mnemonicParsing="false" onAction="#addProduct" prefHeight="35.0" prefWidth="120.0" text="ADD" />
                 <Button mnemonicParsing="false" onAction="#updateProduct" prefHeight="35.0" prefWidth="120.0" text="UPDATE" />
                 <Button mnemonicParsing="false" onAction="#deleteProduct" prefHeight="35.0" prefWidth="120.0" text="DELETE" />

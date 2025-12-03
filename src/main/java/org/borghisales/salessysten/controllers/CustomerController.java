@@ -18,7 +18,9 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class CustomerController implements Initializable {
+import static org.borghisales.salessysten.controllers.MenuController.*;
+
+public class CustomerController extends MenuController implements Initializable {
 
     private final CustomerDAO customerDAO = new CustomerDAO();
     private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
@@ -77,6 +79,13 @@ public class CustomerController implements Initializable {
         cbState.setValue(Customer.State.ACTIVE);
         cbState.setItems(stateList);
     }
+
+    @FXML
+    public void searchCustomer(ActionEvent actionEvent){
+
+    }
+
+
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
         Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
@@ -116,5 +125,8 @@ public class CustomerController implements Initializable {
         customerDAO.setTable(customers);
         tableCustomers.setItems(customers);
     }
+
+
+
 
 }

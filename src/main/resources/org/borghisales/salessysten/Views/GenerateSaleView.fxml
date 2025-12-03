@@ -17,18 +17,19 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="596.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.GenerateSaleController">
+    <Button text="Cerrar ventana" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10" prefHeight="35" prefWidth="120" onAction="#exitWindow" />
     <VBox spacing="10.0"
           AnchorPane.bottomAnchor="10.0"
           AnchorPane.leftAnchor="10.0"
           AnchorPane.rightAnchor="10.0"
-          AnchorPane.topAnchor="10.0">
+          AnchorPane.topAnchor="60.0">
 
         <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </padding>
         <children>
 
-            <HBox alignment="TOP_LEFT" spacing="20.0">
+            <HBox alignment="TOP_LEFT" spacing="20.0" AnchorPane.topAnchor="60.0">
                 <children>
                     <ImageView fitHeight="111.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -70,7 +71,7 @@
 
             <Separator prefWidth="200.0" />
 
-            <VBox spacing="8.0">
+            <VBox spacing="8.0" AnchorPane.topAnchor="60.0">
 
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
@@ -82,7 +83,7 @@
                     </children>
                 </HBox>
 
-                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <HBox alignment="CENTER_LEFT" spacing="10.0" AnchorPane.topAnchor="60.0">
                     <children>
                         <Label prefWidth="100.0" text="COD PROD:" />
                         <TextField fx:id="codProduct" prefWidth="117.0" />
@@ -92,7 +93,7 @@
                     </children>
                 </HBox>
 
-                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <HBox alignment="CENTER_LEFT" spacing="10.0" AnchorPane.topAnchor="60.0">
                     <children>
                         <Label prefWidth="100.0" text="PRICE:" />
                         <TextField fx:id="price" prefWidth="117.0" />
@@ -102,7 +103,7 @@
                     </children>
                 </HBox>
 
-                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <HBox alignment="CENTER_LEFT" spacing="10.0" AnchorPane.topAnchor="60.0">
                     <children>
                         <Label prefWidth="100.0" text="QUANTITY:" />
                         <Spinner fx:id="quantity" prefWidth="117.0" />
@@ -132,11 +133,10 @@
 
             <Separator prefWidth="200.0" />
 
-            <HBox alignment="CENTER_LEFT" spacing="20.0">
+            <HBox alignment="CENTER_LEFT" spacing="20.0" AnchorPane.topAnchor="60.0">
                 <children>
                     <Button mnemonicParsing="false" onAction="#cancel" prefWidth="102.0" text="CANCEL" />
                     <Button mnemonicParsing="false" onAction="#generateSale" text="GENERATE SALE" />
-                    <Button fx:id="closeWindow" text="Cerrar ventana" prefWidth="140" onAction="#exitWindow"/>
                     <Region HBox.hgrow="ALWAYS" />
 
                     <Label text="TOTAL SALE" />

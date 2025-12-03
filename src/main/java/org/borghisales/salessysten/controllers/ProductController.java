@@ -19,7 +19,7 @@ import org.borghisales.salessysten.model.ProductDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProductController implements Initializable {
+public class ProductController extends MenuController implements Initializable {
 
     private final ProductDAO productDAO = new ProductDAO();
 

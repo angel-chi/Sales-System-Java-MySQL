@@ -60,7 +60,7 @@ public class ManagementController extends MenuController implements Initializabl
 
 
     public void openCustomer(ActionEvent actionEvent) {
-        openNewStage(CUSTOMER_VIEW_FXML, "Clientes", 800, 800);
+        openNewStage(CUSTOMER_VIEW_FXML, "Clientes", 1000, 800);
         closeCurrentStage((Button) actionEvent.getSource());
     }
 
@@ -71,7 +71,7 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void openGenerateSale(ActionEvent actionEvent) {
 
-        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compra", 600, 700);
+        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compra", 700, 700);
         closeCurrentStage((Button) actionEvent.getSource());
     }
 

@@ -23,6 +23,7 @@
     <Tab text="SALES HISTORY">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="537.0" prefWidth="816.0">
+               <Button text="Cerrar ventana" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10" prefHeight="35" prefWidth="120" onAction="#exitWindow" />
                <children>
                   <TableView fx:id="tableReport" layoutX="19.0" layoutY="123.0" prefHeight="818.0" prefWidth="1430.0">
                     <columns>
@@ -76,6 +77,7 @@
     <Tab text="STATISTICS">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="710.0" prefWidth="1103.0">
+                <Button text="Cerrar ventana" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10" prefHeight="35" prefWidth="120" onAction="#exitWindow" />
                <children>
                   <PieChart fx:id="pieChartProducts" layoutX="14.0" layoutY="142.0" prefHeight="654.0" prefWidth="750.0" />
                   <Label layoutX="211.0" layoutY="61.0" text="AMOUNT PRODUCST SOLD" underline="true" wrapText="true">

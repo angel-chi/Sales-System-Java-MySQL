@@ -5,9 +5,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.text.Text?>
 <AnchorPane prefHeight="484.0" prefWidth="663.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.CustomerController">
-
-    <VBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <Button text="Cerrar ventana" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10" prefHeight="35" prefWidth="120" onAction="#exitWindow" />
+    <VBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
@@ -18,7 +19,7 @@
             </font>
         </Label>
 
-        <HBox alignment="TOP_CENTER" spacing="30.0">
+        <HBox alignment="TOP_CENTER" spacing="30.0" AnchorPane.topAnchor="60.0">
 
             <GridPane hgap="10.0" vgap="10.0">
                 <columnConstraints>
@@ -43,7 +44,12 @@
                 <ComboBox fx:id="cbState" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </GridPane>
 
-            <VBox alignment="TOP_CENTER" spacing="10.0">
+            <VBox alignment="TOP_CENTER" spacing="10.0" AnchorPane.topAnchor="60.0">
+                <HBox spacing="10" alignment="CENTER">
+                    <Label text="Ingrese id del cliente " style="-fx-font-weight: bold; -fx-font-size: 15px;" GridPane.rowIndex="0"/>
+                    <TextField fx:id="idSearch" prefHeight="25" GridPane.columnIndex="1"/>
+                    <Button onAction="#searchCustomer" prefHeight="35" prefWidth="120" text="Buscar" />
+                </HBox>
                 <Button onAction="#addCustomer" prefHeight="35.0" prefWidth="120.0" text="Añadir" />
                 <Button onAction="#updateCustomer" prefHeight="35.0" prefWidth="120.0" text="Actualizar" />
                 <Button onAction="#deleteCustomer" prefHeight="35.0" prefWidth="120.0" text="Eliminar" />

@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="534.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SaleDetailController">
-   <children>
+    <Button text="Cerrar ventana" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10" prefHeight="35" prefWidth="120" onAction="#exitWindow" />
+    <children>
       <TableView fx:id="tableSale" prefHeight="496.0" prefWidth="799.0">
          <columns>
             <TableColumn fx:id="colNro" prefWidth="70.0" sortable="false" style="-fx-alignment: CENTER;" text="NR" />

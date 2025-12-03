@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class SellerController implements Initializable {
+public class SellerController extends MenuController implements Initializable {
     private final SellerDAO sellerDAO = new SellerDAO();
     private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
     private static ObservableList<Seller> sellers = null;

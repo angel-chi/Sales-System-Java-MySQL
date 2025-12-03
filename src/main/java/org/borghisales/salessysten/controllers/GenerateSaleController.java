@@ -320,12 +320,8 @@ public class GenerateSaleController extends MenuController implements Initializa
         String formattedId= String.format("%04d", idSale);
         serial.setText(formattedId);
     }
-    @FXML
-    private void exitWindow(ActionEvent actionEvent) {
-        Button button = (Button) actionEvent.getSource();
-        closeCurrentStage(button);
-        openNewStage(MANAGEMENT_VIEW_FXML, "Control del punto de venta", 600, 800);
-    }
+
+
 
 
 }
