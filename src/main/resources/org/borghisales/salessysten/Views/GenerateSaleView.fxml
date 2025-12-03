@@ -39,12 +39,12 @@
 
                     <VBox alignment="TOP_LEFT" spacing="5.0">
                         <children>
-                            <Label text="POINT OF SALE &quot;BORGHI SYSTEM&quot;" underline="true">
+                            <Label text="PUNTO DE VENTA &quot;EQUIPO 3&quot;" underline="true">
                                 <font>
                                     <Font name="System Bold" size="17.0" />
                                 </font>
                             </Label>
-                            <Label text="SALE OF TECHNOLOGY PRODUCTS">
+                            <Label text="VENTA DE PRODUCTOS DE TECNOLOGIA">
                                 <font>
                                     <Font size="15.0" />
                                 </font>
@@ -75,10 +75,10 @@
 
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
-                        <Label prefWidth="100.0" text="DNI CUSTOMER:" />
+                        <Label prefWidth="100.0" text="USUARIO DEL CLIENTE:" />
                         <TextField fx:id="codCustomer" prefWidth="117.0" />
-                        <Button mnemonicParsing="false" onAction="#searchCustomer" prefWidth="80.0" text="SEARCH" />
-                        <Label text="CUSTOMER:" />
+                        <Button mnemonicParsing="false" onAction="#searchCustomer" prefWidth="80.0" text="BUSCAR" />
+                        <Label text="CLIENTE:" />
                         <TextField fx:id="customerName" editable="false" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
@@ -87,28 +87,28 @@
                     <children>
                         <Label prefWidth="100.0" text="COD PROD:" />
                         <TextField fx:id="codProduct" prefWidth="117.0" />
-                        <Button mnemonicParsing="false" onAction="#searchProduct" prefWidth="80.0" text="SEARCH" />
-                        <Label text="PRODUCT:" />
+                        <Button mnemonicParsing="false" onAction="#searchProduct" prefWidth="80.0" text="BUSCAR" />
+                        <Label text="PRODUCTO:" />
                         <TextField fx:id="productName" editable="false" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10.0" AnchorPane.topAnchor="60.0">
                     <children>
-                        <Label prefWidth="100.0" text="PRICE:" />
+                        <Label prefWidth="100.0" text="PRECIO:" />
                         <TextField fx:id="price" prefWidth="117.0" />
-                        <Button mnemonicParsing="false" onAction="#addShoppingCart" prefWidth="80.0" text="ADD" />
-                        <Label text="STOCK:" />
+                        <Button mnemonicParsing="false" onAction="#addShoppingCart" prefWidth="80.0" text="AÑADIR" />
+                        <Label text="EXISTENCIAS:" />
                         <TextField fx:id="stock" editable="false" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10.0" AnchorPane.topAnchor="60.0">
                     <children>
-                        <Label prefWidth="100.0" text="QUANTITY:" />
+                        <Label prefWidth="100.0" text="CANTIDAD:" />
                         <Spinner fx:id="quantity" prefWidth="117.0" />
                         <Region prefWidth="80.0" />
-                        <Label text="SELLER:" />
+                        <Label text="Vendedor:" />
                         <TextField fx:id="seller" editable="false" prefWidth="148.0" />
                         <TextField fx:id="date" editable="false" prefWidth="80.0" />
                     </children>
@@ -121,9 +121,9 @@
                 <columns>
                     <TableColumn fx:id="colNro" prefWidth="71.0" sortable="false" style="-fx-alignment: CENTER;" text="NR" />
                     <TableColumn fx:id="colCod" prefWidth="92.0" sortable="false" style="-fx-alignment: CENTER;" text="COD" />
-                    <TableColumn fx:id="colProduct" prefWidth="77.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCT" />
-                    <TableColumn fx:id="colQuantity" prefWidth="100.0" style="-fx-alignment: CENTER;" text="QUANTITY" />
-                    <TableColumn fx:id="colPrice" prefWidth="124.0" style="-fx-alignment: CENTER;" text="PRICE UNIT" />
+                    <TableColumn fx:id="colProduct" prefWidth="77.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCTO" />
+                    <TableColumn fx:id="colQuantity" prefWidth="100.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
+                    <TableColumn fx:id="colPrice" prefWidth="124.0" style="-fx-alignment: CENTER;" text="PRECIO POR UNIDAD" />
                     <TableColumn fx:id="colTotal" prefWidth="103.0" style="-fx-alignment: CENTER;" text="TOTAL" />
                 </columns>
                 <columnResizePolicy>
@@ -135,11 +135,11 @@
 
             <HBox alignment="CENTER_LEFT" spacing="20.0" AnchorPane.topAnchor="60.0">
                 <children>
-                    <Button mnemonicParsing="false" onAction="#cancel" prefWidth="102.0" text="CANCEL" />
-                    <Button mnemonicParsing="false" onAction="#generateSale" text="GENERATE SALE" />
+                    <Button mnemonicParsing="false" onAction="#cancel" prefWidth="102.0" text="Cancelar" />
+                    <Button mnemonicParsing="false" onAction="#generateSale" text="Generar venta" />
                     <Region HBox.hgrow="ALWAYS" />
 
-                    <Label text="TOTAL SALE" />
+                    <Label text="Venta total" />
                     <TextField fx:id="total" editable="false" prefWidth="88.0" />
                 </children>
             </HBox>

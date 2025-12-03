@@ -78,7 +78,7 @@ public class CustomerController extends MenuController implements Initializable 
     }
     private void initializeComboBox() {
         cbState.setValue(Customer.State.ACTIVE);
-        cbState.setItems(stateList);        
+        cbState.setItems(stateList);
     }
 
     @FXML
