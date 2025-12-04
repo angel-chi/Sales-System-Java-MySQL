@@ -2,6 +2,7 @@ package org.borghisales.salessysten.controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -34,22 +35,18 @@ public class MenuController {
         stage.close();
     }
 
-
-    public static void openNewStage(String fxmlPath, String title, double width, double height) {
+    public void openNewStage(String fxmlFileName, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(MenuController.class.getResource(fxmlPath));
-            Scene scene = new Scene(loader.load());
+            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
+            Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
-
-            //Instrucciones para arreglar el tamaño de las ventanas
-            stage.setMinHeight(width);
-            stage.setMinHeight(height);
-
+            stage.setMinWidth(500);
+            stage.setMinHeight(500);
             stage.show();
-        } catch (IOException e) {
-            setAlert(Alert.AlertType.ERROR, "Error al abrir ventana: " + e.getMessage());
+        } catch (IOException | NullPointerException e) {
+            setAlert(Alert.AlertType.WARNING, "Error loading the view: " + e.getMessage());
         }
     }
 
