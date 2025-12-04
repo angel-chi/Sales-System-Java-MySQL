@@ -5,28 +5,28 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.util.List;
+//import java.time.LocalDate;
+//import java.util.List;
 
 import javafx.collections.ObservableList;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+//import org.apache.pdfbox.pdmodel.PDDocument;
+//import org.apache.pdfbox.pdmodel.PDPage;
+//import org.apache.pdfbox.pdmodel.PDPageContentStream;
+//import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-import javafx.collections.ObservableList;
+//import javafx.collections.ObservableList;
 import org.borghisales.salessysten.controllers.MenuController;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 
 import java.awt.*;
-import java.io.IOException;
+//import java.io.IOException;
 
 public class SalesReportGenerator {
 
@@ -151,8 +151,10 @@ public class SalesReportGenerator {
 
     private static void drawRow(PDPageContentStream contentStream, float x, float y, float width, float rowHeight,
                                 float[] columnWidths, Color backgroundColor, boolean isHeader, String... data) throws IOException {
+        // El método fillReact no existe en PDPageContentStream. Se debe usar addRect seguido de fill.
         contentStream.setNonStrokingColor(backgroundColor);
-        contentStream.fillRect(x, y, width, rowHeight);
+        contentStream.addRect(x, y, width, rowHeight);
+        contentStream.fill();
         contentStream.setNonStrokingColor(Color.BLACK);
         float cellMargin = 5;
 
@@ -162,7 +164,8 @@ public class SalesReportGenerator {
             float cellWidth = columnWidths[i];
 
             float textX = nextX + cellMargin;
-            float textY = y + rowHeight / 2 - 12 / 2; // Font size 12
+            // Se hizo un caste a float
+            float textY = y + rowHeight / 2 - (float) 12 / 2; // Font size 12
             contentStream.beginText();
             contentStream.setFont(PDType1Font.HELVETICA, 12);
             contentStream.newLineAtOffset(textX, textY);
