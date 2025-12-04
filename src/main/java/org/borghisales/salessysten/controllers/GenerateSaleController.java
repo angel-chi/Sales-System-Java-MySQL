@@ -40,7 +40,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SI");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
@@ -102,8 +102,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void configureAlerts() {
-        configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
-        configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+        configureAlert(alertCustomer, "Nuevo cliente", "El cliente no existe", "¿Deseas añadirlo?");
+        configureAlert(alertProduct, "Nuevo producto", "El producto no existe", "¿Deseas añadirlo?");
     }
 
     private void configureTable() {
@@ -144,11 +144,12 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void handleCustomerNotFound() {
         alertCustomer.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeAccept) {
-                openCustomerManagementView();
+                openNewStage(CUSTOMER_VIEW_FXML, "Clientes", 1000, 800);
+                //openCustomerManagementView();
             }
         });
     }
-
+    /*
     private void openCustomerManagementView() {
         FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(CUSTOMER_VIEW_FXML));
 
@@ -163,7 +164,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         stage.setScene(scene);
         stage.show();
     }
-
+    */
 
     public void searchProduct(ActionEvent actionEvent) {
         int productId = Integer.parseInt(codProduct.getText());
@@ -189,11 +190,13 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void handleProductNotFound() {
         alertProduct.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeAccept) {
-                openProductManagementView();
+                openNewStage(PRODUCT_VIEW_FXML,"Productos", 800, 800);
+                //openProductManagementView();
             }
         });
     }
 
+    /*
     private void openProductManagementView() {
         FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(PRODUCT_VIEW_FXML));
 
@@ -209,6 +212,8 @@ public class GenerateSaleController extends MenuController implements Initializa
         stage.show();
     }
 
+
+     */
 
     public void cancel(ActionEvent actionEvent) {
         if (products.isEmpty())return;
