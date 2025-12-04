@@ -38,7 +38,7 @@ public class DBConnection {
     }
 
     private static boolean verifyDuplicates(String name, String surname){
-        String query = "SELECT * FROM employee_data WHERE NAME = ? AND SURNAME = ?";
+        String query = "SELECT * FROM datos_empleado WHERE NOMBRE = ? AND APELLIDO = ?";
         try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
@@ -51,7 +51,7 @@ public class DBConnection {
 
         } catch (SQLException e) {
             MenuController.setAlert(Alert.AlertType.ERROR,
-                    "Error adding employee: " + e.getMessage());
+                    "Error al agregar empleado: " + e.getMessage());
             return false;
         }
     }

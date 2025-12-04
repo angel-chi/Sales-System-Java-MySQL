@@ -1,6 +1,7 @@
 module org.borghisales.salessysten {
     requires javafx.controls;
     requires javafx.fxml;
+    requires transitive javafx.base; // Añadido para solucionar advertencias de accesibilidad
     requires java.sql;
     requires org.apache.pdfbox;
     requires java.desktop;

@@ -66,7 +66,7 @@ public class ManagementController extends MenuController implements Initializabl
             Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
         } catch (Exception e) {
             e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"The URL could not be opened. Check your internet connection.");
+            setAlert(Alert.AlertType.ERROR,"No se pudo abrir la URL. Comprueba tu conexión a internet.");
         }
 
     }
