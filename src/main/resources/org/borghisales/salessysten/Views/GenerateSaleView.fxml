@@ -40,13 +40,13 @@
 
                 <!-- Campos de texto -->
                 <TextField fx:id="serial" editable="false" layoutX="336.0" layoutY="101.0" prefHeight="16.0" prefWidth="117.0" />
-                <TextField fx:id="codCustomer" layoutX="125.0" layoutY="166.0" prefHeight="25.0" prefWidth="117.0" />
-                <TextField fx:id="codProduct" layoutX="124.0" layoutY="200.0" prefHeight="25.0" prefWidth="117.0" />
+                <TextField fx:id="codCliente" layoutX="125.0" layoutY="166.0" prefHeight="25.0" prefWidth="117.0" />
+                <TextField fx:id="codProducto" layoutX="124.0" layoutY="200.0" prefHeight="25.0" prefWidth="117.0" />
                 <TextField fx:id="price" layoutX="125.0" layoutY="234.0" prefHeight="25.0" prefWidth="117.0" />
-                <TextField fx:id="customerName" editable="false" layoutX="425.0" layoutY="166.0" prefHeight="25.0" prefWidth="148.0" />
-                <TextField fx:id="productName" editable="false" layoutX="425.0" layoutY="199.0" prefHeight="25.0" prefWidth="148.0" />
-                <TextField fx:id="stock" editable="false" layoutX="424.0" layoutY="234.0" prefHeight="25.0" prefWidth="148.0" />
-                <TextField fx:id="seller" editable="false" layoutX="424.0" layoutY="269.0" prefHeight="25.0" prefWidth="148.0" />
+                <TextField fx:id="nombreCliente" editable="false" layoutX="425.0" layoutY="166.0" prefHeight="25.0" prefWidth="148.0" />
+                <TextField fx:id="nombreProducto" editable="false" layoutX="425.0" layoutY="199.0" prefHeight="25.0" prefWidth="148.0" />
+                <TextField fx:id="existencia" editable="false" layoutX="424.0" layoutY="234.0" prefHeight="25.0" prefWidth="148.0" />
+                <TextField fx:id="vendedor" editable="false" layoutX="424.0" layoutY="269.0" prefHeight="25.0" prefWidth="148.0" />
                 <Spinner fx:id="quantity" layoutX="125.0" layoutY="269.0" prefHeight="21.0" prefWidth="117.0" />
 
                 <!-- Botones -->
