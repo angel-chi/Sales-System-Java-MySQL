@@ -14,10 +14,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -26,14 +26,13 @@ public class GenerateSaleController extends MenuController implements Initializa
     private final SalesDAO salesDAO = new SalesDAO();
     private int idSale;
 
-    private static int contProducts =1;
+    private static int contProducts = 1;
     private static ObservableList<ShoppingCart> products;
 
     private static String sellerName;
     private static int idSeller;
 
     private final LocalDate now = LocalDate.now();
-
 
     private Scene scene = null;
     private Stage stage;
@@ -43,51 +42,33 @@ public class GenerateSaleController extends MenuController implements Initializa
     private final ButtonType buttonTypeAccept = new ButtonType("SI");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
-
     private final CustomerDAO customerDAO = new CustomerDAO();
 
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
-    @FXML
-    private Button closeWindow;
-    @FXML
-    private TextField serial;
-    @FXML
-    private TextField codCustomer;
-    @FXML
-    private TextField codProduct;
-    @FXML
-    private TextField price;
-    @FXML
-    private TextField customerName;
-    @FXML
-    private TextField productName;
-    @FXML
-    private TextField stock;
-    @FXML
-    private TextField seller;
-    @FXML
-    private TextField total;
-    @FXML
-    private TextField date;
 
-    @FXML
-    private Spinner<Integer> quantity;
-    @FXML
-    private TableView<ShoppingCart> tableSale;
-    @FXML
-    private TableColumn<ShoppingCart,Integer> colNro;
-    @FXML
-    private TableColumn<ShoppingCart,String> colCod;
-    @FXML
-    private TableColumn<ShoppingCart,String> colProduct;
-    @FXML
-    private TableColumn<ShoppingCart, Integer> colQuantity;
-    @FXML
-    private TableColumn<ShoppingCart, Double> colPrice;
-    @FXML
-    private TableColumn<ShoppingCart,Double> colTotal;
+    @FXML private Button closeWindow;
+    @FXML private TextField serial;
+    @FXML private TextField codCustomer;
+    @FXML private TextField codProduct;
+    @FXML private TextField price;
+    @FXML private TextField customerName;
+    @FXML private TextField productName;
+    @FXML private TextField stock;
+    @FXML private TextField seller;
+    @FXML private TextField total;
+    @FXML private TextField date;
 
+    @FXML private Spinner<Integer> quantity;
+    @FXML private TableView<ShoppingCart> tableSale;
+    @FXML private TableColumn<ShoppingCart,Integer> colNro;
+    @FXML private TableColumn<ShoppingCart,String> colCod;
+    @FXML private TableColumn<ShoppingCart,String> colProduct;
+    @FXML private TableColumn<ShoppingCart, Integer> colQuantity;
+    @FXML private TableColumn<ShoppingCart, Double> colPrice;
+    @FXML private TableColumn<ShoppingCart,Double> colTotal;
+
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeUIElements();
         configureAlerts();
@@ -111,7 +92,6 @@ public class GenerateSaleController extends MenuController implements Initializa
         tableSale.getItems().clear();
         products = FXCollections.observableArrayList();
     }
-
 
     private void configureAlert(Alert alert, String title, String header, String content) {
         alert.setTitle(title);
@@ -145,26 +125,9 @@ public class GenerateSaleController extends MenuController implements Initializa
         alertCustomer.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeAccept) {
                 openNewStage(CUSTOMER_VIEW_FXML, "Clientes", 1000, 800);
-                //openCustomerManagementView();
             }
         });
     }
-    /*
-    private void openCustomerManagementView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(CUSTOMER_VIEW_FXML));
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        stage = new Stage();
-        stage.setTitle("Manage Customer");
-        stage.setScene(scene);
-        stage.show();
-    }
-    */
 
     public void searchProduct(ActionEvent actionEvent) {
         int productId = Integer.parseInt(codProduct.getText());
@@ -183,7 +146,8 @@ public class GenerateSaleController extends MenuController implements Initializa
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
 
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, product.stock(), 0);
+        SpinnerValueFactory<Integer> valueFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, product.stock(), 0);
         quantity.setValueFactory(valueFactory);
     }
 
@@ -191,43 +155,22 @@ public class GenerateSaleController extends MenuController implements Initializa
         alertProduct.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeAccept) {
                 openNewStage(PRODUCT_VIEW_FXML,"Productos", 800, 800);
-                //openProductManagementView();
             }
         });
     }
 
-    /*
-    private void openProductManagementView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(PRODUCT_VIEW_FXML));
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        stage = new Stage();
-        stage.setTitle("Manage Product");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-
-     */
-
     public void cancel(ActionEvent actionEvent) {
-        if (products.isEmpty())return;
-        cleanCells(codCustomer,codProduct,customerName,productName,price,stock);        //por si rompo el codigo, aqui habia un MenuController.
+        if (products.isEmpty()) return;
+
+        cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");              //por si rompo el codigo, aqui habia un MenuController.
+        setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
         total.clear();
     }
 
     public void generateSale(ActionEvent actionEvent) {
-        if (products.isEmpty()) {
-            return;
-        }
+        if (products.isEmpty()) return;
 
         Sales sales = createSalesObject();
 
@@ -243,7 +186,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Sales createSalesObject() {
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
+                LocalDate.parse(date.getText()), Double.parseDouble(total.getText().replace(",", ".")),
                 Sales.State.ACTIVE);
     }
 
@@ -254,7 +197,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void cleanFieldsAndTable() {
-        cleanCells(codCustomer, codProduct, customerName, productName, price, stock);               //por si rompo el codigo, aqui habia un MenuController.
+        cleanCells(codCustomer, codProduct, customerName, productName, price, stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
     }
@@ -265,7 +208,6 @@ public class GenerateSaleController extends MenuController implements Initializa
         ReportsController.setLineChartData(null);
         ReportsController.removeCacheLineChart(now.getYear(), now.getMonth().getValue());
     }
-
 
     public static void setSellerName(String sellerName) {
         GenerateSaleController.sellerName = sellerName;
@@ -279,14 +221,14 @@ public class GenerateSaleController extends MenuController implements Initializa
         String errorMessage = validateInputs();
 
         if (errorMessage != null) {
-            setAlert(Alert.AlertType.ERROR, errorMessage);                  //por si rompo el codigo, aqui habia un MenuController.
+            setAlert(Alert.AlertType.ERROR, errorMessage);
             return;
         }
 
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");        //por si rompo el codigo, aqui habia un MenuController.
+            setAlert(Alert.AlertType.ERROR, "Este producto ya esta en tu carrito");
             return;
         }
 
@@ -296,7 +238,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private ShoppingCart createShoppingCartObject() {
         return new ShoppingCart(contProducts++, codProduct.getText(),
                 productName.getText(), quantity.getValue(),
-                Double.parseDouble(price.getText()));
+                Double.parseDouble(price.getText().replace(",", ".")));
     }
 
     private boolean isProductAlreadyInCart(ShoppingCart product) {
@@ -306,27 +248,24 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
-        double currentTotal = Double.parseDouble(total.getText()) + product.total();
-        total.setText(String.format("%.2f", currentTotal));
+        double currentTotal = Double.parseDouble(total.getText().replace(",", ".")) + product.total();
+        total.setText(String.format(Locale.US, "%.2f", currentTotal));
     }
-
 
     private String validateInputs() {
         if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Missing customer name or product name.";
+            return "Falta nombre del producto o cliente";
         } else if (quantity.getValue() == 0) {
-            return "Quantity can't be 0.";
+            return "La cantidad no puede ser 0";
         }
         return null;
     }
 
-    private void setSerial(){
-        idSale = 1+salesDAO.IdSale();
+    private void setSerial() {
+        idSale = 1 + salesDAO.IdSale();
         String formattedId= String.format("%04d", idSale);
         serial.setText(formattedId);
     }
 
-
-
-
 }
+

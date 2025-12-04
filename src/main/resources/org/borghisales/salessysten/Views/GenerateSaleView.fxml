@@ -75,7 +75,7 @@
 
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
-                        <Label prefWidth="100.0" text="USUARIO DEL CLIENTE:" />
+                        <Label prefWidth="150.0" text="USUARIO DEL CLIENTE:" />
                         <TextField fx:id="codCustomer" prefWidth="117.0" />
                         <Button mnemonicParsing="false" onAction="#searchCustomer" prefWidth="80.0" text="BUSCAR" />
                         <Label text="CLIENTE:" />

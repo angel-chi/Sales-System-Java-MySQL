@@ -16,41 +16,41 @@
       <TableView fx:id="tableSellers" layoutX="26.0" layoutY="228.0" prefHeight="221.0" prefWidth="602.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="120.0" text="idVendedor" />
-          <TableColumn fx:id="colDni" prefWidth="111.0" text="DNI" />
+          <TableColumn fx:id="colDni" prefWidth="111.0" text="Usuario" />
             <TableColumn fx:id="colName" prefWidth="124.0" text="Nombre" />
             <TableColumn fx:id="colPhone" prefWidth="124.0" text="Teléfono" />
             <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />
         </columns>
       </TableView>
-      <Label layoutX="51.0" layoutY="62.0" prefHeight="17.0" prefWidth="54.0" text="DNI:" underline="true">
+      <Label layoutX="51.0" layoutY="62.0" prefHeight="17.0" prefWidth="110" text="Usuario:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="88.0" prefHeight="17.0" prefWidth="54.0" text="Nombre:" underline="true">
+      <Label layoutX="51.0" layoutY="88.0" prefHeight="17.0" prefWidth="110" text="Nombre:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="114.0" prefHeight="26.0" prefWidth="68.0" text="Teléfono:" underline="true">
+      <Label layoutX="51.0" layoutY="114.0" prefHeight="26.0" prefWidth="110" text="Teléfono:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="140.0" prefHeight="17.0" prefWidth="54.0" text="Usuario:" underline="true">
+      <Label layoutX="51.0" layoutY="140.0" prefHeight="17.0" prefWidth="110" text="Contraseña:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="dni" layoutX="120.0" layoutY="55.0" prefHeight="25.0" prefWidth="289.0" />
-      <TextField fx:id="name" layoutX="120.0" layoutY="84.0" prefHeight="25.0" prefWidth="289.0" />
-      <TextField fx:id="phone" layoutX="121.0" layoutY="114.0" prefHeight="25.0" prefWidth="289.0" />
-      <TextField fx:id="user" layoutX="120.0" layoutY="144.0" prefHeight="25.0" prefWidth="289.0" />
+      <TextField fx:id="dni" layoutX="150.0" layoutY="55.0" prefHeight="25.0" prefWidth="289.0" />
+      <TextField fx:id="name" layoutX="150.0" layoutY="84.0" prefHeight="25.0" prefWidth="289.0" />
+      <TextField fx:id="phone" layoutX="150.0" layoutY="114.0" prefHeight="25.0" prefWidth="289.0" />
+      <TextField fx:id="user" layoutX="150.0" layoutY="144.0" prefHeight="25.0" prefWidth="289.0" />
       <Button layoutX="458.0" layoutY="90.0" mnemonicParsing="false" onAction="#updateSeller" prefHeight="32.0" prefWidth="101.0" text="Actualizar" />
       <Button layoutX="458.0" layoutY="127.0" mnemonicParsing="false" onAction="#deleteSeller" prefHeight="32.0" prefWidth="101.0" text="Eliminar" />
       <Button layoutX="458.0" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="101.0" text="Limpiar Celdas" />
       <ComboBox fx:id="cbState" layoutX="121.0" layoutY="176.0" prefHeight="25.0" prefWidth="283.0" />
-      <Label layoutX="51.0" layoutY="173.0" prefHeight="17.0" prefWidth="54.0" text="Estado:" underline="true">
+      <Label layoutX="51.0" layoutY="173.0" prefHeight="17.0" prefWidth="110" text="Estado:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
