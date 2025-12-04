@@ -4,22 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="refactor: delete comments">
-      <change afterPath="$PROJECT_DIR$/updatesDBsalesystem.sql" afterDir="false" />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Se modificó los tamaños de las ventanas asi como la traducción del texto en ellas, haciendo las ventanas responsivas y con un tamaño adecuado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salesystem.sql" beforeDir="false" afterPath="$PROJECT_DIR$/salesystem.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/config.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Seller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SellerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SellerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/MainView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/SellerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/SellerView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/ManagementView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/ManagementView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +27,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -89,6 +84,11 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "MavenSettings"
+  },
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "repository"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -463,7 +463,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fea: delete seller" />
     <MESSAGE value="fea: add table" />
     <MESSAGE value="fea: add show table" />
     <MESSAGE value="fea: add DAO products" />
@@ -488,6 +487,7 @@
     <MESSAGE value="fix: finish optimization linechart" />
     <MESSAGE value="refactor: cleaning code" />
     <MESSAGE value="refactor: delete comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: delete comments" />
+    <MESSAGE value="Se modificó los tamaños de las ventanas asi como la traducción del texto en ellas, haciendo las ventanas responsivas y con un tamaño adecuado" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se modificó los tamaños de las ventanas asi como la traducción del texto en ellas, haciendo las ventanas responsivas y con un tamaño adecuado" />
   </component>
 </project>

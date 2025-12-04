@@ -41,6 +41,8 @@ public class MenuController {
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
+            stage.setMinWidth(800);
+            stage.setMinHeight(600); //Estas dos lineas se agregaron para que al abrir una pestaña nueva se abra con un tamaño fijo
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
