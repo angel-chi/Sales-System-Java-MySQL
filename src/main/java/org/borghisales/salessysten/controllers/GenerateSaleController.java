@@ -101,8 +101,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void configureAlerts() {
-        configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
-        configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+        configureAlert(alertCustomer, "Nuevo cliente", "El cliente no existe", "Deseas agregarlo");
+        configureAlert(alertProduct, "Nuevo producto", "El producto no existe", "Deseas agregarlo?");
     }
 
     private void configureTable() {

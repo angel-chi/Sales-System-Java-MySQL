@@ -12,15 +12,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Customer;
 import org.borghisales.salessysten.model.CustomerDAO;
-
+import org.borghisales.salessysten.model.CRUD; //usa la interfaz
 
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
-
-    private final CustomerDAO customerDAO = new CustomerDAO();
+    // Depender de la abstraccion (CRUD)
+    private final CRUD<Customer> customerDAO = new CustomerDAO();
     private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
     private static ObservableList<Customer> customers=null;
 
@@ -81,23 +81,32 @@ public class CustomerController implements Initializable {
     public void addCustomer(ActionEvent actionEvent) {
         Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
         if (customerDAO.create(customer)) {
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente añadido con éxito");
             MenuController.cleanCells(dni, name, address);
             updateTable();
+        } else{
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al añadir cliente: Por favor checar el usuario o la información");
         }
     }
     @FXML
     public void updateCustomer(ActionEvent actionEvent) {
         Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
         if (customerDAO.update(customer)) {
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente actualizado con éxito");
             MenuController.cleanCells(dni, name, address);
             updateTable();
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al actualizar cliente. No se encontro el usuario o error de información");
         }
     }
     @FXML
     public void deleteCustomer(ActionEvent actionEvent) {
         if (customerDAO.delete(dni.getText())){
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente eliminado con éxito");
             MenuController.cleanCells(dni,name,address);
             updateTable();
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al borrar cliente. Puede que no tenga ventas asociadas o el usuario es incorrecto");
         }
     }
     @FXML

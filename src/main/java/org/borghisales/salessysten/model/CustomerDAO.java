@@ -19,12 +19,14 @@ public class CustomerDAO implements CRUD<Customer> {
             pstmt.setInt(1,dni);
 
             try (ResultSet rs = pstmt.executeQuery()){
-                rs.next();
-                return Customer.fromResultSet(rs);
+                if (rs.next()) {
+                    return Customer.fromResultSet(rs);
+                }
+                return null;
             }
 
         }catch (SQLException e){
-
+            e.printStackTrace();
             return null;
         }
 
@@ -42,17 +44,13 @@ public class CustomerDAO implements CRUD<Customer> {
             pstmt.setString(4, entity.state().toString());
 
             int rows_affected = pstmt.executeUpdate();
+            //s: solo devuelve resultado
+            return rows_affected > 0;
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Customer added correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding customer: ");
-                return false;
-            }
+
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding customer: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -74,16 +72,11 @@ public class CustomerDAO implements CRUD<Customer> {
 
             int rows_affected = pstmt.executeUpdate();
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Customer updated correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating customer");
-                return false;
-            }
+            return rows_affected > 0;
+
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating customer: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -109,15 +102,9 @@ public class CustomerDAO implements CRUD<Customer> {
             // Reactivate foreign key constraints
             enableConstraintsStmt.executeUpdate();
 
-            if (rowsAffected > 0) {
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Customer deleted correctly");
-                return true;
-            } else {
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting customer: ");
-                return false;
-            }
+            return rowsAffected > 0;
         } catch (SQLException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting customer: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -139,7 +126,7 @@ public class CustomerDAO implements CRUD<Customer> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table customer: " + e.getMessage());
+            e.printStackTrace();
         }
 
     }

@@ -9,19 +9,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
+import org.borghisales.salessysten.model.CRUD;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ProductController implements Initializable {
-
-    private final ProductDAO productDAO = new ProductDAO();
+    //usando la abstraccion
+    private final CRUD<Product> productDAO = new ProductDAO();
 
     private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
 
@@ -88,8 +86,11 @@ public class ProductController implements Initializable {
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                           Integer.parseInt(stock.getText()), cbState.getValue());
         if (productDAO.create(product)) {
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto añadido con éxito");
             MenuController.cleanCells(name,price,stock);
             updateTable();
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error añadiendo el producto: Favor de checar la información");
         }
     }
 
@@ -97,15 +98,21 @@ public class ProductController implements Initializable {
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                 Integer.parseInt(stock.getText()), cbState.getValue());
         if (productDAO.update(product)) {
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto actualizado con éxito");
             MenuController.cleanCells(name,price,stock);
             updateTable();
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando producto: Nombre no encontrado o error de información");
         }
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
         if (productDAO.delete(name.getText())) {
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto borrado con éxito");
             MenuController.cleanCells(name,price,stock);
             updateTable();
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error borrando el producto: Puede no tener ventas asociadas o el nombre es incorrecto");
         }
     }
 

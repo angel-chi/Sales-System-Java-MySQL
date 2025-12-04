@@ -28,17 +28,11 @@ public class SellerDAO implements CRUD<Seller> {
 
             int rows_affected = pstmt.executeUpdate();
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller added correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: ");
-                return false;
-            }
+            return rows_affected > 0;
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
 
@@ -60,17 +54,11 @@ public class SellerDAO implements CRUD<Seller> {
             pstmt.setString(5, entity.dni());
 
             int rows_affected = pstmt.executeUpdate();
+            return rows_affected > 0;
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller updated correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller ");
-                return false;
-            }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
 
@@ -88,19 +76,12 @@ public class SellerDAO implements CRUD<Seller> {
             pstmt.setString(1,id);
 
             int rows_affected = pstmt.executeUpdate();
-
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller deleted correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: ");
-                return false;
-            }
+            return rows_affected>0;
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
 
@@ -122,7 +103,7 @@ public class SellerDAO implements CRUD<Seller> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -157,7 +138,7 @@ public class SellerDAO implements CRUD<Seller> {
                 }
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching seller: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
 

@@ -12,13 +12,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Seller;
 import org.borghisales.salessysten.model.SellerDAO;
+import org.borghisales.salessysten.model.CRUD;
 
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SellerController implements Initializable {
-    private final SellerDAO sellerDAO = new SellerDAO();
+    //Usando la abstraccion
+    private final CRUD<Seller> sellerDAO = new SellerDAO();
     private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
     private static ObservableList<Seller> sellers = null;
 
@@ -88,24 +90,31 @@ public class SellerController implements Initializable {
     public void addSeller(ActionEvent actionEvent){
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
         if (sellerDAO.create(seller)) {
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor añadido con éxito");
             MenuController.cleanCells(dni, name, phone, user);
             updateTable();
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error añadiendo vendedor: el usuario ya existe");
         }
     }
     public void updateSeller(ActionEvent actionEvent) {
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
         if (sellerDAO.update(seller)) {
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor actualizado con éxito");
             MenuController.cleanCells(dni, name, phone, user);
             updateTable();
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando vendedor: Usuario no encontrado o error de datos");
         }
     }
 
     public void deleteSeller(ActionEvent actionEvent) {
         if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller");
+            MenuController.setAlert(Alert.AlertType.ERROR,"No se puede eliminar el vendedor actual");
             return;
         }
         if (sellerDAO.delete(dni.getText())){
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor eliminado con éxito");
             MenuController.cleanCells(dni,name,phone,user);
             updateTable();
         }
