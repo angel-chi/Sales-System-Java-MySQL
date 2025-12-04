@@ -124,8 +124,8 @@ public class ReportsController implements Initializable {
 
         x_time.setAutoRanging(false);
         x_time.setCategories(FXCollections.observableArrayList(categories));
-        x_time.setLabel("Days of the month");
-        y_amountSales.setLabel("Sales amount");
+        x_time.setLabel("Días del mes");
+        y_amountSales.setLabel("Cantidad de ventas");
 
         year.setText(String.valueOf(yearsShowed));
         month.setText(monthsShowed[idxMonth]);
@@ -147,7 +147,7 @@ public class ReportsController implements Initializable {
             pieChartData.forEach(data ->
                     data.nameProperty().bind(
                             Bindings.concat(
-                                    data.getName(), " amount: ", (int) data.pieValueProperty().doubleValue()
+                                    data.getName(), " cantidad: ", (int) data.pieValueProperty().doubleValue()
                             )
                     )
             );
@@ -185,7 +185,7 @@ public class ReportsController implements Initializable {
                 try {
                     Scene scene = new Scene(fxmlLoaderSaleDetails.load());
                     Stage stage = new Stage();
-                    stage.setTitle("Sale detail");
+                    stage.setTitle("Detalle de venta");
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException e) {
@@ -203,7 +203,7 @@ public class ReportsController implements Initializable {
 
     public void onFilter(ActionEvent actionEvent) {
         if (sales.isEmpty()){
-            MenuController.setAlert(Alert.AlertType.WARNING,"There are no sales");
+            MenuController.setAlert(Alert.AlertType.WARNING,"No hay ventas");
             return;
         }
 

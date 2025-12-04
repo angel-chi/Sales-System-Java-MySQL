@@ -7,21 +7,22 @@
 
 <AnchorPane prefHeight="596.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.GenerateSaleController">
    <AnchorPane prefHeight="596.0" prefWidth="590.0">
-      <Label layoutX="216.0" layoutY="11.0" prefHeight="39.0" prefWidth="279.0" text="POINT OF SALE &quot;BORGHI SYSTEM&quot;" underline="true">
-         <font>
-            <Font name="System Bold" size="17.0" />
-         </font>
+       <Label alignment="CENTER" layoutX="120.0" layoutY="11.0" prefHeight="39.0" prefWidth="400.0" text="PUNTO DE VENTA &quot;BORGHI SYSTEM&quot;" underline="true">
+           <font>
+               <Font name="System Bold" size="17.0" />
+           </font>
+
       </Label>
       <ImageView fitHeight="111.0" fitWidth="117.0" layoutX="50.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../../images/img_1.png" />
       </ImageView>
       <Separator layoutX="6.0" layoutY="135.0" prefHeight="16.0" prefWidth="584.0" />
-      <Label layoutX="234.0" layoutY="43.0" prefHeight="21.0" prefWidth="244.0" text="VENTA DE PRODUCTOS TECNOLÓGICOS">
+      <Label layoutX="145.0" layoutY="43.0" prefHeight="21.0" prefWidth="350.0" text="     VENTA DE PRODUCTOS TECNOLÓGICOS">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="300.0" layoutY="66.0" prefHeight="17.0" prefWidth="94.0" text="TEL: 8383-03939" />
+    <Label alignment="CENTER" layoutX="245.0" layoutY="66.0" prefHeight="17.0" prefWidth="150.0" text="TEL: 8383-03939" />
       <Label layoutX="258.0" layoutY="104.0" prefHeight="17.0" prefWidth="137.0" text="FOLIO:">
          <font>
             <Font size="14.0" />
@@ -31,10 +32,10 @@
       <TextField fx:id="codCustomer" layoutX="125.0" layoutY="166.0" prefHeight="25.0" prefWidth="117.0" />
       <TextField fx:id="codProduct" layoutX="124.0" layoutY="200.0" prefHeight="25.0" prefWidth="117.0" />
       <TextField fx:id="price" layoutX="125.0" layoutY="234.0" prefHeight="25.0" prefWidth="117.0" />
-      <TextField fx:id="customerName" editable="false" layoutX="416.0" layoutY="166.0" prefHeight="25.0" prefWidth="148.0" />
-      <TextField fx:id="productName" editable="false" layoutX="416.0" layoutY="199.0" prefHeight="25.0" prefWidth="148.0" />
-      <TextField fx:id="stock" editable="false" layoutX="415.0" layoutY="234.0" prefHeight="25.0" prefWidth="148.0" />
-      <TextField fx:id="seller" editable="false" layoutX="415.0" layoutY="269.0" prefHeight="25.0" prefWidth="148.0" />
+       <TextField fx:id="customerName" editable="false" layoutX="445.0" layoutY="166.0" prefHeight="25.0" prefWidth="135.0" />
+       <TextField fx:id="productName" editable="false" layoutX="445.0" layoutY="199.0" prefHeight="25.0" prefWidth="135.0" />
+       <TextField fx:id="stock" editable="false" layoutX="445.0" layoutY="234.0" prefHeight="25.0" prefWidth="135.0" />
+       <TextField fx:id="seller" editable="false" layoutX="445.0" layoutY="269.0" prefHeight="25.0" prefWidth="135.0" />
       <Spinner fx:id="quantity" layoutX="125.0" layoutY="269.0" prefHeight="21.0" prefWidth="117.0" />
       <Button layoutX="250.0" layoutY="166.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="25.0" prefWidth="80.0" text="BUSCAR" />
       <Button layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="25.0" prefWidth="80.0" text="BUSCAR" />
@@ -53,16 +54,16 @@
       <Separator layoutX="-4.0" layoutY="551.0" prefHeight="2.0" prefWidth="590.0" />
       <Button layoutX="53.0" layoutY="561.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="102.0" text="CANCELAR" />
       <Button layoutX="192.0" layoutY="561.0" mnemonicParsing="false" onAction="#generateSale" text="GENERAR VENTA" />
-      <TextField fx:id="total" editable="false" layoutX="472.0" layoutY="561.0" prefWidth="88.0" />
+      <TextField fx:id="total" editable="false" layoutX="500.0" layoutY="561.0" prefWidth="80.0" />
       <Label layoutX="21.0" layoutY="170.0" text="USUARIO:" wrapText="true" />
       <Label layoutX="21.0" layoutY="204.0" text="COD PROD:" wrapText="true" />
       <Label layoutX="22.0" layoutY="238.0" text="PRECIO:" wrapText="true" />
       <Label layoutX="22.0" layoutY="274.0" text="CANTIDAD:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="170.0" text="CLIENTE:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="204.0" text="PRODUCTO:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="238.0" text="INVENTARIO:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="273.0" text="VENDEDOR:" wrapText="true" />
-      <Label layoutX="397.0" layoutY="565.0" text="VENTA TOTAL" wrapText="true" />
+       <Label layoutX="345.0" layoutY="170.0" text="CLIENTE:" wrapText="true" />
+       <Label layoutX="345.0" layoutY="204.0" text="PRODUCTO:" wrapText="true" />
+       <Label layoutX="345.0" layoutY="238.0" text="INVENTARIO:" wrapText="true" />
+       <Label layoutX="345.0" layoutY="273.0" text="VENDEDOR:" wrapText="true" />
+       <Label layoutX="415.0" layoutY="565.0" text="VENTA TOTAL" wrapText="true" />
       <TextField fx:id="date" editable="false" layoutX="251.0" layoutY="270.0" prefHeight="25.0" prefWidth="80.0" />
    </AnchorPane>
 </AnchorPane>

@@ -133,7 +133,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         customer = customerDAO.searchCustomer(customerId);
 
         if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
+            setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + customer.name());
             customerName.setText(customer.name());
         } else {
             handleCustomerNotFound();
@@ -176,7 +176,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto encontrado: " + product.name());
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
@@ -214,7 +214,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
         total.clear();
     }
 
@@ -280,7 +280,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya está en el carrito de compras");
             return;
         }
 
@@ -307,9 +307,9 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private String validateInputs() {
         if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Missing customer name or product name.";
+            return "Falta nombre del cliente o nombre del producto.";
         } else if (quantity.getValue() == 0) {
-            return "Quantity can't be 0.";
+            return "La cantidad no puede ser 0.";
         }
         return null;
     }
