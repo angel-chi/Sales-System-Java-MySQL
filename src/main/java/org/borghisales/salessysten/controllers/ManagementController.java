@@ -78,7 +78,7 @@ public class ManagementController extends MenuController implements Initializabl
     }
 
     public void openHelp(ActionEvent actionEvent) {
-        openNewStage(HELP_VIEW_FXML,"Ayuda", 700, 700);
+        openNewStage(HELP_VIEW_FXML,"Ayuda", 575, 620);
         closeCurrentStage((Button) actionEvent.getSource());
     }
 
