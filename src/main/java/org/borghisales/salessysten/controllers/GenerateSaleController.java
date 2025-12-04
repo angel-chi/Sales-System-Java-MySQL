@@ -238,7 +238,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Sales createSalesObject() {
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
+                LocalDate.parse(date.getText()), Double.parseDouble((total.getText()).replace(',','.')),
                 Sales.State.ACTIVE);
     }
 
@@ -301,7 +301,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
-        double currentTotal = Double.parseDouble(total.getText()) + product.total();
+        double currentTotal = Double.parseDouble((total.getText()).replace(',','.')) + product.total();
         total.setText(String.format("%.2f", currentTotal));
     }
 
