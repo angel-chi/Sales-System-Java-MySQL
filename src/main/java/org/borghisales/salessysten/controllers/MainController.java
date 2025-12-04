@@ -3,8 +3,8 @@ package org.borghisales.salessysten.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import org.borghisales.salessysten.model.Seller;
-import org.borghisales.salessysten.model.SellerDAO;
+import org.borghisales.salessysten.model.Vendedor; // Seller -> Vendedor
+import org.borghisales.salessysten.model.VendedorDAO; // SellerDAO -> VendedorDAO
 
 //Para usar el metodo Platform.exit() que cierra la aplicación de forma controlada.
 import javafx.application.Platform;
@@ -18,7 +18,7 @@ public class MainController extends MenuController implements Initializable {
     @FXML
     private TextField password;
 
-    public static Seller sellerLog;
+    public static Vendedor vendedorLogeado; // Seller -> Vendedor, sellerLog -> vendedorLogeado
 
 
     @Override
@@ -26,16 +26,16 @@ public class MainController extends MenuController implements Initializable {
 //        user.setText("44994806");
 //        password.setText("chimu");
 
-        //In case the user is changed, the reports of that user should be updated.
-        ReportsController.setSales(null);
-        ReportsController.setPieChartData(null);
-        ReportsController.setLineChartData(null);
+        //En caso de que se cambie de usuario, se deben actualizar los reportes de ese usuario.
+        ReportsController.setVentas(null);
+        ReportsController.setDatosGraficoCircular(null);
+        ReportsController.setDatosGraficoLinea(null);
 
     }
 
     @FXML
     private void signIn(){
-        if (SellerDAO.login(user.getText(),password.getText())) {
+        if (VendedorDAO.login(user.getText(),password.getText())) { // SellerDAO -> VendedorDAO
             openNewStage(MANAGEMENT_VIEW_FXML, "Gestión");
             closeCurrentStage(user);
         }
