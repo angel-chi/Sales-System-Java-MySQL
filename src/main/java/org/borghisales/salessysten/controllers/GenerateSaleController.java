@@ -114,7 +114,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         customer = customerDAO.searchCustomer(customerId);
 
         if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
+            setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + customer.name());
             customerName.setText(customer.name());
         } else {
             handleCustomerNotFound();
@@ -141,7 +141,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto encontrado: " + product.name());
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
@@ -165,7 +165,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
+        setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
         total.clear();
     }
 

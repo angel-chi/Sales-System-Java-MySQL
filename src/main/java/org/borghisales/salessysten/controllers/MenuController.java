@@ -68,7 +68,7 @@ public class MenuController {
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("Información");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);
@@ -80,6 +80,7 @@ public class MenuController {
             e.clear();
     }
 
+    //boton de Cerrar ventana
     @FXML
     public void exitWindow(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getSource();
