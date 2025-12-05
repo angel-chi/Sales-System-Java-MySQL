@@ -88,8 +88,26 @@ public class MenuController {
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
+                //Se obtiene el título de la ventana padre
+                String parentFxml = getFxmlFather(fxmlFileName);
+                if (parentFxml != null) {
+                    //Aseguramos que el título también se pase correctamente
+                    openNewStage(parentFxml, getParentTittle(parentFxml));
+                }
             });
+        }
+    }
+
+    //Método para determinar el nombre de la ventana padre
+    private String getParentTittle(String fxmlFileName) {
+        //Nombre de las ventanas padres (ventanas que se ven al cerrar otras)
+        switch (fxmlFileName) {
+            case MAIN_VIEW_FXML:
+                return "Inicio de Sesión";
+            case MANAGEMENT_VIEW_FXML:
+                return "Gestión";
+            default:
+                return "Ventana desconocida";
         }
     }
 
