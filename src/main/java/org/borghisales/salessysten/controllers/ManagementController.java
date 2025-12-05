@@ -62,13 +62,19 @@ public class ManagementController extends MenuController implements Initializabl
     }
 
     public void help(ActionEvent actionEvent) {
-        try {
-            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"No se pudo abrir la URL. Comprueba tu conexión a internet.");
-        }
-
+        //Se usa Thread para no bloquear la interfaz gráfica
+        new Thread(() -> {
+            try {
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(new URI("https://github.com/angel-chi/Sales-System-Java-MySQL/blob/Basulto-Maga%C3%B1a/README.md"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                javafx.application.Platform.runLater(() ->
+                        setAlert(Alert.AlertType.ERROR, "No se pudo abrir la URL.")
+                );
+            }
+        }).start();
     }
 
     public void exit(ActionEvent actionEvent) {

@@ -88,7 +88,7 @@ public class MenuController {
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
-                //Se obtiene el título de la ventana padre
+                //Se obtiene la ventana padre
                 String parentFxml = getFxmlFather(fxmlFileName);
                 if (parentFxml != null) {
                     //Aseguramos que el título también se pase correctamente
