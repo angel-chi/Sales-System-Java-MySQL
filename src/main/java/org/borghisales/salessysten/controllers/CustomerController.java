@@ -1,6 +1,5 @@
 package org.borghisales.salessysten.controllers;
 
-import com.sun.tools.javac.Main;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,7 +14,6 @@ import org.borghisales.salessysten.model.CustomerDAO;
 
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
@@ -25,7 +23,7 @@ public class CustomerController implements Initializable {
     private static ObservableList<Customer> customers=null;
 
     @FXML
-    private TextField dni;
+    private TextField DNI;
     @FXML
     private TextField name;
     @FXML
@@ -79,34 +77,34 @@ public class CustomerController implements Initializable {
     }
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
+        Customer customer = new Customer(DNI.getText(),name.getText(),address.getText(),cbState.getValue());
         if (customerDAO.create(customer)) {
-            MenuController.cleanCells(dni, name, address);
+            MenuController.cleanCells(DNI, name, address);
             updateTable();
         }
     }
     @FXML
     public void updateCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
+        Customer customer = new Customer(DNI.getText(),name.getText(),address.getText(),cbState.getValue());
         if (customerDAO.update(customer)) {
-            MenuController.cleanCells(dni, name, address);
+            MenuController.cleanCells(DNI, name, address);
             updateTable();
         }
     }
     @FXML
     public void deleteCustomer(ActionEvent actionEvent) {
-        if (customerDAO.delete(dni.getText())){
-            MenuController.cleanCells(dni,name,address);
+        if (customerDAO.delete(DNI.getText())){
+            MenuController.cleanCells(DNI,name,address);
             updateTable();
         }
     }
     @FXML
     public void cleanCellsScreen(ActionEvent actionEvent) {
-        MenuController.cleanCells(dni,name,address);
+        MenuController.cleanCells(DNI,name,address);
     }
     private void setCells(Customer customer){
         name.setText(customer.name());
-        dni.setText(customer.dni());
+        DNI.setText(customer.dni());
         address.setText(customer.address());
         cbState.setValue(customer.state());
     }

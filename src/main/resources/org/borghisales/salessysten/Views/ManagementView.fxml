@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.borghisales.salessysten.controllers.ManagementController">
+<AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
 
     <children>
-        <TabPane fx:id="tabPaneManage"
-                 AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
-                 AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0"
-                 tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="tabPaneManage" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 
             <tabs>
 
@@ -20,11 +18,9 @@
                 <Tab text="MENÚ">
                     <content>
                         <StackPane>
-                            <VBox spacing="25" alignment="CENTER">
-                                <Button text="HELP"  onAction="#help"
-                                        prefWidth="160" prefHeight="60"/>
-                                <Button text="EXIT" onAction="#exit"
-                                        prefWidth="160" prefHeight="60"/>
+                            <VBox alignment="CENTER" prefHeight="600.0" prefWidth="400.0" spacing="25">
+                                <Button onAction="#help" prefHeight="100.0" prefWidth="190.0" text="AYUDA" />
+                                <Button onAction="#exit" prefHeight="100.0" prefWidth="190.0" text="SALIDA" />
                             </VBox>
                         </StackPane>
                     </content>
@@ -34,10 +30,8 @@
                 <Tab text="VENTAS">
                     <content>
                         <StackPane>
-                            <VBox spacing="25" alignment="CENTER">
-                                <Button text="GENERATE SALE"
-                                        onAction="#openGenerateSale"
-                                        prefWidth="160" prefHeight="60"/>
+                            <VBox alignment="CENTER" spacing="25">
+                                <Button onAction="#openGenerateSale" prefHeight="60" prefWidth="160" text="GENERAR VENTAS" />
                             </VBox>
                         </StackPane>
                     </content>
@@ -47,19 +41,12 @@
                 <Tab text="ADMINISTRACIÓN">
                     <content>
                         <StackPane>
-                            <VBox spacing="25" alignment="CENTER">
-                                <Button text="CLIENTE"
-                                        onAction="#openCustomer"
-                                        prefWidth="160" prefHeight="60"/>
+                            <VBox alignment="CENTER" spacing="25">
+                                <Button onAction="#openCustomer" prefHeight="60" prefWidth="160" text="CLIENTE" />
 
-                                <Button text="PRODUCTO"
-                                        onAction="#openProduct"
-                                        prefWidth="160" prefHeight="60"/>
+                                <Button onAction="#openProduct" prefHeight="60" prefWidth="160" text="PRODUCTO" />
 
-                                <Button fx:id="sellerButton"
-                                        text="VENDEDOR"
-                                        onAction="#openSeller"
-                                        prefWidth="160" prefHeight="60"/>
+                                <Button fx:id="sellerButton" onAction="#openSeller" prefHeight="60" prefWidth="160" text="VENDEDOR" />
                             </VBox>
                         </StackPane>
                     </content>
@@ -69,10 +56,8 @@
                 <Tab text="REPORTES">
                     <content>
                         <StackPane>
-                            <VBox spacing="25" alignment="CENTER">
-                                <Button text="Reporte de Ventas"
-                                        onAction="#openSalesReport"
-                                        prefWidth="160" prefHeight="60"/>
+                            <VBox alignment="CENTER" spacing="25">
+                                <Button onAction="#openSalesReport" prefHeight="60" prefWidth="160" text="REPORTE DE VENTAS" />
                             </VBox>
                         </StackPane>
                     </content>
