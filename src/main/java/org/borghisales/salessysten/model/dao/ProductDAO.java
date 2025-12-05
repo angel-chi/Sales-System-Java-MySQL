@@ -1,18 +1,21 @@
-package org.borghisales.salessysten.model;
+package org.borghisales.salessysten.model.dao;
 
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
-import org.borghisales.salessysten.controllers.ReportsController;
+import org.borghisales.salessysten.model.CRUD;
+import org.borghisales.salessysten.model.DBConnection;
+import org.borghisales.salessysten.model.Product;
+import org.borghisales.salessysten.model.ShoppingCart;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProductDAO implements CRUD<Product>{
+public class ProductDAO implements CRUD<Product> {
 
     public void subtractStock(ObservableList<ShoppingCart> products){
         String sql = "UPDATE product SET stock = stock - ? WHERE idProduct = ?";

@@ -25,10 +25,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
+import org.borghisales.salessysten.model.dao.ProductDAO;
+import org.borghisales.salessysten.model.dao.SalesDAO;
 
 
 import java.net.URL;
-import java.time.Month;
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -91,7 +92,7 @@ public class ReportsController implements Initializable {
     @FXML
     private TableColumn<Sales,Double> colAmount;
     @FXML
-    private TableColumn<Sales, Sales.State> colState;
+    private TableColumn<Sales, State> colState;
 
     public static void removeCacheLineChart(int year, int month) {
         if (cacheReportLineChart != null && cacheReportLineChart.containsKey(year)) {

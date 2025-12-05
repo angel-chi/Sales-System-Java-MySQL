@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import org.borghisales.salessysten.model.Seller;
-import org.borghisales.salessysten.model.SellerDAO;
+import org.borghisales.salessysten.model.dao.SellerDAO;
 
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class DBConnection {
 
-    static Connection connection() throws SQLException {
+    public static Connection connection() throws SQLException {
         Properties properties = new Properties();
         try (InputStream input = new FileInputStream("src/main/java/org/borghisales/salessysten/model/config.properties")) {
             properties.load(input);

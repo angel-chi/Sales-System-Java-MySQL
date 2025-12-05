@@ -11,7 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Seller;
-import org.borghisales.salessysten.model.SellerDAO;
+import org.borghisales.salessysten.model.dao.SellerDAO;
+import org.borghisales.salessysten.model.State;
 
 import java.net.URL;
 import java.util.Objects;
@@ -19,7 +20,7 @@ import java.util.ResourceBundle;
 
 public class SellerController implements Initializable {
     private final SellerDAO sellerDAO = new SellerDAO();
-    private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
+    private final ObservableList<State> stateList = FXCollections.observableArrayList(State.ACTIVE, State.DISACTIVE);
     private static ObservableList<Seller> sellers = null;
 
     @FXML
@@ -27,13 +28,15 @@ public class SellerController implements Initializable {
     @FXML
     private TextField name;
     @FXML
+    private TextField email;
+    @FXML
     private TextField phone;
     @FXML
     private TextField user;
     @FXML
     private TextField password;
     @FXML
-    private ComboBox<Seller.State> cbState;
+    private ComboBox<State> cbState;
     @FXML
     private TableView<Seller> tableSellers;
     @FXML
@@ -43,11 +46,11 @@ public class SellerController implements Initializable {
     @FXML
     private TableColumn<Seller,String> colName;
     @FXML
+    private TableColumn<Seller,String> colEmail;
+    @FXML
     private TableColumn<Seller,String> colPhone;
     @FXML
-    private TableColumn<Seller, Seller.State> colState;
-    @FXML
-    private TableColumn<Seller, String> colPassword;
+    private TableColumn<Seller, State> colState;
 
 
 
@@ -69,12 +72,13 @@ public class SellerController implements Initializable {
         colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSeller()).asObject());
         colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
         colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
+        colEmail.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().email()));
         colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().phoneNumber()));
         colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
     }
 
     private void initializeComboBox() {
-        cbState.setValue(Seller.State.ACTIVE);
+        cbState.setValue(State.ACTIVE);
         cbState.setItems(stateList);
     }
 
@@ -94,7 +98,7 @@ public class SellerController implements Initializable {
             ;
         }
         else {
-            Seller seller = new Seller(dni.getText(), name.getText(), phone.getText(), cbState.getValue(), user.getText(), password.getText());
+            Seller seller = new Seller(dni.getText(), name.getText(), email.getText(), phone.getText(), cbState.getValue(), user.getText(), password.getText());
             if (sellerDAO.create(seller)) {
                 MenuController.cleanCells(dni, name, phone, user, password);
                 updateTable();
@@ -107,7 +111,7 @@ public class SellerController implements Initializable {
             ;
         }
         else {
-            Seller seller = new Seller(dni.getText(), name.getText(), phone.getText(), (Seller.State) cbState.getValue(), user.getText(), password.getText());
+            Seller seller = new Seller(dni.getText(), name.getText(), email.getText(), phone.getText(), (State) cbState.getValue(), user.getText(), password.getText());
             if (sellerDAO.update(seller)) {
                 MenuController.cleanCells(dni, name, phone, user, password);
                 updateTable();
@@ -121,7 +125,7 @@ public class SellerController implements Initializable {
             return;
         }
         if (sellerDAO.delete(user.getText())){
-            MenuController.cleanCells(dni,name,phone,user);
+            MenuController.cleanCells(dni,name,email,phone,user);
             updateTable();
         }
     }
@@ -133,6 +137,7 @@ public class SellerController implements Initializable {
     private void setCells(Seller seller){
         dni.setText(seller.dni());
         name.setText(seller.name());
+        email.setText(seller.email());
         phone.setText(seller.phoneNumber());
         user.setText(seller.user());
         password.setText(seller.password());

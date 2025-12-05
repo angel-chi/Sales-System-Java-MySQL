@@ -13,6 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
+import org.borghisales.salessysten.model.dao.CustomerDAO;
+import org.borghisales.salessysten.model.dao.ProductDAO;
+import org.borghisales.salessysten.model.dao.SalesDAO;
 
 
 import java.io.IOException;
@@ -238,7 +241,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Sales createSalesObject() {
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
                 LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
-                Sales.State.ACTIVE);
+                State.ACTIVE);
     }
 
     private boolean saveSaleAndDetails(Sales sales) {

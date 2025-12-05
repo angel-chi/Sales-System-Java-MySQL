@@ -1,4 +1,4 @@
-package org.borghisales.salessysten.model;
+package org.borghisales.salessysten.model.dao;
 
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
@@ -6,6 +6,9 @@ import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 import org.borghisales.salessysten.controllers.ReportsController;
+import org.borghisales.salessysten.model.DBConnection;
+import org.borghisales.salessysten.model.Sales;
+import org.borghisales.salessysten.model.ShoppingCart;
 
 import java.sql.*;
 

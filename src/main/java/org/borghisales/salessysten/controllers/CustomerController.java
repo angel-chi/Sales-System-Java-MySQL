@@ -1,6 +1,5 @@
 package org.borghisales.salessysten.controllers;
 
-import com.sun.tools.javac.Main;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,17 +10,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Customer;
-import org.borghisales.salessysten.model.CustomerDAO;
+import org.borghisales.salessysten.model.dao.CustomerDAO;
+import org.borghisales.salessysten.model.State;
 
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
 
     private final CustomerDAO customerDAO = new CustomerDAO();
-    private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
+    private final ObservableList<State> stateList = FXCollections.observableArrayList(State.ACTIVE, State.DISACTIVE);
     private static ObservableList<Customer> customers=null;
 
     @FXML
@@ -29,9 +28,11 @@ public class CustomerController implements Initializable {
     @FXML
     private TextField name;
     @FXML
+    private TextField email;
+    @FXML
     private TextField address;
     @FXML
-    private ComboBox<Customer.State> cbState;
+    private ComboBox<State> cbState;
     @FXML
     private TableView<Customer> tableCustomers;
     @FXML
@@ -41,9 +42,11 @@ public class CustomerController implements Initializable {
     @FXML
     private TableColumn<Customer,String> colName;
     @FXML
+    private TableColumn<Customer,String> colEmail;
+    @FXML
     private TableColumn<Customer,String> colAddress;
     @FXML
-    private TableColumn<Customer,Customer.State> colState;
+    private TableColumn<Customer,State> colState;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,27 +72,28 @@ public class CustomerController implements Initializable {
 
         colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idCustomer()).asObject());
         colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
+        colEmail.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().email()));
         colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
         colAddress.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().address()));
         colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
     }
     private void initializeComboBox() {
-        cbState.setValue(Customer.State.ACTIVE);
+        cbState.setValue(State.ACTIVE);
         cbState.setItems(stateList);
     }
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
+        Customer customer = new Customer(dni.getText(),name.getText(), email.getText(),address.getText(),cbState.getValue());
         if (customerDAO.create(customer)) {
-            MenuController.cleanCells(dni, name, address);
+            MenuController.cleanCells(dni, name, email, address);
             updateTable();
         }
     }
     @FXML
     public void updateCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
+        Customer customer = new Customer(dni.getText(),name.getText(), email.getText(), address.getText(),cbState.getValue());
         if (customerDAO.update(customer)) {
-            MenuController.cleanCells(dni, name, address);
+            MenuController.cleanCells(dni, name, email, address);
             updateTable();
         }
     }
@@ -107,6 +111,7 @@ public class CustomerController implements Initializable {
     private void setCells(Customer customer){
         name.setText(customer.name());
         dni.setText(customer.dni());
+        email.setText(customer.email());
         address.setText(customer.address());
         cbState.setValue(customer.state());
     }

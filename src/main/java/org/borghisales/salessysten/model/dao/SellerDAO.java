@@ -1,16 +1,18 @@
-package org.borghisales.salessysten.model;
+package org.borghisales.salessysten.model.dao;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.GenerateSaleController;
 import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
+import org.borghisales.salessysten.model.CRUD;
+import org.borghisales.salessysten.model.DBConnection;
+import org.borghisales.salessysten.model.Seller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class SellerDAO implements CRUD<Seller> {
     @Override

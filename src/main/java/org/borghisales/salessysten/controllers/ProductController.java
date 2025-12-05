@@ -14,7 +14,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.borghisales.salessysten.model.Product;
-import org.borghisales.salessysten.model.ProductDAO;
+import org.borghisales.salessysten.model.dao.ProductDAO;
+import org.borghisales.salessysten.model.State;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,11 +24,11 @@ public class ProductController implements Initializable {
 
     private final ProductDAO productDAO = new ProductDAO();
 
-    private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
+    private final ObservableList<State> stateList = FXCollections.observableArrayList(State.ACTIVE, State.DISACTIVE);
 
     private static ObservableList<Product> products =null;
     @FXML
-    private ComboBox<Product.State> cbState;
+    private ComboBox<State> cbState;
     @FXML
     private TextField name;
     @FXML
@@ -45,7 +46,7 @@ public class ProductController implements Initializable {
     @FXML
     private TableColumn<Product,Integer> colStock;
     @FXML
-    private TableColumn<Product,Product.State> colState;
+    private TableColumn<Product,State> colState;
 
 
     @Override
@@ -71,7 +72,7 @@ public class ProductController implements Initializable {
     }
 
     private void initializeComboBox() {
-        cbState.setValue(Product.State.ACTIVE);
+        cbState.setValue(State.ACTIVE);
         cbState.setItems(stateList);
     }
 
