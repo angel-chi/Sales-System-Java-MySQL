@@ -136,8 +136,8 @@ public class GenerateSaleController extends MenuController implements Initializa
         cliente = clienteDAO.searchCliente(codCliente.getText()); // customer -> cliente, customerDAO -> clienteDAO, searchCustomer -> searchCliente
 
         if (cliente != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + cliente.nombre()); // cliente.name() -> cliente.nombre()
-            nombreCliente.setText(cliente.nombre()); // customerName -> nombreCliente
+            setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + cliente.getNombre()); // cliente.name() -> cliente.nombre()
+            nombreCliente.setText(cliente.getNombre()); // customerName -> nombreCliente
         } else {
             handleCustomerNotFound();
         }
@@ -244,7 +244,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         String totalText = total.getText().trim().replace(',', '.');
         //Se convierte a double
         double totalValue = Double.parseDouble(totalText);
-        return new Venta(cliente.idCliente(), idVendedor, serial.getText(), // Customer -> Cliente, idCustomer() -> idCliente(), idSeller -> idVendedor
+        return new Venta(cliente.getId(), idVendedor, serial.getText(), // Customer -> Cliente, idCustomer() -> idCliente(), idSeller -> idVendedor
                 LocalDate.parse(date.getText()), totalValue,
                 Venta.Estado.ACTIVO); // Sales.State.ACTIVE -> Venta.Estado.ACTIVO
     }

@@ -67,11 +67,11 @@ public class CustomerController implements Initializable {
             }
         });
 
-        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idCliente()).asObject());
-        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().nombre()));
-        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().correo()));
-        colAddress.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().direccion()));
-        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().estado()));
+        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getId()).asObject());
+        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getNombre()));
+        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getCorreo()));
+        colAddress.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getDireccion()));
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getEstado()));
     }
     private void initializeComboBox() {
         cbState.setValue(Cliente.Estado.ACTIVO);
@@ -105,10 +105,10 @@ public class CustomerController implements Initializable {
         MenuController.cleanCells(dni,name,address);
     }
     private void setCells(Cliente cliente){
-        name.setText(cliente.nombre());
-        dni.setText(cliente.correo());
-        address.setText(cliente.direccion());
-        cbState.setValue(cliente.estado());
+        name.setText(cliente.getNombre());
+        dni.setText(cliente.getCorreo());
+        address.setText(cliente.getDireccion());
+        cbState.setValue(cliente.getEstado());
     }
 
     private void updateTable() {
@@ -116,5 +116,4 @@ public class CustomerController implements Initializable {
         clienteDAO.setTable(clientes);
         tableCustomers.setItems(clientes);
     }
-
 }

@@ -40,10 +40,10 @@ public class ClienteDAO implements CRUD<Cliente> {
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-            pstmt.setString(1, entity.correo());
-            pstmt.setString(2, entity.nombre());
-            pstmt.setString(3, entity.direccion());
-            pstmt.setString(4, entity.estado().toString());
+            pstmt.setString(1, entity.getCorreo());
+            pstmt.setString(2, entity.getNombre());
+            pstmt.setString(3, entity.getDireccion());
+            pstmt.setString(4, entity.getEstado().toString());
 
             int rows_affected = pstmt.executeUpdate();
 
@@ -69,11 +69,11 @@ public class ClienteDAO implements CRUD<Cliente> {
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-            pstmt.setString(1, entity.nombre());
-            pstmt.setString(2, entity.direccion());
-            pstmt.setString(3, entity.estado().name());
-            pstmt.setString(4, entity.correo());
-            pstmt.setInt(5, entity.idCliente()); // Usando idCliente para el WHERE
+            pstmt.setString(1, entity.getNombre());
+            pstmt.setString(2, entity.getDireccion());
+            pstmt.setString(3, entity.getEstado().name());
+            pstmt.setString(4, entity.getCorreo());
+            pstmt.setInt(5, entity.getId()); // Usando idCliente para el WHERE
 
             int rows_affected = pstmt.executeUpdate();
 
