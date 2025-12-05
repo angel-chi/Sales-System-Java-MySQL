@@ -173,7 +173,7 @@ public class ProductoDAO implements CRUD<Producto>{ // Cambiado de ProductDAO a 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-            pstmt.setInt(1, MainController.vendedorLogeado.idVendedor());
+            pstmt.setInt(1, MainController.vendedorLogeado.getId());
 
             try (ResultSet rs = pstmt.executeQuery()){
                 while (rs.next()){

@@ -20,11 +20,11 @@ public class VendedorDAO implements CRUD<Vendedor> { // Cambiado de SellerDAO a 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-            pstmt.setString(1, entity.identificacion()); // Nombre de método de entidad cambiado
-            pstmt.setString(2, entity.nombre()); // Nombre de método de entidad cambiado
-            pstmt.setString(3, entity.telefono()); // Nombre de método de entidad cambiado
-            pstmt.setString(4, entity.estado().name());
-            pstmt.setString(5, entity.usuario()); // Nombre de método de entidad cambiado
+            pstmt.setString(1, entity.getIdentificacion()); // Nombre de método de entidad cambiado
+            pstmt.setString(2, entity.getNombre()); // Nombre de método de entidad cambiado
+            pstmt.setString(3, entity.getTelefono()); // Nombre de método de entidad cambiado
+            pstmt.setString(4, entity.getEstado().name());
+            pstmt.setString(5, entity.getUsuario()); // Nombre de método de entidad cambiado
 
             int rows_affected = pstmt.executeUpdate();
 
@@ -53,11 +53,11 @@ public class VendedorDAO implements CRUD<Vendedor> { // Cambiado de SellerDAO a 
             PreparedStatement pstmt = conn.prepareStatement(sql)){
 
 
-            pstmt.setString(1, entity.nombre()); // Nombre de método de entidad cambiado
-            pstmt.setString(2, entity.telefono()); // Nombre de método de entidad cambiado
-            pstmt.setString(3, entity.estado().name());
-            pstmt.setString(4, entity.usuario()); // Nombre de método de entidad cambiado
-            pstmt.setString(5, entity.identificacion()); // Nombre de método de entidad cambiado
+            pstmt.setString(1, entity.getNombre()); // Nombre de método de entidad cambiado
+            pstmt.setString(2, entity.getTelefono()); // Nombre de método de entidad cambiado
+            pstmt.setString(3, entity.getEstado().name());
+            pstmt.setString(4, entity.getUsuario()); // Nombre de método de entidad cambiado
+            pstmt.setString(5, entity.getIdentificacion()); // Nombre de método de entidad cambiado
 
             int rows_affected = pstmt.executeUpdate();
 

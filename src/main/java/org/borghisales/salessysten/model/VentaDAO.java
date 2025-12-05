@@ -96,7 +96,7 @@ public class VentaDAO { // Cambiado de SalesDAO a VentaDAO
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-            pstmt.setInt(1, MainController.vendedorLogeado.idVendedor()); // Corregido: sellerLog -> vendedorLogeado
+            pstmt.setInt(1, MainController.vendedorLogeado.getId()); // Corregido: sellerLog -> vendedorLogeado
 
             try (ResultSet rs = pstmt.executeQuery()){
                 while (rs.next()){
@@ -126,7 +126,7 @@ public class VentaDAO { // Cambiado de SalesDAO a VentaDAO
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-            pstmt.setInt(1, MainController.vendedorLogeado.idVendedor()); // Corregido: sellerLog -> vendedorLogeado
+            pstmt.setInt(1, MainController.vendedorLogeado.getId()); // Corregido: sellerLog -> vendedorLogeado
             pstmt.setInt(2, year);
             pstmt.setInt(3, month);
 

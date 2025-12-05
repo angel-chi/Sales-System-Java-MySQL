@@ -63,11 +63,11 @@ public class SellerController implements Initializable {
             }
         });
 
-        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idVendedor()).asObject()); // idSeller() -> idVendedor()
-        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().identificacion())); // dni() -> identificacion()
-        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().nombre())); // name() -> nombre()
-        colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().telefono())); // phoneNumber() -> telefono()
-        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().estado())); // state() -> estado()
+        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getId()).asObject()); // idSeller() -> idVendedor()
+        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getIdentificacion())); // dni() -> identificacion()
+        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getNombre())); // name() -> nombre()
+        colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getTelefono())); // phoneNumber() -> telefono()
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getEstado())); // state() -> estado()
     }
 
     private void initializeComboBox() {
@@ -101,7 +101,7 @@ public class SellerController implements Initializable {
     }
 
     public void deleteSeller(ActionEvent actionEvent) {
-        if (Objects.equals(identificacion.getText(), MainController.vendedorLogeado.identificacion())){ // dni -> identificacion, sellerLog -> vendedorLogeado, dni() -> identificacion()
+        if (Objects.equals(identificacion.getText(), MainController.vendedorLogeado.getIdentificacion())){ // dni -> identificacion, sellerLog -> vendedorLogeado, dni() -> identificacion()
             MenuController.setAlert(Alert.AlertType.ERROR,"No se puede eliminar el vendedor actual"); // Mensaje traducido
             return;
         }
@@ -116,11 +116,11 @@ public class SellerController implements Initializable {
     }
 
     private void setCells(Vendedor vendedor){ // Seller -> Vendedor
-        identificacion.setText(vendedor.identificacion()); // dni -> identificacion
-        nombre.setText(vendedor.nombre()); // name -> nombre
-        telefono.setText(vendedor.telefono()); // phoneNumber -> telefono
-        usuario.setText(vendedor.usuario()); // user -> usuario
-        cbState.setValue(vendedor.estado()); // state -> estado
+        identificacion.setText(vendedor.getIdentificacion()); // dni -> identificacion
+        nombre.setText(vendedor.getNombre()); // name -> nombre
+        telefono.setText(vendedor.getTelefono()); // phoneNumber -> telefono
+        usuario.setText(vendedor.getUsuario()); // user -> usuario
+        cbState.setValue(vendedor.getEstado()); // state -> estado
     }
 
     private void updateTable(){
@@ -128,6 +128,4 @@ public class SellerController implements Initializable {
         vendedorDAO.setTable(vendedores); // sellerDAO -> vendedorDAO, sellers -> vendedores
         tableSellers.setItems(vendedores); // sellers -> vendedores
     }
-
-
 }

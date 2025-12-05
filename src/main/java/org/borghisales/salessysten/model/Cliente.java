@@ -18,7 +18,7 @@ public class Cliente extends Usuario {
         this(0, correo, nombre, direccion, estado);
     }
 
-    //Método factory estático para usar desde ClienteDAO: Cliente.fromResultSet(rs)
+    //Método factory estático para usar desde ClienteDAO
     public static Cliente fromResultSet(ResultSet rs) throws SQLException {
         int id = rs.getInt("idCliente");
         String nombre = rs.getString("nombre");

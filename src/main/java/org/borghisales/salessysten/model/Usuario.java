@@ -13,7 +13,7 @@ public abstract class Usuario {
         this.estado = estado;
     }
 
-    //Métodos getter y setter
+    //Métodos getter
     public int getId() {
         return id;
     }
