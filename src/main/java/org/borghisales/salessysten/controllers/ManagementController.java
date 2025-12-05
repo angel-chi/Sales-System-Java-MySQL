@@ -63,12 +63,18 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void help(ActionEvent actionEvent) {
         try {
-            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"No fue posible abrir la URL. Por favor, verifica tu conexión a Internet.");
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            new ProcessBuilder("rundll32", "url.dll,FileProtocolHandler", "https://github.com/Borghii/Sales-System").start();
+        } else if (os.contains("mac")) {
+            new ProcessBuilder("open", "https://github.com/Borghii/Sales-System").start();
+        } else {
+            new ProcessBuilder("xdg-open", "https://github.com/Borghii/Sales-System").start();
         }
-
+    } catch (Exception e) {
+        e.printStackTrace();
+        setAlert(Alert.AlertType.ERROR, "No fue posible abrir la URL. Por favor, verifica tu conexión a internet.");
+    }
     }
 
     public void exit(ActionEvent actionEvent) {

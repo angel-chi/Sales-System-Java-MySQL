@@ -3,9 +3,7 @@ package org.borghisales.salessysten;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.controllers.MenuController;
-
 import java.io.IOException;
-
 import static org.borghisales.salessysten.controllers.MenuController.*;
 
 public class Main extends Application {

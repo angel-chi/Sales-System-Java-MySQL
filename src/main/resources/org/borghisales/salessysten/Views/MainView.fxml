@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
    <children>
       <ImageView fitHeight="71.0" fitWidth="73.0" layoutX="224.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -17,7 +17,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-       <Label alignment="CENTER" layoutX="14.0" layoutY="50.0" prefHeight="45.0" prefWidth="200.0" text="VENTAS" underline="true" textAlignment="CENTER">
+       <Label alignment="CENTER" layoutX="14.0" layoutY="50.0" prefHeight="45.0" prefWidth="200.0" text="VENTAS" textAlignment="CENTER" underline="true">
            <font>
                <Font size="28.0" />
            </font>
@@ -27,7 +27,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="54.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="CONTRASEÑA">
+      <Label alignment="CENTER" layoutX="60.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="CONTRASEÑA">
          <font>
             <Font size="28.0" />
          </font>

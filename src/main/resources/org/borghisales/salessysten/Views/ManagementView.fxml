@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="407.0" prefWidth="305.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
+<AnchorPane prefHeight="407.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
    <children>
-      <TabPane fx:id="tabPaneManage" prefHeight="400.0" prefWidth="340.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPaneManage" prefHeight="400.0" prefWidth="298.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="MENÚ">
             <content>
@@ -26,9 +26,9 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="ADMINISTRACIÓN">
+            <Tab text="GESTION">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="230.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="270.0">
                      <children>
                         <Button layoutX="78.0" layoutY="46.0" mnemonicParsing="false" onAction="#openCustomer" prefHeight="70.0" prefWidth="160.0" text="CLIENTES" />
                         <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="160.0" text="PRODUCTOS" />
