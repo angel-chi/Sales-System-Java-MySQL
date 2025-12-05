@@ -11,7 +11,7 @@
             <TableColumn fx:id="colCod" prefWidth="73.0" sortable="false" style="-fx-alignment: CENTER;" text="COD" />
             <TableColumn fx:id="colProduct" prefWidth="356.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCTO" />
             <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="103.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
-            <TableColumn fx:id="colPrice" prefWidth="102.0" style="-fx-alignment: CENTER;" text="PRICE UNIT" />
+            <TableColumn fx:id="colPrice" prefWidth="102.0" style="-fx-alignment: CENTER;" text="PRECIO UNIT." />
             <TableColumn fx:id="colTotal" prefWidth="94.0" style="-fx-alignment: CENTER;" text="TOTAL" />
          </columns>
       </TableView>

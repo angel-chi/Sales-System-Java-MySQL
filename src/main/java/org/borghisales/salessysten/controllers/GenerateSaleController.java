@@ -40,7 +40,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SI");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
@@ -158,7 +158,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Customer");
+        stage.setTitle("Gestión de clientes");
         stage.setScene(scene);
         stage.show();
     }
@@ -203,7 +203,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Product");
+        stage.setTitle("Gestión de productos");
         stage.setScene(scene);
         stage.show();
     }

@@ -34,7 +34,7 @@ import java.util.function.Predicate;
 
 public class ReportsController implements Initializable {
 
-    private static final String[] monthsShowed = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    private static final String[] monthsShowed = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     private static int idxMonth = LocalDate.now().getMonth().getValue()-1;
     private static int yearsShowed = LocalDate.now().getYear();
 
@@ -217,11 +217,11 @@ public class ReportsController implements Initializable {
 
 
             if (minAmount >= maxAmount) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct amount intervals");
+                MenuController.setAlert(Alert.AlertType.ERROR,"Introduzca la cantidad correcta de intervalos");
                 return;
             }
             if (minDate.isAfter(maxDate)) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct date intervals");
+                MenuController.setAlert(Alert.AlertType.ERROR,"Introduzca el intervalo de fechas correcto");
                 return;
             }
 
@@ -268,10 +268,10 @@ public class ReportsController implements Initializable {
                 series.setName(monthsShowed[idxMonth]);
                 yearData.put(month, series);
             } else {
-                System.out.println("There is already a series for the year" + year + " and the month " + month + ". No new series will be added");
+                System.out.println("Ya existe una serie para el año" + year + " y mes " + month + ". No se agregarán series nuevas");
             }
         } else {
-            System.out.println("Error: lineChartData is null. Cannot add to cache map.");
+            System.out.println("Error: lineChartData es nulo. No se puede añadir al mapa de caché.");
         }
 
         recorrerHashMap();
@@ -395,15 +395,15 @@ public class ReportsController implements Initializable {
 
     public static void recorrerHashMap() {
         for (Integer year : cacheReportLineChart.keySet()) {
-            System.out.println("Year: " + year);
+            System.out.println("año: " + year);
             HashMap<Integer, XYChart.Series<String, Integer>> yearData = cacheReportLineChart.get(year);
             for (Integer month : yearData.keySet()) {
-                System.out.println("  Month: " + month);
+                System.out.println("  mes: " + month);
                 XYChart.Series<String, Integer> series = yearData.get(month);
                 if (series != null) {
-                    System.out.println("    Series: " + series.getName());
+                    System.out.println("    serie: " + series.getName());
                     for (XYChart.Data<String, Integer> data : series.getData()) {
-                        System.out.println("      Data: " + data.getXValue() + ", " + data.getYValue());
+                        System.out.println("      datos: " + data.getXValue() + ", " + data.getYValue());
                     }
                 } else {
                     System.out.println("    No hay serie asociada para este mes.");
