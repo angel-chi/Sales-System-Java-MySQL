@@ -18,17 +18,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1028.0" prefWidth="1465.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ReportsController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1028.0" prefWidth="1465.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ReportsController">
   <tabs>
-    <Tab text="SALES HISTORY">
+    <Tab text="HISTORIAL DE VENTAS">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="537.0" prefWidth="816.0">
                <children>
                   <TableView fx:id="tableReport" layoutX="19.0" layoutY="123.0" prefHeight="818.0" prefWidth="1430.0">
                     <columns>
                       <TableColumn fx:id="colIdSales" prefWidth="75.0" text="idSales" />
-                      <TableColumn fx:id="colIdCustomer" prefWidth="75.0" text="idCustomer" />
-                        <TableColumn fx:id="colIdSeller" prefWidth="75.0" text="idSeller" />
+                      <TableColumn fx:id="colIdCustomer" prefWidth="75.0" text="ID CLIENTE" />
+                        <TableColumn fx:id="colIdSeller" prefWidth="75.0" text="ID VENDEDOR" />
                         <TableColumn fx:id="colNumberSales" prefWidth="75.0" text="numberSales" />
                         <TableColumn fx:id="colSaleDate" prefWidth="75.0" text="saleDate" />
                         <TableColumn fx:id="colAmount" prefWidth="75.0" text="amount" />
@@ -43,7 +43,7 @@
                   <DatePicker fx:id="maxDate" layoutX="1198.0" layoutY="76.0" prefHeight="25.0" prefWidth="92.0" />
                   <TextField fx:id="minAmount" layoutX="887.0" layoutY="74.0" prefHeight="27.0" prefWidth="78.0" />
                   <TextField fx:id="maxAmount" layoutX="984.0" layoutY="74.0" prefHeight="27.0" prefWidth="78.0" />
-                  <Label layoutX="945.0" layoutY="40.0" text="AMOUNT" underline="true" wrapText="true">
+                  <Label layoutX="945.0" layoutY="40.0" text="CANTIDAD" underline="true" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -58,7 +58,7 @@
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label layoutX="1170.0" layoutY="41.0" text="DATE" underline="true" wrapText="true">
+                  <Label layoutX="1170.0" layoutY="41.0" text="FECHA" underline="true" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -73,7 +73,7 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="STATISTICS">
+    <Tab text="ESTADÍSTICAS">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="710.0" prefWidth="1103.0">
                <children>
