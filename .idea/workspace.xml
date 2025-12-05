@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="refactor: delete comments">
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="pruebaINTELIJ, no cambia nada">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/config.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/ShoppingCart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,12 +36,12 @@
     &quot;assignee&quot;: &quot;Borghii&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Borghii/Sales-System.git&quot;,
-    &quot;accountId&quot;: &quot;2e699beb-8c26-4f6a-b608-82f45b0371d8&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/angel-chi/Sales-System-Java-MySQL.git",
+    "accountId": "faa92da2-c8ac-4687-a104-8b06887f986e"
   }
-}</component>
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -69,7 +65,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Run",
+    "Application.Main.executor": "Debug",
     "Application.MainController.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -77,12 +73,19 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "Hernandez-Fabrizio",
     "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/tomas/Desktop/Sales-System/src/main/resources/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "MavenSettings"
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -136,6 +139,14 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -144,6 +155,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
+      <workItem from="1764975469052" duration="669000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
@@ -441,8 +453,27 @@
       <option name="project" value="LOCAL" />
       <updated>1713959368643</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="pruebaINTELIJ, no cambia nada">
+      <option name="closed" value="true" />
+      <created>1764975665750</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1764975665750</updated>
+    </task>
+    <task id="LOCAL-00039" summary="pruebaINTELIJ, no cambia nada">
+      <option name="closed" value="true" />
+      <created>1764975783390</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1764975783390</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -456,7 +487,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fea: delete seller" />
     <MESSAGE value="fea: add table" />
     <MESSAGE value="fea: add show table" />
     <MESSAGE value="fea: add DAO products" />
@@ -481,6 +511,7 @@
     <MESSAGE value="fix: finish optimization linechart" />
     <MESSAGE value="refactor: cleaning code" />
     <MESSAGE value="refactor: delete comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: delete comments" />
+    <MESSAGE value="pruebaINTELIJ, no cambia nada" />
+    <option name="LAST_COMMIT_MESSAGE" value="pruebaINTELIJ, no cambia nada" />
   </component>
 </project>
