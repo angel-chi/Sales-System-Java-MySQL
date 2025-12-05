@@ -12,6 +12,7 @@ public class Main extends Application {
     MenuController mc = new MenuController();
     @Override
     public void init() throws Exception {
+        
         super.init();
         filePaths.put(MANAGEMENT_VIEW_FXML, MAIN_VIEW_FXML);
         filePaths.put(SELLER_VIEW_FXML, MANAGEMENT_VIEW_FXML);
@@ -23,10 +24,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        mc.openNewStage(MAIN_VIEW_FXML,"Inicio de sesión");
+        mc.openAutoSizeStage(MAIN_VIEW_FXML,"Login");
+        
     }
 
     public static void main(String[] args) {
+        // Ejecuta la aplicación JavaFX.
         launch();
     }
 }
