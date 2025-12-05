@@ -102,7 +102,7 @@ public class SellerController extends MenuController implements Initializable {
 
     public void deleteSeller(ActionEvent actionEvent) {
         if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
-            setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller"); //por si rompo el codigo, aqui habia un MenuController.
+            setAlert(Alert.AlertType.ERROR,"No se puede eliminar al vendedor en uso"); //por si rompo el codigo, aqui habia un MenuController.
             return;
         }
         if (sellerDAO.delete(dni.getText())){

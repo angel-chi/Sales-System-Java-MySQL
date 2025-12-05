@@ -33,7 +33,7 @@ public class SalesReportGenerator {
     public static void generateCSVReport(ObservableList<Sales> salesList, String outputPath) {
         try (FileWriter writer = new FileWriter(outputPath)) {
             // Escribir encabezados de columna
-            writer.append("ID Sales,ID Customer,ID Seller,Number Sales,Sale Date,Amount,State\n");
+            writer.append("ID Venta,ID Cliente,ID Vendedor,Numero de venta,Fecha de venta,Cantidad,Estado\n");
 
             // Escribir datos de ventas
             for (Sales sale : salesList) {
