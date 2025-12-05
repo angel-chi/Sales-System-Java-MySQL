@@ -47,7 +47,6 @@ public class MenuController {
 
 
             stage.setResizable(false); // Evite maximizar
-            stage.setMaximized(true);
 
 
             configureStageCloseEvent(stage, fxmlFileName, title);
