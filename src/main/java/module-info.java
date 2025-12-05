@@ -7,6 +7,8 @@ module org.borghisales.salessysten {
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
     requires jdk.compiler;
+    requires javafx.graphics;
+    requires javafx.base;
 
 
     opens org.borghisales.salessysten to javafx.fxml;
