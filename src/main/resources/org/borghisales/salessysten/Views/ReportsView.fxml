@@ -18,11 +18,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="732.5" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ReportsController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1230.5" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ReportsController">
     <tabs>
         <Tab text="HISTORIAL DE VENTAS">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="514.0" prefWidth="732.5">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1230.5">
                     <children>
                         <TableView fx:id="tableReport" prefHeight="550.0" prefWidth="715.0"
                                    AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="100.0">
@@ -94,7 +94,7 @@
 
         <Tab text="ESTADISTICAS">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1100.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1230.5">
                     <children>
 
                         <!-- Label PieChart -->
