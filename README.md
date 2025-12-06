@@ -148,6 +148,23 @@ https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793
 # 📧 Contacto
 Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
 
+# Entrega del proyecto
+## Errores encontrados
+### Archivo faltante (config.properties)
+No se notificaba correctamente al usuario de que configue el archivo config.properties
+#### Solucion
+Crear una ventana que notifique al usuario para crear y configurar el archivo, además en el código se intentaban realizar acciones en la base de datos sin verificar si la conexión era válida.
+
+la solución fue verifica si la conexión no era nula
+
+```java
+try (Connection conn = DBConnection.connection()){
+        if(conn ==null){
+        return false;
+        }
+        ...
+}
+```
 
 # 📝 Licencia
 

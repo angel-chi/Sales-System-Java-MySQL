@@ -136,25 +136,32 @@ public class SellerDAO implements CRUD<Seller> {
 
         String query = "SELECT * from seller where dni = ? and user = ?";
 
-        try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(query)  ){
+        try (Connection conn = DBConnection.connection()){
+            if(conn == null) {
+                return false;
+            }
+
+            PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1,dni);
             pstmt.setString(2,user);
 
             try (ResultSet rs = pstmt.executeQuery()){
-                if (rs.next()){
+                boolean result = false;
 
+                if (rs.next()){
                     GenerateSaleController.setSellerName(rs.getString("name"));
                     GenerateSaleController.setIdSeller(rs.getInt("idSeller"));
 
                     MainController.sellerLog = Seller.fromResultSet(rs);
 
-                    return true;
+                    result = true;
                 }else{
                     MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;
-                    return false;
                 }
+
+                pstmt.close();
+                return result;
             }
         }catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error searching seller: " + e.getMessage());

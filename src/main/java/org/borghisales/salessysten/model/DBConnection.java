@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MenuController;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
@@ -19,7 +20,11 @@ public class DBConnection {
             String user = properties.getProperty("db.user");
             String password = properties.getProperty("db.password");
             return DriverManager.getConnection(url, user, password);
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El archivo de configuración para la conexión con la base de datos no se ha encontrado.\nEl archivo debe de estar en la ruta\n\n\"src/main/java/org/borghisales/salessysten/model/config.properties\"");
+            return null;
+        }
+        catch (IOException e) {
             e.printStackTrace();
             // Manejar la excepción adecuadamente
             return null;
@@ -39,7 +44,7 @@ public class DBConnection {
             }
 
         }catch(SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Error adding employee: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR,"Error añadiendo empleados: " + e.getMessage());
             return false;
         }
 

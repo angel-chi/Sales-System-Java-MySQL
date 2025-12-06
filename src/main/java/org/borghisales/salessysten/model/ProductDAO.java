@@ -56,9 +56,15 @@ public class ProductDAO implements CRUD<Product>{
     public boolean create(Product entity) {
         String sql = "INSERT INTO product (name,price,stock,state) values (?,?,?,?)";
 
-        try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
+        try (
+                Connection conn = DBConnection.connection();
+                ){
 
+            if(conn == null) {
+                return false;
+            }
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, entity.name());
             pstmt.setDouble(2, entity.price());
             pstmt.setInt(3, entity.stock());
@@ -66,6 +72,7 @@ public class ProductDAO implements CRUD<Product>{
 
             int rows_affected = pstmt.executeUpdate();
 
+            pstmt.close();
             if (rows_affected>0){
                 MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product added correctly");
                 return true;
@@ -73,9 +80,11 @@ public class ProductDAO implements CRUD<Product>{
                 MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: ");
                 return false;
             }
-
-
-        }catch (SQLException e){
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+        catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: " + e.getMessage());
             return false;
         }
