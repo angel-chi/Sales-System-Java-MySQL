@@ -2,10 +2,12 @@ package org.borghisales.salessysten.controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,7 +25,6 @@ public class MenuController {
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
 
-
     static Alert defaultAlert;
     static ButtonType acceptButton = new ButtonType("Accept");
     public static HashMap<String, String > filePaths = new HashMap<>();
@@ -33,14 +34,34 @@ public class MenuController {
         stage.close();
     }
 
-
     public void openNewStage(String fxmlFileName, String title) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
-            Scene scene = new Scene(fxmlLoader.load());
+
+
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
+
+
+            stage.sizeToScene();
+
+
+            if (root instanceof Region region) {
+                if (region.getPrefWidth() > 0) {
+                    stage.setMinWidth(region.getPrefWidth());
+                }
+                if (region.getPrefHeight() > 0) {
+                    stage.setMinHeight(region.getPrefHeight());
+                }
+            }
+
+
+            stage.centerOnScreen();
+
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
@@ -52,7 +73,7 @@ public class MenuController {
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
+                openNewStage(getFxmlFather(fxmlFileName), title);
             });
         }
     }
@@ -74,6 +95,4 @@ public class MenuController {
         for (TextField e:cells)
             e.clear();
     }
-
-
 }

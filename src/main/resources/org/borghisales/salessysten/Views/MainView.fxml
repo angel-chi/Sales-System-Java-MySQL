@@ -12,7 +12,7 @@
 
     <children>
 
-        <!-- Logo arriba a la derecha, anclado, no fijo con layoutX/layoutY -->
+
         <ImageView fitHeight="71.0" fitWidth="73.0"
                    pickOnBounds="true" preserveRatio="true"
                    AnchorPane.topAnchor="10.0"
@@ -22,14 +22,14 @@
             </image>
         </ImageView>
 
-        <!-- Contenedor principal centrado y expandible -->
+
         <VBox alignment="CENTER" spacing="15.0"
               AnchorPane.topAnchor="0.0"
               AnchorPane.bottomAnchor="0.0"
               AnchorPane.leftAnchor="0.0"
               AnchorPane.rightAnchor="0.0">
 
-            <!-- Título -->
+
             <Label text="SISTEMA DE VENTAS" underline="true">
                 <font>
                     <Font size="28.0" />
@@ -43,7 +43,7 @@
                 </font>
             </Label>
 
-            <!-- Campo de usuario -->
+
             <TextField fx:id="user"
                        prefHeight="30.0" prefWidth="300.0"
                        maxWidth="300.0"
@@ -56,13 +56,12 @@
                 </font>
             </Label>
 
-            <!-- Campo de contraseña -->
+
             <PasswordField fx:id="password"
                            prefHeight="30.0" prefWidth="300.0"
                            maxWidth="300.0"
                            promptText="Ingrese su contraseña" />
 
-            <!-- Botón Entrar -->
             <Button text="INGRESAR"
                     mnemonicParsing="false"
                     onAction="#signIn"
