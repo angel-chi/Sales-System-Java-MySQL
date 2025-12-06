@@ -106,7 +106,7 @@ CREATE TABLE `vendedores` (
 LOCK TABLES `vendedores` WRITE;
 /*!40000 ALTER TABLE `vendedores` DISABLE KEYS */;
 INSERT INTO `vendedores` VALUES 
-(1,'12341234','Jennifer Lee','5551112222','ACTIVO','jennifer1','VENDEDOR'), --Se le asignó un valor a rol
+(1,'12341234','Jennifer Lee','5551112222','ACTIVO','jennifer1','ADMINISTRADOR'),
 (2,'23452345','Daniel Garcia','5553334443','ACTIVO','daniel2','ADMINISTRADOR'),
 (3,'34563456','Sophia Rodriguez','5555556666','ACTIVO','sophia3','VENDEDOR'),
 (4,'45674567','Michael Smith','5557778888','ACTIVO','michael4','VENDEDOR'),
