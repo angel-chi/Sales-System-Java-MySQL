@@ -11,11 +11,11 @@ public record Customer(int idCustomer, String dni, String name, String address, 
     }
 
     public static Customer fromResultSet(ResultSet rs) throws SQLException {
-        int id = rs.getInt("idCustomer");
-        String dni = rs.getString("dni");
-        String name = rs.getString("name");
-        String address = rs.getString("address");
-        State state = Customer.State.valueOf(rs.getString("state"));
+        int id = rs.getInt("idCliente");
+        String dni = rs.getString("Identificación");
+        String name = rs.getString("Nombre");
+        String address = rs.getString("Dirección");
+        State state = Customer.State.valueOf(rs.getString("Estado"));
         return new Customer(id, dni, name, address, state);
     }
 }

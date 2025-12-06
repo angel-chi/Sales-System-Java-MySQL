@@ -102,7 +102,7 @@ public class SellerController implements Initializable {
 
     public void deleteSeller(ActionEvent actionEvent) {
         if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller");
+            MenuController.setAlert(Alert.AlertType.ERROR,"No se puede eliminar al vendedor actual");
             return;
         }
         if (sellerDAO.delete(dni.getText())){

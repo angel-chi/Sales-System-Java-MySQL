@@ -39,7 +39,7 @@ public class DBConnection {
             }
 
         }catch(SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Error adding employee: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR,"Error al añadir empleado: " + e.getMessage());
             return false;
         }
 

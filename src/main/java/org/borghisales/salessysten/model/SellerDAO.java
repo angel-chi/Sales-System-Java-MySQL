@@ -92,14 +92,14 @@ public class SellerDAO implements CRUD<Seller> {
                 MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor eliminado correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error eliminando al vendedor: ");
                 return false;
             }
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error eliminando al vendedor: " + e.getMessage());
             return false;
         }
 
@@ -121,7 +121,7 @@ public class SellerDAO implements CRUD<Seller> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al configurar la tabla de vendedor " + e.getMessage());
         }
     }
 
@@ -129,7 +129,7 @@ public class SellerDAO implements CRUD<Seller> {
     public static boolean login(String dni,String user){
 
         if (dni ==null || user ==null || dni.isEmpty()||user.isEmpty() ){
-            MenuController.setAlert(Alert.AlertType.ERROR,"User or passsword empty");
+            MenuController.setAlert(Alert.AlertType.ERROR,"Usuario o contraseña vacíos");
             return false;
         }
 
@@ -144,14 +144,14 @@ public class SellerDAO implements CRUD<Seller> {
             try (ResultSet rs = pstmt.executeQuery()){
                 if (rs.next()){
 
-                    GenerateSaleController.setSellerName(rs.getString("name"));
-                    GenerateSaleController.setIdVendedor(rs.getInt("idSeller"));
+                    GenerateSaleController.setSellerName(rs.getString("Nombre"));
+                    GenerateSaleController.setIdVendedor(rs.getInt("idVendedor"));
 
                     MainController.sellerLog = Seller.fromResultSet(rs);
 
                     return true;
                 }else{
-                    MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;
+                    MenuController.setAlert(Alert.AlertType.ERROR, "Usuario no encontradro") ;
                     return false;
                 }
             }

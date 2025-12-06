@@ -78,7 +78,7 @@
                     <Button onAction="#addCustomer" prefHeight="32.0" prefWidth="140.0" text="AÑADIR" />
                     <Button onAction="#updateCustomer" prefHeight="32.0" prefWidth="140.0" text="ACTUALIZAR" />
                     <Button onAction="#deleteCustomer" prefHeight="32.0" prefWidth="140.0" text="ELIMINAR" />
-                    <Button onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="140.0" text="LIMPIAR CELDAS" />
+                    <Button onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="168.0" text="LIMPIAR CELDAS" />
                 </VBox>
             </HBox>
 

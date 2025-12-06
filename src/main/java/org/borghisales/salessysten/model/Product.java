@@ -11,11 +11,11 @@ public record Product(int idProduct, String name, double price, int stock, State
     }
 
     public static Product fromResultSet(ResultSet rs) throws SQLException {
-        int id = rs.getInt("idProduct");
-        String name = rs.getString("name");
-        double price = rs.getDouble("price");
-        int stock = rs.getInt("stock");
-        State state = Product.State.valueOf(rs.getString("state"));
+        int id = rs.getInt("idProducto");
+        String name = rs.getString("Nombre");
+        double price = rs.getDouble("Precio");
+        int stock = rs.getInt("Existencias");
+        State state = Product.State.valueOf(rs.getString("Estado"));
         return new Product(id, name, price, stock, state);
     }
 

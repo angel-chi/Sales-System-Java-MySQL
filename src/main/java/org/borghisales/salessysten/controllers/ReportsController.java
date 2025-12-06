@@ -28,13 +28,13 @@ import org.borghisales.salessysten.model.*;
 
 
 import java.net.URL;
-import java.time.Month;
 import java.util.*;
 import java.util.function.Predicate;
 
 public class ReportsController implements Initializable {
 
-    private static final String[] monthsShowed = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    private static final String[] mesesMostrados =
+            {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     private static int idxMonth = LocalDate.now().getMonth().getValue()-1;
     private static int yearsShowed = LocalDate.now().getYear();
 
@@ -124,11 +124,11 @@ public class ReportsController implements Initializable {
 
         x_time.setAutoRanging(false);
         x_time.setCategories(FXCollections.observableArrayList(categories));
-        x_time.setLabel("Days of the month");
-        y_amountSales.setLabel("Sales amount");
+        x_time.setLabel("Días del mes");
+        y_amountSales.setLabel("Cantidad de ventas");
 
         year.setText(String.valueOf(yearsShowed));
-        month.setText(monthsShowed[idxMonth]);
+        month.setText(mesesMostrados[idxMonth]);
 
         if (lineChartData == null) {
             lineChartData = new XYChart.Series<>();
@@ -147,7 +147,7 @@ public class ReportsController implements Initializable {
             pieChartData.forEach(data ->
                     data.nameProperty().bind(
                             Bindings.concat(
-                                    data.getName(), " amount: ", (int) data.pieValueProperty().doubleValue()
+                                    data.getName(), " Cantidad: ", (int) data.pieValueProperty().doubleValue()
                             )
                     )
             );
@@ -185,7 +185,7 @@ public class ReportsController implements Initializable {
                 try {
                     Scene scene = new Scene(fxmlLoaderSaleDetails.load());
                     Stage stage = new Stage();
-                    stage.setTitle("Sale detail");
+                    stage.setTitle("Detalle de venta");
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException e) {
@@ -203,7 +203,7 @@ public class ReportsController implements Initializable {
 
     public void onFilter(ActionEvent actionEvent) {
         if (sales.isEmpty()){
-            MenuController.setAlert(Alert.AlertType.WARNING,"There are no sales");
+            MenuController.setAlert(Alert.AlertType.WARNING,"No hay ventas");
             return;
         }
 
@@ -217,11 +217,11 @@ public class ReportsController implements Initializable {
 
 
             if (minAmount >= maxAmount) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct amount intervals");
+                MenuController.setAlert(Alert.AlertType.ERROR,"Configura los intervalos de cantidd correctos");
                 return;
             }
             if (minDate.isAfter(maxDate)) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct date intervals");
+                MenuController.setAlert(Alert.AlertType.ERROR,"Configura los intervalos de fechas correctos");
                 return;
             }
 
@@ -265,13 +265,13 @@ public class ReportsController implements Initializable {
                 // Add data series to the map for the given month
                 XYChart.Series<String, Integer> series = new XYChart.Series<>();
                 series.getData().addAll(lineChartData.getData());
-                series.setName(monthsShowed[idxMonth]);
+                series.setName(mesesMostrados[idxMonth]);
                 yearData.put(month, series);
             } else {
-                System.out.println("There is already a series for the year" + year + " and the month " + month + ". No new series will be added");
+                System.out.println("Ya existen series para el año" + year + " y el mes " + month + ". No se añadirán nuevas series");
             }
         } else {
-            System.out.println("Error: lineChartData is null. Cannot add to cache map.");
+            System.out.println("Error: lineChartData es vacío. No se puede añadir al mapa de caché.");
         }
 
         recorrerHashMap();
@@ -362,7 +362,7 @@ public class ReportsController implements Initializable {
         salesLineChart.getData().add(lineChartData);
 
 
-        month.setText(monthsShowed[idxMonth]);
+        month.setText(mesesMostrados[idxMonth]);
 
     }
 
@@ -389,7 +389,7 @@ public class ReportsController implements Initializable {
 
         salesLineChart.getData().add(lineChartData);
 
-        month.setText(monthsShowed[idxMonth]);
+        month.setText(mesesMostrados[idxMonth]);
     }
 
 
