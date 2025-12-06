@@ -14,6 +14,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
 
+import org.borghisales.salessysten.model.DiscountSrategy;
+import org.borghisales.salessysten.model.PercentageDiscount;
+import org.borghisales.salessysten.model.BulkDiscount;
+import javafx.scene.control.Alert;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,6 +54,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
 
+    @FXML
+    private ComboBox<String> cbDiscountType;
     @FXML
     private Button back;
     @FXML
@@ -93,6 +100,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         initializeUIElements();
         configureAlerts();
         configureTable();
+        configureDiscountComboBox();
     }
 
     private void initializeUIElements() {
@@ -128,6 +136,19 @@ public class GenerateSaleController extends MenuController implements Initializa
         colQuantity.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().quantity()).asObject());
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
         colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total()).asObject());
+
+        //2 Decimales
+        colPrice.setCellFactory(column -> new TableCell<ShoppingCart, Double>() {
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty || value == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("%.2f", value));
+                }
+            }
+        });
     }
 
     public void searchCustomer(ActionEvent actionEvent) {
@@ -291,9 +312,49 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private ShoppingCart createShoppingCartObject() {
-        return new ShoppingCart(contProducts++, codProduct.getText(),
-                productName.getText(), quantity.getValue(),
-                Double.parseDouble(price.getText()));
+        // Datos base
+        double originalUnitPrice = Double.parseDouble(price.getText());
+        int qty = quantity.getValue();
+
+        double finalUnitPrice = originalUnitPrice;
+
+        // 1. Elegir la estrategia según lo seleccionado en el ComboBox
+        String discountType = cbDiscountType.getValue();  // puede ser null
+        DiscountSrategy strategy = null;
+
+        if ("Sin descuento".equals(discountType)) {
+            strategy = null; // nada
+        } else if ("Descuento 10% por unidad".equals(discountType)) {
+            strategy = new PercentageDiscount(0.10);
+        } else if ("Descuento por volumen (20% si compra 5+)".equals(discountType)) {
+            strategy = new BulkDiscount(5, 0.20);
+        }
+
+        if (strategy != null) {
+            double discounted = strategy.apply(originalUnitPrice, qty);
+
+            // Solo usamos el precio con descuento si es menor (por seguridad)
+            if (discounted < originalUnitPrice) {
+                finalUnitPrice = discounted;
+
+                // ✅ Mostrar mensaje al usuario
+                showDiscountAppliedAlert(
+                        productName.getText(),   // nombre del producto
+                        originalUnitPrice,       // precio antes
+                        finalUnitPrice,          // precio con descuento
+                        qty                      // cantidad
+                );
+            }
+        }
+
+        //Crear el ShoppingCart con el PRECIO FINAL (con o sin descuento)
+        return new ShoppingCart(
+                contProducts++,
+                codProduct.getText(),
+                productName.getText(),
+                qty,
+                finalUnitPrice  //aquí ya va el precio final
+        );
     }
 
     private boolean isProductAlreadyInCart(ShoppingCart product) {
@@ -328,5 +389,42 @@ public class GenerateSaleController extends MenuController implements Initializa
         closeCurrentStage(back);
     }
 
+    private void configureDiscountComboBox() {
+        cbDiscountType.getItems().setAll(
+                "Sin descuento",
+                "Descuento 10% por unidad",
+                "Descuento por volumen (20% si compra 5+)"
+        );
+
+        // Selección por defecto
+        cbDiscountType.getSelectionModel().select(0);
+    }
+
+    private void showDiscountAppliedAlert(String productName,
+                                          double originalPrice,
+                                          double discountedPrice,
+                                          int quantity) {
+
+        double originalSubtotal = originalPrice * quantity;
+        double discountedSubtotal = discountedPrice * quantity;
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Descuento aplicado");
+        alert.setHeaderText(null);
+        alert.setContentText(String.format(
+                "Se aplicó un descuento al producto \"%s\".\n\n" +
+                        "Precio unitario antes: %.2f\n" +
+                        "Precio unitario después: %.2f\n\n" +
+                        "Subtotal antes: %.2f\n" +
+                        "Subtotal con descuento: %.2f",
+                productName,
+                originalPrice,
+                discountedPrice,
+                originalSubtotal,
+                discountedSubtotal
+        ));
+
+        alert.showAndWait();
+    }
 
 }

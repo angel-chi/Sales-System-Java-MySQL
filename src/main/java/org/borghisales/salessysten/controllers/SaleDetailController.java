@@ -13,6 +13,12 @@ import javafx.scene.control.TextField;
 import org.borghisales.salessysten.model.SalesDAO;
 import org.borghisales.salessysten.model.ShoppingCart;
 
+import org.borghisales.salessysten.model.DiscountSrategy;
+import org.borghisales.salessysten.model.PercentageDiscount;
+import org.borghisales.salessysten.model.BulkDiscount;
+
+import javafx.scene.control.Alert;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -67,6 +73,53 @@ public class SaleDetailController implements Initializable {
     private void loadProductsDetails() {
         productsDetails = FXCollections.observableArrayList();
         salesDAO.setTableDetails(productsDetails, idSale);
+        // Nueva lista con precios ya descontados
+        var discountedList = FXCollections.<ShoppingCart>observableArrayList();
+
+        for (ShoppingCart sc : productsDetails) {
+
+            double unitPrice = sc.price();   // precio unitario original
+            int quantity = sc.quantity();    // cantidad comprada
+            double discountedUnitPrice = unitPrice;
+
+            //Elegir estrategia según cantidad
+            DiscountSrategy strategy;
+
+            if (quantity >= 5) {
+                strategy = new BulkDiscount(5, 0.20);  // 20% por comprar 5 o más
+            } else {
+                strategy = new PercentageDiscount(0.10); // 10% fijo
+            }
+
+            //Aplicar descuento
+            double newUnitPrice = strategy.apply(unitPrice, quantity);
+
+            if (newUnitPrice < unitPrice) {
+                discountedUnitPrice = newUnitPrice;
+
+                //Mostrar mensaje al usuario
+                showDiscountAppliedAlert(
+                        sc.product(),
+                        unitPrice,
+                        discountedUnitPrice,
+                        quantity
+                );
+            }
+
+            //Crear un nuevo ShoppingCart con precio YA descontado
+            ShoppingCart discountedItem = new ShoppingCart(
+                    sc.nr(),
+                    sc.cod(),
+                    sc.product(),
+                    sc.quantity(),
+                    discountedUnitPrice
+            );
+
+            discountedList.add(discountedItem);
+        }
+
+        // Reemplazar lista original
+        productsDetails = discountedList;
     }
 
     private void displayTotal() {
@@ -83,6 +136,33 @@ public class SaleDetailController implements Initializable {
 
     public static void setIdSale(int idSale) {
         SaleDetailController.idSale = idSale;
+    }
+
+    private void showDiscountAppliedAlert(String productName,
+                                          double originalPrice,
+                                          double discountedPrice,
+                                          int quantity) {
+
+        double originalSubtotal = originalPrice * quantity;
+        double discountedSubtotal = discountedPrice * quantity;
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Descuento aplicado");
+        alert.setHeaderText(null);
+        alert.setContentText(String.format(
+                "Se aplicó un descuento al producto \"%s\".\n\n" +
+                        "Precio unitario antes: %.2f\n" +
+                        "Precio unitario después: %.2f\n\n" +
+                        "Subtotal antes: %.2f\n" +
+                        "Subtotal con descuento: %.2f",
+                productName,
+                originalPrice,
+                discountedPrice,
+                originalSubtotal,
+                discountedSubtotal
+        ));
+
+        alert.showAndWait();
     }
 
 
