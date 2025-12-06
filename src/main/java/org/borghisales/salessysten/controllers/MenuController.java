@@ -42,6 +42,7 @@ public class MenuController {
             stage.setTitle(title);
             stage.setScene(scene);
             configureStageCloseEvent(stage, fxmlFileName, title);
+            stage.sizeToScene(); //Ajustar el tamano
             stage.show();
 
         } catch (IOException | NullPointerException e) {

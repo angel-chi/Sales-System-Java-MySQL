@@ -82,7 +82,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.borghisales.salessysten/org.borghisales.salessysten.HelloApplication
+                            <mainClass>org.borghisales.salessysten/org.borghisales.salessysten.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
@@ -94,6 +94,9 @@
                     </execution>
                 </executions>
             </plugin>
+
+
+
         </plugins>
     </build>
 </project>
