@@ -10,12 +10,12 @@ public record Seller(int idSeller, String dni, String name, String phoneNumber, 
     }
 
     public static Seller fromResultSet(ResultSet rs) throws SQLException {
-        int id = rs.getInt("idVendedor");
-        String dni = rs.getString("Identificación");
-        String name = rs.getString("Nombre");
-        String phoneNumber = rs.getString("Numero_teléfono");
-        State state = Seller.State.valueOf(rs.getString("Estado"));
-        String user = rs.getString("Usuario");
+        int id = rs.getInt("idSeller");
+        String dni = rs.getString("dni");
+        String name = rs.getString("name");
+        String phoneNumber = rs.getString("phone_number");
+        State state = Seller.State.valueOf(rs.getString("state"));
+        String user = rs.getString("user");
         return new Seller(id, dni, name, phoneNumber, state, user);
     }
 }

@@ -65,7 +65,7 @@ public void help(ActionEvent actionEvent) {
     new Thread(() -> {
         try {
             //URL ACTUALIZADA
-            String url = "https://github.com/angel-chi/Sales-System-Java-MySQL.git";
+            String url = "https://github.com/angel-chi/Sales-System-Java-MySQL/blob/Basulto-Maga%C3%B1a/README.md";
             //Se revisa el nombre de cada sistema operativo, pues cada uno de ellos ejecuta una rutina de navegación distinta
             //Para windows
             if (System.getProperty("os.name").toLowerCase().contains("win")) {
