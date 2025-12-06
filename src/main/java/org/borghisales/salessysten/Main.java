@@ -21,6 +21,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        mc.setStage(stage);
         mc.openNewStage(MAIN_VIEW_FXML,"Inicio");
     }
 

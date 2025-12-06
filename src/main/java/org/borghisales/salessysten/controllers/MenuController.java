@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class MenuController {
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
 
+    private Stage stage;
 
     static Alert defaultAlert;
     static ButtonType acceptButton = new ButtonType("Aceptar");
@@ -34,13 +36,32 @@ public class MenuController {
     }
 
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     public void openNewStage(String fxmlFileName, String title) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MenuController.class.getResource(fxmlFileName)
+            );
+
+            Parent root = fxmlLoader.load();
+
+            if (stage == null) {
+                stage = new Stage();
+            }
+
+            if (stage.getScene() == null) {
+                // Primera vez: creamos la Scene
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+            } else {
+                // Ya había Scene: solo cambiamos el root
+                stage.getScene().setRoot(root);
+            }
+
             stage.setTitle(title);
-            stage.setScene(scene);
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
