@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
+import org.borghisales.salessysten.utils.InputValidator;
 
 
 import java.io.IOException;
@@ -131,6 +132,10 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void searchCustomer(ActionEvent actionEvent) {
+        String error = InputValidator.validarCódigoCliente(codCustomer.getText());
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
+        } else{
         int customerId = Integer.parseInt(codCustomer.getText());
         customer = customerDAO.searchCustomer(customerId);
 
@@ -139,6 +144,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             customerName.setText(customer.name());
         } else {
             handleCustomerNotFound();
+        }
         }
     }
 
@@ -167,13 +173,18 @@ public class GenerateSaleController extends MenuController implements Initializa
 
 
     public void searchProduct(ActionEvent actionEvent) {
-        int productId = Integer.parseInt(codProduct.getText());
-        Product product = productDAO.searchProduct(productId);
-
-        if (product != null) {
-            updateProductFields(product);
+        String error = InputValidator.validarCódigoProducto(codProduct.getText());
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
         } else {
-            handleProductNotFound();
+            int productId = Integer.parseInt(codProduct.getText());
+            Product product = productDAO.searchProduct(productId);
+
+            if (product != null) {
+                updateProductFields(product);
+            } else {
+                handleProductNotFound();
+            }
         }
     }
 
@@ -272,21 +283,19 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void addShoppingCart(ActionEvent actionEvent) {
-        String errorMessage = validateInputs();
+        String error = InputValidator.validarDatosVenta(customerName.getText(), productName.getText(), price.getText(), quantity.getValue());
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
+        } else {
+            ShoppingCart product = createShoppingCartObject();
 
-        if (errorMessage != null) {
-            MenuController.setAlert(Alert.AlertType.ERROR, errorMessage);
-            return;
+            if (isProductAlreadyInCart(product)) {
+                MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+                return;
+            }
+
+            addToCartAndUpdateTotal(product);
         }
-
-        ShoppingCart product = createShoppingCartObject();
-
-        if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
-            return;
-        }
-
-        addToCartAndUpdateTotal(product);
     }
 
     private ShoppingCart createShoppingCartObject() {
