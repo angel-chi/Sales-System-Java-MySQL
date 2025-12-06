@@ -18,12 +18,14 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class CustomerController implements Initializable {
+public class CustomerController extends MenuController implements Initializable {
 
     private final CustomerDAO customerDAO = new CustomerDAO();
     private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
     private static ObservableList<Customer> customers=null;
 
+    @FXML
+    private Button back;
     @FXML
     private TextField dni;
     @FXML
@@ -116,5 +118,11 @@ public class CustomerController implements Initializable {
         customerDAO.setTable(customers);
         tableCustomers.setItems(customers);
     }
+
+    public void back(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML,"Administración");
+        closeCurrentStage(back);
+    }
+
 
 }
