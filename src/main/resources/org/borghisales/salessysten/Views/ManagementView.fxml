@@ -90,7 +90,7 @@
                                             onAction="#openSalesReport"
                                             prefHeight="50.0"
                                             prefWidth="240.0"
-                                            text="REPORTES DE VENTAS" />
+                                            text="REPORTE DE VENTAS" />
                                 </VBox>
                             </center>
                         </BorderPane>
