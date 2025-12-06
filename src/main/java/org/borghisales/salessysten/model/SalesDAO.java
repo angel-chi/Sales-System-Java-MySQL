@@ -48,15 +48,15 @@ public class SalesDAO {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Sale saved correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Ventas guardadas correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error guardando las ventas");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error guardando las ventas " + e.getMessage());
             return false;
         }
 
@@ -65,6 +65,10 @@ public class SalesDAO {
     public boolean SaveDetailsSale(ObservableList<ShoppingCart> products, int id){
 
         try (Connection conn = DBConnection.connection()){
+
+            if(conn == null) {
+                return false;
+            }
 
             for (ShoppingCart e:products) {
                 String sql = "INSERT INTO sales_details (idSales,idProduct,quantity, priceSale) values(?,?,?,?)";
@@ -76,15 +80,12 @@ public class SalesDAO {
                     pstmt.setDouble(4, e.price());
 
                     pstmt.executeUpdate();
-
                 }
             }
-                return true;
 
-
-
+            return true;
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale details: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error guardando los detalles de las ventas: " + e.getMessage());
             return false;
         }
 
@@ -106,7 +107,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando las ventas: " + e.getMessage());
         }
 
 
@@ -144,7 +145,7 @@ public class SalesDAO {
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando las ventas: " + e.getMessage());
         }
     }
 
@@ -170,7 +171,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando las ventas: " + e.getMessage());
         }
 
     }

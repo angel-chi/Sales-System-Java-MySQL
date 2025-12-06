@@ -166,6 +166,8 @@ try (Connection conn = DBConnection.connection()){
 }
 ```
 
+### Error al buscar vacío
+
 # 📝 Licencia
 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
