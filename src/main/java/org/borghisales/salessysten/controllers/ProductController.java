@@ -9,12 +9,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
+import org.borghisales.salessysten.utils.InputValidator;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -85,20 +83,37 @@ public class ProductController implements Initializable {
     }
 
     public void addProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                          Integer.parseInt(stock.getText()), cbState.getValue());
-        if (productDAO.create(product)) {
-            MenuController.cleanCells(name,price,stock);
-            updateTable();
+        String error = InputValidator.validarProducto(name.getText(), price.getText());
+
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
+        } else {
+            Product product = new Product(
+                    name.getText(),
+                    Double.parseDouble(price.getText()),
+                    Integer.parseInt(stock.getText()),
+                    cbState.getValue()
+            );
+
+            if (productDAO.create(product)) {
+                MenuController.cleanCells(name, price, stock);
+                updateTable();
+            }
         }
     }
 
     public void updateProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                Integer.parseInt(stock.getText()), cbState.getValue());
-        if (productDAO.update(product)) {
-            MenuController.cleanCells(name,price,stock);
-            updateTable();
+        String error = InputValidator.validarProducto(name.getText(), price.getText());
+
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
+        } else {
+            Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
+                    Integer.parseInt(stock.getText()), cbState.getValue());
+            if (productDAO.update(product)) {
+                MenuController.cleanCells(name,price,stock);
+                updateTable();
+            }
         }
     }
 
