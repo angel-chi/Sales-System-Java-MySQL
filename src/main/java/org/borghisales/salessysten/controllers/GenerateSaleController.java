@@ -50,6 +50,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     private final ProductDAO productDAO = new ProductDAO();
 
     @FXML
+    private Button back;
+    @FXML
     private TextField serial;
     @FXML
     private TextField codCustomer;
@@ -319,6 +321,11 @@ public class GenerateSaleController extends MenuController implements Initializa
         idSale = 1+salesDAO.IdSale();
         String formattedId= String.format("%04d", idSale);
         serial.setText(formattedId);
+    }
+
+    public void back(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML,"Administración");
+        closeCurrentStage(back);
     }
 
 

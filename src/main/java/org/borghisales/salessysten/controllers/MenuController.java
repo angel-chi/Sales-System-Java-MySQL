@@ -1,5 +1,6 @@
 package org.borghisales.salessysten.controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -62,7 +63,7 @@ public class MenuController {
             }
 
             stage.setTitle(title);
-            configureStageCloseEvent(stage, fxmlFileName, title);
+            configureStageCloseEvent(stage);
             stage.show();
 
         } catch (IOException | NullPointerException e) {
@@ -70,12 +71,12 @@ public class MenuController {
         }
     }
 
-    private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
-        if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
+    private void configureStageCloseEvent(Stage stage) {
+
             stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
+                Platform.exit();
             });
-        }
+
     }
 
     String getFxmlFather(String fxml){

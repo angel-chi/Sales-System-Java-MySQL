@@ -45,11 +45,12 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="150.0" layoutY="10.0" prefHeight="30.0" prefWidth="350" text="GESTIÓN DE PRODUCTOS" underline="true">
+            <Label alignment="CENTER" layoutX="151.0" layoutY="10.0" prefHeight="30.0" prefWidth="288.0" text="GESTIÓN DE PRODUCTOS" underline="true">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
+            <Button fx:id="back" layoutX="30.0" layoutY="12.0" mnemonicParsing="false" onAction="#back" text="ATRAS" />
          </children>
       </AnchorPane>
    </children>

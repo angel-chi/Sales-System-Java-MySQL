@@ -54,5 +54,6 @@
             <Font size="20.0" />
          </font>
       </Label>
+      <Button fx:id="back" layoutX="26.0" layoutY="16.0" mnemonicParsing="false" onAction="#back" text="ATRAS" />
    </children>
 </AnchorPane>

@@ -32,7 +32,7 @@ import java.time.Month;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class ReportsController implements Initializable {
+public class ReportsController extends MenuController implements Initializable {
 
     private static final String[] monthsShowed = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     private static int idxMonth = LocalDate.now().getMonth().getValue()-1;
@@ -49,6 +49,8 @@ public class ReportsController implements Initializable {
     private static ObservableList<PieChart.Data> pieChartData = null;
     private static XYChart.Series<String,Integer> lineChartData = null;
 
+    @FXML
+    private Button back;
     @FXML
     private TextField year;
     @FXML
@@ -448,9 +450,9 @@ public class ReportsController implements Initializable {
         lineChartData.getData().sort(Comparator.comparingInt(data -> Integer.parseInt(data.getXValue())));
     }
 
-
-
-
-
+    public void back(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML,"Administración");
+        closeCurrentStage(back);
+    }
 
 }

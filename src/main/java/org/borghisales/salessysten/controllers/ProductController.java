@@ -9,23 +9,22 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProductController implements Initializable {
+public class ProductController extends MenuController implements Initializable {
 
     private final ProductDAO productDAO = new ProductDAO();
 
     private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
 
     private static ObservableList<Product> products =null;
+    @FXML
+    private Button back;
     @FXML
     private ComboBox<Product.State> cbState;
     @FXML
@@ -126,5 +125,9 @@ public class ProductController implements Initializable {
         tableProducts.setItems(products);
     }
 
+    public void back(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML,"Administración");
+        closeCurrentStage(back);
+    }
 
 }
