@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="refactor: delete comments" />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="refactor: delete comments">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/MainView.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,7 +70,8 @@
     "git-widget-placeholder": "Reza-Ayuso",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/miareza/Documentos/POO/Sales-System-Java-MySQL",
+    "last_opened_file_path": "/home/goodsgames/Documents/ProyectoPOO/Sales-System-Java-MySQL/src/main/java/org/borghisales/salessysten/controllers",
+    "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -76,6 +80,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers" />
       <recent name="C:\Users\tomas\Desktop\Sales-System\src\main\resources\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">

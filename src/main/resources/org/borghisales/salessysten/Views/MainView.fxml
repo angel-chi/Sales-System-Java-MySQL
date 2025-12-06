@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -59,7 +61,12 @@
                             </VBox.margin>
                             <children>
                                 <TextField fx:id="user" promptText="Usuario" styleClass="minimalistic-field" stylesheets="@style.css" GridPane.rowIndex="1" />
-                                <TextField fx:id="password" promptText="Contrasenia" styleClass="minimalistic-field" stylesheets="@style.css" GridPane.rowIndex="3" />
+                        <PasswordField fx:id="password" promptText="Contrasenia" stylesheets="@style.css" GridPane.rowIndex="3">
+                           <styleClass>
+                              <String fx:value="minimalistic-field" />
+                              <String fx:value="password-field" />
+                           </styleClass>
+                        </PasswordField>
                                 <Label alignment="CENTER" text="Iniciar sesion" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                                     <font>
                                         <Font name="JetBrainsMono NF Regular" size="13.0" />

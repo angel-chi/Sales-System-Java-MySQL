@@ -1,0 +1,54 @@
+.minimalistic-field {
+    -fx-font: 14px "JetBrains Mono Regular Nerd Font Complete";
+    -fx-background-color: #F4F4F9;
+    -fx-border-radius: 4 4 0 0;
+    -fx-border-style: solid;
+    -fx-border-color: #000000;
+    -fx-border-width: 0 0 1.5 0;
+    -fx-padding: 8 12;
+    -fx-font-size: 14px;
+}
+
+.minimalistic-field:hover{
+    -fx-border-color: #3a7afe;
+    -fx-border-width: 0 0 1.5 0;
+    -fx-background-color: #ffffff;
+}
+
+.minimalistic-field:focused {
+    -fx-border-color: #3a7afe;
+    -fx-border-width: 0 0 3 0;
+    -fx-background-color: #ffffff;
+}
+
+.minimalistic-field .password-field {
+    -fx-prompt-text-fill: transparent;
+}
+
+.minimalistic-field .prompt-text {
+    -fx-font-size: 12px;
+    -fx-fill: #888;
+}
+
+.minimalistic-button {
+    -fx-font: 14px "JetBrains Mono Regular Nerd Font Complete";
+    -fx-background-color: #3a7afe;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 8 16;
+    -fx-border-radius: 4;
+}
+
+.minimalistic-button:hover {
+    -fx-background-color: #2a5edc;
+    -fx-border-radius: 4;
+    -fx-border-color: #1e3bb8;
+    -fx-border-width: 2;
+}
+
+.login-container {
+    -fx-background-color: #ffffff;
+    -fx-padding: 24;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 4);
+}
