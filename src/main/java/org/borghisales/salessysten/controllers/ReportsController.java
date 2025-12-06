@@ -221,7 +221,7 @@ public class ReportsController implements Initializable {
                 return;
             }
             if (minDate.isAfter(maxDate)) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Establecer intervalos de fecha correctos);
+                MenuController.setAlert(Alert.AlertType.ERROR,"Establecer intervalos de fecha correctos");
                 return;
             }
 
