@@ -1,5 +1,6 @@
 package org.borghisales.salessysten.controllers;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.borghisales.salessysten.model.*;
 
 
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GenerateSaleController extends MenuController implements Initializable {
@@ -141,10 +144,38 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void handleCustomerNotFound() {
-        alertCustomer.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == buttonTypeAccept) {
-                openCustomerManagementView();
+        //SOLUCION A TIPO DISTINTO DE ALERTA -> CustomerNotFound siempre encima
+        //Esperar hilo disponible
+        Platform.runLater(() -> {
+            //Busar la mejor opcion como vista padre empezando por ventanas activas
+            Optional<Window> owner = Window.getWindows().stream()
+                    .filter(Window::isFocused)
+                    .findFirst();
+            //Si no hay ventanas activas buscar en ventanas abiertas
+            if (!owner.isPresent()) {
+                owner = Window.getWindows().stream()
+                        .filter(Window::isShowing)
+                        .findFirst();
             }
+            owner.ifPresent(alertCustomer::initOwner);
+
+            //Para que window no sea null, se renderiza 1 vez
+            alertCustomer.show();
+            alertCustomer.hide();
+            //Cast con stage para AlwaysOnTop
+            Stage alertStage = (Stage) alertCustomer.getDialogPane().getScene().getWindow();
+
+            alertStage.setAlwaysOnTop(true);
+            //Mostrar el alert
+            alertCustomer.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == buttonTypeAccept) {
+                    openCustomerManagementView();
+                }
+            });
+            //Una vez termina quitar alwaysOnTop por si acaso
+            try {
+                alertStage.setAlwaysOnTop(false);
+            } catch (Exception ignored) {}
         });
     }
 
@@ -186,10 +217,39 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void handleProductNotFound() {
-        alertProduct.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == buttonTypeAccept) {
-                openProductManagementView();
+        //NOTA -> Misma solucion aplicada que en CustomerNotFound
+        //SOLUCION A TIPO DISTINTO DE ALERTA-> ProductNotFound siempre encima
+        //Esperar hilo disponible
+        Platform.runLater(() -> {
+            //Busar la mejor opcion como vista padre empezando por ventanas activas
+            Optional<Window> owner = Window.getWindows().stream()
+                    .filter(Window::isFocused)
+                    .findFirst();
+            //Si no hay ventanas activas buscar en ventanas abiertas
+            if (!owner.isPresent()) {
+                owner = Window.getWindows().stream()
+                        .filter(Window::isShowing)
+                        .findFirst();
             }
+            owner.ifPresent(alertProduct::initOwner);
+
+            //Para que window no sea null, se renderiza 1 vez
+            alertProduct.show();
+            alertProduct.hide();
+            //Cast con stage para AlwaysOnTop
+            Stage alertStage = (Stage) alertProduct.getDialogPane().getScene().getWindow();
+
+            alertStage.setAlwaysOnTop(true);
+            //Mostrar el alert
+            alertProduct.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == buttonTypeAccept) {
+                    openProductManagementView();
+                }
+            });
+            //Una vez termina quitar alwaysOnTop por si acaso
+            try {
+                alertStage.setAlwaysOnTop(false);
+            } catch (Exception ignored) {}
         });
     }
 
