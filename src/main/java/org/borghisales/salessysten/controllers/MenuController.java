@@ -43,7 +43,8 @@ public class MenuController {
             stage.setTitle(title);
             stage.setScene(scene);
 
-            // TAMAÑO CONSISTENTE PARA TODAS LAS VENTANAS:
+            // Mantener tama{o al cambiar ventanas
+
             stage.setMinWidth(1000);
             stage.setMinHeight(600);
 
