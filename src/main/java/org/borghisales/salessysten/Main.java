@@ -23,10 +23,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        mc.openNewStage(MAIN_VIEW_FXML,"Login");
+        mc.openNewStage(MAIN_VIEW_FXML,"Login");    // Abre la ventana principal (login)
     }
 
     public static void main(String[] args) {
-        launch();
+        launch();   // Lanza la aplicación JavaFX
     }
 }

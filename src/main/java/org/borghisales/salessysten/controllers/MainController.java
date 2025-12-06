@@ -27,6 +27,10 @@ public class MainController extends MenuController implements Initializable {
         ReportsController.setSales(null);
         ReportsController.setPieChartData(null);
         ReportsController.setLineChartData(null);
+        // Presionar Enter en el campo de usuario brinca al campo de contraseña
+        user.setOnAction(e -> password.requestFocus());
+        // Presionar Enter en el campo de contraseña inicia sesión
+        password.setOnAction(e -> signIn());
 
     }
 

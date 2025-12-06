@@ -48,7 +48,7 @@ public class MenuController {
             setAlert(Alert.AlertType.WARNING, "Error cargando la vista: "+ e.getMessage());
         }
     }
-
+    // Configura el evento de cierre de la ventana para abrir la ventana padre
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
