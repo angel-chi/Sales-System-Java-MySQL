@@ -38,14 +38,27 @@ public class MenuController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
             Scene scene = new Scene(fxmlLoader.load());
+
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
+
+            // TAMAÑO CONSISTENTE PARA TODAS LAS VENTANAS:
+            stage.setMinWidth(1000);
+            stage.setMinHeight(600);
+
+            // Evita tamaño dinámico basado en contenido
+            stage.setResizable(true);
+
+            // Centrar ventana
+            stage.centerOnScreen();
+
             configureStageCloseEvent(stage, fxmlFileName, title);
+
             stage.show();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error al cargar la ventana: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error al cargar la ventana: " + e.getMessage());
         }
     }
 

@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="596.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.GenerateSaleController">
    <AnchorPane prefHeight="630.0" prefWidth="679.0">
-      <Label layoutX="221.0" layoutY="14.0" prefHeight="39.0" prefWidth="300.0" text="POINT OF SALE &quot;BORGHI SYSTEM&quot;" underline="true">
+      <Label layoutX="221.0" layoutY="14.0" prefHeight="39.0" prefWidth="328.0" text="PUNTO DE VENTA &quot;BORGHI SYSTEM&quot;" underline="true">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
@@ -23,12 +23,12 @@
          <Image url="@../../../../images/img_1.png" />
       </ImageView>
       <Separator layoutX="6.0" layoutY="135.0" prefHeight="16.0" prefWidth="584.0" />
-      <Label layoutX="244.0" layoutY="50.0" prefHeight="21.0" prefWidth="244.0" text="VENTA DE PRODUCTOS TECNOLÓGICOS">
+      <Label layoutX="225.0" layoutY="53.0" prefHeight="21.0" prefWidth="311.0" text="VENTA DE PRODUCTOS TECNOLÓGICOS">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="319.0" layoutY="70.0" prefHeight="17.0" prefWidth="94.0" text="TEL: 8383-03939" />
+      <Label layoutX="319.0" layoutY="74.0" prefHeight="17.0" prefWidth="94.0" text="TEL: 8383-03939" />
       <Label layoutX="258.0" layoutY="104.0" prefHeight="17.0" prefWidth="137.0" text="SERIAL NR:">
          <font>
             <Font size="14.0" />
