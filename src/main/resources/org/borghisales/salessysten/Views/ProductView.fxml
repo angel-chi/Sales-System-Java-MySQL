@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ProductController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ProductController">
    <children>
-      <AnchorPane prefHeight="484.0" prefWidth="663.0">
+      <AnchorPane prefHeight="800.0" prefWidth="1000.0" stylesheets="@CSS/MainView.css">
          <children>
-            <Button layoutX="458.0" layoutY="52.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="32.0" prefWidth="101.0" text="ADD" />
-            <TableView fx:id="tableProducts" layoutX="26.0" layoutY="228.0" prefHeight="221.0" prefWidth="602.0">
+            <Button layoutX="522.0" layoutY="56.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="54.0" prefWidth="198.0" style="-fx-background-color: #43d051; -fx-text-fill: #fff;" text="AGREGAR" />
+            <TableView fx:id="tableProducts" layoutX="45.0" layoutY="400.0" prefHeight="360.0" prefWidth="929.0">
                <columns>
                   <TableColumn fx:id="colId" prefWidth="120.0" text="idProduct" />
                   <TableColumn fx:id="colName" prefWidth="111.0" text="name" />
@@ -18,34 +23,34 @@
                   <TableColumn fx:id="colState" prefWidth="122.0" text="state" />
                </columns>
             </TableView>
-            <Label layoutX="51.0" layoutY="70.0" prefHeight="17.0" prefWidth="54.0" text="NAME:" underline="true">
+            <Label layoutX="57.0" layoutY="59.0" prefHeight="43.0" prefWidth="93.0" text="NOMBRE:" underline="true">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="51.0" layoutY="96.0" prefHeight="26.0" prefWidth="68.0" text="PRICE:" underline="true">
+            <Label layoutX="57.0" layoutY="120.0" prefHeight="26.0" prefWidth="86.0" text="PRECIO:" underline="true">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="45.0" layoutY="122.0" prefHeight="26.0" prefWidth="60.0" text="STOCK:" underline="true">
+            <Label layoutX="57.0" layoutY="174.0" prefHeight="26.0" prefWidth="125.0" text="EXISTENCIAS:" underline="true">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="name" layoutX="120.0" layoutY="66.0" prefHeight="25.0" prefWidth="289.0" />
-            <TextField fx:id="price" layoutX="121.0" layoutY="96.0" prefHeight="25.0" prefWidth="289.0" />
-            <TextField fx:id="stock" layoutX="120.0" layoutY="126.0" prefHeight="25.0" prefWidth="289.0" />
-            <Button layoutX="458.0" layoutY="90.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="32.0" prefWidth="101.0" text="UPDATE" />
-            <Button layoutX="458.0" layoutY="127.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="32.0" prefWidth="101.0" text="DELETE" />
-            <Button layoutX="458.0" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="101.0" text="CLEAN CELLS" />
-            <ComboBox fx:id="cbState" layoutX="121.0" layoutY="158.0" prefHeight="25.0" prefWidth="283.0" />
-            <Label layoutX="51.0" layoutY="155.0" prefHeight="17.0" prefWidth="54.0" text="STATE:" underline="true">
+            <TextField fx:id="name" layoutX="182.0" layoutY="63.0" prefHeight="36.0" prefWidth="289.0" />
+            <TextField fx:id="price" layoutX="182.0" layoutY="115.0" prefHeight="36.0" prefWidth="289.0" />
+            <TextField fx:id="stock" layoutX="182.0" layoutY="174.0" prefHeight="36.0" prefWidth="289.0" />
+            <Button layoutX="522.0" layoutY="123.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="54.0" prefWidth="198.0" style="-fx-background-color: #439dd0; -fx-text-fill: #fff;" text="ACTUALIZAR" />
+            <Button layoutX="522.0" layoutY="195.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="54.0" prefWidth="198.0" style="-fx-background-color: #d04343; -fx-text-fill: #fff;" text="ELIMINAR" />
+            <Button layoutX="522.0" layoutY="265.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="54.0" prefWidth="198.0" style="-fx-background-color: #4b4b4b; -fx-text-fill: #fff;" text="LIMPIAR" />
+            <ComboBox fx:id="cbState" layoutX="182.0" layoutY="233.0" prefHeight="36.0" prefWidth="289.0" />
+            <Label layoutX="57.0" layoutY="240.0" prefHeight="21.0" prefWidth="86.0" text="ESTADO:" underline="true">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="200.0" layoutY="10.0" prefHeight="30.0" prefWidth="242.0" text="MANAGEMENT PRODUCT" underline="true">
+            <Label alignment="CENTER" layoutX="2.0" layoutY="10.0" prefHeight="30.0" prefWidth="985.0" text="GESTION DE PRODUCTOS" underline="true">
                <font>
                   <Font size="20.0" />
                </font>

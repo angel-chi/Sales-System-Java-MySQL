@@ -79,7 +79,7 @@
          <font>
             <Font size="16.0" />
          </font></Button>
-      <TextField fx:id="total" alignment="CENTER_RIGHT" editable="false" layoutX="712.0" layoutY="692.0" prefHeight="47.0" prefWidth="148.0" style="-fx-text-fill: #ff0000;" text="192.43">
+      <TextField fx:id="total" alignment="CENTER_RIGHT" editable="false" layoutX="712.0" layoutY="692.0" prefHeight="47.0" prefWidth="148.0" style="-fx-text-fill: #ff0000;">
          <font>
             <Font size="24.0" />
          </font></TextField>
