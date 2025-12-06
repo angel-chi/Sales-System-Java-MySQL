@@ -40,9 +40,9 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="name" layoutX="120.0" layoutY="66.0" prefHeight="25.0" prefWidth="289.0" />
-            <TextField fx:id="price" layoutX="121.0" layoutY="96.0" prefHeight="25.0" prefWidth="289.0" />
-            <TextField fx:id="stock" layoutX="120.0" layoutY="126.0" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="nombre" layoutX="120.0" layoutY="66.0" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="precio" layoutX="121.0" layoutY="96.0" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="existencia" layoutX="120.0" layoutY="126.0" prefHeight="25.0" prefWidth="289.0" />
             <Button layoutX="458.0" layoutY="90.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="32.0" prefWidth="154.0" text="ACTUALIZAR" />
             <Button layoutX="458.0" layoutY="127.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="32.0" prefWidth="154.0" text="ELIMINAR" />
             <Button layoutX="458.0" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="154.0" text="LIMPIAR" />
