@@ -16,6 +16,8 @@ import javafx.scene.layout.VBox;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
 
+import org.borghisales.salessysten.controllers.SelectionListener;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -139,7 +141,15 @@ public class ProductController implements Initializable {
         price.setText(String.valueOf(product.price()));
         stock.setText(String.valueOf(product.stock()));
         cbState.setValue(product.state());
+
+        // Notificar al listener si existe
+        if (selectionListener != null) {
+            selectionListener.onItemSelected(product);
+            // Cerrar la ventana modal
+            tableProducts.getScene().getWindow().hide();
+        }
     }
+
 
     private void updateTable() {
         tableProducts.getItems().clear();
@@ -158,7 +168,8 @@ public class ProductController implements Initializable {
 
 
     }
-
+    // ******************************************************************************************
+        // Botones de Generate en Product
     //  Nuevo metodo para permitir la deselección al hacer click
     private void makeDeselectable(RadioButton rb) {
         rb.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
@@ -190,6 +201,13 @@ public class ProductController implements Initializable {
             // Si no hay ningún radio seleccionado, muestra todo
             return true;
         });
+    }
+
+
+    private SelectionListener<Product> selectionListener;
+
+    public void setSelectionListener(SelectionListener<Product> listener) {
+        this.selectionListener = listener;
     }
 
 

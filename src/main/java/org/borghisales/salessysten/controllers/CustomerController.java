@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import org.borghisales.salessysten.model.Customer;
 import org.borghisales.salessysten.model.CustomerDAO;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -62,7 +63,7 @@ public class CustomerController implements Initializable {
         initializeComboBox();
         initializeCustomerData();
 
-        // CAMBIO: Aplicamos la configuración para poder deseleccionar los botones
+        //Aplicamos la configuración para poder deseleccionar los botones
         makeDeselectable(rbId);
         makeDeselectable(rbNombre);
         makeDeselectable(rbDni);
@@ -70,14 +71,19 @@ public class CustomerController implements Initializable {
         rbNombre.setOnAction(e -> applyFilter(txtSearch.getText()));
         rbDni.setOnAction(e -> applyFilter(txtSearch.getText()));
         rbId.setOnAction(e -> applyFilter(txtSearch.getText()));
+        //esta linea se movió por que se generaban estos egventos listeners cada vez que el metodo searchCostumer ocurra
+        txtSearch.textProperty().addListener((n, un, txt) -> {
+            applyFilter(txt);
+        });
     }
 
     private void initializeCustomerData() {
-        tableCustomers.getItems().clear();
         if (customers == null) {
             customers = FXCollections.observableArrayList();
-            customerDAO.setTable(customers);
+        } else {
+            customers.clear(); //  Limpiamos la lista por si traía basura de antes
         }
+        customerDAO.setTable(customers); //actualizamos la customers con la db
         filteredData = new FilteredList<>(customers, p -> true);
         tableCustomers.setItems(filteredData);      //usamos la mascara sobre la original
     }
@@ -138,25 +144,25 @@ public class CustomerController implements Initializable {
         dni.setText(customer.dni());
         address.setText(customer.address());
         cbState.setValue(customer.state());
+        // Si hay listener (GenerateSale), se notifica el cliente seleccionado
+        if (selectionListener != null) {
+            selectionListener.onItemSelected(customer);
+            // Cerramos la ventana modal
+            tableCustomers.getScene().getWindow().hide();
+        }
     }
 
     private void updateTable() {
-        tableCustomers.getItems().clear();
+        customers.clear(); //  Vaciamos el contenido antes de volver a llenarlo para evitar duplicados
         customerDAO.setTable(customers);
-        tableCustomers.setItems(customers);
+
     }
 
     @FXML
-    private void searchCustomer() {
-
+    private void searchCustomer(ActionEvent actionEvent) {
         boolean isVisible = searchContainer.isVisible();
         searchContainer.setVisible(!isVisible);
         searchContainer.setManaged(!isVisible);
-        txtSearch.textProperty().addListener((n, un, txt) -> {
-            applyFilter(txt);
-        });
-
-
     }
 
     //  Nuevo metodo para permitir la deselección al hacer click
@@ -164,7 +170,7 @@ public class CustomerController implements Initializable {
         rb.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
             if (rb.isSelected()) {
                 searchOptions.selectToggle(null);
-                // Consumimos el evento para evitar que JavaFX lo vuelva a seleccionar automáticamente
+                applyFilter(txtSearch.getText());
                 event.consume();
             }
         });
@@ -191,5 +197,16 @@ public class CustomerController implements Initializable {
             return true;
         });
     }
+
+
+
+    // Interfaz para pasar datos a GenerateSale
+    private SelectionListener<Customer> selectionListener;
+
+    public void setSelectionListener(SelectionListener<Customer> listener) {
+        this.selectionListener = listener;
+    }
+
+
 
 }

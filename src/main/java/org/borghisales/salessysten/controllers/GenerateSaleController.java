@@ -339,4 +339,83 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
 
+
+// ******************************************************************************************
+        /*
+        Implementación de un método en el que a Generate se le agregan 2 botones para seleccionar automaticamente
+        un cliente o producto si el vendedor no conoce, esto facilita el tiempo y es mas ágil.
+         */
+    // Recibe un Customer desde CustomerController
+    private void setCustomerFromManagement(Customer selectedCustomer) {
+        if (selectedCustomer != null) {
+            customer = selectedCustomer;
+            codCustomer.setText(selectedCustomer.dni());
+            customerName.setText(selectedCustomer.name());
+        }
+    }
+
+    // Acción al seleccionar el botón de gestión.
+    @FXML
+    private void openCustomerManagement(ActionEvent event) {
+        openManagementViewModal("customer");
+    }
+
+    @FXML
+    private void openProductManagement(ActionEvent event) {
+        openManagementViewModal("product");
+    }
+
+
+
+
+
+    private void openManagementViewModal(String type) {
+        try {
+            String fxmlFile = switch (type.toLowerCase()) {
+                case "customer" -> CUSTOMER_VIEW_FXML;
+                case "product" -> PRODUCT_VIEW_FXML;
+                default -> throw new IllegalArgumentException("Tipo no soportado: " + type);
+            };
+
+            FXMLLoader loader = new FXMLLoader(MenuController.class.getResource(fxmlFile));
+            Scene scene = new Scene(loader.load());
+
+            Stage stage = new Stage();
+            stage.setTitle("Consultar " + type.substring(0,1).toUpperCase() + type.substring(1));
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.sizeToScene();
+            stage.centerOnScreen();
+
+            // Configurar listener según el tipo
+            if (type.equalsIgnoreCase("customer")) {
+                CustomerController controller = loader.getController();
+                controller.setSelectionListener(this::setCustomerFromManagement);
+            } else if (type.equalsIgnoreCase("product")) {
+                ProductController controller = loader.getController();
+                controller.setSelectionListener(this::setProductFromManagement);
+            }
+
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Método para recibir el producto seleccionado
+    private void setProductFromManagement(Product selectedProduct) {
+        if (selectedProduct != null) {
+            codProduct.setText(String.valueOf(selectedProduct.idProduct()));
+            productName.setText(selectedProduct.name());
+            price.setText(String.valueOf(selectedProduct.price()));
+            stock.setText(String.valueOf(selectedProduct.stock()));
+
+            SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, selectedProduct.stock(), 0);
+            quantity.setValueFactory(valueFactory);
+        }
+    }
+
+
+
 }
