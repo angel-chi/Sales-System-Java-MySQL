@@ -55,8 +55,8 @@
         <Label layoutX="590.0" layoutY="104.0" text="FECHA:" wrapText="true" />
         <TextField fx:id="date" editable="false" layoutX="650.0" layoutY="99.0" prefHeight="25.0" prefWidth="120.0" />
 
-        <Button layoutX="630.0" layoutY="312.0" mnemonicParsing="false" onAction="#addShoppingCart" prefHeight="25.0" prefWidth="145.0" text="AÑADIR PRODUCTO" />
-
+        <Button layoutX="12.0" layoutY="300.0" mnemonicParsing="false" onAction="#addShoppingCart" prefHeight="40.0" prefWidth="150.0" text="AÑADIR PRODUCTO"
+                style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px; -fx-cursor: hand;" />
         <Separator layoutX="-2.0" layoutY="338.0" prefHeight="16.0" prefWidth="790.0" />
 
         <TableView fx:id="tableSale" layoutX="12.0" layoutY="345.0" prefHeight="250.0" prefWidth="768.0">
