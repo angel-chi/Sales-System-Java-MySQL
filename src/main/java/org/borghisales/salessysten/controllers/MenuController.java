@@ -40,16 +40,15 @@ public class MenuController {
             Scene scene = new Scene(fxmlLoader.load());
 
             Stage stage = new Stage();
-            stage.setTitle(title);
             stage.setScene(scene);
 
-            // Mantener tama{o al cambiar ventanas
+            // Mantener tamaño al cambiar ventanas
 
-            stage.setMinWidth(1000);
+            stage.setMinWidth(400);
             stage.setMinHeight(600);
 
-            // Evita tamaño dinámico basado en contenido
-            stage.setResizable(true);
+            // Mantiene el cambio dinámico
+            stage.setResizable(false);
 
             // Centrar ventana
             stage.centerOnScreen();
