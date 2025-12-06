@@ -217,4 +217,40 @@ public class ProductoDAO implements CRUD<Producto>{ // Cambiado de ProductDAO a 
         }
     }
 
+    //Método para obtener el producto más vendido de un vendedor
+    public String getBestSellingProduct(int idVendedor) {
+        //Text Block para el query SQL
+        String sql = """
+            SELECT p.nombre, SUM(dv.cantidad) AS cant
+            FROM productos p
+            INNER JOIN detalle_ventas dv
+            USING (idProducto)
+            WHERE dv.idVenta IN (SELECT idVenta FROM ventas WHERE idVendedor = ?)
+            GROUP BY dv.idProducto, p.nombre
+            ORDER BY cant DESC
+            LIMIT 1
+            """;
+
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, MainController.vendedorLogeado.getId());
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    //Se obtiene el nombre y la cantidad vendida del producto
+                    String nombre = rs.getString("nombre");
+                    int cantidad = rs.getInt("cant");
+                    return nombre + " (" + cantidad + " unidades)";
+                } else {
+                    //En caso de no tener ventas resgistradas
+                    return null;
+                }
+            }
+
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
 }

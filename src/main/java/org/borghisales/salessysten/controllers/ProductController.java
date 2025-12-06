@@ -126,5 +126,4 @@ public class ProductController implements Initializable {
         tableProducts.setItems(productos); // products -> productos
     }
 
-
 }

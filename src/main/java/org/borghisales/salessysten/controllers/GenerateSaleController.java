@@ -53,6 +53,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     private final ProductoDAO productoDAO = new ProductoDAO(); // ProductDAO -> ProductoDAO
 
     @FXML
+    private Label productoMasVendido; // bestSellingProduct -> productoMasVendido
+    @FXML
     private TextField serial;
     @FXML
     private TextField codCliente; // codCustomer -> codCliente
@@ -94,6 +96,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         initializeUIElements();
         configureAlerts();
         configureTable();
+        showBestSellingProduct();
     }
 
     private void initializeUIElements() {
@@ -331,5 +334,13 @@ public class GenerateSaleController extends MenuController implements Initializa
         serial.setText(formattedId);
     }
 
+    private void showBestSellingProduct() {
+        String resultado = productoDAO.getBestSellingProduct(MainController.vendedorLogeado.getId());
 
+        if(resultado == null){
+            productoMasVendido.setText("Sin ventas registradas");
+        }else{
+            productoMasVendido.setText(resultado);
+        }
+    }
 }

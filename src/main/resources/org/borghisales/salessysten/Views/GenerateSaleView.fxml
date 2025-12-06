@@ -23,7 +23,7 @@
                 </ImageView>
 
                 <!-- Separador -->
-                <Separator layoutX="6.0" layoutY="135.0" prefHeight="16.0" prefWidth="584.0" />
+                <Separator layoutX="6.0" layoutY="150.0" prefHeight="16.0" prefWidth="584.0" />
 
                 <!-- Texto -->
                 <Label layoutX="195.0" layoutY="43.0" prefHeight="21.0" prefWidth="300.0" text="VENTA DE PRODUCTOS TECNOLÓGICOS">
@@ -32,14 +32,30 @@
                     </font>
                 </Label>
                 <Label layoutX="300.0" layoutY="66.0" prefHeight="17.0" prefWidth="94.0" text="TEL: 8383-03939" />
-                <Label layoutX="258.0" layoutY="104.0" prefHeight="17.0" prefWidth="137.0" text="SERIAL NR:">
+                <Label layoutX="230.0" layoutY="92.0" prefHeight="17.0" prefWidth="137.0" text="SERIAL NR:">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
+                <Label layoutX="140.0" layoutY="120.0" prefHeight="17.0" prefWidth="160.0"
+                       text="Producto más vendido:">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label fx:id="productoMasVendido"
+                       layoutX="300.0"
+                       layoutY="120.0"
+                       prefHeight="17.0"
+                       prefWidth="300.0"
+                       text="--------------------------">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Label>
 
                 <!-- Campos de texto -->
-                <TextField fx:id="serial" editable="false" layoutX="336.0" layoutY="101.0" prefHeight="16.0" prefWidth="117.0" />
+                <TextField fx:id="serial" editable="false" layoutX="310.0" layoutY="90.0" prefHeight="16.0" prefWidth="117.0" />
                 <TextField fx:id="codCliente" layoutX="125.0" layoutY="166.0" prefHeight="25.0" prefWidth="117.0" />
                 <TextField fx:id="codProducto" layoutX="124.0" layoutY="200.0" prefHeight="25.0" prefWidth="117.0" />
                 <TextField fx:id="price" layoutX="125.0" layoutY="234.0" prefHeight="25.0" prefWidth="117.0" />
