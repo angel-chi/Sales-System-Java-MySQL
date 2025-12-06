@@ -154,3 +154,25 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
 [⬆ Volver al inicio](#title)<br>
+
+## 📋 Changelog
+
+### [v2.0] - 08-12-2025
+**Bug Fixes:**
+- ✅ Corregido:  Las ventanas de los menús se desplegaban  en un tamaño minimo impidiendo la correcta visualización (Se implementó en el metodo openNewStage del MenuController dos parametros, uno para el alto mínimo y otro para el ancho mínimo de cada ventana).
+- ✅ Solucionado: Se arregló el error  que impedia generar una venta por distinto idioma del formato (El formato de los numeros decimales estaba puesto con comas, los metodos que generaban el carrito de compra en "Sales" se le agrego el metodo de "replace()" de la clase Strings para modificar todas las comas por puntos, además de colocar la clase "Local" para interpretar el formato dado).
+- ✅ Reparado: Se implementó la interfaz del apartado "Ayuda" (antes el botón "Help" no tenia una interfaz  propia programada, se creó el HelpController y el HelpView para darle formato a la interfaz Help en el programa).
+
+**Mejoras:**
+- 🎨 Interfaz de LogIn y ManagementView rediseñada.
+- ⚡ Traduccion de todo el programa a Español.
+- ♻️ Reutilización de metodos en clases ya existentes para mejorar el flujo, la legibilidad y para su futuro mantenimiento del codigo.
+- 🔙 Se agregó un botón de "Cerrar Ventana" para regresar al menú principal del punto de venta implementando el metodo exitWindow en la clase MenuController haciendo usó del metodo ya existente: openNewStage.
+
+## 🔨 Mejoras propuestas e implementadas
+- Se propuso e implementó un buscador de clientes via ID comparando el ID escrito en el TextField con los ID ya registrados previamente de los clientes en la base de datos, de manera que sí, el ID escrito concuerda con los y registrados, llenará los demas datos (usuario, nombre y drección) en las casillas de la ventana "Clientes", de no ser así, se arrojara una ventana emergente alertando al usuario diciendo que el cliente no esta registrado en la base de datos.
+- Se propuso e implementó un metodo de seguridad extra a la hora de ingresar al menú de vendedores y a la hora de borrar clientes desde el menú de clientes, ya que sí una persona distinta al propietario de la licencia de uso del software accede a la vista de los vendedores, este podrá tener acceso a sus claves de acceso (usuario y contraseña), nombre completo y telefono, poniendo en riesgo sus datos personales y tambien evitamos que cualquier persona pueda eliminar los datos de un cliente a menos que el dueño de la clave principal lo requiera, esto se logró creando un método que abre un nuevo archivo fxml (mainPasswordView) donde a continuación se necesitara de la contraseña princiapl, otro método que valida si la contraseña ingresada en el TextField es la correcta y de ser así dará acceso a la funcionalidad de borrar clientes y acceder al menú vendedores por medio de un if.
+- En futuras actulizaciones se puede implementar una alerta que avise al usuario cuando las unidades de un producto bajen de cierta cantidad notificando que el inventario se esta acabando especificamente de ese producto, implementando cambios en ProductController creando un metodo que se ejecute a la par con el metodo que se encarga de crear una venta en GenerateSaleController comparando la cantidad actual del producto menos la cantidad vendida y si sobrepasa el limite minimo deseado, ejecutar una ventana de notificación de que el producto se esta agotando.
+- Por ultimo, implementar en un futuro la opción de activar descuentos en productos deseados, se puede lograr seleccionando productos en un combobox para que despues una clase generateDiscount se encargue de aplicar el descuento deseado en los productos previamente seleccionados.
+
+
