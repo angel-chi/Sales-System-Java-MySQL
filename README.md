@@ -154,3 +154,25 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
 [⬆ Volver al inicio](#title)<br>
+
+# *********************************************************
+* [🗄️ Diagrama de Base de Datos Actualizado]("agregar")
+
+<h1 align="left" id="title"> Errores encontrados durante la ejecución del proyecto</h1>
+<h1></h1>
+1. Uno de los errores más notables era al oprimir el botón de "Help" este no interactuaba y además cerraba el programa despues de un lapso de tiempo de estar congelado, por su parte una solución fue entender que el proyecto al ser construido en Windows, debía de existir una implementación para LINUX, la solución fue crear un nuevo proceso del OS el cual ejecuta un comando de linux "xdg-open", solucionando de una manera el problema y no afectando directamente al proyecto.
+  
+<h1></h1>
+2. "Agregar error Carrito de compras".
+
+<h1></h1>
+3. Un tercer error solucionado era el problema de maximizar ventanas, este aunque estuviera de una manera para generarla de acuerdo al contenido, solo minizaba la pestaña al minimo y uno tenía que redimensionar, bueno, la solución fue implementar un nuevo método que aplique a las ventanas de la interfaz un aumento adecuado, se elimino el anterior y se empleo en su totalidad este último, además se implemento que el usuario no pueda extender o en si maximizar las ventanas para evitar desperfecciones o una interfaz descuadrada.
+
+<h1></h1>
+4. "Agregar error de titulo de una pestaña en otra".
+
+
+<h1 align="left" id="title"> Propuestas de mejoras en funcionalidad para el proyecto</h1>
+<h1></h1>
+
+# Un Botón FIltro
