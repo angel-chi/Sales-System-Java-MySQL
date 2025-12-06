@@ -13,7 +13,7 @@
     <children>
         <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="474.0" prefWidth="653.0">
             <children>
-                <Label alignment="CENTER" layoutX="204.0" layoutY="10.0" prefHeight="30.0" prefWidth="255.0" text="Administración de clientes" underline="true">
+                <Label alignment="CENTER" layoutX="204.0" layoutY="10.0" prefHeight="30.0" prefWidth="255.0" text="ADMINISTRACIÓN DE CLIENTES" underline="true">
 
                     <font>
                         <Font size="20.0" />
