@@ -15,8 +15,8 @@
                   <TableView fx:id="tableReport" layoutX="266.0" layoutY="123.0" prefHeight="445.0" prefWidth="735.0">
                     <columns>
                       <TableColumn fx:id="colIdSales" prefWidth="132.0" text="ID-Venta" />
-                      <TableColumn fx:id="colIdCustomer" prefWidth="100.0" text="ID-Cliente" />
-                        <TableColumn fx:id="colIdSeller" prefWidth="150.0" text="ID-Vendedor" />
+                      <TableColumn fx:id="colIdCustomer" prefWidth="100.0" text="DNI-Cliente" />
+                        <TableColumn fx:id="colIdSeller" prefWidth="150.0" text="DNI-Vendedor" />
                         <TableColumn fx:id="colNumberSales" text="Cantidad" />
                         <TableColumn fx:id="colSaleDate" prefWidth="120.0" text="Fecha de venta" />
                         <TableColumn fx:id="colAmount" prefWidth="75.0" text="Monto" />
@@ -61,7 +61,6 @@
                   </ImageView>
                   <Button layoutX="907.0" layoutY="593.0" mnemonicParsing="false" onAction="#onExport" prefHeight="32.0" prefWidth="94.0" text="EXPORT " />
                   <ComboBox fx:id="cbTypeExport" layoutX="783.0" layoutY="593.0" prefHeight="32.0" prefWidth="108.0" style="-fx-alignment: CENTER;" />
-                  <CheckBox layoutX="1240.0" layoutY="620.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="89.0" text="CheckBox" />
                   <Button fx:id="back" layoutX="30.0" layoutY="25.0" mnemonicParsing="false" onAction="#back" text="ATRAS" />
                </children></AnchorPane>
       </content>

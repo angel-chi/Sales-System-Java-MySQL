@@ -10,7 +10,7 @@
       <TableView fx:id="tableSellers" layoutX="26.0" layoutY="228.0" prefHeight="221.0" prefWidth="602.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="120.0" text="ID" />
-          <TableColumn fx:id="colDni" prefWidth="111.0" text="Identificacion" />
+          <TableColumn fx:id="colDni" prefWidth="111.0" text="DNI" />
             <TableColumn fx:id="colName" prefWidth="124.0" text="Nombre" />
             <TableColumn fx:id="colPhone" prefWidth="124.0" text="Telefono" />
             <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />
