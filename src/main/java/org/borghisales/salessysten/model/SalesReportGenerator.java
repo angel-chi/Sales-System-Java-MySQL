@@ -46,10 +46,10 @@ public class SalesReportGenerator {
                 writer.append(sale.state().toString()).append("\n");
             }
 
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "CSV Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte CSV generado satisfactoriamente " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "CSV Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "No fue posible generar el reporte: " + e.getMessage());
         }
     }
     public static void generateExcelReport(ObservableList<Sales> salesList, String outputPath) {
@@ -58,7 +58,7 @@ public class SalesReportGenerator {
 
             // Crear encabezados de columna
             Row headerRow = sheet.createRow(0);
-            String[] columns = {"ID Sales", "ID Customer", "ID Seller", "Number Sales", "Sale Date", "Amount", "State"};
+            String[] columns = {"ID Ventas", "ID Cliente", "ID Vendedor", "Numero de venta", "Fecha de la venta", "Cantidad", "Estado"};
             for (int i = 0; i < columns.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(columns[i]);
@@ -87,10 +87,10 @@ public class SalesReportGenerator {
                 workbook.write(fileOut);
             }
 
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "EXCEL Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte de Excel generado en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "EXCEL Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "No fue posible generar el reporte de Excel: " + e.getMessage());
         }
     }
     public static void generatePDFReport(ObservableList<Sales> salesList, String outputPath) {
@@ -108,8 +108,7 @@ public class SalesReportGenerator {
 
 
             // Obtener los nombres de las columnas
-            String[] columnNames = { "ID Sales", "ID Customer", "ID Seller", "Number Sales", "Sale Date", "Amount",
-                    "State" };
+            String[] columnNames = { "ID Ventas", "ID Cliente", "ID Vendedor", "Numero de venta", "Fecha de la venta", "Cantidad", "Estado" };
 
             // Calcular los anchos de columna basados en los nombres de columna más largos
             float[] columnWidths = calculateColumnWidths(columnNames, PDType1Font.HELVETICA, 12);
@@ -131,10 +130,10 @@ public class SalesReportGenerator {
             contentStream.close();
 
             document.save(outputPath);
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "PDF Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte en PDF generado en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "PDF Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "No fue posible generar el reporte en PDF:: " + e.getMessage());
 
         }
     }

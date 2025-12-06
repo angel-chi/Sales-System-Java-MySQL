@@ -159,7 +159,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Customer");
+        stage.setTitle("Administrar Cliente");
         stage.setScene(scene);
         stage.show();
     }
@@ -177,7 +177,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto Encontrado: " + product.name());
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
@@ -304,8 +304,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
-        double currentTotal = Double.parseDouble(total.getText()) + product.total();
-        total.setText(String.format("%.2f", currentTotal));
+        totalActual=totalActual+product.total();
+        total.setText(String.format("%.2f", totalActual));
     }
 
 
