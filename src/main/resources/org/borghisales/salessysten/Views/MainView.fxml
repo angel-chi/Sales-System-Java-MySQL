@@ -21,7 +21,7 @@
         <!-- LOGO -->
         <ImageView fitHeight="150.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="https://www.flaticon.es/icono-gratis/iniciar-sesion_2102141" />
+                <Image url="@../../../../images/img.png" />
             </image>
         </ImageView>
 

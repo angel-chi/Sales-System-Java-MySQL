@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Traducciones y ajustes de interfaces faltantes. Queda por revisar el apartado de reportes">
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Correción para conección a SQL">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Seller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/MainView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -523,7 +522,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765050143204</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Correción para conección a SQL">
+      <option name="closed" value="true" />
+      <created>1765050568970</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1765050568970</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +545,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: add GenerateSale.viw and modify access modifiers" />
     <MESSAGE value="feat: search Customer" />
     <MESSAGE value="feat: add screen add customer" />
     <MESSAGE value="feat: add search customer" />
@@ -563,6 +569,7 @@
     <MESSAGE value="Eliminación de Layouts de algunos menús que causaban que no quedara centrado." />
     <MESSAGE value="Ajuste interfaces: Se habilitó resize dinámico y se agregaron traducciones" />
     <MESSAGE value="Traducciones y ajustes de interfaces faltantes. Queda por revisar el apartado de reportes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Traducciones y ajustes de interfaces faltantes. Queda por revisar el apartado de reportes" />
+    <MESSAGE value="Correción para conección a SQL" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correción para conección a SQL" />
   </component>
 </project>
