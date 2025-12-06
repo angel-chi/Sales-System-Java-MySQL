@@ -8,8 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
-public class CustomerDAO implements CRUD<Customer> {
+public class CustomerDAO extends Validator<Customer> implements CRUD<Customer>{
 
     public Customer searchCustomer(int dni){
         String sql = "SELECT * FROM customer WHERE dni=?";
@@ -31,6 +32,8 @@ public class CustomerDAO implements CRUD<Customer> {
     }
     @Override
     public boolean create(Customer entity) {
+        if(!validate(entity))return false;
+
         String sql = "Insert into customer (dni,name,address,state) values(?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
@@ -139,8 +142,34 @@ public class CustomerDAO implements CRUD<Customer> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table customer: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error asignando la tabla de clientes: " + e.getMessage());
         }
 
+    }
+
+    @Override
+    protected boolean validate(Customer entity) {
+        if(Objects.isNull(entity)){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El cliente no puede estar vacio");
+            return false;
+        }
+
+        if(entity.dni() == null || entity.dni().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El dni del cliente no puede estar vacio");
+            return false;
+        }
+        if(entity.name() == null || entity.name().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del cliente no puede estar vacio");
+            return false;
+        }
+        if(entity.address() == null || entity.address().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "La direccion del cliente no puede estar vacia");
+            return false;
+        }
+        if(entity.state() == null){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El estado del cliente no puede estar vacio");
+            return false;
+        }
+        return true;
     }
 }

@@ -11,8 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
-public class ProductDAO implements CRUD<Product>{
+public class ProductDAO extends Validator<Product> implements CRUD<Product>{
 
     public void subtractStock(ObservableList<ShoppingCart> products){
         String sql = "UPDATE product SET stock = stock - ? WHERE idProduct = ?";
@@ -189,6 +190,31 @@ public class ProductDAO implements CRUD<Product>{
 
 
 
+    }
+
+    @Override
+    protected boolean validate(Product entity){
+        if(Objects.isNull(entity)){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El producto no puede estar vacio");
+            return false;
+        }
+        if(entity.name() == null || entity.name().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del producto no puede estar vacio");
+            return false;
+        }
+        if(entity.price() == 0){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El precio del producto no puede ser 0");
+            return false;
+        }
+        if(entity.stock() < 0){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El stock del producto no puede ser negativo");
+            return false;
+        }
+        if(entity.state() == null){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El estado del producto no puede estar vacio");
+            return false;
+        }
+        return true;
     }
 
 }

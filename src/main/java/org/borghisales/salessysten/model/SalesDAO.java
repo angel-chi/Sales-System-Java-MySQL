@@ -33,6 +33,7 @@ public class SalesDAO {
         }
     }
     public boolean SaveSale(Sales sale){
+
         String sql = "INSERT INTO sales (idCustomer,idSeller,numberSales,saleDate,amount,state) values(?,?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();

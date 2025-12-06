@@ -11,10 +11,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class SellerDAO implements CRUD<Seller> {
+public class SellerDAO extends Validator<Seller> implements CRUD<Seller>{
     @Override
     public boolean create(Seller entity) {
+
+        if(!validate(entity)) return false;
+
         String sql = "INSERT INTO seller (dni,name,phone_number,state,user) values (?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
@@ -129,7 +135,7 @@ public class SellerDAO implements CRUD<Seller> {
 
     public static boolean login(String dni,String user){
 
-        if (dni ==null || user ==null || dni.isEmpty()||user.isEmpty() ){
+        if (dni.isEmpty()||user.isEmpty()){
             MenuController.setAlert(Alert.AlertType.ERROR,"Usuario o contraseña vacios");
             return false;
         }
@@ -161,5 +167,35 @@ public class SellerDAO implements CRUD<Seller> {
             return false;
         }
 
+    }
+
+    @Override
+    protected boolean validate(Seller entity) {
+        if(Objects.isNull(entity)){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El vendedor no puede estar vacio");
+            return false;
+        }
+
+        if(entity.dni() == null || entity.dni().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El dni del vendedor no puede estar vacio");
+            return false;
+        }
+        if (entity.name() == null || entity.name().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del vendedor no puede estar vacio");
+            return false;
+        }
+        if(entity.phoneNumber() == null || entity.phoneNumber().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El numero de telefono del vendedor no puede estar vacio");
+            return false;
+        }
+        if(entity.user() == null || entity.user().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El usuario del vendedor no puede estar vacio");
+            return false;
+        }
+        if(entity.state()==null){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El estado del vendedor no puede estar vacio");
+            return false;
+        }
+        return true;
     }
 }
