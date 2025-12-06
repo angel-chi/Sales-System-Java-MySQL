@@ -63,7 +63,7 @@
                            promptText="Ingrese su contraseña" />
 
             <!-- Botón Entrar -->
-            <Button text="ENTRAR"
+            <Button text="INGRESAR"
                     mnemonicParsing="false"
                     onAction="#signIn"
                     prefHeight="33.0" prefWidth="150.0" />
