@@ -10,40 +10,40 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="700.0" stylesheets="@CSS/MainView.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
    <children>
-      <ImageView fitHeight="71.0" fitWidth="73.0" layoutX="177.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="71.0" fitWidth="73.0" layoutX="317.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/img.png" />
+            <Image url="@../images/img.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="57.0" layoutY="93.0" prefHeight="45.0" prefWidth="311.0" text="SISTEMA DE VENTAS" underline="true">
+      <Label alignment="CENTER" layoutX="197.0" layoutY="123.0" prefHeight="45.0" prefWidth="311.0" text="SISTEMA DE VENTAS" underline="true">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="138.0" layoutY="150.0" prefHeight="45.0" prefWidth="152.0" text="USUARIO" textAlignment="CENTER" wrapText="true">
+      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="274.0" layoutY="199.0" prefHeight="45.0" prefWidth="152.0" text="USUARIO" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="115.0" layoutY="245.0" prefHeight="45.0" prefWidth="200.0" text="CONTRASEÑA">
+      <Label alignment="CENTER" layoutX="250.0" layoutY="305.0" prefHeight="45.0" prefWidth="200.0" text="CONTRASEÑA">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <TextField fx:id="user" layoutX="115.0" layoutY="195.0" prefHeight="45.0" prefWidth="200.0">
+      <TextField fx:id="user" layoutX="195.0" layoutY="244.0" prefHeight="45.0" prefWidth="311.0">
          <font>
             <Font size="20.0" />
          </font></TextField>
-      <Button defaultButton="true" layoutX="89.0" layoutY="369.0" mnemonicParsing="false" onAction="#signIn" prefHeight="71.0" prefWidth="252.0" style="-fx-background-color: #5b94f8;" text="Ingresar" textFill="WHITE">
+      <Button defaultButton="true" layoutX="197.0" layoutY="465.0" mnemonicParsing="false" onAction="#signIn" prefHeight="71.0" prefWidth="311.0" style="-fx-background-color: #00A38D; -fx-text-fill: #fff;" text="Ingresar" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <PasswordField fx:id="password" layoutX="115.0" layoutY="290.0" prefHeight="45.0" prefWidth="200.0">
+      <PasswordField fx:id="password" layoutX="191.0" layoutY="350.0" prefHeight="45.0" prefWidth="311.0">
          <font>
             <Font size="20.0" />
          </font></PasswordField>

@@ -1,0 +1,43 @@
+.tab {
+    -fx-background-color: #dddddd;
+}
+
+.tab:selected {
+        -fx-background-color: #00A38D;
+
+    -fx-text-fill: white;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: white;
+}
+
+.tab-pane {
+    -fx-background-color: #e6e6e6;
+}
+
+.button {
+    -fx-background-color: #FFF;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14pt;
+    -fx-font-weight: bold;
+    -fx-padding: 15px 30px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 2);
+
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0, 0, 3);
+    -fx-border-color: #00A38D;
+    -fx-border-width: 1px;
+}
+
+.button:pressed {
+    -fx-effect: none;
+    -fx-background-color: #F0F0F0;
+    -fx-translate-y: 1px;
+}
