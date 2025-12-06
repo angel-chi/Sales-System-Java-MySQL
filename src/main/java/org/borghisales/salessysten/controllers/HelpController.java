@@ -31,23 +31,35 @@ public class HelpController extends MenuController implements Initializable {
     }
     @FXML
     private void onHelp(ActionEvent event){
-        String url = "https://github.com/Borghii/Sales-System";
-        try {
-            if (!Desktop.isDesktopSupported()) {
-                setAlert(Alert.AlertType.ERROR, "No se puede abrir un link");
-                return;
-            }
-            Desktop desktop = Desktop.getDesktop();
-            if (!desktop.isSupported(Desktop.Action.BROWSE)) {
-                setAlert(Alert.AlertType.ERROR,"No se pueden abrir links");
-                return;
-            }
-            desktop.browse(new URI(url));
-        }
-        catch (URISyntaxException e) {setAlert(Alert.AlertType.ERROR,"The URL is invalid: " + url);}
-        catch (IOException e) {setAlert(Alert.AlertType.ERROR,"Could not open the URL. Check your internet connection.");}
-        catch (Exception e) {setAlert(Alert.AlertType.ERROR,"An unexpected error occurred while opening the help page.");}
+        String url = "https://github.com/angel-chi/Sales-System-Java-MySQL";
 
+        try {
+            // Detectar el sistema operativo
+            String os = System.getProperty("os.name").toLowerCase();
+
+            if (os.contains("linux")) {
+                // Para Linux (Ubuntu)
+                Runtime.getRuntime().exec(new String[]{"xdg-open", url});
+            } else if (os.contains("mac")) {
+                // Para macOS
+                Runtime.getRuntime().exec(new String[]{"open", url});
+            } else if (os.contains("win")) {
+                // Para Windows
+                Runtime.getRuntime().exec(new String[]{"rundll32", "url.dll,FileProtocolHandler", url});
+            } else {
+                // Fallback
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().browse(new URI(url));
+                } else {
+                    setAlert(Alert.AlertType.INFORMATION,
+                            "No se pudo abrir el navegador automáticamente.");
+                }
+            }
+        } catch (Exception e) {
+            // Si falla
+            setAlert(Alert.AlertType.INFORMATION,
+                    "No se pudo abrir el navegador.\n\nCopia este link:\n" + url);
+        }
     }
 
 }

@@ -2,20 +2,41 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="534.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SaleDetailController">
-   <children>
-      <TableView fx:id="tableSale" prefHeight="496.0" prefWidth="799.0">
-         <columns>
-            <TableColumn fx:id="colNro" prefWidth="70.0" sortable="false" style="-fx-alignment: CENTER;" text="NR" />
-            <TableColumn fx:id="colCod" prefWidth="73.0" sortable="false" style="-fx-alignment: CENTER;" text="COD" />
-            <TableColumn fx:id="colProduct" prefWidth="356.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCT" />
-            <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="103.0" style="-fx-alignment: CENTER;" text="QUANTITY" />
-            <TableColumn fx:id="colPrice" prefWidth="102.0" style="-fx-alignment: CENTER;" text="PRICE UNIT" />
-            <TableColumn fx:id="colTotal" prefWidth="94.0" style="-fx-alignment: CENTER;" text="TOTAL" />
-         </columns>
-      </TableView>
-      <TextField fx:id="totalSale" editable="false" layoutX="693.0" layoutY="501.0" prefHeight="25.0" prefWidth="91.0" />
-      <Label layoutX="619.0" layoutY="504.0" text="TOTAL SALE:" wrapText="true" />
-   </children>
-</AnchorPane>
+<!-- StackPane principal -->
+<StackPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.borghisales.salessysten.controllers.SaleDetailController"
+           prefHeight="650.0" prefWidth="900.0">
+
+    <!-- VBox principal -->
+    <VBox alignment="TOP_CENTER" spacing="15">
+        <padding>
+            <Insets top="30" bottom="30" left="40" right="40"/>
+        </padding>
+
+        <!-- Tabla de detalle de venta -->
+        <TableView fx:id="tableSale" prefHeight="520.0" prefWidth="800.0">
+            <columns>
+                <TableColumn fx:id="colNro" prefWidth="80.0" sortable="false" style="-fx-alignment: CENTER;" text="NRO" />
+                <TableColumn fx:id="colCod" prefWidth="100.0" sortable="false" style="-fx-alignment: CENTER;" text="CÓD" />
+                <TableColumn fx:id="colProduct" prefWidth="220.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCTO" />
+                <TableColumn fx:id="colQuantity" prefWidth="110.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
+                <TableColumn fx:id="colPrice" prefWidth="145.0" style="-fx-alignment: CENTER;" text="PRECIO UNITARIO" />
+                <TableColumn fx:id="colTotal" prefWidth="142.0" style="-fx-alignment: CENTER;" text="TOTAL" />
+            </columns>
+        </TableView>
+
+        <!-- Total de la venta -->
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <padding>
+                <Insets right="0"/>
+            </padding>
+
+            <Label text="VENTA TOTAL:"/>
+            <TextField fx:id="totalSale" editable="false" prefWidth="100.0"/>
+        </HBox>
+
+    </VBox>
+
+</StackPane>

@@ -25,7 +25,7 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     void openSeller(ActionEvent actionEvent){
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(SELLER_VIEW_FXML,"Seller");
+        openNewStage(SELLER_VIEW_FXML,"Vendedor/a");
         closeCurrentStage(sellerButton);
     }
 
@@ -37,38 +37,41 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void openCustomer(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(CUSTOMER_VIEW_FXML, "Customer");
+        openNewStage(CUSTOMER_VIEW_FXML, "Cliente");
         closeCurrentStage(sellerButton);
 
     }
 
     public void openProduct(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(PRODUCT_VIEW_FXML,"Products");
+        openNewStage(PRODUCT_VIEW_FXML,"Productos");
         closeCurrentStage(sellerButton);
 
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(GENERATE_SALE_VIEW_FXML,"Shopping cart");
+        openNewStage(GENERATE_SALE_VIEW_FXML,"Generar Venta");
         closeCurrentStage(sellerButton);
     }
     public void openSalesReport(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(REPORT_VIEW_FXML,"Sales");
+        openNewStage(REPORT_VIEW_FXML,"Ventas");
         closeCurrentStage(sellerButton);
 
     }
 
-    public void help(ActionEvent actionEvent) {
-        openNewStage(HELP_VIEW_FXML,"Help");
-        closeCurrentStage(sellerButton);
+    @FXML
+    private void help() {
+        // Registrar que la ventana padre de Help es Management
+        MenuController.filePaths.put(HELP_VIEW_FXML, MANAGEMENT_VIEW_FXML);
 
+        openNewStage(HELP_VIEW_FXML, "Ayuda");
+        closeCurrentStage(tabPaneManage);
     }
 
     public void exit(ActionEvent actionEvent) {
-        openNewStage(MAIN_VIEW_FXML,"Login");
+        openNewStage(MAIN_VIEW_FXML,"Acceso");
         closeCurrentStage(sellerButton);
     }
 
