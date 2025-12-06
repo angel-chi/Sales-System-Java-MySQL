@@ -12,35 +12,35 @@
       <AnchorPane prefHeight="484.0" prefWidth="663.0">
          <children>
             <Button layoutX="458.0" layoutY="52.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="32.0" prefWidth="101.0" text="AÑADIR" />
-            <Label layoutX="51.0" layoutY="70.0" prefHeight="17.0" prefWidth="54.0" text="NOMBRE:" underline="true">
+            <Label layoutX="25.0" layoutY="70.0" prefHeight="17.0" prefWidth="80.0" text="NOMBRE:" underline="true">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="51.0" layoutY="96.0" prefHeight="26.0" prefWidth="68.0" text="PRECIO:" underline="true">
+            <Label layoutX="25.0" layoutY="96.0" prefHeight="26.0" prefWidth="80.0" text="PRECIO:" underline="true">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="45.0" layoutY="122.0" prefHeight="26.0" prefWidth="60.0" text="EXISTENCIAS:" underline="true">
+            <Label layoutX="25.0" layoutY="126.0" prefHeight="26.0" prefWidth="140.0" text="EXISTENCIAS:" underline="true">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="name" layoutX="120.0" layoutY="66.0" prefHeight="25.0" prefWidth="289.0" />
-            <TextField fx:id="price" layoutX="121.0" layoutY="96.0" prefHeight="25.0" prefWidth="289.0" />
-            <TextField fx:id="stock" layoutX="120.0" layoutY="126.0" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="name" layoutX="140.0" layoutY="66.0" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="price" layoutX="140.0" layoutY="96.0" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="stock" layoutX="140.0" layoutY="126.0" prefHeight="25.0" prefWidth="289.0" />
             <Button layoutX="458.0" layoutY="90.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="32.0" prefWidth="101.0" text="ACTUALIZAR" />
             <Button layoutX="458.0" layoutY="127.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="32.0" prefWidth="101.0" text="ELIMINAR" />
             <Button layoutX="458.0" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="101.0" text="VACIAR" />
-            <ComboBox fx:id="cbState" layoutX="121.0" layoutY="158.0" prefHeight="25.0" prefWidth="283.0" />
-            <Label layoutX="51.0" layoutY="155.0" prefHeight="17.0" prefWidth="54.0" text="ESTADO:" underline="true">
+            <ComboBox fx:id="cbState" layoutX="140.0" layoutY="158.0" prefHeight="25.0" prefWidth="283.0" />
+            <Label layoutX="25.0" layoutY="163.0" prefHeight="17.0" prefWidth="80.0" text="ESTADO:" underline="true">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
              <Button layoutX="25.0" layoutY="200.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="25.0" prefWidth="90.0" text="BUSCAR" />
-             <VBox fx:id="searchContainer" layoutX="120.0" layoutY="195.0" managed="false" spacing="8" visible="false">
+             <VBox fx:id="searchContainer" layoutX="140.0" layoutY="195.0" managed="false" spacing="8" visible="false">
                  <TextField fx:id="txtSearch" promptText="Escribe tu búsqueda..." />
                  <HBox spacing="15">
                      <RadioButton fx:id="rbId" text="ID" toggleGroup="$searchOptions" />
@@ -57,7 +57,7 @@
                      <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />
                  </columns>
              </TableView>
-            <Label alignment="CENTER" layoutX="200.0" layoutY="10.0" prefHeight="30.0" prefWidth="242.0" text="ADMINISTRACIÓN DE PRODUCTOS" underline="true">
+            <Label alignment="CENTER" layoutX="120.0" layoutY="10.0" prefHeight="30.0" prefWidth="400.0" text="ADMINISTRACIÓN DE PRODUCTOS" underline="true">
                <font>
                   <Font size="20.0" />
                </font>
