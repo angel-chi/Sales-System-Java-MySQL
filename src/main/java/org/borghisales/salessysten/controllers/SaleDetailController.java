@@ -21,7 +21,7 @@ public class SaleDetailController implements Initializable {
 
 
     private static final SalesDAO salesDAO = new SalesDAO();
-    private static ObservableList<ShoppingCart> productsDetails;
+    private static ObservableList<ShoppingCart> detallesProducto;
     private static int idSale;
 
     @FXML
@@ -65,19 +65,19 @@ public class SaleDetailController implements Initializable {
     }
 
     private void loadProductsDetails() {
-        productsDetails = FXCollections.observableArrayList();
-        salesDAO.setTableDetails(productsDetails, idSale);
+        detallesProducto = FXCollections.observableArrayList();
+        salesDAO.setTableDetails(detallesProducto, idSale);
     }
 
     private void displayTotal() {
-        double sumTotal = productsDetails.stream()
+        double sumTotal = detallesProducto.stream()
                 .mapToDouble(ShoppingCart::total)
                 .sum();
         totalSale.setText(String.format("%.2f", sumTotal));
     }
 
     private void displayProductsDetails() {
-        tableSale.setItems(productsDetails);
+        tableSale.setItems(detallesProducto);
     }
 
 

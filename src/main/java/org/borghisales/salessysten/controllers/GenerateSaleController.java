@@ -30,7 +30,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private static ObservableList<ShoppingCart> products;
 
     private static String sellerName;
-    private static int idSeller;
+    private static int idVendedor;
 
     private final LocalDate now = LocalDate.now();
 
@@ -40,14 +40,15 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SI");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
     private final CustomerDAO customerDAO = new CustomerDAO();
 
-    private Customer customer;
+    private Customer cliente;
     private final ProductDAO productDAO = new ProductDAO();
+    private double totalActual=0;
 
     @FXML
     private TextField serial;
@@ -99,7 +100,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         seller.setText(sellerName);
         date.setText(String.valueOf(now));
     }
-
+//Se cambiaron algunos mensajes y se puso una traducción para el usuario
     private void configureAlerts() {
         configureAlert(alertCustomer, "Nuevo cliente", "El cliente no existe", "¿Desea agregarlo?");
         configureAlert(alertProduct, "Nuevo producto", "EL producto no existe", "¿Desea agregarlo?");
@@ -130,11 +131,11 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     public void searchCustomer(ActionEvent actionEvent) {
         int customerId = Integer.parseInt(codCustomer.getText());
-        customer = customerDAO.searchCustomer(customerId);
+        cliente = customerDAO.searchCustomer(customerId);
 
-        if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
-            customerName.setText(customer.name());
+        if (cliente != null) {
+            setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + cliente.name());
+            customerName.setText(cliente.name());
         } else {
             handleCustomerNotFound();
         }
@@ -203,7 +204,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Product");
+        stage.setTitle("Gestionar Producto");
         stage.setScene(scene);
         stage.show();
     }
@@ -214,8 +215,12 @@ public class GenerateSaleController extends MenuController implements Initializa
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
-        total.clear();
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
+        //Se elimina el TotalClear();
+        products.clear();
+        total.setText("0.0");
+        totalActual=0;
+
     }
 
     public void generateSale(ActionEvent actionEvent) {
@@ -236,9 +241,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private Sales createSalesObject() {
-        return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
-                Sales.State.ACTIVE);
+        return new Sales(cliente.idCustomer(), idVendedor, serial.getText(),
+                LocalDate.parse(date.getText()),totalActual, Sales.State.ACTIVE);
     }
 
     private boolean saveSaleAndDetails(Sales sales) {
@@ -265,8 +269,8 @@ public class GenerateSaleController extends MenuController implements Initializa
         GenerateSaleController.sellerName = sellerName;
     }
 
-    public static void setIdSeller(int idSeller) {
-        GenerateSaleController.idSeller = idSeller;
+    public static void setIdVendedor(int idVendedor) {
+        GenerateSaleController.idVendedor = idVendedor;
     }
 
     public void addShoppingCart(ActionEvent actionEvent) {
@@ -280,7 +284,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya está en tu carrito de compra");
             return;
         }
 
@@ -307,9 +311,9 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private String validateInputs() {
         if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Missing customer name or product name.";
+            return "Nombre de cliente/producto faltantes.";
         } else if (quantity.getValue() == 0) {
-            return "Quantity can't be 0.";
+            return "La cantidad no puede ser 0.";
         }
         return null;
     }

@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class SellerDAO implements CRUD<Seller> {
     @Override
@@ -146,7 +145,7 @@ public class SellerDAO implements CRUD<Seller> {
                 if (rs.next()){
 
                     GenerateSaleController.setSellerName(rs.getString("name"));
-                    GenerateSaleController.setIdSeller(rs.getInt("idSeller"));
+                    GenerateSaleController.setIdVendedor(rs.getInt("idSeller"));
 
                     MainController.sellerLog = Seller.fromResultSet(rs);
 
