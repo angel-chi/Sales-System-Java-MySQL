@@ -42,8 +42,10 @@ public class MenuController {
             stage.setTitle(title);
             stage.setScene(scene);
             configureStageCloseEvent(stage, fxmlFileName, title);
-            stage.sizeToScene(); //Ajustar el tamano
             stage.show();
+            stage.setWidth(700);
+            stage.setHeight(650);
+            stage.setAlwaysOnTop(true);
 
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());

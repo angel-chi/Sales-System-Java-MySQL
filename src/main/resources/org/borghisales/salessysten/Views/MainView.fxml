@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -21,7 +22,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="137.0" layoutY="160.0" prefHeight="45.0" prefWidth="152.0" text="USUARIO" textAlignment="CENTER" wrapText="true">
+      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="138.0" layoutY="150.0" prefHeight="45.0" prefWidth="152.0" text="USUARIO" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="28.0" />
          </font>
@@ -31,8 +32,20 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <TextField fx:id="user" layoutX="128.0" layoutY="205.0" />
-      <Button layoutX="88.0" layoutY="342.0" mnemonicParsing="false" onAction="#signIn" prefHeight="71.0" prefWidth="252.0" text="Ingresar" />
-      <PasswordField fx:id="password" layoutX="129.0" layoutY="290.0" />
+      <TextField fx:id="user" layoutX="115.0" layoutY="195.0" prefHeight="45.0" prefWidth="200.0">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <Button defaultButton="true" layoutX="89.0" layoutY="369.0" mnemonicParsing="false" onAction="#signIn" prefHeight="71.0" prefWidth="252.0" style="-fx-background-color: #5b94f8;" text="Ingresar" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <PasswordField fx:id="password" layoutX="115.0" layoutY="290.0" prefHeight="45.0" prefWidth="200.0">
+         <font>
+            <Font size="20.0" />
+         </font></PasswordField>
    </children>
 </AnchorPane>
