@@ -74,6 +74,11 @@ public class ProductController implements Initializable {
         rbNombre.setOnAction(e -> applyFilter(txtSearch.getText()));
         rbPrice.setOnAction(e -> applyFilter(txtSearch.getText()));
         rbId.setOnAction(e -> applyFilter(txtSearch.getText()));
+
+        //esta linea se movió por que se generaban estos egventos listeners cada vez que el metodo searchCostumer ocurra
+        txtSearch.textProperty().addListener((n, un, txt) -> {
+            applyFilter(txt);
+        });
     }
 
     private void initializeTable() {
@@ -97,14 +102,14 @@ public class ProductController implements Initializable {
     }
 
     private void initializeProductData() {
-        tableProducts.getItems().clear();
         if (products == null) {
             products = FXCollections.observableArrayList();
-            productDAO.setTable(products);
+        } else {
+            products.clear(); //  Limpiamos la lista por si traía basura de antes
         }
-
+        productDAO.setTable(products); //actualizamos la customers con la db
         filteredData = new FilteredList<>(products, p -> true);
-        tableProducts.setItems(filteredData);
+        tableProducts.setItems(filteredData);      //usamos la mascara sobre la original
     }
 
     public void addProduct(ActionEvent actionEvent) {
@@ -152,21 +157,14 @@ public class ProductController implements Initializable {
 
 
     private void updateTable() {
-        tableProducts.getItems().clear();
+        products.clear(); //  Vaciamos el contenido antes de volver a llenarlo para evitar duplicados
         productDAO.setTable(products);
-        tableProducts.setItems(products);
     }
     @FXML
     private void searchProduct() {
-
         boolean isVisible = searchContainer.isVisible();
         searchContainer.setVisible(!isVisible);
         searchContainer.setManaged(!isVisible);
-        txtSearch.textProperty().addListener((n, un, txt) -> {
-            applyFilter(txt);
-        });
-
-
     }
     // ******************************************************************************************
         // Botones de Generate en Product
@@ -175,6 +173,7 @@ public class ProductController implements Initializable {
         rb.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
             if (rb.isSelected()) {
                 searchOptions.selectToggle(null);
+                applyFilter(txtSearch.getText());
                 // Consumimos el evento para evitar que JavaFX lo vuelva a seleccionar automáticamente
                 event.consume();
             }
