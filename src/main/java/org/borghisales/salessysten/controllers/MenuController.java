@@ -41,6 +41,7 @@ public class MenuController {
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
+            //stage.setResizable(false); // Aun en dudad si hacer esto
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
