@@ -54,7 +54,7 @@ public class MenuController {
             stage.centerOnScreen();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error al cargar la vista "+ e.getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ public class MenuController {
     // Alertas globales
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("Informacion");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);
