@@ -47,11 +47,11 @@ public class MenuController {
             stage.setScene(scene);
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
-            stage.setWidth(700);
-            stage.setHeight(650);
+            stage.setWidth(1000);
+            stage.setHeight(800);
             stage.setAlwaysOnTop(true);
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista: "+ e.getMessage());
         }
     }
 

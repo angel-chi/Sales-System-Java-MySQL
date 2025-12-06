@@ -6,10 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="refactor: delete comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/DBConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/ProductDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SellerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SellerDAO.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" afterDir="false" />
+>>>>>>> 5b6ec210206d0129ef5f4c23cbf8c5fbd9861520
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +169,7 @@
       <workItem from="1764091808576" duration="8000" />
       <workItem from="1764251643774" duration="14026000" />
       <workItem from="1764389150076" duration="6310000" />
-      <workItem from="1764990399614" duration="18917000" />
+      <workItem from="1764990399614" duration="23585000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
