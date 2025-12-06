@@ -21,6 +21,7 @@ public class SellerController implements Initializable {
     private final VendedorDAO vendedorDAO = new VendedorDAO(); // SellerDAO -> VendedorDAO
     private final ObservableList<Vendedor.Estado> stateList = FXCollections.observableArrayList(Vendedor.Estado.ACTIVO, Vendedor.Estado.INACTIVO); // Seller.State -> Vendedor.Estado
     private static ObservableList<Vendedor> vendedores = null; // Seller -> Vendedor, sellers -> vendedores
+    private final ObservableList<Vendedor.Rol> roleList = FXCollections.observableArrayList(Vendedor.Rol.VENDEDOR, Vendedor.Rol.ADMINISTRADOR);
 
     @FXML
     private TextField identificacion; // dni -> identificacion
@@ -31,7 +32,11 @@ public class SellerController implements Initializable {
     @FXML
     private TextField usuario; // user -> usuario
     @FXML
-    private ComboBox<Vendedor.Estado> cbState; // Seller.State -> Vendedor.Estado
+    private Label labelRol; //Para que desapareza también la etiqueta
+    @FXML
+    private ComboBox<Vendedor.Estado> cbState;
+    @FXML
+    private ComboBox<Vendedor.Rol>cbRol; //Para que se muestre el rol del vendedor
     @FXML
     private TableView<Vendedor> tableSellers; // Seller -> Vendedor
     @FXML
@@ -43,7 +48,9 @@ public class SellerController implements Initializable {
     @FXML
     private TableColumn<Vendedor,String> colPhone; // Seller -> Vendedor
     @FXML
-    private TableColumn<Vendedor, Vendedor.Estado> colState; // Seller -> Vendedor, Seller.State -> Vendedor.Estado
+    private TableColumn<Vendedor, Vendedor.Estado> colState;
+    @FXML
+    private TableColumn<Vendedor, Vendedor.Rol> colRol;
 
 
 
@@ -67,12 +74,23 @@ public class SellerController implements Initializable {
         colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getIdentificacion())); // dni() -> identificacion()
         colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getNombre())); // name() -> nombre()
         colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getTelefono())); // phoneNumber() -> telefono()
-        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getEstado())); // state() -> estado()
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getEstado()));// state() -> estado()
+        colRol.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getRol()));// role() -> rol()
     }
 
     private void initializeComboBox() {
         cbState.setValue(Vendedor.Estado.ACTIVO); // Seller.State.ACTIVE -> Vendedor.Estado.ACTIVO
         cbState.setItems(stateList);
+
+        cbRol.setItems(roleList);
+        cbRol.setValue(Vendedor.Rol.VENDEDOR);
+
+        //Si el rol del vendedor no es administrador, entonces no podrá cambiar el rol y ni siquiera verlo
+        if(MainController.vendedorLogeado == null || MainController.vendedorLogeado.getRol() != Vendedor.Rol.ADMINISTRADOR){
+            cbRol.setDisable(true);
+            cbRol.setVisible(false);
+            labelRol.setVisible(false);
+        }
     }
 
     private void initializeSellerData() {
@@ -86,14 +104,14 @@ public class SellerController implements Initializable {
 
 
     public void addSeller(ActionEvent actionEvent){
-        Vendedor vendedor = new Vendedor(identificacion.getText(),nombre.getText(),telefono.getText(), cbState.getValue(),usuario.getText()); // Seller -> Vendedor, dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
+        Vendedor vendedor = new Vendedor(identificacion.getText(),nombre.getText(),telefono.getText(), cbState.getValue(),usuario.getText(),cbRol.getValue()); // Seller -> Vendedor, dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
         if (vendedorDAO.create(vendedor)) { // sellerDAO -> vendedorDAO
             MenuController.cleanCells(identificacion, nombre, telefono, usuario); // dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
             updateTable();
         }
     }
     public void updateSeller(ActionEvent actionEvent) {
-        Vendedor vendedor = new Vendedor(identificacion.getText(),nombre.getText(),telefono.getText(), cbState.getValue(),usuario.getText()); // Seller -> Vendedor, dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
+        Vendedor vendedor = new Vendedor(identificacion.getText(),nombre.getText(),telefono.getText(), cbState.getValue(),usuario.getText(), cbRol.getValue()); // Seller -> Vendedor, dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
         if (vendedorDAO.update(vendedor)) { // sellerDAO -> vendedorDAO
             MenuController.cleanCells(identificacion, nombre, telefono, usuario); // dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
             updateTable();
@@ -120,7 +138,12 @@ public class SellerController implements Initializable {
         nombre.setText(vendedor.getNombre()); // name -> nombre
         telefono.setText(vendedor.getTelefono()); // phoneNumber -> telefono
         usuario.setText(vendedor.getUsuario()); // user -> usuario
-        cbState.setValue(vendedor.getEstado()); // state -> estado
+        cbState.setValue(vendedor.getEstado());
+
+        //Solo tiene sentido mostrarlo si el comboBox de rol está habilitado
+        if(cbRol != null){
+            cbRol.setValue(vendedor.getRol());
+        }
     }
 
     private void updateTable(){

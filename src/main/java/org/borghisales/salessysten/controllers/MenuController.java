@@ -50,22 +50,27 @@ public class MenuController {
                     stage.setResizable(false);
                     break;
 
-                case GENERATE_SALE_VIEW_FXML:             // ejemplo
+                case GENERATE_SALE_VIEW_FXML:
                     scene = new Scene(root, 590, 600);
                     stage.setResizable(false);
                     break;
 
-                case REPORT_VIEW_FXML:            // ejemplo
+                case REPORT_VIEW_FXML:
                     scene = new Scene(root, 1470, 1040);
                     stage.setResizable(false);
                     break;
 
-                case PRODUCT_VIEW_FXML, SELLER_VIEW_FXML:            // ejemplo
+                case PRODUCT_VIEW_FXML:
                     scene = new Scene(root, 650, 500);
                     stage.setResizable(false);
                     break;
 
-                case CUSTOMER_VIEW_FXML:            // ejemplo
+                case SELLER_VIEW_FXML:
+                    scene = new Scene(root, 700, 500);
+                    stage.setResizable(false);
+                    break;
+
+                case CUSTOMER_VIEW_FXML:
                     scene = new Scene(root, 665, 510);
                     stage.setResizable(false);
                     break;

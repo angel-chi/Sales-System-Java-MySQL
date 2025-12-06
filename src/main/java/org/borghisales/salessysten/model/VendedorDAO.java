@@ -15,7 +15,7 @@ import java.util.List;
 public class VendedorDAO implements CRUD<Vendedor> { // Cambiado de SellerDAO a VendedorDAO, y Seller a Vendedor
     @Override
     public boolean create(Vendedor entity) { // Tipo de entidad cambiado
-        String sql = "INSERT INTO vendedores (identificacion,nombre,telefono,estado,usuario) values (?,?,?,?,?)"; // Nombres de tabla y columnas cambiados
+        String sql = "INSERT INTO vendedores (identificacion,nombre,telefono,estado,usuario,rol) values (?,?,?,?,?,?)"; // Nombres de tabla y columnas cambiados
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -25,6 +25,7 @@ public class VendedorDAO implements CRUD<Vendedor> { // Cambiado de SellerDAO a 
             pstmt.setString(3, entity.getTelefono()); // Nombre de método de entidad cambiado
             pstmt.setString(4, entity.getEstado().name());
             pstmt.setString(5, entity.getUsuario()); // Nombre de método de entidad cambiado
+            pstmt.setString(6, entity.getRol().name()); //Nueva entidad rol
 
             int rows_affected = pstmt.executeUpdate();
 
@@ -46,18 +47,35 @@ public class VendedorDAO implements CRUD<Vendedor> { // Cambiado de SellerDAO a 
 
 
     @Override
-    public boolean update(Vendedor entity) { // Tipo de entidad cambiado
-        String sql = "UPDATE vendedores SET nombre=?,telefono=?,estado=?,usuario=? WHERE identificacion=?"; // Nombres de tabla y columnas cambiados, la lógica de WHERE se mantiene con 'identificacion'
+    public boolean update(Vendedor entity) {// Tipo de entidad cambiado
+
+        //Verificar que el vendedor logeado sea administrador
+        boolean isAdmin = MainController.vendedorLogeado != null && MainController.vendedorLogeado.getRol() == Vendedor.Rol.ADMINISTRADOR;
+
+        // Construir la consulta SQL según el rol
+        String sql;
+        if(isAdmin){
+            sql = "UPDATE vendedores SET nombre=?,telefono=?,estado=?,usuario=?,rol=? WHERE identificacion=?";
+        }else{
+            sql = "UPDATE vendedores SET nombre=?,telefono=?,estado=?,usuario=? WHERE identificacion=?";
+        }
 
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
-
 
             pstmt.setString(1, entity.getNombre()); // Nombre de método de entidad cambiado
             pstmt.setString(2, entity.getTelefono()); // Nombre de método de entidad cambiado
             pstmt.setString(3, entity.getEstado().name());
             pstmt.setString(4, entity.getUsuario()); // Nombre de método de entidad cambiado
-            pstmt.setString(5, entity.getIdentificacion()); // Nombre de método de entidad cambiado
+
+            //Verificar si es admin para agregar el parámetro del rol
+            if(isAdmin){
+                //Al ser admin puede cambiar el rol
+                pstmt.setString(5, entity.getRol().name());
+                pstmt.setString(6, entity.getIdentificacion());
+            }else{
+                pstmt.setString(5, entity.getIdentificacion());
+            }
 
             int rows_affected = pstmt.executeUpdate();
 

@@ -7,6 +7,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 
+//importar la clase vendedor para usarla
+import org.borghisales.salessysten.model.Vendedor;
+
 import java.awt.*;
 import java.net.URI;
 import java.net.URL;
@@ -23,6 +26,9 @@ public class ManagementController extends MenuController implements Initializabl
     private TabPane tabPaneManage;
 
     @FXML
+    private Button productButton;
+
+    @FXML
     void openSeller(ActionEvent actionEvent){
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
         openNewStage(SELLER_VIEW_FXML,"Vendedor");
@@ -33,6 +39,14 @@ public class ManagementController extends MenuController implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabPaneManage.getSelectionModel().select(lastTab);
+
+        // Ocultar botón de productos si NO es administrador
+        if (MainController.vendedorLogeado != null &&
+                MainController.vendedorLogeado.getRol() == Vendedor.Rol.VENDEDOR) {
+
+            productButton.setDisable(true);
+            productButton.setVisible(false);
+        }
     }
 
     public void openCustomer(ActionEvent actionEvent) {
@@ -46,7 +60,6 @@ public class ManagementController extends MenuController implements Initializabl
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
         openNewStage(PRODUCT_VIEW_FXML,"Producto");
         closeCurrentStage(sellerButton);
-
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {

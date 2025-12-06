@@ -4,19 +4,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Vendedor extends Usuario {
+
+    //Se agrega el enum rol para determinar si es un vendedor o administrador
+    public enum Rol { VENDEDOR, ADMINISTRADOR }
+
     private final String identificacion;
     private final String telefono;
     private final String usuario;
+    private final Rol rol;
 
-    public Vendedor(int idVendedor, String identificacion, String nombre, String telefono, Estado estado, String usuario){
+    public Vendedor(int idVendedor, String identificacion, String nombre, String telefono, Estado estado, String usuario, Rol rol){
         super(idVendedor, nombre, estado);
         this.identificacion = identificacion;
         this.telefono = telefono;
         this.usuario = usuario;
+        this.rol = rol;
     }
 
-    public Vendedor(String identificacion, String nombre, String telefono, Estado estado, String usuario) {
-        this(0, identificacion, nombre, telefono, estado, usuario);
+    public Vendedor(String identificacion, String nombre, String telefono, Estado estado, String usuario, Rol rol) {
+        this(0, identificacion, nombre, telefono, estado, usuario, rol);
     }
 
     //Método factory estático para usar desde VendedorDAO
@@ -28,8 +34,9 @@ public class Vendedor extends Usuario {
         String telefono = rs.getString("telefono"); // En la BD es 'telefono'
         Estado estado = Vendedor.Estado.valueOf(rs.getString("estado"));
         String usuario = rs.getString("usuario");
+        Rol rol = Vendedor.Rol.valueOf(rs.getString("rol"));
 
-        return new Vendedor(id, identificacion, nombre, telefono, estado, usuario);
+        return new Vendedor(id, identificacion, nombre, telefono, estado, usuario, rol);
     }
 
     //Métodos getter
@@ -43,5 +50,9 @@ public class Vendedor extends Usuario {
 
     public String getUsuario(){
         return usuario;
+    }
+
+    public Rol getRol(){
+        return rol;
     }
 }

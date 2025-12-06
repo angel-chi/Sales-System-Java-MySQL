@@ -13,6 +13,11 @@ import java.sql.SQLException;
 
 public class ProductoDAO implements CRUD<Producto>{ // Cambiado de ProductDAO a ProductoDAO, y Product a Producto
 
+    //Método para veriricar si el vendedor logeado es administrador
+    private boolean isAdmin() {
+        return MainController.vendedorLogeado != null && MainController.vendedorLogeado.getRol() == Vendedor.Rol.ADMINISTRADOR;
+    }
+
     public void subtractStock(ObservableList<CarritoCompra> productosDelCarrito){
         String sql = "UPDATE productos SET existencia = existencia - ? WHERE idProducto = ?";
 
@@ -55,6 +60,12 @@ public class ProductoDAO implements CRUD<Producto>{ // Cambiado de ProductDAO a 
 
     @Override
     public boolean create(Producto entity) {
+
+        // No permite crear productos si el vendedor logeado no es administrador
+        if (!isAdmin()) {
+            return false;
+        }
+
         String sql = "INSERT INTO productos (nombre,precio,existencia,estado) values (?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
@@ -85,6 +96,12 @@ public class ProductoDAO implements CRUD<Producto>{ // Cambiado de ProductDAO a 
 
     @Override
     public boolean update(Producto entity) {
+
+        //Si no es admin no permite actualizar productos
+        if (!isAdmin()) {
+            return false;
+        }
+
         String sql = "UPDATE productos SET precio=?,existencia=?,estado=? WHERE nombre=?";
 
         try(Connection conn = DBConnection.connection();
@@ -114,6 +131,12 @@ public class ProductoDAO implements CRUD<Producto>{ // Cambiado de ProductDAO a 
 
     @Override
     public boolean delete(String id) {
+
+        //Si no es admin no permite eliminar productos
+        if (!isAdmin()) {
+            return false;
+        }
+
         String sql = "DELETE FROM productos WHERE nombre=?";
 
         try(Connection conn = DBConnection.connection();
@@ -142,6 +165,13 @@ public class ProductoDAO implements CRUD<Producto>{ // Cambiado de ProductDAO a 
 
     @Override
     public void setTable(ObservableList<Producto> productos) {
+
+        //Si no es admin no permite cargar la tabla de productos
+        if (!isAdmin()) {
+            productos.clear();
+            return;
+        }
+
         String sql = "SELECT * FROM productos";
 
         try (Connection conn = DBConnection.connection();
