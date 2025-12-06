@@ -3,6 +3,7 @@ package org.borghisales.salessysten.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,10 +27,15 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     private Button sellerButton;
 
+
     @FXML
     void openSeller(ActionEvent actionEvent){
-        openNewStage(SELLER_VIEW_FXML,"Vendedor", 650, 600);
-        closeCurrentStage((Button) actionEvent.getSource());
+        requestPassword();
+        if (correctPassword) {
+            openNewStage(SELLER_VIEW_FXML, "Vendedor", 650, 600, false);
+            closeCurrentStage((Button) actionEvent.getSource());
+        }
+        correctPassword = false;
     }
 
     @Override
@@ -56,36 +62,36 @@ public class ManagementController extends MenuController implements Initializabl
 
 
     public void openCustomer(ActionEvent actionEvent) {
-        openNewStage(CUSTOMER_VIEW_FXML, "Clientes", 1000, 800);
+        openNewStage(CUSTOMER_VIEW_FXML, "Clientes", 1000, 800, false);
         closeCurrentStage((Button) actionEvent.getSource());
     }
 
     public void openProduct(ActionEvent actionEvent) {
-        openNewStage(PRODUCT_VIEW_FXML,"Productos", 800, 800);
+        openNewStage(PRODUCT_VIEW_FXML,"Productos", 800, 800, false);
         closeCurrentStage((Button) actionEvent.getSource());
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
 
-        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compra", 700, 700);
+        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compra", 700, 700, false);
         closeCurrentStage((Button) actionEvent.getSource());
     }
 
     public void openSalesReport(ActionEvent actionEvent) {
-        openNewStage(REPORT_VIEW_FXML,"Ventas", 1500, 1025);
+        openNewStage(REPORT_VIEW_FXML,"Ventas", 1500, 1025, false);
         closeCurrentStage((Button) actionEvent.getSource());
 
     }
 
     public void openHelp(ActionEvent actionEvent) {
-        openNewStage(HELP_VIEW_FXML,"Ayuda", 575, 620);
+        openNewStage(HELP_VIEW_FXML,"Ayuda", 575, 620, false);
         closeCurrentStage((Button) actionEvent.getSource());
     }
 
     public void exit(ActionEvent actionEvent) {
 
         closeCurrentStage((Button) actionEvent.getSource());
-        openNewStage(MAIN_VIEW_FXML, "Inicio de sesión", 400, 500);
+        openNewStage(MAIN_VIEW_FXML, "Inicio de sesión", 400, 500, false);
     }
 
 

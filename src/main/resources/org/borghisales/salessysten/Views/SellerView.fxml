@@ -55,7 +55,7 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="204.0" layoutY="10.0" prefHeight="17.0" prefWidth="232.0" text="Control de productos" underline="true">
+      <Label alignment="CENTER" layoutX="204.0" layoutY="10.0" prefHeight="17.0" prefWidth="232.0" text="Control de vendedores" underline="true">
          <font>
             <Font size="20.0" />
          </font>

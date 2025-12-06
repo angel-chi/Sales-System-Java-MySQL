@@ -116,9 +116,13 @@ public class CustomerController extends MenuController implements Initializable 
     }
     @FXML
     public void deleteCustomer(ActionEvent actionEvent) {
-        if (customerDAO.delete(dni.getText())){
-            cleanCells(dni,name,address);           //por si rompo el codigo, aqui habia un MenuController.
-            updateTable();
+        requestPassword();
+        if(correctPassword) {
+            if (customerDAO.delete(dni.getText())) {
+                cleanCells(dni, name, address);           //por si rompo el codigo, aqui habia un MenuController.
+                updateTable();
+            }
+            correctPassword = false;
         }
     }
     @FXML

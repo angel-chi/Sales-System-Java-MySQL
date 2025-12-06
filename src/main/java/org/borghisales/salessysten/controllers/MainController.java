@@ -33,7 +33,7 @@ public class MainController extends MenuController implements Initializable {
     @FXML
     private void signIn(){
         if (SellerDAO.login(user.getText(),password.getText())) {
-            openNewStage(MANAGEMENT_VIEW_FXML, "Control del punto de venta", 800, 600);
+            openNewStage(MANAGEMENT_VIEW_FXML, "Control del punto de venta", 800, 600, false);
             closeCurrentStage(user);
         }
     }

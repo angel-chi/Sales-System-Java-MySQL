@@ -124,7 +124,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void handleCustomerNotFound() {
         alertCustomer.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeAccept) {
-                openNewStage(CUSTOMER_VIEW_FXML, "Clientes", 1000, 800);
+                openNewStage(CUSTOMER_VIEW_FXML, "Clientes", 1000, 800,false);
             }
         });
     }
@@ -154,7 +154,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void handleProductNotFound() {
         alertProduct.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeAccept) {
-                openNewStage(PRODUCT_VIEW_FXML,"Productos", 800, 800);
+                openNewStage(PRODUCT_VIEW_FXML,"Productos", 800, 800, false);
             }
         });
     }

@@ -182,7 +182,7 @@ public class ReportsController extends MenuController implements Initializable {
 
                 //FXMLLoader fxmlLoaderSaleDetails = new FXMLLoader(MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML));
 
-                MenuController.openNewStage(MenuController.SALE_DETAIL_VIEW_FXML, "Detalles de venta", 800, 575);
+                MenuController.openNewStage(MenuController.SALE_DETAIL_VIEW_FXML, "Detalles de venta", 800, 575, false);
                 /*try {
                     Scene scene = new Scene(fxmlLoaderSaleDetails.load());
                     Stage stage = new Stage();
