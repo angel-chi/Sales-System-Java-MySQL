@@ -212,6 +212,75 @@ Customer customer = new Customer(usuario, nombre, direccion, cbState.getValue())
 
 Lo mismo sucedía con los productos y con los empleados, se usó la misma solución
 
+## Propuestas
+### Agregar atributo garantía a los productos
+Agregarle garantía a los productos que se venden, debido a que son productos tecnológicos en la gran mayoría de los casos los artículos vienen con garantía para cubrir cualquier fallo que pudiera presentarse en un periodo de tiempo.
+
+Esto ayuda con la abstracción de los objetos, debido a que es una propiedad importante para los productos.
+
+## Aplicación de propuestas
+### Atributo garantía
+Para implementarlo se tuvo que crear una nueva clase (en este caso un ENUM) que representara los tipos de garantía
+```java
+public enum Garantia {
+    SIN_GARANTIA("SIN GARANTIA"), MES_1("1 MES"), MESES_3("3 MESES"), MESES_6("6 MESES"), ANO_1("1 AÑO"), ANO_2("2 AÑOS");
+
+    final private String text;
+
+    Garantia(String text) {
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public static Garantia getFromString(String str) {
+        return switch(str) {
+            case "1 MES" -> MES_1;
+            case "3 MESES" -> MESES_3;
+            case "6 MESES" -> MESES_6;
+            case "1 AÑO" -> ANO_1;
+            case "2 AÑOS" -> ANO_2;
+            default -> SIN_GARANTIA;
+        };
+    };
+
+    @Override
+    public String toString() {
+        return text;
+    }
+}
+```
+Este enum se encuentra dentro de la clase Product.
+
+Además de ello, se tuvo que adaptar diversas funciones para lograr que el programa registrara y leyera los datos en la base de datos.
+
+Y para una mejor integración con la interfaz de usuario se requirió agregar un overload a la función de buscar producto, para poder buscar por nombre de producto en lugar de por ID.
+```java
+public class ProductDao implements CRUD<Product> {
+    ...
+
+    public Product searchProduct(String productName) {
+        String sql = "SELECT * FROM product WHERE name = ?";
+
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, productName);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                rs.next();
+                return Product.fromResultSet(rs);
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    ...
+}
+```
+
 # 📝 Licencia
 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.

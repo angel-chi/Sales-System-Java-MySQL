@@ -47,14 +47,30 @@ public class ProductDAO implements CRUD<Product>{
             }
 
         }catch (SQLException e){
+            return null;
+        }
+    }
 
+    public Product searchProduct(String productName) {
+        String sql = "SELECT * FROM product WHERE name = ?";
+
+        try(Connection conn = DBConnection.connection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, productName);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                rs.next();
+                return Product.fromResultSet(rs);
+            }
+        }catch (SQLException e){
             return null;
         }
     }
 
     @Override
     public boolean create(Product entity) {
-        String sql = "INSERT INTO product (name,price,stock,state) values (?,?,?,?)";
+        String sql = "INSERT INTO product (name,price,stock,state,garantia) values (?,?,?,?,?)";
 
         try (
                 Connection conn = DBConnection.connection();
@@ -69,6 +85,7 @@ public class ProductDAO implements CRUD<Product>{
             pstmt.setDouble(2, entity.price());
             pstmt.setInt(3, entity.stock());
             pstmt.setString(4, entity.state().name());
+            pstmt.setString(5, entity.garantia().getText());
 
             int rows_affected = pstmt.executeUpdate();
 
@@ -93,7 +110,7 @@ public class ProductDAO implements CRUD<Product>{
 
     @Override
     public boolean update(Product entity) {
-        String sql = "UPDATE product set price=?,stock=?,state=? where name=?";
+        String sql = "UPDATE product set price=?,stock=?,state=?,garantia=? where name=?";
 
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -103,7 +120,8 @@ public class ProductDAO implements CRUD<Product>{
             pstmt.setDouble(1, entity.price());
             pstmt.setInt(2, entity.stock());
             pstmt.setString(3, entity.state().name());
-            pstmt.setString(4, entity.name());
+            pstmt.setString(4, entity.garantia().getText());
+            pstmt.setString(5, entity.name());
 
 
             int rows_affected = pstmt.executeUpdate();

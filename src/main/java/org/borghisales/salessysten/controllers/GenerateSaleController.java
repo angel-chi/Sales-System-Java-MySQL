@@ -3,6 +3,7 @@ package org.borghisales.salessysten.controllers;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -84,6 +85,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     @FXML
     private TableColumn<ShoppingCart,String> colProduct;
     @FXML
+    private TableColumn<ShoppingCart, String> colGarantia;
+    @FXML
     private TableColumn<ShoppingCart, Integer> colQuantity;
     @FXML
     private TableColumn<ShoppingCart, Double> colPrice;
@@ -129,6 +132,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         colQuantity.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().quantity()).asObject());
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
         colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total()).asObject());
+        colGarantia.setCellValueFactory(p -> new SimpleStringProperty(productDAO.searchProduct(p.getValue().product()).garantia().toString()));
     }
 
     public void searchCustomer(ActionEvent actionEvent) {

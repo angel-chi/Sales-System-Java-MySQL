@@ -13,14 +13,20 @@
    <children>
       <AnchorPane prefHeight="800.0" prefWidth="1000.0" stylesheets="@CSS/MainView.css">
          <children>
+             <Label alignment="CENTER" layoutX="2.0" layoutY="10.0" prefHeight="30.0" prefWidth="985.0" text="GESTION DE PRODUCTOS" underline="true">
+                 <font>
+                     <Font size="20.0" />
+                 </font>
+             </Label>
             <Button layoutX="522.0" layoutY="56.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="54.0" prefWidth="198.0" style="-fx-background-color: #43d051; -fx-text-fill: #fff;" text="AGREGAR" />
             <TableView fx:id="tableProducts" layoutX="45.0" layoutY="400.0" prefHeight="360.0" prefWidth="929.0">
                <columns>
-                  <TableColumn fx:id="colId" prefWidth="120.0" text="idProduct" />
-                  <TableColumn fx:id="colName" prefWidth="111.0" text="name" />
-                  <TableColumn fx:id="colPrice" prefWidth="124.0" text="price" />
-                  <TableColumn fx:id="colStock" prefWidth="124.0" text="stock" />
-                  <TableColumn fx:id="colState" prefWidth="122.0" text="state" />
+                  <TableColumn fx:id="colId" prefWidth="120.0" text="Identificador" />
+                  <TableColumn fx:id="colName" prefWidth="111.0" text="Nombre" />
+                  <TableColumn fx:id="colPrice" prefWidth="124.0" text="Precio" />
+                  <TableColumn fx:id="colStock" prefWidth="124.0" text="Existencias" />
+                  <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />
+                   <TableColumn fx:id="colGarantia" prefWidth="122.0" text="Garantía" />
                </columns>
             </TableView>
             <Label layoutX="57.0" layoutY="59.0" prefHeight="43.0" prefWidth="93.0" text="NOMBRE:" underline="true">
@@ -44,17 +50,20 @@
             <Button layoutX="522.0" layoutY="123.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="54.0" prefWidth="198.0" style="-fx-background-color: #439dd0; -fx-text-fill: #fff;" text="ACTUALIZAR" />
             <Button layoutX="522.0" layoutY="195.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="54.0" prefWidth="198.0" style="-fx-background-color: #d04343; -fx-text-fill: #fff;" text="ELIMINAR" />
             <Button layoutX="522.0" layoutY="265.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="54.0" prefWidth="198.0" style="-fx-background-color: #4b4b4b; -fx-text-fill: #fff;" text="LIMPIAR" />
+             <Label layoutX="57.0" layoutY="240.0" prefHeight="21.0" prefWidth="86.0" text="ESTADO:" underline="true">
+                 <font>
+                     <Font size="17.0" />
+                 </font>
+             </Label>
             <ComboBox fx:id="cbState" layoutX="182.0" layoutY="233.0" prefHeight="36.0" prefWidth="289.0" />
-            <Label layoutX="57.0" layoutY="240.0" prefHeight="21.0" prefWidth="86.0" text="ESTADO:" underline="true">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="2.0" layoutY="10.0" prefHeight="30.0" prefWidth="985.0" text="GESTION DE PRODUCTOS" underline="true">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
+
+
+             <Label layoutX="57.0" layoutY="292.0" prefHeight="21.0" prefWidth="120.0" text="GARANTIA:" underline="true">
+                 <font>
+                     <Font size="17.0" />
+                 </font>
+             </Label>
+             <ComboBox fx:id="cbGarantia" layoutX="182.0" layoutY="292.0" prefHeight="36.0" prefWidth="289.0" />
          </children>
       </AnchorPane>
    </children>
