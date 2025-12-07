@@ -20,7 +20,6 @@ import java.util.ResourceBundle;
 public class ManagementController extends MenuController implements Initializable {
 
     //private static int lastTab ;
-    private static String lastPage;
 
     @FXML
     private StackPane mainpage;
@@ -65,7 +64,8 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void loadPage(String fxmlFileName, String title){
         try{
-            Parent page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFileName)));
+
+            Parent page = FXMLLoader.load(getClass().getResource(fxmlFileName));
             mainpage.getChildren().setAll(page);
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error cargando la vista: "+ e.getMessage());
