@@ -9,10 +9,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="474.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SellerController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SellerController">
    <children>
       <Button layoutX="524.0" layoutY="59.0" mnemonicParsing="false" onAction="#addSeller" prefHeight="32.0" prefWidth="101.0" text="AÑADIR" />
-      <TableView fx:id="tableSellers" layoutX="26.0" layoutY="228.0" prefHeight="221.0" prefWidth="602.0">
+      <TableView fx:id="tableSellers" layoutX="35.0" layoutY="234.0" prefHeight="242.0" prefWidth="631.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="120.0" text="ID Vendedor" />
           <TableColumn fx:id="colDni" prefWidth="111.0" text="Identificación" />
@@ -21,17 +21,17 @@
             <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />
         </columns>
       </TableView>
-      <Label layoutX="63.0" layoutY="62.0" prefHeight="26.0" prefWidth="151.0" text="IDENTIFICACIÓN" underline="true">
+      <Label layoutX="63.0" layoutY="62.0" prefHeight="26.0" prefWidth="151.0" text="IDENTIFICACIÓN:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="63.0" layoutY="99.0" prefHeight="26.0" prefWidth="101.0" text="NOMBRE" underline="true">
+      <Label layoutX="63.0" layoutY="99.0" prefHeight="26.0" prefWidth="101.0" text="NOMBRE:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="63.0" layoutY="128.0" prefHeight="26.0" prefWidth="101.0" text="TELÉFONO" underline="true">
+      <Label layoutX="63.0" layoutY="128.0" prefHeight="26.0" prefWidth="101.0" text="TELÉFONO:" underline="true">
          <font>
             <Font size="17.0" />
          </font>
@@ -47,9 +47,9 @@
       <TextField fx:id="user" layoutX="222.0" layoutY="157.0" prefHeight="25.0" prefWidth="289.0" />
       <Button layoutX="524.0" layoutY="99.0" mnemonicParsing="false" onAction="#updateSeller" prefHeight="32.0" prefWidth="101.0" text="ACTUALIZAR" />
       <Button layoutX="524.0" layoutY="137.0" mnemonicParsing="false" onAction="#deleteSeller" prefHeight="32.0" prefWidth="101.0" text="ELIMINAR" />
-      <Button layoutX="520.0" layoutY="176.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="38.0" prefWidth="109.0" text="LIMPIAR CELDAS" />
+      <Button layoutX="520.0" layoutY="176.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="38.0" prefWidth="125.0" text="LIMPIAR CELDAS" />
       <ComboBox fx:id="cbState" layoutX="222.0" layoutY="188.0" prefHeight="25.0" prefWidth="289.0" />
-      <Label layoutX="63.0" layoutY="187.0" prefHeight="26.0" prefWidth="101.0" text="ESTADO" underline="true">
+      <Label layoutX="63.0" layoutY="187.0" prefHeight="26.0" prefWidth="101.0" text="ESTADO:" underline="true">
          <font>
             <Font size="17.0" />
          </font>

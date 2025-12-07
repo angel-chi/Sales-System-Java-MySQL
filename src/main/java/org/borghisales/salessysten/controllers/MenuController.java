@@ -36,36 +36,36 @@ public class MenuController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
             Scene scene = new Scene(fxmlLoader.load());
-
             Stage stage = new Stage();
             stage.setScene(scene);
-
+            //Mantiene el nombre de la ventana actual.
+            stage.getProperties().put("currentView",fxmlFileName);
             // Mantener el mismo tamaño al cambiar ventanas.
-
             stage.setMinWidth(400);
             stage.setMinHeight(600);
-
             // Mantiene el tamaño dinámico.
             stage.setResizable(false);
-
             // Contrar ventana.
             stage.centerOnScreen();
-
             configureStageCloseEvent(stage, fxmlFileName, title);
-
             stage.show();
-
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error al cargar la ventana: " + e.getMessage());
         }
     }
 
-    private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
-        if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
-            stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
-            });
-        }
+    /*Cambio en la clase que cierra una ventana. Ahora en lugar de mantener el fxmlFileName guardado al abrir la ventana
+    se mantiene el nombre de la ventana actual, corrigiendo el error identificado
+     */
+
+    private void configureStageCloseEvent(Stage stage) {
+        stage.setOnCloseRequest(e -> {
+            String vistaActual = (String) stage.getProperties().get("currentView");
+            if (!vistaActual.equals(MAIN_VIEW_FXML)) {
+                String father = getFxmlFather(vistaActual);
+                openNewStage(father, "Ventana Anterior");
+            }
+        });
     }
 
     String getFxmlFather(String fxml){

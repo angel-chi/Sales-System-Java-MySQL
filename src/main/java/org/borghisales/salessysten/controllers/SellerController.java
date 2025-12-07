@@ -96,13 +96,11 @@ public class SellerController implements Initializable, validacionEntrada {
             return;
         }
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
-
         if (sellerDAO.create(seller)) {
             MenuController.cleanCells(dni, name, phone, user);
             updateTable();
         }
     }
-
     public void updateSeller(ActionEvent actionEvent) {
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
         if (sellerDAO.update(seller)) {

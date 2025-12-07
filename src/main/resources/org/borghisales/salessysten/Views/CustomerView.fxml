@@ -19,7 +19,7 @@
 
     <!-- PARTE SUPERIOR-->
     <top>
-        <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxWidth="Infinity" prefHeight="47.0" prefWidth="780.0" text="ADMINISTRACIÓN DE CLIENTES" underline="true" BorderPane.alignment="CENTER">
+        <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxWidth="Infinity" prefHeight="0.0" prefWidth="687.0" text="ADMINISTRACIÓN DE CLIENTES" underline="true" BorderPane.alignment="CENTER">
             <font>
                 <Font size="20.0" />
             </font>
@@ -30,7 +30,7 @@
     </top>
 
     <center>
-        <VBox fillWidth="true" prefHeight="441.0" prefWidth="817.0" spacing="15">
+        <VBox fillWidth="true" prefHeight="500.0" prefWidth="700.0" spacing="15">
             <padding>
                 <Insets bottom="20" left="20" right="20" top="10" />
             </padding>
@@ -43,25 +43,25 @@
                     </columnConstraints>
 
                     <!-- IDENTIFICACIÓN -->
-                    <Label text="IDENTIFICACIÓN" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="IDENTIFICACIÓN:" GridPane.columnIndex="0" GridPane.rowIndex="0">
                         <font><Font size="17.0" /></font>
                     </Label>
                     <TextField fx:id="DNI" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                     <!-- NOMBRE -->
-                    <Label text="NOMBRE" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="NOMBRE:" GridPane.columnIndex="0" GridPane.rowIndex="1">
                         <font><Font size="17.0" /></font>
                     </Label>
                     <TextField fx:id="name" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                     <!-- DIRECCIÓN -->
-                    <Label text="DIRECCIÓN" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <Label text="DIRECCIÓN:" GridPane.columnIndex="0" GridPane.rowIndex="2">
                         <font><Font size="17.0" /></font>
                     </Label>
                     <TextField fx:id="address" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                     <!-- ESTADO -->
-                    <Label text="ESTADO" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                    <Label text="ESTADO:" GridPane.columnIndex="0" GridPane.rowIndex="3">
                         <font><Font size="17.0" /></font>
                     </Label>
                     <ComboBox fx:id="cbState" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
