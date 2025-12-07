@@ -16,6 +16,7 @@ import java.net.URI;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 
 public class ManagementController extends MenuController implements Initializable {
 
@@ -98,13 +99,16 @@ public class ManagementController extends MenuController implements Initializabl
 //    }
 
     public void help(ActionEvent actionEvent) {
-        try {
-            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"La liga no puede ser abierta. Revisa tu conexion de internet.");
-        }
-
+        new Thread(() -> {
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> {
+                    setAlert(Alert.AlertType.ERROR, "La URL no pudo ser abierta. Revisa tu conexion a internet.");
+                });
+            }
+        }).start();
     }
 
     public void exit(ActionEvent actionEvent) {
