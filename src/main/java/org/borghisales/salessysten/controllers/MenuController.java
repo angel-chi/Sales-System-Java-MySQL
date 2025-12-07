@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,16 +37,25 @@ public class MenuController {
 
     public void openNewStage(String fxmlFileName, String title) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
-            Scene scene = new Scene(fxmlLoader.load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
+            Parent root = loader.load();
+
             Stage stage = new Stage();
             stage.setTitle(title);
-            stage.setScene(scene);
-            configureStageCloseEvent(stage, fxmlFileName, title);
+
+            // Tamaño base de la ventana (como la main)
+            stage.setWidth(1200);
+            stage.setHeight(700);
+
+            // Tamaño mínimo para evitar que quede muy pequeña
+            stage.setMinWidth(900);
+            stage.setMinHeight(500);
+
+            stage.setScene(new Scene(root));
             stage.show();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error en la carga de la ventana: "+ e.getMessage());
         }
     }
 

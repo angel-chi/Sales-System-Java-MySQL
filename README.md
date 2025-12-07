@@ -106,7 +106,8 @@ Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder,
   <img src="src/main/resources/images/diagramaBD.png" />
 </p>
 
-
+# Cambios 
+El primer cambio que hice es el cambio de idioma a la ventana de inicio de sesion y la ventana de managmente, tambien se cambio el tamaño con el que se abre todo y aparte que los botones y demas cosas se ajustan al tamaño de la ventana asi que si el usuario lo mueve este cambia tambien de tamaño 
 # 💡 Fucionalidades
 
 ## Inicio de sesión
