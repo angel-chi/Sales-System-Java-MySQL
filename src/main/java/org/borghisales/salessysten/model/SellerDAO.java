@@ -53,6 +53,7 @@ public class SellerDAO extends Validator<Seller> implements CRUD<Seller>{
 
     @Override
     public boolean update(Seller entity) {
+        if(!validate(entity)) return false;
         String sql = "UPDATE seller set name=?,phone_number=?,state=?,user=? where dni=?";
 
         try(Connection conn = DBConnection.connection();
@@ -128,7 +129,7 @@ public class SellerDAO extends Validator<Seller> implements CRUD<Seller>{
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error sestableciendo la tabla de vendedor: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error estableciendo la tabla de vendedor: " + e.getMessage());
         }
     }
 
@@ -177,7 +178,7 @@ public class SellerDAO extends Validator<Seller> implements CRUD<Seller>{
         }
 
         if(entity.dni() == null || entity.dni().isEmpty()){
-            MenuController.setAlert(Alert.AlertType.ERROR, "El dni del vendedor no puede estar vacio");
+            MenuController.setAlert(Alert.AlertType.ERROR, "El id del vendedor no puede estar vacio");
             return false;
         }
         if (entity.name() == null || entity.name().isEmpty()){
@@ -187,6 +188,11 @@ public class SellerDAO extends Validator<Seller> implements CRUD<Seller>{
         if(entity.phoneNumber() == null || entity.phoneNumber().isEmpty()){
             MenuController.setAlert(Alert.AlertType.ERROR, "El numero de telefono del vendedor no puede estar vacio");
             return false;
+        } else {
+            if(!validate_phone(entity)) {
+                MenuController.setAlert(Alert.AlertType.ERROR, "El numero de telefono que intenta ingresar no es valido");
+                return false;
+            }
         }
         if(entity.user() == null || entity.user().isEmpty()){
             MenuController.setAlert(Alert.AlertType.ERROR, "El usuario del vendedor no puede estar vacio");
@@ -195,6 +201,21 @@ public class SellerDAO extends Validator<Seller> implements CRUD<Seller>{
         if(entity.state()==null){
             MenuController.setAlert(Alert.AlertType.ERROR, "El estado del vendedor no puede estar vacio");
             return false;
+        }
+        return true;
+    }
+
+    protected boolean validate_phone(Seller entity){
+        for (int i = 0; i < entity.phoneNumber().length(); i++) {
+            char caracter = entity.phoneNumber().charAt(i);
+            int c=i+1;
+            if(c<=15){ //maximo de digitos permitidos en el mundo
+                if (!Character.isDigit(caracter)) {
+                    return false;
+                }
+            } else{
+                return false;
+            }
         }
         return true;
     }

@@ -96,14 +96,14 @@
                             </VBox.margin>
                             <children>
 
-                                <Label text="INE:" underline="true"
+                                <Label text="ID:" underline="true"
                                        GridPane.rowIndex="0" GridPane.columnIndex="0">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
                                 <TextField fx:id="dni"
-                                           promptText="Ingrese el INE"
+                                           promptText="Ingrese el Id"
                                            styleClass="minimalistic-field"
                                            stylesheets="@style.css"
                                            GridPane.rowIndex="0" GridPane.columnIndex="1" />
