@@ -1,56 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ProductController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="580.0" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ProductController">
    <children>
-      <AnchorPane prefHeight="484.0" prefWidth="663.0">
+      <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button layoutX="458.0" layoutY="52.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="32.0" prefWidth="101.0" text="Agregar" />
-            <TableView fx:id="tableProducts" layoutX="26.0" layoutY="228.0" prefHeight="221.0" prefWidth="602.0">
+            <HBox alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" text="Gestion de productos" underline="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <GridPane hgap="10.0" vgap="20.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="NEVER" minWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="40.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="NOMBRE:" underline="true">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label text="PRECIO:" underline="true" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label text="EXISTENCIAS:" underline="true" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label text="ESTADO:" underline="true" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="name" prefHeight="25.0" prefWidth="289.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="price" prefHeight="25.0" prefWidth="289.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="stock" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="cbState" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="40.0" right="40.0" top="20.0" />
+               </VBox.margin>
+            </GridPane>
+            <HBox alignment="CENTER" spacing="70.0" VBox.vgrow="NEVER">
+               <children>
+                  <Button minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="40.0" prefWidth="150.0" text="Agregar" />
+                  <Button minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="40.0" prefWidth="150.0" text="Actualizar" />
+                  <Button minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="40.0" prefWidth="150.0" text="Eliminar" />
+                  <Button minHeight="30.0" minWidth="110.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="40.0" prefWidth="150.0" text="Limpiar Celdas" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <TableView fx:id="tableProducts" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn fx:id="colId" prefWidth="120.0" text="idProducto" />
-                  <TableColumn fx:id="colName" prefWidth="111.0" text="Nombre" />
-                  <TableColumn fx:id="colPrice" prefWidth="124.0" text="Precio" />
-                  <TableColumn fx:id="colStock" prefWidth="124.0" text="Disponibilidad" />
-                  <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />
+                  <TableColumn fx:id="colId" minWidth="50.0" text="idProducto" />
+                  <TableColumn fx:id="colName" minWidth="50.0" prefWidth="110.0" text="Nombre" />
+                  <TableColumn fx:id="colPrice" minWidth="50.0" text="Precio" />
+                  <TableColumn fx:id="colStock" minWidth="20.0" text="Disponibilidad" />
+                  <TableColumn fx:id="colState" minWidth="20.0" text="Estado" />
                </columns>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
-            <Label layoutX="51.0" layoutY="70.0" prefHeight="17.0" prefWidth="54.0" text="NOMBRE:" underline="true">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="51.0" layoutY="96.0" prefHeight="26.0" prefWidth="68.0" text="PRECIO:" underline="true">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="45.0" layoutY="122.0" prefHeight="26.0" prefWidth="60.0" text="EXISTENCIAS:" underline="true">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <TextField fx:id="name" layoutX="120.0" layoutY="66.0" prefHeight="25.0" prefWidth="289.0" />
-            <TextField fx:id="price" layoutX="121.0" layoutY="96.0" prefHeight="25.0" prefWidth="289.0" />
-            <TextField fx:id="stock" layoutX="120.0" layoutY="126.0" prefHeight="25.0" prefWidth="289.0" />
-            <Button layoutX="458.0" layoutY="90.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="32.0" prefWidth="101.0" text="Actualizar" />
-            <Button layoutX="458.0" layoutY="127.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="32.0" prefWidth="101.0" text="Eliminar" />
-            <Button layoutX="458.0" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="101.0" text="Limpiar Celdas" />
-            <ComboBox fx:id="cbState" layoutX="121.0" layoutY="158.0" prefHeight="25.0" prefWidth="283.0" />
-            <Label layoutX="51.0" layoutY="155.0" prefHeight="17.0" prefWidth="54.0" text="Estado" underline="true">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="200.0" layoutY="10.0" prefHeight="30.0" prefWidth="242.0" text="GESTION DE PRODUCTOS" underline="true">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
          </children>
-      </AnchorPane>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>
