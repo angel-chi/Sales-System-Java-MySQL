@@ -27,6 +27,18 @@ public class MenuController {
     static Alert defaultAlert;
     static ButtonType acceptButton = new ButtonType("Aceptar");
     public static HashMap<String, String > filePaths = new HashMap<>();
+    public static HashMap<String, String> fxmlTitles = new HashMap<>();
+
+    public MenuController(){
+        fxmlTitles.put(MAIN_VIEW_FXML,"Login");
+        fxmlTitles.put(MANAGEMENT_VIEW_FXML,"Gestión");
+        fxmlTitles.put(SELLER_VIEW_FXML,"Vendedor");
+        fxmlTitles.put(PRODUCT_VIEW_FXML,"Productos");
+        fxmlTitles.put(CUSTOMER_VIEW_FXML,"Cliente");
+        fxmlTitles.put(GENERATE_SALE_VIEW_FXML,"Carrito de compras");
+        fxmlTitles.put(REPORT_VIEW_FXML,"Ventas");
+        fxmlTitles.put(SALE_DETAIL_VIEW_FXML,"Detalle de venta");
+    }
 
     void closeCurrentStage(Node node) {
         Stage stage = (Stage) node.getScene().getWindow();
@@ -52,7 +64,9 @@ public class MenuController {
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
+                String fatherFxml = getFxmlFather(fxmlFileName);
+                String fatherTitle = fxmlTitles.getOrDefault(fatherFxml, "Ventana");
+                openNewStage(fatherFxml, fatherTitle);
             });
         }
     }
