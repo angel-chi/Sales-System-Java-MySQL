@@ -174,8 +174,11 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 
 <h1 align="left" id="title"> Propuestas de mejoras en funcionalidad para el proyecto</h1>
 <h1></h1>
+# Un Botón de busqueda
+    una función que facilitaría la busqueda de información, especificamente sobre los clientes y productos.  Esta funcionalidad optimizaría la experiencia del usuario al permitir la localización eficiente de registros dentro de grandes volúmenes, en este caso entre los clientes y los productos, aplicando filtros sobre los registros, 
+# ...
 
-# Boton de busqueda
-1.Se propuso y se implementó una función que facilita la busqueda de información, especificamente sobre los clientes y productos. Esta funcionalidad optimiza la experiencia del usuario al permitir la localización eficiente de registros dentro de grandes volúmenes, en este caso entre los clientes y los productos, aplicando filtros sobre los registros, para esto se aplicó la clase FilteredList . Esta estructura actúa como una máscara dinámica sobre la lista observable original, para no tener que estar accediendo a la base de datos y usar consultas para filtrar elementos de esta. Con el FilteredList actuamos sobre la clase ObservableList. Aquí se aplicaron las lambdas que son útiles para tener un código limpio, compacto y  para implementar polimorfismo por medio de interfaces funcionales(un solo metódo asbtracto)
-
+<h1 align="left" id="title"> Propuestas implementadas</h1>
+<h2>Botón de búsqueda</h2> 
+    Para este se aplicó la clase FilteredList. Esta estructura actúa como una máscara dinámica sobre la lista observable original, para no tener que estar accediendo a la base de datos y usar consultas para filtrar elementos de esta constantemente. Con el FilteredList actuamos sobre la clase ObservableList, que esta sí es cargada con el contenido de la base de datos correspondiente. Con respecto a la POO, se aplicaron las lambdas que son útiles para tener un código limpio, compacto y para implementar polimorfismo por medio de interfaces funcionales (un solo método abstracto), además de implementar encapsulación con métodos y atributos en privado, para que otras clases no puedan acceder a estas funciones y malograr el funcionamiento.
 # 
