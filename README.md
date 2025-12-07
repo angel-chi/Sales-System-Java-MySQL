@@ -145,8 +145,21 @@ https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b
 ## Reports
 https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
 
-# 📧 Contacto
-Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
+# 🛠️ Corrección de Errores
+
+1. .
+2. .
+3. .
+
+# 🚧👷‍♀️ Implementaciones
+
+## Valeria
+- Implementación 1
+- Implementación 2
+
+## Alberto
+- Implementación 1
+- Implementación 2
 
 
 # 📝 Licencia
