@@ -5,8 +5,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 <p align="center">
-  <img src="src/main/resources/images/shopping cart.png" />
+  <img src="img/pantalla-principal.png" alt="Pantalla principal" />
 </p>
+
 
 <!-- TOC -->
 * [📑 Descripcion](#-descripcion)
@@ -26,16 +27,19 @@
         * [Reports](#reports)
 * [📧 Contacto](#-contacto)
 * [📝 Licencia](#-licencia)
+* [🛠 Cambios propuestos](#-cambios-propuestos)
+  * [Cambio 1. Clasificación por marca](#cambio-1-clasificación-por-marca)
+  * [Cambio 2. Modelar el tipo de venta](#cambio-2-modelar-el-tipo-de-venta)
+  * [Cambio 3. Crear una clase para el inventario](#cambio-3-crear-una-clase-para-el-inventario)
+  * [Cambio 4. Crear un manejo de diferentes tipos de pago](#cambio-4-crear-un-manejo-de-diferentes-tipos-de-pago)
 <!-- TOC -->
 
 # 📑 Descripcion
-Este proyecto es una herramienta que diseñé para mejorar mis habilidades con el lenguaje Java, centrándome en la gestión de ventas para vendedores. Utiliza los patrones de diseño MVC (Modelo-Vista-Controlador) y DAO (Data Access Object) para una arquitectura robusta y modular.
+Este proyecto surge como parte de nuestro proceso de aprendizaje de Java y Programación Orientada a Objetos, con la idea de construir algo más real que solo ejercicios: un pequeño sistema de ventas que pueda gestionar productos, clientes y vendedores. Más que solo “que funcione”, lo usamos para practicar cosas que sí se aplican en proyectos serios: **separación por capas, trabajo con base de datos y organización del código.**
 
-Con esta aplicación, puedes iniciar sesión como vendedor, administrar tus productos y clientes, así como realizar ventas de manera sencilla. Además, cuenta con una sección de reportes donde puedes ver detalles de tus ventas, filtrarlas y generar informes personalizados.
+A lo largo del desarrollo buscamos aplicar POO, el patrón MVC para organizar la lógica, las vistas y los modelos; y un manejo más ordenado del acceso a datos usando clases específicas para comunicarnos con la base de datos. También aprovechamos el proyecto para practicar herramientas de la vida real como Git/GitHub, trabajo en equipo, revisión de código y documentación, entre otros aspectos.
 
-Todos los datos se almacenan de forma segura en una base de datos MySQL, utilizando el patrón DAO para separar la lógica de acceso a datos de la lógica de negocio. Esto garantiza un código más limpio, mantenible y escalable.
-
-Además, hay una sección de estadísticas que te muestra cuántas ventas has realizado de cada producto y cómo han variado a lo largo del tiempo, utilizando el patrón MVC para separar la lógica de presentación de la lógica de negocio y la manipulación de datos.
+En resumen, este proyecto no solo es una aplicación para gestionar ventas, sino también un laboratorio donde experimentamis y pusimos en práctica diseño de software, colaboración y lo aprendido a lo largo de este semestre, todas estas son cosas que nos van a servir en proyectos más grandes y profesionales.
 
 # 💻 Entorno
 
@@ -152,5 +156,52 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 # 📝 Licencia
 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
+
+# Cambios propuestos
+## Cambio 1. Clasificación por marca
+### Descripción del cambio
+Se propone incorporar al modelo Product un nuevo atributo de nombre **brand** que sea de tipo _Brand_, donde Brand es un enum que representa las distintas marcas con las que trabaja el negocio.<br>
+La idea es que la marca no sea un simple texto escrito a mano, sino que sea una parte formal del modelo del sistema. Esto ayuda a evitar errores como escribir mal una marca o usar nombres 
+diferentes para la misma, además, hace más fácil filtrar, buscar o generar reportes por marca si es que en un futuro quiere implementarse esta funcionalidad.
+
+### Justificación 
+Desde el punto de vista de la Programación Orientada a Objetos, el cambio tiene sentido porque la marca se vuelve un concepto del dominio con su propio tipo (Brand), 
+en lugar de ser solo una cadena más. Además, tenemos a todas las marcas en un solo lugar, lo que facilita mucho mantener el código, por ejemplo, si algún día el negocio agrega una marca nueva, 
+solo habría que añadirla al enum y ya está disponible en todo el sistema, incluso en la interfaz. En resumen, se modela mejor la realidad del negocio y el código se vuelve más claro y menos propenso a errores.
+
+
+## Cambio 2. Modelar el tipo de venta
+### Descripción del cambio
+En este cambio se propone ampliar la clase Sales para que, además de la información básica de la venta (id del cliente, id del vendedor, fecha, monto y estado), también guarde el tipo de venta que se realizó.
+Para eso se agrega un nuevo atributo llamado **Type**, a _Sales_, de tipo **_TipoDeVenta_**, donde TipoDeVenta es un enum definido con dos valores: EN_TIENDA (venta física) y
+EN_LINEA (venta en línea).
+
+### Justificación
+Este cambio busca que el sistema entienda explícitamente qué tipo de venta se está registrando, en lugar de tratar todas las ventas igual o depender de cadenas de texto. 
+Al guardar el tipo de venta dentro de la clase Sales, se vuelve mucho más sencillo diferenciar entre ventas físicas y en línea, así como en caso de requerirlo, aplicar reglas distintas 
+según el tipo de venta (promociones, descuentos, etc.)<br>
+Desde la Programación Orientada a Objetos, la implementación del tipo de venta mediante un enum representa una ventaja porque pertenece al modelo del dominio. Esta práctica centraliza la
+clasificación de las ventas (EN_TIENDA/EN_LINEA), ofreciendo mayor seguridad de datos y claridad de código. 
+Además, la estructura garantiza que los nuevos canales de venta solo requieran la adición de nuevos valores al enum, sin alterar la clase Sales directamente.
+
+## Cambio 3. Crear una clase para el Inventario 
+### Descripción del cambio
+En el programa actual, la validación y actualización del stock de los productos (por ejemplo, verificar si hay suficientes unidades para una venta o descontar el stock cuando se completa la compra) suele hacerse directamente 
+en los controladores o en código disperso. La propuesta es agrupar toda esa lógica en una clase específica. Esta clase se encargará de verificar si hay stock suficiente de un producto, descontar stock cuando se realiza una venta,
+aumentar stock en caso de devoluciones o correcciones y consultar el stock actual desde la base de datos.
+
+### Justificación
+Esta mejora apunta a que la lógica relacionada con el stock deje de estar regada en varios controladores y pase a estar encapsulada en una sola clase, que entiende y controla todo lo que tiene que ver con existencias.
+
+## Cambio 4. Crear un manejo de diferentes tipos de pago
+### Descripción del cambio
+La idea es crear una superclase **"Pago"**, que represente un pago genérico, y luego crear subclases para cada tipo de pago que maneje el sistema,
+por ejemplo:
+* CashPayment → pago en efectivo
+* CardPayment → pago con tarjeta
+### Justificación
+Vemo que cada forma de pago se vuelve una clase con su propia lógica. Por ejemplo, el pago en efectivo es simple, pero el pago con tarjeta podría requerir validaciones extra,
+datos adicionales (número de autorización, últimos dígitos, etc.). Viendo el panorama desde la Programación Orientada a Objetos, hay varios conceptos que aplicamos 
+como la abstracción, la herencia y el polimorfismo.
 
 [⬆ Volver al inicio](#title)<br>
