@@ -28,7 +28,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="45.0" layoutY="122.0" prefHeight="26.0" prefWidth="123.0" text="DISPONIBLES:" underline="true">
+            <Label layoutX="45.0" layoutY="122.0" prefHeight="26.0" prefWidth="123.0" text="INVENTARIO:" underline="true">
                <font>
                   <Font size="17.0" />
                </font>

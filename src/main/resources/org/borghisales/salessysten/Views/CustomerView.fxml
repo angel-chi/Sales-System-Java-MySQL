@@ -18,7 +18,7 @@
                   <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />
                </columns>
             </TableView>
-            <Label layoutX="44.0" layoutY="71.0" prefHeight="17.0" prefWidth="54.0" text="ID:" underline="true">
+            <Label layoutX="44.0" layoutY="71.0" prefHeight="17.0" prefWidth="54.0" text="DNI:" underline="true">
                <font>
                   <Font size="17.0" />
                </font>

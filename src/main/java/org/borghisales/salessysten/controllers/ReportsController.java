@@ -157,7 +157,7 @@ public class ReportsController extends MenuController implements Initializable {
         pieChartProducts.getData().addAll(pieChartData);
     }
 
-    private void setupTableView() {
+    void setupTableView() {
         colIdSales.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSales()).asObject());
         colIdCustomer.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idCustomer()).asObject());
         colIdSeller.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSeller()).asObject());
@@ -181,15 +181,18 @@ public class ReportsController extends MenuController implements Initializable {
             if (!tableReport.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
                 int idSales = tableReport.getSelectionModel().getSelectedItem().idSales();
                 SaleDetailController.setIdSale(idSales);
-
-                FXMLLoader fxmlLoaderSaleDetails = new FXMLLoader(MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML));
-
                 try {
-                    Scene scene = new Scene(fxmlLoaderSaleDetails.load());
+                    FXMLLoader loader = new FXMLLoader(
+                            MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML)
+                    );
+                    Scene scene = new Scene(loader.load());
+                    SaleDetailController controller = loader.getController();
+                    controller.setParentController(this);
                     Stage stage = new Stage();
                     stage.setTitle("Detalle de venta");
                     stage.setScene(scene);
                     stage.show();
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -453,6 +456,23 @@ public class ReportsController extends MenuController implements Initializable {
     public void back(ActionEvent actionEvent) {
         openNewStage(MANAGEMENT_VIEW_FXML,"Administración");
         closeCurrentStage(back);
+    }
+
+    public void refreshReports() {
+        // Recargar ventas (tabla)
+        sales.clear();
+        salesDAO.setTable(sales);
+
+        // Recargar pie chart
+        pieChartData.clear();
+        ProductDAO.setPieChart(pieChartData);
+        pieChartProducts.getData().setAll(pieChartData);
+
+        // Recargar gráfico de líneas
+        lineChartData.getData().clear();
+        salesDAO.setLineChart(lineChartData, yearsShowed, idxMonth + 1);
+        fillMissingDays(lineChartData);
+        salesLineChart.getData().setAll(lineChartData);
     }
 
 }

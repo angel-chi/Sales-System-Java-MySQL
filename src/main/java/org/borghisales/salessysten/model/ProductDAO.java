@@ -16,7 +16,6 @@ public class ProductDAO implements CRUD<Product>{
 
     public void subtractStock(ObservableList<ShoppingCart> products){
         String sql = "UPDATE product SET stock = stock - ? WHERE idProduct = ?";
-
         try(Connection conn = DBConnection.connection()){
 
             for (ShoppingCart e:products) {
@@ -30,7 +29,6 @@ public class ProductDAO implements CRUD<Product>{
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public Product searchProduct(int idProduct){
@@ -163,12 +161,13 @@ public class ProductDAO implements CRUD<Product>{
     }
     public static void setPieChart(ObservableList<PieChart.Data> pieChartData) {
         String sql = """ 
-                SELECT p.name, sum(s.quantity) as cant
+                SELECT p.name, SUM(sd.quantity) AS cant
                 FROM product p
-                INNER JOIN sales_details s
-                USING (idProduct)
-                WHERE s.idSales in (SELECT idSales FROM sales where idSeller=?)
-                GROUP BY s.idProduct;
+                INNER JOIN sales_details sd USING (idProduct)
+                INNER JOIN sales s ON s.idSales = sd.idSales
+                WHERE s.idSeller = ?
+                AND s.state NOT IN ('CANCELADA', 'DEVUELTA')
+                GROUP BY sd.idProduct;
                 """;
 
         try (Connection conn = DBConnection.connection();
@@ -182,13 +181,8 @@ public class ProductDAO implements CRUD<Product>{
                 }
             }
 
-
         }catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando ventas: " + e.getMessage());
         }
-
-
-
     }
-
 }

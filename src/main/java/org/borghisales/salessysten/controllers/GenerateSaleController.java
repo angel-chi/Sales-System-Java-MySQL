@@ -181,7 +181,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Administración de clientes");
+        stage.setTitle("Gestión de clientes");
         stage.setScene(scene);
         stage.show();
     }

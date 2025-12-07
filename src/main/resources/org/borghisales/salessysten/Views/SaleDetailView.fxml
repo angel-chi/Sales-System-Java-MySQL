@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="534.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SaleDetailController">
+<AnchorPane prefHeight="534.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SaleDetailController">
    <children>
-      <TableView fx:id="tableSale" prefHeight="496.0" prefWidth="799.0">
+      <TableView fx:id="tableSale" prefHeight="424.0" prefWidth="799.0">
          <columns>
             <TableColumn fx:id="colNro" prefWidth="70.0" sortable="false" style="-fx-alignment: CENTER;" text="N°" />
-            <TableColumn fx:id="colCod" prefWidth="73.0" sortable="false" style="-fx-alignment: CENTER;" text="COD" />
+            <TableColumn fx:id="colCod" prefWidth="73.0" sortable="false" style="-fx-alignment: CENTER;" text="CODIGO" />
             <TableColumn fx:id="colProduct" prefWidth="308.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCTO" />
             <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="120.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
             <TableColumn fx:id="colPrice" prefWidth="133.0" style="-fx-alignment: CENTER;" text="PRECIO UNITARIO" />
@@ -20,9 +17,13 @@
          </columns>
       </TableView>
       <TextField fx:id="totalSale" editable="false" layoutX="694.0" layoutY="502.0" prefHeight="25.0" prefWidth="91.0" />
-      <Label layoutX="601.0" layoutY="506.0" text="TOTAL VENTA:" wrapText="true">
+      <Label layoutX="586.0" layoutY="506.0" text="VENTA TOTAL:" wrapText="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
+      <Button fx:id="desactivar" layoutX="30.0" layoutY="468.0" mnemonicParsing="false" onAction="#finalizar" text="FINALIZADA" />
+      <Label layoutX="113.0" layoutY="439.0" text="Desactivar venta como:" />
+      <Button fx:id="desactivar" layoutX="138.0" layoutY="468.0" mnemonicParsing="false" onAction="#cancelar" text="CANCELADA" />
+      <Button fx:id="desactivar" layoutX="244.0" layoutY="468.0" mnemonicParsing="false" onAction="#devolver" text="DEVUELTA" />
    </children>
 </AnchorPane>

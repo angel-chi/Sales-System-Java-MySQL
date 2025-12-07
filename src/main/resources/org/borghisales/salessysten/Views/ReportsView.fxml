@@ -12,11 +12,11 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="797.0" prefWidth="1465.0">
                <children>
-                  <TableView fx:id="tableReport" layoutX="266.0" layoutY="123.0" prefHeight="445.0" prefWidth="735.0">
+                  <TableView fx:id="tableReport" layoutX="245.0" layoutY="123.0" prefHeight="445.0" prefWidth="774.0">
                     <columns>
                       <TableColumn fx:id="colIdSales" prefWidth="132.0" text="ID-Venta" />
-                      <TableColumn fx:id="colIdCustomer" prefWidth="100.0" text="DNI-Cliente" />
-                        <TableColumn fx:id="colIdSeller" prefWidth="150.0" text="DNI-Vendedor" />
+                      <TableColumn fx:id="colIdCustomer" prefWidth="100.0" text="ID-Cliente" />
+                        <TableColumn fx:id="colIdSeller" prefWidth="150.0" text="ID-Vendedor" />
                         <TableColumn fx:id="colNumberSales" text="Cantidad" />
                         <TableColumn fx:id="colSaleDate" prefWidth="120.0" text="Fecha de venta" />
                         <TableColumn fx:id="colAmount" prefWidth="75.0" text="Monto" />
