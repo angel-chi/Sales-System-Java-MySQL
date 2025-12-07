@@ -44,7 +44,7 @@ INSERT INTO `customer` VALUES (3,'00237851','Pablo','Callejuela Estrecha','ACTIV
 UNLOCK TABLES;
 
 --
--- Table structure for table `product`
+-- ESTRUCTURA DE LA TABLA "PRODUCT" (con Marca agregada)
 --
 
 DROP TABLE IF EXISTS `product`;
@@ -56,6 +56,13 @@ CREATE TABLE `product` (
   `price` double NOT NULL,
   `stock` int NOT NULL,
   `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
+
+  `brand` enum(
+    'Dell','Samsung','LG','Apple','Sony','HP','DJI','Amazon','Fitbit','iRobot','GoPro',
+    'TP-Link','NVIDIA','Nest','Xiaomi','Anker','Canon','Ring','Logitech','Husqvarna',
+    'Razer','Arlo','Withings','Boosted','Marca Blanca'
+  ) DEFAULT 'Marca Blanca',
+
   PRIMARY KEY (`idProduct`),
   UNIQUE KEY `uk_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3;
@@ -67,7 +74,42 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Laptop Dell XPS 15',1899.99,7,'ACTIVE'),(2,'Smartphone Samsung Galaxy S22',999.99,19,'ACTIVE'),(3,'Smart TV LG OLED C1 55\"',1499.99,12,'ACTIVE'),(4,'Tablet Apple iPad Pro 12.9\"',1099.99,15,'ACTIVE'),(5,'Wireless Headphones Sony WH-1000XM4',400,8,'ACTIVE'),(6,'Gaming Console Sony PlayStation 5',499.99,10,'ACTIVE'),(7,'Smartwatch Apple Watch Series 7',399.99,29,'ACTIVE'),(8,'Desktop PC HP Pavilion',899.99,8,'ACTIVE'),(9,'Drone DJI Mavic Air 2',799.99,0,'ACTIVE'),(10,'Camera Sony Alpha A7 III',1999.99,5,'ACTIVE'),(11,'Smart Speaker Amazon Echo',99.99,4,'DISACTIVE'),(12,'Fitness Tracker Fitbit Charge 5',149.99,3,'DISACTIVE'),(13,'Wireless Earbuds Apple AirPods Pro',249.99,12,'DISACTIVE'),(14,'Robot Vacuum Cleaner iRobot Roomba',299.99,6,'DISACTIVE'),(15,'Action Camera GoPro Hero 10',449.99,0,'DISACTIVE'),(16,'Wireless Router TP-Link Archer AX6000',299.99,13,'ACTIVE'),(17,'External SSD Samsung T7 1TB',169.99,22,'ACTIVE'),(18,'Monitor Dell UltraSharp U2720Q 27\"',449.99,0,'ACTIVE'),(19,'Graphics Card NVIDIA GeForce RTX 3080',699.99,8,'ACTIVE'),(20,'Smart Thermostat Nest Learning Thermostat',249.99,15,'ACTIVE'),(21,'Electric Scooter Xiaomi Mi Electric Scooter Pro 2',499.99,10,'ACTIVE'),(22,'Wireless Mouse Logitech MX Master 3',99.99,0,'ACTIVE'),(23,'Portable Charger Anker PowerCore 26800mAh',59.99,25,'ACTIVE'),(24,'VR Headset Oculus Quest 2',299.99,18,'ACTIVE'),(25,'Compact Camera Canon PowerShot G7 X Mark III',699.99,10,'ACTIVE'),(26,'Smart Doorbell Ring Video Doorbell Pro',199.99,5,'DISACTIVE'),(27,'Wireless Keyboard Logitech K780',79.99,8,'DISACTIVE'),(29,'Portable Projector Anker Nebula Capsule II',399.99,6,'DISACTIVE'),(30,'Robot Lawn Mower Husqvarna Automower 315X',1499.99,7,'DISACTIVE'),(31,'E-Reader Amazon Kindle Paperwhite',129.99,10,'DISACTIVE'),(32,'Gaming Mouse Razer DeathAdder V2',69,15,'DISACTIVE'),(33,'Wireless Security Camera Arlo Pro 4',249.99,18,'DISACTIVE'),(34,'Smart Scale Withings Body+',79.99,20,'ACTIVE'),(35,'Electric Skateboard Boosted Stealth',1599.99,8,'DISACTIVE');
+INSERT INTO `product` VALUES
+    (1,'Laptop Dell XPS 15',1899.99,7,'ACTIVE','Dell'),
+    (2,'Smartphone Samsung Galaxy S22',999.99,19,'ACTIVE','Samsung'),
+    (3,'Smart TV LG OLED C1 55\"',1499.99,12,'ACTIVE','LG'),
+    (4,'Tablet Apple iPad Pro 12.9\"',1099.99,15,'ACTIVE','Apple'),
+    (5,'Wireless Headphones Sony WH-1000XM4',400,8,'ACTIVE','Sony'),
+    (6,'Gaming Console Sony PlayStation 5',499.99,10,'ACTIVE','Sony'),
+    (7,'Smartwatch Apple Watch Series 7',399.99,29,'ACTIVE','Apple'),
+    (8,'Desktop PC HP Pavilion',899.99,8,'ACTIVE','HP'),
+    (9,'Drone DJI Mavic Air 2',799.99,0,'ACTIVE','DJI'),
+    (10,'Camera Sony Alpha A7 III',1999.99,5,'ACTIVE','Sony'),
+    (11,'Smart Speaker Amazon Echo',99.99,4,'DISACTIVE','Amazon'),
+    (12,'Fitness Tracker Fitbit Charge 5',149.99,3,'DISACTIVE','Fitbit'),
+    (13,'Wireless Earbuds Apple AirPods Pro',249.99,12,'DISACTIVE','Apple'),
+    (14,'Robot Vacuum Cleaner iRobot Roomba',299.99,6,'DISACTIVE','iRobot'),
+    (15,'Action Camera GoPro Hero 10',449.99,0,'DISACTIVE','GoPro'),
+    (16,'Wireless Router TP-Link Archer AX6000',299.99,13,'ACTIVE','TP-Link'),
+    (17,'External SSD Samsung T7 1TB',169.99,22,'ACTIVE','Samsung'),
+    (18,'Monitor Dell UltraSharp U2720Q 27\"',449.99,0,'ACTIVE','Dell'),
+    (19,'Graphics Card NVIDIA GeForce RTX 3080',699.99,8,'ACTIVE','NVIDIA'),
+    (20,'Smart Thermostat Nest Learning Thermostat',249.99,15,'ACTIVE','Nest'),
+    (21,'Electric Scooter Xiaomi Mi Electric Scooter Pro 2',499.99,10,'ACTIVE','Xiaomi'),
+    (22,'Wireless Mouse Logitech MX Master 3',99.99,0,'ACTIVE','Logitech'),
+    (23,'Portable Charger Anker PowerCore 26800mAh',59.99,25,'ACTIVE','Anker'),
+    (24,'VR Headset Oculus Quest 2',299.99,18,'ACTIVE','Marca Blanca'),
+    (25,'Compact Camera Canon PowerShot G7 X Mark III',699.99,10,'ACTIVE','Canon'),
+    (26,'Smart Doorbell Ring Video Doorbell Pro',199.99,5,'DISACTIVE','Ring'),
+    (27,'Wireless Keyboard Logitech K780',79.99,8,'DISACTIVE','Logitech'),
+    (29,'Portable Projector Anker Nebula Capsule II',399.99,6,'DISACTIVE','Anker'),
+    (30,'Robot Lawn Mower Husqvarna Automower 315X',1499.99,7,'DISACTIVE','Husqvarna'),
+    (31,'E-Reader Amazon Kindle Paperwhite',129.99,10,'DISACTIVE','Amazon'),
+    (32,'Gaming Mouse Razer DeathAdder V2',69,15,'DISACTIVE','Razer'),
+    (33,'Wireless Security Camera Arlo Pro 4',249.99,18,'DISACTIVE','Arlo'),
+    (34,'Smart Scale Withings Body+',79.99,20,'ACTIVE','Withings'),
+    (35,'Electric Skateboard Boosted Stealth',1599.99,8,'DISACTIVE','Boosted');
+
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
