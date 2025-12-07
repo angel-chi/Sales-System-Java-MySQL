@@ -67,7 +67,7 @@ public class MenuController {
                     stage.setResizable(false);
                 }
                 case REPORT_VIEW_FXML -> {
-                    scene = new Scene(root, 1470, 1030);
+                    scene = new Scene(root, 1291, 633);
                     stage.setResizable(false);
                 }
                 case GENERATE_SALE_VIEW_FXML -> {

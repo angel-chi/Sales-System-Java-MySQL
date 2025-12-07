@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="feat: ajustar diseño y elementos de la UI en ManagementView.fxml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/ReportsView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/ReportsView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="ValeriaMoo_Branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,25 +66,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.MainController.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Moo__Osorno",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/tomas/Desktop/Sales-System/src/main/resources/images",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "MavenSettings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainController.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Moo__Osorno&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tomas/Desktop/Sales-System/src/main/resources/images&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\tomas\Desktop\Sales-System\src\main\resources\images" />
@@ -132,6 +134,9 @@
       <list>
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.TimerTest" />
+        <item itemvalue="Application.TimerTest" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -143,14 +148,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00006" summary="fea: add combobox">
-      <option name="closed" value="true" />
-      <created>1707875046431</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1707875046431</updated>
     </task>
     <task id="LOCAL-00007" summary="fea: add create seller">
       <option name="closed" value="true" />
@@ -536,7 +533,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765087282409</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="merge">
+      <option name="closed" value="true" />
+      <created>1765125196465</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1765125196466</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -551,7 +556,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add: report view" />
     <MESSAGE value="feat: filter reports" />
     <MESSAGE value="feat: export reports &#10;add: statistic pie char products" />
     <MESSAGE value="add: statistic line chart products" />
@@ -576,7 +580,8 @@
     <MESSAGE value="feat: ajustar diseño y elementos de la UI en CustomerView.fxml" />
     <MESSAGE value="feat: ajustar diseño y elementos de la UI en GenerateSaleView.fxml" />
     <MESSAGE value="feat: ajustar diseño y elementos de la UI en ManagementView.fxml" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: ajustar diseño y elementos de la UI en ManagementView.fxml" />
+    <MESSAGE value="merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
