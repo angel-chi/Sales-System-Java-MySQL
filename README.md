@@ -169,30 +169,7 @@ Error 1: No se encontró o no se pudo cargar la clase principal
 
 Lo cual era incorrecto porque, en este caso, no debería apuntar a HelloApplication; debería ser la clase Main. Al realizar estos cambios, el programa funcionó usando el comando. El plugin implementado fue el siguiente:
 
-<plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <!--mainClass>mypackage.gui.menuInicial.JFrameGestorEstudiantes_app</mainClass-->
-                            <mainClass>org.borghisales.salessysten.Main</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-            </plugin>
-
+<img width="834" height="467" alt="imagen" src="https://github.com/user-attachments/assets/4724e020-3e19-4c11-88ce-91601f827e83" />
 
 # ⚙️ Mejoras propuestas
 
