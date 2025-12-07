@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="feat: traducción del controlador MainController de inglés a español">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" afterDir="false" />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="feat: ajustar diseño y elementos de la UI en ManagementView.fxml">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,38 +143,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00001" summary="create project">
-      <option name="closed" value="true" />
-      <created>1707617671752</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1707617671752</updated>
-    </task>
-    <task id="LOCAL-00002" summary="feature: add login">
-      <option name="closed" value="true" />
-      <created>1707622890390</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1707622890390</updated>
-    </task>
-    <task id="LOCAL-00003" summary="feature: add login">
-      <option name="closed" value="true" />
-      <created>1707622903283</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1707622903283</updated>
-    </task>
-    <task id="LOCAL-00004" summary="feature: add login">
-      <option name="closed" value="true" />
-      <created>1707772380456</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1707772380456</updated>
     </task>
     <task id="LOCAL-00005" summary="fea: add crud and classes">
       <option name="closed" value="true" />
@@ -496,7 +464,79 @@
       <option name="project" value="LOCAL" />
       <updated>1765072837752</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="feat: traducción del controlador ManagementController de inglés a español">
+      <option name="closed" value="true" />
+      <created>1765073120782</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1765073120782</updated>
+    </task>
+    <task id="LOCAL-00046" summary="feat: traducción del controlador ManagementController de inglés a español">
+      <option name="closed" value="true" />
+      <created>1765073262134</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1765073262134</updated>
+    </task>
+    <task id="LOCAL-00047" summary="feat: traducción del controlador CustomerDAO de inglés a español">
+      <option name="closed" value="true" />
+      <created>1765073698307</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1765073698307</updated>
+    </task>
+    <task id="LOCAL-00048" summary="feat: traducción del DAO DBConnection de inglés a español">
+      <option name="closed" value="true" />
+      <created>1765074142191</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1765074142191</updated>
+    </task>
+    <task id="LOCAL-00049" summary="feat: traducción del DAO SalesDAO de inglés a español">
+      <option name="closed" value="true" />
+      <created>1765075070643</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1765075070643</updated>
+    </task>
+    <task id="LOCAL-00050" summary="feat: ajustar diseño y elementos de la UI en MainView.fxml">
+      <option name="closed" value="true" />
+      <created>1765075319224</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1765075319225</updated>
+    </task>
+    <task id="LOCAL-00051" summary="feat: ajustar diseño y elementos de la UI en CustomerView.fxml">
+      <option name="closed" value="true" />
+      <created>1765077332988</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1765077332988</updated>
+    </task>
+    <task id="LOCAL-00052" summary="feat: ajustar diseño y elementos de la UI en GenerateSaleView.fxml">
+      <option name="closed" value="true" />
+      <created>1765078110616</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1765078110616</updated>
+    </task>
+    <task id="LOCAL-00053" summary="feat: ajustar diseño y elementos de la UI en ManagementView.fxml">
+      <option name="closed" value="true" />
+      <created>1765078297221</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1765078297221</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -511,14 +551,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: search Customer" />
-    <MESSAGE value="feat: add screen add customer" />
-    <MESSAGE value="feat: add search customer" />
-    <MESSAGE value="feat: add search product" />
-    <MESSAGE value="perf: improve screen switching time" />
-    <MESSAGE value="feat: generate Sale and SaleDetails" />
-    <MESSAGE value="fix: format serial and total sale" />
-    <MESSAGE value="feat: subtract stock" />
     <MESSAGE value="add: report view" />
     <MESSAGE value="feat: filter reports" />
     <MESSAGE value="feat: export reports &#10;add: statistic pie char products" />
@@ -536,7 +568,15 @@
     <MESSAGE value="Feat: Implementación de ENUM Discount y adaptación del código para utilizarlo correctamente." />
     <MESSAGE value="feat: traducción del controlador GenerateSaleController de inglés a español" />
     <MESSAGE value="feat: traducción del controlador MainController de inglés a español" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: traducción del controlador MainController de inglés a español" />
+    <MESSAGE value="feat: traducción del controlador ManagementController de inglés a español" />
+    <MESSAGE value="feat: traducción del controlador CustomerDAO de inglés a español" />
+    <MESSAGE value="feat: traducción del DAO DBConnection de inglés a español" />
+    <MESSAGE value="feat: traducción del DAO SalesDAO de inglés a español" />
+    <MESSAGE value="feat: ajustar diseño y elementos de la UI en MainView.fxml" />
+    <MESSAGE value="feat: ajustar diseño y elementos de la UI en CustomerView.fxml" />
+    <MESSAGE value="feat: ajustar diseño y elementos de la UI en GenerateSaleView.fxml" />
+    <MESSAGE value="feat: ajustar diseño y elementos de la UI en ManagementView.fxml" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: ajustar diseño y elementos de la UI en ManagementView.fxml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -568,11 +608,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ReportsController.java</url>
           <line>172</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesDAO.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
