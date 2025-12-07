@@ -110,7 +110,7 @@ Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder,
 # 💡 Fucionalidades
 
 ## Inicio de sesión
-Para iniciar sesión, se requiere el DNI y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el DNI se asocia con 'dni' y la contraseña con 'user'.
+Para iniciar sesión, se requiere el Usuario y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el Usuario se asocia con 'dni' y la contraseña con 'user'.
 
 <p align="center">
   <img src="src/main/resources/images/login.png" />
@@ -118,7 +118,7 @@ Para iniciar sesión, se requiere el DNI y la contraseña del vendedor. En la ba
 
 ## Pantalla principal
 
-* Control de punto de venta: Ofrece el acceso completo al usuario a todas las interfaces disponibles del punto de venta
+* Control de punto de venta: Ofrece el acceso completo al usuario a todas las interfaces disponibles del punto de venta organizada en 3 secciones principales: VENTAS, GESTIÓN Y CATÁLOGO, REPORTES. Proporcionando una interfaz amigable con el usuario
 <p align="center">
   <img src="src/main/resources/images/management.png" />
 </p>
@@ -263,9 +263,14 @@ De las propuestas mencionadas implementamos la verificación para acceder a func
 Jarib Alberto Novelo Hernández
 - **Matricula**: 24216374
 - **Usuario de github**: novelo03
-- **Rol desempeñado**:  
+- **Rol desempeñado**:
+Cristian Uriel Sanchez Sanchez
+- **Matricula**: 21203170
+- **Usuario de github**: Cristian271
+- **Rol desempeñado**: Re estructure el codigo de todas los archivos fxml para que se facilite la manipulación y se puedan agregar funcionalidades nuevas mas facilmente, Desarrolle una interfaz de menu completamente nueva, asegurandome que sea amigable con el usuario. Realice traducciones de una buena parte de las interfaces, repare errorres criticos como: Error al generar venta y Desahabilite el boton de help para dar lugar a que mi compañero desarrolle una solución a ese problema. Tambien añadí la funcionalidad de buscar a un usuario a través de su id y se auto rellenen todos los campos con sus datos y asi facilitar la edición o eliminación del cliente.
 
 
 
 [⬆ Volver al inicio](#title)<br>
+
 
