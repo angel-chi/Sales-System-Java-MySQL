@@ -13,13 +13,10 @@
            alignment="CENTER">
 
     <children>
-
         <Group>
             <children>
 
-
                 <AnchorPane prefHeight="596.0" prefWidth="720.0">
-
 
                     <Label layoutX="120.0" layoutY="11.0"
                            prefHeight="39.0" prefWidth="480.0"
@@ -32,7 +29,6 @@
                         </font>
                     </Label>
 
-
                     <ImageView fitHeight="111.0" fitWidth="117.0"
                                layoutX="20.0" layoutY="14.0"
                                pickOnBounds="true" preserveRatio="true">
@@ -41,7 +37,6 @@
 
                     <Separator layoutX="6.0" layoutY="135.0"
                                prefHeight="16.0" prefWidth="708.0" />
-
 
                     <Label layoutX="120.0" layoutY="48.0"
                            prefHeight="21.0" prefWidth="480.0"
@@ -53,13 +48,11 @@
                         </font>
                     </Label>
 
-
                     <Label layoutX="120.0" layoutY="75.0"
                            prefHeight="17.0" prefWidth="480.0"
                            text="NÚM. TELEFÓNICO: 999 334 4230"
                            alignment="CENTER"
                            wrapText="true" />
-
 
                     <Label layoutX="258.0" layoutY="104.0"
                            prefHeight="17.0" prefWidth="180.0"
@@ -74,7 +67,6 @@
                                layoutX="345.0" layoutY="101.0"
                                prefHeight="25.0" prefWidth="140.0" />
 
-
                     <TextField fx:id="codCustomer"
                                layoutX="125.0" layoutY="166.0"
                                prefHeight="25.0" prefWidth="117.0" />
@@ -84,7 +76,6 @@
                     <TextField fx:id="price"
                                layoutX="125.0" layoutY="234.0"
                                prefHeight="25.0" prefWidth="117.0" />
-
 
                     <TextField fx:id="customerName" editable="false"
                                layoutX="450.0" layoutY="166.0"
@@ -103,6 +94,25 @@
                              layoutX="125.0" layoutY="269.0"
                              prefHeight="21.0" prefWidth="117.0" />
 
+                    <!-- FECHA (solo una vez) -->
+                    <TextField fx:id="date" editable="false"
+                               layoutX="260.0" layoutY="270.0"
+                               prefHeight="25.0" prefWidth="90.0" />
+
+                    <!-- MÉTODO DE PAGO Y ÚLTIMOS 4 -->
+                    <Label layoutX="22.0" layoutY="305.0"
+                           text="MÉTODO DE PAGO:"
+                           wrapText="true" />
+                    <ComboBox fx:id="paymentMethod"
+                              layoutX="125.0" layoutY="301.0"
+                              prefHeight="25.0" prefWidth="117.0" />
+
+                    <Label layoutX="370.0" layoutY="305.0"
+                           text="ÚLTIMOS 4:"
+                           wrapText="true" />
+                    <TextField fx:id="cardLast4"
+                               layoutX="450.0" layoutY="301.0"
+                               prefHeight="25.0" prefWidth="180.0" />
 
                     <Button layoutX="260.0" layoutY="166.0"
                             mnemonicParsing="false"
@@ -124,7 +134,6 @@
 
                     <Separator layoutX="0.0" layoutY="318.0"
                                prefHeight="16.0" prefWidth="720.0" />
-
 
                     <TableView fx:id="tableSale"
                                layoutX="12.0" layoutY="335.0"
@@ -163,7 +172,6 @@
                     <Separator layoutX="0.0" layoutY="551.0"
                                prefHeight="2.0" prefWidth="720.0" />
 
-
                     <Button layoutX="53.0" layoutY="561.0"
                             mnemonicParsing="false"
                             onAction="#cancel"
@@ -184,7 +192,6 @@
                                layoutX="520.0" layoutY="561.0"
                                prefWidth="100.0" />
 
-
                     <Label layoutX="21.0" layoutY="170.0"
                            text="ID CLIENTE:" wrapText="true" />
                     <Label layoutX="21.0" layoutY="204.0"
@@ -201,10 +208,6 @@
                            text="INVENTARIO:" wrapText="true" />
                     <Label layoutX="370.0" layoutY="273.0"
                            text="VENDEDOR:" wrapText="true" />
-
-                    <TextField fx:id="date" editable="false"
-                               layoutX="260.0" layoutY="270.0"
-                               prefHeight="25.0" prefWidth="90.0" />
 
                 </AnchorPane>
 

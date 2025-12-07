@@ -1,5 +1,9 @@
 package org.borghisales.salessysten.controllers;
 
+import org.borghisales.salessysten.model.Sales;
+import org.borghisales.salessysten.model.payment.Payment;
+import org.borghisales.salessysten.model.payment.CashPayment;
+import org.borghisales.salessysten.model.payment.CardPayment;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -86,6 +90,12 @@ public class GenerateSaleController extends MenuController implements Initializa
     private TableColumn<ShoppingCart, Double> colPrice;
     @FXML
     private TableColumn<ShoppingCart,Double> colTotal;
+    @FXML
+    private ComboBox<String> paymentMethod;
+
+    @FXML
+    private TextField cardLast4;
+
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeUIElements();
@@ -98,7 +108,13 @@ public class GenerateSaleController extends MenuController implements Initializa
         setSerial();
         seller.setText(sellerName);
         date.setText(String.valueOf(now));
+
+        if (paymentMethod != null) {
+            paymentMethod.setItems(FXCollections.observableArrayList("CASH", "CARD"));
+            paymentMethod.setValue("CASH");
+        }
     }
+
 
     private void configureAlerts() {
         configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
@@ -223,8 +239,33 @@ public class GenerateSaleController extends MenuController implements Initializa
             return;
         }
 
-        Sales sales = createSalesObject();
+        double totalAmount = Double.parseDouble(total.getText().replace(",", "."));
 
+        // 1. Crear Payment y validar
+        Payment payment = createPayment(totalAmount);
+        if (payment == null) {
+            return;
+        }
+
+        if (!payment.authorize()) {
+            MenuController.setAlert(Alert.AlertType.ERROR,
+                    "Payment not authorized.\n" + payment.getDescription());
+            return;
+        }
+
+        // 2. Determinar PaymentType para la BD
+        Sales.PaymentType paymentType;
+        String method = paymentMethod.getValue();
+        if ("CASH".equals(method)) {
+            paymentType = Sales.PaymentType.CASH;
+        } else {
+            paymentType = Sales.PaymentType.CARD;
+        }
+
+        // 3. Crear Sales con paymentType
+        Sales sales = createSalesObject(totalAmount, paymentType);
+
+        // 4. Guardar venta y detalles
         if (saveSaleAndDetails(sales)) {
             productDAO.subtractStock(products);
             cleanFieldsAndTable();
@@ -232,14 +273,55 @@ public class GenerateSaleController extends MenuController implements Initializa
             total.setText("0.0");
             products.clear();
             updateReportsController();
+
+            MenuController.setAlert(Alert.AlertType.INFORMATION,
+                    "Sale completed successfully.\n" + payment.getDescription());
         }
     }
 
-    private Sales createSalesObject() {
-        return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
-                Sales.State.ACTIVE);
+
+    private Sales createSalesObject(double totalAmount, Sales.PaymentType paymentType) {
+        return new Sales(
+                customer.idCustomer(),
+                idSeller,
+                serial.getText(),
+                LocalDate.parse(date.getText()),
+                totalAmount,
+                Sales.State.ACTIVE,
+                paymentType
+        );
     }
+
+
+    private Payment createPayment(double totalAmount) {
+        if (paymentMethod == null) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Payment method combo is not initialized.");
+            return null;
+        }
+
+        String method = paymentMethod.getValue();
+
+        if (method == null) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Select a payment method.");
+            return null;
+        }
+
+        if ("CASH".equals(method)) {
+            return new CashPayment(totalAmount);
+        } else if ("CARD".equals(method)) {
+            String last4 = cardLast4.getText();
+            if (last4 == null || last4.isBlank()) {
+                MenuController.setAlert(Alert.AlertType.ERROR,
+                        "Enter the last 4 digits of the card.");
+                return null;
+            }
+            return new CardPayment(totalAmount, last4);
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Unknown payment method: " + method);
+            return null;
+        }
+    }
+
 
     private boolean saveSaleAndDetails(Sales sales) {
         boolean saleSaved = salesDAO.SaveSale(sales);

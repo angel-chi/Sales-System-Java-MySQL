@@ -33,7 +33,8 @@ public class SalesDAO {
         }
     }
     public boolean SaveSale(Sales sale){
-        String sql = "INSERT INTO sales (idCustomer,idSeller,numberSales,saleDate,amount,state) values(?,?,?,?,?,?)";
+        String sql = "INSERT INTO sales (idCustomer, idSeller, numberSales, saleDate, amount, state, payment_type) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -44,6 +45,7 @@ public class SalesDAO {
             pstmt.setDate(4, Date.valueOf(sale.saleDate()));
             pstmt.setDouble(5,sale.amount());
             pstmt.setString(6,sale.state().name());
+            pstmt.setString(7, sale.paymentType().name());
 
             int rows_affected = pstmt.executeUpdate();
 
