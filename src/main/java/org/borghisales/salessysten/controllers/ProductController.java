@@ -9,10 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
 
@@ -85,8 +82,30 @@ public class ProductController implements Initializable {
     }
 
     public void addProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                          Integer.parseInt(stock.getText()), cbState.getValue());
+        String nombre = name.getText();
+        double precio = 0.0d;
+        int cantidad = 0;
+
+        if(nombre.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del producto es una cadena vacía");
+            return;
+        }
+
+        try {
+            precio = Double.parseDouble(price.getText());
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El formato del precio es incorrecto");
+            return;
+        }
+
+        try {
+            cantidad = Integer.parseInt(stock.getText());
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El formato de la cantidad es incorrecto");
+            return;
+        }
+
+        Product product = new Product(nombre, precio, cantidad, cbState.getValue());
         if (productDAO.create(product)) {
             MenuController.cleanCells(name,price,stock);
             updateTable();
@@ -94,8 +113,30 @@ public class ProductController implements Initializable {
     }
 
     public void updateProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                Integer.parseInt(stock.getText()), cbState.getValue());
+        String nombre = name.getText();
+        double precio = 0.0d;
+        int cantidad = 0;
+
+        if(nombre.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del producto es una cadena vacía");
+            return;
+        }
+
+        try {
+            precio = Double.parseDouble(price.getText());
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El formato del precio es incorrecto");
+            return;
+        }
+
+        try {
+            cantidad = Integer.parseInt(stock.getText());
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El formato de la cantidad es incorrecto");
+            return;
+        }
+
+        Product product = new Product(nombre, precio, cantidad, cbState.getValue());
         if (productDAO.update(product)) {
             MenuController.cleanCells(name,price,stock);
             updateTable();

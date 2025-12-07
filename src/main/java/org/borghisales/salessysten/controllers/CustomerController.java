@@ -79,7 +79,26 @@ public class CustomerController implements Initializable {
     }
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
+        String usuario = dni.getText();
+        String nombre = name.getText();
+        String direccion = address.getText();
+
+        if(usuario.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar\nEl usuario está en blanco");
+            return;
+        }
+
+        if(nombre.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar\nEl nombre está en blanco");
+            return;
+        }
+
+        if(direccion.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar\nLa dirección está en blanco");
+            return;
+        }
+
+        Customer customer = new Customer(usuario, nombre, direccion, cbState.getValue());
         if (customerDAO.create(customer)) {
             MenuController.cleanCells(dni, name, address);
             updateTable();
@@ -87,7 +106,26 @@ public class CustomerController implements Initializable {
     }
     @FXML
     public void updateCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
+        String usuario = dni.getText();
+        String nombre = name.getText();
+        String direccion = address.getText();
+
+        if(usuario.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El usuario está en blanco");
+            return;
+        }
+
+        if(nombre.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre está en blanco");
+            return;
+        }
+
+        if(direccion.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "La dirección está en blanco");
+            return;
+        }
+
+        Customer customer = new Customer(usuario, nombre, direccion,cbState.getValue());
         if (customerDAO.update(customer)) {
             MenuController.cleanCells(dni, name, address);
             updateTable();

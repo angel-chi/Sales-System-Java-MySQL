@@ -86,14 +86,62 @@ public class SellerController implements Initializable {
 
 
     public void addSeller(ActionEvent actionEvent){
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
+        String usuario = dni.getText();
+        String nombre = name.getText();
+        String numeroTelefonico = phone.getText();
+        String cont = user.getText();
+
+        if(usuario.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El usuario está en blanco");
+            return;
+        }
+
+        if(nombre.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre está en blanco");
+            return;
+        }
+
+        if(numeroTelefonico.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El número telefónico está en blanco");
+            return;
+        }
+
+        if(cont.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "La contraseña está en blanco");
+        }
+
+        Seller seller = new Seller(usuario, nombre, numeroTelefonico, cbState.getValue(), cont);
         if (sellerDAO.create(seller)) {
             MenuController.cleanCells(dni, name, phone, user);
             updateTable();
         }
     }
     public void updateSeller(ActionEvent actionEvent) {
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
+        String usuario = dni.getText();
+        String nombre = name.getText();
+        String numeroTelefonico = phone.getText();
+        String cont = user.getText();
+
+        if(usuario.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El usuario está en blanco");
+            return;
+        }
+
+        if(nombre.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre está en blanco");
+            return;
+        }
+
+        if(numeroTelefonico.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El número telefónico está en blanco");
+            return;
+        }
+
+        if(cont.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "La contraseña está en blanco");
+        }
+
+        Seller seller = new Seller(usuario, nombre, numeroTelefonico, cbState.getValue(), cont);
         if (sellerDAO.update(seller)) {
             MenuController.cleanCells(dni, name, phone, user);
             updateTable();

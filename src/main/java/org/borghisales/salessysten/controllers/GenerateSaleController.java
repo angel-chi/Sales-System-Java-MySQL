@@ -132,7 +132,20 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void searchCustomer(ActionEvent actionEvent) {
-        int customerId = Integer.parseInt(codCustomer.getText());
+        if(codCustomer.getText().isBlank()) {
+            setAlert(Alert.AlertType.ERROR, "El texto a buscar es una cadena vacía");
+            return;
+        }
+        int customerId;
+
+        try {
+            customerId = Integer.parseInt(codCustomer.getText());
+        }
+        catch(NumberFormatException e) {
+            setAlert(Alert.AlertType.ERROR, "El texto a buscar no es un número entero.\nPor favor ingrese únicamente números.");
+            return;
+        }
+
         customer = customerDAO.searchCustomer(customerId);
 
         if (customer != null) {
@@ -196,9 +209,21 @@ public class GenerateSaleController extends MenuController implements Initializa
 
 
     public void searchProduct(ActionEvent actionEvent) {
-        int productId = Integer.parseInt(codProduct.getText());
-        Product product = productDAO.searchProduct(productId);
+        if(codProduct.getText().isBlank()) {
+            setAlert(Alert.AlertType.ERROR, "El texto a buscar es una cadena vacía");
+            return;
+        }
+        int productId;
 
+        try {
+            productId = Integer.parseInt(codProduct.getText());
+        }
+        catch(NumberFormatException e) {
+            setAlert(Alert.AlertType.ERROR, "El texto a buscar no es un número entero.\nPor favor ingrese únicamente números.");
+            return;
+        }
+
+        Product product = productDAO.searchProduct(productId);
         if (product != null) {
             updateProductFields(product);
         } else {

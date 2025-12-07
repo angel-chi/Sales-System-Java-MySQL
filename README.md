@@ -167,6 +167,50 @@ try (Connection conn = DBConnection.connection()){
 ```
 
 ### Error al buscar vacío
+En algunas entradas se convierte una cadena en un número entero, al hacer este proceso si la cadena era vacía o no contenía un número válido no ejecutaba nada y el usuario no era notificado de este error, se solucionó agregando esas validaciones
+
+```java
+if(codCustomer.getText().isBlank()) {
+    setAlert(Alert.AlertType.ERROR, "El texto a buscar es una cadena vacía");
+    return;
+}
+int customerId;
+
+try {
+    customerId = Integer.parseInt(codCustomer.getText());
+}
+catch(NumberFormatException e) {
+    setAlert(Alert.AlertType.ERROR, "El texto a buscar no es un número entero.\nPor favor ingrese únicamente números.");
+    return;
+}
+```
+
+### Agregar usuario vacío
+Al agregar un cliente se permitía agregar un cliente con información vacía. Se agregó una validación para evitar ese caso
+```java
+String usuario = dni.getText();
+String nombre = name.getText();
+String direccion = address.getText();
+
+if(usuario.isBlank()) {
+    MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar\nEl usuario está en blanco");
+    return;
+}
+
+if(nombre.isBlank()) {
+    MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar\nEl nombre está en blanco");
+    return;
+}
+
+if(direccion.isBlank()) {
+    MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar\nLa dirección está en blanco");
+    return;
+}
+
+Customer customer = new Customer(usuario, nombre, direccion, cbState.getValue());
+```
+
+Lo mismo sucedía con los productos y con los empleados, se usó la misma solución
 
 # 📝 Licencia
 
