@@ -9,14 +9,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
+import org.borghisales.salessysten.model.Seller;
+import org.borghisales.salessysten.model.Validator;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ProductController implements Initializable {
@@ -46,6 +46,7 @@ public class ProductController implements Initializable {
     private TableColumn<Product,Integer> colStock;
     @FXML
     private TableColumn<Product,Product.State> colState;
+    private Object nameText;
 
 
     @Override
@@ -84,7 +85,34 @@ public class ProductController implements Initializable {
         tableProducts.setItems(products);
     }
 
+    protected boolean validate_Product(){
+        String nameText = name.getText();
+        if(nameText == null || nameText.isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del producto no puede estar vacio.");
+            return false;
+        }
+        String priceText = price.getText().replace(",", ".");
+        String stockText = stock.getText();
+        try {
+            Double.parseDouble(priceText);
+            price.setText(priceText);
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El precio del producto debe ser un numero.");
+            return false;
+        }
+        try {
+            Integer.parseInt(stockText);
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "La cantidad de existencias del producto debe ser un numero entero.");
+            return false;
+        }
+        return true;
+    }
     public void addProduct(ActionEvent actionEvent) {
+        if(!validate_Product()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar prodcuto");
+            return;
+        }
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                           Integer.parseInt(stock.getText()), cbState.getValue());
         if (productDAO.create(product)) {
@@ -94,6 +122,10 @@ public class ProductController implements Initializable {
     }
 
     public void updateProduct(ActionEvent actionEvent) {
+        if(!validate_Product()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar prodcuto");
+            return;
+        }
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                 Integer.parseInt(stock.getText()), cbState.getValue());
         if (productDAO.update(product)) {
@@ -125,6 +157,5 @@ public class ProductController implements Initializable {
         productDAO.setTable(products);
         tableProducts.setItems(products);
     }
-
 
 }

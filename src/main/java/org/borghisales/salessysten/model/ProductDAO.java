@@ -55,7 +55,8 @@ public class ProductDAO extends Validator<Product> implements CRUD<Product>{
 
     @Override
     public boolean create(Product entity) {
-        if(!validate(entity))return false;
+        if(!validate(entity)) return false;
+
         String sql = "INSERT INTO product (name,price,stock,state) values (?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
@@ -86,7 +87,7 @@ public class ProductDAO extends Validator<Product> implements CRUD<Product>{
 
     @Override
     public boolean update(Product entity) {
-        if(!validate(entity))return false;
+       if(!validate(entity)) return false;
         String sql = "UPDATE product set price=?,stock=?,state=? where name=?";
 
         try(Connection conn = DBConnection.connection();
@@ -196,27 +197,19 @@ public class ProductDAO extends Validator<Product> implements CRUD<Product>{
 
     @Override
     protected boolean validate(Product entity){
-        if(Objects.isNull(entity)){
-            MenuController.setAlert(Alert.AlertType.ERROR, "El producto no puede estar vacio");
+
+        if (entity.price() <= 0){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El precio del producto debe ser mayor que 0.");
             return false;
         }
-        if(entity.name() == null || entity.name().isEmpty()){
-            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del producto no puede estar vacio");
+
+        if (entity.stock() <= 0){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Debes tener almenos una unidad de este producto en tu almacen.");
             return false;
         }
-        if( entity.price() <= 0){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Debes seleccionar un precio mayor a 0");
-            return false;
-        }
-        if( entity.stock() < 0){
-            MenuController.setAlert(Alert.AlertType.ERROR, "El stock del producto no puede ser negativo");
-            return false;
-        }
-        if(entity.state() == null){
-            MenuController.setAlert(Alert.AlertType.ERROR, "El estado del producto no puede estar vacio");
-            return false;
-        }
+
         return true;
     }
+
 
 }

@@ -48,6 +48,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
+    private double currentTotal =0;
 
     @FXML
     private TextField serial;
@@ -263,7 +264,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Sales createSalesObject() {
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
+                LocalDate.parse(date.getText()), currentTotal,
                 Sales.State.ACTIVE);
     }
 
@@ -314,9 +315,10 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private ShoppingCart createShoppingCartObject() {
+
         return new ShoppingCart(contProducts++, codProduct.getText(),
                 productName.getText(), quantity.getValue(),
-                Double.parseDouble(price.getText()));
+                Double.parseDouble(price.getText().replace(",", ".")));
     }
 
     private boolean isProductAlreadyInCart(ShoppingCart product) {
@@ -326,7 +328,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
-        double currentTotal = Double.parseDouble(total.getText()) + product.total();
+        currentTotal += product.total();
         total.setText(String.format("%.2f", currentTotal));
     }
 
