@@ -73,7 +73,6 @@ public class ManagementController extends MenuController implements Initializabl
                 });
             }
         }).start();
-
     }
 
     public void exit(ActionEvent actionEvent) {
