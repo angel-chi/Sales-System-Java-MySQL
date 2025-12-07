@@ -38,27 +38,27 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <DatePicker fx:id="minDate" layoutX="986.0" layoutY="74.0" prefHeight="25.0" prefWidth="92.0" />
+                  <DatePicker fx:id="minDate" layoutX="875.0" layoutY="74.0" prefHeight="25.0" prefWidth="150.0" />
                   <Button layoutX="1355.0" layoutY="70.0" mnemonicParsing="false" onAction="#onFilter" prefHeight="32.0" prefWidth="94.0" text="FILTER" />
-                  <DatePicker fx:id="maxDate" layoutX="1103.0" layoutY="74.0" prefHeight="25.0" prefWidth="92.0" />
-                  <TextField fx:id="minAmount" layoutX="753.0" layoutY="75.0" prefHeight="27.0" prefWidth="78.0" />
-                  <TextField fx:id="maxAmount" layoutX="866.0" layoutY="75.0" prefHeight="27.0" prefWidth="78.0" />
-                  <Label layoutX="815.0" layoutY="41.0" text="CANTIDAD" underline="true" wrapText="true">
+                  <DatePicker fx:id="maxDate" layoutX="1043.0" layoutY="74.0" prefHeight="25.0" prefWidth="150.0" />
+                  <TextField fx:id="minAmount" layoutX="633.0" layoutY="73.0" prefHeight="27.0" prefWidth="78.0" />
+                  <TextField fx:id="maxAmount" layoutX="729.0" layoutY="73.0" prefHeight="27.0" prefWidth="78.0" />
+                  <Label layoutX="684.0" layoutY="41.0" text="CANTIDAD" underline="true" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="842.0" layoutY="61.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
+                  <Label layoutX="711.0" layoutY="61.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label layoutX="1085.0" layoutY="61.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
+                  <Label layoutX="1025.0" layoutY="61.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label layoutX="1063.0" layoutY="41.0" text="FECHA" underline="true" wrapText="true">
+                  <Label layoutX="1012.0" layoutY="41.0" text="FECHA" underline="true" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -77,18 +77,18 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="710.0" prefWidth="1103.0">
                <children>
-                  <PieChart fx:id="pieChartProducts" layoutX="14.0" layoutY="123.0" prefHeight="539.0" prefWidth="638.0" />
-                  <Label layoutX="174.0" layoutY="61.0" prefHeight="47.0" prefWidth="501.0" text="PRODUCTOS VENDIDOS" underline="true" wrapText="true">
+                  <PieChart fx:id="pieChartProducts" layoutX="14.0" layoutY="105.0" prefHeight="539.0" prefWidth="638.0" />
+                  <Label layoutX="157.0" layoutY="14.0" prefHeight="47.0" prefWidth="501.0" text="PRODUCTOS VENDIDOS" underline="true" wrapText="true">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <Label layoutX="862.0" layoutY="61.0" text="VENTAS/TIEMPO" underline="true" wrapText="true">
+                  <Label layoutX="844.0" layoutY="27.0" text="VENTAS/TIEMPO" underline="true" wrapText="true">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <LineChart fx:id="salesLineChart" createSymbols="false" layoutX="641.0" layoutY="123.0" legendVisible="false" prefHeight="559.0" prefWidth="575.0">
+                  <LineChart fx:id="salesLineChart" createSymbols="false" layoutX="633.0" layoutY="105.0" legendVisible="false" prefHeight="559.0" prefWidth="575.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" fx:id="x_time" />
                     </xAxis>

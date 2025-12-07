@@ -47,7 +47,7 @@ public class MenuController {
             stage.setResizable(false);
             // Contrar ventana.
             stage.centerOnScreen();
-            configureStageCloseEvent(stage, fxmlFileName, title);
+            configureStageCloseEvent(stage);
             stage.show();
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error al cargar la ventana: " + e.getMessage());

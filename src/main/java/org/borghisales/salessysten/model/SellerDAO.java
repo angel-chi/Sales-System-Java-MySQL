@@ -144,8 +144,8 @@ public class SellerDAO implements CRUD<Seller> {
             try (ResultSet rs = pstmt.executeQuery()){
                 if (rs.next()){
 
-                    GenerateSaleController.setSellerName(rs.getString("Nombre"));
-                    GenerateSaleController.setIdVendedor(rs.getInt("idVendedor"));
+                    GenerateSaleController.setSellerName(rs.getString("name"));
+                    GenerateSaleController.setIdVendedor(rs.getInt("idSeller"));
 
                     MainController.sellerLog = Seller.fromResultSet(rs);
 
