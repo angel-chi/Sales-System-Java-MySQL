@@ -15,18 +15,18 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="173.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="827.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="623.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="623.0" valignment="CENTER" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="180.0">
+        <VBox maxHeight="1.7976931348623157E308" maxWidth="300.0" prefHeight="700.0" prefWidth="180.0" GridPane.halignment="LEFT" GridPane.vgrow="ALWAYS">
             <children>
-                <Pane prefHeight="72.0" prefWidth="162.0">
+                <Pane maxWidth="1.7976931348623157E308" prefHeight="72.0" prefWidth="162.0" VBox.vgrow="NEVER">
                     <children>
                         <GridPane alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="65.0" prefWidth="181.0">
                             <columnConstraints>
@@ -36,7 +36,7 @@
                                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Menu sistema de ventas" textAlignment="CENTER" wrapText="true">
+                                <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Menu sistema de ventas" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
                                     <font>
                                         <Font name="JetBrainsMono NF Regular" size="15.0" />
                                     </font>
@@ -48,7 +48,7 @@
                         </GridPane>
                     </children>
                     <VBox.margin>
-                        <Insets bottom="10.0" top="20.0" />
+                        <Insets bottom="20.0" top="20.0" />
                     </VBox.margin>
                 </Pane>
                 <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="584.0" prefWidth="173.0">
@@ -56,27 +56,27 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="442.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="159.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="442.0" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="159.0" vgrow="ALWAYS" />
                     </rowConstraints>
                     <children>
-                        <GridPane GridPane.rowIndex="1">
+                        <GridPane maxWidth="300.0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="10.0" prefWidth="52.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="129.0" />
+                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="142.0" minWidth="10.0" prefWidth="129.0" />
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="53.0" valignment="BOTTOM" vgrow="ALWAYS" />
                                 <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#help" text="Ayuda" GridPane.columnIndex="1" />
+                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#help" text="Ayuda" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
                                 <SVGPath content="M101.212,0c-34.694,0-62.92,28.226-62.92,62.92c0,4.142,3.358,7.5,7.5,7.5c4.142,0,7.5-3.358,7.5-7.5c0-26.423,21.497-47.92,47.92-47.92c26.422,0,47.918,21.497,47.918,47.92c0,26.425-21.496,47.923-47.918,47.923c-0.259,0-0.516,0.013-0.769,0.039c-11.128,0.4-20.088,9.36-20.488,20.487c-0.026,0.253-0.039,0.509-0.039,0.769v30.922c0,4.142,3.358,7.5,7.5,7.5c4.142,0,7.5-3.358,7.5-7.5v-30.922c0-3.471,2.824-6.295,6.296-6.295c34.693,0,62.918-28.227,62.918-62.923C164.13,28.226,135.906,0,101.212,0z" scaleX="0.15" scaleY="0.15" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                 <SVGPath content="M234.666667,-2.13162821e-14 L234.666667,85.3333333 L192.000667,85.333 L192,42.6666667 L42.6666667,42.6666667 L42.6666667,384 L192,384 L192.000667,341.333 L234.666667,341.333333 L234.666667,426.666667 L-4.26325641e-14,426.666667 L-4.26325641e-14,-2.13162821e-14 L234.666667,-2.13162821e-14 Z M292.418278,112.915055 L392.836556,213.333333 L292.418278,313.751611 L262.248389,283.581722 L311.163,234.666 L106.666667,234.666667 L106.666667,192 L311.163,192 L262.248389,143.084945 L292.418278,112.915055 Z" scaleX="0.07" scaleY="0.07" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#exit" text="Cerrar sesion" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#exit" text="Cerrar sesion" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
                             </children>
                         </GridPane>
-                        <Accordion maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <Accordion maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.hgrow="ALWAYS" GridPane.vgrow="SOMETIMES">
                             <panes>
                                 <TitledPane animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Ventas">
                                     <content>
@@ -115,22 +115,22 @@
         </VBox>
         <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="344.0" minHeight="10.0" prefHeight="102.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="681.0" minHeight="10.0" prefHeight="598.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="300.0" minHeight="10.0" prefHeight="102.0" valignment="TOP" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="681.0" minHeight="10.0" prefHeight="598.0" valignment="TOP" vgrow="NEVER" />
             </rowConstraints>
             <children>
-                <GridPane prefHeight="91.0" prefWidth="827.0">
+                <GridPane maxHeight="100.0" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="827.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="740.0" minWidth="10.0" prefWidth="721.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.0" minWidth="10.0" prefWidth="106.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="57.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="0.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Label text="dd/mm/yy" GridPane.columnIndex="1">
