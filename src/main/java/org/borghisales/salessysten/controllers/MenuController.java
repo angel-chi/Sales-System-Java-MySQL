@@ -9,6 +9,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import javafx.animation.FadeTransition;
+import javafx.util.Duration;
+
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -37,38 +40,35 @@ public class MenuController {
     public void openNewStage(String fxmlFileName, String title) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
-
-
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
 
+            // FADE IN al abrir la nueva vista
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(450), root);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+
+            Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
 
-
             stage.sizeToScene();
-
-
             if (root instanceof Region region) {
-                if (region.getPrefWidth() > 0) {
-                    stage.setMinWidth(region.getPrefWidth());
-                }
-                if (region.getPrefHeight() > 0) {
-                    stage.setMinHeight(region.getPrefHeight());
-                }
+                if (region.getPrefWidth() > 0) stage.setMinWidth(region.getPrefWidth());
+                if (region.getPrefHeight() > 0) stage.setMinHeight(region.getPrefHeight());
             }
 
-
             stage.centerOnScreen();
-
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
+            fadeIn.play(); // ejecuta la animación
+
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error loading view: " + e.getMessage());
         }
     }
+
 
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {

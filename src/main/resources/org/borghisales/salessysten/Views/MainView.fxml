@@ -5,67 +5,84 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="450.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            style="-fx-background-color: linear-gradient(to bottom, #2c2c2c, #1e1e1e);"
+            xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.borghisales.salessysten.controllers.MainController">
 
     <children>
-
-
-        <ImageView fitHeight="71.0" fitWidth="73.0"
-                   pickOnBounds="true" preserveRatio="true"
-                   AnchorPane.topAnchor="10.0"
-                   AnchorPane.rightAnchor="10.0">
-            <image>
-                <Image url="@../../../../images/candadoReal.png" />
-            </image>
-        </ImageView>
-
-
-        <VBox alignment="CENTER" spacing="15.0"
+        <VBox alignment="CENTER" spacing="18.0"
               AnchorPane.topAnchor="0.0"
               AnchorPane.bottomAnchor="0.0"
               AnchorPane.leftAnchor="0.0"
               AnchorPane.rightAnchor="0.0">
 
-
-            <Label text="SISTEMA DE VENTAS" underline="true">
+            <!-- TÍTULO -->
+            <Label text="SISTEMA DE VENTAS"
+                   style="-fx-text-fill: #f2f2f2;
+                   -fx-font-weight: bold;">
                 <font>
-                    <Font size="28.0" />
+                    <Font name="Segoe UI Semibold" size="34.0" />
                 </font>
             </Label>
+            <!-- Ícono -->
+            <ImageView fitHeight="100.0" fitWidth="100.0"
+                       pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../../../../images/usuarioInicio.png" />
+                </image>
+            </ImageView>
 
-
-            <Label text="ID VENDEDOR">
+            <!-- ID -->
+            <Label text="ID VENDEDOR"
+                   style="-fx-text-fill: #dcdcdc;">
                 <font>
-                    <Font size="20.0" />
+                    <Font name="Segoe UI" size="18.0" />
                 </font>
             </Label>
-
 
             <TextField fx:id="user"
-                       prefHeight="30.0" prefWidth="300.0"
-                       maxWidth="300.0"
-                       promptText="Ingrese su ID" />
+                       prefHeight="35.0" prefWidth="300.0" maxWidth="300.0"
+                       promptText="Ingrese su ID"
+                       style="-fx-background-color: #333333;
+                              -fx-text-fill: #ffffff;
+                              -fx-prompt-text-fill: #999999;
+                              -fx-background-radius: 6;" />
 
-
-            <Label text="CONTRASEÑA">
+            <!-- CONTRASEÑA -->
+            <Label text="CONTRASEÑA"
+                   style="-fx-text-fill: #dcdcdc;">
                 <font>
-                    <Font size="20.0" />
+                    <Font name="Segoe UI" size="18.0" />
                 </font>
             </Label>
 
-
             <PasswordField fx:id="password"
-                           prefHeight="30.0" prefWidth="300.0"
-                           maxWidth="300.0"
-                           promptText="Ingrese su contraseña" />
+                           prefHeight="35.0" prefWidth="300.0" maxWidth="300.0"
+                           promptText="Ingrese su contraseña"
+                           style="-fx-background-color:#333333;
+                                  -fx-text-fill:#ffffff;
+                                  -fx-prompt-text-fill:#999999;
+                                  -fx-background-radius:6;" />
 
+            <!-- BOTÓN -->
             <Button text="INGRESAR"
                     mnemonicParsing="false"
                     onAction="#signIn"
-                    prefHeight="33.0" prefWidth="150.0" />
+                    prefHeight="35.0" prefWidth="160.0"
+                    style="-fx-background-color: #3a3a3a;
+                           -fx-text-fill: #ffffff;
+                           -fx-background-radius: 8;
+                           -fx-border-color: #555555;
+                           -fx-border-radius: 8;">
+                <font>
+                    <Font name="Segoe UI Semibold" size="16.0" />
+                </font>
+            </Button>
+
         </VBox>
 
     </children>
