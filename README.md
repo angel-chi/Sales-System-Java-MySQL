@@ -155,6 +155,8 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 
 [⬆ Volver al inicio](#title)<br>
 
+![image alt](https://github.com/angel-chi/Sales-System-Java-MySQL/blob/9c4cf0bf42704f11ab4cc64c8afaddc3c6a9a313/UML.png)
+
 ## 📋 Changelog
 
 ### [v2.0] - 08-12-2025
@@ -174,5 +176,6 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 - Se propuso e implementó un metodo de seguridad extra a la hora de ingresar al menú de vendedores y a la hora de borrar clientes desde el menú de clientes, ya que sí una persona distinta al propietario de la licencia de uso del software accede a la vista de los vendedores, este podrá tener acceso a sus claves de acceso (usuario y contraseña), nombre completo y telefono, poniendo en riesgo sus datos personales y tambien evitamos que cualquier persona pueda eliminar los datos de un cliente a menos que el dueño de la clave principal lo requiera, esto se logró creando un método que abre un nuevo archivo fxml (mainPasswordView) donde a continuación se necesitara de la contraseña princiapl, otro método que valida si la contraseña ingresada en el TextField es la correcta y de ser así dará acceso a la funcionalidad de borrar clientes y acceder al menú vendedores por medio de un if.
 - En futuras actulizaciones se puede implementar una alerta que avise al usuario cuando las unidades de un producto bajen de cierta cantidad notificando que el inventario se esta acabando especificamente de ese producto, implementando cambios en ProductController creando un metodo que se ejecute a la par con el metodo que se encarga de crear una venta en GenerateSaleController comparando la cantidad actual del producto menos la cantidad vendida y si sobrepasa el limite minimo deseado, ejecutar una ventana de notificación de que el producto se esta agotando.
 - Por ultimo, implementar en un futuro la opción de activar descuentos en productos deseados, se puede lograr seleccionando productos en un combobox para que despues una clase generateDiscount se encargue de aplicar el descuento deseado en los productos previamente seleccionados.
+
 
 
