@@ -138,6 +138,87 @@ La pantalla principal muestra las siguientes ventanas
   <img src="src/main/resources/images/reports.png" />
 </p>
 
+# PROYECTO EQUIPO 6
+
+**Integrantes:**
+* **Rivera Manzanero Alessandra Anelisse**
+* **Polanco Casares Fernando**
+
+---
+##  Diagrama UML
+### Agregar despues 
+---
+
+##  Errores encontrados y soluciones implementadas
+
+### 1. Error en la Funcionalidad "Help" (Congelación de UI)
+
+| Aspecto                   | Detalles                                                                                                                                                                                                                                                      |
+|:--------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Descripción del Error** | Al hacer clic en la opción "Help" (Ayuda), la interfaz de usuario se congelaba, impidiendo que se abriera el enlace; Concluimos que podría ser error por el sistema operativo .                                                                               |
+| **Solución Implementada** | Se movió la lógica de la apertura del enlace a un hilo en segundo plano para que si no se logra abrir el enlace, no se congele el programa.                                                                                                                   |
+| **Implementación**        | Se agregó un bloque try-catch para verificar si es posible abrir el enlace. La lógica de apertura fue trasladada a otro hilo para evitar la congelación de la UI, permitiendo que la interfaz se maneje mientras la operación externa se ejecuta en paralelo. |
+
+### 2. Error al Agregar Productos (Validación de Precio)
+
+| Aspecto                   | Detalles                                                                                                                                                                                                          |
+|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Descripción del Error** | Al agregar un producto, si el usuario ingresaba texto o dejaba vacío el campo de precio, el programa fallaba al intentar convertir la entrada a un tipo numérico ( `NumberFormatException`).                      |
+| **Solución Implementada** | Implementación de manejo de errores y validación de entrada                                                                                                                                                       |
+| **Implementación**        | Se añadió una validación del campo y un bloque try-catch en el controlador. Si la entrada no es un valor numérico válido, se muestra una alerta al usuario indicándole el error y solicitando una entrada válida. |
+
+### 3. Error (describir error)
+| Aspecto                   | Detalles      |
+|:--------------------------|:--------------|
+| **Descripción del Error** | Escribir aqui |
+| **Solución Implementada** | Escribir aqui |
+| **Implementación**        | Escribir aqui |
+
+
+
+---
+
+##  Modificaciones en la Interfaz de Usuario (UI)
+
+* **Idioma:** Se realizó el cambio del idioma de la interfaz de inglés a español para asegurar que el producto sea completamente accesible y usable para el público objetivo.
+* **Ajuste de Distribución:** Se ajustó la distribución y el diseño en varias ventanas, especialmente en la ventana de reportes, ya que el contenido no se visualizaba completo al abrirla, mejorando la experiencia de usuario.
+
+---
+
+## Implementaciones Propuestas:
+
+### Propuesta Implementada #1: Validación de Campos Mediante Interfaz
+
+* **Objetivo** Fortalecer la solidez de la aplicación previniendo la inserción de datos vacíos o no válidos para atributos esenciales, promoviendo la **integridad de los datos**.
+* **Implementación:**
+    1.  Se creó la interfaz **`IValidable`**.
+    2.  Esta interfaz se implementó en los controladores principales: `SellerController`, `ProductController`, y `CustomerController`.
+    3.  La interfaz obliga a la implementación del método de validación de campos para no permitir agregar elementos con atributos esenciales vacíos.
+* **Resultado:** 
+    1.  No se permiten agregar productos, clientes y vendedores con campos vacíos, informa al usuario que debe de ingresar una entrada válida
+
+### Propuesta Implementada #2: Refactorización Arquitectónica (Principios SOLID: S y D)
+
+#### 1. Separación de Responsabilidades (SOLID: Single Responsibility Principle - SRP)
+
+* **Objetivo:** Asegurar un límite claro y estricto entre la capa de Acceso a Datos (DAO) y la capa de Presentación (Controladores).
+* **Acción:**
+    * Se eliminaron todas las responsabilidades específicas de la Interfaz de Usuario (UI) (llamadas a `MenuController.setAlert()`) de las clases DAO (`CustomerDAO`, `SellerDAO`, `ProductDAO`, `SalesDAO`).
+* **Resultado:**
+    * Las DAOs ahora tienen una Responsabilidad Única: gestionar la persistencia y devolver un simple resultado (`true` para éxito, `false` para fallo, o un objeto de modelo/`null`).
+    * Los Controladores ahora son los responsables de interpretar el resultado del DAO y manejar la lógica de la presentación (mostrar alertas de éxito o error al usuario).
+
+#### 2. Inversión de Dependencias (SOLID: Dependency Inversion Principle - DIP)
+
+* **Objetivo:** Desacoplar los módulos de alto nivel de los módulos de bajo nivel, promoviendo la flexibilidad.
+* **Acción:**
+    * Se modificaron las declaraciones de los Controladores para que dependan de la interfaz abstracta `CRUD<T>` en lugar de depender de la implementación concreta de cada DAO.
+* **Resultado:**
+    * Los módulos de alto nivel (Controladores) ya no dependen directamente de los módulos de bajo nivel (DAOs concretos).
+    * Esto desacopla la aplicación, facilitando la posibilidad de cambiar el mecanismo de persistencia sin la necesidad de modificar el código del Controlador.
+
+
+---
 ## Sales
 https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d-83f9b4807ac5
 ## Management

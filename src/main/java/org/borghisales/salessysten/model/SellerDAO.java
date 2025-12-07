@@ -108,12 +108,7 @@ public class SellerDAO implements CRUD<Seller> {
     }
 
 
-    public static boolean login(String dni,String user){
-
-        if (dni ==null || user ==null || dni.isEmpty()||user.isEmpty() ){
-            MenuController.setAlert(Alert.AlertType.ERROR,"User or passsword empty");
-            return false;
-        }
+    public static Seller login(String dni,String user){
 
         String query = "SELECT * from seller where dni = ? and user = ?";
 
@@ -126,20 +121,15 @@ public class SellerDAO implements CRUD<Seller> {
             try (ResultSet rs = pstmt.executeQuery()){
                 if (rs.next()){
 
-                    GenerateSaleController.setSellerName(rs.getString("name"));
-                    GenerateSaleController.setIdSeller(rs.getInt("idSeller"));
+                    return Seller.fromResultSet(rs);
 
-                    MainController.sellerLog = Seller.fromResultSet(rs);
-
-                    return true;
                 }else{
-                    MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;
-                    return false;
+                    return null;
                 }
             }
         }catch (SQLException e){
             e.printStackTrace();
-            return false;
+            return null;
         }
 
     }
