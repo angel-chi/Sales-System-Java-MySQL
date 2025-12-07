@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class SellerController implements Initializable {
+public class SellerController implements Initializable, validacionEntrada {
     private final SellerDAO sellerDAO = new SellerDAO();
     private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
     private static ObservableList<Seller> sellers = null;
@@ -87,11 +87,15 @@ public class SellerController implements Initializable {
 
     public void addSeller(ActionEvent actionEvent){
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
+        if (campoVacio(dni)||campoVacio(name)||campoVacio(phone)||campoVacio(user)){
+            mostrarAdvertencia("Debes de completar todos los campos antes de guardar");
+        }
         if (sellerDAO.create(seller)) {
             MenuController.cleanCells(dni, name, phone, user);
             updateTable();
         }
     }
+
     public void updateSeller(ActionEvent actionEvent) {
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
         if (sellerDAO.update(seller)) {

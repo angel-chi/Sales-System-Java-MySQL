@@ -19,7 +19,7 @@ import org.borghisales.salessysten.model.ProductDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProductController implements Initializable {
+public class ProductController implements Initializable,validacionEntrada {
 
     private final ProductDAO productDAO = new ProductDAO();
 
@@ -87,6 +87,10 @@ public class ProductController implements Initializable {
     public void addProduct(ActionEvent actionEvent) {
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                           Integer.parseInt(stock.getText()), cbState.getValue());
+        if (campoVacio(name)||campoVacio(price)||campoVacio(stock)){
+            mostrarAdvertencia("Debes de completar todos los campos antes de guardar");
+        }
+
         if (productDAO.create(product)) {
             MenuController.cleanCells(name,price,stock);
             updateTable();

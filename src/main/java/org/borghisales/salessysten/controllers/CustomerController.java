@@ -16,7 +16,7 @@ import org.borghisales.salessysten.model.CustomerDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CustomerController implements Initializable {
+public class CustomerController implements Initializable,validacionEntrada {
 
     private final CustomerDAO customerDAO = new CustomerDAO();
     private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
@@ -78,6 +78,9 @@ public class CustomerController implements Initializable {
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
         Customer customer = new Customer(DNI.getText(),name.getText(),address.getText(),cbState.getValue());
+        if (campoVacio(DNI)||campoVacio(name)||campoVacio(address)){
+            mostrarAdvertencia("Debes de completar todos los campos antes de guardar");
+        }
         if (customerDAO.create(customer)) {
             MenuController.cleanCells(DNI, name, address);
             updateTable();
