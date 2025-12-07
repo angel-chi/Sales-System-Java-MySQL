@@ -94,6 +94,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void initializeUIElements() {
+        //quantity.getValueFactory().setValue(0);
         total.setText("0.0");
         setSerial();
         seller.setText(sellerName);
@@ -129,15 +130,36 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void searchCustomer(ActionEvent actionEvent) {
-        int customerId = Integer.parseInt(codCustomer.getText());
-        customer = customerDAO.searchCustomer(customerId);
+        try{
+            if(codCustomer.getText() != null && !codCustomer.getText().isBlank()){
+                int customerId = Integer.parseInt(codCustomer.getText());
+                customer = customerDAO.searchCustomer(customerId);
 
-        if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Ciente encontrado: " + customer.name());
-            customerName.setText(customer.name());
-        } else {
-            handleCustomerNotFound();
+                if (customer != null) {
+                    setAlert(Alert.AlertType.CONFIRMATION, "Ciente encontrado: " + customer.name());
+                    customerName.setText(customer.name());
+                } else {
+                    handleCustomerNotFound();
+                }
+            }
+            if(customerName.getText() != null && !customerName.getText().isBlank()){
+                String customerName = this.customerName.getText();
+                customer = customerDAO.searchCustomerName(customerName);
+
+                if(customer != null){
+                    setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + customer.idCustomer());
+                    codCustomer.setText(String.valueOf(customer.idCustomer()));
+                }else{
+                    handleCustomerNotFound();
+                }
+            }
+
+        }catch (NumberFormatException e){
+            codCustomer.clear();
+            customerName.clear();
+            MenuController.setAlert(Alert.AlertType.ERROR,"El codigo del cliente debe ser un numero");
         }
+
     }
 
     private void handleCustomerNotFound() {
@@ -165,13 +187,17 @@ public class GenerateSaleController extends MenuController implements Initializa
 
 
     public void searchProduct(ActionEvent actionEvent) {
-        int productId = Integer.parseInt(codProduct.getText());
-        Product product = productDAO.searchProduct(productId);
+        try {
+            int productId = Integer.parseInt(codProduct.getText());
+            Product product = productDAO.searchProduct(productId);
 
-        if (product != null) {
-            updateProductFields(product);
-        } else {
-            handleProductNotFound();
+            if (product != null) {
+                updateProductFields(product);
+            } else {
+                handleProductNotFound();
+            }
+        }catch (NumberFormatException e){
+            MenuController.setAlert(Alert.AlertType.ERROR,"El codigo del producto debe ser un numero");
         }
     }
 

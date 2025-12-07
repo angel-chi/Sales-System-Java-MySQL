@@ -14,13 +14,21 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.scene.text.Text;
+import org.borghisales.salessysten.model.SellerDAO;
 
 public class ManagementController extends MenuController implements Initializable {
 
     //private static int lastTab ;
+
+    @FXML
+    private Text dateNow, idVendedor, usuarioVendedor;
+
 
     @FXML
     private StackPane mainpage;
@@ -40,6 +48,8 @@ public class ManagementController extends MenuController implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        idVendedor.setText(String.valueOf(MainController.sellerLog.idSeller()));
+        usuarioVendedor.setText(MainController.sellerLog.dni());
         loadPage(WELCOME_MENU_VIEW_FXML,"Bienvenido");
     }
 
@@ -65,13 +75,15 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void loadPage(String fxmlFileName, String title){
         try{
-
+            dateNow.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             Parent page = FXMLLoader.load(getClass().getResource(fxmlFileName));
             mainpage.getChildren().setAll(page);
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error cargando la vista: "+ e.getMessage());
         }
     }
+
+
 //    public void openCustomer(ActionEvent actionEvent) {
 //        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
 //        openNewStage(CUSTOMER_VIEW_FXML, "Cliente");

@@ -206,16 +206,9 @@ public class SellerDAO extends Validator<Seller> implements CRUD<Seller>{
     }
 
     protected boolean validate_phone(Seller entity){
-        for (int i = 0; i < entity.phoneNumber().length(); i++) {
-            char caracter = entity.phoneNumber().charAt(i);
-            int c=i+1;
-            if(c<=15){ //maximo de digitos permitidos en el mundo
-                if (!Character.isDigit(caracter)) {
-                    return false;
-                }
-            } else{
-                return false;
-            }
+        if(entity.phoneNumber().length()<= 15 && entity.phoneNumber().length() >= 8)return true;
+        for(char c : entity.phoneNumber().toCharArray()){
+            if(!Character.isDigit(c))return false;
         }
         return true;
     }

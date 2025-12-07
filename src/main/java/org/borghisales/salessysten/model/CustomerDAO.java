@@ -30,6 +30,29 @@ public class CustomerDAO extends Validator<Customer> implements CRUD<Customer>{
         }
 
     }
+
+
+    ///  Busca si el cliente por su 'name' en la base de datos
+    public Customer searchCustomerName(String name){
+        String sql = "SELECT * FROM customer WHERE name=?";
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setString(1,name);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    return Customer.fromResultSet(rs);
+                }
+                return null;
+            }
+
+        }catch (SQLException e){
+
+            return null;
+        }
+
+    }
     @Override
     public boolean create(Customer entity) {
         if(!validate(entity))return false;
