@@ -155,6 +155,44 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 
 [⬆ Volver al inicio](#title)<br>
 
+# ⚠️ Errores
+
+Error 1: No se encontró o no se pudo cargar la clase principal
+
+<img width="1853" height="888" alt="imagen" src="https://github.com/user-attachments/assets/a7ebe140-ef3d-4586-920d-5edd486e036c" />
+
+<img width="1853" height="888" alt="imagen" src="https://github.com/user-attachments/assets/299d681c-fa68-40d2-a411-e1e2681c46e1" />
+
+**Solución**: El programa no presentaba el plugin de Maven, por lo tanto, al intentar aplicar el comando mvn javafx:run aparecía un error diciendo que no se pudo cargar la clase principal y decía **BUILD FAILURE**. La solución fue agregar el plugin de Maven faltante. Del mismo modo, se modificó el módulo debido a que anteriormente estaba de la siguiente forma:
+
+<mainClass>org.borghisales.salessysten/org.borghisales.salessysten.HelloApplication 
+
+Lo cual era incorrecto porque, en este caso, no debería apuntar a HelloApplication; debería ser la clase Main. Al realizar estos cambios, el programa funcionó usando el comando. El plugin implementado fue el siguiente:
+
+<plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <!--mainClass>mypackage.gui.menuInicial.JFrameGestorEstudiantes_app</mainClass-->
+                            <mainClass>org.borghisales.salessysten.Main</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+
 # ⚙️ Mejoras propuestas
 
 Mejora 1 **IMPLEMENTADA**:
