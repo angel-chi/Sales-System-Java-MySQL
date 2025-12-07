@@ -169,11 +169,38 @@ Error 1: No se encontró o no se pudo cargar la clase principal
 
 Lo cual era incorrecto porque, en este caso, no debería apuntar a HelloApplication; debería ser la clase Main. Al realizar estos cambios, el programa funcionó usando el comando. El plugin implementado fue el siguiente:
 
-<img width="834" height="467" alt="imagen" src="https://github.com/user-attachments/assets/4724e020-3e19-4c11-88ce-91601f827e83" />
+```xml
+<plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <!--mainClass>mypackage.gui.menuInicial.JFrameGestorEstudiantes_app</mainClass-->
+                            <mainClass>org.borghisales.salessysten.Main</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+</plugin>
+```
+
 
 # ⚙️ Mejoras propuestas
 
 Mejora 1 **IMPLEMENTADA**:
+
 Se propuso e implementó una nueva clase para validar los datos de entrada de cada entidad. Por ejemplo, en el apartado del DNI, la entrada deben ser números y no caracteres. Anteriormente, el programa no marcaba ningún error al ingresar cosas diferentes a números. Del mismo modo, se hicieron los cambios en todas las entidades para validar que los datos de entrada fueran los solicitados.
 
 Se hizo esta mejora porque el programa no marcaba ningún error al ingresar datos diferentes a los requeridos, lo cual es incorrecto; por lo tanto, se implementó este cambio que valida todos los datos de entrada.
@@ -186,6 +213,7 @@ En cuanto a la clasificación, se organiza el código agrupando en una sola clas
 Por último, se aplica el Principio de Responsabilidad Única (SRP), ya que antes la validación estaba distribuida dentro de los controladores. Al mover esta lógica a una clase independiente, cada clase cumple una única responsabilidad: InputValidator valida datos, mientras que los controladores se encargan de gestionar la interfaz.
 
 Mejora 2:
+
 Se propuso una nueva clase para clasificar los productos dependiendo de su categoría (celulares, laptops, accesorios, etc.). El programa actualmente no clasifica los productos por categoría, y esta mejora permitiría buscar de una manera más sencilla los productos deseados, como celulares, audífonos, etc.
 
 Esta mejora se relaciona con la programación orientada a objetos porque implementa clasificación y encapsulación.
