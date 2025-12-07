@@ -155,9 +155,10 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 
 [⬆ Volver al inicio](#title)<br>
 
-# ⚙️ Mejoras
+# ⚙️ Mejoras propuestas
 
-1- Se propuso e implementó una nueva clase para validar los datos de entrada de cada entidad. Por ejemplo, en el apartado del DNI, la entrada deben ser números y no caracteres. Anteriormente, el programa no marcaba ningún error al ingresar cosas diferentes a números. Del mismo modo, se hicieron los cambios en todas las entidades para validar que los datos de entrada fueran los solicitados.
+Mejora 1 **IMPLEMENTADA**:
+Se propuso e implementó una nueva clase para validar los datos de entrada de cada entidad. Por ejemplo, en el apartado del DNI, la entrada deben ser números y no caracteres. Anteriormente, el programa no marcaba ningún error al ingresar cosas diferentes a números. Del mismo modo, se hicieron los cambios en todas las entidades para validar que los datos de entrada fueran los solicitados.
 
 Se hizo esta mejora porque el programa no marcaba ningún error al ingresar datos diferentes a los requeridos, lo cual es incorrecto; por lo tanto, se implementó este cambio que valida todos los datos de entrada.
 
@@ -167,3 +168,12 @@ En el caso de la encapsulación, la lógica de validación queda concentrada den
 En cuanto a la clasificación, se organiza el código agrupando en una sola clase todas las funciones relacionadas con el mismo propósito: la validación de datos. 
 
 Por último, se aplica el Principio de Responsabilidad Única (SRP), ya que antes la validación estaba distribuida dentro de los controladores. Al mover esta lógica a una clase independiente, cada clase cumple una única responsabilidad: InputValidator valida datos, mientras que los controladores se encargan de gestionar la interfaz.
+
+Mejora 2:
+Se propuso una nueva clase para clasificar los productos dependiendo de su categoría (celulares, laptops, accesorios, etc.). El programa actualmente no clasifica los productos por categoría, y esta mejora permitiría buscar de una manera más sencilla los productos deseados, como celulares, audífonos, etc.
+
+Esta mejora se relaciona con la programación orientada a objetos porque implementa clasificación y encapsulación.
+
+Se utiliza clasificación porque, en este caso, el código se organizaría de una manera que permite dividir los productos según su categoría, simplificando el programa.
+
+Finalmente, se implementaría encapsulación, ya que el código quedaría en una nueva clase con una única función, la cual sería clasificar los productos, dejando ver únicamente los atributos y métodos necesarios para ser utilizados por otras clases.
