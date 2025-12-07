@@ -176,8 +176,6 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 <h1></h1>
 
 # Boton de busqueda
-<h2>Boton de busqueda</h2>
-1.Implementar una función que facilite la busqueda de información, especificamente sobre los clientes y productos. Para que el usuario pueda encontrar de una forma más rápida y sencilla el cliente o producto que esta buscando, quisá y no es tan útil si tienes muy pocos productos o clientes pero en el caso contrario te podrías ahorrar tiempo de estar "scrolleando" hasta encontrar lo que quieres(falta especificar la realción con POO).
-
+1.Se propuso y se implementó una función que facilita la busqueda de información, especificamente sobre los clientes y productos. Esta funcionalidad optimiza la experiencia del usuario al permitir la localización eficiente de registros dentro de grandes volúmenes, en este caso entre los clientes y los productos, aplicando filtros sobre los registros, para esto se aplicó la clase FilteredList . Esta estructura actúa como una máscara dinámica sobre la lista observable original, para no tener que estar accediendo a la base de datos y usar consultas para filtrar elementos de esta. Con el FilteredList actuamos sobre la clase ObservableList. Aquí se aplicaron las lambdas que son útiles para tener un código limpio, compacto y  para implementar polimorfismo por medio de interfaces funcionales(un solo metódo asbtracto)
 
 # 
