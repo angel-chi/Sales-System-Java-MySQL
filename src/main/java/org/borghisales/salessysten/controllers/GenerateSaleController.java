@@ -314,6 +314,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
         Sales sales = createSalesObject();
 
+        setSerial();
         if (saveSaleAndDetails(sales)) {
             productDAO.subtractStock(products);
             cleanFieldsAndTable();
