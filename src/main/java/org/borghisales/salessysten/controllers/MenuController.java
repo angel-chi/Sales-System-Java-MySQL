@@ -42,8 +42,8 @@ public class MenuController {
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
-            stage.setMinWidth(500);
-            stage.setMinHeight(500);
+            stage.setMinWidth(650);
+            stage.setMinHeight(650);
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
         } catch (IOException | NullPointerException e) {

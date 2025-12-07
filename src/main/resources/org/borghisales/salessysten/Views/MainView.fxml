@@ -5,40 +5,35 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
+<AnchorPane prefHeight="650.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
     <children>
-        <ImageView fitHeight="500.0" fitWidth="500.0" preserveRatio="false">
+        <ImageView fitHeight="650.0" fitWidth="650.0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
             <image>
                 <Image url="@../../../../images/fondologin.jpg"/>
             </image>
         </ImageView>
-        <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+        <ImageView fitHeight="150.0" fitWidth="150.0" preserveRatio="true" layoutX="10" layoutY="20">
             <image>
                 <Image url="@../../../../images/Logo_UADY.svg.png"/>
             </image>
         </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="180.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/login.jpg" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" layoutX="10.0" layoutY="30.0" prefHeight="300.0" prefWidth="500.0" text="SISTEMA DE VENTAS" underline="true">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="125.0" layoutY="225.0" prefHeight="45.0" prefWidth="250.0" text="USUARIO" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="150.0" layoutY="320.0" prefHeight="45.0" prefWidth="200.0" text="CONTRASEÑA">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <TextField fx:id="user" layoutX="170.0" layoutY="270.0" />
-      <Button layoutX="190.0" layoutY="420.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="INICIAR SESIÓN" />
-      <PasswordField fx:id="password" layoutX="170.0" layoutY="365.0" />
-   </children>
+        <ImageView fitHeight="200.0" fitWidth="200.0" preserveRatio="true" layoutX="225" layoutY="50">
+            <image>
+                <Image url="@../../../../images/login.jpg"/>
+            </image>
+        </ImageView>
+        <Label text="SISTEMA DE VENTAS" underline="true" layoutX="150" layoutY="260" prefWidth="350" alignment="CENTER">
+            <font><Font size="28.0"/></font>
+        </Label>
+        <Label text="IDENTIFICACIÓN" alignment="CENTER" layoutX="200" layoutY="310" prefWidth="250">
+            <font><Font size="24.0"/></font>
+        </Label>
+        <TextField fx:id="user" prefWidth="250" layoutX="200" layoutY="350"/>
+        <Label text="CONTRASEÑA" alignment="CENTER" layoutX="200" layoutY="400" prefWidth="250">
+            <font><Font size="24.0"/></font>
+        </Label>
+        <PasswordField fx:id="password" prefWidth="250" layoutX="200" layoutY="440"/>
+        <Button text="INICIAR SESIÓN" onAction="#signIn" layoutX="265" layoutY="500" prefWidth="120" prefHeight="35"/>
+    </children>
 </AnchorPane>
+
