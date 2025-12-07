@@ -1,6 +1,5 @@
 package org.borghisales.salessysten.controllers;
 
-import com.sun.tools.javac.Main;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -13,12 +12,11 @@ import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Cliente;
 import org.borghisales.salessysten.model.ClienteDAO;
 
-
+import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class CustomerController implements Initializable {
+public class CustomerController extends MenuController implements Initializable {
 
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private final ObservableList<Cliente.Estado> stateList = FXCollections.observableArrayList(Cliente.Estado.ACTIVO, Cliente.Estado.INACTIVO);
@@ -115,5 +113,11 @@ public class CustomerController implements Initializable {
         tableCustomers.getItems().clear();
         clienteDAO.setTable(clientes);
         tableCustomers.setItems(clientes);
+    }
+
+    @FXML
+    public void backToMenu(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML, "Management");
+        closeCurrentStage(dni);
     }
 }

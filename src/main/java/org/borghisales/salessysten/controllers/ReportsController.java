@@ -36,7 +36,7 @@ import java.time.Month;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class ReportsController implements Initializable {
+public class ReportsController extends MenuController implements Initializable {
 
     private static final String[] mesesMostrados = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"}; // monthsShowed -> mesesMostrados (traducido)
     private static int idxMes = LocalDate.now().getMonth().getValue()-1; // idxMonth -> idxMes
@@ -96,6 +96,10 @@ public class ReportsController implements Initializable {
     private TableColumn<Venta,Double> colAmount; // Sales -> Venta
     @FXML
     private TableColumn<Venta, Venta.Estado> colState; // Sales.State -> Venta.Estado
+    @FXML
+    private TableColumn<Venta, Venta.TipoPago> colTipoPago;
+    @FXML
+    private TableColumn<Venta, Venta.EntregaTicket> colEntregaTicket;
 
     public static void eliminarCacheGraficoLinea(int year, int month) { // Nombre de método y parámetros
         if (cacheReporteGraficoLinea != null && cacheReporteGraficoLinea.containsKey(year)) { // cacheReportLineChart -> cacheReporteGraficoLinea
@@ -167,6 +171,8 @@ public class ReportsController implements Initializable {
         colSaleDate.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().fechaDeVenta())); // saleDate() -> fechaDeVenta()
         colAmount.setCellValueFactory(p -> new SimpleDoubleProperty((p.getValue().total())).asObject()); // amount() -> total()
         colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().estado())); // state() -> estado()
+        colTipoPago.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().tipo_pago()));
+        colEntregaTicket.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().entrega_ticket()));
 
         tableReport.getItems().clear();
 
@@ -177,6 +183,7 @@ public class ReportsController implements Initializable {
 
         tableReport.setItems(ventas); // sales -> ventas
     }
+
 
     private void setupEventHandlers() {
         tableReport.setOnMouseClicked(mouseEvent -> {
@@ -452,9 +459,9 @@ public class ReportsController implements Initializable {
         lineChartData.getData().sort(Comparator.comparingInt(data -> Integer.parseInt(data.getXValue())));
     }
 
-
-
-
-
-
+    @FXML
+    public void backToMenu(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML, "Management");
+        closeCurrentStage(cbTypeExport);
+    }
 }

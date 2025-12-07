@@ -10,14 +10,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import org.borghisales.salessysten.model.Vendedor; // Seller -> Vendedor
-import org.borghisales.salessysten.model.VendedorDAO; // SellerDAO -> VendedorDAO
+import org.borghisales.salessysten.model.Vendedor;
+import org.borghisales.salessysten.model.VendedorDAO;
 
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class SellerController implements Initializable {
+public class SellerController extends MenuController implements Initializable {
     private final VendedorDAO vendedorDAO = new VendedorDAO(); // SellerDAO -> VendedorDAO
     private final ObservableList<Vendedor.Estado> stateList = FXCollections.observableArrayList(Vendedor.Estado.ACTIVO, Vendedor.Estado.INACTIVO); // Seller.State -> Vendedor.Estado
     private static ObservableList<Vendedor> vendedores = null; // Seller -> Vendedor, sellers -> vendedores
@@ -150,5 +150,11 @@ public class SellerController implements Initializable {
         tableSellers.getItems().clear();
         vendedorDAO.setTable(vendedores); // sellerDAO -> vendedorDAO, sellers -> vendedores
         tableSellers.setItems(vendedores); // sellers -> vendedores
+    }
+
+    @FXML
+    public void backToMenu(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML, "Management");
+        closeCurrentStage(identificacion);
     }
 }

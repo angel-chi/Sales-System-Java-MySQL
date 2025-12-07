@@ -16,10 +16,11 @@ import javafx.scene.control.TextField;
 import org.borghisales.salessysten.model.Producto; // Product -> Producto
 import org.borghisales.salessysten.model.ProductoDAO; // ProductDAO -> ProductoDAO
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProductController implements Initializable {
+public class ProductController extends MenuController implements Initializable {
 
     private final ProductoDAO productoDAO = new ProductoDAO(); // ProductDAO -> ProductoDAO
 
@@ -126,4 +127,9 @@ public class ProductController implements Initializable {
         tableProducts.setItems(productos); // products -> productos
     }
 
+    @FXML
+    public void backToMenu(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML, "Management");
+        closeCurrentStage(nombre);
+    }
 }
