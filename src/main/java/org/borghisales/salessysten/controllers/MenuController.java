@@ -44,10 +44,23 @@ public class MenuController {
             stage.setScene(scene);
             stage.setMinWidth(500);
             stage.setMinHeight(500);
+            configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error loading the view: " + e.getMessage());
         }
+    }
+
+    private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
+        if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
+            stage.setOnCloseRequest(e -> {
+                openNewStage(getFxmlFather(fxmlFileName),title);
+            });
+        }
+    }
+
+    String getFxmlFather(String fxml){
+        return filePaths.get(fxml);
     }
 
     static public void setAlert(Alert.AlertType alertType,String argument){
