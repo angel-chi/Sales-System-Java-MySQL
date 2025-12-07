@@ -27,6 +27,22 @@ public class MenuController {
     static ButtonType acceptButton = new ButtonType("Aceptar");
     public static HashMap<String, String > filePaths = new HashMap<>();
 
+    //Hashmap que guarda los titulos de cada ventana.
+    public static HashMap<String, String> titles = new HashMap<>();
+    static {
+        titles.put(MANAGEMENT_VIEW_FXML, "Gestión");
+        titles.put(SELLER_VIEW_FXML, "Vendedores");
+        titles.put(CUSTOMER_VIEW_FXML, "Clientes");
+        titles.put(PRODUCT_VIEW_FXML, "Productos");
+        titles.put(GENERATE_SALE_VIEW_FXML, "Venta");
+        titles.put(REPORT_VIEW_FXML, "Reportes");
+        titles.put(SALE_DETAIL_VIEW_FXML, "Detalles de Venta");
+    }
+    //Metodo para obtener cada título perteneciente al hashmap.
+    String getTitleForView(String fxml) {
+        return titles.getOrDefault(fxml, "Ventana");
+    }
+
     void closeCurrentStage(Node node) {
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
@@ -40,6 +56,7 @@ public class MenuController {
             stage.setScene(scene);
             //Mantiene el nombre de la ventana actual.
             stage.getProperties().put("currentView",fxmlFileName);
+            stage.getProperties().put("currentTitle", title);
             // Mantener el mismo tamaño al cambiar ventanas.
             stage.setMinWidth(400);
             stage.setMinHeight(600);
@@ -61,9 +78,12 @@ public class MenuController {
     private void configureStageCloseEvent(Stage stage) {
         stage.setOnCloseRequest(e -> {
             String vistaActual = (String) stage.getProperties().get("currentView");
+            String tituloActual = (String) stage.getProperties().get("currentTitle");
+
             if (!vistaActual.equals(MAIN_VIEW_FXML)) {
-                String father = getFxmlFather(vistaActual);
-                openNewStage(father, "Ventana Anterior");
+                String vistaPadre = getFxmlFather(vistaActual);
+                String tituloPadre = getTitleForView(vistaPadre);
+                openNewStage(vistaPadre,tituloPadre);
             }
         });
     }
