@@ -49,7 +49,12 @@ public class MenuController {
             stage.show();
             stage.setWidth(1000);
             stage.setHeight(800);
-            stage.setAlwaysOnTop(true);
+
+            Platform.runLater(() -> {
+                stage.toFront();
+                stage.requestFocus();
+            });
+
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error cargando la vista: "+ e.getMessage());
         }
