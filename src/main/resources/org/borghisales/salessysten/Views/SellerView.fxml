@@ -96,6 +96,7 @@
         <!-- Tabla de vendedores -->
         <TableView fx:id="tableSellers" prefHeight="250.0" prefWidth="800.0">
             <columns>
+                <TableColumn fx:id="colNivel" prefWidth="133.0" text="Estado" />
                 <TableColumn fx:id="colId" prefWidth="133.0" text="IdVendedor" />
                 <TableColumn fx:id="colDni" prefWidth="133.0" text="DNI" />
                 <TableColumn fx:id="colName" prefWidth="133.0" text="NOMBRE" />

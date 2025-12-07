@@ -27,6 +27,8 @@ import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
 import org.borghisales.salessysten.model.dao.ProductDAO;
 import org.borghisales.salessysten.model.dao.SalesDAO;
+import org.borghisales.salessysten.model.entities.Sales;
+import org.borghisales.salessysten.model.entities.State;
 
 
 import java.net.URL;

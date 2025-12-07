@@ -1,4 +1,4 @@
-package org.borghisales.salessysten.model;
+package org.borghisales.salessysten.model.entities;
 
 public interface User {
     String dni();

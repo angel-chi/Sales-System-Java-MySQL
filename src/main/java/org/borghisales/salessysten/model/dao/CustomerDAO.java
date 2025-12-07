@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MenuController;
 import org.borghisales.salessysten.model.CRUD;
-import org.borghisales.salessysten.model.Customer;
+import org.borghisales.salessysten.model.entities.Customer;
 import org.borghisales.salessysten.model.DBConnection;
 
 import java.sql.Connection;

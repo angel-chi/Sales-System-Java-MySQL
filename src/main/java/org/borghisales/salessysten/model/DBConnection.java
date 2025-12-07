@@ -21,7 +21,7 @@ public class DBConnection {
             return DriverManager.getConnection(url, user, password);
         } catch (IOException e) {
             e.printStackTrace();
-            // Manejar la excepción adecuadamente
+            MenuController.setAlert(Alert.AlertType.ERROR, "No se ha encontrado el archivo de configuracion para la base de datos");
             return null;
         }
     }
@@ -39,10 +39,23 @@ public class DBConnection {
             }
 
         }catch(SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Error adding employee: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR,"Error al agregar el empleado (Este ya existe): " + e.getMessage());
             return false;
         }
 
+    }
+    private static boolean verifyBeforeDeletingSeller(String idVendedor){
+        // Esto evitara problemas de logica al intentar eliminar alguna entidad que ya teng aun historial
+        String query = "Select S.idCustomer from Sales join S sales, C customer";
+        return false;
+    }
+    private static boolean verifyBeforeDeletingProduct(String idProducto){
+        String query = "Select * from ";
+        return false;
+    }
+    private static boolean verifyBeforeDeletingCustomer(String idCliente){
+        String query = "Select * from ";
+        return false;
     }
 
 

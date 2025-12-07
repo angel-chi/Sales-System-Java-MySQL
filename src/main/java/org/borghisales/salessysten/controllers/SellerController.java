@@ -10,9 +10,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import org.borghisales.salessysten.model.Seller;
+import org.borghisales.salessysten.model.entities.Nivel;
+import org.borghisales.salessysten.model.entities.Seller;
 import org.borghisales.salessysten.model.dao.SellerDAO;
-import org.borghisales.salessysten.model.State;
+import org.borghisales.salessysten.model.entities.State;
+import org.borghisales.salessysten.model.entities.Nivel;
 
 import java.net.URL;
 import java.util.Objects;
@@ -36,6 +38,8 @@ public class SellerController implements Initializable {
     @FXML
     private TextField password;
     @FXML
+    private ComboBox<Nivel>  nivel;
+    @FXML
     private ComboBox<State> cbState;
     @FXML
     private TableView<Seller> tableSellers;
@@ -51,6 +55,8 @@ public class SellerController implements Initializable {
     private TableColumn<Seller,String> colPhone;
     @FXML
     private TableColumn<Seller, State> colState;
+    @FXML
+    private TableColumn<Seller, Nivel> colNivel;
 
 
 
@@ -75,6 +81,7 @@ public class SellerController implements Initializable {
         colEmail.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().email()));
         colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().phoneNumber()));
         colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+        colNivel.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().nivel()));
     }
 
     private void initializeComboBox() {
@@ -98,7 +105,7 @@ public class SellerController implements Initializable {
             ;
         }
         else {
-            Seller seller = new Seller(dni.getText(), name.getText(), email.getText(), phone.getText(), cbState.getValue(), user.getText(), password.getText());
+            Seller seller = new Seller(dni.getText(), name.getText(), email.getText(), phone.getText(), cbState.getValue(), nivel.getValue(), user.getText(), password.getText());
             if (sellerDAO.create(seller)) {
                 MenuController.cleanCells(dni, name, phone, user, password);
                 updateTable();
@@ -111,7 +118,7 @@ public class SellerController implements Initializable {
             ;
         }
         else {
-            Seller seller = new Seller(dni.getText(), name.getText(), email.getText(), phone.getText(), (State) cbState.getValue(), user.getText(), password.getText());
+            Seller seller = new Seller(dni.getText(), name.getText(), email.getText(), phone.getText(), (State) cbState.getValue(), (Nivel) nivel.getValue(),user.getText(), password.getText());
             if (sellerDAO.update(seller)) {
                 MenuController.cleanCells(dni, name, phone, user, password);
                 updateTable();
@@ -142,6 +149,7 @@ public class SellerController implements Initializable {
         user.setText(seller.user());
         password.setText(seller.password());
         cbState.setValue(seller.state());
+        nivel.setValue(seller.nivel());
     }
 
     private void updateTable(){

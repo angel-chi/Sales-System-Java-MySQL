@@ -1,4 +1,4 @@
-package org.borghisales.salessysten.model;
+package org.borghisales.salessysten.model.entities;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

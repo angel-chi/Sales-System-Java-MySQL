@@ -13,9 +13,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import org.borghisales.salessysten.model.Product;
+import org.borghisales.salessysten.model.entities.Product;
 import org.borghisales.salessysten.model.dao.ProductDAO;
-import org.borghisales.salessysten.model.State;
+import org.borghisales.salessysten.model.entities.State;
 
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -12,10 +12,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.borghisales.salessysten.model.*;
 import org.borghisales.salessysten.model.dao.CustomerDAO;
 import org.borghisales.salessysten.model.dao.ProductDAO;
 import org.borghisales.salessysten.model.dao.SalesDAO;
+import org.borghisales.salessysten.model.entities.*;
 
 
 import java.io.IOException;

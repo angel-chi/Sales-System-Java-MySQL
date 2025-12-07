@@ -5,27 +5,17 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.util.List;
 
 import javafx.collections.ObservableList;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-import javafx.collections.ObservableList;
 import org.borghisales.salessysten.controllers.MenuController;
+import org.borghisales.salessysten.model.entities.Sales;
 
 import java.awt.Color;
-import java.io.IOException;
-import java.time.LocalDate;
-
-import java.awt.*;
 import java.io.IOException;
 
 public class SalesReportGenerator {

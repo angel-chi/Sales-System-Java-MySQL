@@ -7,8 +7,8 @@ import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 import org.borghisales.salessysten.controllers.ReportsController;
 import org.borghisales.salessysten.model.DBConnection;
-import org.borghisales.salessysten.model.Sales;
-import org.borghisales.salessysten.model.ShoppingCart;
+import org.borghisales.salessysten.model.entities.Sales;
+import org.borghisales.salessysten.model.entities.ShoppingCart;
 
 import java.sql.*;
 

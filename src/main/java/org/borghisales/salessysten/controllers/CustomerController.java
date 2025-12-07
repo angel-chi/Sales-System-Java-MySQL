@@ -9,9 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import org.borghisales.salessysten.model.Customer;
+import org.borghisales.salessysten.model.entities.Customer;
 import org.borghisales.salessysten.model.dao.CustomerDAO;
-import org.borghisales.salessysten.model.State;
+import org.borghisales.salessysten.model.entities.State;
 
 
 import java.net.URL;

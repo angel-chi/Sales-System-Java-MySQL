@@ -7,7 +7,7 @@ import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 import org.borghisales.salessysten.model.CRUD;
 import org.borghisales.salessysten.model.DBConnection;
-import org.borghisales.salessysten.model.Seller;
+import org.borghisales.salessysten.model.entities.Seller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

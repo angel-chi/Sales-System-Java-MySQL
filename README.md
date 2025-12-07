@@ -148,6 +148,79 @@ https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793
 # 📧 Contacto
 Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
 
+# Errores encontrados
+
+## Falta de validaciones
+
+### Validacion de conexion
+
+En caso que no se pueda conectar con la base de datos y/o que no se pueda encontrar el archivo de configuraciones, no muestra esta falla hasta que se intenta iniciar sesi�n o bien ni ello
+
+### Validacion en tipo de dato
+
+Varios campos de los formularios permiten varios tipos de datos, pese a que el objeto o entidad a la que se hace referencia tiene otro tipo de dato, esto provoca que el programa colapse al no poder procesar estos datos y no haber un control de exepciones
+
+### Validacion de seguridad
+
+Esto aplica unicamente para los vendedores, esto es una falta de logica en practicas, pues la vista actual muestra control absoluto de productos, clientes e incluso otros vendedores para cualqueira que sea el vendedor que inicio sesion.
+Esto es un grave error, pues en lo practico, si un vendedor nuevo tiene tal acceso, podria incluso eliminar al vendedor con mayor experiencia o eliminar productos/clientes sin raz�n.
+
+## Botones problematicos
+
+### Boton cancelar 
+
+En la pestaña de generar ventas, este boton no tenia funcionalidad original, suponiendo debiera cancelar el proceso de generar la venta, deberia limpiar las celdas
+
+### Boton help
+
+Este boton originalmente buscaba abrir directamente el repositorio del proyecto para buscar detalles de este en el propio github.
+Sin embargo, no habria el enlace y en su lugar provocaba una falla en el programa que lo congelaba
+
+# Propuestas
+
+## Incorporacion en base de datos
+
+### Nuevos atributos
+
+Debido al login, agregamos un atributo de password a la entidad de vendedor. Ademas de hacer que el dni se unico para evitar duplicaciones, al igual que el usuario.
+Para tener una forma de contacto relacionado y que ademas funcione con los involucrados
+
+### Nueva entidad
+
+Dado que existe los clientes y vendedores, cuando el stock esta vacio deber�a haber una forma de comprar m�s, por ello se propuso crear una entidad llamada proveedor
+Esto involucra una tabla intermedia, que ser�a la de compraProveedor, en la cual relaciona tanto el proveedor, el producto como el encargado (Vendedor tipo Contador).
+En donde basicamente se registra cuando se compro los nuevos productos, cuando, quien lo autorizo, que productos se compraron, de quien provienen, cuanto costo cada producto
+
+## Agregar una seguridad en operaciones
+
+### Eliminacion de objetos
+
+Para mejorar la logica de negocio en cuanto a las transacciones se ha agregado un pequeño seguro, esto se basa en evitar desatar un problema en cascada al intentar eliminar un producto, cliente o vendedor, puesto que si estos ya estan relacionados con alguna transaccion esto dejaria un vacio.
+Para solucionar esto, se incorporo un pequeño verificador que busca si este objeto esta asociado con alguna transaccion antes de eliminarlo, de esta forma podria eliminar solo los 'fantasmas' que no han dejado un rastro que afecte a otras entidades.
+Esto se implemento con una consulta anidada que busca algun rastro en las transacciones, esto aplicado para estos 3 principales
+
+### Agregacion de jerarquia en vendedores
+
+Para mejorar la seguridad, se ha incorporado un atributo similar a un ENUM para la entidad vendedores.
+Esto es una medida de seguridad para evitar darle todo el control a cualquier vendedor. Esto se basa en que ahora los vendedores con el estado 'Vendedor' solo pueden vender, y la pestaña de control para clientes/productos/vendedores e incluso la de reportes se limitara
+Ahora existen por ejemplo los contadores, que no pueden ni manejar el control, pero tienen acceso a los reportes
+El jefe que no puede generar ventas, pero tiene acceso al control y los reportes
+Finalmente el admin que puede ver todo.
+
+## Centralizar atributos comunes
+
+### Atributos similares para vendedores y clientes
+En las entidades para clientes y vendedores hay varios aspectos iguales, como los dni, nombres y otros atributos, por lo que para hacerlo central y seguir las reglas del Poo, se utilizo una interfaz que reune estos atributos comunes, debido a ser records se ocupaba la interfaz para ser compatible
+
+### Atributo igual en varias entidades
+Para varias entidades que tenian un atributo ENUM basicamente igual, se opto por centralizar este ENUM
+Para la jerarquia de carpetas se realizo un pequeño cambio dentro de models: separando las entidades, Daos y configuracion
+
+## Nuevas vistas
+
+### Vista compra
+
+Esta se basa en el poder comprar y reabaster los stoks con los productos
 
 # 📝 Licencia
 

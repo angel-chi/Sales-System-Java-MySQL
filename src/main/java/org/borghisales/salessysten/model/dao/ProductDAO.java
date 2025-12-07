@@ -7,8 +7,8 @@ import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 import org.borghisales.salessysten.model.CRUD;
 import org.borghisales.salessysten.model.DBConnection;
-import org.borghisales.salessysten.model.Product;
-import org.borghisales.salessysten.model.ShoppingCart;
+import org.borghisales.salessysten.model.entities.Product;
+import org.borghisales.salessysten.model.entities.ShoppingCart;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -70,16 +70,16 @@ public class ProductDAO implements CRUD<Product> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product added correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto agregado con exito");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar el producto: ");
                 return false;
             }
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar el producto: " + e.getMessage());
             return false;
         }
     }

@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import org.borghisales.salessysten.model.entities.Nivel;
 
 import java.awt.*;
 import java.net.URI;
@@ -16,11 +18,11 @@ public class ManagementController extends MenuController implements Initializabl
 
     private static int lastTab ;
 
-    @FXML
-    private Button sellerButton;
-
-    @FXML
-    private TabPane tabPaneManage;
+    @FXML private Button sellerButton;
+    @FXML private TabPane tabPaneManage;
+    @FXML private Tab ventasTab;
+    @FXML private Tab gestionTab;
+    @FXML private Tab reportesTab;
 
     @FXML
     void openSeller(ActionEvent actionEvent){
@@ -34,6 +36,20 @@ public class ManagementController extends MenuController implements Initializabl
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabPaneManage.getSelectionModel().select(lastTab);
     }
+    /*
+    public void aplicarSeguridad(){
+        Nivel nivel = MainController.sellerLog.nivel();
+        if (nivel == null) {
+            ventasTab.setDisable(false);
+            reportesTab.setDisable(false);
+            gestionTab.setDisable(false);
+            return;
+        }
+        ventasTab.setDisable(!nivel.puedeVender());
+        reportesTab.setDisable(!nivel.puedeRevisarReportes());
+        gestionTab.setDisable(!nivel.puedeEditarPersona());
+        }
+    */
 
     public void openCustomer(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
