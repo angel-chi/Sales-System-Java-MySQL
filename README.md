@@ -64,6 +64,11 @@ Antes de ejecutar el proyecto, asegúrate de configurar la base de datos:
 
 1. Instala MySQL: Si aún no tienes MySQL instalado, descárgalo e instálalo desde https://dev.mysql.com/downloads/mysql/.
 2. Crea la Base de Datos: Utiliza el script proporcionado llamado salesystem.sql para importar la base de datos y las tablas necesarias.
+> El proceso esta automatizado, si te encuentras en un sistema operativo con kernel de linux puedes ejecutar el siguiente comando para importar y crear la base de datos de manera automática
+```sh
+mysql -u (usuario con privilegios: normalmente root) -p(contraseña) < salesystem.sql
+```
+
 3. Configura la Conexión: Para configurar la conexión a la base de datos, sigue estos pasos:
    * Crea un archivo llamado config.properties en la ruta src/main/java/org/borghisales/salessystem/model/.
    * Define las propiedades de configuración para la conexión a la base de datos en el archivo config.properties. 
@@ -184,6 +189,29 @@ catch(NumberFormatException e) {
     return;
 }
 ```
+### Error al comprar un artículo
+Cuando se compraba un artículo se generaba un error al no poder ingresar un elemento a la base de datos (Los detalles de la compra), el error se debía a que no se colocaba correctamente la ID que estaba enlazada con la venta, se solucionó forzando a recargar esa ID antes de hacer el proceso de añadir una nueva venta.
+
+```java
+public void generateSale(ActionEvent actionEvent) {
+    if (products.isEmpty()) {
+        return;
+    }
+
+    Sales sales = createSalesObject();
+
+    setSerial(); // Linea nueva
+    if (saveSaleAndDetails(sales)) {
+        productDAO.subtractStock(products);
+        cleanFieldsAndTable();
+        setSerial();
+        total.setText("0.0");
+        products.clear();
+        updateReportsController();
+    }
+}
+
+```
 
 ### Agregar usuario vacío
 Al agregar un cliente se permitía agregar un cliente con información vacía. Se agregó una validación para evitar ese caso
@@ -215,8 +243,16 @@ Lo mismo sucedía con los productos y con los empleados, se usó la misma soluci
 ## Propuestas
 ### Agregar atributo garantía a los productos
 Agregarle garantía a los productos que se venden, debido a que son productos tecnológicos en la gran mayoría de los casos los artículos vienen con garantía para cubrir cualquier fallo que pudiera presentarse en un periodo de tiempo.
-
 Esto ayuda con la abstracción de los objetos, debido a que es una propiedad importante para los productos.
+
+### Separar en más paquetes
+los DAOs podrían tener un paquete completamente separado de los Records que representan los modelos de la base de datos, para mejorar la claridad.
+
+### Añadir una opción para buscar productos y personas por nombre
+Al momento de hacer una venta la única forma de seleccionar una persona es por medio de su identificador, la cual no es una forma muy cómoda e intuitiva para el usuario, para solucionar esto se pueden implementar overloads para las funciones de búsqueda 
+
+### Agregar atributo marca a los productos
+Sería una forma para identificar productos similares y poder dar un mejor servicio al cliente.
 
 ## Aplicación de propuestas
 ### Atributo garantía
