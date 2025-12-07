@@ -240,6 +240,84 @@ Customer customer = new Customer(usuario, nombre, direccion, cbState.getValue())
 
 Lo mismo sucedía con los productos y con los empleados, se usó la misma solución
 
+### Error al mostrar una nueva vista
+Al dirigirse a una nueva vista dentro del programa esta se mostraba debajo de otros programas, lo cual es un error de implementacion al renderizar las vistas. Se agrego una funcion asincrona dentro del metodo ```openNewStage()```  de la clase ```MenuController```la cual espera la disponibilidad del hilo de UI para desplazar la vista enfrente y enforcarla.
+```java 
+//Funcion lambda para esperar el JAT
+Platform.runLater(() -> {
+        stage.toFront();
+        stage.requestFocus();
+});
+```
+
+### Error al mostrar alertas
+Al invocar alguna de las alertas, estas se mostraban debajo del programa y en modo modal, causando una mala UX. Se modifico el metodo  ```setAlert()``` de la clase ```MenuController``` y se unificaron los metodos ```configureAlerts()``` - ```configureAlert()``` por ```createConfiguredAlert()``` de la clase ```GenerateSaleController```
+
+Cambios en ```setAlert()```:
+
+1. Se envolvio la logica dentro de una funcion asincrona que llama al hilo de UI para dibujar la alerta correctamente 
+2. Busca la ventana padre empezando por alguna ventana enfocada, sino encuentra usa la primera ventana que se este mostrando y la asigna como ventana padre
+3. Se inicia la ventana en modo modal
+4. Se realiza un cast con la clase Stage para activar la propiedad ```AlwaysOnTop```
+5. Se muestra la alerta y se espera a su cierre
+
+```java
+static public void setAlert(Alert.AlertType alertType, String argument) {
+        //Se espera a que el hilo este disponible para evitar problemas de interfaz
+        Platform.runLater(() -> {
+            Alert alert = new Alert(alertType);
+            alert.setTitle("Información");
+            alert.setHeaderText(null);
+            alert.getButtonTypes().setAll(acceptButton);
+            alert.setContentText(argument);
+
+            //Filtra entre ventanas enfocadas y seleccionar la primera
+            Optional<Window> owner = Window.getWindows().stream()
+                    .filter(Window::isFocused)
+                    .findFirst();
+
+            //Si no hay ventana activa busca la primera que se este mostrando
+            if (!owner.isPresent()) {
+                owner = Window.getWindows().stream()
+                        .filter(Window::isShowing)
+                        .findFirst();
+            }
+            //Asignar ventana padre a la alerta
+            owner.ifPresent(alert::initOwner);
+            //Activa el modal para bloquear
+            alert.initModality(Modality.APPLICATION_MODAL);
+
+            //Cast con stage para aplicar alwaysOnTop
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.setAlwaysOnTop(true);
+
+            // Mostrar y esperar al cierre, al cierre el stage es eliminado
+            alert.showAndWait();
+
+            // Cualquier cosa tratar de quitar el alwaysOntTop
+            try {
+                alertStage.setAlwaysOnTop(false);
+            } catch (Exception ignored) {}
+        });
+    }
+```
+
+Union de metodos ```configureAlerts()``` y ```configureAlert()```:
+
+La clase ```GenerateSaleController``` creaba dos objetos ```Alert``` y los reutilizaba a medida que se invocaban las alertas, pero esto causaba problemas con referencias a Stage/Window. Por lo que se creo un solo metodo encargado de crear y devolver la alerta necesaria a mostrar.
+
+Despues simplemente fue necesario llamar a la funcion dentro de los metodos encargados de mostrar las alertas ```handleCustomerNotFound()``` y ```handleProductNotFound()``` y aplicar la misma logica que en ```setAlert()``` para mostrar de manera segura la alerta
+
+```java
+private Alert createConfiguredAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.getButtonTypes().setAll(buttonTypeAccept, buttonTypeCancel);
+        return alert;
+    }
+```
 ## Propuestas
 ### Agregar atributo garantía a los productos
 Agregarle garantía a los productos que se venden, debido a que son productos tecnológicos en la gran mayoría de los casos los artículos vienen con garantía para cubrir cualquier fallo que pudiera presentarse en un periodo de tiempo.
