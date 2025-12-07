@@ -117,25 +117,10 @@ Para iniciar sesión, se requiere el DNI y la contraseña del vendedor. En la ba
 </p>
 
 ## Pantalla principal
-La pantalla principal muestra las siguientes ventanas
-* Menu: incluyen la posibilidad de salir o visitar la documentación
-<p align="center">
-  <img src="src/main/resources/images/menu.png" />
-</p>
 
-* Sales: Permite generar nuevas ventas.
-<p align="center">
-  <img src="src/main/resources/images/sales.png" />
-</p>
-
-* Management: Ofrece operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para clientes, productos y vendedores.
+* Control de punto de venta: Ofrece el acceso completo al usuario a todas las interfaces disponibles del punto de venta
 <p align="center">
   <img src="src/main/resources/images/management.png" />
-</p>
-
-* Reports: Aquí se encuentran las operaciones de reportes y estadísticas relacionadas.
-<p align="center">
-  <img src="src/main/resources/images/reports.png" />
 </p>
 
 ## Sales
@@ -283,3 +268,4 @@ Jarib Alberto Novelo Hernández
 
 
 [⬆ Volver al inicio](#title)<br>
+
