@@ -19,6 +19,7 @@ public class ManagementController extends MenuController implements Initializabl
     private static int lastTab ;
 
     @FXML private Button sellerButton;
+    @FXML private Button proveedorButton;
     @FXML private TabPane tabPaneManage;
     @FXML private Tab ventasTab;
     @FXML private Tab gestionTab;

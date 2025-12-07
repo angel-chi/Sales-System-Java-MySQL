@@ -7,6 +7,7 @@ import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 import org.borghisales.salessysten.model.CRUD;
 import org.borghisales.salessysten.model.DBConnection;
+import org.borghisales.salessysten.model.entities.ComprasDetalles;
 import org.borghisales.salessysten.model.entities.Product;
 import org.borghisales.salessysten.model.entities.ShoppingCart;
 
@@ -14,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProductDAO implements CRUD<Product> {
 
@@ -192,6 +194,19 @@ public class ProductDAO implements CRUD<Product> {
 
 
 
+    }
+    // Complemento para compras
+    public void addStock(List<ComprasDetalles> detalles) {
+        String sql = "UPDATE product SET stock = stock + ? WHERE idProduct = ?";
+        try (Connection conn = DBConnection.connection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            for (ComprasDetalles d : detalles) {
+                ps.setInt(1, d.cantidad());
+                ps.setInt(2, d.idProducto());
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

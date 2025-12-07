@@ -31,26 +31,26 @@ UPDATE seller SET nivel = 'ADMIN' where dni = '12341234';
 UPDATE seller SET nivel = 'CONTADOR' where dni = '23452345';
 UPDATE seller SET nivel = 'JEFE' where dni = '34563456';
 
+CREATE TABLE proveedor (
+  idProveedor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  email VARCHAR(255),
+  state ENUM('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
-CREATE TABLE `proveedor` (
-  `idProveedor` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  `phone_number` varchar(10) DEFAULT NULL,
-  `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
-  PRIMARY KEY (`idSeller`),
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3;
 
-CREATE TABLE `Compras`{
-    `idCompra` int NOT NULL AUTO_INCREMENT,
-    `idProveedor` int DEFAULT NULL,
-    `idSeller` int DEFAULT NULL,
-    `subtotal` double NOT NULL,
-    `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (idCompra),
-    CONSTRAINT compra_fk_proveedor FOREIGN KEY (idProveedor) REFERENCES proveedor(idProveedor),
-    CONSTRAINT compra_fk_seller FOREIGN KEY (idSeller) REFERENCES seller(idSeller)
-}
+CREATE TABLE compras (
+  idCompra INT NOT NULL AUTO_INCREMENT,
+  idProveedor INT NOT NULL,
+  dniVendedor varchar(8) NOT NULL,
+  subtotal DOUBLE NOT NULL,
+  stateCompra ENUM('CANCELADO','COMPLETADO') DEFAULT 'COMPLETADO',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (idCompra),
+  CONSTRAINT compra_fk_proveedor FOREIGN KEY (idProveedor) REFERENCES proveedor(idProveedor),
+  CONSTRAINT compra_fk_seller FOREIGN KEY (idSeller) REFERENCES seller(idSeller)
+) ENGINE=InnoDB;
+
 CREATE TABLE compra_detalle (
   idCompraDetalle INT NOT NULL AUTO_INCREMENT,
   idCompra INT NOT NULL,
@@ -59,6 +59,6 @@ CREATE TABLE compra_detalle (
   precioCompra DOUBLE NOT NULL,
   subtotal DOUBLE NOT NULL,
   PRIMARY KEY (idCompraDetalle),
-  CONSTRAINT cd_fk_compra   FOREIGN KEY (idCompra) REFERENCES compra(idCompra) ON DELETE CASCADE,
-  CONSTRAINT cd_fk_product       FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+  CONSTRAINT cd_fk_compra FOREIGN KEY (idCompra) REFERENCES compras(idCompra) ON DELETE CASCADE,
+  CONSTRAINT cd_fk_product FOREIGN KEY (idProduct) REFERENCES product(idProduct)
 ) ENGINE=InnoDB;

@@ -64,7 +64,6 @@ public class SalesDAO {
         }
 
     }
-
     public boolean SaveDetailsSale(ObservableList<ShoppingCart> products, int id){
 
         try (Connection conn = DBConnection.connection()){
@@ -93,7 +92,6 @@ public class SalesDAO {
         }
 
     }
-
     public void setTable(ObservableList<Sales> sales) {
         String sql = "SELECT * FROM sales WHERE idSeller = ?";
 
@@ -115,7 +113,6 @@ public class SalesDAO {
 
 
     }
-
     public void setLineChart(XYChart.Series<String, Integer> lineChartData,int year,int month) {
         String sql = """ 
                 SELECT day(saleDate) as saleDate, count(saleDate) as salesPerDay
@@ -151,7 +148,6 @@ public class SalesDAO {
             MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
         }
     }
-
     public void setTableDetails(ObservableList<ShoppingCart> productsDetails, int idSale) {
         String sql = """ 
                 SELECT ROW_NUMBER() OVER() as nr, sd.idProduct as cod, p.name as product, sd.quantity, sd.priceSale as price, ROUND(sd.quantity *sd.priceSale,2) as total

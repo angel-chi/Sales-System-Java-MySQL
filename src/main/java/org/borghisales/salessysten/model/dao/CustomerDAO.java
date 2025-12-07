@@ -59,9 +59,6 @@ public class CustomerDAO implements CRUD<Customer> {
             return false;
         }
     }
-
-
-
     @Override
     public boolean update(Customer entity) {
         String sql = "UPDATE customer set name=?,address=?,state=? where dni=?";
@@ -90,7 +87,6 @@ public class CustomerDAO implements CRUD<Customer> {
             return false;
         }
     }
-
     @Override
     public boolean delete(String id) {
         String disableConstraintsSQL = "SET foreign_key_checks = 0;";
@@ -124,8 +120,6 @@ public class CustomerDAO implements CRUD<Customer> {
             return false;
         }
     }
-
-
     @Override
     public void setTable(ObservableList<Customer> customers) {
         String sql = "SELECT * FROM customer";

@@ -60,8 +60,8 @@ public class SellerDAO implements CRUD<Seller> {
             pstmt.setString(2, entity.phoneNumber());
             pstmt.setString(3, entity.state().name());
             pstmt.setString(4, entity.user());
-            pstmt.setString(5, entity.dni());
-            pstmt.setString(6, entity.password());
+            pstmt.setString(5, entity.password());
+            pstmt.setString(6, entity.dni());
 
             int rows_affected = pstmt.executeUpdate();
 
