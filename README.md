@@ -193,6 +193,7 @@ Lo cual era incorrecto porque, en este caso, no debería apuntar a HelloApplicat
                 </configuration>
             </plugin>
 
+
 # ⚙️ Mejoras propuestas
 
 Mejora 1 **IMPLEMENTADA**:
