@@ -3,7 +3,6 @@ package org.borghisales.salessysten.controllers;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,8 +41,9 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Scene scene = null;
     private Stage stage;
 
-    private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
-    private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
+    //Se crean al momento ya no son necesarios
+    //private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
+    //private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
     private final ButtonType buttonTypeAccept = new ButtonType("Sí");
     private final ButtonType buttonTypeCancel = new ButtonType("No");
 
@@ -95,7 +95,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeUIElements();
-        configureAlerts();
+        //configureAlerts();
         configureTable();
     }
 
@@ -106,10 +106,20 @@ public class GenerateSaleController extends MenuController implements Initializa
         date.setText(String.valueOf(now));
     }
 
-    private void configureAlerts() {
+    //Nuevo metodo para crear y configurar alert nuevo - Remplazo de configureAlert
+    private Alert createConfiguredAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.getButtonTypes().setAll(buttonTypeAccept, buttonTypeCancel);
+        return alert;
+    }
+    //YA NO SE NECESITA -> ELIMINAR DESPUES
+    /*private void configureAlerts() {
         configureAlert(alertCustomer, "Nuevo cliente", "El cliente no existe", "¿Desea añadirlo?");
         configureAlert(alertProduct, "Nuevo producto", "El producto no existe", "¿Desea añadirlo?");
-    }
+    }*/
 
     private void configureTable() {
         configureTableColumns();
@@ -117,13 +127,13 @@ public class GenerateSaleController extends MenuController implements Initializa
         products = FXCollections.observableArrayList();
     }
 
-
-    private void configureAlert(Alert alert, String title, String header, String content) {
+    //YA NO SE NECESITA -> ELIMINAR DESPUES
+    /*private void configureAlert(Alert alert, String title, String header, String content) {
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.getButtonTypes().setAll(buttonTypeAccept, buttonTypeCancel);
-    }
+    }*/
 
     private void configureTableColumns() {
         colNro.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().nr()).asObject());
@@ -164,22 +174,27 @@ public class GenerateSaleController extends MenuController implements Initializa
         //SOLUCION A TIPO DISTINTO DE ALERTA -> CustomerNotFound siempre encima
         //Esperar hilo disponible
         Platform.runLater(() -> {
+
+            //Se crea un nuevo alert configurado
+            Alert alertCustomer = createConfiguredAlert(
+                    "Nuevo cliente",
+                    "El cliente no existe",
+                    "¿Desea añadirlo?"
+            );
+
             //Busar la mejor opcion como vista padre empezando por ventanas activas
             Optional<Window> owner = Window.getWindows().stream()
                     .filter(Window::isFocused)
                     .findFirst();
             //Si no hay ventanas activas buscar en ventanas abiertas
-            if (!owner.isPresent()) {
+            if (owner.isEmpty()) {
                 owner = Window.getWindows().stream()
                         .filter(Window::isShowing)
                         .findFirst();
             }
+            // La asignación de owner nuevo
             owner.ifPresent(alertCustomer::initOwner);
 
-            //Para que window no sea null, se renderiza 1 vez
-            alertCustomer.show();
-            alertCustomer.hide();
-            //Cast con stage para AlwaysOnTop
             Stage alertStage = (Stage) alertCustomer.getDialogPane().getScene().getWindow();
 
             alertStage.setAlwaysOnTop(true);
@@ -189,7 +204,7 @@ public class GenerateSaleController extends MenuController implements Initializa
                     openCustomerManagementView();
                 }
             });
-            //Una vez termina quitar alwaysOnTop por si acaso
+            //quitar alwaysOnTop por si acaso
             try {
                 alertStage.setAlwaysOnTop(false);
             } catch (Exception ignored) {}
@@ -248,6 +263,12 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void handleProductNotFound() {
         //NOTA -> Misma solucion aplicada que en CustomerNotFound
         //SOLUCION A TIPO DISTINTO DE ALERTA-> ProductNotFound siempre encima
+
+        Alert alertProduct = createConfiguredAlert(
+                "Nuevo producto",
+                "El producto no existe",
+                "¿Desea añadirlo?"
+        );
         //Esperar hilo disponible
         Platform.runLater(() -> {
             //Busar la mejor opcion como vista padre empezando por ventanas activas
@@ -255,16 +276,13 @@ public class GenerateSaleController extends MenuController implements Initializa
                     .filter(Window::isFocused)
                     .findFirst();
             //Si no hay ventanas activas buscar en ventanas abiertas
-            if (!owner.isPresent()) {
+            if (owner.isEmpty()) {
                 owner = Window.getWindows().stream()
                         .filter(Window::isShowing)
                         .findFirst();
             }
             owner.ifPresent(alertProduct::initOwner);
 
-            //Para que window no sea null, se renderiza 1 vez
-            alertProduct.show();
-            alertProduct.hide();
             //Cast con stage para AlwaysOnTop
             Stage alertStage = (Stage) alertProduct.getDialogPane().getScene().getWindow();
 
