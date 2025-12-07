@@ -395,15 +395,15 @@ public class ReportsController implements Initializable {
 
     public static void recorrerHashMap() {
         for (Integer year : cacheReportLineChart.keySet()) {
-            System.out.println("Year: " + year);
+            System.out.println("Año: " + year);
             HashMap<Integer, XYChart.Series<String, Integer>> yearData = cacheReportLineChart.get(year);
             for (Integer month : yearData.keySet()) {
-                System.out.println("  Month: " + month);
+                System.out.println("  Mes: " + month);
                 XYChart.Series<String, Integer> series = yearData.get(month);
                 if (series != null) {
                     System.out.println("    Series: " + series.getName());
                     for (XYChart.Data<String, Integer> data : series.getData()) {
-                        System.out.println("      Data: " + data.getXValue() + ", " + data.getYValue());
+                        System.out.println("      Datos: " + data.getXValue() + ", " + data.getYValue());
                     }
                 } else {
                     System.out.println("    No hay serie asociada para este mes.");

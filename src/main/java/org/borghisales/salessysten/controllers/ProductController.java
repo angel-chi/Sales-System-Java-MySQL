@@ -85,11 +85,20 @@ public class ProductController implements Initializable,validacionEntrada {
     }
 
     public void addProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                          Integer.parseInt(stock.getText()), cbState.getValue());
+       //IMPLEMENTACIÓN DE VALIDACIÓN PARA PRODUCTO
+        //Hacía falta un return para evitar guardar datos incorrectos
         if (campoVacio(name)||campoVacio(price)||campoVacio(stock)){
             mostrarAdvertencia("Debes de completar todos los campos antes de guardar");
+            return;
         }
+
+        if (cbState.getValue() == null) {
+            mostrarAdvertencia("Debes seleccionar un estado");
+            return;
+        }
+
+        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
+                          Integer.parseInt(stock.getText()), cbState.getValue());
 
         if (productDAO.create(product)) {
             MenuController.cleanCells(name,price,stock);

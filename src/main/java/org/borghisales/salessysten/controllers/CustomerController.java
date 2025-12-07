@@ -77,15 +77,22 @@ public class CustomerController implements Initializable,validacionEntrada {
     }
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(DNI.getText(),name.getText(),address.getText(),cbState.getValue());
-        if (campoVacio(DNI)||campoVacio(name)||campoVacio(address)){
+        if (campoVacio(DNI) || campoVacio(name) || campoVacio(address)) {
             mostrarAdvertencia("Debes de completar todos los campos antes de guardar");
+            //FALTABA RETURN para no guardar al cliente
+            return;
         }
-        if (customerDAO.create(customer)) {
-            MenuController.cleanCells(DNI, name, address);
-            updateTable();
+        if (cbState.getValue() == null) {
+            mostrarAdvertencia("Debes seleccionar un estado");
+            return;
         }
-    }
+            Customer customer = new Customer(DNI.getText(), name.getText(), address.getText(), cbState.getValue());
+            if (customerDAO.create(customer)) {
+                MenuController.cleanCells(DNI, name, address);
+                updateTable();
+            }
+        }
+
     @FXML
     public void updateCustomer(ActionEvent actionEvent) {
         Customer customer = new Customer(DNI.getText(),name.getText(),address.getText(),cbState.getValue());
