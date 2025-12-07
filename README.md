@@ -155,13 +155,15 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 
 [⬆ Volver al inicio](#title)<br>
 
+
 <h1 align="center" id="title"> README equipo 3 (nuestros aportes)</h1>
 
-## Diagrama UML
+## 📊 Diagrama UML
 
 ![image alt](https://github.com/angel-chi/Sales-System-Java-MySQL/blob/9c4cf0bf42704f11ab4cc64c8afaddc3c6a9a313/UML.png)
 
-## Instalacion de Maven
+
+## ⬇️ Instalacion de Maven
 
 1. Actualiza los repositorios usando: _sudo apt uptdate_
 2. Instala Maven usando: _sudo apt install Maven_
@@ -170,16 +172,15 @@ _Si se imprime algo similar a esto, la instalación fue correcta (nota: Revisar 
 
 ![image alt](https://github.com/angel-chi/Sales-System-Java-MySQL/blob/2f4832054a223c41183e473d574709fdc230f15d/mvn.png)
 
-## Instrucciones para construir y ejecutar sin IDE
+
+## 🔨 Instrucciones para construir y ejecutar sin IDE
 
 1. Compila y empaqueta el proyecto usando: _mvn clean install_
 (Esto limpia compilaciones previas, compila el código, corre pruebas y genera el .jar )
 2. Ejecuta la aplicación JavaFX usando: _mvn javafx:run_
 
-## 📋 Changelog
 
-### [v2.0] - 08-12-2025
-**Bug Fixes:**
+## 🪲 Errores encontrados y su solución
 
 Error 1: Se terminaba la ejecución del programa y cerraba IntelliJ 
 - _**¿Cuándo ocurrió?:**_ Al presionar el botón del help de la interfaz de _Control del punto de venta_ (Error de ejecución).
@@ -196,7 +197,8 @@ Error 3: Error al generar una venta
 - _**Causa:**_ Idioma de la computadora, si se encuentra en ingles parece no generar error pero si se encuentra en español si, esto debido a que en ingles se usa comas para separar enteros de decimales y en español se usa punto decimal.
 - _**Solución:**_ El método Double.parseDouble esperaba un punto decimal en su valor y recibía una coma, por lo que antes de que el método reciba el valor retornado por price.getText() se añadió un .replace(",", ".") para sustituir la coma por punto decimal
 
-## Cambios en la UI
+
+## 💱 Cambios en la UI
 
 Traducción del programa de ingles a español:
   _Se tradujeron las siguientes interfaces y todos sus elementos visibles por el usuario:_
@@ -208,23 +210,70 @@ Traducción del programa de ingles a español:
   - Seller -> Vendedor
   - Sales -> Ventas
 
-Cambios para que la UI sea entendible por cualquier usuario
+Cambios para que la UI sea entendible por cualquier usuario:
   Se tradujeron las interfaces mencionadas en el punto anterior, tambien se reestructuro la interfaz de _Control de punto de venta_, de tal forma se eliminaron los paneles “Menu, Sales, Management, Reports” y se decidió integrar todas sus funcionalidades individuales en una misma interfaz para que el usuario tenga mayor facilidad para acceder a cada ventana del sistema.
+
   
-## Propuestas de mejora
+## 💡 Propuestas de mejora
+
+Mejora 1: Implementar búsqueda de clientes por ID 
+
+_**¿Qué mejora hicimos?**_ Agregamos una función que permite buscar un cliente ingresando únicamente su ID. La búsqueda se realiza desde la interfaz del sistema y utiliza el DAO para obtener los datos desde la base. 
+
+_**¿Por qué la hicimos?**_ Para que el usuario pueda rellenar los datos de un cliente de manera sencilla y poder editar algún campo que desee.  
+
+_**Relación con POO:**_ 
+
+- Abstracción: El controlador solo solicita al DAO los datos dando solo el id sin saber cómo se hace internamente la consulta SQL.
 
 
+Mejora 2: Añadir una verificación para acceder a funciones sensibles 
+
+_**¿Qué mejora hicimos?**_ Implementamos un sistema de autenticación que pide una contraseña antes de permitir el acceso a la interfaz de Vendedores (donde se muestran datos privados) y antes de ejecutar la función de eliminar clientes en la interfaz de Clientes. Esta verificación se hace mediante un método compartido. 
+
+_**¿Por qué la hicimos?**_ Para proteger información delicada y evitar modificaciones o eliminaciones no autorizadas. Con esto, se mejora la seguridad del sistema sin tener que repetir la misma lógica en cada controlador. 
+
+_**Relación con POO:**_
+- Herencia: El método que valida la contraseña se creó en la clase MenuController, y los demás controladores heredan dicho método. Esto evita duplicar código y permite reutilizar un comportamiento común entre varias clases. 
 
 
-## Implementación de mejoras en la UI
+Mejora 3: Agregar una alerta que avise de stock proximo a agotarse por producto (Solo propuesta)
+
+_**¿Qué mejora hicimos?**_ Implementamos un sistema de alertas que notifica al usuario cuando el inventario de un producto está por agotarse. El sistema revisa el stock disponible y, si está por debajo de un límite definido, muestra un aviso en la interfaz.
+
+_**¿Por qué la hicimos?**_ Para evitar inventarios vacios y mejorar la gestión de los productos. Con la alerta, el administrador o vendedor puede tomar decisiones como reabastecer productos, ajustar pedidos o informar a los clientes. Esto aumenta la eficiencia del punto de venta y reduce pérdidas por falta de disponibilidad.
+
+_**Relación con POO:**_
+- Herencia: Este método puede extenderse a todos los productos o principalmente a los productos que nos interesa tener un stock suficiente para abstecer la demanda directamente comunicandose con la clase GenerateSaleController para que cada vez que se genere una venta, detectar si los productos que nos interesa heredar este metodo se encuentran por debajo del umbral de stock minimo que deseamos tener y asi, ejecutar el aviso.
 
 
+Mejora 4: Crear la posibilidad de añadir descuentos a productos seleccionados (Solo propuesta)
 
-## Video del proyecto
+_**¿Qué mejora hicimos?**_ Se implementó la opción de aplicar descuentos a productos específicos dentro del sistema. Ahora, cuando se quiera registrar una venta, el usuario puede visualizar si un producto cuenta con descuento y ver reflejado el precio final de este producto ya con el descuento incluido.
+
+_**¿Por qué la hicimos?**_ Para ofrecer una mejor flexibilidad en el manejo de los productos que se ofrecen del usuario, permitiendo que si el administrador desea implementar descuentos por cualquier motivo, estos ya se vean reflejados a la hora de generar una venta.
+
+_**Relación con POO:**_
+- Polimorfismo: El metodo a la hora de implementarse a los productos deseados, puede responder de distintas formas según lo que el administrador indique, ya sea aplicando un descuento fijo a los productos, un porcentaje sobre el total o promociones 2x1, 3x2, étc.
+
+
+## 🌀 Implementación de mejoras en la UI
+
+De las propuestas mencionadas implementamos la verificación para acceder a funciones sensibles y la búsqueda de clientes mediante ID: 
+
+- _**Verificación para acceder a funciones sensibles:**_ El usuario vera reflejada esta mejora cuando trate de acceder a la interfaz de vendedores, al momento de presionar el botón para abrir dicha interfaz, el sistema le pedirá una contraseña única la cual solo tendrá acceso si el propietario del sistema se la proporciono, en este caso se espera que sea el dueño del local donde se este usando este punto de venta. Esta contraseña también se le va a pedir si trata de borrar un cliente del sistema.
+
+- _**Búsqueda de clientes mediante ID:**_ El usuario vera esta mejora en la interfaz de Clientes, únicamente deberá ingresar el id del cliente y presionar el boton de buscar, de esta forma, automáticamente se rellenaran todos los campos con la información del cliente. 
+
+- De forma extra agregamos un botón de cerrar ventana en todas las interfaces aplicando herencia, todos los controladores heredan de MenuController por lo que se creó un método que cierre la ventana actual y habrá la anterior y se heredó en todas las interfaces.
+
+
+## 🎥 Video del proyecto
 
 **Link:** 
 
-## Integrantes del equipo
+
+## 💼 Integrantes del equipo
 
 Jarib Alberto Novelo Hernández
 - **Matricula**: 24216374
@@ -234,14 +283,3 @@ Jarib Alberto Novelo Hernández
 
 
 [⬆ Volver al inicio](#title)<br>
-
-
-## 🔨 Mejoras propuestas e implementadas
-- Se propuso e implementó un buscador de clientes via ID comparando el ID escrito en el TextField con los ID ya registrados previamente de los clientes en la base de datos, de manera que sí, el ID escrito concuerda con los y registrados, llenará los demas datos (usuario, nombre y drección) en las casillas de la ventana "Clientes", de no ser así, se arrojara una ventana emergente alertando al usuario diciendo que el cliente no esta registrado en la base de datos.
-- Se propuso e implementó un metodo de seguridad extra a la hora de ingresar al menú de vendedores y a la hora de borrar clientes desde el menú de clientes, ya que sí una persona distinta al propietario de la licencia de uso del software accede a la vista de los vendedores, este podrá tener acceso a sus claves de acceso (usuario y contraseña), nombre completo y telefono, poniendo en riesgo sus datos personales y tambien evitamos que cualquier persona pueda eliminar los datos de un cliente a menos que el dueño de la clave principal lo requiera, esto se logró creando un método que abre un nuevo archivo fxml (mainPasswordView) donde a continuación se necesitara de la contraseña princiapl, otro método que valida si la contraseña ingresada en el TextField es la correcta y de ser así dará acceso a la funcionalidad de borrar clientes y acceder al menú vendedores por medio de un if.
-- En futuras actulizaciones se puede implementar una alerta que avise al usuario cuando las unidades de un producto bajen de cierta cantidad notificando que el inventario se esta acabando especificamente de ese producto, implementando cambios en ProductController creando un metodo que se ejecute a la par con el metodo que se encarga de crear una venta en GenerateSaleController comparando la cantidad actual del producto menos la cantidad vendida y si sobrepasa el limite minimo deseado, ejecutar una ventana de notificación de que el producto se esta agotando.
-- Por ultimo, implementar en un futuro la opción de activar descuentos en productos deseados, se puede lograr seleccionando productos en un combobox para que despues una clase generateDiscount se encargue de aplicar el descuento deseado en los productos previamente seleccionados.
-
-
-
-
