@@ -23,11 +23,22 @@ public class MenuController {
     public static final String GENERATE_SALE_VIEW_FXML = VIEWS_DIRECTORY + "GenerateSaleView.fxml";
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
+    public static final String CONFIGURACION_ADMIN_VIEW_FXML = VIEWS_DIRECTORY + "ConfiguracionAdminView.fxml";
 
 
     static Alert defaultAlert;
     static ButtonType acceptButton = new ButtonType("Aceptar");
     public static HashMap<String, String > filePaths = new HashMap<>();
+
+    static {
+        filePaths.put(MANAGEMENT_VIEW_FXML, MAIN_VIEW_FXML);
+        filePaths.put(SELLER_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        filePaths.put(PRODUCT_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        filePaths.put(CUSTOMER_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        filePaths.put(GENERATE_SALE_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        filePaths.put(REPORT_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        filePaths.put(CONFIGURACION_ADMIN_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+    }
 
     void closeCurrentStage(Node node) {
         Stage stage = (Stage) node.getScene().getWindow();
@@ -45,13 +56,8 @@ public class MenuController {
             Stage stage = new Stage();
 
             switch (fxmlFileName) {
-                case MAIN_VIEW_FXML, MANAGEMENT_VIEW_FXML:
+                case MAIN_VIEW_FXML:
                     scene = new Scene(root, 800, 600);
-                    stage.setResizable(false);
-                    break;
-
-                case GENERATE_SALE_VIEW_FXML:
-                    scene = new Scene(root, 590, 600);
                     stage.setResizable(false);
                     break;
 
@@ -60,22 +66,7 @@ public class MenuController {
                     stage.setResizable(false);
                     break;
 
-                case PRODUCT_VIEW_FXML:
-                    scene = new Scene(root, 650, 500);
-                    stage.setResizable(false);
-                    break;
-
-                case SELLER_VIEW_FXML:
-                    scene = new Scene(root, 700, 500);
-                    stage.setResizable(false);
-                    break;
-
-                case CUSTOMER_VIEW_FXML:
-                    scene = new Scene(root, 665, 510);
-                    stage.setResizable(false);
-                    break;
-
-                // Si ningún título coincide, usa tamaño genérico
+                // For all other views, use a default resizable window
                 default:
                    scene = new Scene(root, 800, 600);
             }
@@ -111,6 +102,8 @@ public class MenuController {
                 return "Inicio de Sesión";
             case MANAGEMENT_VIEW_FXML:
                 return "Gestión";
+            case CONFIGURACION_ADMIN_VIEW_FXML:
+                return "Configuraciones de Administrador";
             default:
                 return "Ventana desconocida";
         }

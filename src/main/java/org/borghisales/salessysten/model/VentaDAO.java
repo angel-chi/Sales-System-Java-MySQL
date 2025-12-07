@@ -32,11 +32,11 @@ public class VentaDAO { // Cambiado de SalesDAO a VentaDAO
             return 1;
         }
     }
-    public boolean SaveVenta(Venta venta){ // Cambiado de SaveSale a SaveVenta, y Sales a Venta
-        String sql = "INSERT INTO ventas (idCliente,idVendedor,numeroDeVenta,fechaDeVenta,total,estado) values(?,?,?,?,?,?)"; // Nombres de tabla y columnas cambiados
+    public Integer SaveVenta(Venta venta){ // Cambiado de SaveSale a SaveVenta, y Sales a Venta
+        String sql = "INSERT INTO ventas (idCliente,idVendedor,numeroDeVenta,fechaDeVenta,total,estado,tipo_pago,entrega_ticket) values(?,?,?,?,?,?,?,?)"; // Nombres de tabla y columnas cambiados
 
         try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 
             pstmt.setInt(1,venta.idCliente()); // Nombre de método de entidad cambiado
             pstmt.setInt(2,venta.idVendedor()); // Nombre de método de entidad cambiado
@@ -44,20 +44,23 @@ public class VentaDAO { // Cambiado de SalesDAO a VentaDAO
             pstmt.setDate(4, Date.valueOf(venta.fechaDeVenta())); // Nombre de método de entidad cambiado
             pstmt.setDouble(5,venta.total()); // Nombre de método de entidad cambiado
             pstmt.setString(6,venta.estado().name());
+            pstmt.setString(7, venta.tipo_pago().name());
+            pstmt.setString(8, venta.entrega_ticket().name());
 
             int rows_affected = pstmt.executeUpdate();
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Venta guardada correctamente"); // Mensaje traducido
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar venta: "); // Mensaje traducido
-                return false;
+            if (rows_affected > 0){
+                try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        return generatedKeys.getInt(1);
+                    }
+                }
             }
+            return null;
 
         }catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar venta: " + e.getMessage()); // Mensaje traducido
-            return false;
+            return null;
         }
 
     }

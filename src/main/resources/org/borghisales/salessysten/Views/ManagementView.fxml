@@ -4,48 +4,50 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
    <children>
-      <TabPane fx:id="tabPaneManage" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPaneManage" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab text="MENU">
             <content>
-              <AnchorPane>
+              <VBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button layoutX="78.0" layoutY="76.0" mnemonicParsing="false" onAction="#help" prefHeight="70.0" prefWidth="160.0" text="AYUDA" />
-                        <Button layoutX="78.0" layoutY="219.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="160.0" text="SALIR" />
+                        <Button mnemonicParsing="false" onAction="#help" prefHeight="70.0" prefWidth="160.0" text="AYUDA" />
+                        <Button mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="160.0" text="SALIR" />
                      </children>
-                  </AnchorPane>
+                  </VBox>
             </content>
           </Tab>
           <Tab text="VENTAS">
             <content>
-              <AnchorPane>
+              <VBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openGenerateSale" prefHeight="70.0" prefWidth="160.0" text="GENERAR VENTA" />
+                        <Button mnemonicParsing="false" onAction="#openGenerateSale" prefHeight="70.0" prefWidth="160.0" text="GENERAR VENTA" />
                      </children>
-                  </AnchorPane>
+                  </VBox>
             </content>
           </Tab>
             <Tab text="ADMINISTRACION">
               <content>
-                <AnchorPane>
+                <VBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button layoutX="78.0" layoutY="46.0" mnemonicParsing="false" onAction="#openCustomer" prefHeight="70.0" prefWidth="160.0" text="CLIENTE" />
-                        <Button fx:id="sellerButton" layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openSeller" prefHeight="70.0" prefWidth="160.0" text="VENDEDORES" />
-                         <Button fx:id="productButton" layoutX="78.0" layoutY="264.0" mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="160.0" text="PRODUCTO" />
+                        <Button mnemonicParsing="false" onAction="#openCustomer" prefHeight="70.0" prefWidth="160.0" text="CLIENTE" />
+                        <Button fx:id="sellerButton" mnemonicParsing="false" onAction="#openSeller" prefHeight="70.0" prefWidth="160.0" text="VENDEDORES" />
+                         <Button fx:id="productButton" mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="160.0" text="PRODUCTO" />
+                         <Button mnemonicParsing="false" onAction="#openConfiguracionAdmin" prefHeight="70.0" prefWidth="160.0" text="CONFIGURACIONES" />
                      </children>
-                  </AnchorPane>
+                  </VBox>
               </content>
             </Tab>
             <Tab text="REPORTES">
               <content>
-                <AnchorPane>
+                <VBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openSalesReport" prefHeight="70.0" prefWidth="160.0" text="REPORTE DE VENTAS" />
+                        <Button mnemonicParsing="false" onAction="#openSalesReport" prefHeight="70.0" prefWidth="160.0" text="REPORTE DE VENTAS" />
                      </children>
-                  </AnchorPane>
+                  </VBox>
               </content>
             </Tab>
         </tabs>

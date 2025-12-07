@@ -46,6 +46,8 @@ public class ManagementController extends MenuController implements Initializabl
 
             productButton.setDisable(true);
             productButton.setVisible(false);
+            sellerButton.setDisable(true);
+            sellerButton.setVisible(false);
         }
     }
 
@@ -88,6 +90,16 @@ public class ManagementController extends MenuController implements Initializabl
                 );
             }
         }).start();
+    }
+
+    public void openConfiguracionAdmin(ActionEvent actionEvent) {
+        if (MainController.vendedorLogeado != null && MainController.vendedorLogeado.getRol() == Vendedor.Rol.ADMINISTRADOR) {
+            lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+            openNewStage(CONFIGURACION_ADMIN_VIEW_FXML, "Configuraciones de Administrador");
+            closeCurrentStage(sellerButton);
+        } else {
+            setAlert(Alert.AlertType.WARNING, "Acceso denegado. Solo los administradores pueden acceder a esta configuración.");
+        }
     }
 
     public void exit(ActionEvent actionEvent) {

@@ -7,67 +7,73 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SellerController">
+<StackPane alignment="CENTER" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SellerController">
     <children>
-        <Button layoutX="480.0" layoutY="52.0" mnemonicParsing="false" onAction="#addSeller" prefHeight="32.0" prefWidth="148.0" text="AGREGAR" />
-        <TableView fx:id="tableSellers" layoutX="20.0" layoutY="260.0" prefHeight="221.0" prefWidth="670.0">
-            <columns>
-                <TableColumn fx:id="colId" prefWidth="120.0" text="idVendedor" />
-                <TableColumn fx:id="colDni" prefWidth="111.0" text="usuario" />
-                <TableColumn fx:id="colName" prefWidth="124.0" text="nombre" />
-                <TableColumn fx:id="colPhone" prefWidth="124.0" text="telefono" />
-                <TableColumn fx:id="colState" prefWidth="90.0" text="estado" />
-                <!-- NUEVA COLUMNA PARA EL ROL -->
-                <TableColumn fx:id="colRol" prefWidth="80.0" text="rol" />
-            </columns>
-        </TableView>
-        <Label layoutX="74.0" layoutY="56.0" prefHeight="24.0" prefWidth="83.0" text="USUARIO:" underline="true">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Label>
-        <Label layoutX="77.0" layoutY="85.0" prefHeight="24.0" prefWidth="77.0" text="NOMBRE:" underline="true">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Label>
-        <Label layoutX="64.0" layoutY="116.0" prefHeight="26.0" prefWidth="102.0" text="TELEFONO:" underline="true">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Label>
-        <Label layoutX="40.0" layoutY="145.0" prefHeight="24.0" prefWidth="130.0" text="CONTRASEÑA:" underline="true">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Label>
-        <TextField fx:id="identificacion" layoutX="157.0" layoutY="55.0" prefHeight="25.0" prefWidth="289.0" />
-        <TextField fx:id="nombre" layoutX="157.0" layoutY="84.0" prefHeight="25.0" prefWidth="289.0" />
-        <TextField fx:id="telefono" layoutX="157.0" layoutY="116.0" prefHeight="25.0" prefWidth="289.0" />
-        <TextField fx:id="usuario" layoutX="157.0" layoutY="144.0" prefHeight="25.0" prefWidth="289.0" />
-        <Button layoutX="480.0" layoutY="93.0" mnemonicParsing="false" onAction="#updateSeller" prefHeight="32.0" prefWidth="148.0" text="ACTUALIZAR" />
-        <Button layoutX="480.0" layoutY="129.0" mnemonicParsing="false" onAction="#deleteSeller" prefHeight="32.0" prefWidth="148.0" text="ELIMINAR" />
-        <Button layoutX="480.0" layoutY="169.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="148.0" text="LIMPIAR" />
-        <ComboBox fx:id="cbState" layoutX="160.0" layoutY="184.0" prefHeight="25.0" prefWidth="283.0" />
-        <Label layoutX="89.0" layoutY="185.0" prefHeight="24.0" prefWidth="70.0" text="ESTADO:" underline="true">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Label>
-        <!-- NUEVO LABEL Y COMBOBOX PARA ROL -->
-        <Label fx:id="labelRol" layoutX="117.0" layoutY="214.0" prefHeight="24.0" prefWidth="42.0" text="ROL:" underline="true">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Label>
-        <ComboBox fx:id="cbRol" layoutX="160.0" layoutY="214.0" prefHeight="25.0" prefWidth="283.0" />
+        <AnchorPane prefHeight="500.0" prefWidth="700.0">
+            <children>
+                <Button layoutX="613.0" layoutY="16.0" mnemonicParsing="false" onAction="#backToMenu" text="Regresar" />
+                <Button layoutX="480.0" layoutY="52.0" mnemonicParsing="false" onAction="#addSeller" prefHeight="32.0" prefWidth="148.0" text="AGREGAR" />
+                <TableView fx:id="tableSellers" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="260.0">
+                    <columns>
+                        <TableColumn fx:id="colId" prefWidth="120.0" text="idVendedor" />
+                        <TableColumn fx:id="colName" prefWidth="124.0" text="nombre" />
+                        <TableColumn fx:id="colPhone" prefWidth="124.0" text="telefono" />
+                        <TableColumn fx:id="colState" prefWidth="90.0" text="estado" />
+                        <!-- NUEVA COLUMNA PARA EL ROL -->
+                        <TableColumn fx:id="colRol" prefWidth="80.0" text="rol" />
+                        <TableColumn fx:id="colDni" prefWidth="111.0" text="usuario" />
+                    </columns>
+                </TableView>
+                <Label layoutX="74.0" layoutY="56.0" prefHeight="24.0" prefWidth="83.0" text="USUARIO:" underline="true">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <Label layoutX="77.0" layoutY="85.0" prefHeight="24.0" prefWidth="77.0" text="NOMBRE:" underline="true">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <Label layoutX="64.0" layoutY="116.0" prefHeight="26.0" prefWidth="102.0" text="TELEFONO:" underline="true">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <Label layoutX="40.0" layoutY="145.0" prefHeight="24.0" prefWidth="130.0" text="CONTRASEÑA:" underline="true">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="identificacion" layoutX="157.0" layoutY="55.0" prefHeight="25.0" prefWidth="289.0" />
+                <TextField fx:id="nombre" layoutX="157.0" layoutY="84.0" prefHeight="25.0" prefWidth="289.0" />
+                <TextField fx:id="telefono" layoutX="157.0" layoutY="116.0" prefHeight="25.0" prefWidth="289.0" />
+                <TextField fx:id="usuario" layoutX="157.0" layoutY="144.0" prefHeight="25.0" prefWidth="289.0" />
+                <Button layoutX="480.0" layoutY="93.0" mnemonicParsing="false" onAction="#updateSeller" prefHeight="32.0" prefWidth="148.0" text="ACTUALIZAR" />
+                <Button layoutX="480.0" layoutY="129.0" mnemonicParsing="false" onAction="#deleteSeller" prefHeight="32.0" prefWidth="148.0" text="ELIMINAR" />
+                <Button layoutX="480.0" layoutY="169.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="148.0" text="LIMPIAR" />
+                <ComboBox fx:id="cbState" layoutX="160.0" layoutY="184.0" prefHeight="25.0" prefWidth="283.0" />
+                <Label layoutX="89.0" layoutY="185.0" prefHeight="24.0" prefWidth="70.0" text="ESTADO:" underline="true">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <!-- NUEVO LABEL Y COMBOBOX PARA ROL -->
+                <Label fx:id="labelRol" layoutX="117.0" layoutY="214.0" prefHeight="24.0" prefWidth="42.0" text="ROL:" underline="true">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <ComboBox fx:id="cbRol" layoutX="160.0" layoutY="214.0" prefHeight="25.0" prefWidth="283.0" />
 
-        <Label alignment="CENTER" layoutX="149.0" layoutY="14.0" prefHeight="30.0" prefWidth="354.0" text="ADMINISTRACION DE VENDEDORES" underline="true">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Label>
+                <Label alignment="CENTER" layoutX="149.0" layoutY="14.0" prefHeight="30.0" prefWidth="354.0" text="ADMINISTRACION DE VENDEDORES" underline="true">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
     </children>
-</AnchorPane>
+</StackPane>
