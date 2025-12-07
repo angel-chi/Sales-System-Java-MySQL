@@ -54,8 +54,10 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
 
+    private Product currentProduct;
+
     @FXML
-    private ComboBox<String> cbDiscountType;
+    private TextField cbDiscountType;
     @FXML
     private Button back;
     @FXML
@@ -100,7 +102,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         initializeUIElements();
         configureAlerts();
         configureTable();
-        configureDiscountComboBox();
+        cbDiscountType.setDisable(true);   // solo visor
     }
 
     private void initializeUIElements() {
@@ -193,20 +195,46 @@ public class GenerateSaleController extends MenuController implements Initializa
         Product product = productDAO.searchProduct(productId);
 
         if (product != null) {
+            currentProduct = product;
             updateProductFields(product);
         } else {
+            currentProduct = null;
             handleProductNotFound();
         }
     }
 
     private void updateProductFields(Product product) {
         setAlert(Alert.AlertType.CONFIRMATION, "Producto seleccionado: " + product.name());
+
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
 
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, product.stock(), 0);
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, product.stock(), 1);
         quantity.setValueFactory(valueFactory);
+
+        double discountPercent = product.discountPercentage();      // ej. 0.10
+        int minQty = product.discountMinQuantity();                 // ej. 1 o 5
+
+        // Habilitamos el ComboBox pero solo como “visor”
+        cbDiscountType.setDisable(false);
+
+        if (discountPercent <= 0) {
+            // Sin descuento
+            cbDiscountType.setText("Sin descuento");
+        } else if (minQty <= 1) {
+            // Descuento por unidad
+            cbDiscountType.setText(
+                    String.format("Descuento %.0f%% por unidad", discountPercent)
+            );
+        } else {
+            // Descuento por volumen
+            cbDiscountType.setText(
+                    String.format("Descuento por volumen (%.0f%% si compra %d+)",
+                            discountPercent,
+                            minQty)
+            );
+        }
     }
 
     private void handleProductNotFound() {
@@ -234,12 +262,11 @@ public class GenerateSaleController extends MenuController implements Initializa
 
 
     public void cancel(ActionEvent actionEvent) {
-        if (products.isEmpty())return;
-        MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
-        quantity.getValueFactory().setValue(null);
-        tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
+        if (products.isEmpty()) return;
+        cleanFieldsAndTable();
+        MenuController.setAlert(Alert.AlertType.INFORMATION, "Venta cancelada");
         total.clear();
+        products.clear();
     }
 
     public void generateSale(ActionEvent actionEvent) {
@@ -272,7 +299,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void cleanFieldsAndTable() {
-        MenuController.cleanCells(codCustomer, codProduct, customerName, productName, price, stock);
+        MenuController.cleanCells(codCustomer, codProduct, customerName, productName, price, stock, cbDiscountType);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
     }
@@ -312,48 +339,93 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private ShoppingCart createShoppingCartObject() {
-        // Datos base
         double originalUnitPrice = Double.parseDouble(price.getText());
         int qty = quantity.getValue();
 
         double finalUnitPrice = originalUnitPrice;
 
-        // 1. Elegir la estrategia según lo seleccionado en el ComboBox
-        String discountType = cbDiscountType.getValue();  // puede ser null
-        DiscountSrategy strategy = null;
+        // ================================
+        // 1. Leer datos del producto
+        // ================================
+        double discountPercent = 0.0;   // en DECIMAL (0.10, 0.20, etc.)
+        int minQty = 0;
 
-        if ("Sin descuento".equals(discountType)) {
-            strategy = null; // nada
-        } else if ("Descuento 10% por unidad".equals(discountType)) {
-            strategy = new PercentageDiscount(0.10);
-        } else if ("Descuento por volumen (20% si compra 5+)".equals(discountType)) {
-            strategy = new BulkDiscount(5, 0.20);
+        if (currentProduct != null) {
+            discountPercent = currentProduct.discountPercentage();
+            minQty = currentProduct.discountMinQuantity();
         }
 
+        DiscountSrategy strategy = null;
+
+        // ================================
+        // 2. Decidir la estrategia automáticamente
+        // ================================
+        if (discountPercent > 0) {
+            double discountFraction = discountPercent / 100.0;
+
+            // Descuento por UNIDAD (minQty <= 1)
+            if (minQty <= 1) {
+                strategy = new PercentageDiscount(discountFraction);
+
+                // Solo VISOR del tipo de descuento
+                cbDiscountType.setText(
+                        String.format("Descuento %.0f%% por unidad", discountPercent)
+                );
+
+            } else { // Descuento por VOLUMEN
+
+                // Si la cantidad comprada alcanza el mínimo, se aplica
+                if (qty >= minQty) {
+                    strategy = new BulkDiscount(minQty, discountFraction);
+
+                    cbDiscountType.setText(
+                            String.format("Descuento por volumen (%.0f%% si compra %d+)",
+                                    discountPercent, minQty)
+                    );
+                } else {
+                    // No se aplica, pero mostramos que EXISTE un descuento por volumen
+                    cbDiscountType.setText(
+                            String.format("Descuento por volumen (%.0f%% si compra %d+) - no aplicado",
+                                    discountPercent, minQty)
+                    );
+                }
+            }
+
+        } else {
+            // Sin descuento configurado para este producto
+            cbDiscountType.setText("Sin descuento");
+        }
+
+        // ================================
+        // 3. Aplicar el descuento (si corresponde)
+        // ================================
         if (strategy != null) {
             double discounted = strategy.apply(originalUnitPrice, qty);
 
-            // Solo usamos el precio con descuento si es menor (por seguridad)
+            // Por seguridad, solo usamos si realmente baja el precio
             if (discounted < originalUnitPrice) {
                 finalUnitPrice = discounted;
-
-                // ✅ Mostrar mensaje al usuario
-                showDiscountAppliedAlert(
-                        productName.getText(),   // nombre del producto
-                        originalUnitPrice,       // precio antes
-                        finalUnitPrice,          // precio con descuento
-                        qty                      // cantidad
-                );
             }
+
+            // Mostrar el mensaje como ya lo tenías
+            showDiscountAppliedAlert(
+                    productName.getText(), // nombre del producto
+                    originalUnitPrice,     // precio antes
+                    finalUnitPrice,        // precio con descuento (unitario)
+                    qty                    // cantidad
+            );
         }
 
-        //Crear el ShoppingCart con el PRECIO FINAL (con o sin descuento)
+        // ================================
+        // 4. Crear el objeto ShoppingCart
+        // ================================
         return new ShoppingCart(
-                contProducts++,
-                codProduct.getText(),
-                productName.getText(),
-                qty,
-                finalUnitPrice  //aquí ya va el precio final
+                Integer.parseInt(serial.getText()), // nr
+                codProduct.getText(),               // cod
+                productName.getText(),              // product
+                qty,                                // quantity
+                finalUnitPrice,                     // precio unitario (ya con descuento)
+                finalUnitPrice * qty                // total
         );
     }
 
@@ -389,15 +461,8 @@ public class GenerateSaleController extends MenuController implements Initializa
         closeCurrentStage(back);
     }
 
-    private void configureDiscountComboBox() {
-        cbDiscountType.getItems().setAll(
-                "Sin descuento",
-                "Descuento 10% por unidad",
-                "Descuento por volumen (20% si compra 5+)"
-        );
-
-        // Selección por defecto
-        cbDiscountType.getSelectionModel().select(0);
+    private void configureDiscountField() {
+        cbDiscountType.setText("Sin descuento");   // texto inicial
     }
 
     private void showDiscountAppliedAlert(String productName,

@@ -81,45 +81,20 @@ public class SaleDetailController extends ReportsController implements Initializ
         var discountedList = FXCollections.<ShoppingCart>observableArrayList();
 
         for (ShoppingCart sc : productsDetails) {
+            // Tomamos el precio tal cual viene de la BD
+            double unitPrice = sc.price();
+            int quantity = sc.quantity();
 
-            double unitPrice = sc.price();   // precio unitario original
-            int quantity = sc.quantity();    // cantidad comprada
-            double discountedUnitPrice = unitPrice;
-
-            //Elegir estrategia según cantidad
-            DiscountSrategy strategy;
-
-            if (quantity >= 5) {
-                strategy = new BulkDiscount(5, 0.20);  // 20% por comprar 5 o más
-            } else {
-                strategy = new PercentageDiscount(0.10); // 10% fijo
-            }
-
-            //Aplicar descuento
-            double newUnitPrice = strategy.apply(unitPrice, quantity);
-
-            if (newUnitPrice < unitPrice) {
-                discountedUnitPrice = newUnitPrice;
-
-                //Mostrar mensaje al usuario
-                showDiscountAppliedAlert(
-                        sc.product(),
-                        unitPrice,
-                        discountedUnitPrice,
-                        quantity
-                );
-            }
-
-            //Crear un nuevo ShoppingCart con precio YA descontado
-            ShoppingCart discountedItem = new ShoppingCart(
+            // Creamos el item SIN tocar el precio
+            ShoppingCart item = new ShoppingCart(
                     sc.nr(),
                     sc.cod(),
                     sc.product(),
-                    sc.quantity(),
-                    discountedUnitPrice
+                    quantity,
+                    unitPrice
             );
 
-            discountedList.add(discountedItem);
+            discountedList.add(item);
         }
 
         // Reemplazar lista original
@@ -168,33 +143,6 @@ public class SaleDetailController extends ReportsController implements Initializ
 
     public void setParentController(ReportsController parent) {
         this.parent = parent;
-    }
-
-    private void showDiscountAppliedAlert(String productName,
-                                          double originalPrice,
-                                          double discountedPrice,
-                                          int quantity) {
-
-        double originalSubtotal = originalPrice * quantity;
-        double discountedSubtotal = discountedPrice * quantity;
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Descuento aplicado");
-        alert.setHeaderText(null);
-        alert.setContentText(String.format(
-                "Se aplicó un descuento al producto \"%s\".\n\n" +
-                        "Precio unitario antes: %.2f\n" +
-                        "Precio unitario después: %.2f\n\n" +
-                        "Subtotal antes: %.2f\n" +
-                        "Subtotal con descuento: %.2f",
-                productName,
-                originalPrice,
-                discountedPrice,
-                originalSubtotal,
-                discountedSubtotal
-        ));
-
-        alert.showAndWait();
     }
 
 

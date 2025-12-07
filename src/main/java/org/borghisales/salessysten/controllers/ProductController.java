@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
+import javafx.scene.control.TextField;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,6 +35,10 @@ public class ProductController extends MenuController implements Initializable {
     private TextField price;
     @FXML
     private TextField stock;
+    @FXML
+    private TextField txtDiscountPercentage;
+    @FXML
+    private TextField txtDiscountMinQty;
     @FXML
     private TableView<Product> tableProducts;
     @FXML
@@ -84,19 +90,142 @@ public class ProductController extends MenuController implements Initializable {
     }
 
     public void addProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                          Integer.parseInt(stock.getText()), cbState.getValue());
+        // ============================
+        //  LEER Y VALIDAR DESCUENTO (%)
+        // ============================
+        double discountPercentage = 0.0;
+
+        if (!txtDiscountPercentage.getText().trim().isEmpty()) {
+            try {
+                discountPercentage = Double.parseDouble(txtDiscountPercentage.getText().trim());
+
+                // Validación 1: Rango permitido
+                if (discountPercentage < 0 || discountPercentage > 100) {
+                    MenuController.setAlert(Alert.AlertType.ERROR,
+                            "El descuento debe estar entre 0% y 100%.");
+                    return; // Cancelar registro
+                }
+
+            } catch (NumberFormatException e) {
+                MenuController.setAlert(Alert.AlertType.ERROR,
+                        "Ingrese un valor numérico válido para el descuento.");
+                return;
+            }
+        }
+
+        // ============================
+        //  LEER Y VALIDAR CANTIDAD MÍNIMA
+        // ============================
+        int discountMinQty = 0;
+
+        if (!txtDiscountMinQty.getText().trim().isEmpty()) {
+            try {
+                discountMinQty = Integer.parseInt(txtDiscountMinQty.getText().trim());
+
+                // Validación 2: No negativos
+                if (discountMinQty < 0) {
+                    MenuController.setAlert(Alert.AlertType.ERROR,
+                            "La cantidad mínima no puede ser negativa.");
+                    return;
+                }
+
+            } catch (NumberFormatException e) {
+                MenuController.setAlert(Alert.AlertType.ERROR,
+                        "Ingrese un valor numérico válido para la cantidad mínima.");
+                return;
+            }
+        }
+
+        // ============================
+        //  CREAR PRODUCTO
+        // ============================
+        Product product = new Product(
+                name.getText(),
+                Double.parseDouble(price.getText()),
+                Integer.parseInt(stock.getText()),
+                cbState.getValue(),
+                discountPercentage,     // 👈 SE GUARDA TAL CUAL (ej: 50)
+                discountMinQty
+        );
+
+        // ============================
+        //  GUARDAR EN BD
+        // ============================
         if (productDAO.create(product)) {
-            MenuController.cleanCells(name,price,stock);
+            MenuController.cleanCells(name, price, stock);
+            txtDiscountPercentage.clear();
+            txtDiscountMinQty.clear();
             updateTable();
         }
     }
 
     public void updateProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                Integer.parseInt(stock.getText()), cbState.getValue());
+        // ==============================
+        // 1. Leer y validar DESCUENTO (%)
+        // ==============================
+        double discountPercentage = 0.0;
+        String discountText = txtDiscountPercentage.getText().trim();
+
+        if (!discountText.isEmpty()) {
+            try {
+                discountPercentage = Double.parseDouble(discountText);
+
+                // rango permitido: 0–100
+                if (discountPercentage < 0 || discountPercentage > 100) {
+                    MenuController.setAlert(Alert.AlertType.ERROR,
+                            "El descuento debe estar entre 0 y 100.");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                MenuController.setAlert(Alert.AlertType.ERROR,
+                        "El descuento debe ser un número válido.");
+                return;
+            }
+        }
+
+        // ==================================
+        // 2. Leer y validar CANTIDAD MÍNIMA
+        // ==================================
+        int discountMinQty = 0;
+        String minQtyText = txtDiscountMinQty.getText().trim();
+
+        if (!minQtyText.isEmpty()) {
+            try {
+                discountMinQty = Integer.parseInt(minQtyText);
+
+                if (discountMinQty < 0) {
+                    MenuController.setAlert(Alert.AlertType.ERROR,
+                            "La cantidad mínima no puede ser negativa.");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                MenuController.setAlert(Alert.AlertType.ERROR,
+                        "La cantidad mínima debe ser un número entero válido.");
+                return;
+            }
+        }
+
+        // Si el descuento es 0, forzamos cantidad mínima en 0
+        if (discountPercentage == 0) {
+            discountMinQty = 0;
+        }
+
+        // ==============================
+        // 3. Crear producto y actualizar
+        // ==============================
+        Product product = new Product(
+                name.getText(),
+                Double.parseDouble(price.getText()),
+                Integer.parseInt(stock.getText()),
+                cbState.getValue(),
+                discountPercentage,   // 0–100
+                discountMinQty
+        );
+
         if (productDAO.update(product)) {
-            MenuController.cleanCells(name,price,stock);
+            MenuController.cleanCells(name, price, stock);
+            txtDiscountPercentage.clear();
+            txtDiscountMinQty.clear();
             updateTable();
         }
     }
@@ -117,6 +246,9 @@ public class ProductController extends MenuController implements Initializable {
         price.setText(String.valueOf(product.price()));
         stock.setText(String.valueOf(product.stock()));
         cbState.setValue(product.state());
+
+        txtDiscountPercentage.setText(String.valueOf(product.discountPercentage()));
+        txtDiscountMinQty.setText(String.valueOf(product.discountMinQuantity()));
     }
 
     private void updateTable() {
