@@ -2,6 +2,7 @@ package org.borghisales.salessysten.controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -25,7 +26,7 @@ public class MenuController {
 
 
     static Alert defaultAlert;
-    static ButtonType acceptButton = new ButtonType("Accept");
+    static ButtonType acceptButton = new ButtonType("Aceptar");
     public static HashMap<String, String > filePaths = new HashMap<>();
 
     void closeCurrentStage(Node node) {
@@ -37,15 +38,49 @@ public class MenuController {
     public void openNewStage(String fxmlFileName, String title) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
-            Scene scene = new Scene(fxmlLoader.load());
+            Parent root = fxmlLoader.load();
+
+            Scene scene;
             Stage stage = new Stage();
+
+            switch (fxmlFileName) {
+                case MAIN_VIEW_FXML -> {
+                    scene = new Scene(root, 420, 400);
+                    stage.setResizable(false);
+                }
+                case MANAGEMENT_VIEW_FXML -> {
+                    scene = new Scene(root, 315, 450);
+                    stage.setResizable(false);
+                }
+                case CUSTOMER_VIEW_FXML -> {
+                    scene = new Scene(root, 665, 510);
+                    stage.setResizable(false);
+                }
+                case PRODUCT_VIEW_FXML, SELLER_VIEW_FXML -> {
+                    scene = new Scene(root, 650, 500);
+                    stage.setResizable(false);
+                }
+                case REPORT_VIEW_FXML -> {
+                    scene = new Scene(root, 1470, 1030);
+                    stage.setResizable(false);
+                }
+                case GENERATE_SALE_VIEW_FXML -> {
+                    scene = new Scene(root, 590, 600);
+                    stage.setResizable(false);
+                }
+                default -> {
+                    // tamaño por defecto si no coincide con ninguno
+                    scene = new Scene(root, 600, 400);
+                }
+            }
+
             stage.setTitle(title);
             stage.setScene(scene);
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error al cargar la ventana: "+ e.getMessage());
         }
     }
 
@@ -63,7 +98,7 @@ public class MenuController {
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("Información");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);

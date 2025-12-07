@@ -7,15 +7,15 @@
    <children>
       <TableView fx:id="tableSale" prefHeight="496.0" prefWidth="799.0">
          <columns>
-            <TableColumn fx:id="colNro" prefWidth="70.0" sortable="false" style="-fx-alignment: CENTER;" text="NR" />
-            <TableColumn fx:id="colCod" prefWidth="73.0" sortable="false" style="-fx-alignment: CENTER;" text="COD" />
-            <TableColumn fx:id="colProduct" prefWidth="356.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCT" />
-            <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="103.0" style="-fx-alignment: CENTER;" text="QUANTITY" />
-            <TableColumn fx:id="colPrice" prefWidth="102.0" style="-fx-alignment: CENTER;" text="PRICE UNIT" />
+            <TableColumn fx:id="colNro" prefWidth="70.0" sortable="false" style="-fx-alignment: CENTER;" text="No." />
+            <TableColumn fx:id="colCod" prefWidth="73.0" sortable="false" style="-fx-alignment: CENTER;" text="ID" />
+            <TableColumn fx:id="colProduct" prefWidth="356.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCTO" />
+            <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="103.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
+            <TableColumn fx:id="colPrice" prefWidth="102.0" style="-fx-alignment: CENTER;" text="PRECIO UNITARIO" />
             <TableColumn fx:id="colTotal" prefWidth="94.0" style="-fx-alignment: CENTER;" text="TOTAL" />
          </columns>
       </TableView>
       <TextField fx:id="totalSale" editable="false" layoutX="693.0" layoutY="501.0" prefHeight="25.0" prefWidth="91.0" />
-      <Label layoutX="619.0" layoutY="504.0" text="TOTAL SALE:" wrapText="true" />
+      <Label layoutX="600" layoutY="504.0" text="VENTA TOTAL:" wrapText="true" />
    </children>
 </AnchorPane>
