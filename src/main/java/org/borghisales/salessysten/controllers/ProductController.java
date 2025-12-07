@@ -19,7 +19,7 @@ import org.borghisales.salessysten.model.ProductDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProductController implements Initializable {
+public class ProductController implements Initializable,validacionEntrada {
 
     private final ProductDAO productDAO = new ProductDAO();
     private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
@@ -83,8 +83,21 @@ public class ProductController implements Initializable {
     }
     // Agregar nuevo producto.
     public void addProduct(ActionEvent actionEvent) {
+       //IMPLEMENTACIÓN DE VALIDACIÓN PARA PRODUCTO.
+        // Actualización: Hacía falta un return para evitar guardar datos incorrectos.
+        if (campoVacio(name)||campoVacio(price)||campoVacio(stock)){
+            mostrarAdvertencia("Debes de completar todos los campos antes de guardar.");
+            return;
+        }
+
+        if (cbState.getValue() == null) {
+            mostrarAdvertencia("Debes seleccionar un estado.");
+            return;
+        }
+
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                           Integer.parseInt(stock.getText()), cbState.getValue());
+
         if (productDAO.create(product)) {
             MenuController.cleanCells(name,price,stock);
             updateTable();
