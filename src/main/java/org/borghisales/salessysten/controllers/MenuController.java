@@ -65,18 +65,6 @@ public class MenuController {
         }
     }
 
-    /*private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
-        if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
-            stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
-            });
-        }
-    }
-
-    String getFxmlFather(String fxml){
-        return filePaths.get(fxml);
-    }*/
-
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
         defaultAlert.setTitle("Información");

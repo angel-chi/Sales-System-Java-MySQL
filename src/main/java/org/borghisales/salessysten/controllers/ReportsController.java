@@ -180,18 +180,7 @@ public class ReportsController extends MenuController implements Initializable {
                 int idSales = tableReport.getSelectionModel().getSelectedItem().idSales();
                 SaleDetailController.setIdSale(idSales);
 
-                //FXMLLoader fxmlLoaderSaleDetails = new FXMLLoader(MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML));
-
-                MenuController.openNewStage(MenuController.SALE_DETAIL_VIEW_FXML, "Detalles de venta", 800, 575, false);
-                /*try {
-                    Scene scene = new Scene(fxmlLoaderSaleDetails.load());
-                    Stage stage = new Stage();
-                    stage.setTitle("Detalles de venta");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }*/
+                openNewStage(MenuController.SALE_DETAIL_VIEW_FXML, "Detalles de venta", 800, 575, false);
             }
         });
     }

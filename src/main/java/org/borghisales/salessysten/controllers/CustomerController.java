@@ -102,7 +102,7 @@ public class CustomerController extends MenuController implements Initializable 
     public void addCustomer(ActionEvent actionEvent) {
         Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
         if (customerDAO.create(customer)) {
-            cleanCells(dni, name, address);  //por si rompo el codigo, aqui habia un MenuController.
+            cleanCells(dni, name, address);
             updateTable();
         }
     }
@@ -110,7 +110,7 @@ public class CustomerController extends MenuController implements Initializable 
     public void updateCustomer(ActionEvent actionEvent) {
         Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
         if (customerDAO.update(customer)) {
-            cleanCells(dni, name, address);    //por si rompo el codigo, aqui habia un MenuController.
+            cleanCells(dni, name, address);
             updateTable();
         }
     }
@@ -119,7 +119,7 @@ public class CustomerController extends MenuController implements Initializable 
         requestPassword();
         if(correctPassword) {
             if (customerDAO.delete(dni.getText())) {
-                cleanCells(dni, name, address);           //por si rompo el codigo, aqui habia un MenuController.
+                cleanCells(dni, name, address);
                 updateTable();
             }
             correctPassword = false;
