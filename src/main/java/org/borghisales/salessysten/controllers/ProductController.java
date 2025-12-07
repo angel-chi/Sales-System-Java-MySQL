@@ -12,12 +12,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
+import org.borghisales.salessysten.model.IValidable;
 import org.borghisales.salessysten.model.CRUD;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProductController implements Initializable {
+public class ProductController implements Initializable, IValidable {
     //usando la abstraccion
     private final CRUD<Product> productDAO = new ProductDAO();
 
@@ -45,6 +46,33 @@ public class ProductController implements Initializable {
     @FXML
     private TableColumn<Product,Product.State> colState;
 
+    @Override
+    public String validarCampos() {
+        String nameText = name.getText();
+        String priceText = price.getText();
+        String stockText = stock.getText();
+        if (IValidable.esCampoVacio(nameText)) {
+            return "El campo Nombre del producto es obligatorio.";
+        }
+        if (IValidable.esCampoVacio(priceText)) {
+            return "El campo Precio es obligatorio.";
+        }
+        if (IValidable.esCampoVacio(stockText)) {
+            return "El campo Stock es obligatorio.";
+        }
+        try {
+            Double.parseDouble(priceText);
+        } catch (NumberFormatException e) {
+            return "El precio debe ser un número decimal válido.";
+        }
+        try {
+            Integer.parseInt(stockText);
+        } catch (NumberFormatException e) {
+            return "El stock debe ser un número entero válido.";
+        }
+
+        return null;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -83,6 +111,11 @@ public class ProductController implements Initializable {
     }
 
     public void addProduct(ActionEvent actionEvent) {
+        String errorMessage = validarCampos();
+        if (errorMessage != null) {
+            MenuController.setAlert(Alert.AlertType.WARNING, errorMessage);
+            return; // Detiene la ejecución si hay errores
+        }
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                           Integer.parseInt(stock.getText()), cbState.getValue());
         if (productDAO.create(product)) {
@@ -95,6 +128,11 @@ public class ProductController implements Initializable {
     }
 
     public void updateProduct(ActionEvent actionEvent) {
+        String errorMessage = validarCampos();
+        if (errorMessage != null) {
+            MenuController.setAlert(Alert.AlertType.WARNING, errorMessage);
+            return; // Detiene la ejecución si hay errores
+        }
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                 Integer.parseInt(stock.getText()), cbState.getValue());
         if (productDAO.update(product)) {

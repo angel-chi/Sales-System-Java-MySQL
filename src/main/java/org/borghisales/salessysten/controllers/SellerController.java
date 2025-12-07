@@ -13,12 +13,13 @@ import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Seller;
 import org.borghisales.salessysten.model.SellerDAO;
 import org.borghisales.salessysten.model.CRUD;
+import org.borghisales.salessysten.model.IValidable;
 
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class SellerController implements Initializable {
+public class SellerController implements Initializable, IValidable{
     //Usando la abstraccion
     private final CRUD<Seller> sellerDAO = new SellerDAO();
     private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
@@ -48,7 +49,27 @@ public class SellerController implements Initializable {
     private TableColumn<Seller, Seller.State> colState;
 
 
+    @Override
+    public String validarCampos() {
+        String dniText = dni.getText();
+        String nameText = name.getText();
+        String phoneText = phone.getText();
+        String userText = user.getText();
+        if (IValidable.esCampoVacio(dniText)) {
+            return "El campo DNI del vendedor es obligatorio.";
+        }
+        if (IValidable.esCampoVacio(nameText)) {
+            return "El campo Nombre del vendedor es obligatorio.";
+        }
+        if (IValidable.esCampoVacio(phoneText)) {
+            return "El campo Teléfono del vendedor es obligatorio.";
+        }
+        if (IValidable.esCampoVacio(userText)) {
+            return "El campo Usuario del vendedor es obligatorio.";
+        }
 
+        return null; // La validación fue exitosa
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -88,6 +109,11 @@ public class SellerController implements Initializable {
 
 
     public void addSeller(ActionEvent actionEvent){
+        String errorMessage = validarCampos();
+        if (errorMessage != null) {
+            MenuController.setAlert(Alert.AlertType.WARNING, errorMessage);
+            return; // Detiene la ejecución si hay errores
+        }
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
         if (sellerDAO.create(seller)) {
             MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor añadido con éxito");
@@ -98,6 +124,12 @@ public class SellerController implements Initializable {
         }
     }
     public void updateSeller(ActionEvent actionEvent) {
+        String errorMessage = validarCampos();
+
+        if (errorMessage != null) {
+            MenuController.setAlert(Alert.AlertType.WARNING, errorMessage);
+            return; // Detiene la ejecución si hay errores
+        }
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
         if (sellerDAO.update(seller)) {
             MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor actualizado con éxito");

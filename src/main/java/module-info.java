@@ -13,4 +13,6 @@ module org.borghisales.salessysten {
     exports org.borghisales.salessysten.controllers;
     opens org.borghisales.salessysten.controllers to javafx.fxml;
     exports org.borghisales.salessysten;
+    exports org.borghisales.salessysten.model;
+    opens org.borghisales.salessysten.model to javafx.fxml;
 }
