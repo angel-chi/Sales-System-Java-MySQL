@@ -93,6 +93,7 @@ public class SellerDAO extends Validator<Seller> implements CRUD<Seller>{
 
 
             pstmt.setString(1,id);
+            //confirmacion
 
             int rows_affected = pstmt.executeUpdate();
 
@@ -159,7 +160,7 @@ public class SellerDAO extends Validator<Seller> implements CRUD<Seller>{
 
                     return true;
                 }else{
-                    MenuController.setAlert(Alert.AlertType.ERROR, "usuario no encontrado") ;
+                    MenuController.setAlert(Alert.AlertType.ERROR, "Usuario no encontrado") ;
                     return false;
                 }
             }
