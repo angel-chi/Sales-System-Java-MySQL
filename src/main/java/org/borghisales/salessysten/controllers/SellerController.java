@@ -48,13 +48,13 @@ public class SellerController implements Initializable {
 
 
 
-    @Override
+    @Override // Métodos de configuración
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeTable();
         initializeComboBox();
         initializeSellerData();
     }
-
+    // Inicializar la tabla de vendedores.
     private void initializeTable() {
         tableSellers.setOnMouseClicked(mouseEvent -> {
             if (!tableSellers.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
@@ -74,7 +74,7 @@ public class SellerController implements Initializable {
         cbState.setValue(Seller.State.ACTIVE);
         cbState.setItems(stateList);
     }
-
+    // Inicializar la información de un vendedor.
     private void initializeSellerData() {
         tableSellers.getItems().clear();
         if (sellers == null) {
@@ -84,7 +84,7 @@ public class SellerController implements Initializable {
         tableSellers.setItems(sellers);
     }
 
-
+    // Agregar un vendedor nuevo.
     public void addSeller(ActionEvent actionEvent){
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
         if (sellerDAO.create(seller)) {
@@ -92,6 +92,7 @@ public class SellerController implements Initializable {
             updateTable();
         }
     }
+    // Actualizar la información de un vendedor.
     public void updateSeller(ActionEvent actionEvent) {
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
         if (sellerDAO.update(seller)) {
@@ -99,10 +100,10 @@ public class SellerController implements Initializable {
             updateTable();
         }
     }
-
+    // Eliminar a un vendedor.
     public void deleteSeller(ActionEvent actionEvent) {
         if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
-            MenuController.setAlert(Alert.AlertType.ERROR,"No se puede eliminar al vendedor actual");
+            MenuController.setAlert(Alert.AlertType.ERROR,"No se puede eliminar al vendedor actual.");
             return;
         }
         if (sellerDAO.delete(dni.getText())){
@@ -110,7 +111,7 @@ public class SellerController implements Initializable {
             updateTable();
         }
     }
-
+    // Limpiar texto.
     public void cleanCellsScreen(ActionEvent actionEvent) {
         MenuController.cleanCells(dni,name,phone,user);
     }
@@ -122,7 +123,7 @@ public class SellerController implements Initializable {
         user.setText(seller.user());
         cbState.setValue(seller.state());
     }
-
+    // Refrescar tabla.
     private void updateTable(){
         tableSellers.getItems().clear();
         sellerDAO.setTable(sellers);

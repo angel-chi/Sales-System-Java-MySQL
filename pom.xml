@@ -15,7 +15,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -46,8 +45,6 @@
             <artifactId>poi-ooxml</artifactId>
             <version>5.4.0</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -108,7 +105,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <!--mainClass>mypackage.gui.menuInicial.JFrameGestorEstudiantes_app</mainClass-->
-                            <mainClass>  </mainClass>
+                            <mainClass>org.borghisales.salessysten.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

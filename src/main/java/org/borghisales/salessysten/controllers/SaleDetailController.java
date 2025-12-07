@@ -18,12 +18,15 @@ import java.util.ResourceBundle;
 
 public class SaleDetailController implements Initializable {
 
-
-
     private static final SalesDAO salesDAO = new SalesDAO();
     private static ObservableList<ShoppingCart> detallesProducto;
     private static int idSale;
 
+    // salesDAO: Interactúa con la base de datos.
+    // detallesProducto: almacena los objetos ShoppingCart
+    // idSale: ID de la venta de la que se van a mostrar los detalles.
+
+    // Variables
     @FXML
     private   TableView<ShoppingCart> tableSale;
     @FXML
@@ -41,8 +44,7 @@ public class SaleDetailController implements Initializable {
     @FXML
     private TextField totalSale;
 
-
-    @Override
+    @Override // Configurar UI
     public void initialize(URL url, ResourceBundle resourceBundle) {
         configureTableColumns();
         clearTableItems();
@@ -59,11 +61,11 @@ public class SaleDetailController implements Initializable {
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
         colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total()).asObject());
     }
-
+    // Asegura que la tabla esté vacía antes de cargar nuevos datos.
     private void clearTableItems() {
         tableSale.getItems().clear();
     }
-
+    // Ejecuta la consulta a la base de datos.
     private void loadProductsDetails() {
         detallesProducto = FXCollections.observableArrayList();
         salesDAO.setTableDetails(detallesProducto, idSale);
@@ -80,10 +82,8 @@ public class SaleDetailController implements Initializable {
         tableSale.setItems(detallesProducto);
     }
 
-
     public static void setIdSale(int idSale) {
         SaleDetailController.idSale = idSale;
     }
-
 
 }

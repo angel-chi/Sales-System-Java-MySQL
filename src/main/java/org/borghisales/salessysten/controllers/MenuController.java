@@ -23,7 +23,6 @@ public class MenuController {
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
 
-
     static Alert defaultAlert;
     static ButtonType acceptButton = new ButtonType("Aceptar");
     public static HashMap<String, String > filePaths = new HashMap<>();
@@ -33,7 +32,6 @@ public class MenuController {
         stage.close();
     }
 
-
     public void openNewStage(String fxmlFileName, String title) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
@@ -42,15 +40,15 @@ public class MenuController {
             Stage stage = new Stage();
             stage.setScene(scene);
 
-            // Mantener tamaño al cambiar ventanas
+            // Mantener el mismo tamaño al cambiar ventanas.
 
             stage.setMinWidth(400);
             stage.setMinHeight(600);
 
-            // Mantiene el cambio dinámico
+            // Mantiene el tamaño dinámico.
             stage.setResizable(false);
 
-            // Centrar ventana
+            // Contrar ventana.
             stage.centerOnScreen();
 
             configureStageCloseEvent(stage, fxmlFileName, title);
@@ -87,6 +85,5 @@ public class MenuController {
         for (TextField e:cells)
             e.clear();
     }
-
 
 }

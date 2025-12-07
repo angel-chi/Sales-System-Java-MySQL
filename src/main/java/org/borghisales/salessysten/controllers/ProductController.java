@@ -22,10 +22,9 @@ import java.util.ResourceBundle;
 public class ProductController implements Initializable {
 
     private final ProductDAO productDAO = new ProductDAO();
-
     private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
-
-    private static ObservableList<Product> products =null;
+    private static ObservableList<Product> products = null;
+    // Variables
     @FXML
     private ComboBox<Product.State> cbState;
     @FXML
@@ -47,8 +46,7 @@ public class ProductController implements Initializable {
     @FXML
     private TableColumn<Product,Product.State> colState;
 
-
-    @Override
+    @Override // Configuración del UI.
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeTable();
         initializeComboBox();
@@ -74,7 +72,7 @@ public class ProductController implements Initializable {
         cbState.setValue(Product.State.ACTIVE);
         cbState.setItems(stateList);
     }
-
+    // Mapear los datos de los prodcutos.
     private void initializeProductData() {
         tableProducts.getItems().clear();
         if (products == null) {
@@ -83,7 +81,7 @@ public class ProductController implements Initializable {
         }
         tableProducts.setItems(products);
     }
-
+    // Agregar nuevo producto.
     public void addProduct(ActionEvent actionEvent) {
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                           Integer.parseInt(stock.getText()), cbState.getValue());
@@ -92,7 +90,7 @@ public class ProductController implements Initializable {
             updateTable();
         }
     }
-
+    // Actualizar producto.
     public void updateProduct(ActionEvent actionEvent) {
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                 Integer.parseInt(stock.getText()), cbState.getValue());
@@ -101,7 +99,7 @@ public class ProductController implements Initializable {
             updateTable();
         }
     }
-
+    // Eliminar producto.
     public void deleteProduct(ActionEvent actionEvent) {
         if (productDAO.delete(name.getText())) {
             MenuController.cleanCells(name,price,stock);
@@ -125,6 +123,5 @@ public class ProductController implements Initializable {
         productDAO.setTable(products);
         tableProducts.setItems(products);
     }
-
 
 }

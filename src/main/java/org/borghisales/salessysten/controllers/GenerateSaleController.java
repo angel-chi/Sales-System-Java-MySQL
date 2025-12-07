@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class GenerateSaleController extends MenuController implements Initializable {
-
+    // Variables
     private final SalesDAO salesDAO = new SalesDAO();
     private int idSale;
 
@@ -34,7 +34,6 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final LocalDate now = LocalDate.now();
 
-
     private Scene scene = null;
     private Stage stage;
 
@@ -42,7 +41,6 @@ public class GenerateSaleController extends MenuController implements Initializa
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
     private final ButtonType buttonTypeAccept = new ButtonType("SI");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
-
 
     private final CustomerDAO customerDAO = new CustomerDAO();
 
@@ -87,39 +85,38 @@ public class GenerateSaleController extends MenuController implements Initializa
     private TableColumn<ShoppingCart, Double> colPrice;
     @FXML
     private TableColumn<ShoppingCart,Double> colTotal;
-
+    // Métodos de configuración
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeUIElements();
         configureAlerts();
         configureTable();
     }
-
+    // Inicializar elementos de la interfaz de usuario.
     private void initializeUIElements() {
         total.setText("0.0");
         setSerial();
         seller.setText(sellerName);
         date.setText(String.valueOf(now));
     }
-//Se cambiaron algunos mensajes y se puso una traducción para el usuario
+    // Dos alertas. Se usan cuando no se encuentra cliente o producto.
     private void configureAlerts() {
-        configureAlert(alertCustomer, "Nuevo cliente", "El cliente no existe", "¿Desea agregarlo?");
-        configureAlert(alertProduct, "Nuevo producto", "EL producto no existe", "¿Desea agregarlo?");
+        configureAlert(alertCustomer, "Nuevo cliente.", "El cliente no existe.", "¿Desea agregarlo?");
+        configureAlert(alertProduct, "Nuevo producto.", "El producto no existe.", "¿Desea agregarlo?");
     }
-
+    // Vacía la tabla y mapea las columnas con los datos de Shopping Cart.
     private void configureTable() {
         configureTableColumns();
         tableSale.getItems().clear();
         products = FXCollections.observableArrayList();
     }
-
-
+    // Configura una alerta.
     private void configureAlert(Alert alert, String title, String header, String content) {
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.getButtonTypes().setAll(buttonTypeAccept, buttonTypeCancel);
     }
-
+    // Configura tableSale.
     private void configureTableColumns() {
         colNro.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().nr()).asObject());
         colCod.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().cod()));
@@ -128,7 +125,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
         colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total()).asObject());
     }
-
+    // Busca a un cliente.
     public void searchCustomer(ActionEvent actionEvent) {
         int customerId = Integer.parseInt(codCustomer.getText());
         cliente = customerDAO.searchCustomer(customerId);
@@ -140,7 +137,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             handleCustomerNotFound();
         }
     }
-
+    // Si no existe el cliente, recomienda agregarlo.
     private void handleCustomerNotFound() {
         alertCustomer.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeAccept) {
@@ -148,7 +145,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             }
         });
     }
-
+    // Agregando dicho cliente.
     private void openCustomerManagementView() {
         FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(CUSTOMER_VIEW_FXML));
 
@@ -163,8 +160,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         stage.setScene(scene);
         stage.show();
     }
-
-
+    // Buscar un producto.
     public void searchProduct(ActionEvent actionEvent) {
         int productId = Integer.parseInt(codProduct.getText());
         Product product = productDAO.searchProduct(productId);
@@ -175,7 +171,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             handleProductNotFound();
         }
     }
-
+    // Actualizar la información de un producto, si existe.
     private void updateProductFields(Product product) {
         setAlert(Alert.AlertType.CONFIRMATION, "Producto Encontrado: " + product.name());
         productName.setText(product.name());
@@ -185,7 +181,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, product.stock(), 0);
         quantity.setValueFactory(valueFactory);
     }
-
+    // Si no existe, recomienda agregarlo.
     private void handleProductNotFound() {
         alertProduct.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeAccept) {
@@ -193,7 +189,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             }
         });
     }
-
+    // Agregando dciho producto.
     private void openProductManagementView() {
         FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(PRODUCT_VIEW_FXML));
 
@@ -208,8 +204,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         stage.setScene(scene);
         stage.show();
     }
-
-
+    // Cancelar una acción.
     public void cancel(ActionEvent actionEvent) {
         if (products.isEmpty())return;
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
@@ -222,7 +217,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         totalActual=0;
 
     }
-
+    // Este es el proceso de generar una venta.
     public void generateSale(ActionEvent actionEvent) {
         if (products.isEmpty()) {
             return;
@@ -273,6 +268,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         GenerateSaleController.idVendedor = idVendedor;
     }
 
+    // Agrega un producto a la tabla de venta.
     public void addShoppingCart(ActionEvent actionEvent) {
         String errorMessage = validateInputs();
 
@@ -284,23 +280,23 @@ public class GenerateSaleController extends MenuController implements Initializa
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya está en tu carrito de compra");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya está en tu carrito de compraw.");
             return;
         }
 
         addToCartAndUpdateTotal(product);
     }
-
+    // Creando un objeto ShoppingCart
     private ShoppingCart createShoppingCartObject() {
         return new ShoppingCart(contProducts++, codProduct.getText(),
                 productName.getText(), quantity.getValue(),
                 Double.parseDouble(price.getText()));
     }
-
+    // ¿El producto ya está en el carrito?
     private boolean isProductAlreadyInCart(ShoppingCart product) {
         return products.stream().anyMatch(e -> Objects.equals(e.cod(), product.cod()));
     }
-
+    // Agregar al carrito y actualizar el total.
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
@@ -308,7 +304,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         total.setText(String.format("%.2f", totalActual));
     }
 
-
+    // Validando datos.
     private String validateInputs() {
         if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
             return "Nombre de cliente/producto faltantes.";

@@ -67,10 +67,10 @@ public class ProductDAO implements CRUD<Product>{
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto añadido correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto añadido exitosamente!");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error añadiendo el producto: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error añadiendo el producto. ");
                 return false;
             }
 
@@ -100,15 +100,15 @@ public class ProductDAO implements CRUD<Product>{
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto actualizado correctamente");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto actualizado correctamente!");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error al actualizar producto");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error intentando actualizar el producto.");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando el producto: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error intentando actualizar el producto: " + e.getMessage());
             return false;
         }
     }
@@ -126,17 +126,17 @@ public class ProductDAO implements CRUD<Product>{
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto eliminado correctamente");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto eliminado correctamente!");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error al eliminar producto: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error intentando eliminar el producto: ");
                 return false;
             }
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "No se puede eliminar un producto registrado en una venta");
+            MenuController.setAlert(Alert.AlertType.ERROR, "No se puede eliminar un producto registrado en una venta.");
             return false;
         }
     }
@@ -157,7 +157,7 @@ public class ProductDAO implements CRUD<Product>{
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error al crear la tabla de vendedor: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error intentando crear la tabla de vendedor: " + e.getMessage());
         }
 
     }
@@ -184,7 +184,7 @@ public class ProductDAO implements CRUD<Product>{
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar ventas : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar buscar las ventas: " + e.getMessage());
         }
 
 

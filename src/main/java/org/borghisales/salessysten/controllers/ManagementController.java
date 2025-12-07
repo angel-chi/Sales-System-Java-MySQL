@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ManagementController extends MenuController implements Initializable {
-
+    // Variables
     private static int lastTab ;
 
     @FXML
@@ -29,24 +29,22 @@ public class ManagementController extends MenuController implements Initializabl
         closeCurrentStage(sellerButton);
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabPaneManage.getSelectionModel().select(lastTab);
     }
-
+    // Todos los open<> siguen el mismo patrón. Guardan la pestaña actual,
+    // abren una nueva ventana y cierran la ventana actual.
     public void openCustomer(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
         openNewStage(CUSTOMER_VIEW_FXML, "Cliente");
         closeCurrentStage(sellerButton);
-
     }
 
     public void openProduct(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
         openNewStage(PRODUCT_VIEW_FXML,"Productos");
         closeCurrentStage(sellerButton);
-
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
@@ -54,6 +52,7 @@ public class ManagementController extends MenuController implements Initializabl
         openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compra");
         closeCurrentStage(sellerButton);
     }
+
     public void openSalesReport(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
         openNewStage(REPORT_VIEW_FXML,"Ventas");
@@ -64,22 +63,21 @@ public class ManagementController extends MenuController implements Initializabl
 public void help(ActionEvent actionEvent) {
     new Thread(() -> {
         try {
-            //URL ACTUALIZADA
             String url = "https://github.com/angel-chi/Sales-System-Java-MySQL.git";
-            //Se revisa el nombre de cada sistema operativo, pues cada uno de ellos ejecuta una rutina de navegación distinta
-            //Para windows
+            // Cada Sistema Operativo ejecuta una rutina de navegación distinta.
+            // Windows
             if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 Runtime.getRuntime().exec(new String[]{"rundll32", "url.dll,FileProtocolHandler", url});
-           //Para linux y algunas de sus distribuciones
+           // Algunas distribuciones de Linux
             } else if (System.getProperty("os.name").toLowerCase().contains("nux")||System.getProperty("os.name").toLowerCase().contains("nix")
             ||System.getProperty("os.name").toLowerCase().contains("aix")) {
                 Runtime.getRuntime().exec(new String[]{"xdg-open", url});
-            //Para MacOS
+            // MacOS
             } else if (System.getProperty("os.name").toLowerCase().contains("mac")) {
                 Runtime.getRuntime().exec(new String[]{"open", url});
-            //POR SI ACASO
+            // Algún otro Sistema Operativo...
             } else {
-                System.out.println("Sistema operativo no soportado");
+                System.out.println("Sistema operativo no soportado.");
             }
         } catch (Exception E) {
             E.printStackTrace();
@@ -89,7 +87,7 @@ public void help(ActionEvent actionEvent) {
         }
     }).start();
 }
-
+    // Salir
     public void exit(ActionEvent actionEvent) {
         openNewStage(MAIN_VIEW_FXML,"Iniciar Sesión");
         closeCurrentStage(sellerButton);
