@@ -31,6 +31,8 @@ public class CustomerController implements Initializable {
     @FXML
     private TextField address;
     @FXML
+    private TextField number; //añadido
+    @FXML
     private ComboBox<Customer.State> cbState;
     @FXML
     private TableView<Customer> tableCustomers;
@@ -44,6 +46,8 @@ public class CustomerController implements Initializable {
     private TableColumn<Customer,String> colAddress;
     @FXML
     private TableColumn<Customer,Customer.State> colState;
+    @FXML
+    private TableColumn<Customer,String> colNumber;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -72,6 +76,7 @@ public class CustomerController implements Initializable {
         colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
         colAddress.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().address()));
         colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+        colNumber.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().number()));
     }
     private void initializeComboBox() {
         cbState.setValue(Customer.State.ACTIVE);
@@ -79,36 +84,37 @@ public class CustomerController implements Initializable {
     }
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
+        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue(), number.getText());
         if (customerDAO.create(customer)) {
-            MenuController.cleanCells(dni, name, address);
+            MenuController.cleanCells(dni, name, address, number);
             updateTable();
         }
     }
     @FXML
     public void updateCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
+        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue(),number.getText());
         if (customerDAO.update(customer)) {
-            MenuController.cleanCells(dni, name, address);
+            MenuController.cleanCells(dni, name, address,number);
             updateTable();
         }
     }
     @FXML
     public void deleteCustomer(ActionEvent actionEvent) {
         if (customerDAO.delete(dni.getText())){
-            MenuController.cleanCells(dni,name,address);
+            MenuController.cleanCells(dni,name,address,number);
             updateTable();
         }
     }
     @FXML
     public void cleanCellsScreen(ActionEvent actionEvent) {
-        MenuController.cleanCells(dni,name,address);
+        MenuController.cleanCells(dni,name,address,number);
     }
     private void setCells(Customer customer){
         name.setText(customer.name());
         dni.setText(customer.dni());
         address.setText(customer.address());
         cbState.setValue(customer.state());
+        number.setText(customer.number());
     }
 
     private void updateTable() {

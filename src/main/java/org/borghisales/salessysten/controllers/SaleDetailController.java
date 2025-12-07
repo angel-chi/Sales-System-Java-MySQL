@@ -18,8 +18,6 @@ import java.util.ResourceBundle;
 
 public class SaleDetailController implements Initializable {
 
-
-
     private static final SalesDAO salesDAO = new SalesDAO();
     private static ObservableList<ShoppingCart> productsDetails;
     private static int idSale;

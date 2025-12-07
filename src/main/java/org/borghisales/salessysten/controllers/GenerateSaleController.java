@@ -40,11 +40,11 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SÍ");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
-    private final CustomerDAO customerDAO = new CustomerDAO();
+    private final CustomerDAO customerDAO = new CustomerDAO(); //TODOS LOS QUE TIENEN DAO SE CONECTAN A LA BASE DE DATOS
 
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
@@ -66,7 +66,13 @@ public class GenerateSaleController extends MenuController implements Initializa
     @FXML
     private TextField seller;
     @FXML
+    private ComboBox<Discount> cbDiscount;
+    @FXML
     private TextField total;
+    @FXML
+    private TextField totalDiscount;
+    @FXML
+    private TextField percentageDiscount;
     @FXML
     private TextField date;
 
@@ -89,6 +95,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeUIElements();
+        initializeComboBox();
         configureAlerts();
         configureTable();
     }
@@ -98,11 +105,35 @@ public class GenerateSaleController extends MenuController implements Initializa
         setSerial();
         seller.setText(sellerName);
         date.setText(String.valueOf(now));
+        totalDiscount.setText("0.0");
+        percentageDiscount.setText("0%");
+    } //***
+
+    //Inicializa la lista de descuentos
+    private void initializeComboBox(){
+        cbDiscount.setItems(FXCollections.observableArrayList(Discount.values()));
+        cbDiscount.setValue(Discount.NONE);
+        //Cada vez que se presione el boton
+        cbDiscount.setOnAction(actionEvent -> {
+            updatePercentageDiscount();
+            recalculateTotals();
+        });
+    }
+    //Actualiza el descuento cada vez que el seller seleccione
+    private void updatePercentageDiscount(){
+        Discount selectedDiscount = cbDiscount.getValue();
+
+        if(selectedDiscount== null || selectedDiscount == Discount.NONE) {
+            percentageDiscount.setText("0.0%");
+        }else{
+            double percentage = selectedDiscount.getPercentage() * 100;
+            percentageDiscount.setText(String.format("%.0f%%", percentage));
+        }
     }
 
     private void configureAlerts() {
-        configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
-        configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+        configureAlert(alertCustomer, "Nuevo cliente", "El cliente no existe");
+        configureAlert(alertProduct, "Nuevo producto", "El producto no existe");
     }
 
     private void configureTable() {
@@ -112,10 +143,10 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
 
-    private void configureAlert(Alert alert, String title, String header, String content) {
+    private void configureAlert(Alert alert, String title, String header) {
         alert.setTitle(title);
         alert.setHeaderText(header);
-        alert.setContentText(content);
+        alert.setContentText("¿Deseas agregarlo?");
         alert.getButtonTypes().setAll(buttonTypeAccept, buttonTypeCancel);
     }
 
@@ -133,13 +164,15 @@ public class GenerateSaleController extends MenuController implements Initializa
         customer = customerDAO.searchCustomer(customerId);
 
         if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
+            setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + customer.name()); //Te dice si encontro
+                                                                                                    // un customer con esa matricula
             customerName.setText(customer.name());
-        } else {
-            handleCustomerNotFound();
+        } else { //En caso de no encontrarlo
+            handleCustomerNotFound(); //La tachita no hace nada
         }
     }
 
+    //Funcion que abre una pestaña en caso de no encontrar un customer
     private void handleCustomerNotFound() {
         alertCustomer.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeAccept) {
@@ -158,7 +191,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Customer");
+        stage.setTitle("Administrar cliente");
         stage.setScene(scene);
         stage.show();
     }
@@ -176,7 +209,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto encontrado: " + product.name());
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
@@ -203,44 +236,54 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Product");
+        stage.setTitle("Administrar producto");
         stage.setScene(scene);
         stage.show();
     }
 
-
+    //CANCELA LA VENTA
     public void cancel(ActionEvent actionEvent) {
-        if (products.isEmpty())return;
-        MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
+        if (products.isEmpty()){ //Agrega alerta al botón cancelar //CORRECCIÓN ERROR
+            MenuController.setAlert(Alert.AlertType.INFORMATION, "No se ha ingresado ningún dato que se pueda cancelar");
+            return;
+        }
+        MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock); //limpia la tabla
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
         total.clear();
+        totalDiscount.clear();
+        cbDiscount.setValue(Discount.NONE);
+
     }
 
+    //GENERA VENTA //***
     public void generateSale(ActionEvent actionEvent) {
         if (products.isEmpty()) {
             return;
         }
 
-        Sales sales = createSalesObject();
+        Sales sales = createSalesObject();  //crea un objeto sales sin pasarle parametros
 
-        if (saveSaleAndDetails(sales)) {
-            productDAO.subtractStock(products);
-            cleanFieldsAndTable();
+        if (saveSaleAndDetails(sales)) { //si se concreta la venta
+            productDAO.subtractStock(products); //quita productos del stock
+            cleanFieldsAndTable(); //se eliminanlos objetos de la tabla
             setSerial();
-            total.setText("0.0");
+            total.setText("0.0"); //se reinicia el total a cero
+            totalDiscount.setText("0.0");
             products.clear();
-            updateReportsController();
+            updateReportsController(); //Se actualiza la base de datos
         }
     }
 
+    //Crea un objeto "ventas" (constructor)
     private Sales createSalesObject() {
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
                 LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
-                Sales.State.ACTIVE);
+                Sales.State.ACTIVE, cbDiscount.getValue());
     }
 
+    //guarda las ventas, regresa true or false
     private boolean saveSaleAndDetails(Sales sales) {
         boolean saleSaved = salesDAO.SaveSale(sales);
         boolean detailsSaved = salesDAO.SaveDetailsSale(products, idSale);
@@ -277,14 +320,14 @@ public class GenerateSaleController extends MenuController implements Initializa
             return;
         }
 
-        ShoppingCart product = createShoppingCartObject();
+        ShoppingCart product = createShoppingCartObject(); //Crea objeto en el carrito
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya se encuentra en tu carrito de compras");
             return;
         }
 
-        addToCartAndUpdateTotal(product);
+        addToCartAndUpdateTotalWithDiscount(product); //***
     }
 
     private ShoppingCart createShoppingCartObject() {
@@ -297,22 +340,61 @@ public class GenerateSaleController extends MenuController implements Initializa
         return products.stream().anyMatch(e -> Objects.equals(e.cod(), product.cod()));
     }
 
-    private void addToCartAndUpdateTotal(ShoppingCart product) {
+    /*private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
         double currentTotal = Double.parseDouble(total.getText()) + product.total();
         total.setText(String.format("%.2f", currentTotal));
+    }*/
+
+    //Suma de precios 1 //mostrar datos con descuento
+    private void addToCartAndUpdateTotalWithDiscount(ShoppingCart product) {
+        products.add(product);
+        tableSale.setItems(products);
+        recalculateTotals();
+    }
+
+    //Calcula precios con y sin descuentos
+    private void recalculateTotals() {
+        double totalSinDescuento = 0;
+        double totalConDescuento = 0;
+        double diferenciaDescuento = 0;
+
+        Discount discount = cbDiscount.getValue();
+        double percent = discount.getPercentage();
+
+        for (ShoppingCart product : products) {
+            double subtotal = product.total();
+            totalSinDescuento += subtotal;
+            totalConDescuento += subtotal - (subtotal * percent);
+            diferenciaDescuento = totalSinDescuento - totalConDescuento; //***
+
+        }
+
+        totalDiscount.setText(String.format("%.2f", totalSinDescuento)); //Sin Descuento (subtotal)
+        total.setText(String.format("%.2f", totalConDescuento)); //(total)
     }
 
 
-    private String validateInputs() {
+
+    /* private String validateInputs() {
         if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
             return "Missing customer name or product name.";
         } else if (quantity.getValue() == 0) {
             return "Quantity can't be 0.";
         }
         return null;
+    } */
+
+    private String validateInputs() {
+        if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
+            return "No se ingresó el nombre del cliente o el nombre del producto.";
+        } else if (quantity.getValue() == 0) {
+            return "La cantidad no puede ser 0.";
+        }
+        return null;
     }
+
 
     private void setSerial(){
         idSale = 1+salesDAO.IdSale();

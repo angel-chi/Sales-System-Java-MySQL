@@ -28,6 +28,7 @@ CREATE TABLE `customer` (
   `name` varchar(20) NOT NULL,
   `address` varchar(30) DEFAULT NULL,
   `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
+  `number` varchar(15) DEFAULT NULL, --Crea la columna number en la base de datos
   PRIMARY KEY (`idCustomer`),
   UNIQUE KEY `dni_UNIQUE` (`dni`)
 ) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3;

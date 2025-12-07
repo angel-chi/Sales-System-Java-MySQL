@@ -92,6 +92,8 @@ public class ReportsController implements Initializable {
     private TableColumn<Sales,Double> colAmount;
     @FXML
     private TableColumn<Sales, Sales.State> colState;
+    @FXML
+    private TableColumn<Sales, Discount> colDiscount; //Tipo de objeto Discount
 
     public static void removeCacheLineChart(int year, int month) {
         if (cacheReportLineChart != null && cacheReportLineChart.containsKey(year)) {
@@ -102,8 +104,6 @@ public class ReportsController implements Initializable {
             }
         }
     }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -163,6 +163,8 @@ public class ReportsController implements Initializable {
         colSaleDate.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().saleDate()));
         colAmount.setCellValueFactory(p -> new SimpleDoubleProperty((p.getValue().amount())).asObject());
         colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+        colDiscount.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().discount())); //añadir valor a la columna reportes
+
 
         tableReport.getItems().clear();
 

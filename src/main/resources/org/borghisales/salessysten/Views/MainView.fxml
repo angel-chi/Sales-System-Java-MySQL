@@ -5,30 +5,30 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
-   <children>
-      <ImageView fitHeight="71.0" fitWidth="73.0" layoutX="224.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/img.png" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="22.0" prefHeight="45.0" prefWidth="200.0" text="SALES SYSTEM" underline="true">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="94.0" layoutY="111.0" prefHeight="45.0" prefWidth="119.0" text="DNI" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="54.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="PASSWORD">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <TextField fx:id="user" layoutX="79.0" layoutY="163.0" />
-      <Button layoutX="94.0" layoutY="331.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="SIGN IN" />
-      <PasswordField fx:id="password" layoutX="79.0" layoutY="260.0" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
+    <children>
+        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="40.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../../images/img.png" />
+            </image>
+        </ImageView>
+        <Label alignment="CENTER" layoutX="25" layoutY="20.0" prefHeight="50.0" prefWidth="420.0" text="SISTEMA DE VENTAS" underline="true">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" blendMode="SRC_ATOP" layoutY="110.0" prefHeight="50.0" prefWidth="420.0" text="ID VENDEDOR" textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" layoutY="200.0" prefHeight="50.0" prefWidth="420.0" text="CONTRASEÑA">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Label>
+        <TextField fx:id="user" alignment="CENTER" layoutX="110" layoutY="160.0" prefWidth="200" />
+        <PasswordField fx:id="password" alignment="CENTER" layoutX="110.0" layoutY="250.0" prefWidth="200" />
+        <Button layoutX="160.0" layoutY="310.0" mnemonicParsing="false" onAction="#signIn" prefHeight="30.0" prefWidth="100.0" text="ENTRAR" />
+    </children>
 </AnchorPane>
