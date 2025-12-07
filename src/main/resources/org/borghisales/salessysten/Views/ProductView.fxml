@@ -19,19 +19,19 @@
                </columns>
             </TableView>
             <Label layoutX="45.0" layoutY="70.0" prefHeight="17.0" prefWidth="100.0" text="NOMBRE:" underline="true">
-               <font>
-                  <Font size="17.0" />
-               </font>
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
             </Label>
             <Label layoutX="45.0" layoutY="96.0" prefHeight="26.0" prefWidth="100.0" text="PRECIO:" underline="true">
-               <font>
-                  <Font size="17.0" />
-               </font>
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
             </Label>
             <Label layoutX="45.0" layoutY="122.0" prefHeight="26.0" prefWidth="123.0" text="INVENTARIO:" underline="true">
-               <font>
-                  <Font size="17.0" />
-               </font>
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
             </Label>
             <TextField fx:id="name" layoutX="170.0" layoutY="66.0" prefHeight="25.0" prefWidth="250.0" />
             <TextField fx:id="price" layoutX="170.0" layoutY="96.0" prefHeight="25.0" prefWidth="250.0" />
@@ -41,9 +41,9 @@
             <Button layoutX="458.0" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="130.0" text="LIMPIAR CELDAS" />
             <ComboBox fx:id="cbState" layoutX="170.0" layoutY="158.0" prefHeight="25.0" prefWidth="250.0" />
             <Label layoutX="45.0" layoutY="155.0" prefHeight="17.0" prefWidth="100.0" text="ESTADO:" underline="true">
-               <font>
-                  <Font size="17.0" />
-               </font>
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
             </Label>
             <Label alignment="CENTER" layoutX="151.0" layoutY="10.0" prefHeight="30.0" prefWidth="288.0" text="GESTIÓN DE PRODUCTOS" underline="true">
                <font>
