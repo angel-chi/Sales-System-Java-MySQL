@@ -155,27 +155,93 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 
 [⬆ Volver al inicio](#title)<br>
 
+<h1 align="center" id="title"> README equipo 3 (nuestros aportes)</h1>
+
+## Diagrama UML
+
 ![image alt](https://github.com/angel-chi/Sales-System-Java-MySQL/blob/9c4cf0bf42704f11ab4cc64c8afaddc3c6a9a313/UML.png)
+
+## Instalacion de Maven
+
+1. Actualiza los repositorios usando: _sudo apt uptdate_
+2. Instala Maven usando: _sudo apt install Maven_
+3. Verifica la instalación usando: _mvn -version_
+_Si se imprime algo similar a esto, la instalación fue correcta (nota: Revisar que la versón de Maven sea igual o superio a v3.8 y Java version igual a v17)
+
+![image alt](https://github.com/angel-chi/Sales-System-Java-MySQL/blob/2f4832054a223c41183e473d574709fdc230f15d/mvn.png)
+
+## Instrucciones para construir y ejecutar sin IDE
+
+1. Compila y empaqueta el proyecto usando: _mvn clean install_
+(Esto limpia compilaciones previas, compila el código, corre pruebas y genera el .jar )
+2. Ejecuta la aplicación JavaFX usando: _mvn javafx:run_
 
 ## 📋 Changelog
 
 ### [v2.0] - 08-12-2025
 **Bug Fixes:**
-- ✅ Corregido:  Las ventanas de los menús se desplegaban  en un tamaño minimo impidiendo la correcta visualización (Se implementó en el metodo openNewStage del MenuController dos parametros, uno para el alto mínimo y otro para el ancho mínimo de cada ventana).
-- ✅ Solucionado: Se arregló el error  que impedia generar una venta por distinto idioma del formato (El formato de los numeros decimales estaba puesto con comas, los metodos que generaban el carrito de compra en "Sales" se le agrego el metodo de "replace()" de la clase Strings para modificar todas las comas por puntos, además de colocar la clase "Local" para interpretar el formato dado).
-- ✅ Reparado: Se implementó la interfaz del apartado "Ayuda" (antes el botón "Help" no tenia una interfaz  propia programada, se creó el HelpController y el HelpView para darle formato a la interfaz Help en el programa).
 
-**Mejoras:**
-- 🎨 Interfaz de LogIn y ManagementView rediseñada.
-- ⚡ Traduccion de todo el programa a Español.
-- ♻️ Reutilización de metodos en clases ya existentes para mejorar el flujo, la legibilidad y para su futuro mantenimiento del codigo.
-- 🔙 Se agregó un botón de "Cerrar Ventana" para regresar al menú principal del punto de venta implementando el metodo exitWindow en la clase MenuController haciendo usó del metodo ya existente: openNewStage.
+Error 1: Se terminaba la ejecución del programa y cerraba IntelliJ 
+- _**¿Cuándo ocurrió?:**_ Al presionar el botón del help de la interfaz de _Control del punto de venta_ (Error de ejecución).
+- _**Causa:**_ Trata de redirigir  al usuario al repositorio de github pero por alguna razón la librería no conseguía hacerlo y se quedaba congelada, sospechamos que fue debido al sistema operativo.
+- _**Solución:**_ Reconstruimos totalmente la función del botón de help, la cual ya no manda directo al usuario a un repositorio de github, si no que ahora abre una interfaz de soporte implementada en el propio programa donde se proporciona todo lo necesario al usuario respecto a un servicio de ayuda.
+
+Error 2: Creación de ventanas emergentes con tamaño erróneo 
+- _**¿Cuándo ocurrió?:**_ Cada que se abría una nueva ventana (Error de ejecución).
+- _**Causa:**_ No se inicializaba un tamaño mínimo a la hora de llamar al método que creaba las pestañas.
+- _**Solución:**_ Se añadió 2 parametros extras a [openNewStage] para definir un tamaño mínimo a la hora de crear una nueva ventana.
+
+Error 3: Error al generar una venta 
+- _**¿Cuándo ocurrió?:**_ Cuando añadias una venta (Error de ejecución).
+- _**Causa:**_ Idioma de la computadora, si se encuentra en ingles parece no generar error pero si se encuentra en español si, esto debido a que en ingles se usa comas para separar enteros de decimales y en español se usa punto decimal.
+- _**Solución:**_ El método Double.parseDouble esperaba un punto decimal en su valor y recibía una coma, por lo que antes de que el método reciba el valor retornado por price.getText() se añadió un .replace(",", ".") para sustituir la coma por punto decimal
+
+## Cambios en la UI
+
+Traducción del programa de ingles a español:
+  _Se tradujeron las siguientes interfaces y todos sus elementos visibles por el usuario:_
+  - Login -> Inicio de Sesión
+  - Management -> Control de punto de venta
+  - Shopping cart -> Carrito de compra
+  - Customer -> Clientes
+  - Products -> Productos
+  - Seller -> Vendedor
+  - Sales -> Ventas
+
+Cambios para que la UI sea entendible por cualquier usuario
+  Se tradujeron las interfaces mencionadas en el punto anterior, tambien se reestructuro la interfaz de _Control de punto de venta_, de tal forma se eliminaron los paneles “Menu, Sales, Management, Reports” y se decidió integrar todas sus funcionalidades individuales en una misma interfaz para que el usuario tenga mayor facilidad para acceder a cada ventana del sistema.
+  
+## Propuestas de mejora
+
+
+
+
+## Implementación de mejoras en la UI
+
+
+
+## Video del proyecto
+
+**Link:** 
+
+## Integrantes del equipo
+
+Jarib Alberto Novelo Hernández
+- **Matricula**: 24216374
+- **Usuario de github**: novelo03
+- **Rol desempeñado**:  
+
+
+
+[⬆ Volver al inicio](#title)<br>
+
 
 ## 🔨 Mejoras propuestas e implementadas
 - Se propuso e implementó un buscador de clientes via ID comparando el ID escrito en el TextField con los ID ya registrados previamente de los clientes en la base de datos, de manera que sí, el ID escrito concuerda con los y registrados, llenará los demas datos (usuario, nombre y drección) en las casillas de la ventana "Clientes", de no ser así, se arrojara una ventana emergente alertando al usuario diciendo que el cliente no esta registrado en la base de datos.
 - Se propuso e implementó un metodo de seguridad extra a la hora de ingresar al menú de vendedores y a la hora de borrar clientes desde el menú de clientes, ya que sí una persona distinta al propietario de la licencia de uso del software accede a la vista de los vendedores, este podrá tener acceso a sus claves de acceso (usuario y contraseña), nombre completo y telefono, poniendo en riesgo sus datos personales y tambien evitamos que cualquier persona pueda eliminar los datos de un cliente a menos que el dueño de la clave principal lo requiera, esto se logró creando un método que abre un nuevo archivo fxml (mainPasswordView) donde a continuación se necesitara de la contraseña princiapl, otro método que valida si la contraseña ingresada en el TextField es la correcta y de ser así dará acceso a la funcionalidad de borrar clientes y acceder al menú vendedores por medio de un if.
 - En futuras actulizaciones se puede implementar una alerta que avise al usuario cuando las unidades de un producto bajen de cierta cantidad notificando que el inventario se esta acabando especificamente de ese producto, implementando cambios en ProductController creando un metodo que se ejecute a la par con el metodo que se encarga de crear una venta en GenerateSaleController comparando la cantidad actual del producto menos la cantidad vendida y si sobrepasa el limite minimo deseado, ejecutar una ventana de notificación de que el producto se esta agotando.
 - Por ultimo, implementar en un futuro la opción de activar descuentos en productos deseados, se puede lograr seleccionando productos en un combobox para que despues una clase generateDiscount se encargue de aplicar el descuento deseado en los productos previamente seleccionados.
+
 
 
 
