@@ -78,7 +78,6 @@ public class MenuController {
     private void configureStageCloseEvent(Stage stage) {
         stage.setOnCloseRequest(e -> {
             String vistaActual = (String) stage.getProperties().get("currentView");
-            String tituloActual = (String) stage.getProperties().get("currentTitle");
 
             if (!vistaActual.equals(MAIN_VIEW_FXML)) {
                 String vistaPadre = getFxmlFather(vistaActual);
