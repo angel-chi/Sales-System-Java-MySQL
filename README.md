@@ -154,3 +154,16 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
 [⬆ Volver al inicio](#title)<br>
+
+# ⚙️ Mejoras
+
+1- Se propuso e implementó una nueva clase para validar los datos de entrada de cada entidad. Por ejemplo, en el apartado del DNI, la entrada deben ser números y no caracteres. Anteriormente, el programa no marcaba ningún error al ingresar cosas diferentes a números. Del mismo modo, se hicieron los cambios en todas las entidades para validar que los datos de entrada fueran los solicitados.
+
+Se hizo esta mejora porque el programa no marcaba ningún error al ingresar datos diferentes a los requeridos, lo cual es incorrecto; por lo tanto, se implementó este cambio que valida todos los datos de entrada.
+
+Esta mejora se relaciona con la programación orientada a objetos porque implementa encapsulación, clasificación y el principio SRP.
+En el caso de la encapsulación, la lógica de validación queda concentrada dentro de la clase InputValidator, ocultando su funcionamiento y revelando únicamente los métodos necesarios para que otras clases los utilicen.
+
+En cuanto a la clasificación, se organiza el código agrupando en una sola clase todas las funciones relacionadas con el mismo propósito: la validación de datos. 
+
+Por último, se aplica el Principio de Responsabilidad Única (SRP), ya que antes la validación estaba distribuida dentro de los controladores. Al mover esta lógica a una clase independiente, cada clase cumple una única responsabilidad: InputValidator valida datos, mientras que los controladores se encargan de gestionar la interfaz.
