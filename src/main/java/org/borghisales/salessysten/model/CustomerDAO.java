@@ -64,6 +64,7 @@ public class CustomerDAO extends Validator<Customer> implements CRUD<Customer>{
 
     @Override
     public boolean update(Customer entity) {
+        if(!validate(entity))return false;
         String sql = "UPDATE customer set name=?,address=?,state=? where dni=?";
 
         try(Connection conn = DBConnection.connection();
