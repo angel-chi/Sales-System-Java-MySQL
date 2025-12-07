@@ -22,7 +22,7 @@ public class MenuController {
     public static final String GENERATE_SALE_VIEW_FXML = VIEWS_DIRECTORY + "GenerateSaleView.fxml";
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
-
+    public static final String WELCOME_MENU_VIEW_FXML = VIEWS_DIRECTORY + "WelcomeMenuView.fxml";
 
     static Alert defaultAlert;
     static ButtonType acceptButton = new ButtonType("Aceptar");
