@@ -20,7 +20,7 @@ public class ProductController implements Initializable {
 
     private final ProductDAO productDAO = new ProductDAO();
 
-    private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
+    private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVO, Product.State.INACTIVO);
 
     private static ObservableList<Product> products =null;
     @FXML
@@ -68,7 +68,7 @@ public class ProductController implements Initializable {
     }
 
     private void initializeComboBox() {
-        cbState.setValue(Product.State.ACTIVE);
+        cbState.setValue(Product.State.ACTIVO);
         cbState.setItems(stateList);
     }
 

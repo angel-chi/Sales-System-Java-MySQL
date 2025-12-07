@@ -323,7 +323,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Sales createSalesObject() {
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
                 LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
-                Sales.State.ACTIVE);
+                Sales.State.ACTIVA);
     }
 
     private boolean saveSaleAndDetails(Sales sales) {

@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public record Customer(int idCustomer, String dni, String name, String address, State state) {
-    public enum State {ACTIVE(), DISACTIVE()}
+    public enum State {ACTIVA(), INACTIVA()}
 
     public Customer(String dni, String name, String address, State state){
         this(0,dni,name,address,state);

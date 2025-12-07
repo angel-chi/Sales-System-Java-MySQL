@@ -1,6 +1,5 @@
 package org.borghisales.salessysten.controllers;
 
-import com.sun.tools.javac.Main;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,13 +14,12 @@ import org.borghisales.salessysten.model.CustomerDAO;
 
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
 
     private final CustomerDAO customerDAO = new CustomerDAO();
-    private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
+    private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVA, Customer.State.INACTIVA);
     private static ObservableList<Customer> customers=null;
 
     @FXML
@@ -74,7 +72,7 @@ public class CustomerController implements Initializable {
         colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
     }
     private void initializeComboBox() {
-        cbState.setValue(Customer.State.ACTIVE);
+        cbState.setValue(Customer.State.ACTIVA);
         cbState.setItems(stateList);
     }
     @FXML
