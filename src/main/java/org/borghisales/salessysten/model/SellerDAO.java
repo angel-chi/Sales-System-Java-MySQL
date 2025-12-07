@@ -181,6 +181,13 @@ public class SellerDAO extends Validator<Seller> implements CRUD<Seller>{
         if(entity.dni() == null || entity.dni().isEmpty()){
             MenuController.setAlert(Alert.AlertType.ERROR, "El id del vendedor no puede estar vacio");
             return false;
+        } else {
+            for(char c : entity.dni().toCharArray()){
+                if(!Character.isDigit(c)){
+                    MenuController.setAlert(Alert.AlertType.ERROR, "El id del vendedor debe ser una secuencia de numeros");
+                    return false;
+                }
+            }
         }
         if (entity.name() == null || entity.name().isEmpty()){
             MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del vendedor no puede estar vacio");
