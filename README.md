@@ -59,11 +59,22 @@ Para ejecutar este proyecto, necesitarás tener instalado el JDK 17. Sigue estos
 3. Instalación: Una vez descargado el archivo de instalación, sigue las instrucciones proporcionadas por Oracle para instalar el JDK 17 en tu sistema.
 4. Configuración de las Variables de Entorno (Opcional): Después de instalar el JDK 17, puedes configurar las variables de entorno JAVA_HOME y PATH en tu sistema para que apunten al directorio de instalación del JDK. Esto facilitará el uso del JDK desde la línea de comandos.
 
+## Instalación de Maven<br>
+Para instalar Maven haga clic en la siguiente liga y siga los pasos según su sistema https://maven-apache-org.translate.goog/install.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc.<br><br>
+Para instalar Maven en Linux, sigue estos pasos:
+1. En la terminal ejecute: `sudo apt install maven`<br> 
+2. Para verificar la correcta instalación ejecute: `mvn -v`, debería ver la versión junto con la de java.
+
+
 ## Configuración de la Base de Datos
 Antes de ejecutar el proyecto, asegúrate de configurar la base de datos:
 
 1. Instala MySQL: Si aún no tienes MySQL instalado, descárgalo e instálalo desde https://dev.mysql.com/downloads/mysql/.
-2. Crea la Base de Datos: Utiliza el script proporcionado llamado salesystem.sql para importar la base de datos y las tablas necesarias.
+2. Crea la Base de Datos:<br>
+- En el directorio del proyecto ejecuta `mysql -u tu_usuario -p` y proporciona tu contraseña cuando se te solicite.<br>
+- Ejecuta `CREATE DATABASE salesystem;` para crear la base de datos.<br>
+- Ejecuta `USE salesystem;` para seleccionar la base de datos recién creada.<br>
+Utiliza el script proporcionado llamado salesystem.sql para importar la base de datos y las tablas necesarias.
 3. Configura la Conexión: Para configurar la conexión a la base de datos, sigue estos pasos:
    * Crea un archivo llamado config.properties en la ruta src/main/java/org/borghisales/salessystem/model/.
    * Define las propiedades de configuración para la conexión a la base de datos en el archivo config.properties. 
@@ -74,14 +85,42 @@ Antes de ejecutar el proyecto, asegúrate de configurar la base de datos:
    db.password=contraseña
    </pre>
    
-   Asegúrate de reemplazar nombre_basedatos, usuario y contraseña con los valores correspondientes de tu entorno de desarrollo.
 ## Ejecución del Proyecto
 Una vez que hayas configurado la base de datos, puedes ejecutar el proyecto siguiendo estos pasos:
 
 1. Clona el Proyecto: Clona este repositorio en tu máquina local utilizando Git o descargando el archivo ZIP.
 2. Importa el Proyecto: Importa el proyecto en tu IDE preferido (como IntelliJ, Eclipse, etc.) como un proyecto Maven existente.
-3. Verifica las Dependencias: Antes de compilar y ejecutar el proyecto, asegúrate de que todas las dependencias estén resueltas correctamente. Esto se puede hacer actualizando Maven o ejecutando el comando mvn clean install desde la línea de comandos en el directorio del proyecto. Esto garantizará que todas las dependencias se descarguen y configuren correctamente.
-4. Compila y Ejecuta: Compila y ejecuta el proyecto desde tu IDE. Asegúrate de ejecutar la clase principal adecuada (si es necesario) para iniciar la aplicación.
+3. Verifica las Dependencias: Antes de compilar y ejecutar el proyecto, asegúrate de que todas las dependencias estén resueltas correctamente. Esto se puede hacer actualizando Maven o ejecutando el comando mvn clean install desde la línea de comandos en el directorio del proyecto. Esto garantizará que todas las dependencias se descarguen y configuren correctamente.<br><br>
+Para poder ejecutar desde línea de comandos debe agregar el plugin de javafx en el archivo pom.xml:
+```xml
+<plugin>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-maven-plugin</artifactId>
+    <version>0.0.8</version>
+    <executions>
+        <execution>
+            <!-- Default configuration for running with: mvn clean javafx:run -->
+            <id>default-cli</id>
+            <configuration>
+                <mainClass>org.borghisales.salessysten.Main</mainClass>
+                <launcher>app</launcher>
+                <jlinkZipName>app</jlinkZipName>
+                <jlinkImageName>app</jlinkImageName>
+                <noManPages>true</noManPages>
+                <stripDebug>true</stripDebug>
+                <noHeaderFiles>true</noHeaderFiles>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+4. Compila y Ejecuta: Compila y ejecuta el proyecto desde tu IDE. Asegúrate de ejecutar la clase principal adecuada (si es necesario) para iniciar la aplicación.<br>
+
+### Para ejecutar el proyecto desde la línea de comandos:
+1. Abre una terminal o línea de comandos.
+2. Navega al directorio del proyecto.
+3. Ejecuta `mvn clean install` para compilar el proyecto y resolver las dependencias.
+4. Ejecuta `mvn javafx:run` para iniciar la aplicación JavaFX.
 
 ## Modificación de las Vistas con Scene Builder
 Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder, una herramienta gráfica para diseñar interfaces de usuario JavaFX. Para instalar Scene Builder, sigue estos pasos:
