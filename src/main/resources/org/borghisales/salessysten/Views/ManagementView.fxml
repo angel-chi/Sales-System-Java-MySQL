@@ -35,8 +35,8 @@
                      <children>
                         <Button mnemonicParsing="false" onAction="#openCustomer" prefHeight="70.0" prefWidth="160.0" text="CLIENTE" />
                         <Button fx:id="sellerButton" mnemonicParsing="false" onAction="#openSeller" prefHeight="70.0" prefWidth="160.0" text="VENDEDORES" />
-                         <Button fx:id="productButton" mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="160.0" text="PRODUCTO" />
                          <Button mnemonicParsing="false" onAction="#openConfiguracionAdmin" prefHeight="70.0" prefWidth="160.0" text="CONFIGURACIONES" />
+                         <Button fx:id="productButton" mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="160.0" text="PRODUCTO" />
                      </children>
                   </VBox>
               </content>

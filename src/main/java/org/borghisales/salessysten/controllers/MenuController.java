@@ -56,7 +56,7 @@ public class MenuController {
             Stage stage = new Stage();
 
             switch (fxmlFileName) {
-                case MAIN_VIEW_FXML:
+                case MAIN_VIEW_FXML, MANAGEMENT_VIEW_FXML, GENERATE_SALE_VIEW_FXML, CONFIGURACION_ADMIN_VIEW_FXML:
                     scene = new Scene(root, 800, 600);
                     stage.setResizable(false);
                     break;
@@ -66,9 +66,24 @@ public class MenuController {
                     stage.setResizable(false);
                     break;
 
-                // For all other views, use a default resizable window
+                case PRODUCT_VIEW_FXML:
+                    scene = new Scene(root, 650, 500);
+                    stage.setResizable(false);
+                    break;
+
+                case SELLER_VIEW_FXML:
+                    scene = new Scene(root, 700, 500);
+                    stage.setResizable(false);
+                    break;
+
+                case CUSTOMER_VIEW_FXML:
+                    scene = new Scene(root, 665, 510);
+                    stage.setResizable(false);
+                    break;
+
+                // Si ningún título coincide, usa tamaño genérico
                 default:
-                   scene = new Scene(root, 800, 600);
+                    scene = new Scene(root, 800, 600);
             }
 
             stage.setTitle(title);

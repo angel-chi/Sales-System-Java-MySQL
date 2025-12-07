@@ -27,24 +27,24 @@
                         <TableColumn fx:id="colDni" prefWidth="111.0" text="usuario" />
                     </columns>
                 </TableView>
-                <Label layoutX="74.0" layoutY="56.0" prefHeight="24.0" prefWidth="83.0" text="USUARIO:" underline="true">
+                <Label layoutX="72.0" layoutY="56.0" prefHeight="24.0" prefWidth="90.0" text="USUARIO:" underline="true">
                     <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                     </font>
                 </Label>
-                <Label layoutX="77.0" layoutY="85.0" prefHeight="24.0" prefWidth="77.0" text="NOMBRE:" underline="true">
+                <Label layoutX="75.0" layoutY="85.0" prefHeight="24.0" prefWidth="90.0" text="NOMBRE:" underline="true">
                     <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                     </font>
                 </Label>
-                <Label layoutX="64.0" layoutY="116.0" prefHeight="26.0" prefWidth="102.0" text="TELEFONO:" underline="true">
+                <Label layoutX="62.0" layoutY="116.0" prefHeight="26.0" prefWidth="102.0" text="TELEFONO:" underline="true">
                     <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                     </font>
                 </Label>
-                <Label layoutX="40.0" layoutY="145.0" prefHeight="24.0" prefWidth="130.0" text="CONTRASEÑA:" underline="true">
+                <Label layoutX="36.0" layoutY="145.0" prefHeight="24.0" prefWidth="130.0" text="CONTRASEÑA:" underline="true">
                     <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                     </font>
                 </Label>
                 <TextField fx:id="identificacion" layoutX="157.0" layoutY="55.0" prefHeight="25.0" prefWidth="289.0" />

@@ -30,19 +30,19 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Label layoutX="33.0" layoutY="72.0" prefHeight="24.0" prefWidth="77.0" text="NOMBRE:" underline="true">
+            <Label layoutX="33.0" layoutY="72.0" prefHeight="24.0" prefWidth="90.0" text="NOMBRE:" underline="true">
                <font>
-                  <Font size="17.0" />
+                  <Font name="System Bold" size="17.0" />
                </font>
             </Label>
             <Label layoutX="45.0" layoutY="96.0" prefHeight="26.0" prefWidth="68.0" text="PRECIO:" underline="true">
                <font>
-                  <Font size="17.0" />
+                  <Font name="System Bold" size="17.0" />
                </font>
             </Label>
             <Label layoutX="21.0" layoutY="126.0" prefHeight="26.0" prefWidth="102.0" text="CANTIDAD:" underline="true">
                <font>
-                  <Font size="17.0" />
+                  <Font name="System Bold" size="17.0" />
                </font>
             </Label>
             <TextField fx:id="nombre" layoutX="120.0" layoutY="66.0" prefHeight="25.0" prefWidth="289.0" />

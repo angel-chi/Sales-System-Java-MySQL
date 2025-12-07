@@ -46,8 +46,6 @@ public class ManagementController extends MenuController implements Initializabl
 
             productButton.setDisable(true);
             productButton.setVisible(false);
-            sellerButton.setDisable(true);
-            sellerButton.setVisible(false);
         }
     }
 
