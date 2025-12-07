@@ -8,7 +8,7 @@
 <!-- StackPane principal -->
 <StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="org.borghisales.salessysten.controllers.SellerController"
-           prefHeight="700.0" prefWidth="900.0">
+           prefHeight="750.0" prefWidth="900.0">
 
     <!-- VBox principal -->
     <VBox alignment="TOP_CENTER" spacing="20">
@@ -81,13 +81,21 @@
             </Label>
             <TextField fx:id="password" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-            <!-- Fila 7: ESTADO -->
-            <Label text="ESTADO:" underline="true" GridPane.columnIndex="0" GridPane.rowIndex="6">
+            <!-- Fila 7: NIVEL -->
+            <Label text="NIVEL:" underline="true" GridPane.columnIndex="0" GridPane.rowIndex="6">
                 <font>
                     <Font size="17.0" />
                 </font>
             </Label>
-            <ComboBox fx:id="cbState" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+            <ComboBox fx:id="nivel" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+            <!-- Fila 8: ESTADO -->
+            <Label text="ESTADO:" underline="true" GridPane.columnIndex="0" GridPane.rowIndex="7">
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Label>
+            <ComboBox fx:id="cbState" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
 
         </GridPane>
 
@@ -96,13 +104,13 @@
         <!-- Tabla de vendedores -->
         <TableView fx:id="tableSellers" prefHeight="250.0" prefWidth="800.0">
             <columns>
-                <TableColumn fx:id="colNivel" prefWidth="133.0" text="Estado" />
-                <TableColumn fx:id="colId" prefWidth="133.0" text="IdVendedor" />
-                <TableColumn fx:id="colDni" prefWidth="133.0" text="DNI" />
-                <TableColumn fx:id="colName" prefWidth="133.0" text="NOMBRE" />
-                <TableColumn fx:id="colEmail" prefWidth="133.0" text="E-Mail" />
-                <TableColumn fx:id="colPhone" prefWidth="133.0" text="Número" />
-                <TableColumn fx:id="colState" prefWidth="133.0" text="Estado" />
+                <TableColumn fx:id="colId" prefWidth="114.0" text="IdVendedor" />
+                <TableColumn fx:id="colDni" prefWidth="114.0" text="DNI" />
+                <TableColumn fx:id="colName" prefWidth="114.0" text="NOMBRE" />
+                <TableColumn fx:id="colEmail" prefWidth="114.0" text="E-Mail" />
+                <TableColumn fx:id="colPhone" prefWidth="114.0" text="Número" />
+                <TableColumn fx:id="colNivel" prefWidth="114.0" text="Nivel" />
+                <TableColumn fx:id="colState" prefWidth="114.0" text="Estado" />
             </columns>
         </TableView>
 

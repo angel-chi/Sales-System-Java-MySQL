@@ -38,7 +38,7 @@ public class SellerController implements Initializable {
     @FXML
     private TextField password;
     @FXML
-    private ComboBox<Nivel>  nivel;
+    private ComboBox<Nivel> nivel;
     @FXML
     private ComboBox<State> cbState;
     @FXML

@@ -6,31 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="refactor: delete comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ReportsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ReportsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SaleDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SaleDetailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/DBConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Sales.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Sales.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/SalesDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesReportGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesReportGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Seller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/ShoppingCart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/State.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/CustomerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/ProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/SalesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/SalesDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/SellerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/SellerDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/SellerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/SellerView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/updatesDBsalesystem.sql" beforeDir="false" afterPath="$PROJECT_DIR$/updatesDBsalesystem.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,10 +18,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Record" />
         <option value="FxmlFile" />
         <option value="Class" />
-        <option value="Enum" />
-        <option value="Record" />
       </list>
     </option>
   </component>
@@ -57,12 +33,12 @@
     &quot;assignee&quot;: &quot;Borghii&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Borghii/Sales-System.git&quot;,
-    &quot;accountId&quot;: &quot;2e699beb-8c26-4f6a-b608-82f45b0371d8&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/angel-chi/Sales-System-Java-MySQL.git",
+    "accountId": "40f2b3fd-e7b8-4b57-a115-f75fce6b2f5f"
   }
-}</component>
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
