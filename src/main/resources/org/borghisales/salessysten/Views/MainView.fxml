@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -14,79 +15,72 @@
             fx:controller="org.borghisales.salessysten.controllers.MainController">
 
     <children>
-        <VBox alignment="CENTER" spacing="18.0"
+        <VBox fx:id="loginContainer" alignment="CENTER" spacing="20.0"
               AnchorPane.topAnchor="0.0"
               AnchorPane.bottomAnchor="0.0"
               AnchorPane.leftAnchor="0.0"
               AnchorPane.rightAnchor="0.0">
 
-            <!-- TÍTULO -->
             <Label text="SISTEMA DE VENTAS"
-                   style="-fx-text-fill: #f2f2f2;
-                   -fx-font-weight: bold;">
+                   style="-fx-text-fill: #f2f2f2; -fx-font-weight: bold;">
                 <font>
                     <Font name="Segoe UI Semibold" size="34.0" />
                 </font>
+                <effect>
+                    <DropShadow color="#0000004d" height="10.0" radius="4.5" width="10.0" />
+                </effect>
             </Label>
-            <Separator prefWidth="300"
-                       style="-fx-background-color: #555; -fx-opacity: 0.4;"/>
 
-            <!-- Ícono -->
-            <ImageView fitHeight="100.0" fitWidth="100.0"
-                       pickOnBounds="true" preserveRatio="true">
+            <Separator maxWidth="300" style="-fx-background-color: #555; -fx-opacity: 0.3;"/>
+
+            <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                 <image>
                     <Image url="@../../../../images/usuarioInicio.png" />
                 </image>
+                <effect>
+                    <DropShadow color="#00000066" radius="10" />
+                </effect>
             </ImageView>
 
-            <!-- ID -->
-            <Label text="ID VENDEDOR"
-                   style="-fx-text-fill: #dcdcdc;">
-                <font>
-                    <Font name="Segoe UI" size="18.0" />
-                </font>
-            </Label>
+            <VBox alignment="CENTER" spacing="15" maxWidth="300">
 
-            <TextField fx:id="user"
-                       prefHeight="35.0" prefWidth="300.0" maxWidth="300.0"
-                       promptText="Ingrese su ID"
-                       style="-fx-background-color: #333333;
-                              -fx-text-fill: #ffffff;
-                              -fx-prompt-text-fill: #999999;
-                              -fx-background-radius: 6;" />
+                <VBox spacing="5" alignment="CENTER_LEFT">
+                    <Label text="ID VENDEDOR" style="-fx-text-fill: #dcdcdc; -fx-font-weight: bold;">
+                        <font><Font name="Segoe UI" size="13.0" /></font>
+                    </Label>
+                    <TextField fx:id="user"
+                               prefHeight="40.0"
+                               promptText="Ingrese su ID"
+                               style="-fx-background-color: #333333; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10; -fx-prompt-text-fill: #888;" />
+                </VBox>
 
-            <!-- CONTRASEÑA -->
-            <Label text="CONTRASEÑA"
-                   style="-fx-text-fill: #dcdcdc;">
-                <font>
-                    <Font name="Segoe UI" size="18.0" />
-                </font>
-            </Label>
+                <VBox spacing="5" alignment="CENTER_LEFT">
+                    <Label text="CONTRASEÑA" style="-fx-text-fill: #dcdcdc; -fx-font-weight: bold;">
+                        <font><Font name="Segoe UI" size="13.0" /></font>
+                    </Label>
+                    <PasswordField fx:id="password"
+                                   prefHeight="40.0"
+                                   promptText="Ingrese su contraseña"
+                                   style="-fx-background-color: #333333; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10; -fx-prompt-text-fill: #888;" />
+                </VBox>
+            </VBox>
 
-            <PasswordField fx:id="password"
-                           prefHeight="35.0" prefWidth="300.0" maxWidth="300.0"
-                           promptText="Ingrese su contraseña"
-                           style="-fx-background-color:#333333;
-                                  -fx-text-fill:#ffffff;
-                                  -fx-prompt-text-fill:#999999;
-                                  -fx-background-radius:6;" />
+            <Region prefHeight="10" />
 
-            <!-- BOTÓN -->
-            <Button text="INGRESAR"
+            <Button fx:id="btnLogin"
+                    text="INGRESAR"
                     mnemonicParsing="false"
                     onAction="#signIn"
-                    prefHeight="35.0" prefWidth="160.0"
-                    style="-fx-background-color: #3a3a3a;
-                           -fx-text-fill: #ffffff;
-                           -fx-background-radius: 8;
-                           -fx-border-color: #555555;
-                           -fx-border-radius: 8;">
+                    prefHeight="40.0" prefWidth="180.0"
+                    style="-fx-background-color: #3a3a3a; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-color: #555; -fx-border-radius: 8;">
                 <font>
                     <Font name="Segoe UI Semibold" size="16.0" />
                 </font>
+                <effect>
+                    <DropShadow color="#00000040" offsetY="3" />
+                </effect>
             </Button>
 
         </VBox>
-
     </children>
 </AnchorPane>
