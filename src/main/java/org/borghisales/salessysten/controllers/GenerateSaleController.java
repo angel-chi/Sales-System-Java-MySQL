@@ -315,16 +315,6 @@ public class GenerateSaleController extends MenuController implements Initializa
         total.setText(String.format("%.2f", totalPrice));
     }
 
-
-    private String validateInputs() {
-        if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Nombre del producto o cliente vacío";
-        } else if (quantity.getValue() == 0) {
-            return "La cantidad no puede ser 0";
-        }
-        return null;
-    }
-
     private void setSerial(){
         idSale = 1+salesDAO.IdSale();
         String formattedId= String.format("%04d", idSale);
