@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Se arregló la interfaz de help, igualmente se crearon las bases para crear las interfaces nuevas.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Interfaz de Generar Compra creada.">
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerarCompraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerarCompraController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerarCompraView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerarCompraView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -477,7 +475,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765176690150</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Interfaz de Generar Compra creada.">
+      <option name="closed" value="true" />
+      <created>1765178165043</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1765178165043</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,7 +498,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fea: add CRUD Customers" />
     <MESSAGE value="feat: add GenerateSale.viw and modify access modifiers" />
     <MESSAGE value="feat: search Customer" />
     <MESSAGE value="feat: add screen add customer" />
@@ -517,6 +522,7 @@
     <MESSAGE value="Se ajustó las tablas para que no genera una columna extra vacía, en su lugar se ajusta perfectamente al tamaño de la ventana." />
     <MESSAGE value="Se modificó el inicio de sesión para que sea más sencillo e intuitivo." />
     <MESSAGE value="Se arregló la interfaz de help, igualmente se crearon las bases para crear las interfaces nuevas." />
-    <option name="LAST_COMMIT_MESSAGE" value="Se arregló la interfaz de help, igualmente se crearon las bases para crear las interfaces nuevas." />
+    <MESSAGE value="Interfaz de Generar Compra creada." />
+    <option name="LAST_COMMIT_MESSAGE" value="Interfaz de Generar Compra creada." />
   </component>
 </project>

@@ -82,7 +82,7 @@ public class GenerarCompraController extends MenuController implements Initializ
             comprasDAO.saveDetalles(detalles, idCompra);
             MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Compra registrada exitosamente");
 
-            // Limpiar todo después de guardar
+            // Limpiar
             cancel(e);
         }
     }
@@ -186,17 +186,13 @@ public class GenerarCompraController extends MenuController implements Initializ
         precioCompra.clear();
         stockActual.clear();
         total.setText("0.0");
-
-        // Resetear spinner
         cantidad.getValueFactory().setValue(1);
 
         proveedor = null;
     }
 
     private void actualizarTotal() {
-        double totalCompra = detalles.stream()
-                .mapToDouble(ComprasDetalles::subtotal)
-                .sum();
+        double totalCompra = detalles.stream().mapToDouble(ComprasDetalles::subtotal).sum();
         total.setText(String.format("%.2f", totalCompra));
     }
 
@@ -273,6 +269,5 @@ public class GenerarCompraController extends MenuController implements Initializ
         stage.setScene(scene);
         stage.show();
     }
-
 
 }
