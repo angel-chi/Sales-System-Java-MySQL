@@ -147,7 +147,7 @@ public class ComprasDAO implements CRUD<Compras> {
             }
             return true;
         } catch (SQLException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR,                     "Error en detalles de compra: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error en detalles de compra: " + e.getMessage());
             return false;
         }
     }

@@ -41,8 +41,8 @@
                         <padding>
                             <Insets top="50" bottom="50" left="50" right="50"/>
                         </padding>
-                        <Button mnemonicParsing="false" onAction="#openGenerateSale" prefHeight="70.0" prefWidth="200.0" text="COMPRAR PRODUCTOS" />
-                        <Button mnemonicParsing="false" onAction="#openGenerateSale" prefHeight="70.0" prefWidth="200.0" text="VER PRODUCTOS" />
+                        <Button mnemonicParsing="false" onAction="#openGenerarCompra" prefHeight="70.0" prefWidth="200.0" text="COMPRAR PRODUCTOS" />
+                        <Button mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="200.0" text="VER PRODUCTOS" />
                     </VBox>
                 </content>
             </Tab>
@@ -57,7 +57,7 @@
                         <Button mnemonicParsing="false" onAction="#openCustomer" prefHeight="70.0" prefWidth="200.0" text="CLIENTE" />
                         <Button mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="200.0" text="PRODUCTO" />
                         <Button fx:id="sellerButton" mnemonicParsing="false" onAction="#openSeller" prefHeight="70.0" prefWidth="200.0" text="VENDEDOR/A" />
-                        <Button fx:id="proveedorButton" mnemonicParsing="false" onAction="#openSeller" prefHeight="70.0" prefWidth="200.0" text="PROVEEDORES" />
+                        <Button fx:id="proveedorButton" mnemonicParsing="false" onAction="#openProveedor" prefHeight="70.0" prefWidth="200.0" text="PROVEEDORES" />
                     </VBox>
                 </content>
             </Tab>
@@ -69,7 +69,7 @@
                             <Insets top="50" bottom="50" left="50" right="50"/>
                         </padding>
                         <Button mnemonicParsing="false" onAction="#openSalesReport" prefHeight="70.0" prefWidth="200.0" text="INFORME DE VENTAS" />
-                        <Button mnemonicParsing="false" onAction="#openSalesReport" prefHeight="70.0" prefWidth="200.0" text="INFORME DE COMPRAS" />
+                        <Button mnemonicParsing="false" onAction="#openComprasReport" prefHeight="70.0" prefWidth="200.0" text="INFORME DE COMPRAS" />
                     </VBox>
                 </content>
             </Tab>

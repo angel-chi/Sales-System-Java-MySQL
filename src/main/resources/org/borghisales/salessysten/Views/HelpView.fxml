@@ -2,20 +2,39 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="550.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.HelpController">
-        <Label alignment="CENTER" fx:id="titleLabel" layoutX="20.0" layoutY="10.0" prefHeight="39.0" prefWidth="300.0" text="No hay servicio">
+<!-- StackPane principal -->
+<StackPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.borghisales.salessysten.controllers.HelpController"
+           prefHeight="600.0" prefWidth="800.0">
+
+    <VBox alignment="CENTER" spacing="20">
+        <padding>
+            <Insets top="30" bottom="30" left="30" right="30"/>
+        </padding>
+
+        <!-- Título -->
+        <Label fx:id="titleLabel" alignment="CENTER" text="No hay servicio">
             <font>
                 <Font size="30.0" />
             </font>
         </Label>
-        <ImageView fitHeight="500.0" fitWidth="500.0" layoutX="20.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+
+        <ImageView fitHeight="350.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../../../images/help.jpg"/>
         </ImageView>
-        <Button layoutX="160" layoutY="480" text="Salir del sistema" onAction="#onClose"/>
-        <Button layoutX="160" layoutY="520" text="Buscar documentaci�n en el github" onAction="#onHelp"/>
-</AnchorPane>
+
+        <!-- Contenedor de botones -->
+        <HBox alignment="CENTER" spacing="15">
+            <!-- Botón Salir -->
+            <Button text="Salir del sistema" onAction="#onClose" prefWidth="180.0" prefHeight="35.0"/>
+            <!-- Botón GitHub -->
+            <Button text="Buscar documentación en Github" onAction="#onHelp" prefWidth="250.0" prefHeight="35.0"/>
+        </HBox>
+
+    </VBox>
+
+</StackPane>

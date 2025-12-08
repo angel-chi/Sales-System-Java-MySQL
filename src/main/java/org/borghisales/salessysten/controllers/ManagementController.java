@@ -92,5 +92,25 @@ public class ManagementController extends MenuController implements Initializabl
         closeCurrentStage(sellerButton);
     }
 
+    @FXML
+    public void openProveedor(ActionEvent actionEvent) {
+        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        openNewStage(PROVEEDOR_VIEW_FXML, "Proveedores");
+        closeCurrentStage(proveedorButton);
+    }
+
+    @FXML
+    public void openGenerarCompra(ActionEvent actionEvent) {
+        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        openNewStage(GENERAR_COMPRA_VIEW_FXML, "Generar Compra");
+        closeCurrentStage(tabPaneManage);
+    }
+
+    @FXML
+    public void openComprasReport(ActionEvent actionEvent) {
+        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        openNewStage(COMPRAS_REPORT_VIEW_FXML, "Informe de Compras");
+        closeCurrentStage(tabPaneManage);
+    }
 
 }
