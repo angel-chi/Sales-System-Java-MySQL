@@ -208,7 +208,18 @@ Lo cual era incorrecto porque, en este caso, no debería apuntar a HelloApplicat
 
 **Descripción**: Anteriormente, al intentar presionar el botón "HELP", se terminaba la ejecución del programa.
 
-**Solución**: Se realizò un nuevo controller y una nueva vista para la ventana help, de esta manera se soluciono el error y ahora al presionar el boton se manda a una nueva ventana, la cual menciona que està en mantenimiento ese apartado.
+**Solución**: Se realizó un nuevo controller y una nueva vista para la ventana help; de esta manera se solucionó el error y ahora, al presionar el botón, se manda a una nueva ventana, la cual menciona que está en mantenimiento ese apartado.
+
+**Error 3: Error en el tamaño de las ventanas de la interfaz**
+
+**Descripción**: Anteriormente, el tamaño de las ventanas era incorrecto; en este caso era de un tamaño impreciso, lo cual dificultaba su uso.
+
+**Solución**: Se modificó el MainController en el método openNewStage y se agregó una configuración para que el tamaño mínimo de la ventana concuerde con la interfaz. La modificación es la siguiente:
+
+stage.setMinWidth(650);
+
+stage.setMinHeight(650);
+
 
 # ⚙️ Mejoras propuestas
 
