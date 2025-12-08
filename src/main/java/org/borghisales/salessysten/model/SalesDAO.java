@@ -9,6 +9,8 @@ import org.borghisales.salessysten.controllers.ReportsController;
 
 import java.sql.*;
 
+// Por qué no se hizo el cambio a este DAO: Está bien diferente al resto, mucho rollo andar buscando la poca relación que
+// tiene con el AbstractBase que hice antes así que mejor que se quede así. Además, ya funciona, pa qué le muevo
 
 // Se realizaron traducciones en los bloques try-catch.
 public class SalesDAO {

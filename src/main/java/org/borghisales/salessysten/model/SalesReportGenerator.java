@@ -32,10 +32,10 @@ public class SalesReportGenerator {
 
     public static void generateCSVReport(ObservableList<Sales> salesList, String outputPath) {
         try (FileWriter writer = new FileWriter(outputPath)) {
-            // Escribir encabezados de columna
+            // Escribir encabezados de columna.
             writer.append("ID Sales,ID Customer,ID Seller,Number Sales,Sale Date,Amount,State\n");
 
-            // Escribir datos de ventas
+            // Escribir datos de ventas.
             for (Sales sale : salesList) {
                 writer.append(String.valueOf(sale.idSales())).append(",");
                 writer.append(String.valueOf(sale.idCustomer())).append(",");
@@ -56,7 +56,7 @@ public class SalesReportGenerator {
         try (Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet("Sales Report");
 
-            // Crear encabezados de columna
+            // Crear encabezados de columna.
             Row headerRow = sheet.createRow(0);
             String[] columns = {"ID Ventas", "ID Cliente", "ID Vendedor", "Numero de venta", "Fecha de la venta", "Cantidad", "Estado"};
             for (int i = 0; i < columns.length; i++) {
@@ -64,7 +64,7 @@ public class SalesReportGenerator {
                 cell.setCellValue(columns[i]);
             }
 
-            // Agregar datos de ventas
+            // Agregar datos de ventas.
             int rowNum = 1;
             for (Sales sale : salesList) {
                 Row row = sheet.createRow(rowNum++);
@@ -77,12 +77,12 @@ public class SalesReportGenerator {
                 row.createCell(6).setCellValue(sale.state().toString());
             }
 
-            // Ajustar el ancho de las columnas
+            // Ajustar el ancho de las columnas.
             for (int i = 0; i < columns.length; i++) {
                 sheet.autoSizeColumn(i);
             }
 
-            // Escribir el libro de trabajo en un archivo
+            // Escribir el libro de trabajo en un archivo.
             try (FileOutputStream fileOut = new FileOutputStream(outputPath)) {
                 workbook.write(fileOut);
             }
@@ -106,10 +106,10 @@ public class SalesReportGenerator {
             float yPosition = yStart;
             float rowHeight = 20;
 
-            // Obtener los nombres de las columnas
+            // Obtener los nombres de las columnas.
             String[] columnNames = { "ID Ventas", "ID Cliente", "ID Vendedor", "Numero de venta", "Fecha de la venta", "Cantidad", "Estado" };
 
-            // Calcular los anchos de columna basados en los nombres de columna más largos
+            // Calcular los anchos de columna basados en los nombres de columna más largos.
             float[] columnWidths = calculateColumnWidths(columnNames, PDType1Font.HELVETICA, 12);
 
             // Dibujar encabezados de columna.
