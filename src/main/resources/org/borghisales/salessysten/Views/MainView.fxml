@@ -61,7 +61,7 @@
         </VBox>
 
         <!-- Botón para iniciar sesión -->
-        <Button mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="INICIAR SESIÓN">
+        <Button mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="INICIAR SESIÓN" defaultButton="true">
             <VBox.margin>
                 <Insets top="20"/>
             </VBox.margin>
