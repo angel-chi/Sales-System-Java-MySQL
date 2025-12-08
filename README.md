@@ -41,7 +41,7 @@ Además, hay una sección de estadísticas que te muestra cuántas ventas has re
 
 Este proyecto requiere las siguientes herramientas y versiones:
 
-* SO: Windows <br>
+* SO: Windows <br> 
 * Java: 17<br>
 * Maven: 3.8.5<br>
 * MySQL: 8.0.33<br>
@@ -107,7 +107,7 @@ Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder,
 </p>
 
 
-# 💡 Fucionalidades
+# 💡 Funcionalidades
 
 ## Inicio de sesión
 Para iniciar sesión, se requiere el DNI y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el DNI se asocia con 'dni' y la contraseña con 'user'.
@@ -154,6 +154,12 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
 [⬆ Volver al inicio](#title)<br>
+
+# <p align="center">Proyecto equipo 14</p>
+
+Integrantes:
+
+* **Christian Alexander Vargas Llanes**
 
 # ⚠️ Errores
 
