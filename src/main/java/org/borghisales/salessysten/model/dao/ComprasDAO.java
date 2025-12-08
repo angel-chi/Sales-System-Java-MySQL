@@ -35,7 +35,7 @@ public class ComprasDAO implements CRUD<Compras> {
             pstmt.setInt(1, entity.idProveedor());
             pstmt.setInt(2, entity.idVendedor());
             pstmt.setDouble(3,entity.subtotal());
-            pstmt.setString(4, entity.estadoCompra().name());
+            pstmt.setString(4, entity.estado().name());
             int rows_affected = pstmt.executeUpdate();
             if (rows_affected>0){
                 MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Se ha realizado la compra");
@@ -56,8 +56,8 @@ public class ComprasDAO implements CRUD<Compras> {
             pstmt.setInt(1, compra.idProveedor());
             pstmt.setInt(2, compra.idVendedor());
             pstmt.setDouble(3, compra.subtotal());
-            pstmt.setString(4, compra.estadoCompra().name());
-            pstmt.setInt(5, compra.idcompra());
+            pstmt.setString(4, compra.estado().name());
+            pstmt.setInt(5, compra.idCompra());
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             MenuController.setAlert(Alert.AlertType.ERROR,"Error al actualizar compra: " + e.getMessage());
@@ -93,24 +93,26 @@ public class ComprasDAO implements CRUD<Compras> {
         }
 
     }
+
     @Override
-    public void setTable(ObservableList<Compras> compras){
+    public void setTable(ObservableList<Compras> compras) {
         String sql = "SELECT * FROM compras";
+
         try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
 
-            try (ResultSet rs = pstmt.executeQuery()){
-
-                while (rs.next()){
-                    Compras compra = Compras.fromResultSet(rs);
-                    compras.add(compra);
-                }
-
+            while (rs.next()) {
+                Compras compra = Compras.fromResultSet(rs);
+                compras.add(compra);
             }
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+
+        } catch (SQLException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error cargando compras: " + e.getMessage());
         }
     }
+
+
     // Complementos
     public int IdSale(){
         String sql = "SELECT MAX(idCompra) FROM compras";
