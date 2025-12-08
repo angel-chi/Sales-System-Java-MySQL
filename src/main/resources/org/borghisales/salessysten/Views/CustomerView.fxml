@@ -19,7 +19,7 @@
 
     <!-- PARTE SUPERIOR-->
     <top>
-        <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxWidth="Infinity" prefHeight="0.0" prefWidth="687.0" text="ADMINISTRACIÓN DE CLIENTES" underline="true" BorderPane.alignment="CENTER">
+        <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxWidth="Infinity" prefHeight="0.0" prefWidth="687.0" text="ADMINISTRACIÓN DE CLIENTES" underline="false" BorderPane.alignment="CENTER">
             <font>
                 <Font size="20.0" />
             </font>
