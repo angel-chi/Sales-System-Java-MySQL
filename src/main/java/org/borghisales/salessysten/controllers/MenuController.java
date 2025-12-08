@@ -43,19 +43,77 @@ public class MenuController {
             Stage stage = new Stage();
             stage.setTitle(title);
 
-            // Tamaño base de la ventana (como la main)
-            stage.setWidth(1200);
-            stage.setHeight(700);
+            // Variables para dimensiones
+            double width, height, minWidth, minHeight;
 
-            // Tamaño mínimo para evitar que quede muy pequeña
-            stage.setMinWidth(900);
-            stage.setMinHeight(500);
+            // Switch case para determinar tamaños según la ventana que se abra
+            switch (fxmlFileName) {
+                case MAIN_VIEW_FXML:
+                    width = 1200;
+                    height = 900;
+                    minWidth = 900;
+                    minHeight = 500;
+                    break;
+                case MANAGEMENT_VIEW_FXML:
+                    width = 1200;
+                    height = 900;
+                    minWidth = 900;
+                    minHeight = 500;
+                    break;
+                case SELLER_VIEW_FXML:
+                    width = 1200;
+                    height = 800;
+                    minWidth = 800;
+                    minHeight = 500;
+                    break;
+                case PRODUCT_VIEW_FXML:
+                    width = 1100;
+                    height = 700;
+                    minWidth = 850;
+                    minHeight = 550;
+                    break;
+                case CUSTOMER_VIEW_FXML:
+                    width = 1000;
+                    height = 650;
+                    minWidth = 800;
+                    minHeight = 500;
+                    break;
+                case GENERATE_SALE_VIEW_FXML:
+                    width = 1800;
+                    height = 1200;
+                    minWidth = 1000;
+                    minHeight = 600;
+                    break;
+                case REPORT_VIEW_FXML:
+                    width = 1400;
+                    height = 800;
+                    minWidth = 1100;
+                    minHeight = 650;
+                    break;
+                case SALE_DETAIL_VIEW_FXML:
+                    width = 900;
+                    height = 600;
+                    minWidth = 700;
+                    minHeight = 500;
+                    break;
+
+                default:
+                    width = 1200;
+                    height = 700;
+                    minWidth = 900;
+                    minHeight = 500;
+                    break;
+            }
+            stage.setWidth(width);
+            stage.setHeight(height);
+            stage.setMinWidth(minWidth);
+            stage.setMinHeight(minHeight);
 
             stage.setScene(new Scene(root));
             stage.show();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error en la carga de la ventana: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error en la carga de la ventana: " + e.getMessage());
         }
     }
 

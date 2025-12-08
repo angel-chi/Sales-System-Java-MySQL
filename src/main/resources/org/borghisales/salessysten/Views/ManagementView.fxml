@@ -22,7 +22,6 @@
                         <AnchorPane>
                             <children>
 
-
                                 <Button text="AYUDA" onAction="#help"
                                         prefHeight="70.0"
                                         AnchorPane.leftAnchor="40.0"
@@ -87,8 +86,6 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-
-
                 <Tab text="INFORMES">
                     <content>
                         <AnchorPane>
