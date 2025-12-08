@@ -96,7 +96,7 @@
          </padding>
         </GridPane>
       <HBox prefWidth="200.0" spacing="30.0">
-         <children>
+            <children>
                <Button onAction="#searchCustomer" prefHeight="40.0" text="BUSCAR CLIENTE" />
                <Button onAction="#searchProduct" prefHeight="40.0" text="BUSCAR PRODUCTO" />
                <Button onAction="#addShoppingCart" prefHeight="40.0" prefWidth="121.0" text="AGREGAR VENTA" />
