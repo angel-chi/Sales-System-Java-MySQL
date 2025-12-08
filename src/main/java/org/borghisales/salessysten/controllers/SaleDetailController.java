@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import org.borghisales.salessysten.model.SalesDAO;
 import org.borghisales.salessysten.model.ShoppingCart;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -37,6 +39,8 @@ public class SaleDetailController implements Initializable {
     @FXML
     private TableColumn<ShoppingCart, Double> colPrice;
     @FXML
+    private TableColumn<ShoppingCart, Double> colDescuento;
+    @FXML
     private TableColumn<ShoppingCart,Double> colTotal;
     @FXML
     private TextField totalSale;
@@ -57,6 +61,7 @@ public class SaleDetailController implements Initializable {
         colProduct.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().product()));
         colQuantity.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().quantity()).asObject());
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
+        colDescuento.setCellValueFactory(p -> new SimpleDoubleProperty(BigDecimal.valueOf( p.getValue().price() * p.getValue().discount() ).setScale(2, RoundingMode.HALF_UP).doubleValue() ).asObject());
         colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total()).asObject());
     }
 

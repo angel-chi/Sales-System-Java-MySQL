@@ -20,30 +20,30 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ReportsController">
   <tabs>
-    <Tab text="SALES HISTORY">
+    <Tab text="HISTORIAL DE VENTAS">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="537.0" prefWidth="1000.0">
                <children>
                   <TableView fx:id="tableReport" layoutX="19.0" layoutY="123.0" prefHeight="583.0" prefWidth="842.0">
                     <columns>
-                      <TableColumn fx:id="colIdSales" prefWidth="139.0" text="idSales" />
-                      <TableColumn fx:id="colIdCustomer" prefWidth="242.0" text="idCustomer" />
-                        <TableColumn fx:id="colIdSeller" prefWidth="74.0" text="idSeller" />
-                        <TableColumn fx:id="colNumberSales" prefWidth="120.0" text="numberSales" />
-                        <TableColumn fx:id="colSaleDate" prefWidth="115.0" text="saleDate" />
-                        <TableColumn fx:id="colAmount" prefWidth="75.0" text="amount" />
-                        <TableColumn fx:id="colState" prefWidth="75.0" text="state" />
+                      <TableColumn fx:id="colIdSales" prefWidth="139.0" text="Identificador" />
+                      <TableColumn fx:id="colIdCustomer" prefWidth="242.0" text="ID del cliente" />
+                        <TableColumn fx:id="colIdSeller" prefWidth="74.0" text="ID del vendedor" />
+                        <TableColumn fx:id="colNumberSales" prefWidth="120.0" text="Número de ventas" />
+                        <TableColumn fx:id="colSaleDate" prefWidth="115.0" text="Fecha de ventas" />
+                        <TableColumn fx:id="colAmount" prefWidth="75.0" text="Cantidad" />
+                        <TableColumn fx:id="colState" prefWidth="75.0" text="Estado" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
                   <DatePicker fx:id="minDate" layoutX="395.0" layoutY="73.0" prefHeight="25.0" prefWidth="92.0" />
-                  <Button layoutX="631.0" layoutY="71.0" mnemonicParsing="false" onAction="#onFilter" prefHeight="32.0" prefWidth="94.0" text="FILTER" />
+                  <Button layoutX="631.0" layoutY="71.0" mnemonicParsing="false" onAction="#onFilter" prefHeight="32.0" prefWidth="94.0" text="FILTRO" />
                   <DatePicker fx:id="maxDate" layoutX="505.0" layoutY="74.0" prefHeight="25.0" prefWidth="92.0" />
                   <TextField fx:id="minAmount" layoutX="194.0" layoutY="72.0" prefHeight="27.0" prefWidth="78.0" />
                   <TextField fx:id="maxAmount" layoutX="291.0" layoutY="72.0" prefHeight="27.0" prefWidth="78.0" />
-                  <Label layoutX="252.0" layoutY="38.0" text="AMOUNT" underline="true" wrapText="true">
+                  <Label layoutX="252.0" layoutY="38.0" text="CANTIDAD" underline="true" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -58,7 +58,7 @@
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label layoutX="477.0" layoutY="39.0" text="DATE" underline="true" wrapText="true">
+                  <Label layoutX="477.0" layoutY="39.0" text="FECHA" underline="true" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -68,22 +68,22 @@
                         <Image url="@../../../../images/report.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="767.0" layoutY="758.0" mnemonicParsing="false" onAction="#onExport" prefHeight="32.0" prefWidth="94.0" text="EXPORT " />
+                  <Button layoutX="767.0" layoutY="758.0" mnemonicParsing="false" onAction="#onExport" prefHeight="32.0" prefWidth="94.0" text="EXPORTAR " />
                   <ComboBox fx:id="cbTypeExport" layoutX="643.0" layoutY="758.0" prefHeight="32.0" prefWidth="108.0" style="-fx-alignment: CENTER;" />
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="STATISTICS">
+    <Tab text="ESTADISTICAS">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="976.0" prefWidth="1000.0">
                <children>
                   <PieChart fx:id="pieChartProducts" layoutX="41.0" layoutY="54.0" prefHeight="312.0" prefWidth="938.0" />
-                  <Label layoutX="260.0" layoutY="14.0" text="AMOUNT PRODUCST SOLD" underline="true" wrapText="true">
+                  <Label layoutX="260.0" layoutY="14.0" text="CANTIDAD DE PRODUCTOS VENDIDOS" underline="true" wrapText="true">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <Label layoutX="330.0" layoutY="372.0" text="SALES OVER TIME" underline="true" wrapText="true">
+                  <Label layoutX="330.0" layoutY="372.0" text="VENTAS A TRAVES DEL TIEMPO" underline="true" wrapText="true">
                      <font>
                         <Font size="32.0" />
                      </font>
@@ -96,12 +96,12 @@
                       <NumberAxis fx:id="y_amountSales" side="LEFT" />
                     </yAxis>
                   </LineChart>
-                  <Label layoutX="824.0" layoutY="577.0" prefHeight="42.0" prefWidth="89.0" text="MONTH" underline="true" wrapText="true">
+                  <Label layoutX="824.0" layoutY="577.0" prefHeight="42.0" prefWidth="89.0" text="MES" underline="true" wrapText="true">
                      <font>
                         <Font size="23.0" />
                      </font>
                   </Label>
-                  <Label layoutX="841.0" layoutY="432.0" prefHeight="42.0" prefWidth="69.0" text="YEAR" underline="true" wrapText="true">
+                  <Label layoutX="841.0" layoutY="432.0" prefHeight="42.0" prefWidth="69.0" text="AÑO" underline="true" wrapText="true">
                      <font>
                         <Font size="23.0" />
                      </font>

@@ -71,6 +71,7 @@
             <TableColumn fx:id="colGarantia" prefWidth="77.0" sortable="false" style="-fx-alignment: CENTER;" text="GARANTIA" />
             <TableColumn fx:id="colQuantity" prefWidth="100.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
             <TableColumn fx:id="colPrice" prefWidth="124.0" style="-fx-alignment: CENTER;" text="PRECIO UNITARIO" />
+             <TableColumn fx:id="colDescuento" prefWidth="150.0" style="-fx-alignment: CENTER;" text="PRECIO CON DESCUENTO" />
             <TableColumn fx:id="colTotal" prefWidth="103.0" style="-fx-alignment: CENTER;" text="TOTAL" />
          </columns>
       </TableView>

@@ -28,7 +28,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching IdSale: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando la id de la venta: " + e.getMessage());
             return 1;
         }
     }
@@ -71,13 +71,14 @@ public class SalesDAO {
             }
 
             for (ShoppingCart e:products) {
-                String sql = "INSERT INTO sales_details (idSales,idProduct,quantity, priceSale) values(?,?,?,?)";
+                String sql = "INSERT INTO sales_details (idSales,idProduct,quantity, priceSale,descuento) values(?,?,?,?, ?)";
                 try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
                     pstmt.setInt(1, id);
                     pstmt.setInt(2, Integer.parseInt(e.cod()));
                     pstmt.setInt(3, e.quantity());
                     pstmt.setDouble(4, e.price());
+                    pstmt.setDouble(5, 1 - e.discount());
 
                     pstmt.executeUpdate();
                 }
@@ -151,7 +152,7 @@ public class SalesDAO {
 
     public void setTableDetails(ObservableList<ShoppingCart> productsDetails, int idSale) {
         String sql = """ 
-                SELECT ROW_NUMBER() OVER() as nr, sd.idProduct as cod, p.name as product, sd.quantity, sd.priceSale as price, ROUND(sd.quantity *sd.priceSale,2) as total
+                SELECT ROW_NUMBER() OVER() as nr, sd.idProduct as cod, p.name as product, sd.quantity, sd.priceSale as price, ROUND(sd.quantity *sd.priceSale,2) as total, sd.descuento as descuento
                 FROM sales_details sd
                 INNER JOIN product p
                 USING(idProduct)

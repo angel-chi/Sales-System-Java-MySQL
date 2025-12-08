@@ -3,6 +3,7 @@ package org.borghisales.salessysten.controllers;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -91,6 +92,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     @FXML
     private TableColumn<ShoppingCart, Double> colPrice;
     @FXML
+    private TableColumn<ShoppingCart, Double> colDescuento;
+    @FXML
     private TableColumn<ShoppingCart,Double> colTotal;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -141,7 +144,8 @@ public class GenerateSaleController extends MenuController implements Initializa
         colProduct.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().product()));
         colQuantity.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().quantity()).asObject());
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
-        colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total()).asObject());
+        colDescuento.setCellValueFactory(p -> new SimpleDoubleProperty( customer.membresia().applyDiscount( p.getValue().price())  ).asObject());
+        colTotal.setCellValueFactory(p -> new SimpleDoubleProperty( p.getValue().total() ).asObject());
         colGarantia.setCellValueFactory(p -> new SimpleStringProperty(productDAO.searchProduct(p.getValue().product()).garantia().toString()));
     }
 
@@ -322,7 +326,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
         MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
-        total.clear();
+        total.setText("0.0");
     }
 
     public void generateSale(ActionEvent actionEvent) {
@@ -396,9 +400,13 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private ShoppingCart createShoppingCartObject() {
+
         return new ShoppingCart(contProducts++, codProduct.getText(),
-                productName.getText(), quantity.getValue(),
-                Double.parseDouble(price.getText()));
+                productName.getText(),
+                quantity.getValue(),
+                Double.parseDouble(price.getText()),
+                customer.membresia().getDiscount()
+        );
     }
 
     private boolean isProductAlreadyInCart(ShoppingCart product) {

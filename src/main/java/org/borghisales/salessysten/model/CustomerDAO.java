@@ -31,7 +31,7 @@ public class CustomerDAO implements CRUD<Customer> {
     }
     @Override
     public boolean create(Customer entity) {
-        String sql = "Insert into customer (dni,name,address,state) values(?,?,?,?)";
+        String sql = "Insert into customer (dni,name,address,state,membresia) values(?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -40,6 +40,7 @@ public class CustomerDAO implements CRUD<Customer> {
             pstmt.setString(2, entity.name());
             pstmt.setString(3, entity.address());
             pstmt.setString(4, entity.state().toString());
+            pstmt.setString(5, entity.membresia().toString());
 
             int rows_affected = pstmt.executeUpdate();
 
@@ -61,7 +62,7 @@ public class CustomerDAO implements CRUD<Customer> {
 
     @Override
     public boolean update(Customer entity) {
-        String sql = "UPDATE customer set name=?,address=?,state=? where dni=?";
+        String sql = "UPDATE customer set name=?,address=?,state=?,membresia=? where dni=?";
 
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -69,7 +70,8 @@ public class CustomerDAO implements CRUD<Customer> {
             pstmt.setString(1, entity.name());
             pstmt.setString(2, entity.address());
             pstmt.setString(3, entity.state().name());
-            pstmt.setString(4, entity.dni());
+            pstmt.setString(4, entity.membresia().toString());
+            pstmt.setString(5, entity.dni());
 
 
             int rows_affected = pstmt.executeUpdate();

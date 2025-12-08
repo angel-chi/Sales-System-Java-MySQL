@@ -318,6 +318,13 @@ private Alert createConfiguredAlert(String title, String header, String content)
         return alert;
     }
 ```
+### Error al cancelar una venta
+Al cancelar una venta se impedía hacer más compras, el error se provocaba debido a que se limpiaba el texto total y no se reiniciaba aun valor seguro como 0.0
+```java
+total.setText("0.0");
+```
+Simplemente se agregó esta línea al limpiar en vez de limpiar el texto del total
+
 ## Propuestas
 ### Agregar atributo garantía a los productos
 Agregarle garantía a los productos que se venden, debido a que son productos tecnológicos en la gran mayoría de los casos los artículos vienen con garantía para cubrir cualquier fallo que pudiera presentarse en un periodo de tiempo.
@@ -331,6 +338,9 @@ Al momento de hacer una venta la única forma de seleccionar una persona es por 
 
 ### Agregar atributo marca a los productos
 Sería una forma para identificar productos similares y poder dar un mejor servicio al cliente.
+
+### Membresías
+Dependiendo del tipo de membresía que tenga un cliente se le aplican diversos descuentos a la hora de comprar un producto
 
 ## Aplicación de propuestas
 ### Atributo garantía
@@ -394,6 +404,37 @@ public class ProductDao implements CRUD<Product> {
     ...
 }
 ```
+
+### Atributo Membresía
+Igual que en el ejemplo anterior se tuvo que crear un enum que representara los elementos de la base de datos y a su vez editar la tabla y las entradas de la base de datos.
+```java
+public enum Membresia {
+    REGULAR("REGULAR"), FRECUENTE("FRECUENTE"), DESTACADO("DESTACADO");
+
+    private final String text;
+
+    Membresia(String text) {
+        this.text = text;
+    }
+
+    public static Membresia getFromText(String text) {
+        for(Membresia membresia : Membresia.values()) {
+            if( membresia.text.contentEquals(text) ) {
+                return membresia;
+            }
+        }
+        return REGULAR;
+    }
+
+    @Override
+    public String toString() {
+        return text;
+    }
+};
+```
+Se implementó en la interfaz gráfica de los clientes además de en las de ventas se visualiza el valor con descuento.
+Luego de ello se incorporó al código del shopping cart un atributo de descuento para aplicárselo al total.
+
 
 # 📝 Licencia
 
