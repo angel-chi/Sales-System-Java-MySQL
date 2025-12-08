@@ -9,10 +9,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.HelpController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.HelpController">
 
     <top>
-        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="Infinity" prefHeight="67.0" prefWidth="500.0" text="AYUDA DEL SISTEMA" underline="false" BorderPane.alignment="CENTER">
+        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="Infinity" prefHeight="80.0" prefWidth="600.0" text="AYUDA DEL SISTEMA" underline="false" BorderPane.alignment="CENTER">
             <font>
                 <Font size="35.0" />
             </font>
@@ -23,13 +23,13 @@
     </top>
 
     <center>
-        <VBox alignment="CENTER" prefHeight="266.0" prefWidth="600.0" spacing="15">
+        <VBox alignment="CENTER" prefHeight="361.0" prefWidth="602.0" spacing="15">
             <padding>
                 <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
 
             <!-- Imagen agregada -->
-            <ImageView fitHeight="120" fitWidth="120" preserveRatio="true">
+            <ImageView fitHeight="134.0" fitWidth="134.0" preserveRatio="true">
                 <image>
                     <Image url="@../../../../images/sistema.png" />
                 </image>
@@ -40,12 +40,12 @@
                <Font size="23.0" />
             </font></Label>
 
-            <Button onAction="#openRepository" prefWidth="250" text="Abrir repositorio en GitHub">
+            <Button onAction="#openRepository" prefHeight="39.0" prefWidth="323.0" text="Abrir repositorio en GitHub">
             <font>
                <Font size="18.0" />
             </font></Button>
 
-            <Button onAction="#closeWindow" prefWidth="120" text="Cerrar">
+            <Button onAction="#closeWindow" prefHeight="39.0" prefWidth="237.0" text="Cerrar">
             <font>
                <Font size="18.0" />
             </font></Button>
