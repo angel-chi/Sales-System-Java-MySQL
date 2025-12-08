@@ -435,7 +435,169 @@ public enum Membresia {
 Se implementó en la interfaz gráfica de los clientes además de en las de ventas se visualiza el valor con descuento.
 Luego de ello se incorporó al código del shopping cart un atributo de descuento para aplicárselo al total.
 
+### Buscar clientes por nombre
 
+Se implemento la busqueda de un cliente escribiendo su nombre en el campo correspondiente para una busqueda mas comoda. Se realizo un overloading en el metodo ```searchCustomer``` para aceptar el nombre en lugar de su id.
+```java
+public Customer searchCustomer(String nombre){
+        String sql = "SELECT * FROM customer WHERE name=?";
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setString(1,nombre);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                rs.next();
+                return Customer.fromResultSet(rs);
+            }
+
+        }catch (SQLException e){
+
+            return null;
+        }
+
+    }
+```
+Y se adapto el metodo principal de busqueda para buscar por nombre en caso de que la ID no sea proporcionada
+
+```java
+public void searchCustomer(ActionEvent actionEvent) {
+        String codText = codCustomer.getText() == null ? "" : codCustomer.getText().trim();
+        String nameText = customerName.getText() == null ? "" : customerName.getText().trim();
+        //Si no se proporciona ninguno se manda alerta
+        if (codText.isBlank() && nameText.isBlank()) {
+            setAlert(Alert.AlertType.ERROR, "Debe ingresar un codigo o un nombre para buscar");
+            return;
+        }
+
+        Customer found = null;
+        //Si se proporciona ID tratar de buscar el cliente
+        if (!codText.isBlank()) {
+            try {
+                int customerId = Integer.parseInt(codText);
+                found = customerDAO.searchCustomer(customerId);
+
+                if (found != null) {
+                    //Encontrar por id
+                    setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + found.name());
+                    customer = found;
+                    customerName.setText(found.name());
+                    return;
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
+
+        //Definir el nombre que se va a buscar si se proporciona el nombre usarlo sino usa el ID
+        String nameToSearch = !nameText.isBlank() ? nameText : codText;
+        //Si se definio el nombre tratar de hacer la busqueda con el
+        if (!nameToSearch.isBlank()) {
+            found = customerDAO.searchCustomer(nameToSearch);
+            if (found != null) {
+                setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + found.name());
+                customer = found;
+                codCustomer.setText(String.valueOf(found.dni()));
+                customerName.setText(found.name());
+                return;
+            }
+        }
+
+        handleCustomerNotFound();
+    }
+```
+
+### Nueva vista para seleccionar productos al generar una venta
+
+Se implemento la apertura de una ventana para seleccionar un producto directamente desde una tabla al momento de registrar una venta, con esto se mejora la navegacion facilitando el acceso a cualquier producto sin necesidad de saberse su codigo o nombre.
+
+Se creo un metodo ```openProductSelectionView()``` dentro de la clase ```GenerateSaleController``` para poder acceder a la nueva vista:
+
+```java
+@FXML
+    public void openProductSelectionView(ActionEvent actionEvent) {
+        //Asignar la vista padre
+        Window ownerWindow = serial.getScene() != null ? serial.getScene().getWindow() : null;
+        //Se utiliza un metodo sobrecargado de openNewStage que admite configurar la vista padre y pasar los enlaces del producto
+        openNewStage(
+                PRODUCTSELECTION_VIEW_FXML,
+                "Seleccionar producto",
+                true,
+                ownerWindow,
+                loader -> {
+                    //controlador de la vista para asignar la referencia del padre
+                    ProductSelectionController controller = loader.getController();
+                    controller.setParentController(this);
+                }
+        );
+    }
+```
+
+Se creo la nueva vista ```ProductSelection.fxml``` junto a su controlador ```ProductSelectionController```, en donde se le permite al usuario seleccionar un producto dentro los productos registrados y devolver el producto a la vista padre
+
+Implementaciones en ```ProductSelectionController``` :
+
+- Carga todos los productos al iniciar la vista con un nuevo metodo (```getAllProducts()```) creado en ```ProductDAO``` 
+- Muestra en una tabla las columnas ID, codigo, nombre, precio, existencias y garantia
+- Filtro por ID o nombre usando el campo de texto correspondiente
+- Haciendo doble click en alguna fila de algun producto se selecciona y se envia el producto a la vista padre para rellenar los campos correspondientes
+
+Sobrecarga en el metodo ```openNewStage()``` para permitir comunicacion entre las vistas:
+
+```java
+public Stage openNewStage(String fxmlFileName, String title, boolean modal, Window owner, Consumer<FXMLLoader> loaderConfigurator) {
+        try {
+            //Se crea un FXMLLoader para apuntar a la nueva vista
+            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
+
+            // construye la interfaz completa que esta dentro del FXML
+            Parent root = fxmlLoader.load();
+
+            // se aplica configuracion extra para el controlador si se proporciona
+            // Permite pasar datos y preparar la ventana antes de abrir
+            if (loaderConfigurator != null) {
+                try {
+                    loaderConfigurator.accept(fxmlLoader);
+                } catch (Exception e) {
+                    // evitar que fallos al configurar rompan la apertua
+                    System.err.println("Error configurando controller: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+            //Se crea la vista usando la interfaz ya creada
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(scene);
+
+            configureStageCloseEvent(stage, fxmlFileName, title);
+
+            stage.setMinWidth(1000);
+            stage.setMinHeight(800);
+            
+            //Si la ventana depende de otra se le asigna como "ventana padre"
+            if (owner != null) {
+                stage.initOwner(owner);
+            }
+            if (modal) {
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.showAndWait();
+            } else {
+                stage.show();
+            }
+
+            Platform.runLater(() -> {
+                stage.toFront();
+                stage.requestFocus();
+            });
+
+            return stage;
+
+        } catch (IOException | NullPointerException e) {
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista: " + e.getMessage());
+            return null;
+        }
+    }
+```
 # 📝 Licencia
 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
