@@ -342,6 +342,9 @@ Sería una forma para identificar productos similares y poder dar un mejor servi
 ### Membresías
 Dependiendo del tipo de membresía que tenga un cliente se le aplican diversos descuentos a la hora de comprar un producto
 
+### Nueva vista para seleccionar productos al generar una venta
+Al registrar una venta para hacer mas facil el acceso a cualquier producto del inventario se crea una nueva vista para mostrar todos los productos y permitir seleccionar alguno simplemente haciendo doble click y el sistema rellena los campos necesarios
+
 ## Aplicación de propuestas
 ### Atributo garantía
 Para implementarlo se tuvo que crear una nueva clase (en este caso un ENUM) que representara los tipos de garantía
