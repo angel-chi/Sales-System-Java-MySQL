@@ -8,12 +8,14 @@
 
 <!-- TOC -->
 * [Antecedentes](#antecedentes)
+* [Video presentación AQUÍ](#video-presentación-aquí)
 * [Objetivo](#objetivo)
 * [Mejoras visuales](#mejoras-visuales)
 * [Errores corregidos](#errores-corregidos)
   * [Navegador web](#navegador-web)
   * [Formato de precios](#formato-de-precios)
   * [Nombre de pestañas](#nombre-de-pestañas)
+  * [Precio/inventario negativos](#precioinventario-negativos-)
 * [Diagramas UML](#diagramas-uml)
 * [Propuestas de mejora](#propuestas-de-mejora)
   * [Correo electronico y telefono de clientes](#correo-electronico-y-telefono-de-clientes)
@@ -21,7 +23,7 @@
   * [Garantía en los productos](#garantía-en-los-productos)
   * [Desactivar ventas](#desactivar-ventas-)
 * [Implementación](#implementación)
-  * [Clase para descuentos](#clase-para-descuentos)
+  * [Sistema Automático de Descuentos](#sistema-automático-de-descuentos)
   * [Metodos para desactivar ventas](#metodos-para-desactivar-ventas)
 * [Conclusión](#conclusión)
 <!-- TOC -->
@@ -29,6 +31,8 @@
 # Antecedentes
 Este fue un ejercicio completado por estudiantes del lenguaje Java para poner en práctica los conocimientos aprendidos sobre el paradigma orientado a objetos.
 Se hace uso de un software de codigo abierto bajo los derechos de uso del mismo. 
+
+# [Video presentación AQUÍ](https://drive.google.com/file/d/1UNmw1EoOijAyDTNc1JEZeRM6BOoEbT9c/view?usp=sharing)
 
 # Objetivo
 Se hace una crítica constructiva al producto de Tomás Borghi bajo los conceptos de la programación orientada a objetos, se ofrecen mejoras a la interfaz visual y se proponen 4 nuevas funciones, implementando dos de ellas en este repositorio.
