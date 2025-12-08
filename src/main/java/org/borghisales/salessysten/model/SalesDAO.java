@@ -48,7 +48,7 @@ public class SalesDAO {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Sale saved correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Venta generada correctamente");
                 return true;
             }else{
                 MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: ");
