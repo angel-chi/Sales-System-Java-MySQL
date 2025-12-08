@@ -15,7 +15,7 @@ import java.util.List;
 public class SellerDAO implements CRUD<Seller> {
     @Override
     public boolean create(Seller entity) {
-        String sql = "INSERT INTO seller (dni,name,phone_number,state,user) values (?,?,?,?,?)";
+        String sql = "INSERT INTO seller (dni,name,phone_number,state,user, role) values (?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -25,6 +25,7 @@ public class SellerDAO implements CRUD<Seller> {
             pstmt.setString(3, entity.phoneNumber());
             pstmt.setString(4, entity.state().name());
             pstmt.setString(5, entity.user());
+            pstmt.setString(6, entity.role().name());
 
             int rows_affected = pstmt.executeUpdate();
 
@@ -41,7 +42,7 @@ public class SellerDAO implements CRUD<Seller> {
 
     @Override
     public boolean update(Seller entity) {
-        String sql = "UPDATE seller set name=?,phone_number=?,state=?,user=? where dni=?";
+        String sql = "UPDATE seller set name=?,phone_number=?,state=?,user=?, role=? where dni=?";
 
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -51,7 +52,8 @@ public class SellerDAO implements CRUD<Seller> {
             pstmt.setString(2, entity.phoneNumber());
             pstmt.setString(3, entity.state().name());
             pstmt.setString(4, entity.user());
-            pstmt.setString(5, entity.dni());
+            pstmt.setString(5, entity.role().name());
+            pstmt.setString(6, entity.dni());
 
             int rows_affected = pstmt.executeUpdate();
             return rows_affected > 0;

@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.borghisales.salessysten.model.Seller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ public class MenuController {
     public static final String GENERATE_SALE_VIEW_FXML = VIEWS_DIRECTORY + "GenerateSaleView.fxml";
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
+    public static final String ACCESS_DENIED_VIEW_FXML = VIEWS_DIRECTORY + "AccessDeniedView.fxml";
 
 
     static Alert defaultAlert;
@@ -38,6 +40,26 @@ public class MenuController {
         fxmlTitles.put(GENERATE_SALE_VIEW_FXML,"Carrito de compras");
         fxmlTitles.put(REPORT_VIEW_FXML,"Ventas");
         fxmlTitles.put(SALE_DETAIL_VIEW_FXML,"Detalle de venta");
+        fxmlTitles.put(ACCESS_DENIED_VIEW_FXML, "Acceso Denegado");
+    }
+
+    // Muestra la ventana de acceso denegado
+    public static void showAccessDenied(String message, Seller.Role userRole) {
+        try {
+            AccessDeniedController.setMessage(message);
+            AccessDeniedController.setUserRole(userRole);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(ACCESS_DENIED_VIEW_FXML));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Acceso Denegado");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.showAndWait();  // Modal - bloquea hasta que se cierre
+
+        } catch (IOException | NullPointerException e) {
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista de acceso denegado: "+ e.getMessage());
+        }
     }
 
     void closeCurrentStage(Node node) {

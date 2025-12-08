@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
+import org.borghisales.salessysten.model.Seller;
 
 import java.awt.*;
 import java.net.URI;
@@ -25,6 +26,14 @@ public class ManagementController extends MenuController implements Initializabl
 
     @FXML
     void openSeller(ActionEvent actionEvent){
+        // Verificar si es MANAGER
+        if (MainController.sellerLog.role() != Seller.Role.MANAGER) {
+            MenuController.showAccessDenied(
+                    "Solo los gerentes pueden gestionar vendedores",
+                    MainController.sellerLog.role()
+            );
+            return;
+        }
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
         openNewStage(SELLER_VIEW_FXML,"Vendedor");
         closeCurrentStage(sellerButton);
@@ -44,6 +53,14 @@ public class ManagementController extends MenuController implements Initializabl
     }
 
     public void openProduct(ActionEvent actionEvent) {
+        // Verificar si es MANAGER
+        if (MainController.sellerLog.role() != Seller.Role.MANAGER) {
+            MenuController.showAccessDenied(
+                    "Solo los gerentes pueden gestionar productos",
+                    MainController.sellerLog.role()
+            );
+            return;
+        }
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
         openNewStage(PRODUCT_VIEW_FXML,"Productos");
         closeCurrentStage(sellerButton);

@@ -23,6 +23,7 @@ public class SellerController implements Initializable, IValidable{
     //Usando la abstraccion
     private final CRUD<Seller> sellerDAO = new SellerDAO();
     private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
+    private final ObservableList<Seller.Role> roleList = FXCollections.observableArrayList(Seller.Role.MANAGER, Seller.Role.SELLER);
     private static ObservableList<Seller> sellers = null;
 
     @FXML
@@ -36,6 +37,8 @@ public class SellerController implements Initializable, IValidable{
     @FXML
     private ComboBox<Seller.State> cbState;
     @FXML
+    private ComboBox<Seller.Role> cbRole;
+    @FXML
     private TableView<Seller> tableSellers;
     @FXML
     private TableColumn<Seller,Integer> colId;
@@ -47,6 +50,8 @@ public class SellerController implements Initializable, IValidable{
     private TableColumn<Seller,String> colPhone;
     @FXML
     private TableColumn<Seller, Seller.State> colState;
+    @FXML
+    private TableColumn<Seller, Seller.Role> colRole;
 
 
     @Override
@@ -96,6 +101,8 @@ public class SellerController implements Initializable, IValidable{
     private void initializeComboBox() {
         cbState.setValue(Seller.State.ACTIVE);
         cbState.setItems(stateList);
+        cbRole.setValue(Seller.Role.SELLER);
+        cbRole.setItems(roleList);
     }
 
     private void initializeSellerData() {
@@ -114,7 +121,7 @@ public class SellerController implements Initializable, IValidable{
             MenuController.setAlert(Alert.AlertType.WARNING, errorMessage);
             return; // Detiene la ejecución si hay errores
         }
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
+        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText(), cbRole.getValue());
         if (sellerDAO.create(seller)) {
             MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor añadido con éxito");
             MenuController.cleanCells(dni, name, phone, user);
@@ -130,7 +137,7 @@ public class SellerController implements Initializable, IValidable{
             MenuController.setAlert(Alert.AlertType.WARNING, errorMessage);
             return; // Detiene la ejecución si hay errores
         }
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
+        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText(), cbRole.getValue());
         if (sellerDAO.update(seller)) {
             MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor actualizado con éxito");
             MenuController.cleanCells(dni, name, phone, user);
@@ -162,6 +169,7 @@ public class SellerController implements Initializable, IValidable{
         phone.setText(seller.phoneNumber());
         user.setText(seller.user());
         cbState.setValue(seller.state());
+        cbRole.setValue(seller.role());
     }
 
     private void updateTable(){
