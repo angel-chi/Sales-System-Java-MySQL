@@ -11,125 +11,62 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SellerDAO implements CRUD<Seller> {
+public class SellerDAO extends AbstractBaseDAO<Seller> {
+
+    // Implementación de lo que se repite.
     @Override
-    public boolean create(Seller entity) {
-        String sql = "INSERT INTO seller (dni,name,phone_number,state,user) values (?,?,?,?,?)";
-
-        try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
-
-            pstmt.setString(1, entity.dni());
-            pstmt.setString(2, entity.name());
-            pstmt.setString(3, entity.phoneNumber());
-            pstmt.setString(4, entity.state().name());
-            pstmt.setString(5, entity.user());
-
-            int rows_affected = pstmt.executeUpdate();
-
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor agregado correctamente");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error añadiendo a vendedor: ");
-                return false;
-            }
-
-
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error añadiendo a vendedor: " + e.getMessage());
-            return false;
-        }
-
-    }
-
-
-    @Override
-    public boolean update(Seller entity) {
-        String sql = "UPDATE seller set name=?,phone_number=?,state=?,user=? where dni=?";
-
-        try(Connection conn = DBConnection.connection();
-            PreparedStatement pstmt = conn.prepareStatement(sql)){
-
-
-            pstmt.setString(1, entity.name());
-            pstmt.setString(2, entity.phoneNumber());
-            pstmt.setString(3, entity.state().name());
-            pstmt.setString(4, entity.user());
-            pstmt.setString(5, entity.dni());
-
-            int rows_affected = pstmt.executeUpdate();
-
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor actualizado correctamente");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando a vendedor ");
-                return false;
-            }
-
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando a vendedor: " + e.getMessage());
-            return false;
-        }
-
+    protected String getEntityName() {
+        return "Vendedor";
     }
 
     @Override
-    public boolean delete(String id) {
-
-        String sql = "DELETE FROM seller where dni=?";
-
-        try(Connection conn = DBConnection.connection();
-            PreparedStatement pstmt = conn.prepareStatement(sql))    {
-
-
-            pstmt.setString(1,id);
-
-            int rows_affected = pstmt.executeUpdate();
-
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor eliminado correctamente");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error eliminando al vendedor: ");
-                return false;
-            }
-
-
-
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error eliminando al vendedor: " + e.getMessage());
-            return false;
-        }
-
+    protected String getInsertSQL() {
+        return "INSERT INTO seller (dni,name,phone_number,state,user) values (?,?,?,?,?)";
     }
 
     @Override
-    public void setTable(ObservableList<Seller> sellers){
-        String sql = "SELECT * FROM seller";
-
-        try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
-
-            try (ResultSet rs = pstmt.executeQuery()){
-
-                while (rs.next()){
-                    Seller seller = Seller.fromResultSet(rs);
-                    sellers.add(seller);
-                }
-
-            }
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error al configurar la tabla de vendedor " + e.getMessage());
-        }
+    protected void setInsertParameters(PreparedStatement pstmt, Seller entity) throws SQLException {
+        pstmt.setString(1, entity.dni());
+        pstmt.setString(2, entity.name());
+        pstmt.setString(3, entity.phoneNumber());
+        pstmt.setString(4, entity.state().name());
+        pstmt.setString(5, entity.user());
     }
 
+    @Override
+    protected String getUpdateSQL() {
+        return "UPDATE seller set name=?,phone_number=?,state=?,user=? where dni=?";
+    }
 
+    @Override
+    protected void setUpdateParameters(PreparedStatement pstmt, Seller entity) throws SQLException {
+        pstmt.setString(1, entity.name());
+        pstmt.setString(2, entity.phoneNumber());
+        pstmt.setString(3, entity.state().name());
+        pstmt.setString(4, entity.user());
+        pstmt.setString(5, entity.dni()); // El ID va al final en el UPDATE
+    }
+
+    @Override
+    protected String getDeleteSQL() {
+        return "DELETE FROM seller where dni=?";
+    }
+
+    @Override
+    protected String getSelectAllSQL() {
+        return "SELECT * FROM seller";
+    }
+
+    @Override
+    protected Seller fromResultSet(ResultSet rs) throws SQLException {
+        return Seller.fromResultSet(rs);
+    }
+
+    // Las siguientes son métodos específicos del SellerDAO.
     public static boolean login(String dni,String user){
 
         if (dni ==null || user ==null || dni.isEmpty()||user.isEmpty() ){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Usuario o contraseña vacíos");
+            MenuController.setAlert(Alert.AlertType.ERROR,"Usuario o contraseña vacíos.");
             return false;
         }
 
@@ -150,13 +87,13 @@ public class SellerDAO implements CRUD<Seller> {
                     MainController.sellerLog = Seller.fromResultSet(rs);
 
                     return true;
-                }else{
-                    MenuController.setAlert(Alert.AlertType.ERROR, "Usuario no encontradro") ;
+                } else{
+                    MenuController.setAlert(Alert.AlertType.ERROR, "Usuario no encontrado.") ;
                     return false;
                 }
             }
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching seller: " + e.getMessage());
+        } catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error intentando buscar al vendedor: " + e.getMessage());
             return false;
         }
 

@@ -88,11 +88,11 @@ public class SellerController implements Initializable, validacionEntrada {
     public void addSeller(ActionEvent actionEvent){
         //IMPLEMENTACIÓN DE VALIDACIÓN PARA VENDEDOR
         if (campoVacio(dni)||campoVacio(name)||campoVacio(phone)||campoVacio(user)){
-            mostrarAdvertencia("Debes de completar todos los campos antes de guardar");
+            mostrarAdvertencia("Debes de completar todos los campos antes de guardar.");
             return;
         }
         if (cbState.getValue()==null){
-            mostrarAdvertencia("Debes de seleccionar un estado");
+            mostrarAdvertencia("Debes de seleccionar un estado.");
             return;
         }
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());

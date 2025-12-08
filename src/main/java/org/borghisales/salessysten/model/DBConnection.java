@@ -21,7 +21,7 @@ public class DBConnection {
             return DriverManager.getConnection(url, user, password);
         } catch (IOException e) {
             e.printStackTrace();
-            // Manejar la excepción adecuadamente
+            // TODO: Manejar la excepción corrcetamente.
             return null;
         }
     }

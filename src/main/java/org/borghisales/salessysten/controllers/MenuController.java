@@ -30,7 +30,7 @@ public class MenuController {
     public static HashMap<String, String> titulosFxml = new HashMap<>();
 
     public MenuController(){
-        titulosFxml.put(MAIN_VIEW_FXML,"Login");
+        titulosFxml.put(MAIN_VIEW_FXML,"Iniciar Sesión");
         titulosFxml.put(MANAGEMENT_VIEW_FXML,"Gestión");
         titulosFxml.put(SELLER_VIEW_FXML,"Vendedor");
         titulosFxml.put(PRODUCT_VIEW_FXML,"Productos");

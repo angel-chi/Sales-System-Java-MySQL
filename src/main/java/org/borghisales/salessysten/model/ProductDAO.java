@@ -182,12 +182,9 @@ public class ProductDAO implements CRUD<Product>{
                 }
             }
 
-
-        }catch (SQLException e){
+        } catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar buscar las ventas: " + e.getMessage());
         }
-
-
 
     }
 

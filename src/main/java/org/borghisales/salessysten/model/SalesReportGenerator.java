@@ -106,19 +106,18 @@ public class SalesReportGenerator {
             float yPosition = yStart;
             float rowHeight = 20;
 
-
             // Obtener los nombres de las columnas
             String[] columnNames = { "ID Ventas", "ID Cliente", "ID Vendedor", "Numero de venta", "Fecha de la venta", "Cantidad", "Estado" };
 
             // Calcular los anchos de columna basados en los nombres de columna más largos
             float[] columnWidths = calculateColumnWidths(columnNames, PDType1Font.HELVETICA, 12);
 
-            // Dibujar encabezados de columna
+            // Dibujar encabezados de columna.
             drawRow(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths, Color.LIGHT_GRAY, true,
                     columnNames);
             yPosition -= rowHeight;
 
-            // Dibujar filas con los datos de salesList
+            // Dibujar filas con los datos de salesList.
             for (Sales sale : salesList) {
                 drawRow(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths, Color.WHITE, false,
                         String.valueOf(sale.idSales()), String.valueOf(sale.idCustomer()),
@@ -130,10 +129,10 @@ public class SalesReportGenerator {
             contentStream.close();
 
             document.save(outputPath);
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte en PDF generado en " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte en PDF generado en: " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "No fue posible generar el reporte en PDF:: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "No fue posible generar el reporte en PDF: " + e.getMessage());
 
         }
     }
@@ -143,7 +142,7 @@ public class SalesReportGenerator {
         float[] columnWidths = new float[columnNames.length];
         for (int i = 0; i < columnNames.length; i++) {
             float textWidth = font.getStringWidth(columnNames[i]) / 1000 * fontSize;
-            columnWidths[i] = textWidth + 2 * 5; // Add some margin
+            columnWidths[i] = textWidth + 2 * 5; // Agrega algo de margen.
         }
         return columnWidths;
     }
@@ -161,7 +160,7 @@ public class SalesReportGenerator {
             float cellWidth = columnWidths[i];
 
             float textX = nextX + cellMargin;
-            float textY = y + rowHeight / 2 - 12 / 2; // Font size 12
+            float textY = y + rowHeight / 2 - 12 / 2; // Font size 12.
             contentStream.beginText();
             contentStream.setFont(PDType1Font.HELVETICA, 12);
             contentStream.newLineAtOffset(textX, textY);
@@ -170,9 +169,9 @@ public class SalesReportGenerator {
 
             nextX += cellWidth;
 
-            // Agregar un espacio entre las columnas
+            // Agregar un espacio entre las columnas.
             if (i < data.length - 1) {
-                nextX += 10; // Espacio entre columnas
+                nextX += 10; // Espacio entre columnas.
             }
         }
     }

@@ -28,7 +28,7 @@ public class SalesDAO {
                 return 1;
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error intentando buscar el ID de la venta: " + e.getMessage());
             return 1;
         }
@@ -82,9 +82,7 @@ public class SalesDAO {
             }
                 return true;
 
-
-
-        }catch (SQLException e){
+        } catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar guardar detalles de la venta: " + e.getMessage());
             return false;
         }
@@ -106,10 +104,9 @@ public class SalesDAO {
                 }
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar buscar ventas: " + e.getMessage());
         }
-
 
     }
 
@@ -121,9 +118,7 @@ public class SalesDAO {
                 GROUP BY saleDate;
                 """;
 
-
         System.out.println("Buscando base de datos...");
-
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -139,12 +134,9 @@ public class SalesDAO {
                 }
             }
 
-
             ReportsController.setCacheReportLineChart(year,month,lineChartData);
 
-
-
-        }catch (SQLException e){
+        } catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar buscar las ventas: " + e.getMessage());
         }
     }
@@ -170,7 +162,7 @@ public class SalesDAO {
                 }
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar buscar las ventas: " + e.getMessage());
         }
 

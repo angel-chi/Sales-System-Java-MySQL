@@ -1,8 +1,7 @@
 package org.borghisales.salessysten.controllers;
 
-/*Interfaz para validar campos de texto o valores vacíos. Anteriormente era posible añadir vendedores con campo de nombre vacío a la tabla y cuando se intentaba
-agregar un producto no había un mensaje de advertencia.
-*/
+/*Interfaz para validar campos de texto o valores vacíos. Anteriormente era posible añadir vendedores con
+campo de nombre vacío a la tabla y cuando se intentaba agregar un producto no había un mensaje de advertencia.*/
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;

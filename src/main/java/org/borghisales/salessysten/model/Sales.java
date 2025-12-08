@@ -22,4 +22,5 @@ public record Sales(int idSales, int idCustomer, int idSeller, String numberSale
         State state = State.valueOf(rs.getString("state"));
         return new Sales(idSales, idCustomer, idSeller, numberSales, saleDate, amount, state);
     }
+
 }

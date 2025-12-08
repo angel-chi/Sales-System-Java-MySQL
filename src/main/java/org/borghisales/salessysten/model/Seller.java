@@ -18,5 +18,6 @@ public record Seller(int idSeller, String dni, String name, String phoneNumber, 
         String user = rs.getString("user");
         return new Seller(id, dni, name, phoneNumber, state, user);
     }
+
 }
 
