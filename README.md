@@ -123,12 +123,40 @@ Para iniciar sesión, se requiere el Usuario y la contraseña del vendedor. En l
   <img src="src/main/resources/images/management.png" />
 </p>
 
-## Sales
-https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d-83f9b4807ac5
-## Management
-https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b-218c9ca25b10
-## Reports
-https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
+## Generar Venta
+
+* En este apartado el usuario podra generar sus ventas añadiendo el codigo del producto y el usuario del cliente, todo mediante una interfaz amigable con el usuario
+<p align="center">
+  <img src="src/main/resources/images/generarVenta.png" />
+</p>
+
+## Clientes
+* En este apartado el usuario podra llevar un control de sus clientes, podra añadir o actualizar, en dado caso de querer eliminar un cliente debera ingresar la clave unica de administrador para poder realizar dicha acción
+<p align="center">
+  <img src="src/main/resources/images/controlClientes.png" />
+</p>
+
+## Productos
+* En este apartado el usuario podra añadir, eliminar o actualizar el inventario de productos del punto de venta
+<p align="center">
+  <img src="src/main/resources/images/productos.png" />
+</p>
+
+## Vendedores
+* En este apartado, el administrador del punto de venta, quien se espera que sea el dueño del loca, podra eliminar a sus vendedores (empleados) o actualizar la informacion de los mismos, unicamente el o las personas que tengan la clave unica de acceso, podran acceder a este apartado
+<p align="center">
+  <img src="src/main/resources/images/vendedor.png" />
+</p>
+
+## Cierre de ventas
+* En este apartado, los vendedores podran hacer su corte y obtener un .PDF, .XLSX o .CSV con el registro de todas las ventas realizadas hasta el momento de la consulta, al igual que una estadistica para mayor claridad
+<p align="center">
+  <img src="src/main/resources/images/reportesHistorial.png" />
+</p>
+
+<p align="center">
+  <img src="src/main/resources/images/reportesEst.png" />
+</p>
 
 # 📧 Contacto
 Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
@@ -180,7 +208,7 @@ Error 2: Creación de ventanas emergentes con tamaño erróneo
 Error 3: Error al generar una venta 
 - _**¿Cuándo ocurrió?:**_ Cuando añadias una venta (Error de ejecución).
 - _**Causa:**_ Idioma de la computadora, si se encuentra en ingles parece no generar error pero si se encuentra en español si, esto debido a que en ingles se usa comas para separar enteros de decimales y en español se usa punto decimal.
-- _**Solución:**_ El método Double.parseDouble esperaba un punto decimal en su valor y recibía una coma, por lo que antes de que el método reciba el valor retornado por price.getText() se añadió un .replace(",", ".") para sustituir la coma por punto decimal
+- _**Solución:**_ El método Double.parseDouble esperaba un punto decimal en su valor y recibía una coma, por lo que antes de que el método reciba el valor retornado por price.getText() se añadió un .replace(",", ".") concatenado a price.getText() para sustituir la coma por punto decimal y asi Double.parseDouble reciba un parametro valído
 
 
 ## 💱 Cambios en la UI
@@ -272,5 +300,6 @@ Cristian Uriel Sanchez Sanchez
 
 
 [⬆ Volver al inicio](#title)<br>
+
 
 
