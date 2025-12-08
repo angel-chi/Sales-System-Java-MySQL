@@ -42,7 +42,7 @@
                             <Insets top="50" bottom="50" left="50" right="50"/>
                         </padding>
                         <Button mnemonicParsing="false" onAction="#openGenerarCompra" prefHeight="70.0" prefWidth="200.0" text="COMPRAR PRODUCTOS" />
-                        <Button mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="200.0" text="VER PRODUCTOS" />
+                        <Button mnemonicParsing="false" onAction="#openInventario" prefHeight="70.0" prefWidth="200.0" text="VER INVENTARIO" />
                     </VBox>
                 </content>
             </Tab>

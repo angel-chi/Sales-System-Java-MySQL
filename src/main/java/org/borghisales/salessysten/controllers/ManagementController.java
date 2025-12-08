@@ -116,4 +116,12 @@ public class ManagementController extends MenuController implements Initializabl
         closeCurrentStage(tabPaneManage);
     }
 
+    @FXML
+    public void openInventario(ActionEvent actionEvent) {
+        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        MenuController.filePaths.put(INVENTARIO_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        openNewStage(INVENTARIO_VIEW_FXML, "Inventario");
+        closeCurrentStage(tabPaneManage);
+    }
+
 }

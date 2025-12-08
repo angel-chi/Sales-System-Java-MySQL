@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Interfaz de Generar Compra creada.">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerarCompraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerarCompraController.java" afterDir="false" />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Se agregaron nuevas interfaces. Útiles y funcionales.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ProveedorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ProveedorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/ManagementView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/ManagementView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,11 +87,11 @@
       <recent name="C:\Users\tomas\Desktop\Sales-System\src\main\resources\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views" />
       <recent name="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model" />
       <recent name="C:\Users\tomas\Desktop\Sales-System" />
       <recent name="C:\Users\tomas\Desktop\Sales-System\src\main\resources\images" />
       <recent name="C:\Users\tomas\Desktop\Sales-System\src\main\resources\org\borghisales\salessysten\Views" />
-      <recent name="C:\Users\tomas\Desktop\SalesSysten\src\main\java\org\borghisales\salessysten\controllers" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.borghisales.salessysten" />
@@ -483,7 +487,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765178165043</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Corrección de errores mínimos.">
+      <option name="closed" value="true" />
+      <created>1765178334248</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1765178334248</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Ajuste en las ventanas 'padre' de las nuevas ventanas de las interfaces creadas, corrección de errores.">
+      <option name="closed" value="true" />
+      <created>1765178627454</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1765178627454</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -498,8 +518,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: add GenerateSale.viw and modify access modifiers" />
-    <MESSAGE value="feat: search Customer" />
     <MESSAGE value="feat: add screen add customer" />
     <MESSAGE value="feat: add search customer" />
     <MESSAGE value="feat: add search product" />
@@ -523,6 +541,8 @@
     <MESSAGE value="Se modificó el inicio de sesión para que sea más sencillo e intuitivo." />
     <MESSAGE value="Se arregló la interfaz de help, igualmente se crearon las bases para crear las interfaces nuevas." />
     <MESSAGE value="Interfaz de Generar Compra creada." />
-    <option name="LAST_COMMIT_MESSAGE" value="Interfaz de Generar Compra creada." />
+    <MESSAGE value="Corrección de errores mínimos." />
+    <MESSAGE value="Ajuste en las ventanas 'padre' de las nuevas ventanas de las interfaces creadas, corrección de errores." />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajuste en las ventanas 'padre' de las nuevas ventanas de las interfaces creadas, corrección de errores." />
   </component>
 </project>

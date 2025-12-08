@@ -26,6 +26,7 @@ public class MenuController {
     public static final String PROVEEDOR_VIEW_FXML = VIEWS_DIRECTORY + "ProveedorView.fxml";
     public static final String GENERAR_COMPRA_VIEW_FXML = VIEWS_DIRECTORY + "GenerarCompraView.fxml";
     public static final String COMPRAS_REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ComprasReportView.fxml";
+    public static final String INVENTARIO_VIEW_FXML = VIEWS_DIRECTORY + "InventarioView.fxml";
 
 
     static Alert defaultAlert;

@@ -41,6 +41,7 @@ public class ProveedorController  implements Initializable {
         initializeTable();
         initializeComboBox();
         initializeProductData();
+        tableProveedor.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private void initializeTable() {
