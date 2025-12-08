@@ -12,6 +12,8 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static org.borghisales.salessysten.Main.HOST_SERVICES;
+
 public class ManagementController extends MenuController implements Initializable {
 
     private static int lastTab ;
@@ -62,14 +64,20 @@ public class ManagementController extends MenuController implements Initializabl
     }
 
     public void help(ActionEvent actionEvent) {
+        String url = "https://github.com/angel-chi/Sales-System-Java-MySQL/tree/Gonzalez-Flores";
         try {
-            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
+            if (HOST_SERVICES != null) {
+                //Abre la URL
+                HOST_SERVICES.showDocument(url);
+            } else {
+                setAlert(Alert.AlertType.ERROR, "No se pudo acceder a HostServices");
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"La URL no se pudo abrir, checa tu conexión a internet");
+            setAlert(Alert.AlertType.ERROR, "No se pudo abrir la URL");
         }
-
     }
+
 
     public void exit(ActionEvent actionEvent) {
         openNewStage(MAIN_VIEW_FXML,"Iniciar sesión");

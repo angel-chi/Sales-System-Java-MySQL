@@ -325,6 +325,34 @@ total.setText("0.0");
 ```
 Simplemente se agregó esta línea al limpiar en vez de limpiar el texto del total
 
+### Error al presionar el boton de ayuda
+
+Al accionar el boton de ayuda en la ventana principal el programa se congelaba provacando su cierre. Se reemplazo el uso de ```Desktop``` por ```HostServices``` en el metodo ```help()```, el cual es una mejor forma de abrir enlaces externos en el navegador
+
+Cambios en ```help()```:
+
+- Se elimino el uso de ```Desktop.getDesktop()``` para eliminar incompatibilidades con AWT
+- Se utilizo ```HostService.ShowDocument()``` para asignar la apertura de la pagina a JavaFX
+- Se agrego una referencia estatica del ```HostServices``` del programa en la clase ```main``` para que cualquier controlador pueda usarla
+- Se manejo la exepcion interna para informar al usuario en caso de que la URL haya fallado.
+
+```java
+public void help(ActionEvent actionEvent) {
+        String url = "https://github.com/angel-chi/Sales-System-Java-MySQL/tree/Gonzalez-Flores";
+        try {
+            if (HOST_SERVICES != null) {
+                //Abre la URL
+                HOST_SERVICES.showDocument(url);
+            } else {
+                setAlert(Alert.AlertType.ERROR, "No se pudo acceder a HostServices");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            setAlert(Alert.AlertType.ERROR, "No se pudo abrir la URL");
+        }
+    }
+```
+
 ## Propuestas
 ### Agregar atributo garantía a los productos
 Agregarle garantía a los productos que se venden, debido a que son productos tecnológicos en la gran mayoría de los casos los artículos vienen con garantía para cubrir cualquier fallo que pudiera presentarse en un periodo de tiempo.
@@ -508,6 +536,7 @@ public void searchCustomer(ActionEvent actionEvent) {
         handleCustomerNotFound();
     }
 ```
+La sobrecarga del metodo se anadio al UML
 
 ### Nueva vista para seleccionar productos al generar una venta
 
@@ -601,6 +630,7 @@ public Stage openNewStage(String fxmlFileName, String title, boolean modal, Wind
         }
     }
 ```
+Los metodos y la clase creados en esta implementacion fueron agregados al UML
 # 📝 Licencia
 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
