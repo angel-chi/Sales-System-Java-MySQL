@@ -13,13 +13,13 @@
     <children>
         <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="474.0" prefWidth="653.0">
             <children>
-                <Label alignment="CENTER" layoutX="110.0" layoutY="10.0" prefHeight="30.0" prefWidth="400.0" text="ADMINISTRACIÓN DE CLIENTES" underline="true">
+                <Label alignment="CENTER" layoutX="110.0" layoutY="10.0" prefHeight="30.0" prefWidth="400.0" text="GESTIÓN DE CLIENTES" underline="true">
 
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <Label layoutX="25.0" layoutY="70.0" text="ID:" underline="true">
+                <Label layoutX="25.0" layoutY="70.0" text="INE CLIENTE:" underline="true">
                     <font>
                         <Font size="17.0" />
                     </font>
@@ -58,8 +58,8 @@
                 </VBox>
                 <TableView fx:id="tableCustomers" layoutX="26.0" layoutY="250.0" prefHeight="221.0" prefWidth="602.0">
                     <columns>
-                        <TableColumn fx:id="colId" prefWidth="120.0" text="ID" />
-                        <TableColumn fx:id="colDni" prefWidth="111.0" text="Usuario" />
+                        <TableColumn fx:id="colId" prefWidth="120.0" text="ID cliente" />
+                        <TableColumn fx:id="colDni" prefWidth="111.0" text="INE cliente" />
                         <TableColumn fx:id="colName" prefWidth="124.0" text="Nombre" />
                         <TableColumn fx:id="colAddress" prefWidth="124.0" text="Dirección" />
                         <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />

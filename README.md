@@ -163,16 +163,26 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 1. Uno de los errores más notables era al oprimir el botón de "Help" este no interactuaba y además cerraba el programa despues de un lapso de tiempo de estar congelado, por su parte una solución fue entender que el proyecto al ser construido en Windows, debía de existir una implementación para LINUX, la solución fue crear un nuevo proceso del OS el cual ejecuta un comando de linux "xdg-open", solucionando de una manera el problema y no afectando directamente al proyecto.
   
 <h1></h1>
-2. "Agregar error Carrito de compras".
+2.El segundo error se ecnontraba en el carrito de compras y también al momento de generar ventas, no permitía añadir productos al carrito para la generar venta(y una vez solucionado, tampoco dejaba generar venta),  el error en ambos casos era ocasionado por que se intentaba hacer un parseDouble a un String con un formato no valido para los doubles(utilizaba comas en vez de puntos), formato devuelto por el metodo format.String. La solución fue quitarlo y operar con todos los decimales, unicammente lo truncabamos a dos decimales para lo visual, y la verdadera causante se debe a la configuración de idioma del usuario, si lo tienes en español, el formatString retornaba xx,xx si lo tenías en otro idioma como inglés, retornaba el mismo metódo xx.xx (ya legible por el parceDouble)
 
 <h1></h1>
 3. Un tercer error solucionado era el problema de maximizar ventanas, este aunque estuviera de una manera para generarla de acuerdo al contenido, solo minizaba la pestaña al minimo y uno tenía que redimensionar, bueno, la solución fue implementar un nuevo método que aplique a las ventanas de la interfaz un aumento adecuado, se elimino el anterior y se empleo en su totalidad este último, además se implemento que el usuario no pueda extender o en si maximizar las ventanas para evitar desperfecciones o una interfaz descuadrada.
 
 <h1></h1>
-4. "Agregar error de titulo de una pestaña en otra".
+4. Hay un error visual con el título de ciertas pestañas que al regresar a la pestaña anterior este se mantiene. (por arreglar)
+
 
 
 <h1 align="left" id="title"> Propuestas de mejoras en funcionalidad para el proyecto</h1>
 <h1></h1>
+# Un Botón de busqueda
+    una función que facilitaría la busqueda de información, especificamente sobre los clientes y productos.  Esta funcionalidad optimizaría la experiencia del usuario al permitir la localización eficiente de registros dentro de grandes volúmenes, en este caso entre los clientes y los productos, aplicando filtros sobre los registros, 
+<h1></h1>
+# Seguridad para los Vendedores
+    En la administracón de vendedores resulta muy fácil eliminar/actualizar los vendedores, ya que no hay ninguna restricción para ello, esta viene siendo una función bastante peligrosa y muy malograda, ya que al borrar/actualizar al vendedor sin su consentimiento puedes perjudicarlo obviamente, sobre todo por que los reportes son individuales. Entonces se propondría que al momento de eliminarlo/actualizar al vendedor con la sesión activa se le pida permisos, como la constaseña del vendedor, ya que esta no debería ser (sí lo es) visible para otros, podría mejorarse pero complicaría mucho las cosas, por lo que por el momento con pedir la constraseña del usuario basta.
 
-# Un Botón FIltro
+<h1 align="left" id="title"> Propuestas implementadas</h1>
+<h2>Botón de búsqueda</h2> 
+    Para este se aplicó la clase FilteredList. Esta estructura actúa como una máscara dinámica sobre la lista observable original, para no tener que estar accediendo a la base de datos y usar consultas para filtrar elementos de esta constantemente. Con el FilteredList actuamos sobre la clase ObservableList, que esta sí es cargada con el contenido de la base de datos correspondiente. Con respecto a la POO, se aplicaron las lambdas que son útiles para tener un código limpio, compacto y para implementar polimorfismo por medio de interfaces funcionales (un solo método abstracto), además de implementar encapsulación con métodos y atributos en privado, para que otras clases no puedan acceder a estas funciones y malograr el funcionamiento.
+<h2>Seguridad para los Vendedores</h2> 
+    Para la seguridad de los vendedores se implementó una forma de validación usando directamente  el objeto en memoria this.seller, evitandonos la lógica de los campos de texto editables de la interfaz. Esta garantiza que las operaciones de eliminación y actualización se ejecuten unicamente sobre la entidad seleccionada en la tabla, y no por los valores que el usuario ponga en los TextField, evitando que cualquiera penetre la seguridad para el vendedor. Con respecto a la POO, se destacó el  Encapsulamiento y la separación entre la Vista y el Modelo, asegurando que la validación de las contraseña se realice comparando contra el estado inmutable del objeto encapsulado y no contra la entrada visual, protegiendo así la consistencia de la base de datos.

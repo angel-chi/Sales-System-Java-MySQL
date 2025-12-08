@@ -23,7 +23,7 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     void openSeller(ActionEvent actionEvent){
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openAutoSizeStage(SELLER_VIEW_FXML,"Seller");
+        openAutoSizeStage(SELLER_VIEW_FXML,"Vendedor");
         closeCurrentStage(sellerButton);
     }
 
@@ -34,25 +34,25 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void openCustomer(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openAutoSizeStage(CUSTOMER_VIEW_FXML, "Customer");
+        openAutoSizeStage(CUSTOMER_VIEW_FXML, "Cliente");
         closeCurrentStage(sellerButton);
     }
 
     public void openProduct(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openAutoSizeStage(PRODUCT_VIEW_FXML,"Products");
+        openAutoSizeStage(PRODUCT_VIEW_FXML,"Productos");
         closeCurrentStage(sellerButton);
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openAutoSizeStage(GENERATE_SALE_VIEW_FXML,"Shopping cart");
+        openAutoSizeStage(GENERATE_SALE_VIEW_FXML,"Carrito de compras");
         closeCurrentStage(sellerButton);
     }
 
     public void openSalesReport(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openAutoSizeStage(REPORT_VIEW_FXML,"Sales");
+        openAutoSizeStage(REPORT_VIEW_FXML,"Ventas");
         closeCurrentStage(sellerButton);
     }
 

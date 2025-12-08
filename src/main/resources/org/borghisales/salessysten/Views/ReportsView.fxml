@@ -27,13 +27,13 @@
                         <TableView fx:id="tableReport" prefHeight="550.0" prefWidth="715.0"
                                    AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="100.0">
                             <columns>
-                                <TableColumn fx:id="colIdSales" prefWidth="75.0" text="idSales" />
-                                <TableColumn fx:id="colIdCustomer" prefWidth="75.0" text="idCustomer" />
-                                <TableColumn fx:id="colIdSeller" prefWidth="75.0" text="idSeller" />
-                                <TableColumn fx:id="colNumberSales" prefWidth="75.0" text="numberSales" />
-                                <TableColumn fx:id="colSaleDate" prefWidth="75.0" text="saleDate" />
-                                <TableColumn fx:id="colAmount" prefWidth="75.0" text="amount" />
-                                <TableColumn fx:id="colState" prefWidth="75.0" text="state" />
+                                <TableColumn fx:id="colIdSales" prefWidth="75.0" text="ID ventas" />
+                                <TableColumn fx:id="colIdCustomer" prefWidth="75.0" text="ID cliente" />
+                                <TableColumn fx:id="colIdSeller" prefWidth="75.0" text="Usuario" />
+                                <TableColumn fx:id="colNumberSales" prefWidth="75.0" text="Numero de venta" />
+                                <TableColumn fx:id="colSaleDate" prefWidth="75.0" text="Fecha de venta" />
+                                <TableColumn fx:id="colAmount" prefWidth="75.0" text="Monto" />
+                                <TableColumn fx:id="colState" prefWidth="75.0" text="Estado" />
                             </columns>
                             <columnResizePolicy>
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

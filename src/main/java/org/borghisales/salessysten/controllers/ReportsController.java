@@ -30,8 +30,7 @@ import java.util.function.Predicate;
 
 public class ReportsController implements Initializable {
 
-    private static final String[] monthsShowed = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    private static int idxMonth = LocalDate.now().getMonth().getValue()-1;
+    private static final String[] monthsShowed = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};    private static int idxMonth = LocalDate.now().getMonth().getValue()-1;
     private static int yearsShowed = LocalDate.now().getYear();
 
 

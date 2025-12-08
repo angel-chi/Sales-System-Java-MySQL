@@ -15,7 +15,7 @@
             <Image url="@../../../../images/img_1.png" />
         </ImageView>
         <Separator layoutX="6.0" layoutY="135.0" prefHeight="16.0" prefWidth="790.0" />
-        <Label layoutX="234.0" layoutY="43.0" prefHeight="21.0" prefWidth="350.0" text="VENTA DE PRODUCTOS TECNOLOGICOS">
+        <Label layoutX="234.0" layoutY="43.0" prefHeight="21.0" prefWidth="350.0" text="VENTA DE PRODUCTOS TECNOLÓGICOS">
             <font>
                 <Font size="15.0" />
             </font>
@@ -29,7 +29,7 @@
         <TextField fx:id="serial" editable="false" layoutX="336.0" layoutY="101.0" prefHeight="16.0" prefWidth="150.0" />
 
 
-        <Label layoutX="21.0" layoutY="166.0" text="DNI CLIENTE:" wrapText="true" />
+        <Label layoutX="21.0" layoutY="166.0" text="INE CLIENTE:" wrapText="true" />
         <TextField fx:id="codCustomer" layoutX="125.0" layoutY="166.0" prefHeight="25.0" prefWidth="150.0" />
         <Button layoutX="250.0" layoutY="166.0" mnemonicParsing="false" onAction="#openCustomerManagement" prefHeight="25.0" prefWidth="160.0" text="GESTIONAR CLIENTE" />
         <TextField fx:id="customerName" editable="false" layoutX="496.0" layoutY="166.0" prefHeight="25.0" prefWidth="180.0" />
@@ -65,7 +65,7 @@
                 <TableColumn fx:id="colCod" prefWidth="112.0" sortable="false" style="-fx-alignment: CENTER;" text="CODIGO" />
                 <TableColumn fx:id="colProduct" prefWidth="170.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCTO" />
                 <TableColumn fx:id="colQuantity" prefWidth="110.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
-                <TableColumn fx:id="colPrice" prefWidth="134.0" style="-fx-alignment: CENTER;" text="PRECIO UNIDAD" />
+                <TableColumn fx:id="colPrice" prefWidth="134.0" style="-fx-alignment: CENTER;" text="PRECIO UNIT." />
                 <TableColumn fx:id="colTotal" prefWidth="129.0" style="-fx-alignment: CENTER;" text="TOTAL" />
             </columns>
         </TableView>

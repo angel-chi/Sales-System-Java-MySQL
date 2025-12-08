@@ -51,13 +51,13 @@
                 <TableView fx:id="tableProducts" layoutX="26.0" layoutY="250.0" prefHeight="221.0" prefWidth="602.0">
                     <columns>
                         <TableColumn fx:id="colId" prefWidth="120.0" text="ID" />
-                        <TableColumn fx:id="colName" prefWidth="111.0" text="Nombre" />
+                        <TableColumn fx:id="colName" prefWidth="111.0" text="Nombre Prod." />
                         <TableColumn fx:id="colPrice" prefWidth="124.0" text="Precio" />
                         <TableColumn fx:id="colStock" prefWidth="124.0" text="Existencias" />
                         <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />
                     </columns>
                 </TableView>
-                <Label alignment="CENTER" layoutX="120.0" layoutY="10.0" prefHeight="30.0" prefWidth="400.0" text="ADMINISTRACIÓN DE PRODUCTOS" underline="true">
+                <Label alignment="CENTER" layoutX="120.0" layoutY="10.0" prefHeight="30.0" prefWidth="400.0" text="GESTIÓN DE PRODUCTOS" underline="true">
                     <font>
                         <Font size="20.0" />
                     </font>
