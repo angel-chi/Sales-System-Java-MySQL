@@ -92,6 +92,11 @@ public class ReportsController implements Initializable {
         x_time.setLabel("Días del Mes");
         y_amountSales.setLabel("Monto de Ventas");
 
+        int daysInMonth = Month.of(idxMonth + 1).length(Year.isLeap(yearsShowed));
+        List<String> days = new ArrayList<>();
+        for (int i = 1; i <= daysInMonth; i++) days.add(String.valueOf(i));
+        x_time.setCategories(FXCollections.observableArrayList(days));
+
         year.setText(String.valueOf(yearsShowed));
         month.setText(monthsShowed[idxMonth]);
 
@@ -102,10 +107,64 @@ public class ReportsController implements Initializable {
         }
 
         fillMissingDays(lineChartData);
+
         salesLineChart.getData().clear();
         salesLineChart.getData().add(lineChartData);
     }
 
+    private void updateLineChart() {
+        int daysInMonth = Month.of(idxMonth + 1).length(Year.isLeap(yearsShowed));
+        List<String> days = new ArrayList<>();
+        for (int i = 1; i <= daysInMonth; i++) days.add(String.valueOf(i));
+        x_time.setCategories(FXCollections.observableArrayList(days));
+
+        if (lineChartData == null) lineChartData = new XYChart.Series<>();
+
+        lineChartData.getData().clear();
+
+        XYChart.Series<String, Integer> cached = getCachedSeries(yearsShowed, idxMonth + 1);
+        if (cached != null) {
+            lineChartData.getData().addAll(cached.getData());
+        } else {
+            salesDAO.setLineChart(lineChartData, yearsShowed, idxMonth + 1);
+            addCacheSeries(yearsShowed, idxMonth + 1, lineChartData);
+        }
+
+        fillMissingDays(lineChartData);
+        salesLineChart.getData().clear();
+        salesLineChart.getData().add(lineChartData);
+    }
+
+    private XYChart.Series<String, Integer> getCachedSeries(int year, int month) {
+        if (cacheReportLineChart.containsKey(year)) {
+            return cacheReportLineChart.get(year).get(month);
+        }
+        return null;
+    }
+
+    private void addCacheSeries(int year, int month, XYChart.Series<String, Integer> series) {
+        cacheReportLineChart.putIfAbsent(year, new HashMap<>());
+        XYChart.Series<String, Integer> copy = new XYChart.Series<>();
+        copy.getData().addAll(series.getData());
+        copy.setName(monthsShowed[month - 1]);
+        cacheReportLineChart.get(year).put(month, copy);
+    }
+
+    public void fillMissingDays(XYChart.Series<String, Integer> series) {
+        Map<Integer, Integer> salesByDay = new HashMap<>();
+        for (XYChart.Data<String, Integer> d : series.getData()) {
+            salesByDay.put(Integer.parseInt(d.getXValue()), d.getYValue());
+        }
+
+        int daysInMonth = Month.of(idxMonth + 1).length(Year.isLeap(yearsShowed));
+        for (int i = 1; i <= daysInMonth; i++) {
+            if (!salesByDay.containsKey(i)) {
+                series.getData().add(new XYChart.Data<>(String.valueOf(i), 0));
+            }
+        }
+
+        series.getData().sort(Comparator.comparingInt(d -> Integer.parseInt(d.getXValue())));
+    }
     private void setupPieChart() {
         if (pieChartData == null) {
             pieChartData = FXCollections.observableArrayList();
@@ -120,7 +179,6 @@ public class ReportsController implements Initializable {
         pieChartProducts.getData().clear();
         pieChartProducts.getData().addAll(pieChartData);
     }
-
     private void setupTableView() {
         colIdSales.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSales()).asObject());
         colIdCustomer.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idCustomer()).asObject());
@@ -137,7 +195,6 @@ public class ReportsController implements Initializable {
 
         tableReport.setItems(sales);
     }
-
     private void setupEventHandlers() {
         tableReport.setOnMouseClicked(mouseEvent -> {
             if (!tableReport.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
@@ -253,7 +310,7 @@ public class ReportsController implements Initializable {
                 yearData.remove(month);
             }
         }
-        lineChartData = null; // Por si se desea resetear de manera global es útil
+        lineChartData = null;
     }
 
     public static void setSales(ObservableList<Sales> sales) {
@@ -277,7 +334,6 @@ public class ReportsController implements Initializable {
     }
 
     // --- Navegación de meses y años ---
-
     public void sumYear(ActionEvent actionEvent) { changeYear(1); }
     public void subtractYear(ActionEvent actionEvent) { changeYear(-1); }
     public void sumMonth(ActionEvent actionEvent) { changeMonth(1); }
@@ -295,52 +351,5 @@ public class ReportsController implements Initializable {
         if (idxMonth > 11) idxMonth = 11;
         updateLineChart();
         month.setText(monthsShowed[idxMonth]);
-    }
-
-    private void updateLineChart() {
-        lineChartData.getData().clear();
-
-        XYChart.Series<String, Integer> cached = getCachedSeries(yearsShowed, idxMonth + 1);
-        if (cached != null) {
-            lineChartData.getData().addAll(cached.getData());
-        } else {
-            salesDAO.setLineChart(lineChartData, yearsShowed, idxMonth + 1);
-            addCacheSeries(yearsShowed, idxMonth + 1, lineChartData);
-        }
-
-        fillMissingDays(lineChartData);
-        salesLineChart.getData().clear();
-        salesLineChart.getData().add(lineChartData);
-    }
-
-    private XYChart.Series<String, Integer> getCachedSeries(int year, int month) {
-        if (cacheReportLineChart.containsKey(year)) {
-            return cacheReportLineChart.get(year).get(month);
-        }
-        return null;
-    }
-
-    private void addCacheSeries(int year, int month, XYChart.Series<String, Integer> series) {
-        cacheReportLineChart.putIfAbsent(year, new HashMap<>());
-        XYChart.Series<String, Integer> copy = new XYChart.Series<>();
-        copy.getData().addAll(series.getData());
-        copy.setName(monthsShowed[month - 1]);
-        cacheReportLineChart.get(year).put(month, copy);
-    }
-
-    public void fillMissingDays(XYChart.Series<String, Integer> series) {
-        Map<Integer, Integer> salesByDay = new HashMap<>();
-        for (XYChart.Data<String, Integer> d : series.getData()) {
-            salesByDay.put(Integer.parseInt(d.getXValue()), d.getYValue());
-        }
-
-        int daysInMonth = Month.of(idxMonth + 1).length(Year.isLeap(yearsShowed));
-        for (int i = 1; i <= daysInMonth; i++) {
-            if (!salesByDay.containsKey(i)) {
-                series.getData().add(new XYChart.Data<>(String.valueOf(i), 0));
-            }
-        }
-
-        series.getData().sort(Comparator.comparingInt(d -> Integer.parseInt(d.getXValue())));
     }
 }

@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="SEGUNDA ACTUALIZACIÓN DE CORRECIONES. Se corrigió un error el cual al cambiar de pestaña se mantenía el nombre de la clase hija, actualmente solo eran dependientes el Main y Management, pero ya se corrigió. Se corrigió detalle de que al dar doble clic a una venta de reports no se mostraba detalles y además estaba pequeña la ventana, traducción de detallitos y ya se ve bien.">
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="TERCERA Y ULTIMA ACTUALIZACIÓN, SE IMPLEMENTO UN MECANISMO ABARCANDO EL ANTERIOR REALIZADO PARA PODER ELIMINAR UNA VENTA YA REALIZADA. TODO ESTO DESDE LA PESTAÑA DE REPORTS, SE MODIFICO UN POCO SalesDAO, se agrego un boton y el poder cancelar en ReportsController y nada más.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ReportsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ReportsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +158,7 @@
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
       <workItem from="1764975469052" duration="669000" />
-      <workItem from="1765165555757" duration="7793000" />
+      <workItem from="1765165555757" duration="8517000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
@@ -482,7 +480,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765170024780</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="TERCERA Y ULTIMA ACTUALIZACIÓN, SE IMPLEMENTO UN MECANISMO ABARCANDO EL ANTERIOR REALIZADO PARA PODER ELIMINAR UNA VENTA YA REALIZADA. TODO ESTO DESDE LA PESTAÑA DE REPORTS, SE MODIFICO UN POCO SalesDAO, se agrego un boton y el poder cancelar en ReportsController y nada más.">
+      <option name="closed" value="true" />
+      <created>1765173468419</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1765173468419</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -500,7 +506,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fea: add show table" />
     <MESSAGE value="fea: add DAO products" />
     <MESSAGE value="fea: add FML CustomerView.fxml" />
     <MESSAGE value="fea: add CRUD Customers" />
@@ -525,6 +530,7 @@
     <MESSAGE value="refactor: delete comments" />
     <MESSAGE value="pruebaINTELIJ, no cambia nada" />
     <MESSAGE value="SEGUNDA ACTUALIZACIÓN DE CORRECIONES. Se corrigió un error el cual al cambiar de pestaña se mantenía el nombre de la clase hija, actualmente solo eran dependientes el Main y Management, pero ya se corrigió. Se corrigió detalle de que al dar doble clic a una venta de reports no se mostraba detalles y además estaba pequeña la ventana, traducción de detallitos y ya se ve bien." />
-    <option name="LAST_COMMIT_MESSAGE" value="SEGUNDA ACTUALIZACIÓN DE CORRECIONES. Se corrigió un error el cual al cambiar de pestaña se mantenía el nombre de la clase hija, actualmente solo eran dependientes el Main y Management, pero ya se corrigió. Se corrigió detalle de que al dar doble clic a una venta de reports no se mostraba detalles y además estaba pequeña la ventana, traducción de detallitos y ya se ve bien." />
+    <MESSAGE value="TERCERA Y ULTIMA ACTUALIZACIÓN, SE IMPLEMENTO UN MECANISMO ABARCANDO EL ANTERIOR REALIZADO PARA PODER ELIMINAR UNA VENTA YA REALIZADA. TODO ESTO DESDE LA PESTAÑA DE REPORTS, SE MODIFICO UN POCO SalesDAO, se agrego un boton y el poder cancelar en ReportsController y nada más." />
+    <option name="LAST_COMMIT_MESSAGE" value="TERCERA Y ULTIMA ACTUALIZACIÓN, SE IMPLEMENTO UN MECANISMO ABARCANDO EL ANTERIOR REALIZADO PARA PODER ELIMINAR UNA VENTA YA REALIZADA. TODO ESTO DESDE LA PESTAÑA DE REPORTS, SE MODIFICO UN POCO SalesDAO, se agrego un boton y el poder cancelar en ReportsController y nada más." />
   </component>
 </project>

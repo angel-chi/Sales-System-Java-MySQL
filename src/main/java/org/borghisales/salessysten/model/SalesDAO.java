@@ -113,10 +113,14 @@ public class SalesDAO {
     }
 
     public void setLineChart(XYChart.Series<String,Integer> series, int year, int month) {
-        // Limpias la serie y agregas datos directamente
         series.getData().clear();
         try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement("SELECT day(saleDate) as saleDate, count(saleDate) as salesPerDay FROM sales WHERE idSeller=? and year(saleDate) = ? and month(saleDate)=? GROUP BY saleDate")) {
+             PreparedStatement pstmt = conn.prepareStatement(
+                     "SELECT day(saleDate) as saleDate, count(saleDate) as salesPerDay " +
+                             "FROM sales " +
+                             "WHERE idSeller=? and year(saleDate) = ? and month(saleDate)=? " +
+                             "GROUP BY saleDate"
+             )) {
 
             pstmt.setInt(1, MainController.sellerLog.idSeller());
             pstmt.setInt(2, year);
@@ -124,14 +128,21 @@ public class SalesDAO {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    XYChart.Data<String,Integer> data = new XYChart.Data<>(String.valueOf(rs.getInt("saleDate")),rs.getInt("salesPerDay"));
+                    XYChart.Data<String,Integer> data = new XYChart.Data<>(
+                            String.valueOf(rs.getInt("saleDate")),
+                            rs.getInt("salesPerDay")
+                    );
                     series.getData().add(data);
                 }
             }
+
+            System.out.println("LineChart datos para " + month + "/" + year + ": " + series.getData().size());
+
         } catch(SQLException e) {
             MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar ventas : " + e.getMessage());
         }
     }
+
 
     public void setTableDetails(ObservableList<ShoppingCart> productsDetails, int idSale) {
         String sql = """ 
