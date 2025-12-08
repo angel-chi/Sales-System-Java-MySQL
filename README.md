@@ -208,3 +208,6 @@ Dentro del nuevo diseño de la interfaz dentro de las ventanas de esta se añadi
 ## ⿻ Diagrama UML
 //Insertar diagrama
 
+## 🎥 Vìdeo
+//Insertar link
+
