@@ -52,12 +52,15 @@ public class MenuController {
         }
     }
 //Se cambió esto para la salida de la ventana help
+    //Se volvió a modificar para la salida desde la ventana de Gestión
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
                 String parentFxml = getFxmlFather(fxmlFileName);
                 if (parentFxml != null) {
-                    openNewStage(parentFxml, "Gestión");
+                    // Determinar el título correcto según la ventana padre
+                    String parentTitle = parentFxml.equals(MAIN_VIEW_FXML) ? "Inicio de Sesión" : "Gestión";
+                    openNewStage(parentFxml, parentTitle);
                 }
             });
         }
