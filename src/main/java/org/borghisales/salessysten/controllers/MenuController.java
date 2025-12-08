@@ -50,7 +50,7 @@ public class MenuController {
             switch (fxmlFileName) {
                 case MAIN_VIEW_FXML:
                     width = 1200;
-                    height = 900;
+                    height = 800;
                     minWidth = 900;
                     minHeight = 500;
                     break;
@@ -85,14 +85,14 @@ public class MenuController {
                     minHeight = 600;
                     break;
                 case REPORT_VIEW_FXML:
-                    width = 1400;
-                    height = 800;
-                    minWidth = 1100;
-                    minHeight = 650;
+                    width = 2000;
+                    height = 1800;
+                    minWidth = 1500;
+                    minHeight = 1000;
                     break;
                 case SALE_DETAIL_VIEW_FXML:
-                    width = 900;
-                    height = 600;
+                    width = 1200;
+                    height = 1000;
                     minWidth = 700;
                     minHeight = 500;
                     break;
