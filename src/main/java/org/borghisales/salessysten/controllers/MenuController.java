@@ -49,29 +49,41 @@ public class MenuController {
             Scene scene;
             Stage stage = new Stage();
 
+            //En el switch se espécifica el tamaño y título de la ventana para que se creen de manera correcta //CORRECCIÓN ERROR
             switch (fxmlFileName) {
                 case MAIN_VIEW_FXML -> {
                     scene = new Scene(root, 420, 400);
+                    stage.setTitle("Registro");
                     stage.setResizable(false);
                 }
                 case MANAGEMENT_VIEW_FXML -> {
                     scene = new Scene(root, 315, 450);
+                    stage.setTitle("Administrar");
                     stage.setResizable(false);
                 }
                 case CUSTOMER_VIEW_FXML -> {
-                    scene = new Scene(root, 665, 510);
+                    scene = new Scene(root, 780, 510);
+                    stage.setTitle("Cliente");
                     stage.setResizable(false);
                 }
-                case PRODUCT_VIEW_FXML, SELLER_VIEW_FXML -> {
+                case PRODUCT_VIEW_FXML -> {
+                    scene = new Scene(root, 780, 520);
+                    stage.setTitle("Productos");
+                    stage.setResizable(false);
+                }
+                case SELLER_VIEW_FXML ->{
                     scene = new Scene(root, 650, 500);
+                    stage.setTitle("Vendedor");
                     stage.setResizable(false);
                 }
                 case REPORT_VIEW_FXML -> {
                     scene = new Scene(root, 1291, 633);
+                    stage.setTitle("Reportes");
                     stage.setResizable(false);
                 }
                 case GENERATE_SALE_VIEW_FXML -> {
                     scene = new Scene(root, 590, 600);
+                    stage.setTitle("Generar venta");
                     stage.setResizable(false);
                 }
                 default -> {
@@ -80,7 +92,6 @@ public class MenuController {
                 }
             }
 
-            stage.setTitle(title);
             stage.setScene(scene);
             configureStageCloseEvent(stage, fxmlFileName, title); //Configura que pasa cuando esta ventana se ciera
                                                                     // a donde va?
