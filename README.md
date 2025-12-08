@@ -154,3 +154,14 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
 [⬆ Volver al inicio](#title)<br>
+
+
+# APORTACIONES EQUIPO 5
+
+# ⚙️ Errores Encontrados
+### Error en HELP 
+# 🗂 Implementacion de Mejoras
+
+# ⿻ Diagrama UML
+//Insertar diagrama
+
