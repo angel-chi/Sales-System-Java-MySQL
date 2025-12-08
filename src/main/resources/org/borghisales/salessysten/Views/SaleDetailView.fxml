@@ -2,20 +2,28 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="534.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SaleDetailController">
+<AnchorPane prefHeight="534.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SaleDetailController">
    <children>
-      <TableView fx:id="tableSale" prefHeight="496.0" prefWidth="799.0">
+      <TableView fx:id="tableSale" prefHeight="424.0" prefWidth="799.0">
          <columns>
-            <TableColumn fx:id="colNro" prefWidth="70.0" sortable="false" style="-fx-alignment: CENTER;" text="NR" />
-            <TableColumn fx:id="colCod" prefWidth="73.0" sortable="false" style="-fx-alignment: CENTER;" text="COD" />
-            <TableColumn fx:id="colProduct" prefWidth="356.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCT" />
-            <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="103.0" style="-fx-alignment: CENTER;" text="QUANTITY" />
-            <TableColumn fx:id="colPrice" prefWidth="102.0" style="-fx-alignment: CENTER;" text="PRICE UNIT" />
+            <TableColumn fx:id="colNro" prefWidth="70.0" sortable="false" style="-fx-alignment: CENTER;" text="N°" />
+            <TableColumn fx:id="colCod" prefWidth="73.0" sortable="false" style="-fx-alignment: CENTER;" text="CODIGO" />
+            <TableColumn fx:id="colProduct" prefWidth="308.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCTO" />
+            <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="120.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
+            <TableColumn fx:id="colPrice" prefWidth="133.0" style="-fx-alignment: CENTER;" text="PRECIO UNITARIO" />
             <TableColumn fx:id="colTotal" prefWidth="94.0" style="-fx-alignment: CENTER;" text="TOTAL" />
          </columns>
       </TableView>
-      <TextField fx:id="totalSale" editable="false" layoutX="693.0" layoutY="501.0" prefHeight="25.0" prefWidth="91.0" />
-      <Label layoutX="619.0" layoutY="504.0" text="TOTAL SALE:" wrapText="true" />
+      <TextField fx:id="totalSale" editable="false" layoutX="694.0" layoutY="502.0" prefHeight="25.0" prefWidth="91.0" />
+      <Label layoutX="586.0" layoutY="506.0" text="VENTA TOTAL:" wrapText="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Button fx:id="desactivar" layoutX="30.0" layoutY="468.0" mnemonicParsing="false" onAction="#finalizar" text="FINALIZADA" />
+      <Label layoutX="113.0" layoutY="439.0" text="Desactivar venta como:" />
+      <Button fx:id="desactivar" layoutX="138.0" layoutY="468.0" mnemonicParsing="false" onAction="#cancelar" text="CANCELADA" />
+      <Button fx:id="desactivar" layoutX="244.0" layoutY="468.0" mnemonicParsing="false" onAction="#devolver" text="DEVUELTA" />
    </children>
 </AnchorPane>

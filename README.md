@@ -1,156 +1,301 @@
-<h1 align="center" id="title"> Sistema de ventas en Java FX</h1>
-<h6 align="center"> Aplicación de Gestión de Ventas con Java 17, JavaFX, MySQL y Patrones de Diseño MVC y DAO </h6>
+<h1 align="center" id="title">Sistema de ventas EQUIPO 11</h1>
+<h6 align="center"> Propuesta de cambios constructivos para el sistema de ventas en JavaFX de Borghi. </h6>
 <h1></h1>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-
 <p align="center">
-  <img src="src/main/resources/images/shopping cart.png" />
+  <img src="src/main/resources/images/generate_sale_nuevo.png"  alt=""/>
 </p>
 
 <!-- TOC -->
-* [📑 Descripcion](#-descripcion)
-* [💻 Entorno](#-entorno)
-* [🚀 Instalacion](#-instalacion)
-    * [Instalacion del JDK 17](#instalación-del-jdk-17)
-    * [Configuracion de la Base de Datos](#configuración-de-la-base-de-datos)
-    * [Ejecucion del Proyecto](#ejecución-del-proyecto)
-    * [Modificacion de las Vistas con Scene Builder](#modificación-de-las-vistas-con-scene-builder)
-* [🧬 Estructura Basica](#-estructura-basica)
-* [🗄️ Diagrama de Base de Datos](#-diagrama-de-base-de-datos)
-* [💡 Fucionalidades](#-fucionalidades)
-    * [Inicio de Sesion](#inicio-de-sesión)
-    * [Pantalla Principal](#pantalla-principal)
-        * [Sales](#sales)
-        * [Management](#management)
-        * [Reports](#reports)
-* [📧 Contacto](#-contacto)
-* [📝 Licencia](#-licencia)
+* [Antecedentes](#antecedentes)
+* [Video presentación AQUÍ](#video-presentación-aquí)
+* [Objetivo](#objetivo)
+* [Mejoras visuales](#mejoras-visuales)
+* [Errores corregidos](#errores-corregidos)
+  * [Navegador web](#navegador-web)
+  * [Formato de precios](#formato-de-precios)
+  * [Nombre de pestañas](#nombre-de-pestañas)
+  * [Precio/inventario negativos](#precioinventario-negativos-)
+* [Diagrama UML](#diagrama-uml)
+* [Propuestas de mejora](#propuestas-de-mejora)
+  * [Correo electronico y telefono de clientes](#correo-electronico-y-telefono-de-clientes)
+  * [Descuentos en los productos](#descuentos-en-los-productos)
+  * [Garantía en los productos](#garantía-en-los-productos)
+  * [Desactivar ventas](#desactivar-ventas-)
+* [Implementación](#implementación)
+  * [Sistema Automático de Descuentos](#sistema-automático-de-descuentos)
+  * [Metodos para desactivar ventas](#metodos-para-desactivar-ventas)
+* [Conclusión](#conclusión)
 <!-- TOC -->
 
-# 📑 Descripcion
-Este proyecto es una herramienta que diseñé para mejorar mis habilidades con el lenguaje Java, centrándome en la gestión de ventas para vendedores. Utiliza los patrones de diseño MVC (Modelo-Vista-Controlador) y DAO (Data Access Object) para una arquitectura robusta y modular.
+# Antecedentes
+Este fue un ejercicio completado por estudiantes del lenguaje Java para poner en práctica los conocimientos aprendidos sobre el paradigma orientado a objetos.
+Se hace uso de un software de codigo abierto bajo los derechos de uso del mismo. 
 
-Con esta aplicación, puedes iniciar sesión como vendedor, administrar tus productos y clientes, así como realizar ventas de manera sencilla. Además, cuenta con una sección de reportes donde puedes ver detalles de tus ventas, filtrarlas y generar informes personalizados.
+# [Video presentación AQUÍ](https://drive.google.com/file/d/1UNmw1EoOijAyDTNc1JEZeRM6BOoEbT9c/view?usp=sharing)
 
-Todos los datos se almacenan de forma segura en una base de datos MySQL, utilizando el patrón DAO para separar la lógica de acceso a datos de la lógica de negocio. Esto garantiza un código más limpio, mantenible y escalable.
+# Objetivo
+Se hace una crítica constructiva al producto de Tomás Borghi bajo los conceptos de la programación orientada a objetos, se ofrecen mejoras a la interfaz visual y se proponen 4 nuevas funciones, implementando dos de ellas en este repositorio.
+Un punto interesante es que este programa está hecho para Windows, pero nosotros estuvimos desarrollandolo en 2 Sistemas más: Linux y Mac para seguir la adaptabilidad de este software en distintos entornos, y comprobar la eficiencia de Java sobre otros leguajes de programación.
 
-Además, hay una sección de estadísticas que te muestra cuántas ventas has realizado de cada producto y cómo han variado a lo largo del tiempo, utilizando el patrón MVC para separar la lógica de presentación de la lógica de negocio y la manipulación de datos.
-
-# 💻 Entorno
-
-Este proyecto requiere las siguientes herramientas y versiones:
-
-* SO: Windows <br>
-* Java: 17<br>
-* Maven: 3.8.5<br>
-* MySQL: 8.0.33<br>
-* JavaFX: 21
-
-
-# 🚀 Instalacion
-Para utilizar este proyecto, simplemente clona el repositorio en tu máquina local y sigue estos pasos:
-
-## Instalación del JDK 17
-Para ejecutar este proyecto, necesitarás tener instalado el JDK 17. Sigue estos pasos para instalarlo:
-
-1. Descarga del JDK 17: Visita la página de descargas de Oracle JDK en https://www.oracle.com/java/technologies/javase-jdk17-downloads.html.
-2. Selecciona tu sistema operativo: Descarga la versión adecuada del JDK 17 para tu sistema operativo. Asegúrate de seleccionar la versión correcta para Windows.
-3. Instalación: Una vez descargado el archivo de instalación, sigue las instrucciones proporcionadas por Oracle para instalar el JDK 17 en tu sistema.
-4. Configuración de las Variables de Entorno (Opcional): Después de instalar el JDK 17, puedes configurar las variables de entorno JAVA_HOME y PATH en tu sistema para que apunten al directorio de instalación del JDK. Esto facilitará el uso del JDK desde la línea de comandos.
-
-## Configuración de la Base de Datos
-Antes de ejecutar el proyecto, asegúrate de configurar la base de datos:
-
-1. Instala MySQL: Si aún no tienes MySQL instalado, descárgalo e instálalo desde https://dev.mysql.com/downloads/mysql/.
-2. Crea la Base de Datos: Utiliza el script proporcionado llamado salesystem.sql para importar la base de datos y las tablas necesarias.
-3. Configura la Conexión: Para configurar la conexión a la base de datos, sigue estos pasos:
-   * Crea un archivo llamado config.properties en la ruta src/main/java/org/borghisales/salessystem/model/.
-   * Define las propiedades de configuración para la conexión a la base de datos en el archivo config.properties. 
-   * Las propiedades necesarias son db.url, db.user y db.password. Por ejemplo:
-   <pre>
-   db.url=jdbc:mysql://localhost:3306/salesystem
-   db.user=usuario
-   db.password=contraseña
-   </pre>
-   
-   Asegúrate de reemplazar nombre_basedatos, usuario y contraseña con los valores correspondientes de tu entorno de desarrollo.
-## Ejecución del Proyecto
-Una vez que hayas configurado la base de datos, puedes ejecutar el proyecto siguiendo estos pasos:
-
-1. Clona el Proyecto: Clona este repositorio en tu máquina local utilizando Git o descargando el archivo ZIP.
-2. Importa el Proyecto: Importa el proyecto en tu IDE preferido (como IntelliJ, Eclipse, etc.) como un proyecto Maven existente.
-3. Verifica las Dependencias: Antes de compilar y ejecutar el proyecto, asegúrate de que todas las dependencias estén resueltas correctamente. Esto se puede hacer actualizando Maven o ejecutando el comando mvn clean install desde la línea de comandos en el directorio del proyecto. Esto garantizará que todas las dependencias se descarguen y configuren correctamente.
-4. Compila y Ejecuta: Compila y ejecuta el proyecto desde tu IDE. Asegúrate de ejecutar la clase principal adecuada (si es necesario) para iniciar la aplicación.
-
-## Modificación de las Vistas con Scene Builder
-Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder, una herramienta gráfica para diseñar interfaces de usuario JavaFX. Para instalar Scene Builder, sigue estos pasos:
-
-1. Descarga Scene Builder: Puedes descargar Scene Builder desde el sitio web oficial de Gluon https://gluonhq.com/products/scene-builder/.
-2. Instalación: Una vez descargado, sigue las instrucciones de instalación para tu sistema operativo.
-
-# 🧬 Estructura Basica
-<pre>
-+ java
-  |-- controllers // controladores de la aplicacion
-  |-- model	// modelos de datos de la aplicación
-  --Main.java // donde se inicia la ejecución del programa      
-+ Resources
-  |-- images // imágenes utilizadas en la aplicación
-  |-- views // vistas de la aplicación fxml
-  |-- reports // informes generados por la aplicación
-</pre>
-
-# 🗄️ Diagrama de Base de Datos
-<p align="center">
-  <img src="src/main/resources/images/diagramaBD.png" />
-</p>
-
-
-# 💡 Fucionalidades
-
-## Inicio de sesión
-Para iniciar sesión, se requiere el DNI y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el DNI se asocia con 'dni' y la contraseña con 'user'.
+# Mejoras visuales
+El cambio más significativo fue traducir los mensajes de la interfaz al español, algunas palabras fueron traducidas implicitamente, cambiandolas por un sinonimo que ayude al usuario a entender mejor las funciones.
+Las palabras en español son más largas que en inglés, lo cual tuvo un efecto en los elementos visuales. Fueron acomodados y reorganizados en su mayoría.
 
 <p align="center">
-  <img src="src/main/resources/images/login.png" />
+  <img src="src/main/resources/images/traduccion.png"  alt=""/>
 </p>
 
-## Pantalla principal
-La pantalla principal muestra las siguientes ventanas
-* Menu: incluyen la posibilidad de salir o visitar la documentación
+# Errores corregidos
+Mientras se exploraba el programa se rastrearon 3 errores del codigo de los cuales nos hicimos a cargo de resolver. Se procede a su especificación.
+
+## Navegador web
+**- Sistema operativo: Linux Ubuntu.**
+Existe una función predeterminada para consultar ayuda e información sobre el programa, el cual es un botón para navegar en el repositorio original de Borghi. Sin embargo, hace uso de los metodos de la clase Desktop, la cual está documentada oficialmente a fallar en este sistema. Como resultado: el programa se detiene y arroja un error de ejecución.
+```
+  public void help(ActionEvent actionEvent) {
+        try {
+            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            setAlert(Alert.AlertType.ERROR,"The URL could not be opened. Check your internet connection.");
+        }
+
+    }
+```
+**Solucion:** Se decidió no usar esta clase para navegar y entonces usar un objeto ProcessBuilder para consultar la URL desde la terminal de cada computadora, este metodo está garantizado a ejecutarse siempre y cuando haya un navegador configurado en cada computadora.
+```
+    public void help(ActionEvent actionEvent) {
+        try {
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            new ProcessBuilder("rundll32", "url.dll,FileProtocolHandler", "https://github.com/Borghii/Sales-System").start();
+        } else if (os.contains("mac")) {
+            new ProcessBuilder("open", "https://github.com/Borghii/Sales-System").start();
+        } else {
+            new ProcessBuilder("xdg-open", "https://github.com/Borghii/Sales-System").start();
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        setAlert(Alert.AlertType.ERROR, "No fue posible abrir la URL. Por favor, verifica tu conexión a internet.");
+    }
+   }
+```
+## Formato de precios
+
+Los precios de los productos se guardan en la interfaz como atributos tipo TextField, y se tienen que pasar a datos primitivos para realizar operaciones con estos. La conversión de TextField a double es exitosa y este valor es reducido a dos decimales, sin embargo, en esta operación el punto separador entre enteros y decimales es cambiado por una coma, y al momento de querer convertir esto a un double el programa tira "NumberFormatException".
+```
+Double.parseDouble((total.getText())); // -> Anteriormente se ha regresado un valor a la interfaz que ya tiene una coma.
+```
+**Solucion:** Se decidió solamente cambiar manualmente la coma por el punto otra vez.
+```
+Double.parseDouble((total.getText()).replace(',','.'));
+```
+
+## Nombre de pestañas
+El nombre de la pestaña del menu de administración se pierde y es reemplazado por el de las pestañas que se cerraron anteriormente.
+
 <p align="center">
-  <img src="src/main/resources/images/menu.png" />
+  <img src="src/main/resources/images/error_nombre_ventanas.png"  alt=""/>
 </p>
 
-* Sales: Permite generar nuevas ventas.
+Esto solo es un detalle visual y pudo ser ignorado; sin embargo, aprovechamos a cambiar la usabilidad del software. Anteriormente, para cerrar el programa se debía cerrar todas las pestañas hasta llegar al inicio y entonces esa era la unica que podía terminar el programa.
+
+**Solucion:** Se agrega una opción en todas las vistas para regresar al menú de administración, lo que garantíza que su nombre se actualize, entonces ahora cada pestaña termina el programa al cerrarse, manteniendo la lógica para el usuario.
+
+## Precio/inventario negativos 
+Se detectó que el sistema permitía ingresar precio negativo e inventario negativo al crear o actualizar productos. Esto generaba datos inválidos dentro del sistema y afectaba los cálculos de ventas y descuentos.
+```
+Double.parseDouble(price.getText());
+Integer.parseInt(stock.getText());
+```
+El valor se convertía directamente sin validar si era negativo o incluso válido.
+
+**Solucion:** Se implementó una validación previa para asegurar que el precio y el inventario nunca sean negativos:
+```
+private boolean validateInventoryPrice() {
+    String priceText = price.getText().trim();
+    String stockText = stock.getText().trim();
+
+    if (priceText.isEmpty() || stockText.isEmpty()) {
+        MenuController.setAlert(Alert.AlertType.ERROR,
+            "Precio e inventario son obligatorios.");
+        return false;
+    }
+
+    double parsedPrice;
+    int parsedStock;
+
+    try {
+        parsedPrice = Double.parseDouble(priceText);
+    } catch (NumberFormatException e) {
+        MenuController.setAlert(Alert.AlertType.ERROR,
+            "El precio debe ser un número válido.");
+        return false;
+    }
+
+    try {
+        parsedStock = Integer.parseInt(stockText);
+    } catch (NumberFormatException e) {
+        MenuController.setAlert(Alert.AlertType.ERROR,
+            "El inventario debe ser un número entero.");
+        return false;
+    }
+
+    if (parsedPrice < 0) {
+        MenuController.setAlert(Alert.AlertType.ERROR,
+            "El precio no puede ser negativo.");
+        return false;
+    }
+
+    if (parsedStock < 0) {
+        MenuController.setAlert(Alert.AlertType.ERROR,
+            "El inventario no puede ser negativo.");
+        return false;
+    }
+
+    return true;
+}
+```
+Este metodo fue integrado en:
+```
+if (!validateInventoryPrice()) {
+    return;
+}
+```
+# Diagrama UML
+Tras haber analizado la estructura del codigo, creemos que esta es una representación universal del modelo del software:
+
 <p align="center">
-  <img src="src/main/resources/images/sales.png" />
+  <img src="src/main/resources/images/UML%20Ricardo-Roberto.drawio.png" alt=""/>
 </p>
 
-* Management: Ofrece operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para clientes, productos y vendedores.
+# Propuestas de mejora
+A continuación se presentan las cuatro propuestas de modificación al software, las cuales tienen el objetivo de mejorar la experiencia del usuario, así como recomendar mejoras a la estructura de codigo de Borghi.
+
+## Correo electronico y telefono de clientes
+Atributos nuevos de la clase Customer, esto permitiría la comunicación con el cliente de ser necesaria y el programa entonces podría enviar el recibo de compra al correo electronico.
+
+## Descuentos en los productos
+Una interfaz con la firma de algún metodo de descuento, y todos objetos Product deberían tener su propio tipo de descuento que se vea reflejado al momento de crear objetos tipo ShoppingCart.
+
+## Garantía en los productos
+Atributo nuevo de la clase Product, que marcaría ya sea una fecha o una cantidad de días en las que el Producto puede ser devuelto.
+
+## Desactivar ventas 
+En el programa el atributo "estado" de las ventas no tiene utilidad, se agregarían nuevos enums para este atributo y entonces agregar metodos para cambiar el estado de una venta.
+
+# Implementación
+
+Dos propuestas de las ya enlistadas se encuentran disponibles en este repositorio.
+
+## Sistema Automático de Descuentos
+Se añadió un sistema que permite configurar descuentos por producto y aplicarlos automáticamente al generar una venta. Cada producto ahora cuenta con dos nuevos atributos: porcentaje de descuento y cantidad mínima requerida, los cuales se validan en la interfaz "ProductController" antes de guardarse en la base de datos.
 <p align="center">
-  <img src="src/main/resources/images/management.png" />
+  <img src="src/main/resources/images/Captura de pantalla 2025-12-07 a la(s) 10.16.44 p.m..png"  alt=""/>
 </p>
+Para determinar qué tipo de descuento aplicar, se implementó una estructura que se baso en los pilares fundamentales de POO, usando:
 
-* Reports: Aquí se encuentran las operaciones de reportes y estadísticas relacionadas.
+- *Abstracción:* una clase base DiscountStrategy con el método apply().
+
+- *Herencia:* dos estrategias concretas (PercentageDiscount y BulkDiscount).
+
+- P*olimorfismo:* el controlador usa una sola variable strategy que puede contener cualquier tipo de descuento.
+
+- *Encapsulación:* los valores del producto permanecen dentro del objeto y solo se acceden mediante getters.
+
+El controlador GenerateSaleController decide automáticamente:
+
+- *Sin descuento:* porcentaje = 0
+
+- *Descuento por unidad:* porcentaje > 0 y cantidad mínima = 1
+
+- *Descuento por volumen:* porcentaje > 0 y cantidad mínima > 1
+
+Si la cantidad comprada no cumple el mínimo, la interfaz muestra "Descuento por volumen — no aplicado".
 <p align="center">
-  <img src="src/main/resources/images/reports.png" />
+  <img src="src/main/resources/images/Captura de pantalla 2025-12-07 a la(s) 10.20.47 p.m..png"  alt=""/>
+</p>
+Durante la venta, se calcula el precio final de manera segura:
+
+```
+double discounted = strategy.apply(originalUnitPrice, qty);
+if (discounted < originalUnitPrice)
+    finalUnitPrice = discounted;   // Evita precios incorrectos
+```
+Además, se añadió un mensaje informativo que muestra el detalle del descuento aplicado, incluyendo precio original, precio final y cantidad adquirida.
+<p align="center">
+  <img src="src/main/resources/images/Captura de pantalla 2025-12-07 a la(s) 10.26.02 p.m..png"  alt=""/>
 </p>
 
-## Sales
-https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d-83f9b4807ac5
-## Management
-https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b-218c9ca25b10
-## Reports
-https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
+## Metodos para desactivar ventas
+Como se dijo antes, se trataría de nuevos enums de tipo 'state', los cuales son los siguientes:
+- *'ACTIVE'*: La que ya existía, representa que la garantía aún no termina y la venta está sujeta a devolverse
+- *'FINALIZADA'*: La garantía ha expirado y el negocio se libra de responsabilidad con el cliente.
+- *'CANCELADA'*: La venta se canceló antes de entregarse.
+- *'DEVUELTA'*: Ocurrió alguna avería de fábrica, o el cliente ya no la quiere.
 
-# 📧 Contacto
-Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
+Cada uno ahora representa el destino de la venta. Se modificaron la vista y el controlador 'SaleDetails', que es donde se añadió la función:
 
+<p align="center">
+  <img src="src/main/resources/images/devolucion_ventas.png"  alt=""/>
+</p>
 
-# 📝 Licencia
+Los metodos constan de dos consultas a la base de datos para obtener el estado del objeto, una para saber si ya se desactivó o está sujeta a desactivarse y otra para actualizar el estado.
+```
+    public void finalizar(javafx.event.ActionEvent actionEvent) {
+        salesDAO.desactivar(idSale, Sales.State.FINALIZADA);
+        if (parent != null) {
+            parent.refreshReports();
+        }
+        closeCurrentStage(desactivar);
+    }
+    public void devolver(javafx.event.ActionEvent actionEvent){
+        salesDAO.regresar(idSale, Sales.State.DEVUELTA,productsDetails);
+        if (parent != null) {
+            parent.refreshReports();
+        }
+        closeCurrentStage(desactivar);
+    }
+    public void cancelar(javafx.event.ActionEvent actionEvent){
+        salesDAO.regresar(idSale, Sales.State.CANCELADA,productsDetails);
+        if (parent != null) {
+            parent.refreshReports();
+        }
+        closeCurrentStage(desactivar);
+    }
+```
+Solo el cambio de estado a FINALIZAR usa solo estos pasos, el resto de estados usan un tercer metodo y conexion a la base de datos y es que se tienen que regresar los objetos que se pidieron al inventario.
 
-Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
+Se logra obteniendo el codigo de un objeto tipo ShoppingCart, y con eso se llama a un metodo addStock() similar al metodo usado para descontar los productos al generar la venta, esto se hace por cada objeto en la venta.
+```
+    public void addStock(ObservableList<ShoppingCart> products){
+        String sql = "UPDATE product SET stock = stock + ? WHERE idProduct = ?";
+        try(Connection conn = DBConnection.connection()){
 
-[⬆ Volver al inicio](#title)<br>
+            for (ShoppingCart e:products) {
+                try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                    pstmt.setInt(1,e.quantity());
+                    pstmt.setInt(2,Integer.parseInt(e.cod()));
+                    int rows_affected = pstmt.executeUpdate();
+
+                    if (rows_affected>0){
+                        System.out.println("productos regresados correctamente");
+                    }else{
+                        System.out.println("error regresando productos");
+                    }
+                }
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+```
+Hubo un metodo más que fue necesario agregar -> ´refreshReports()´, y es que aparte que los estados se deben actualizar en la tabla de ventas, la gráfica de ventas totales no debería contar los productos que fueron devueltos. Hubo modificación de codigo en la inicialización de esta gráfica para esto, pero lo principal es que se añadió un metodo de refresco a la interfaz de reportes para que el usuario pueda ver los cambios en tiempo real a como se esperaría.
+Este metodo recopila las funciones ya existentes para inicializar la interfaz de reportes, y configura la ejecucion dentro de "SalesDetail" para aplicar el refresco como si fuera la inicialización de la clase "Reports", esto implica que "SalesDetail" hereda los controles de "Reports".
+
+# Conclusión
+
+Se concluye el reporte de todo lo que trabajamos para el proyecto de la materia "Programación Orientada a Objetos". Hubo muchos aspectos que nos hubiera encantado trabajar, pero que fueron recortados para ajustar los tiempos a la entrega. Aun asi estamos satisfechos con el trabajo que se terminó y podemos asegurar que nos llevamos una buena experiencia de este y muchos aprendizajes base para continuar el estudio proximamente con los mismos temas pero abarcados en su maximo. Se agradece su atención de leer todo el reporte.
+

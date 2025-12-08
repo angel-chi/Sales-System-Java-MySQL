@@ -9,23 +9,24 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
+import javafx.scene.control.TextField;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProductController implements Initializable {
+public class ProductController extends MenuController implements Initializable {
 
     private final ProductDAO productDAO = new ProductDAO();
 
     private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
 
     private static ObservableList<Product> products =null;
+    @FXML
+    private Button back;
     @FXML
     private ComboBox<Product.State> cbState;
     @FXML
@@ -34,6 +35,10 @@ public class ProductController implements Initializable {
     private TextField price;
     @FXML
     private TextField stock;
+    @FXML
+    private TextField txtDiscountPercentage;
+    @FXML
+    private TextField txtDiscountMinQty;
     @FXML
     private TableView<Product> tableProducts;
     @FXML
@@ -85,19 +90,137 @@ public class ProductController implements Initializable {
     }
 
     public void addProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                          Integer.parseInt(stock.getText()), cbState.getValue());
+
+        if (!validateInventoryPrice()) {
+            return; // Si falla, no sigue
+        }
+        //  LEER Y VALIDAR DESCUENTO
+        double discountPercentage = 0.0;
+
+        if (!txtDiscountPercentage.getText().trim().isEmpty()) {
+            try {
+                discountPercentage = Double.parseDouble(txtDiscountPercentage.getText().trim());
+
+                // Validación 1: Rango permitido
+                if (discountPercentage < 0 || discountPercentage > 100) {
+                    MenuController.setAlert(Alert.AlertType.ERROR,
+                            "El descuento debe estar entre 0% y 100%.");
+                    return; // Cancelar registro
+                }
+
+            } catch (NumberFormatException e) {
+                MenuController.setAlert(Alert.AlertType.ERROR,
+                        "Ingrese un valor numérico válido para el descuento.");
+                return;
+            }
+        }
+
+        //  LEER Y VALIDAR CANTIDAD MÍNIMA
+        int discountMinQty = 0;
+
+        if (!txtDiscountMinQty.getText().trim().isEmpty()) {
+            try {
+                discountMinQty = Integer.parseInt(txtDiscountMinQty.getText().trim());
+
+                // Validación 2: No negativos
+                if (discountMinQty < 0) {
+                    MenuController.setAlert(Alert.AlertType.ERROR,
+                            "La cantidad mínima no puede ser negativa.");
+                    return;
+                }
+
+            } catch (NumberFormatException e) {
+                MenuController.setAlert(Alert.AlertType.ERROR,
+                        "Ingrese un valor numérico válido para la cantidad mínima.");
+                return;
+            }
+        }
+
+        //  CREAR PRODUCTO
+        Product product = new Product(
+                name.getText(),
+                Double.parseDouble(price.getText()),
+                Integer.parseInt(stock.getText()),
+                cbState.getValue(),
+                discountPercentage,
+                discountMinQty
+        );
+
+        //  GUARDAR EN BD
         if (productDAO.create(product)) {
-            MenuController.cleanCells(name,price,stock);
+            MenuController.cleanCells(name, price, stock);
+            txtDiscountPercentage.clear();
+            txtDiscountMinQty.clear();
             updateTable();
         }
     }
 
     public void updateProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                Integer.parseInt(stock.getText()), cbState.getValue());
+
+        if (!validateInventoryPrice()) {
+            return; // Si falla, no sigue
+        }
+
+        //Leer y validar DESCUENTO
+        double discountPercentage = 0.0;
+        String discountText = txtDiscountPercentage.getText().trim();
+
+        if (!discountText.isEmpty()) {
+            try {
+                discountPercentage = Double.parseDouble(discountText);
+
+                // rango permitido: 0–100
+                if (discountPercentage < 0 || discountPercentage > 100) {
+                    MenuController.setAlert(Alert.AlertType.ERROR,
+                            "El descuento debe estar entre 0 y 100.");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                MenuController.setAlert(Alert.AlertType.ERROR,
+                        "El descuento debe ser un número válido.");
+                return;
+            }
+        }
+
+        //Leer y validar CANTIDAD MÍNIMA
+        int discountMinQty = 0;
+        String minQtyText = txtDiscountMinQty.getText().trim();
+
+        if (!minQtyText.isEmpty()) {
+            try {
+                discountMinQty = Integer.parseInt(minQtyText);
+
+                if (discountMinQty < 0) {
+                    MenuController.setAlert(Alert.AlertType.ERROR,
+                            "La cantidad mínima no puede ser negativa.");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                MenuController.setAlert(Alert.AlertType.ERROR,
+                        "La cantidad mínima debe ser un número entero válido.");
+                return;
+            }
+        }
+
+        // Si el descuento es 0, forzamos cantidad mínima en 0
+        if (discountPercentage == 0) {
+            discountMinQty = 0;
+        }
+
+        // 3. Crear producto y actualizar
+        Product product = new Product(
+                name.getText(),
+                Double.parseDouble(price.getText()),
+                Integer.parseInt(stock.getText()),
+                cbState.getValue(),
+                discountPercentage,   // 0–100
+                discountMinQty
+        );
+
         if (productDAO.update(product)) {
-            MenuController.cleanCells(name,price,stock);
+            MenuController.cleanCells(name, price, stock);
+            txtDiscountPercentage.clear();
+            txtDiscountMinQty.clear();
             updateTable();
         }
     }
@@ -118,6 +241,9 @@ public class ProductController implements Initializable {
         price.setText(String.valueOf(product.price()));
         stock.setText(String.valueOf(product.stock()));
         cbState.setValue(product.state());
+
+        txtDiscountPercentage.setText(String.valueOf(product.discountPercentage()));
+        txtDiscountMinQty.setText(String.valueOf(product.discountMinQuantity()));
     }
 
     private void updateTable() {
@@ -125,6 +251,56 @@ public class ProductController implements Initializable {
         productDAO.setTable(products);
         tableProducts.setItems(products);
     }
+
+    public void back(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML,"Administración");
+        closeCurrentStage(back);
+    }
+
+    private boolean validateInventoryPrice() {
+        String priceText = price.getText().trim();
+        String stockText = stock.getText().trim();
+
+        if (priceText.isEmpty() || stockText.isEmpty()) {
+            MenuController.setAlert(Alert.AlertType.ERROR,
+                    "Precio e inventario son obligatorios.");
+            return false;
+        }
+
+        double parsedPrice;
+        int parsedStock;
+
+        try {
+            parsedPrice = Double.parseDouble(priceText);
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR,
+                    "El precio debe ser un número válido (usa punto para decimales).");
+            return false;
+        }
+
+        try {
+            parsedStock = Integer.parseInt(stockText);
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR,
+                    "El inventario debe ser un número entero.");
+            return false;
+        }
+
+        if (parsedPrice < 0) {
+            MenuController.setAlert(Alert.AlertType.ERROR,
+                    "El precio no puede ser negativo.");
+            return false;
+        }
+
+        if (parsedStock < 0) {
+            MenuController.setAlert(Alert.AlertType.ERROR,
+                    "El inventario no puede ser negativo.");
+            return false;
+        }
+
+        return true;
+    }
+
 
 
 }

@@ -3,9 +3,7 @@ package org.borghisales.salessysten;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.controllers.MenuController;
-
 import java.io.IOException;
-
 import static org.borghisales.salessysten.controllers.MenuController.*;
 
 public class Main extends Application {
@@ -23,7 +21,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        mc.openNewStage(MAIN_VIEW_FXML,"Login");
+        mc.setStage(stage);
+        mc.openNewStage(MAIN_VIEW_FXML,"Inicio");
     }
 
     public static void main(String[] args) {

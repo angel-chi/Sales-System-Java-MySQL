@@ -32,9 +32,9 @@ import java.time.Month;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class ReportsController implements Initializable {
+public class ReportsController extends MenuController implements Initializable {
 
-    private static final String[] monthsShowed = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    private static final String[] monthsShowed = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     private static int idxMonth = LocalDate.now().getMonth().getValue()-1;
     private static int yearsShowed = LocalDate.now().getYear();
 
@@ -49,6 +49,8 @@ public class ReportsController implements Initializable {
     private static ObservableList<PieChart.Data> pieChartData = null;
     private static XYChart.Series<String,Integer> lineChartData = null;
 
+    @FXML
+    private Button back;
     @FXML
     private TextField year;
     @FXML
@@ -124,8 +126,8 @@ public class ReportsController implements Initializable {
 
         x_time.setAutoRanging(false);
         x_time.setCategories(FXCollections.observableArrayList(categories));
-        x_time.setLabel("Days of the month");
-        y_amountSales.setLabel("Sales amount");
+        x_time.setLabel("Dias del mes");
+        y_amountSales.setLabel("Monto de ventas");
 
         year.setText(String.valueOf(yearsShowed));
         month.setText(monthsShowed[idxMonth]);
@@ -147,7 +149,7 @@ public class ReportsController implements Initializable {
             pieChartData.forEach(data ->
                     data.nameProperty().bind(
                             Bindings.concat(
-                                    data.getName(), " amount: ", (int) data.pieValueProperty().doubleValue()
+                                    data.getName(), " Monto: ", (int) data.pieValueProperty().doubleValue()
                             )
                     )
             );
@@ -155,7 +157,7 @@ public class ReportsController implements Initializable {
         pieChartProducts.getData().addAll(pieChartData);
     }
 
-    private void setupTableView() {
+    void setupTableView() {
         colIdSales.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSales()).asObject());
         colIdCustomer.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idCustomer()).asObject());
         colIdSeller.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSeller()).asObject());
@@ -179,15 +181,18 @@ public class ReportsController implements Initializable {
             if (!tableReport.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
                 int idSales = tableReport.getSelectionModel().getSelectedItem().idSales();
                 SaleDetailController.setIdSale(idSales);
-
-                FXMLLoader fxmlLoaderSaleDetails = new FXMLLoader(MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML));
-
                 try {
-                    Scene scene = new Scene(fxmlLoaderSaleDetails.load());
+                    FXMLLoader loader = new FXMLLoader(
+                            MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML)
+                    );
+                    Scene scene = new Scene(loader.load());
+                    SaleDetailController controller = loader.getController();
+                    controller.setParentController(this);
                     Stage stage = new Stage();
-                    stage.setTitle("Sale detail");
+                    stage.setTitle("Detalle de venta");
                     stage.setScene(scene);
                     stage.show();
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -203,7 +208,7 @@ public class ReportsController implements Initializable {
 
     public void onFilter(ActionEvent actionEvent) {
         if (sales.isEmpty()){
-            MenuController.setAlert(Alert.AlertType.WARNING,"There are no sales");
+            MenuController.setAlert(Alert.AlertType.WARNING,"No hay ventas");
             return;
         }
 
@@ -217,11 +222,11 @@ public class ReportsController implements Initializable {
 
 
             if (minAmount >= maxAmount) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct amount intervals");
+                MenuController.setAlert(Alert.AlertType.ERROR,"Ajusta los intervalos de monto validos");
                 return;
             }
             if (minDate.isAfter(maxDate)) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct date intervals");
+                MenuController.setAlert(Alert.AlertType.ERROR,"Ajusta intervalos de fecha validos");
                 return;
             }
 
@@ -268,10 +273,10 @@ public class ReportsController implements Initializable {
                 series.setName(monthsShowed[idxMonth]);
                 yearData.put(month, series);
             } else {
-                System.out.println("There is already a series for the year" + year + " and the month " + month + ". No new series will be added");
+                System.out.println("Ya existe una serie para el año" + year + " and the month " + month + ". No se añadirá una nueva serie.");
             }
         } else {
-            System.out.println("Error: lineChartData is null. Cannot add to cache map.");
+            System.out.println("Error: lineChartData es nulo. No se puede agregar al mapa de cache.");
         }
 
         recorrerHashMap();
@@ -395,15 +400,15 @@ public class ReportsController implements Initializable {
 
     public static void recorrerHashMap() {
         for (Integer year : cacheReportLineChart.keySet()) {
-            System.out.println("Year: " + year);
+            System.out.println("Año: " + year);
             HashMap<Integer, XYChart.Series<String, Integer>> yearData = cacheReportLineChart.get(year);
             for (Integer month : yearData.keySet()) {
-                System.out.println("  Month: " + month);
+                System.out.println("  Mes: " + month);
                 XYChart.Series<String, Integer> series = yearData.get(month);
                 if (series != null) {
-                    System.out.println("    Series: " + series.getName());
+                    System.out.println("    Serie: " + series.getName());
                     for (XYChart.Data<String, Integer> data : series.getData()) {
-                        System.out.println("      Data: " + data.getXValue() + ", " + data.getYValue());
+                        System.out.println("      Datos: " + data.getXValue() + ", " + data.getYValue());
                     }
                 } else {
                     System.out.println("    No hay serie asociada para este mes.");
@@ -448,9 +453,26 @@ public class ReportsController implements Initializable {
         lineChartData.getData().sort(Comparator.comparingInt(data -> Integer.parseInt(data.getXValue())));
     }
 
+    public void back(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML,"Administración");
+        closeCurrentStage(back);
+    }
 
+    public void refreshReports() {
+        // Recargar ventas (tabla)
+        sales.clear();
+        salesDAO.setTable(sales);
 
+        // Recargar pie chart
+        pieChartData.clear();
+        ProductDAO.setPieChart(pieChartData);
+        pieChartProducts.getData().setAll(pieChartData);
 
-
+        // Recargar gráfico de líneas
+        lineChartData.getData().clear();
+        salesDAO.setLineChart(lineChartData, yearsShowed, idxMonth + 1);
+        fillMissingDays(lineChartData);
+        salesLineChart.getData().setAll(lineChartData);
+    }
 
 }

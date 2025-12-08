@@ -17,11 +17,13 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class SellerController implements Initializable {
+public class SellerController extends MenuController implements Initializable {
     private final SellerDAO sellerDAO = new SellerDAO();
     private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
     private static ObservableList<Seller> sellers = null;
 
+    @FXML
+    private Button back;
     @FXML
     private TextField dni;
     @FXML
@@ -44,8 +46,6 @@ public class SellerController implements Initializable {
     private TableColumn<Seller,String> colPhone;
     @FXML
     private TableColumn<Seller, Seller.State> colState;
-
-
 
 
     @Override
@@ -102,7 +102,7 @@ public class SellerController implements Initializable {
 
     public void deleteSeller(ActionEvent actionEvent) {
         if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller");
+            MenuController.setAlert(Alert.AlertType.ERROR,"Imposible eliminar a este vendedor");
             return;
         }
         if (sellerDAO.delete(dni.getText())){
@@ -129,5 +129,9 @@ public class SellerController implements Initializable {
         tableSellers.setItems(sellers);
     }
 
+    public void back(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML,"Administración");
+        closeCurrentStage(back);
+    }
 
 }
