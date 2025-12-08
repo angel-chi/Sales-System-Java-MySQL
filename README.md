@@ -160,15 +160,17 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 # Cambios propuestos
 ## Cambio 1. Clasificación por marca
 ### Descripción del cambio
-Se propone incorporar al modelo Product un nuevo atributo de nombre **brand** que sea de tipo _Brand_, donde Brand es un enum que representa las distintas marcas con las que trabaja el negocio.<br>
-La idea es que la marca no sea un simple texto escrito a mano, sino que sea una parte formal del modelo del sistema. Esto ayuda a evitar errores como escribir mal una marca o usar nombres 
-diferentes para la misma, además, hace más fácil filtrar, buscar o generar reportes por marca si es que en un futuro quiere implementarse esta funcionalidad.
+
+Se implementará un nuevo apartado para **Product**, este será el apartado **brand** para gestionar las marcas de los productos y que se puedan clasificar por esa caracteristica. <br>
+Se creará una nueva entidad Brand (reflejada en la base de datos sql como una tabla independiente) y se relacionará de manera directa en la tabla product mediante una **_Foreign Key_**. <br>
+El proposito de esto es que, al registrar o editar un producto, la marca se seleccione desde un catálogo dinámico cargado desde la base de datos, en lugar de ingresarse como texto libre, 
+facilitando el proceso y evitando el "error humano" o la creación de marcas inexistentes. 
 
 ### Justificación 
-Desde el punto de vista de la Programación Orientada a Objetos, el cambio tiene sentido porque la marca se vuelve un concepto del dominio con su propio tipo (Brand), 
-en lugar de ser solo una cadena más. Además, tenemos a todas las marcas en un solo lugar, lo que facilita mucho mantener el código, por ejemplo, si algún día el negocio agrega una marca nueva, 
-solo habría que añadirla al enum y ya está disponible en todo el sistema, incluso en la interfaz. En resumen, se modela mejor la realidad del negocio y el código se vuelve más claro y menos propenso a errores.
-
+Desde el punto de vista de la Programación Orientada a Objetos (POO), la implementación de la clase **_Brand_** como atributo de **_Product_** es lógico debido a que:<br>
+1. En lugar de tratar la marca como un tipo de dato primitivo (String), se eleva a la categoría de Objeto, pues en el mundo real, una "Marca" es una entidad con identidad propia (un ID) y atributos (un nombre). Al crear la clase **_Brand_**, se refleja de mejor manera el modelo de negocio, permitiendo interactuar con atributos concretos en lugar de datos sueltos.
+2. De igual manera, entra la **escalabilidad** pues en el mundo real no existe un numero finito y determinado de marcas, por lo que si llega una nueva es tan sencillo como agregarla a la **base de datos** y el cambio se verá reflejado.
+3. Esto facilita futuras expansiones, como generar reportes de ventas filtrados específicamente por el ID de una marca o gestionar atributos adicionales del fabricante sin afectar la estructura del producto.
 
 ## Cambio 2. Modelar el tipo de venta
 ### Descripción del cambio
