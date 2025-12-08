@@ -27,7 +27,7 @@ public class MenuController {
 
 
     static Alert defaultAlert;
-    static ButtonType acceptButton = new ButtonType("Accept");
+    static ButtonType acceptButton = new ButtonType("Aceptar");
     public static HashMap<String, String > filePaths = new HashMap<>();
 
     void closeCurrentStage(Node node) {
@@ -47,7 +47,7 @@ public class MenuController {
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: " + e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error al cargar la vista: " + e.getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ public class MenuController {
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("Informe");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);
