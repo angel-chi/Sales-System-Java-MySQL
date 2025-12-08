@@ -239,6 +239,8 @@ public class ReportsController implements Initializable {
                 sales.remove(sale);
                 tableReport.refresh();
                 MenuController.setAlert(Alert.AlertType.INFORMATION, "Venta eliminada correctamente.");
+                // Actualizar gráfico
+                refreshLineChart();
             } else {
                 MenuController.setAlert(Alert.AlertType.ERROR, "No se pudo eliminar la venta.");
             }
@@ -320,9 +322,15 @@ public class ReportsController implements Initializable {
     public static void setPieChartData(ObservableList<PieChart.Data> pieChartData) {
         ReportsController.pieChartData = pieChartData;
     }
-
+    // Refrezcar gráficos al elimianr una venta
     public static void setLineChartData(XYChart.Series<String, Integer> lineChartData) {
         ReportsController.lineChartData = lineChartData;
+    }
+    public void refreshLineChart() {
+        removeCacheLineChart(yearsShowed, idxMonth + 1);
+
+        // Volver a actualizar la gráfica
+        updateLineChart();
     }
 
     public void onExport(ActionEvent actionEvent) {
