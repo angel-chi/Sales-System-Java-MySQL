@@ -101,7 +101,7 @@ Esto solo es un detalle visual y pudo ser ignorado; sin embargo, aprovechamos a 
 
 # Diagramas UML
 <p align="center">
-  <img src="src/main/resources/images/UML.png" width="900">
+  <img src="src/main/resources/images/UML.png" alt=""/>
 </p>
 
 # Propuestas de mejora
