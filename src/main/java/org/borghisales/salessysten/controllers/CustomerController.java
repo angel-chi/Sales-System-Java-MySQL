@@ -95,10 +95,23 @@ public class CustomerController implements Initializable {
     }
     @FXML
     public void deleteCustomer(ActionEvent actionEvent) {
-        if (customerDAO.delete(dni.getText())){
-            MenuController.cleanCells(dni,name,address);
-            updateTable();
-        }
+        Alert Delete = new Alert(Alert.AlertType.CONFIRMATION);
+        Delete.setTitle("Eliminar");
+        Delete.setHeaderText("¿Estas seguro que quieres realizar esta accion?");
+        Delete.setContentText("Se eliminará el cliente: " + name.getText());
+
+        ButtonType Accept = new ButtonType("Sí", ButtonBar.ButtonData.OK_DONE);
+        ButtonType Cancel = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Delete.getButtonTypes().setAll(Accept, Cancel);
+        Delete.showAndWait().ifPresent(button -> {
+
+            if (button == Accept) {
+                if (customerDAO.delete(dni.getText())){
+                    MenuController.cleanCells(dni,name,address);
+                    updateTable();
+                }
+            }
+        });
     }
     @FXML
     public void cleanCellsScreen(ActionEvent actionEvent) {

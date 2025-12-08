@@ -12,11 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
-import org.borghisales.salessysten.model.Seller;
-import org.borghisales.salessysten.model.Validator;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ProductController implements Initializable {
@@ -24,6 +21,7 @@ public class ProductController implements Initializable {
     private final ProductDAO productDAO = new ProductDAO();
 
     private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
+
 
     private static ObservableList<Product> products =null;
     @FXML
@@ -135,10 +133,23 @@ public class ProductController implements Initializable {
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
-        if (productDAO.delete(name.getText())) {
-            MenuController.cleanCells(name,price,stock);
-            updateTable();
-        }
+        Alert Delete = new Alert(Alert.AlertType.CONFIRMATION);
+        Delete.setTitle("Eliminar");
+        Delete.setHeaderText("¿Estas seguro que quieres realizar esta accion?");
+        Delete.setContentText("Se eliminará el producto: " + name.getText());
+
+        ButtonType Accept = new ButtonType("Sí", ButtonBar.ButtonData.OK_DONE);
+        ButtonType Cancel = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Delete.getButtonTypes().setAll(Accept, Cancel);
+        Delete.showAndWait().ifPresent(button -> {
+
+            if (button == Accept) {
+                if (productDAO.delete(name.getText())) {
+                    MenuController.cleanCells(name, price, stock);
+                    updateTable();
+                }
+            }
+        });
     }
 
     public void cleanCellsScreen(ActionEvent actionEvent) {
