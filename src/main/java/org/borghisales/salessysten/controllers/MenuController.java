@@ -22,6 +22,7 @@ public class MenuController {
     public static final String GENERATE_SALE_VIEW_FXML = VIEWS_DIRECTORY + "GenerateSaleView.fxml";
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
+    public static final String HELP_VIEW_FXML = VIEWS_DIRECTORY + "HelpView.fxml";
 
 
     static Alert defaultAlert;
@@ -38,6 +39,7 @@ public class MenuController {
         titulosFxml.put(GENERATE_SALE_VIEW_FXML,"Carrito de compras");
         titulosFxml.put(REPORT_VIEW_FXML,"Ventas");
         titulosFxml.put(SALE_DETAIL_VIEW_FXML,"Detalle de venta");
+        titulosFxml.put(HELP_VIEW_FXML,"Ayuda");
     }
 
     void closeCurrentStage(Node node) {
@@ -52,8 +54,8 @@ public class MenuController {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             //Mantener el tamaño al cambiar de pestaña.
-            stage.setMinWidth(400);
-            stage.setMinHeight(600);
+            stage.setMinWidth(500);
+            stage.setMinHeight(700);
             // Mantiene el tamaño dinámico.
             stage.setResizable(false);
             // Centrar ventana.

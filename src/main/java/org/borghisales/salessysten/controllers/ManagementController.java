@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
-
 import java.awt.*;
 import java.net.URI;
 import java.net.URL;
@@ -59,34 +58,14 @@ public class ManagementController extends MenuController implements Initializabl
         closeCurrentStage(sellerButton);
 
     }
-//Haciendo uso de la función Thread, se maneja el error del botón HELP sin bloquear el programa.
-public void help(ActionEvent actionEvent) {
-    new Thread(() -> {
-        try {
-            String url = "https://github.com/angel-chi/Sales-System-Java-MySQL.git";
-            // Cada Sistema Operativo ejecuta una rutina de navegación distinta.
-            // Windows
-            if (System.getProperty("os.name").toLowerCase().contains("win")) {
-                Runtime.getRuntime().exec(new String[]{"rundll32", "url.dll,FileProtocolHandler", url});
-           // Algunas distribuciones de Linux
-            } else if (System.getProperty("os.name").toLowerCase().contains("nux")||System.getProperty("os.name").toLowerCase().contains("nix")
-            ||System.getProperty("os.name").toLowerCase().contains("aix")) {
-                Runtime.getRuntime().exec(new String[]{"xdg-open", url});
-            // MacOS
-            } else if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-                Runtime.getRuntime().exec(new String[]{"open", url});
-            // Algún otro Sistema Operativo...
-            } else {
-                System.out.println("Sistema operativo no soportado.");
-            }
-        } catch (Exception E) {
-            E.printStackTrace();
-            javafx.application.Platform.runLater(() ->
-                    setAlert(Alert.AlertType.ERROR, "No se pudo abrir la URL.")
-            );
-        }
-    }).start();
-}
+    @FXML
+    private void help() {
+        // Registrar que la ventana padre de Help es Management
+        MenuController.rutaArchivos.put(HELP_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        openNewStage(HELP_VIEW_FXML, "Ayuda");
+        closeCurrentStage(tabPaneManage);
+    }
+
     // Salir
     public void exit(ActionEvent actionEvent) {
         openNewStage(MAIN_VIEW_FXML,"Iniciar Sesión");
