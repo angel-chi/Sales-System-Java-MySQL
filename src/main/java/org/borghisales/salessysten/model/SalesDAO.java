@@ -112,38 +112,23 @@ public class SalesDAO {
 
     }
 
-    public void setLineChart(XYChart.Series<String, Integer> lineChartData,int year,int month) {
-        String sql = """ 
-                SELECT day(saleDate) as saleDate, count(saleDate) as salesPerDay
-                FROM sales
-                WHERE idSeller=? and year(saleDate) = ? and month(saleDate)=?
-                GROUP BY saleDate;
-                """;
-
-
-        System.out.println("Buscando base de datos");
-
-
+    public void setLineChart(XYChart.Series<String,Integer> series, int year, int month) {
+        // Limpias la serie y agregas datos directamente
+        series.getData().clear();
         try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
+             PreparedStatement pstmt = conn.prepareStatement("SELECT day(saleDate) as saleDate, count(saleDate) as salesPerDay FROM sales WHERE idSeller=? and year(saleDate) = ? and month(saleDate)=? GROUP BY saleDate")) {
 
             pstmt.setInt(1, MainController.sellerLog.idSeller());
             pstmt.setInt(2, year);
             pstmt.setInt(3, month);
 
-            try (ResultSet rs = pstmt.executeQuery()){
-                while (rs.next()){
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
                     XYChart.Data<String,Integer> data = new XYChart.Data<>(String.valueOf(rs.getInt("saleDate")),rs.getInt("salesPerDay"));
-                    lineChartData.getData().add(data);
+                    series.getData().add(data);
                 }
             }
-
-
-            ReportsController.setCacheReportLineChart(year,month,lineChartData);
-
-
-
-        }catch (SQLException e){
+        } catch(SQLException e) {
             MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar ventas : " + e.getMessage());
         }
     }
@@ -174,4 +159,40 @@ public class SalesDAO {
         }
 
     }
+    public boolean deleteSale(int idSale) {
+        String sqlDetails = "DELETE FROM sales_details WHERE idSales = ?";
+        String sqlSale = "DELETE FROM sales WHERE idSales = ?";
+
+        try (Connection conn = DBConnection.connection()) {
+
+            // Para poder revertir si algo falla
+            conn.setAutoCommit(false);
+
+            // Eliminar detalles
+            try (PreparedStatement pstmt = conn.prepareStatement(sqlDetails)) {
+                pstmt.setInt(1, idSale);
+                pstmt.executeUpdate();
+            }
+
+            // Eliminar venta
+            int rows;
+            try (PreparedStatement pstmt = conn.prepareStatement(sqlSale)) {
+                pstmt.setInt(1, idSale);
+                rows = pstmt.executeUpdate();
+            }
+
+            if (rows > 0) {
+                conn.commit();
+                return true;
+            } else {
+                conn.rollback();
+                return false;
+            }
+
+        } catch (SQLException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al eliminar venta: " + e.getMessage());
+            return false;
+        }
+    }
+
 }

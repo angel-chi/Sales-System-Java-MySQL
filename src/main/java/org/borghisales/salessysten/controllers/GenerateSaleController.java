@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
 
+import org.borghisales.salessysten.controllers.ReportsController;
 
 import java.io.IOException;
 import java.net.URL;

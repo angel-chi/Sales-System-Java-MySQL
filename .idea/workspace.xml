@@ -4,18 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="ACTUALIZACIÓN GRANDE, Propuesta implementada, poder gestionar clientes/productos desde GenerateSaleController, eliminación de botones buscar, implementacion de una interfaz la cual determina la transición de Controladores, ajuste de botones, ajuste de la interfaz de Generate, implementación de métodos en Generate, Product y Customer para llamada a interfaz. E implementación de botones Gestionar en Generate (interfaz) y traducción en algunos casos.">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="SEGUNDA ACTUALIZACIÓN DE CORRECIONES. Se corrigió un error el cual al cambiar de pestaña se mantenía el nombre de la clase hija, actualmente solo eran dependientes el Main y Management, pero ya se corrigió. Se corrigió detalle de que al dar doble clic a una venta de reports no se mostraba detalles y además estaba pequeña la ventana, traducción de detallitos y ya se ve bien.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ManagementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/MenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ReportsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ReportsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SaleDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SaleDetailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/SaleDetailView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/SaleDetailView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/SalesDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +160,7 @@
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
       <workItem from="1764975469052" duration="669000" />
-      <workItem from="1765165555757" duration="4276000" />
+      <workItem from="1765165555757" duration="7793000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
@@ -481,7 +474,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764975783390</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="SEGUNDA ACTUALIZACIÓN DE CORRECIONES. Se corrigió un error el cual al cambiar de pestaña se mantenía el nombre de la clase hija, actualmente solo eran dependientes el Main y Management, pero ya se corrigió. Se corrigió detalle de que al dar doble clic a una venta de reports no se mostraba detalles y además estaba pequeña la ventana, traducción de detallitos y ya se ve bien.">
+      <option name="closed" value="true" />
+      <created>1765170024780</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1765170024780</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -499,7 +500,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fea: add table" />
     <MESSAGE value="fea: add show table" />
     <MESSAGE value="fea: add DAO products" />
     <MESSAGE value="fea: add FML CustomerView.fxml" />
@@ -524,6 +524,7 @@
     <MESSAGE value="refactor: cleaning code" />
     <MESSAGE value="refactor: delete comments" />
     <MESSAGE value="pruebaINTELIJ, no cambia nada" />
-    <option name="LAST_COMMIT_MESSAGE" value="pruebaINTELIJ, no cambia nada" />
+    <MESSAGE value="SEGUNDA ACTUALIZACIÓN DE CORRECIONES. Se corrigió un error el cual al cambiar de pestaña se mantenía el nombre de la clase hija, actualmente solo eran dependientes el Main y Management, pero ya se corrigió. Se corrigió detalle de que al dar doble clic a una venta de reports no se mostraba detalles y además estaba pequeña la ventana, traducción de detallitos y ya se ve bien." />
+    <option name="LAST_COMMIT_MESSAGE" value="SEGUNDA ACTUALIZACIÓN DE CORRECIONES. Se corrigió un error el cual al cambiar de pestaña se mantenía el nombre de la clase hija, actualmente solo eran dependientes el Main y Management, pero ya se corrigió. Se corrigió detalle de que al dar doble clic a una venta de reports no se mostraba detalles y además estaba pequeña la ventana, traducción de detallitos y ya se ve bien." />
   </component>
 </project>
