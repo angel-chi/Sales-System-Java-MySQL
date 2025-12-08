@@ -244,7 +244,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     //CANCELA LA VENTA
     public void cancel(ActionEvent actionEvent) {
         if (products.isEmpty()){ //Agrega alerta al botón cancelar //CORRECCIÓN ERROR
-            MenuController.setAlert(Alert.AlertType.INFORMATION, "No se ha ingresado ningún dato que se pueda cancelar");
+            MenuController.setAlert(Alert.AlertType.INFORMATION, "No se ha ingresado ningún dato a la compra que se pueda cancelar");
             return;
         }
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock); //limpia la tabla
@@ -259,7 +259,8 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     //GENERA VENTA //***
     public void generateSale(ActionEvent actionEvent) {
-        if (products.isEmpty()) {
+        if (products.isEmpty()) { //Agregar alerta al botón generar venta //CORRECCIÓN ERROR
+            MenuController.setAlert(Alert.AlertType.INFORMATION, "No se puede generar una venta sin ningún producto en el carrito de compras");
             return;
         }
 

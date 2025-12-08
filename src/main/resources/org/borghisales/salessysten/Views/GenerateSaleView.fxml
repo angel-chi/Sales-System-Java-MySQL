@@ -36,9 +36,9 @@
       <TextField fx:id="stock" editable="false" layoutX="437.0" layoutY="234.0" prefHeight="25.0" prefWidth="126.0" />
       <TextField fx:id="seller" editable="false" layoutX="437.0" layoutY="269.0" prefHeight="25.0" prefWidth="126.0" />
       <Spinner fx:id="quantity" layoutX="125.0" layoutY="269.0" prefHeight="21.0" prefWidth="117.0" />
-      <Button layoutX="250.0" layoutY="166.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="25.0" prefWidth="80.0" text="SEARCH" />
-      <Button layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="25.0" prefWidth="80.0" text="SEARCH" />
-      <Button layoutX="250.0" layoutY="234.0" mnemonicParsing="false" onAction="#addShoppingCart" prefHeight="25.0" prefWidth="80.0" text="ADD" />
+      <Button layoutX="250.0" layoutY="166.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="25.0" prefWidth="80.0" text="BUSCAR" />
+      <Button layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="25.0" prefWidth="80.0" text="BUSCAR" />
+      <Button layoutX="250.0" layoutY="234.0" mnemonicParsing="false" onAction="#addShoppingCart" prefHeight="25.0" prefWidth="80.0" text="AGREGAR" />
       <Separator layoutX="-5.0" layoutY="298.0" prefHeight="16.0" prefWidth="590.0" />
       <TableView fx:id="tableSale" layoutX="12.0" layoutY="317.0" prefHeight="200.0" prefWidth="567.0">
          <columns>
@@ -51,8 +51,8 @@
          </columns>
       </TableView>
       <Separator layoutX="-4.0" layoutY="551.0" prefHeight="2.0" prefWidth="590.0" />
-      <Button layoutX="474.0" layoutY="561.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="102.0" text="CANCEL" />
-      <Button layoutX="337.0" layoutY="561.0" mnemonicParsing="false" onAction="#generateSale" text="GENERATE SALE" />
+      <Button layoutX="474.0" layoutY="561.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="102.0" text="CANCELAR" />
+      <Button layoutX="337.0" layoutY="561.0" mnemonicParsing="false" onAction="#generateSale" text="GENERAR VENTA" />
       <TextField fx:id="total" editable="false" layoutX="117.0" layoutY="562.0" prefWidth="88.0" />
        <Label layoutX="15.0" layoutY="170.0" text="ID CLIENTE:" wrapText="true" />
        <Label layoutX="15.0" layoutY="204.0" text="ID PRODUCTO:" wrapText="true" />
@@ -62,7 +62,7 @@
        <Label layoutX="347.0" layoutY="204.0" text="PRODUCTO:" wrapText="true" />
        <Label layoutX="347.0" layoutY="238.0" text="INVENTARIO:" wrapText="true" />
        <Label layoutX="347.0" layoutY="273.0" text="VENDEDOR:" wrapText="true" />
-      <Label layoutX="26.0" layoutY="565.0" text="TOTAL SALE" wrapText="true" />
+      <Label layoutX="26.0" layoutY="565.0" text="VENTA TOTAL" wrapText="true" />
       <TextField fx:id="date" editable="false" layoutX="251.0" layoutY="270.0" prefHeight="25.0" prefWidth="80.0" />
       <ComboBox fx:id="cbDiscount" layoutX="148.0" layoutY="522.0" prefHeight="24.0" prefWidth="137.0" />
       <Label layoutX="21.0" layoutY="515.0" prefHeight="39.0" prefWidth="126.0" text="Tipo de Descuento" />
