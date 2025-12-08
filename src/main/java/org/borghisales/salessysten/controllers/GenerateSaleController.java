@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -150,28 +151,46 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void searchCustomer(ActionEvent actionEvent) {
-        if(codCustomer.getText().isBlank()) {
-            setAlert(Alert.AlertType.ERROR, "El texto a buscar es una cadena vacía");
-            return;
-        }
-        int customerId;
+        String codText = codCustomer.getText() == null ? "" : codCustomer.getText().trim();
+        String nameText = customerName.getText() == null ? "" : customerName.getText().trim();
 
-        try {
-            customerId = Integer.parseInt(codCustomer.getText());
-        }
-        catch(NumberFormatException e) {
-            setAlert(Alert.AlertType.ERROR, "El texto a buscar no es un número entero.\nPor favor ingrese únicamente números.");
+        if (codText.isBlank() && nameText.isBlank()) {
+            setAlert(Alert.AlertType.ERROR, "Debe ingresar un codigo o un nombre para buscar");
             return;
         }
 
-        customer = customerDAO.searchCustomer(customerId);
+        Customer found = null;
 
-        if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + customer.name());
-            customerName.setText(customer.name());
-        } else {
-            handleCustomerNotFound();
+        if (!codText.isBlank()) {
+            try {
+                int customerId = Integer.parseInt(codText);
+                found = customerDAO.searchCustomer(customerId);
+
+                if (found != null) {
+                    //Encontrar por id
+                    setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + found.name());
+                    customer = found;
+                    customerName.setText(found.name());
+                    return;
+                }
+            } catch (NumberFormatException ignored) {
+            }
         }
+
+        String nameToSearch = !nameText.isBlank() ? nameText : codText;
+
+        if (!nameToSearch.isBlank()) {
+            found = customerDAO.searchCustomer(nameToSearch);
+            if (found != null) {
+                setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + found.name());
+                customer = found;
+                codCustomer.setText(String.valueOf(found.dni()));
+                customerName.setText(found.name());
+                return;
+            }
+        }
+
+        handleCustomerNotFound();
     }
 
     private void handleCustomerNotFound() {
@@ -435,6 +454,37 @@ public class GenerateSaleController extends MenuController implements Initializa
         String formattedId= String.format("%04d", idSale);
         serial.setText(formattedId);
     }
+
+    public void acceptSelectedProduct(Product product) {
+        if (product == null) return;
+
+        codProduct.setText(String.valueOf(product.idProduct()));
+        productName.setText(product.name());
+        price.setText(String.valueOf(product.price()));
+        stock.setText(String.valueOf(product.stock()));
+
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, product.stock(), 0);
+        quantity.setValueFactory(valueFactory);
+
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto seleccionado: " + product.name());
+    }
+
+    @FXML
+    public void openProductSelectionView(ActionEvent actionEvent) {
+        Window ownerWindow = serial.getScene() != null ? serial.getScene().getWindow() : null;
+
+        openNewStage(
+                PRODUCTSELECTION_VIEW_FXML,
+                "Seleccionar producto",
+                true,
+                ownerWindow,
+                loader -> {
+                    ProductSelectionController controller = loader.getController();
+                    controller.setParentController(this);
+                }
+        );
+    }
+
 
 
 }

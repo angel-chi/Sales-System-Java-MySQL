@@ -51,17 +51,17 @@
          <font>
             <Font size="17.0" />
          </font></TextField>
-      <TextField fx:id="customerName" editable="false" layoutX="601.0" layoutY="166.0" prefHeight="33.0" prefWidth="148.0" />
-      <TextField fx:id="productName" editable="false" layoutX="601.0" layoutY="236.0" prefHeight="33.0" prefWidth="148.0" />
-      <TextField fx:id="stock" editable="false" layoutX="601.0" layoutY="307.0" prefHeight="33.0" prefWidth="148.0" />
+      <TextField fx:id="customerName" layoutX="373.0" layoutY="166.0" prefHeight="33.0" prefWidth="148.0" />
+      <TextField fx:id="productName" editable="false" layoutX="375.0" layoutY="236.0" prefHeight="33.0" prefWidth="148.0" />
+      <TextField fx:id="stock" editable="false" layoutX="373.0" layoutY="304.0" prefHeight="33.0" prefWidth="148.0" />
       <TextField fx:id="seller" editable="false" layoutX="601.0" layoutY="375.0" prefHeight="30.0" prefWidth="148.0" />
       <Spinner fx:id="quantity" layoutX="122.0" layoutY="370.0" prefHeight="33.0" prefWidth="126.0" />
-      <Button layoutX="262.0" layoutY="155.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="54.0" prefWidth="180.0" style="-fx-background-color: #439dd0; -fx-text-fill: #fff;" text="BUSCAR">
+      <Button layoutX="532.0" layoutY="155.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="54.0" prefWidth="180.0" style="-fx-background-color: #439dd0; -fx-text-fill: #fff;" text="BUSCAR">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="262.0" layoutY="225.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="54.0" prefWidth="180.0" style="-fx-background-color: #439dd0; -fx-text-fill: #fff;" text="BUSCAR" />
-      <Button layoutX="261.0" layoutY="289.0" mnemonicParsing="false" onAction="#addShoppingCart" prefHeight="64.0" prefWidth="180.0" style="-fx-background-color: #43d051; -fx-text-fill: #fff;" text="AGREGAR" />
+      <Button layoutX="532.0" layoutY="226.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="54.0" prefWidth="180.0" style="-fx-background-color: #439dd0; -fx-text-fill: #fff;" text="BUSCAR" />
+      <Button layoutX="532.0" layoutY="299.0" mnemonicParsing="false" onAction="#addShoppingCart" prefHeight="64.0" prefWidth="180.0" style="-fx-background-color: #43d051; -fx-text-fill: #fff;" text="AGREGAR" />
       <Separator layoutX="3.0" layoutY="421.0" prefHeight="16.0" prefWidth="590.0" />
       <TableView fx:id="tableSale" layoutX="12.0" layoutY="445.0" prefHeight="227.0" prefWidth="966.0">
          <columns>
@@ -101,15 +101,15 @@
          <font>
             <Font size="17.0" />
          </font></Label>
-      <Label layoutX="490.0" layoutY="172.0" text="CLIENTE:" wrapText="true">
+      <Label layoutX="262.0" layoutY="172.0" text="CLIENTE:" wrapText="true">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <Label layoutX="487.0" layoutY="245.0" text="PRODUCTO:" wrapText="true">
+      <Label layoutX="261.0" layoutY="243.0" text="PRODUCTO:" wrapText="true">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <Label layoutX="487.0" layoutY="313.0" text="EXISTENCIA:" wrapText="true">
+      <Label layoutX="259.0" layoutY="310.0" text="EXISTENCIA:" wrapText="true">
          <font>
             <Font size="17.0" />
          </font></Label>
@@ -125,5 +125,6 @@
          <font>
             <Font size="24.0" />
          </font></TextField>
+      <Button layoutX="728.0" layoutY="226.0" mnemonicParsing="false" onAction="#openProductSelectionView" prefHeight="54.0" prefWidth="265.0" style="-fx-background-color: #439dd0; -fx-text-fill: #fff;" text="VER PRODUCTOS" />
    </AnchorPane>
 </AnchorPane>

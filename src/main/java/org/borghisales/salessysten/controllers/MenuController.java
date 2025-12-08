@@ -10,10 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.scene.Parent;
+
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class MenuController {
 
@@ -26,6 +29,7 @@ public class MenuController {
     public static final String GENERATE_SALE_VIEW_FXML = VIEWS_DIRECTORY + "GenerateSaleView.fxml";
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
+    public static final String PRODUCTSELECTION_VIEW_FXML = VIEWS_DIRECTORY + "ProductSelection.fxml";
 
 
     static Alert defaultAlert;
@@ -57,6 +61,58 @@ public class MenuController {
 
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error cargando la vista: "+ e.getMessage());
+        }
+    }
+
+    //Sobrecarga de openNewStage para configurar el controller
+    public Stage openNewStage(String fxmlFileName, String title, boolean modal, Window owner, Consumer<FXMLLoader> loaderConfigurator) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
+
+            // raiz(puede lanzar IOException)
+            Parent root = fxmlLoader.load();
+
+            // configurar el controller si se necesita
+            if (loaderConfigurator != null) {
+                try {
+                    loaderConfigurator.accept(fxmlLoader);
+                } catch (Exception e) {
+                    // evitar que fallos al configurar rompan la apertua
+                    System.err.println("Error configurando controller: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(scene);
+
+            configureStageCloseEvent(stage, fxmlFileName, title);
+
+            stage.setMinWidth(1000);
+            stage.setMinHeight(800);
+
+            if (owner != null) {
+                stage.initOwner(owner);
+            }
+            if (modal) {
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.showAndWait();
+            } else {
+                stage.show();
+            }
+
+            Platform.runLater(() -> {
+                stage.toFront();
+                stage.requestFocus();
+            });
+
+            return stage;
+
+        } catch (IOException | NullPointerException e) {
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista: " + e.getMessage());
+            return null;
         }
     }
 

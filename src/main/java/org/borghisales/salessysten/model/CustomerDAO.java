@@ -29,6 +29,25 @@ public class CustomerDAO implements CRUD<Customer> {
         }
 
     }
+
+    public Customer searchCustomer(String nombre){
+        String sql = "SELECT * FROM customer WHERE name=?";
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setString(1,nombre);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                rs.next();
+                return Customer.fromResultSet(rs);
+            }
+
+        }catch (SQLException e){
+
+            return null;
+        }
+
+    }
     @Override
     public boolean create(Customer entity) {
         String sql = "Insert into customer (dni,name,address,state,membresia) values(?,?,?,?,?)";

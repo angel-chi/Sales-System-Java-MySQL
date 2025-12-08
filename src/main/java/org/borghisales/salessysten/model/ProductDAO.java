@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDAO implements CRUD<Product>{
 
@@ -214,5 +216,24 @@ public class ProductDAO implements CRUD<Product>{
         }catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando las ventas: " + e.getMessage());
         }
+    }
+
+    public List<Product> getAllProducts() {
+        String sql = "SELECT * FROM product";
+        List<Product> list = new ArrayList<>();
+
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                list.add(Product.fromResultSet(rs));
+            }
+
+        } catch (SQLException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error cargando productos: " + e.getMessage());
+        }
+
+        return list;
     }
 }
