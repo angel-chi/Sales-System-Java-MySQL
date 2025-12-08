@@ -26,7 +26,7 @@
         </ImageView>
 
         <!-- TÍTULO -->
-        <Label text="SISTEMA DE VENTAS" underline="true">
+        <Label text="SISTEMA DE VENTAS" underline="false">
             <font>
                 <Font size="28.0" />
             </font>
@@ -35,7 +35,7 @@
         <!-- FORMULARIO -->
         <VBox fillWidth="true" spacing="15">
             <!-- DNI -->
-            <Label alignment="CENTER" text="DNI">
+            <Label alignment="CENTER" text="Usuario">
                 <font>
                     <Font size="24.0" />
                 </font>
@@ -43,7 +43,7 @@
             <TextField fx:id="user" prefHeight="30.0" />
 
             <!-- CONTRASEÑA -->
-            <Label alignment="CENTER" text="CONTRASEÑA">
+            <Label alignment="CENTER" text="Contraseña">
                 <font>
                     <Font size="24.0" />
                 </font>
@@ -52,6 +52,6 @@
         </VBox>
 
         <!-- BOTÓN INGRESAR -->
-        <Button onAction="#signIn" prefHeight="38.0" prefWidth="150.0" text="INGRESAR" />
+        <Button onAction="#signIn" prefHeight="38.0" prefWidth="150.0" text="Ingresar" />
     </VBox>
 </StackPane>

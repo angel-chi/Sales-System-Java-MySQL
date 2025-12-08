@@ -21,22 +21,22 @@
             <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />
         </columns>
       </TableView>
-      <Label layoutX="63.0" layoutY="62.0" prefHeight="26.0" prefWidth="151.0" text="IDENTIFICACIÓN:" underline="true">
+      <Label layoutX="63.0" layoutY="62.0" prefHeight="26.0" prefWidth="151.0" text="IDENTIFICACIÓN:" underline="false">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="63.0" layoutY="99.0" prefHeight="26.0" prefWidth="101.0" text="NOMBRE:" underline="true">
+      <Label layoutX="63.0" layoutY="99.0" prefHeight="26.0" prefWidth="101.0" text="NOMBRE:" underline="false">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="63.0" layoutY="128.0" prefHeight="26.0" prefWidth="101.0" text="TELÉFONO:" underline="true">
+      <Label layoutX="63.0" layoutY="128.0" prefHeight="26.0" prefWidth="101.0" text="TELÉFONO:" underline="false">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="63.0" layoutY="157.0" prefHeight="26.0" prefWidth="84.0" text="USUARIO:" underline="true">
+      <Label layoutX="63.0" layoutY="157.0" prefHeight="26.0" prefWidth="84.0" text="USUARIO:" underline="false">
          <font>
             <Font size="17.0" />
          </font>
@@ -54,7 +54,7 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="192.0" layoutY="14.0" prefHeight="30.0" prefWidth="271.0" text="GESTIÓN DE VENDEDORES" underline="true">
+      <Label alignment="CENTER" layoutX="192.0" layoutY="14.0" prefHeight="30.0" prefWidth="271.0" text="GESTIÓN DE VENDEDORES" underline="false">
          <font>
             <Font size="20.0" />
          </font>
