@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 public class HelpController extends MenuController implements Initializable {
 
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 }
