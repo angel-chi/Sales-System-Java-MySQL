@@ -27,11 +27,21 @@
         * [Reports](#reports)
 * [📧 Contacto](#-contacto)
 * [📝 Licencia](#-licencia)
-* [🛠 Cambios propuestos](#-cambios-propuestos)
-  * [Cambio 1. Clasificación por marca](#cambio-1-clasificación-por-marca)
-  * [Cambio 2. Modelar el tipo de venta](#cambio-2-modelar-el-tipo-de-venta)
-  * [Cambio 3. Crear una clase para el inventario](#cambio-3-crear-una-clase-para-el-inventario)
-  * [Cambio 4. Crear un manejo de diferentes tipos de pago](#cambio-4-crear-un-manejo-de-diferentes-tipos-de-pago)
+* [📊 Diagrama UML](#Diagrama-UML)
+* [❌ Identificación de errores](#identificación-de-errores)
+  * [Error 1. JavaFX](#JavaFx)
+  * [Error 2. Pull request](#Pull-request)
+  * [Error 3. Código](#Código)
+    * [Botón "Generar Venta"](#Generar-Venta)
+    * [Historial de ventas](#Historial-de-Ventas)
+    * [Botón "Ayuda"](#Botón-Ayuda)
+* [👨🏻‍🔧 Mejoras propuestas](#-cambios-propuestos)
+  * [1. Clasificación por marca](#cambio-1-clasificación-por-marca)
+  * [2. Modelar el tipo de venta](#cambio-2-modelar-el-tipo-de-venta)
+  * [3. Crear una clase para el inventario](#cambio-3-crear-una-clase-para-el-inventario)
+  * [4. Crear un manejo de diferentes tipos de pago](#cambio-4-crear-un-manejo-de-diferentes-tipos-de-pago)
+* [💻⚙️ Implementación en la UI](#Implementación-en-la-UI)
+* [🎥 Video de Presentación](#Video-de-Presentación)
 <!-- TOC -->
 
 # 📑 Descripcion
@@ -156,6 +166,16 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 # 📝 Licencia
 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
+
+# Diagrama UML
+
+# Identificación de Errores
+## JavaFx
+## Pull request
+## Código
+* Botón "Generar Venta"
+* Historial de ventas
+* Botón "Ayuda"
 
 # Cambios propuestos
 ## Cambio 1. Clasificación por marca
