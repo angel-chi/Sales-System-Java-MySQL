@@ -157,7 +157,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             Scene scene = new Scene(loader.load());
 
             Stage stage = new Stage();
-            stage.setTitle("Administrar cliente");
+            stage.setTitle("Gestionar cliente");
             stage.setScene(scene);
 
             stage.setResizable(false);
@@ -208,7 +208,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             Scene scene = new Scene(loader.load());
 
             Stage stage = new Stage();
-            stage.setTitle("Administrar producto");
+            stage.setTitle("Gestionar producto");
             stage.setScene(scene);
 
             stage.setResizable(false);

@@ -177,6 +177,7 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 <h1></h1>
 # Un Botón de busqueda
     una función que facilitaría la busqueda de información, especificamente sobre los clientes y productos.  Esta funcionalidad optimizaría la experiencia del usuario al permitir la localización eficiente de registros dentro de grandes volúmenes, en este caso entre los clientes y los productos, aplicando filtros sobre los registros, 
+<h1></h1>
 # Seguridad para los Vendedores
     En la administracón de vendedores resulta muy fácil eliminar/actualizar los vendedores, ya que no hay ninguna restricción para ello, esta viene siendo una función bastante peligrosa y muy malograda, ya que al borrar/actualizar al vendedor sin su consentimiento puedes perjudicarlo obviamente, sobre todo por que los reportes son individuales. Entonces se propondría que al momento de eliminarlo/actualizar al vendedor con la sesión activa se le pida permisos, como la constaseña del vendedor, ya que esta no debería ser (sí lo es) visible para otros, podría mejorarse pero complicaría mucho las cosas, por lo que por el momento con pedir la constraseña del usuario basta.
 
