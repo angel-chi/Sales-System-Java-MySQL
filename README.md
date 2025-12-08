@@ -158,10 +158,10 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 
 # APORTACIONES EQUIPO 5
 
-# ⚙️ Errores Encontrados
-### Error en HELP 
-# 🗂 Implementacion de Mejoras
+## ⚙️ Errores Encontrados
+#### Error en HELP 
+## 🗂 Implementacion de Mejoras
 
-# ⿻ Diagrama UML
+## ⿻ Diagrama UML
 //Insertar diagrama
 
