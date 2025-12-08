@@ -35,9 +35,9 @@ public class MenuController {
     }
 
 
-    public void openNewStage(String fxmlFileName, String title) {
+    public static void openNewStage(String fxmlFileName, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
+            FXMLLoader loader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
             Parent root = loader.load();
 
             Stage stage = new Stage();

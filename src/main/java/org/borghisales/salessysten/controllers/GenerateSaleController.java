@@ -149,18 +149,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void openCustomerManagementView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(CUSTOMER_VIEW_FXML));
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        stage = new Stage();
-        stage.setTitle("Manage Customer");
-        stage.setScene(scene);
-        stage.show();
+        MenuController.openNewStage(MenuController.CUSTOMER_VIEW_FXML, "Gestión de Clientes");
     }
 
 
@@ -194,18 +183,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void openProductManagementView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(PRODUCT_VIEW_FXML));
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        stage = new Stage();
-        stage.setTitle("Manage Product");
-        stage.setScene(scene);
-        stage.show();
+        MenuController.openNewStage(MenuController.PRODUCT_VIEW_FXML, "Gestión de Productos");
     }
 
 
@@ -220,9 +198,13 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     public void generateSale(ActionEvent actionEvent) {
         if (products.isEmpty()) {
+            MenuController.setAlert(Alert.AlertType.WARNING, "No hay productos en el carrito para generar la venta");
             return;
         }
-
+        if (customer == null) {
+            MenuController.setAlert(Alert.AlertType.WARNING, "Debe buscar un cliente primero");
+            return;
+        }
         Sales sales = createSalesObject();
 
         if (saveSaleAndDetails(sales)) {
@@ -232,12 +214,21 @@ public class GenerateSaleController extends MenuController implements Initializa
             total.setText("0.0");
             products.clear();
             updateReportsController();
+            MenuController.setAlert(Alert.AlertType.INFORMATION, "¡Venta generada exitosamente!");
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar la venta en la base de datos");
         }
     }
 
     private Sales createSalesObject() {
-        return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
+        //se crea la variable totalText para poder evitar errores con la , al momento de generar la venta
+        String totalText = total.getText().replace(",", ".");
+        return new Sales(
+                customer.idCustomer(),
+                idSeller,
+                serial.getText(),
+                LocalDate.parse(date.getText()),
+                Double.parseDouble(totalText),
                 Sales.State.ACTIVE);
     }
 
@@ -288,9 +279,13 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private ShoppingCart createShoppingCartObject() {
-        return new ShoppingCart(contProducts++, codProduct.getText(),
-                productName.getText(), quantity.getValue(),
-                Double.parseDouble(price.getText()));
+        String priceText = price.getText().replace(",", ".");
+        return new ShoppingCart(
+                contProducts++,
+                codProduct.getText(),
+                productName.getText(),
+                quantity.getValue(),
+                Double.parseDouble(priceText));
     }
 
     private boolean isProductAlreadyInCart(ShoppingCart product) {
