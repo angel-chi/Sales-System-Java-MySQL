@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="refactor: delete comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/UML.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +158,7 @@
       <workItem from="1765067389678" duration="15607000" />
       <workItem from="1765129822490" duration="7000" />
       <workItem from="1765134549922" duration="2357000" />
-      <workItem from="1765171155290" duration="184000" />
+      <workItem from="1765171155290" duration="1792000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />

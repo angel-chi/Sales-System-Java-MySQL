@@ -153,8 +153,12 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private void configureTable() {
         configureTableColumns();
+
+        productosEnCarrito = FXCollections.observableArrayList();
+        tableSale.setItems(productosEnCarrito); //Enlazar la lista con la tabla
+
+        //Para limpiar
         tableSale.getItems().clear();
-        productosEnCarrito = FXCollections.observableArrayList(); // products -> productosEnCarrito
     }
 
 
@@ -426,9 +430,6 @@ public class GenerateSaleController extends MenuController implements Initializa
             MenuController.setAlert(Alert.AlertType.ERROR, "El código de descuento no es válido o ha expirado.");
         }
     }
-
-
-
 
 
     private String validateInputs() {
