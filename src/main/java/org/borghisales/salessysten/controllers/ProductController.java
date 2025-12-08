@@ -78,8 +78,9 @@ public class ProductController implements Initializable {
         tableProducts.getItems().clear();
         if (products == null) {
             products = FXCollections.observableArrayList();
-            productDAO.setTable(products);
         }
+        products.clear();
+        productDAO.setTable(products);
         tableProducts.setItems(products);
     }
 

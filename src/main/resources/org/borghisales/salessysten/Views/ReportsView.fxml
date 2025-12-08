@@ -41,7 +41,7 @@
 
                         <HBox alignment="CENTER_LEFT" spacing="10" HBox.hgrow="ALWAYS">
                             <VBox alignment="CENTER" spacing="5">
-                                <Label text="AMOUNT" underline="true">
+                                <Label text="CANTIDAD" underline="true">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
@@ -58,7 +58,7 @@
                             </VBox>
 
                             <VBox alignment="CENTER" spacing="5">
-                                <Label text="DATE" underline="true">
+                                <Label text="FECHA" underline="true">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
@@ -123,7 +123,7 @@
                         </rowConstraints>
 
                         <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                            <Label text="AMOUNT PRODUCTS SOLD" textAlignment="CENTER" underline="true">
+                            <Label text="CANTIDAD DE PRODUCTOS VENDIDOS" textAlignment="CENTER" underline="true">
                                 <font>
                                     <Font size="24.0" />
                                 </font>

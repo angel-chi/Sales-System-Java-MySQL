@@ -149,8 +149,8 @@ public class GenerateSaleController extends MenuController implements Initializa
                 customer = customerDAO.searchCustomerName(customerName);
 
                 if(customer != null){
-                    setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + customer.idCustomer());
-                    codCustomer.setText(String.valueOf(customer.idCustomer()));
+                    setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + customer.dni());
+                    codCustomer.setText(String.valueOf(customer.dni()));
                 }else{
                     handleCustomerNotFound();
                 }
@@ -273,9 +273,10 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private boolean saveSaleAndDetails(Sales sales) {
-        boolean saleSaved = salesDAO.SaveSale(sales);
-        boolean detailsSaved = salesDAO.SaveDetailsSale(products, idSale);
-        return saleSaved && detailsSaved;
+        int generatedId = salesDAO.SaveSale(sales);
+
+        if(generatedId != -1) return salesDAO.SaveDetailsSale(products, generatedId);
+        return false;
     }
 
     private void cleanFieldsAndTable() {
@@ -315,6 +316,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             return;
         }
 
+
         addToCartAndUpdateTotal(product);
     }
 
@@ -342,6 +344,8 @@ public class GenerateSaleController extends MenuController implements Initializa
             return "Nombre de cliente o de producto faltante.";
         } else if (quantity.getValue() == 0) {
             return "La cantidad no puede ser 0.";
+        } else if (quantity.getValue() > Integer.parseInt(stock.getText())) {
+            return "La cantidad ingresada supera el stock disponible.";
         }
         return null;
     }
