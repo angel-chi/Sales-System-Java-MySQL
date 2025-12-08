@@ -295,6 +295,7 @@ private void addToCartAndUpdateTotal(CarritoCompra producto) {
 }
 ```
 
+
 # 🔧 Propuestas de Mejora
 
 **1. Clase abstracta "Usuario":**<br><br>
@@ -327,6 +328,51 @@ Se deberá mostrar la etiqueta en la interfaz de Venta, para que al estar genera
 Abstracción: La abstracción permite que el controlador use este método sin saber nada de SQL ni bases de datos.<br>
 Encapsulamiento: Todo el manejo de BD (conexiones, queries, errores) está oculto dentro del método del DAO.
 
+**4. Sistema de Impuesto al Valor Agregado (IVA) Configurable**<br>
+       * ¿Por que?: El sistema original carecía de un manejo de impuestos,
+         lo que lo hacía inadecuado para un entorno comercial real..<br>
+   Por qué y Relación con POO:<br>
+         -Abstracción y Encapsulación: Se planea crear la clase ConfiguracionDAO
+         para encapsular toda la lógica de acceso a la tabla de
+         configuración. Clases como GenerateSaleController ya no                          necesitaran saber SQL; simplemente llamaran a métodos como                       getValor("IVA"). Esto abstrae la complejidad de la base de
+         datos, permitiendo que el controlador se centre únicamente en
+         la lógica de la interfaz. Si en el futuro la configuración se
+         guardara en un archivo en lugar de una base de datos, solo
+         habría que modificar el DAO, sin tocar el resto del sistema.<br>
+         
+**5. Sistema de Códigos de Descuento:**<br>
+         ¿Por que?: La incapacidad de ofrecer promociones o cupones
+         limitaba el potencial comercial de la aplicación. asi como una nueva             interfaz para permitirle a los administradores gestionar los     cupones.<br>
+   Por qué y Relación con POO:<br>
+           - Modelado de Objetos: Se creó la clase CodigoDescuento para
+             modelar un cupón del mundo real como un objeto de software,
+             con sus propios atributos (estado, porcentaje, etc.).
+           - Encapsulación de Lógica de Negocio: La validación de un cupón
+             es una lógica compleja. Esta responsabilidad se encapsuló
+             dentro del CodigoDescuentoDAO. El controlador no pregunta
+             "está activo Y no ha expirado?", sino que simplemente pide
+             "valida este código". El DAO se encarga de los detalles,
+             devolviendo una respuesta simple. Esto hace que el código sea
+             más limpio y robusto.<br>
+**6. Gestión de Tipo de Pago y Entrega de Ticket:**<br>
+        ¿Por que?: Para una gestión financiera y de clientes eficaz, es
+         crucial saber cómo se pagó y qué prefirió el cliente con respecto
+         a su comprobante.<br>
+   Por qué y Relación con POO:<br>
+           -Integridad del Objeto: Al añadir tipoPago y entregaTicket a la
+             clase Venta, nos aseguramos de que un objeto Venta sea una
+             representación completa y fiel de una transacción real.
+            -Encapsulación de la Persistencia: El GenerateSaleController
+             recolecta los datos de la UI y los usa para construir un
+             objeto Venta completo. Luego, le pasa este objeto al VentaDAO.
+             El controlador no sabe cómo se guarda la venta; esa lógica
+             está encapsulada en el DAO. Esto sigue el principio de
+             Responsabilidad Única: el controlador gestiona la UI y el DAO
+             gestiona la persistencia.<br>
+
+
+
+
 # 🖥️ Implementaciones
 
 **1. Clase abstracta "Usuario"**<br>
@@ -346,6 +392,73 @@ En la base de datos se agregó una columna rol a la tabla vendedores y se modifi
 El método getBestSellingProduct obtiene el producto más vendido por el vendedor actualmente logeado mediante una consulta SQL que suma las cantidades vendidas de cada producto asociado a ese usuario. Primero se prepara un PreparedStatement donde se inserta el id del vendedor logeado, tomado desde MainController.vendedorLogeado. La consulta agrupa los productos por su identificador, ordena los resultados de mayor a menor según la cantidad total vendida y devuelve solo el primero mediante LIMIT 1. Si existe un resultado, el método construye una cadena con el nombre del producto y la cantidad vendida; en caso contrario, devuelve null.<br>
 En GenerateSaleController se muestra el producto más vendido del vendedor logeado directamente en la interfaz de la vista de generación de ventas. Para ello, en el método initialize() se llama a showBestSellingProduct(), que utiliza el ProductoDAO para obtener, a partir del id de MainController.vendedorLogeado, una cadena con el nombre del producto y la cantidad total vendida. Si el DAO no encuentra registros (es decir, el vendedor no tiene ventas asociadas), la etiqueta productoMasVendido muestra el mensaje “Sin ventas registradas”; en caso contrario, se muestra el resultado devuelto por el DAO.<br>
 Se agregó la etiqueta en la interfaz para su visualización.
+
+**4.Sistema de Impuesto al Valor Agregado (IVA):** <br><br>
+<br>
+       Cuando se abre la vista GenerateSaleView, su controlador,
+         GenerateSaleController, Lo primero que hace en su
+         método de inicialización es pedirle a la clase ConfiguracionDAO el
+         valor actual del IVA, pasándole el String "IVA" como parámetro al
+         método getValor(). El DAO devuelve el porcentaje (ej. 0.16), que
+         se guarda en una variable de instancia del controlador llamada
+         ivaRate.<br><br>
+       Ahora, cada vez que el vendedor añade o quita un producto del
+         carrito, se invoca un método privado llamado recalculateTotals().
+         Este método recorre todos los productos en la TableView del
+         carrito para calcular el subtotal. Acto seguido, calcula el
+         impuesto con la fórmula montoIva = subtotal * ivaRate. Finalmente,
+         suma ambos para obtener el totalFinal. Estos tres valores se usan
+         para actualizar los Labels correspondientes en la interfaz, para
+         que el vendedor vea el desglose en tiempo real.<br><br>
+       Al pulsar "GENERAR VENTA", el método generateSale() del
+         controlador recoge este totalFinal ya calculado y lo establece en
+         el nuevo objeto Venta que está a punto de guardar. De esta forma,
+         nos aseguramos de que el total con impuestos incluidos sea el que
+         se persiste en la base de datos.<br>
+
+   **5. Módulo de Códigos de Descuento:** <br><br><br>
+       En la interfaz de venta, el vendedor introduce un código en el
+         campo txtCodigoDescuento y pulsa "Aplicar". Esto dispara el método
+         applyDiscount() en GenerateSaleController.<br><br>
+       Dentro de este método, se obtiene el código del campo de texto,
+         por ejemplo, String codigo = "JAGUARES", y se le pasa al método
+         buscarPorCodigo(codigo) de la clase CodigoDescuentoDAO.<br><br>
+       El DAO es inteligente. Su consulta SQL no solo busca el código,
+         sino que también comprueba que su columna estado sea 'ACTIVO' y
+         que su fecha_expiracion sea posterior a la fecha actual. Si
+         encuentra un cupón que cumple todas las reglas, crea y devuelve un
+         objeto CodigoDescuento. Si no, devuelve null.<br><br>
+      De vuelta en el controlador, se comprueba si el objeto recibido es
+         null. Si no lo es, se extrae el porcentaje del objeto (ej. 0.20) y
+         se guarda en una variable de instancia, porcentajeDescuento.
+         Luego, se vuelve a llamar a recalculateTotals(). Si es null, se
+         muestra un Alert de error.<br><br>
+       El método recalculateTotals() ahora es más sofisticado. Primero
+         calcula el subtotal, luego le resta el descuento (montoDescuento =
+         subtotal * porcentajeDescuento), y solo después de obtener este
+         subtotalAjustado, procede a calcular el IVA sobre él. Esto asegura
+         que el impuesto se aplique sobre el precio ya rebajado.<br><br>
+
+**6. Registro de Tipo de Pago y Entrega de Ticket:**<br><br><br>
+       En la GenerateSaleView existen dos ComboBox llamados cbTipoPago y
+         cbEntregaTicket, que contienen Strings como "EFECTIVO" o
+         "IMPRESO".<br><br>
+       Cuando el vendedor hace clic en "GENERAR VENTA", el método
+         generateSale() se ejecuta. Justo antes de crear el objeto Venta
+         final, obtiene las selecciones del usuario de los ComboBox, por
+         ejemplo, String pagoSeleccionado = cbTipoPago.getValue().<br><br>
+       Estas variables String se utilizan para establecer los valores
+         correspondientes en el objeto nuevaVenta a través de sus setters
+         (nuevaVenta.setTipoPago(pagoSeleccionado)).<br><br>
+       Finalmente, este objeto nuevaVenta, que ahora contiene toda la
+         información de la transacción (productos, total, IVA, descuento y
+         preferencias de pago/ticket), se pasa como un único parámetro al
+         método VentaDAO.create(nuevaVenta). El DAO se encarga de
+         "desempacar" el objeto y usar sus getters para alimentar una
+         sentencia INSERT de SQL, guardando un registro completo de la
+         venta.<br><br>
+
+
 
 # 💡 Fucionalidades
 
