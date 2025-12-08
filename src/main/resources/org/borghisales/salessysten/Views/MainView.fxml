@@ -16,7 +16,7 @@
 
         <!-- Padding: Márgenes internos (30 pixeles en todos los lados) -->
         <padding>
-            <Insets top="30" bottom="30" left="30" right="30"/>
+            <Insets top="30" bottom="30" left="175" right="175"/>
         </padding>
 
       <HBox alignment="CENTER" spacing="10"> <!-- preserveRatio mantiene la proporción original de la imagen -->

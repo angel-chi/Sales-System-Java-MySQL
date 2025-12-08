@@ -54,6 +54,7 @@ public class ProductController implements Initializable {
         initializeTable();
         initializeComboBox();
         initializeProductData();
+        tableProducts.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private void initializeTable() {

@@ -53,6 +53,7 @@ public class CustomerController implements Initializable {
         initializeTable();
         initializeComboBox();
         initializeCustomerData();
+        tableCustomers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
     private void initializeCustomerData() {
         tableCustomers.getItems().clear();

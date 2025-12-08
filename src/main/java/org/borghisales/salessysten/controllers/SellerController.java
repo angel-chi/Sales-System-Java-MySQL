@@ -65,6 +65,7 @@ public class SellerController implements Initializable {
         initializeTable();
         initializeComboBox();
         initializeSellerData();
+        tableSellers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private void initializeTable() {

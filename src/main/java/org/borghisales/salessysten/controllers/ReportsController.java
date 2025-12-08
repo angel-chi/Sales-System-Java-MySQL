@@ -115,6 +115,7 @@ public class ReportsController implements Initializable {
         setupTableView();
         setupEventHandlers();
         setupComboBox();
+        tableReport.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private void setupLineChart() {
