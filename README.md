@@ -154,6 +154,12 @@ https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793
 Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
 
 # Entrega del proyecto
+
+## Diagrama UML
+
+![Diagrama UML](docs/POS_UML.png)
+
+
 ## Errores encontrados
 ### Archivo faltante (config.properties)
 No se notificaba correctamente al usuario de que configue el archivo config.properties
