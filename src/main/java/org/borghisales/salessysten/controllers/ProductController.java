@@ -58,11 +58,8 @@ public class ProductController extends MenuController implements Initializable {
         initializeComboBox();
         initializeProductData();
 
-        // Iniciamos estilos y animaciones UI/UX
         setupAnimations();
     }
-
-    // --- SECCIÓN VISUAL Y UI/UX ---
 
     private void setupAnimations() {
         // Estilos base y hover
@@ -107,8 +104,6 @@ public class ProductController extends MenuController implements Initializable {
         st.play();
     }
 
-    // --- LÓGICA DE DATOS ---
-
     private void initializeComboBox() {
         cbState.setValue(Product.State.ACTIVE);
         cbState.setItems(stateList);
@@ -116,12 +111,10 @@ public class ProductController extends MenuController implements Initializable {
         productDAO.getBrands(brandList);
         cbBrand.setItems(brandList);
 
-        // Arreglar fondo blanco de los desplegables
         styleComboBox(cbState);
         styleComboBox(cbBrand);
     }
 
-    // Método para arreglar el fondo blanco del ComboBox
     private <T> void styleComboBox(ComboBox<T> comboBox) {
         // Estilo del botón cerrado
         comboBox.setButtonCell(new ListCell<>() {
@@ -136,7 +129,6 @@ public class ProductController extends MenuController implements Initializable {
                 }
             }
         });
-        // Estilo de la lista desplegable
         comboBox.setCellFactory(new Callback<>() {
             @Override
             public ListCell<T> call(ListView<T> param) {
@@ -198,8 +190,6 @@ public class ProductController extends MenuController implements Initializable {
         }
         tableProducts.setItems(products);
     }
-
-    // --- ACCIONES DE BOTONES ---
 
     @FXML
     public void returnToMenu(ActionEvent event) {

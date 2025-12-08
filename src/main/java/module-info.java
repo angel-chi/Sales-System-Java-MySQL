@@ -7,6 +7,7 @@ module org.borghisales.salessysten {
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
     requires jdk.compiler;
+    requires mysql.connector.j;
 
 
     opens org.borghisales.salessysten to javafx.fxml;
