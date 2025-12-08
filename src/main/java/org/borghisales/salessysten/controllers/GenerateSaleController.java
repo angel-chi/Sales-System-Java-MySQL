@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -18,6 +19,7 @@ import org.borghisales.salessysten.model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -185,6 +187,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         stage.setScene(scene);
         stage.show();
     }
+
 
 
     public void searchProduct(ActionEvent actionEvent) {
