@@ -8,14 +8,15 @@
    <children>
       <AnchorPane prefHeight="484.0" prefWidth="663.0">
          <children>
-            <Button layoutX="500" layoutY="52.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="32.0" prefWidth="130" text="AGREGAR" />
-            <TableView fx:id="tableProducts" layoutX="26" layoutY="228.0" prefHeight="221.0" prefWidth="602.0">
+            <Button layoutX="620" layoutY="52.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="32.0" prefWidth="130" text="AGREGAR" />
+            <TableView fx:id="tableProducts" layoutX="26" layoutY="260.0" prefHeight="221.0" prefWidth="730.0">
                <columns>
                   <TableColumn fx:id="colId" prefWidth="120.0" text="ID PRODUCTO" />
                   <TableColumn fx:id="colName" prefWidth="111.0" text="NOMBRE" />
                   <TableColumn fx:id="colPrice" prefWidth="124.0" text="PRECIO" />
                   <TableColumn fx:id="colStock" prefWidth="124.0" text="INVENTARIO" />
                   <TableColumn fx:id="colState" prefWidth="122.0" text="ESTADO" />
+                   <TableColumn fx:id="colDistributor" prefWidth="111.0" text="DISTRIBUIDOR" />
                </columns>
             </TableView>
             <Label layoutX="26" layoutY="70.0" prefHeight="17.0" prefWidth="100" text="NOMBRE:" underline="true">
@@ -33,19 +34,27 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="name" layoutX="140" layoutY="66.0" prefHeight="25.0" prefWidth="289.0" />
-            <TextField fx:id="price" layoutX="140" layoutY="96.0" prefHeight="25.0" prefWidth="289.0" />
-            <TextField fx:id="stock" layoutX="140" layoutY="126.0" prefHeight="25.0" prefWidth="289.0" />
-            <Button layoutX="500" layoutY="90.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="32.0" prefWidth="130" text="ACTUALIZAR" />
-            <Button layoutX="500" layoutY="127.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="32.0" prefWidth="130" text="ELIMINAR" />
-            <Button layoutX="500" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="130" text="LIMPIAR CELDAS" />
-            <ComboBox fx:id="cbState" layoutX="140" layoutY="158.0" prefHeight="25.0" prefWidth="283.0" />
-            <Label layoutX="26" layoutY="155.0" prefHeight="17.0" prefWidth="100" text="ESTADO:" underline="true">
+            <Label layoutX="26" layoutY="155.0" prefHeight="26.0" prefWidth="150" text="DISTRIBUIDOR:" underline="true">
+                 <font>
+                     <Font size="17.0" />
+                 </font>
+            </Label>
+            <TextField fx:id="name" layoutX="160" layoutY="66.0" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="price" layoutX="160" layoutY="96.0" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="stock" layoutX="160" layoutY="126.0" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="distributor" layoutX="160" layoutY="155.0" prefHeight="25.0" prefWidth="289.0" />
+            <Button layoutX="620" layoutY="90.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="32.0" prefWidth="130" text="ACTUALIZAR" />
+            <Button layoutX="620" layoutY="127.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="32.0" prefWidth="130" text="ELIMINAR" />
+            <Button layoutX="620" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="130" text="LIMPIAR CELDAS" />
+            <Button layoutX="26" layoutY="220" mnemonicParsing="false" onAction="#showAllProducts" prefHeight="32" prefWidth="200" text="Ver todos los productos"/>
+            <Button layoutX="550" layoutY="220" mnemonicParsing="false" onAction="#showNoStockProducts" prefHeight="32" prefWidth="200" text="Ver productos sin inventario"/>
+            <ComboBox fx:id="cbState" layoutX="160" layoutY="188.0" prefHeight="25.0" prefWidth="283.0" />
+            <Label layoutX="26" layoutY="188.0" prefHeight="17.0" prefWidth="100" text="ESTADO:" underline="true">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label alignment="CENTER"  layoutY="10.0" prefHeight="30.0" prefWidth="650" text="ADMINISTRAR PRODUCTOS" underline="true">
+            <Label alignment="CENTER"  layoutY="10.0" prefHeight="30.0" prefWidth="780" text="ADMINISTRAR PRODUCTOS" underline="true">
                <font>
                   <Font size="20.0" />
                </font>

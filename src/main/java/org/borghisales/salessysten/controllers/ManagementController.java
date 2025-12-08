@@ -54,12 +54,12 @@ public class ManagementController extends MenuController implements Initializabl
     //Management----->generate sale
     public void openGenerateSale(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(GENERATE_SALE_VIEW_FXML,"Generador de Ventas");
+        openNewStage(GENERATE_SALE_VIEW_FXML,"Generar venta");
         closeCurrentStage(sellerButton);
     }
     public void openSalesReport(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(REPORT_VIEW_FXML,"Ventas");
+        openNewStage(REPORT_VIEW_FXML,"Reportes");
         closeCurrentStage(sellerButton);
 
     }

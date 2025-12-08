@@ -57,6 +57,7 @@ CREATE TABLE `product` (
   `price` double NOT NULL,
   `stock` int NOT NULL,
   `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
+  `distributor` varchar(50) default NULL, --Crea la columna distributor en la base de datos
   PRIMARY KEY (`idProduct`),
   UNIQUE KEY `uk_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3;
