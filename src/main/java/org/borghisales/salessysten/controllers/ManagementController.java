@@ -6,8 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
 
 import java.awt.*;
@@ -20,7 +18,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.scene.text.Text;
-import org.borghisales.salessysten.model.SellerDAO;
 
 public class ManagementController extends MenuController implements Initializable {
 
@@ -33,83 +30,44 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     private StackPane mainpage;
 
-//    @FXML
-//    private Button sellerButton;
-
-//    @FXML
-//    private TabPane tabPaneManage;
-
-//    @FXML
-//    void openSeller(ActionEvent actionEvent){
-//        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-//        openNewStage(SELLER_VIEW_FXML,"Vendedor");
-//        closeCurrentStage(sellerButton);
-//    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         idVendedor.setText(String.valueOf(MainController.sellerLog.idSeller()));
         usuarioVendedor.setText(MainController.sellerLog.dni());
-        loadPage(WELCOME_MENU_VIEW_FXML,"Bienvenido");
+        loadPage(WELCOME_MENU_VIEW_FXML);
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
-        loadPage(GENERATE_SALE_VIEW_FXML,"Carrito de compras");
+        loadPage(GENERATE_SALE_VIEW_FXML);
     }
 
     public void openCustomer(ActionEvent actionEvent) {
-        loadPage(CUSTOMER_VIEW_FXML,"Clientes");
+        loadPage(CUSTOMER_VIEW_FXML);
     }
 
     public void openProduct(ActionEvent actionEvent) {
 
-        loadPage(PRODUCT_VIEW_FXML,"Productos");
+        loadPage(PRODUCT_VIEW_FXML);
     }
 
     public void openSeller(ActionEvent actionEvent) {
-        loadPage(SELLER_VIEW_FXML,"Vendedores");
+        loadPage(SELLER_VIEW_FXML);
     }
 
     public void openSalesReport(ActionEvent actionEvent) {
-        loadPage(REPORT_VIEW_FXML,"Ventas");
+        loadPage(REPORT_VIEW_FXML);
     }
 
-    public void loadPage(String fxmlFileName, String title) {
+    public void loadPage(String fxmlFileName) {
         try {
             dateNow.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            Parent page = FXMLLoader.load(getClass().getResource(fxmlFileName));
+            Parent page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFileName)));
             mainpage.getChildren().setAll(page);
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error cargando la vista: " + e.getMessage());
         }
     }
 
-
-//    public void openCustomer(ActionEvent actionEvent) {
-//        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-//        openNewStage(CUSTOMER_VIEW_FXML, "Cliente");
-//        closeCurrentStage(sellerButton);
-//
-//    }
-//
-//    public void openProduct(ActionEvent actionEvent) {
-//        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-//        openNewStage(PRODUCT_VIEW_FXML,"Productos");
-//        closeCurrentStage(sellerButton);
-//
-//    }
-//
-//    public void openGenerateSale(ActionEvent actionEvent) {
-//        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-//        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compras");
-//        closeCurrentStage(sellerButton);
-//    }
-//    public void openSalesReport(ActionEvent actionEvent) {
-//        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-//        openNewStage(REPORT_VIEW_FXML,"Ventas");
-//        closeCurrentStage(sellerButton);
-//
-//    }
 
     public void help(ActionEvent actionEvent) {
         new Thread(() -> {

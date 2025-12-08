@@ -5,13 +5,11 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
-import org.borghisales.salessysten.controllers.ReportsController;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class ProductDAO extends Validator<Product> implements CRUD<Product>{
 

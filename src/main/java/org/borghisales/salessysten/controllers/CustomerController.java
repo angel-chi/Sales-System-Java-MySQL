@@ -1,6 +1,5 @@
 package org.borghisales.salessysten.controllers;
 
-import com.sun.tools.javac.Main;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,7 +14,6 @@ import org.borghisales.salessysten.model.CustomerDAO;
 
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {

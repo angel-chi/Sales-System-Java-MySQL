@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -19,14 +18,12 @@ import org.borghisales.salessysten.model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class GenerateSaleController extends MenuController implements Initializable {
 
     private final SalesDAO salesDAO = new SalesDAO();
-    private int idSale;
 
     private static int contProducts =1;
     private static ObservableList<ShoppingCart> products;
@@ -51,7 +48,6 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
     private double currentTotal =0;
-    private int currentStock;
 
     @FXML
     private TextField serial;
@@ -352,7 +348,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void setSerial(){
-        idSale = 1+salesDAO.IdSale();
+        int idSale = 1 + salesDAO.IdSale();
         String formattedId= String.format("%04d", idSale);
         serial.setText(formattedId);
     }
