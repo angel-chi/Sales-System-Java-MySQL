@@ -95,6 +95,7 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     public void openProveedor(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        MenuController.filePaths.put(PROVEEDOR_VIEW_FXML, MANAGEMENT_VIEW_FXML);
         openNewStage(PROVEEDOR_VIEW_FXML, "Proveedores");
         closeCurrentStage(proveedorButton);
     }
@@ -102,6 +103,7 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     public void openGenerarCompra(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        MenuController.filePaths.put(GENERAR_COMPRA_VIEW_FXML, MANAGEMENT_VIEW_FXML);
         openNewStage(GENERAR_COMPRA_VIEW_FXML, "Generar Compra");
         closeCurrentStage(tabPaneManage);
     }
@@ -109,6 +111,7 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     public void openComprasReport(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        MenuController.filePaths.put(COMPRAS_REPORT_VIEW_FXML, MANAGEMENT_VIEW_FXML);
         openNewStage(COMPRAS_REPORT_VIEW_FXML, "Informe de Compras");
         closeCurrentStage(tabPaneManage);
     }
