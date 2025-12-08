@@ -10,7 +10,6 @@ import javafx.scene.chart.PieChart;
 
 import java.sql.*;
 
-
 public class SalesDAO {
 
     public int IdSale(){
