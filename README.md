@@ -163,11 +163,13 @@ Integrantes:
 
 # ⚠️ Errores
 
-Error 1: No se encontró o no se pudo cargar la clase principal
+**Error 1: No se encontró o no se pudo cargar la clase principal**
 
 <img width="1853" height="888" alt="imagen" src="https://github.com/user-attachments/assets/a7ebe140-ef3d-4586-920d-5edd486e036c" />
 
 <img width="1853" height="888" alt="imagen" src="https://github.com/user-attachments/assets/299d681c-fa68-40d2-a411-e1e2681c46e1" />
+
+**Descripción**: Al ejecutar el comando mvn javafx:run, el programa mostraba un error, indicando que no se pudo cargar la clase principal. 
 
 **Solución**: El programa no presentaba el plugin de Maven, por lo tanto, al intentar aplicar el comando mvn javafx:run aparecía un error diciendo que no se pudo cargar la clase principal y decía **BUILD FAILURE**. La solución fue agregar el plugin de Maven faltante. Del mismo modo, se modificó el módulo debido a que anteriormente estaba de la siguiente forma:
 
@@ -202,6 +204,11 @@ Lo cual era incorrecto porque, en este caso, no debería apuntar a HelloApplicat
 </plugin>
 ```
 
+**Error 2: Error en el botón "HELP"**
+
+**Descripción**: Anteriormente, al intentar presionar el botón "HELP", se terminaba la ejecución del programa.
+
+**Solución**: Se realizò un nuevo controller y una nueva vista para la ventana help, de esta manera se soluciono el error y ahora al presionar el boton se manda a una nueva ventana, la cual menciona que està en mantenimiento ese apartado.
 
 # ⚙️ Mejoras propuestas
 
