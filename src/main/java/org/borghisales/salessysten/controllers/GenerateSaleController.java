@@ -314,7 +314,6 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
 
-
         addToCartAndUpdateTotal(product);
     }
 
@@ -342,6 +341,8 @@ public class GenerateSaleController extends MenuController implements Initializa
             return "Nombre de cliente o de producto faltante.";
         } else if (quantity.getValue() == 0) {
             return "La cantidad no puede ser 0.";
+        } else if (quantity.getValue() > Integer.parseInt(stock.getText())) {
+            return "La cantidad ingresada supera el stock disponible.";
         }
         return null;
     }

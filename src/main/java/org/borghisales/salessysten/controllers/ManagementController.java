@@ -62,6 +62,7 @@ public class ManagementController extends MenuController implements Initializabl
     }
 
     public void openProduct(ActionEvent actionEvent) {
+
         loadPage(PRODUCT_VIEW_FXML,"Productos");
     }
 
@@ -73,13 +74,13 @@ public class ManagementController extends MenuController implements Initializabl
         loadPage(REPORT_VIEW_FXML,"Ventas");
     }
 
-    public void loadPage(String fxmlFileName, String title){
-        try{
+    public void loadPage(String fxmlFileName, String title) {
+        try {
             dateNow.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             Parent page = FXMLLoader.load(getClass().getResource(fxmlFileName));
             mainpage.getChildren().setAll(page);
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error cargando la vista: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista: " + e.getMessage());
         }
     }
 
