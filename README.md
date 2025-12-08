@@ -167,13 +167,19 @@ La pantalla principal muestra las siguientes ventanas
 | **Solución Implementada** | Implementación de manejo de errores y validación de entrada                                                                                                                                                       |
 | **Implementación**        | Se añadió una validación del campo y un bloque try-catch en el controlador. Si la entrada no es un valor numérico válido, se muestra una alerta al usuario indicándole el error y solicitando una entrada válida. |
 
-### 3. Error (describir error)
+### 3. Error al mostrar el nombre de las ventanas (No se actualizaba el título)
 | Aspecto                   | Detalles      |
 |:--------------------------|:--------------|
 | **Descripción del Error** | Escribir aqui |
 | **Solución Implementada** | Escribir aqui |
 | **Implementación**        | Escribir aqui |
 
+### 4. Error (describir error)
+| Aspecto                   | Detalles                                                                                                                                                                                                                                                                                                                      |
+|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Descripción del Error** | Al abrir una ventana nueva y después cerrarla, la nueva ventana mantenía el nombre de la ventana cerrada.                                                                                                                                                                                                                     |
+| **Solución Implementada** | Asignar a cada ventana su nombre correspondiente.                                                                                                                                                                                                                                                                             |
+| **Implementación**        | Se creo un HashMap llamado fxmlTitles para asignarle a cada ventana su nombre correspondiente. Luego mediante un constructor se inicializa el fxmlTitle, por último en el método `configurateStageCloseEvent` se creó una variable que almacene el título de la ventana padre que debe mostrarse al cerrar la ventana actual. |
 
 
 ---
@@ -216,7 +222,6 @@ La pantalla principal muestra las siguientes ventanas
 * **Resultado:**
     * Los módulos de alto nivel (Controladores) ya no dependen directamente de los módulos de bajo nivel (DAOs concretos).
     * Esto desacopla la aplicación, facilitando la posibilidad de cambiar el mecanismo de persistencia sin la necesidad de modificar el código del Controlador.
-
 
 ---
 ## Sales
