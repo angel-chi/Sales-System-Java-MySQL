@@ -283,7 +283,7 @@ De las propuestas mencionadas implementamos la verificación para acceder a func
 
 ## 🎥 Video del proyecto
 
-**Link:** 
+**Link:** https://youtu.be/_y2rClTut1U
 
 
 ## 💼 Integrantes del equipo
@@ -291,7 +291,8 @@ De las propuestas mencionadas implementamos la verificación para acceder a func
 Jarib Alberto Novelo Hernández
 - **Matricula**: 24216374
 - **Usuario de github**: novelo03
-- **Rol desempeñado**:
+- **Rol desempeñado**: Desarrollé el menú de Help, creando su Controller, View y metodo para abrir la ventana en ManagementController, tambien la implementación de la funcionalidad de requestPassword, que es un filtro extra para abrir o realizar acciones que requieran de una verificación extra antes de ejecutarse, fue implementada siguiendo la relación de herencia en POO, ya que puede ser heredada e implementada a cualquier función de cualquier clase de la cual herede MenuController. Me encargué de corregir errores (menú help y openNewStage no funcionando correctamente y desplegando la ventana nueva en un tamaño poco practico), me encargué de la traducción de interfaces que a su vez sean más facil de interpretar por cualquier usuario y reutilización de codigo ya existente.
+
 Cristian Uriel Sanchez Sanchez
 - **Matricula**: 21203170
 - **Usuario de github**: Cristian271
@@ -300,6 +301,7 @@ Cristian Uriel Sanchez Sanchez
 
 
 [⬆ Volver al inicio](#title)<br>
+
 
 
 
