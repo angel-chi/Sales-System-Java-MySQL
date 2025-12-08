@@ -56,7 +56,7 @@ public class MenuController {
             stage.setMinHeight(600);
             // Mantiene el tamaño dinámico.
             stage.setResizable(false);
-            // Contrar ventana.
+            // Centrar ventana.
             stage.centerOnScreen();
             stage.setTitle(title);
             stage.setScene(scene);
