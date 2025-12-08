@@ -100,6 +100,9 @@ Esto solo es un detalle visual y pudo ser ignorado; sin embargo, aprovechamos a 
 **Solucion:** Se agrega una opción en todas las vistas para regresar al menú de administración, lo que garantíza que su nombre se actualize, entonces ahora cada pestaña termina el programa al cerrarse, manteniendo la lógica para el usuario.
 
 # Diagramas UML
+<p align="center">
+  <img src="UML_drawio.svg" alt="Diagrama UML" width="900">
+</p>
 
 # Propuestas de mejora
 A continuación se presentan las cuatro propuestas de modificación al software, las cuales tienen el objetivo de mejorar la experiencia del usuario, así como recomendar mejoras a la estructura de codigo de Borghi.
