@@ -16,7 +16,7 @@
   * [Formato de precios](#formato-de-precios)
   * [Nombre de pestañas](#nombre-de-pestañas)
   * [Precio/inventario negativos](#precioinventario-negativos-)
-* [Diagramas UML](#diagramas-uml)
+* [Diagrama UML](#diagrama-uml)
 * [Propuestas de mejora](#propuestas-de-mejora)
   * [Correo electronico y telefono de clientes](#correo-electronico-y-telefono-de-clientes)
   * [Descuentos en los productos](#descuentos-en-los-productos)
@@ -163,9 +163,11 @@ if (!validateInventoryPrice()) {
     return;
 }
 ```
-# Diagramas UML
+# Diagrama UML
+Tras haber analizado la estructura del codigo, creemos que esta es una representación universal del modelo del software:
+
 <p align="center">
-  <img src="src/main/resources/images/UML.png" alt=""/>
+  <img src="src/main/resources/images/UML%20Ricardo-Roberto.drawio.png" alt=""/>
 </p>
 
 # Propuestas de mejora
