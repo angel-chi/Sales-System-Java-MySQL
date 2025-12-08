@@ -110,40 +110,53 @@ Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder,
 # 💡 Fucionalidades
 
 ## Inicio de sesión
-Para iniciar sesión, se requiere el DNI y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el DNI se asocia con 'dni' y la contraseña con 'user'.
+Para iniciar sesión, se requiere el Usuario y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el Usuario se asocia con 'dni' y la contraseña con 'user'.
 
 <p align="center">
   <img src="src/main/resources/images/login.png" />
 </p>
 
 ## Pantalla principal
-La pantalla principal muestra las siguientes ventanas
-* Menu: incluyen la posibilidad de salir o visitar la documentación
-<p align="center">
-  <img src="src/main/resources/images/menu.png" />
-</p>
 
-* Sales: Permite generar nuevas ventas.
-<p align="center">
-  <img src="src/main/resources/images/sales.png" />
-</p>
-
-* Management: Ofrece operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para clientes, productos y vendedores.
+* Control de punto de venta: Ofrece el acceso completo al usuario a todas las interfaces disponibles del punto de venta organizada en 3 secciones principales: VENTAS, GESTIÓN Y CATÁLOGO, REPORTES. Proporcionando una interfaz amigable con el usuario
 <p align="center">
   <img src="src/main/resources/images/management.png" />
 </p>
 
-* Reports: Aquí se encuentran las operaciones de reportes y estadísticas relacionadas.
+## Generar Venta
+
+* En este apartado el usuario podra generar sus ventas añadiendo el codigo del producto y el usuario del cliente, todo mediante una interfaz amigable con el usuario
 <p align="center">
-  <img src="src/main/resources/images/reports.png" />
+  <img src="src/main/resources/images/generarVenta.png" />
 </p>
 
-## Sales
-https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d-83f9b4807ac5
-## Management
-https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b-218c9ca25b10
-## Reports
-https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
+## Clientes
+* En este apartado el usuario podra llevar un control de sus clientes, podra añadir o actualizar, en dado caso de querer eliminar un cliente debera ingresar la clave unica de administrador para poder realizar dicha acción
+<p align="center">
+  <img src="src/main/resources/images/controlClientes.png" />
+</p>
+
+## Productos
+* En este apartado el usuario podra añadir, eliminar o actualizar el inventario de productos del punto de venta
+<p align="center">
+  <img src="src/main/resources/images/productos.png" />
+</p>
+
+## Vendedores
+* En este apartado, el administrador del punto de venta, quien se espera que sea el dueño del loca, podra eliminar a sus vendedores (empleados) o actualizar la informacion de los mismos, unicamente el o las personas que tengan la clave unica de acceso, podran acceder a este apartado
+<p align="center">
+  <img src="src/main/resources/images/vendedor.png" />
+</p>
+
+## Cierre de ventas
+* En este apartado, los vendedores podran hacer su corte y obtener un .PDF, .XLSX o .CSV con el registro de todas las ventas realizadas hasta el momento de la consulta, al igual que una estadistica para mayor claridad
+<p align="center">
+  <img src="src/main/resources/images/reportesHistorial.png" />
+</p>
+
+<p align="center">
+  <img src="src/main/resources/images/reportesEst.png" />
+</p>
 
 # 📧 Contacto
 Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
@@ -195,7 +208,7 @@ Error 2: Creación de ventanas emergentes con tamaño erróneo
 Error 3: Error al generar una venta 
 - _**¿Cuándo ocurrió?:**_ Cuando añadias una venta (Error de ejecución).
 - _**Causa:**_ Idioma de la computadora, si se encuentra en ingles parece no generar error pero si se encuentra en español si, esto debido a que en ingles se usa comas para separar enteros de decimales y en español se usa punto decimal.
-- _**Solución:**_ El método Double.parseDouble esperaba un punto decimal en su valor y recibía una coma, por lo que antes de que el método reciba el valor retornado por price.getText() se añadió un .replace(",", ".") para sustituir la coma por punto decimal
+- _**Solución:**_ El método Double.parseDouble esperaba un punto decimal en su valor y recibía una coma, por lo que antes de que el método reciba el valor retornado por price.getText() se añadió un .replace(",", ".") concatenado a price.getText() para sustituir la coma por punto decimal y asi Double.parseDouble reciba un parametro valído
 
 
 ## 💱 Cambios en la UI
@@ -278,8 +291,15 @@ De las propuestas mencionadas implementamos la verificación para acceder a func
 Jarib Alberto Novelo Hernández
 - **Matricula**: 24216374
 - **Usuario de github**: novelo03
-- **Rol desempeñado**:  
+- **Rol desempeñado**:
+Cristian Uriel Sanchez Sanchez
+- **Matricula**: 21203170
+- **Usuario de github**: Cristian271
+- **Rol desempeñado**: Re estructure el codigo de todas los archivos fxml para que se facilite la manipulación y se puedan agregar funcionalidades nuevas mas facilmente, Desarrolle una interfaz de menu completamente nueva, asegurandome que sea amigable con el usuario. Realice traducciones de una buena parte de las interfaces, repare errorres criticos como: Error al generar venta y Desahabilite el boton de help para dar lugar a que mi compañero desarrolle una solución a ese problema. Tambien añadí la funcionalidad de buscar a un usuario a través de su id y se auto rellenen todos los campos con sus datos y asi facilitar la edición o eliminación del cliente.
 
 
 
 [⬆ Volver al inicio](#title)<br>
+
+
+
