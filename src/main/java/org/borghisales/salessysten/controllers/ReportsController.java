@@ -10,10 +10,6 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 import java.time.LocalDate;
 
-
-
-
-
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -33,6 +29,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class ReportsController implements Initializable {
+    private final SalesDAO salesDAO = new SalesDAO();
 
     private static final String[] monthsShowed = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     private static int idxMonth = LocalDate.now().getMonth().getValue()-1;
@@ -43,8 +40,6 @@ public class ReportsController implements Initializable {
 
     private final ObservableList<String> exportList = FXCollections.observableArrayList(".PDF",".XLSX",".CSV");
 
-
-    private final SalesDAO salesDAO = new SalesDAO();
     private static ObservableList<Sales> sales = null;
     private static ObservableList<PieChart.Data> pieChartData = null;
     private static XYChart.Series<String,Integer> lineChartData = null;
@@ -103,8 +98,6 @@ public class ReportsController implements Initializable {
         }
     }
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupLineChart();
@@ -142,7 +135,7 @@ public class ReportsController implements Initializable {
     private void setupPieChart() {
         if (pieChartData == null) {
             pieChartData = FXCollections.observableArrayList();
-            ProductDAO.setPieChart(pieChartData);
+            salesDAO.setPieChart(pieChartData);
 
             pieChartData.forEach(data ->
                     data.nameProperty().bind(

@@ -112,7 +112,6 @@ public class MainController extends MenuController implements Initializable {
 
     private void updateEyeIcon(String path) {
         try {
-            // Carga la imagen desde recursos
             imgEye.setImage(new Image(getClass().getResourceAsStream(path)));
         } catch (Exception e) {
             System.err.println("No se pudo cargar la imagen del ojo: " + path);

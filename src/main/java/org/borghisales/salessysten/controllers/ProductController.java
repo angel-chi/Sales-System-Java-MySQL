@@ -188,6 +188,9 @@ public class ProductController extends MenuController implements Initializable {
             products = FXCollections.observableArrayList();
             productDAO.setTable(products);
         }
+        /*Actualiza la tabla de products cada que se abre sin tener que cerrar el programa*/
+        products.clear();
+        productDAO.setTable(products);
         tableProducts.setItems(products);
     }
 

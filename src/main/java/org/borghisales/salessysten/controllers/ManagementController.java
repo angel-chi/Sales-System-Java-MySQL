@@ -71,8 +71,6 @@ public class ManagementController extends MenuController implements Initializabl
         st.play();
     }
 
-    // --- MÉTODOS DE ACCIÓN (Lógica original mantenida) ---
-
     @FXML
     void openSeller(ActionEvent actionEvent){
         openNewStage(SELLER_VIEW_FXML,"Seller");
@@ -100,11 +98,22 @@ public class ManagementController extends MenuController implements Initializabl
     }
 
     public void help(ActionEvent actionEvent) {
+        String os = System.getProperty("os.name").toLowerCase();
+
         try {
-            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
+            if (os.contains("nix") || os.contains("nux")) {
+                Runtime.getRuntime().exec("xdg-open https://github.com/Borghii/Sales-System");
+            }
+            else if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
+            }
+            else {
+                setAlert(Alert.AlertType.WARNING, "No se pudo detectar un navegador predeterminado.");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"The URL could not be opened. Check your internet connection.");
+            setAlert(Alert.AlertType.ERROR,"No se pudo abrir la URL. Verifica tu conexión o navegador.");
         }
     }
 

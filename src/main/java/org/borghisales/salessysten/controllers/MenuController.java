@@ -42,7 +42,6 @@ public class MenuController {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
             Parent root = fxmlLoader.load();
 
-            // FADE IN al abrir la nueva vista
             FadeTransition fadeIn = new FadeTransition(Duration.millis(450), root);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
