@@ -154,3 +154,60 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
 [⬆ Volver al inicio](#title)<br>
+
+
+# APORTACIONES EQUIPO 5
+
+## ⚙️ Errores Encontrados
+#### Error en botòn HELP 
+Descripciòn: El problema era que, cuando accedìas a la ventana de inicio, al querer presionar el botòn "HELP" no realizaba ninguna acciòn, solo se quedaba trabado.
+Soluciòn: Se importò la clase Platform de java fx, la cual nos cede el control de el hilo de java fx, es decir, nos permite implementar un hilo nuevo, una acciòn nueva sin necesidad de que se termine la ejecuciòn de la interfaz. De este modo, ahora se permite ejecutar las acciones destinadas del help sin problema alguno, la funciǹ de este botòn consiste en redireccionar al usuario al repositorio de github del creador del proyecto.
+
+#### Problema para generar una venta
+Descripciòn: Al entrar a cualquier espacio que necesitara generar una nueva venta, esta permitìa llenar los campos pero al intentar generarla no realizaba acciòn.
+Soluciòn: El problema se generaba debido a que se estaban tomando los campos nùmericos con entradas incorrectas, por ello se quedaba congelado asì que se solucionò un try-catch que permitìa leer los datos correctos o imprimir un error.
+
+#### Problema para buscar un cliente o producto no registrado dentro de las ventas
+Descripciòn: Al entrar buscar un producto o cliente no registrado no permitìa la busqueda.
+Soluciòn: Se añadiò un try-catch que intentaba buscar los identificadores dentro de la base de datos y, sin no los encuentra, arroja un error.
+
+#### Tamaño de la interfaz
+Descripciòn: Al comenzar a ejecutar la interfaz de usuario o abrir cualquier ventana el tamaño no se adaptaba, evitando que los campos de informaciòn fueran visibles y los botones no fueran accesibles.
+Soluciòn: Se implmentaron cambios en los parametros de la interfaz desde los archivos fxml.
+
+#### Problemas al agregar productos
+Descripciòn: Al entrar al espacio de agregar un nuevo producto, la interfaz no permitìa generarlo, solo se quedaba pausado en la ventana.
+Soluciòn: Como la acciòn de agregar un producto solo toma las entradas y llama al constructor, lo que se hizo fue, antes de llamar al constructor del objeto, hacer una verificaciòn que se asegura que los tipos de datos ingresados coincidan con el tipo de dato establecido en la clase, para posteriormente llamar al constructor y ahora sì ingresarlo en la base de datos.
+
+## 🗂 Implementaciòn de Mejoras
+#### Interfaz màs intuitiva
+La interfaz propuesta por el creador era poco intuitiva para un usuario comùn, asì que se realizaron varios cambios para volverla màs sencilla.
+El principal cambio fue en las etiquetas que se muestran, se tradujeron todas del idioma inglès, y aquellas que tenìan algùn tìtulo tècnico fueron sustituidas por algùn nombre màs comùn.
+Se cambiaron os tamaños de las ventanas y se agrandaron los textos mostrados para que la interfaz sea màs legible.
+Ademàs se hizo una restructuraciòn general de botones y espacios de escritura para que estos se encuentren mejor distribuidos y le den a la interfaz una visiòn màs limpia y còmoda mediante nuevas hojas de estilo.
+Se añadiò el mètodo loadPage, que se convirtiò uno de los mètodos principales, ya que permite que cada vez que se cargue una nueva view se mabtenga en una sola ventana, sin abrir una nueva para cada apartado. 
+
+#### Comprobaciòn de campos al ingresar un nuevo objeto
+La interfza original permitìa ingresar un cliente, vendedor o producto nuevo incluso si los campos de informaciòn estaban vacìos. Asì que se decidiò agregar una nueva clase abstracta Validator con un mètodo validate, que solo tiene como entrada una entidad y un mètodo nombrado validate, el cual es heradado en todas las demàs clases con el propòsito de verificar que los campos de informaciòn no se encuentran vacìos. Si los campos no son llenados por completo, antes de ejecutar una acciòn en la base de datos, se abre la ventana emergente de que la acciòn no se puede concretar.
+
+#### Comprobaciòn de datos
+El programa maneja la entrada de datos como entradas String lo que provoca que no se de ningùn error sin importar què dato se ingrese, sin embargo, hay campos que deben de tener un formato especìfico, por ejemplo el telèfono en los vendedores deben ser puros nùmeros entre 8 y 15 dìgitos, los id deben ser una secuencia de nùmeros y, en el producto el precio o existencias no deben ser negativos ni 0 (por coherencia). Asì que lo que se hizo fue implementar nuevas funciones sobre el mètodo validate ya existente, que se asegurara de que los datos cumplieran estas caracterìsticas, si en el proceso de validaciòn se encontraba una contradicciòn inmediatamente se termina el proceso y se lanza una ventana emergente al usuario con la advertencia de que la informaciòn es incorrecta.
+
+#### Verificaciòn antes de eliminar
+Desde la gestiòn de producto cliente y vendedor existe la acciòn de eliminar a cada uno de estos, desde su vena correpondiente. Lo que observamos es que se podìa seleccionar y simplemente eliminar la informaciòn, lo que consideramos un tanto peligroso en el uso real, por ello implementamos una funciòn que, dependiendo del resgitro seleccionado para eliminar, ejecuta una ventana emergente que indica que la acciòn que se realiza es la eliminaciòn y el nombre del producto o la persona para que el usuario vea què es lo que se eliminarà, pidiendo la confirmaciòn para realizar la eliminaciòn o, de lo contrario cancelar la acciòn y simplemente quedarse en la ventana esperando por una nueva acciòn.
+
+#### Espacio de bùsqueda en la generaciòn de ventas
+Ademàs de la soluciòn del problema inicial que se tenìa en este espacio se añadiò una funcionalidad para que el usuario pueda buscar el id o el nombre tanto del prducto como del cliente. En caso de que buscara por algo que no se encuentra registrado en la base de datos lo que se hace es abrir una ventana que explica que no està registrado y se le prroporciona la opciòn de agregarlo como un elemento nuevo, si el usuario lo acepta, se redirige tanto a la venta como el proceso de gestiòn de clientes o productos, segùn sea el caso.
+
+#### Nuevos elemntos de la UI
+Dentro del nuevo diseño de la interfaz dentro de las ventanas de esta se añadiò informaciòn que se muestra todo el tiempo, como la fecha, el id y el usuario que corresponden segùn el inicio de sesiòn. Ademàs se añadiò un nuevo controlador Welcome para gestionar esta nueva view y guardar los datos que deben mostrar.
+
+
+
+
+## ⿻ Diagrama UML
+//Insertar diagrama
+
+## 🎥 Vìdeo
+//Insertar link
+

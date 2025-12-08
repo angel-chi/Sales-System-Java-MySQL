@@ -25,7 +25,7 @@
         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="31.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #6C4A95; -fx-border-width: 5; -fx-border-radius: 6;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #364958; -fx-border-width: 5; -fx-border-radius: 6;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <children>
                 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="373.0">
                     <children>
@@ -60,19 +60,18 @@
                                 <Insets bottom="35.0" left="35.0" right="35.0" top="20.0" />
                             </VBox.margin>
                             <children>
-                                <TextField fx:id="user" promptText="Usuario" styleClass="minimalistic-field" stylesheets="@style.css" GridPane.rowIndex="1" />
-                        <PasswordField fx:id="password" promptText="Contrasenia" stylesheets="@style.css" GridPane.rowIndex="3">
-                           <styleClass>
-                              <String fx:value="minimalistic-field" />
-                              <String fx:value="password-field" />
-                           </styleClass>
-                        </PasswordField>
-                                <Label alignment="CENTER" text="Iniciar sesion" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                                <TextField fx:id="user" promptText="Usuario" styleClass="modern-field" stylesheets="@style.css" GridPane.rowIndex="1" />
+                        <PasswordField fx:id="password" promptText="Contrasenia" styleClass="modern-field" stylesheets="@style.css" GridPane.rowIndex="3" />
+                                <Label alignment="CENTER" styleClass="prompt-text" text="Iniciar sesion" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                                     <font>
                                         <Font name="JetBrainsMono NF Regular" size="13.0" />
                                     </font>
                                 </Label>
-                                <Button mnemonicParsing="false" onAction="#signIn" styleClass="minimalistic-button" stylesheets="@style.css" text="Iniciar sesion" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                                <Button mnemonicParsing="false" onAction="#signIn" stylesheets="@style.css" text="Iniciar sesion" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                           <styleClass>
+                              <String fx:value="button-modern" />
+                              <String fx:value="button-info" />
+                           </styleClass></Button>
                             </children>
                         </GridPane>
                     </children>
