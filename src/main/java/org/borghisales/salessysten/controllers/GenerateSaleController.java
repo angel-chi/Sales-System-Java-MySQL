@@ -49,6 +49,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
     private double currentTotal =0;
+    private int currentStock;
 
     @FXML
     private TextField serial;
