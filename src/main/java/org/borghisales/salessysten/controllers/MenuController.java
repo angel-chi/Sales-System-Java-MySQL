@@ -23,8 +23,6 @@ public class MenuController {
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
     public static final String HELP_VIEW_FXML = VIEWS_DIRECTORY + "HelpView.fxml";
-
-
     static Alert defaultAlert;
     static ButtonType acceptButton = new ButtonType("Aceptar");
     public static HashMap<String, String > rutaArchivos = new HashMap<>();
