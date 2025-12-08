@@ -159,8 +159,16 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 # APORTACIONES EQUIPO 5
 
 ## ⚙️ Errores Encontrados
-#### Error en HELP 
-## 🗂 Implementacion de Mejoras
+#### Error en botòn HELP 
+Descripciòn: El problema era que cuando accedìas ala ventana de inicio al querer presionar el botòn "HELP" no realizaba ninguna acciòn se quedaba trabado.
+Soluciòn: Se inmportò la clase Platform de java fx, la cual nos permite controlar el hilo de java fx, es decir, nos permite implementar un hilo nuevo, una acciòn nueva sin necesidad de que se termine la ejecuciòn de la interfaz. D este modo ahora se permite ejecutar las acciones destinadas del help sin problema, la cual consiste en redireccionar al usuario al repositorio de github del creador del proyecto.
+
+#### Problema para generar ventas
+Descripciòn: 
+
+#### Tamaño de la interfaz
+#### Problemas al agregar productos
+## 🗂 Implementaciòn de Mejoras
 
 ## ⿻ Diagrama UML
 //Insertar diagrama
