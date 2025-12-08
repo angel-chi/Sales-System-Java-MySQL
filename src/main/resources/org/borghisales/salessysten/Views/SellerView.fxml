@@ -11,43 +11,43 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SellerController">
     <children>
-        <Button layoutX="500" layoutY="76" text="AÑADIR" prefWidth="110" onAction="#addSeller"/>
-        <Button layoutX="500" layoutY="116" text="ACTUALIZAR" prefWidth="110" onAction="#updateSeller"/>
-        <Button layoutX="500" layoutY="156" text="BORRAR" prefWidth="110" onAction="#deleteSeller"/>
-        <Button layoutX="500" layoutY="196" text="LIMPIAR" prefWidth="110" onAction="#cleanCellsScreen"/>
-        <TableView fx:id="tableSellers" layoutX="25" layoutY="300" prefWidth="600" prefHeight="300">
+        <Button layoutX="500" layoutY="76" onAction="#addSeller" prefWidth="110" text="AÑADIR" />
+        <Button layoutX="500" layoutY="116" onAction="#updateSeller" prefWidth="110" text="ACTUALIZAR" />
+        <Button layoutX="500" layoutY="156" onAction="#deleteSeller" prefWidth="110" text="BORRAR" />
+        <Button layoutX="500" layoutY="196" onAction="#cleanCellsScreen" prefWidth="110" text="LIMPIAR" />
+        <TableView fx:id="tableSellers" layoutX="25" layoutY="300" prefHeight="300" prefWidth="600">
             <columns>
-                <TableColumn fx:id="colId" prefWidth="120" text="IDVENTA"/>
-                <TableColumn fx:id="colDni" prefWidth="120" text="IDENTIFICACIÓN"/>
-                <TableColumn fx:id="colName" prefWidth="120" text="NOMBRE"/>
-                <TableColumn fx:id="colPhone" prefWidth="120" text="TELÉFONO"/>
-                <TableColumn fx:id="colState" prefWidth="120" text="ESTADO"/>
+                <TableColumn fx:id="colId" prefWidth="120" text="NO. VENDEDOR" />
+                <TableColumn fx:id="colDni" prefWidth="120" text="ID" />
+                <TableColumn fx:id="colName" prefWidth="120" text="NOMBRE" />
+                <TableColumn fx:id="colPhone" prefWidth="120" text="TELÉFONO" />
+                <TableColumn fx:id="colState" prefWidth="120" text="ESTADO" />
             </columns>
         </TableView>
-        <Label layoutX="175" layoutY="20" text="GESTIÓN VENDEDOR" underline="true">
+        <Label layoutX="200.0" layoutY="20" text="GESTIÓN DE VENDEDORES" underline="true">
             <font>
-                <Font size="22"/>
+                <Font size="22" />
             </font>
         </Label>
-        <Label layoutX="40" layoutY="80" text="IDENTIFICACIÓN:" underline="true">
-            <font><Font size="16"/></font>
+        <Label layoutX="40" layoutY="80" text="ID:" underline="true">
+            <font><Font size="16" /></font>
         </Label>
-        <TextField fx:id="dni" layoutX="180" layoutY="76" prefWidth="300"/>
+        <TextField fx:id="dni" layoutX="148.0" layoutY="78.0" prefWidth="300" />
         <Label layoutX="40" layoutY="120" text="NOMBRE:" underline="true">
-            <font><Font size="16"/></font>
+            <font><Font size="16" /></font>
         </Label>
-        <TextField fx:id="name" layoutX="180" layoutY="116" prefWidth="300"/>
+        <TextField fx:id="name" layoutX="148.0" layoutY="118.0" prefWidth="300" />
         <Label layoutX="40" layoutY="160" text="TELÉFONO:" underline="true">
-            <font><Font size="16"/></font>
+            <font><Font size="16" /></font>
         </Label>
-        <TextField fx:id="phone" layoutX="180" layoutY="156" prefWidth="300"/>
+        <TextField fx:id="phone" layoutX="148.0" layoutY="156.0" prefWidth="300" />
         <Label layoutX="40" layoutY="200" text="USUARIO:" underline="true">
-            <font><Font size="16"/></font>
+            <font><Font size="16" /></font>
         </Label>
-        <TextField fx:id="user" layoutX="180" layoutY="196" prefWidth="300"/>
+        <TextField fx:id="user" layoutX="148.0" layoutY="198.0" prefWidth="300" />
         <Label layoutX="40" layoutY="240" text="ESTADO:" underline="true">
-            <font><Font size="16"/></font>
+            <font><Font size="16" /></font>
         </Label>
-        <ComboBox fx:id="cbState" layoutX="180" layoutY="236" prefWidth="300"/>
+        <ComboBox fx:id="cbState" layoutX="148.0" layoutY="238.0" prefWidth="300" />
     </children>
 </AnchorPane>

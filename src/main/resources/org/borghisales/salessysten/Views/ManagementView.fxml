@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="650.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
+<AnchorPane prefHeight="650.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
     <children>
         <TabPane fx:id="tabPaneManage" prefHeight="650.0" prefWidth="650.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -11,8 +14,8 @@
                     <content>
                         <VBox alignment="CENTER" spacing="20">
                             <children>
-                                <Button text="AYUDA" prefWidth="160" prefHeight="70" onAction="#help"/>
-                                <Button text="SALIR" prefWidth="160" prefHeight="70" onAction="#exit"/>
+                                <Button onAction="#help" prefHeight="70" prefWidth="160" text="AYUDA" />
+                                <Button onAction="#exit" prefHeight="70" prefWidth="160" text="SALIR" />
                             </children>
                         </VBox>
                     </content>
@@ -21,7 +24,7 @@
                     <content>
                         <VBox alignment="CENTER" spacing="20">
                             <children>
-                                <Button text="GENERAR VENTA" prefWidth="160" prefHeight="70" onAction="#openGenerateSale"/>
+                                <Button onAction="#openGenerateSale" prefHeight="70" prefWidth="160" text="GENERAR VENTA" />
                             </children>
                         </VBox>
                     </content>
@@ -30,9 +33,9 @@
                     <content>
                         <VBox alignment="CENTER" spacing="20">
                             <children>
-                                <Button text="CLIENTE" prefWidth="160" prefHeight="70" onAction="#openCustomer"/>
-                                <Button text="PRODUCTO" prefWidth="160" prefHeight="70" onAction="#openProduct"/>
-                                <Button fx:id="sellerButton" text="VENDEDOR" prefWidth="160" prefHeight="70" onAction="#openSeller"/>
+                                <Button onAction="#openCustomer" prefHeight="70" prefWidth="160" text="CLIENTES" />
+                                <Button onAction="#openProduct" prefHeight="70" prefWidth="160" text="PRODUCTOS" />
+                                <Button fx:id="sellerButton" onAction="#openSeller" prefHeight="70" prefWidth="160" text="VENDEDORES" />
                             </children>
                         </VBox>
                     </content>
@@ -41,7 +44,7 @@
                     <content>
                         <VBox alignment="CENTER" spacing="20">
                             <children>
-                                <Button text="REPORTE DE VENTAS" prefWidth="160" prefHeight="70" onAction="#openSalesReport"/>
+                                <Button onAction="#openSalesReport" prefHeight="70" prefWidth="160" text="REPORTE DE VENTAS" />
                             </children>
                         </VBox>
                     </content>
@@ -50,4 +53,3 @@
         </TabPane>
     </children>
 </AnchorPane>
-
