@@ -142,8 +142,7 @@ public class GenerateSaleController extends MenuController implements Initializa
                 } else {
                     handleCustomerNotFound();
                 }
-            }
-            if(customerName.getText() != null && !customerName.getText().isBlank()){
+            }else if(customerName.getText() != null && !customerName.getText().isBlank()){
                 String customerName = this.customerName.getText();
                 customer = customerDAO.searchCustomerName(customerName);
 
@@ -153,6 +152,8 @@ public class GenerateSaleController extends MenuController implements Initializa
                 }else{
                     handleCustomerNotFound();
                 }
+            }else {
+                MenuController.setAlert(Alert.AlertType.ERROR,"Debes ingresar un codigo de cliente o nombre de cliente");
             }
 
         }catch (NumberFormatException e){
