@@ -55,7 +55,7 @@ public class MenuController {
             stage.setTitle("Acceso Denegado");
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.showAndWait();  // Modal - bloquea hasta que se cierre
+            stage.showAndWait();
 
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error cargando la vista de acceso denegado: "+ e.getMessage());
