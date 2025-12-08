@@ -99,6 +99,66 @@ Esto solo es un detalle visual y pudo ser ignorado; sin embargo, aprovechamos a 
 
 **Solucion:** Se agrega una opción en todas las vistas para regresar al menú de administración, lo que garantíza que su nombre se actualize, entonces ahora cada pestaña termina el programa al cerrarse, manteniendo la lógica para el usuario.
 
+## Precio/inventario negativos 
+Se detectó que el sistema permitía ingresar precio negativo e inventario negativo al crear o actualizar productos. Esto generaba datos inválidos dentro del sistema y afectaba los cálculos de ventas y descuentos.
+```
+Double.parseDouble(price.getText());
+Integer.parseInt(stock.getText());
+```
+El valor se convertía directamente sin validar si era negativo o incluso válido.
+
+**Solucion:** Se implementó una validación previa para asegurar que el precio y el inventario nunca sean negativos:
+```
+private boolean validateInventoryPrice() {
+    String priceText = price.getText().trim();
+    String stockText = stock.getText().trim();
+
+    if (priceText.isEmpty() || stockText.isEmpty()) {
+        MenuController.setAlert(Alert.AlertType.ERROR,
+            "Precio e inventario son obligatorios.");
+        return false;
+    }
+
+    double parsedPrice;
+    int parsedStock;
+
+    try {
+        parsedPrice = Double.parseDouble(priceText);
+    } catch (NumberFormatException e) {
+        MenuController.setAlert(Alert.AlertType.ERROR,
+            "El precio debe ser un número válido.");
+        return false;
+    }
+
+    try {
+        parsedStock = Integer.parseInt(stockText);
+    } catch (NumberFormatException e) {
+        MenuController.setAlert(Alert.AlertType.ERROR,
+            "El inventario debe ser un número entero.");
+        return false;
+    }
+
+    if (parsedPrice < 0) {
+        MenuController.setAlert(Alert.AlertType.ERROR,
+            "El precio no puede ser negativo.");
+        return false;
+    }
+
+    if (parsedStock < 0) {
+        MenuController.setAlert(Alert.AlertType.ERROR,
+            "El inventario no puede ser negativo.");
+        return false;
+    }
+
+    return true;
+}
+```
+Este metodo fue integrado en:
+```
+if (!validateInventoryPrice()) {
+    return;
+}
+```
 # Diagramas UML
 <p align="center">
   <img src="src/main/resources/images/UML.png" alt=""/>
@@ -123,11 +183,43 @@ En el programa el atributo "estado" de las ventas no tiene utilidad, se agregar�
 
 Dos propuestas de las ya enlistadas se encuentran disponibles en este repositorio.
 
-## Clase para descuentos
-Mensajito aquí
+## Sistema Automático de Descuentos
+Se añadió un sistema que permite configurar descuentos por producto y aplicarlos automáticamente al generar una venta. Cada producto ahora cuenta con dos nuevos atributos: porcentaje de descuento y cantidad mínima requerida, los cuales se validan en la interfaz "ProductController" antes de guardarse en la base de datos.
+<p align="center">
+  <img src="src/main/resources/images/Captura de pantalla 2025-12-07 a la(s) 10.16.44 p.m..png"  alt=""/>
+</p>
+Para determinar qué tipo de descuento aplicar, se implementó una estructura que se baso en los pilares fundamentales de POO, usando:
+
+- *Abstracción:* una clase base DiscountStrategy con el método apply().
+
+- *Herencia:* dos estrategias concretas (PercentageDiscount y BulkDiscount).
+
+- P*olimorfismo:* el controlador usa una sola variable strategy que puede contener cualquier tipo de descuento.
+
+- *Encapsulación:* los valores del producto permanecen dentro del objeto y solo se acceden mediante getters.
+
+El controlador GenerateSaleController decide automáticamente:
+
+- *Sin descuento:* porcentaje = 0
+
+- *Descuento por unidad:* porcentaje > 0 y cantidad mínima = 1
+
+- *Descuento por volumen:* porcentaje > 0 y cantidad mínima > 1
+
+Si la cantidad comprada no cumple el mínimo, la interfaz muestra "Descuento por volumen — no aplicado".
+<p align="center">
+  <img src="src/main/resources/images/Captura de pantalla 2025-12-07 a la(s) 10.20.47 p.m..png"  alt=""/>
+</p>
+Durante la venta, se calcula el precio final de manera segura:
+
+```
+double discounted = strategy.apply(originalUnitPrice, qty);
+if (discounted < originalUnitPrice)
+    finalUnitPrice = discounted;   // Evita precios incorrectos
+```
+Además, se añadió un mensaje informativo que muestra el detalle del descuento aplicado, incluyendo precio original, precio final y cantidad adquirida.
 
 ## Metodos para desactivar ventas
-
 Como se dijo antes, se trataría de nuevos enums de tipo 'state', los cuales son los siguientes:
 - *'ACTIVE'*: La que ya existía, representa que la garantía aún no termina y la venta está sujeta a devolverse
 - *'FINALIZADA'*: La garantía ha expirado y el negocio se libra de responsabilidad con el cliente.
