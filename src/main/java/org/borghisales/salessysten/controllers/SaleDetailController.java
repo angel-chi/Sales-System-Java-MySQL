@@ -21,8 +21,9 @@ public class SaleDetailController implements Initializable {
 
 
     private static final SalesDAO salesDAO = new SalesDAO();
-    private static ObservableList<ShoppingCart> productsDetails;
-    private static int idSale;
+    // Quitamos static de las siguientes 2 variables por error en Reports, recordar
+    private  ObservableList<ShoppingCart> productsDetails;
+    private  int idSale;
 
     @FXML
     private   TableView<ShoppingCart> tableSale;
@@ -45,12 +46,7 @@ public class SaleDetailController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         configureTableColumns();
-        clearTableItems();
-        loadProductsDetails();
-        displayTotal();
-        displayProductsDetails();
     }
-
     private void configureTableColumns() {
         colNro.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().nr()).asObject());
         colCod.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().cod()));
@@ -81,9 +77,14 @@ public class SaleDetailController implements Initializable {
     }
 
 
-    public static void setIdSale(int idSale) {
-        SaleDetailController.idSale = idSale;
+    public void setIdSale(int idSale) {
+        this.idSale = idSale;
     }
-
-
+    public void loadData() {
+        configureTableColumns();
+        clearTableItems();
+        loadProductsDetails();
+        displayProductsDetails();
+        displayTotal();
+    }
 }

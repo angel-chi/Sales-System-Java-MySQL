@@ -168,23 +168,31 @@ public class ReportsController implements Initializable {
 
         tableReport.setItems(sales);
     }
-
+    // Ajusta el tamaño y a su vez muestra los detalles de la venta abriendo una venta extra y llamando a SaleDetailController,
     private void setupEventHandlers() {
         tableReport.setOnMouseClicked(mouseEvent -> {
             if (!tableReport.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
-                int idSales = tableReport.getSelectionModel().getSelectedItem().idSales();
-                SaleDetailController.setIdSale(idSales);
-
-                FXMLLoader fxmlLoaderSaleDetails = new FXMLLoader(MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML));
 
                 try {
-                    Scene scene = new Scene(fxmlLoaderSaleDetails.load());
+                    int idSales = tableReport.getSelectionModel().getSelectedItem().idSales();
+
+                    FXMLLoader loader = new FXMLLoader(MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML));
+                    Scene scene = new Scene(loader.load());
+
+
+                    SaleDetailController controller = loader.getController();
+                    controller.setIdSale(idSales);
+                    controller.loadData();
+
                     Stage stage = new Stage();
                     stage.setTitle("Detalles de venta");
                     stage.setScene(scene);
+                    stage.sizeToScene();
+                    stage.setResizable(false);
                     stage.show();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });

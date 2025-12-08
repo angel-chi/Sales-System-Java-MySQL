@@ -16,6 +16,6 @@
          </columns>
       </TableView>
       <TextField fx:id="totalSale" editable="false" layoutX="693.0" layoutY="501.0" prefHeight="25.0" prefWidth="91.0" />
-      <Label layoutX="619.0" layoutY="504.0" text="VENTA TOTAL:" wrapText="true" />
+      <Label layoutX="599.0" layoutY="504.0" text="VENTA TOTAL:" wrapText="true" />
    </children>
 </AnchorPane>

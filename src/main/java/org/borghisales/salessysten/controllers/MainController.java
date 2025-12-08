@@ -33,7 +33,7 @@ public class MainController extends MenuController implements Initializable {
     @FXML
     private void signIn(){
         if (SellerDAO.login(user.getText(),password.getText())) {
-            openAutoSizeStage(MANAGEMENT_VIEW_FXML, "Gestionar");
+            openAutoSizeStage(MANAGEMENT_VIEW_FXML, "Gestión Principal");
             closeCurrentStage(user);
         }
     }

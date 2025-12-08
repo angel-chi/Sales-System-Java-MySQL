@@ -357,12 +357,12 @@ public class GenerateSaleController extends MenuController implements Initializa
     // Acción al seleccionar el botón de gestión.
     @FXML
     private void openCustomerManagement(ActionEvent event) {
-        openManagementViewModal("customer");
+        openManagementViewModal("cliente");
     }
 
     @FXML
     private void openProductManagement(ActionEvent event) {
-        openManagementViewModal("product");
+        openManagementViewModal("producto");
     }
 
 
@@ -372,8 +372,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void openManagementViewModal(String type) {
         try {
             String fxmlFile = switch (type.toLowerCase()) {
-                case "customer" -> CUSTOMER_VIEW_FXML;
-                case "product" -> PRODUCT_VIEW_FXML;
+                case "cliente" -> CUSTOMER_VIEW_FXML;
+                case "producto" -> PRODUCT_VIEW_FXML;
                 default -> throw new IllegalArgumentException("Tipo no soportado: " + type);
             };
 
@@ -388,10 +388,10 @@ public class GenerateSaleController extends MenuController implements Initializa
             stage.centerOnScreen();
 
             // Configurar listener según el tipo
-            if (type.equalsIgnoreCase("customer")) {
+            if (type.equalsIgnoreCase("cliente")) {
                 CustomerController controller = loader.getController();
                 controller.setSelectionListener(this::setCustomerFromManagement);
-            } else if (type.equalsIgnoreCase("product")) {
+            } else if (type.equalsIgnoreCase("producto")) {
                 ProductController controller = loader.getController();
                 controller.setSelectionListener(this::setProductFromManagement);
             }

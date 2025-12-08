@@ -8,8 +8,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.plaf.basic.BasicMenuUI;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class MenuController {
 
@@ -26,11 +28,25 @@ public class MenuController {
 
     static Alert defaultAlert;
     static ButtonType acceptButton = new ButtonType("Aceptar");
-    
-    public static HashMap<String, String > filePaths = new HashMap<>();
 
+    public static HashMap<String, String> filePaths = new HashMap<>();
+
+    // Implementación para correción de titulos al cambiar de ventana
+    public final  Map<String, String> titlesMap = new HashMap<>();
+
+    public MenuController() {
+        loadTitles();
+    }
+    private void loadTitles() {
+        titlesMap.put(MAIN_VIEW_FXML, "Inicio de Sesión");
+        titlesMap.put(MANAGEMENT_VIEW_FXML, "Gestión Principal");
+    }
+
+    String getTitleForFXML(String fxml){
+        return titlesMap.get(fxml);
+    }
+    // **********
     void closeCurrentStage(Node node) {
-
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
     }
@@ -44,8 +60,6 @@ public class MenuController {
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
-
-
             stage.setResizable(false); // Evite maximizar
 
 
@@ -59,22 +73,24 @@ public class MenuController {
     }
 
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
-        /*
-        Acción al cerrar una ventana.
-        Si NO estás en la ventana principal
-        Cuando el usuario cierra la ventana
-        Automáticamente se abre su ventana padre
-         */
+
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
+
             stage.setOnCloseRequest(e -> {
-                openAutoSizeStage(getFxmlFather(fxmlFileName),title);
+
+                String fxmlPadre = getFxmlFather(fxmlFileName);   // obtiene el FXML padre
+                String tituloPadre = getTitleForFXML(fxmlPadre);  // obtiene el título del FXML padre
+
+                openAutoSizeStage(fxmlPadre, tituloPadre);        // abre con título correcto
             });
         }
     }
+
     // Obtener la vista padre
     String getFxmlFather(String fxml){
         return filePaths.get(fxml);
     }
+
     // Alertas globales
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);

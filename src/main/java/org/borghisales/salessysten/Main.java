@@ -24,7 +24,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        mc.openAutoSizeStage(MAIN_VIEW_FXML,"Login");
+        mc.openAutoSizeStage(MAIN_VIEW_FXML,"Inicio de Sesión");
         
     }
 
