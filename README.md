@@ -202,6 +202,12 @@ Ademàs de la soluciòn del problema inicial que se tenìa en este espacio se a�
 #### Nuevos elemntos de la UI
 Dentro del nuevo diseño de la interfaz dentro de las ventanas de esta se añadiò informaciòn que se muestra todo el tiempo, como la fecha, el id y el usuario que corresponden segùn el inicio de sesiòn. Ademàs se añadiò un nuevo controlador Welcome para gestionar esta nueva view y guardar los datos que deben mostrar.
 
+#### Propuesta (no implementada) Actualizar stock
+Cada que se genere una nueva venta el programa accederìa a la base de datos y actuaizarìa la existencia segùn el producto que se haya comprado, una y otra vez cada que se haga una nueva venta.
+
+#### Propuesta (no implementada) Generar un recibo
+Desde la ventana de generaciòn de venta permita decidir si se genera un recibo o no, asì que se deberìa implementar una funciòn, que dependiendo del nùmero de serie se acceda al registro de lo que se incluyo en esa venta, escribienod en la factura cada unidad de lo que fue comprado, el precio y los datos del cliente, vendedor y cada producto. Y està tendrà el mismo funcionamiento para cualquier registro de venta pero los resultados cambiaràn dependiendo del nùmero de serie de la venta.
+
 
 
 
