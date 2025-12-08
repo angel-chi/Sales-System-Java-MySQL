@@ -91,7 +91,7 @@ Una vez que hayas configurado la base de datos, puedes ejecutar el proyecto sigu
 1. Clona el Proyecto: Clona este repositorio en tu máquina local utilizando Git o descargando el archivo ZIP.
 2. Importa el Proyecto: Importa el proyecto en tu IDE preferido (como IntelliJ, Eclipse, etc.) como un proyecto Maven existente.
 3. Verifica las Dependencias: Antes de compilar y ejecutar el proyecto, asegúrate de que todas las dependencias estén resueltas correctamente. Esto se puede hacer actualizando Maven o ejecutando el comando mvn clean install desde la línea de comandos en el directorio del proyecto. Esto garantizará que todas las dependencias se descarguen y configuren correctamente.<br><br>
-Para poder ejecutar desde línea de comandos debe agregar el plugin de javafx en el archivo pom.xml:
+Para poder ejecutar desde línea de comandos agregamos el plugin de javafx en el archivo pom.xml:
 ```xml
 <plugin>
     <groupId>org.openjfx</groupId>
@@ -142,7 +142,7 @@ Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder,
 
 # Diagrama UML
 <p align="center">
-  <img src="src/main/resources/images/UML.png" />
+  <img src="src/main/resources/images/UML.drawio.png" />
 </p>
 
 # 🚫 Errores econtrados
