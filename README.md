@@ -218,6 +218,9 @@ if (discounted < originalUnitPrice)
     finalUnitPrice = discounted;   // Evita precios incorrectos
 ```
 Además, se añadió un mensaje informativo que muestra el detalle del descuento aplicado, incluyendo precio original, precio final y cantidad adquirida.
+<p align="center">
+  <img src="src/main/resources/images/Captura de pantalla 2025-12-07 a la(s) 10.26.02 p.m..png"  alt=""/>
+</p>
 
 ## Metodos para desactivar ventas
 Como se dijo antes, se trataría de nuevos enums de tipo 'state', los cuales son los siguientes:
