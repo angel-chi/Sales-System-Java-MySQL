@@ -28,6 +28,9 @@
                     <Font name="Segoe UI Semibold" size="34.0" />
                 </font>
             </Label>
+            <Separator prefWidth="300"
+                       style="-fx-background-color: #555; -fx-opacity: 0.4;"/>
+
             <!-- Ícono -->
             <ImageView fitHeight="100.0" fitWidth="100.0"
                        pickOnBounds="true" preserveRatio="true">

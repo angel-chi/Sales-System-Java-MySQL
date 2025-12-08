@@ -17,7 +17,6 @@ public class MainController extends MenuController implements Initializable {
 
     public static Seller sellerLog;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        user.setText("44994806");
