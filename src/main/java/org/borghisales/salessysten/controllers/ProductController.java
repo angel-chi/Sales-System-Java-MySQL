@@ -35,6 +35,8 @@ public class ProductController implements Initializable {
     @FXML
     private TextField stock;
     @FXML
+    private TextField distributor;
+    @FXML
     private TableView<Product> tableProducts;
     @FXML
     private TableColumn<Product,Integer> colId;
@@ -46,6 +48,8 @@ public class ProductController implements Initializable {
     private TableColumn<Product,Integer> colStock;
     @FXML
     private TableColumn<Product,Product.State> colState;
+    @FXML
+    private TableColumn<Product,String> colDistributor;
 
 
     @Override
@@ -68,6 +72,7 @@ public class ProductController implements Initializable {
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
         colStock.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().stock()).asObject());
         colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+        colDistributor.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().distributor()));
     }
 
     private void initializeComboBox() {
@@ -86,31 +91,31 @@ public class ProductController implements Initializable {
 
     public void addProduct(ActionEvent actionEvent) {
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                          Integer.parseInt(stock.getText()), cbState.getValue());
+                          Integer.parseInt(stock.getText()), cbState.getValue(), distributor.getText());
         if (productDAO.create(product)) {
-            MenuController.cleanCells(name,price,stock);
+            MenuController.cleanCells(name,price,stock,distributor);
             updateTable();
         }
     }
 
     public void updateProduct(ActionEvent actionEvent) {
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                Integer.parseInt(stock.getText()), cbState.getValue());
+                Integer.parseInt(stock.getText()), cbState.getValue(), distributor.getText());
         if (productDAO.update(product)) {
-            MenuController.cleanCells(name,price,stock);
+            MenuController.cleanCells(name,price,stock,distributor);
             updateTable();
         }
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
         if (productDAO.delete(name.getText())) {
-            MenuController.cleanCells(name,price,stock);
+            MenuController.cleanCells(name,price,stock,distributor);
             updateTable();
         }
     }
 
     public void cleanCellsScreen(ActionEvent actionEvent) {
-        MenuController.cleanCells(name,price,stock);
+        MenuController.cleanCells(name,price,stock,distributor);
     }
 
     private void setCells(Product product){
@@ -118,6 +123,7 @@ public class ProductController implements Initializable {
         price.setText(String.valueOf(product.price()));
         stock.setText(String.valueOf(product.stock()));
         cbState.setValue(product.state());
+        distributor.setText(product.distributor());
     }
 
     private void updateTable() {
@@ -126,5 +132,12 @@ public class ProductController implements Initializable {
         tableProducts.setItems(products);
     }
 
+    public void showNoStockProducts(ActionEvent actionEvent){
+        ObservableList<Product> noStockProducts = productDAO.getProductsWithNoStock();
+        tableProducts.setItems(noStockProducts);
+    }
 
+    public void showAllProducts(ActionEvent actionEvent){
+        updateTable();
+    }
 }

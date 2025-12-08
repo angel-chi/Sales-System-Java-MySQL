@@ -1,5 +1,6 @@
 package org.borghisales.salessysten.model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
@@ -13,6 +14,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProductDAO implements CRUD<Product>{
+
+    public ObservableList<Product> getProductsWithNoStock(){
+        ObservableList<Product> noStockProducts = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM product WHERE stock = 0";
+
+        try (Connection conn = DBConnection.connection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery()){
+
+            while (rs.next()) {
+                Product product = Product.fromResultSet(rs);
+                noStockProducts.add(product);
+            }
+        } catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al obtener productos sin inventario" + e.getMessage());
+        }
+
+        return noStockProducts;
+    }
 
     public void subtractStock(ObservableList<ShoppingCart> products){
         String sql = "UPDATE product SET stock = stock - ? WHERE idProduct = ?";
@@ -54,7 +74,7 @@ public class ProductDAO implements CRUD<Product>{
 
     @Override
     public boolean create(Product entity) {
-        String sql = "INSERT INTO product (name,price,stock,state) values (?,?,?,?)";
+        String sql = "INSERT INTO product (name,price,stock,state,distributor) values (?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -63,6 +83,7 @@ public class ProductDAO implements CRUD<Product>{
             pstmt.setDouble(2, entity.price());
             pstmt.setInt(3, entity.stock());
             pstmt.setString(4, entity.state().name());
+            pstmt.setString(5, entity.distributor());
 
             int rows_affected = pstmt.executeUpdate();
 
@@ -84,7 +105,7 @@ public class ProductDAO implements CRUD<Product>{
 
     @Override
     public boolean update(Product entity) {
-        String sql = "UPDATE product set price=?,stock=?,state=? where name=?";
+        String sql = "UPDATE product set price=?,stock=?,state=?,distributor=? where name=?";
 
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -94,7 +115,8 @@ public class ProductDAO implements CRUD<Product>{
             pstmt.setDouble(1, entity.price());
             pstmt.setInt(2, entity.stock());
             pstmt.setString(3, entity.state().name());
-            pstmt.setString(4, entity.name());
+            pstmt.setString(4, entity.distributor());
+            pstmt.setString(5, entity.name());
 
 
             int rows_affected = pstmt.executeUpdate();
