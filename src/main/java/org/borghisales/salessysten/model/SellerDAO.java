@@ -62,7 +62,6 @@ public class SellerDAO implements CRUD<Seller> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller updated correctly");
                 return true;
             }else{
                 MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller ");
@@ -90,7 +89,6 @@ public class SellerDAO implements CRUD<Seller> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller deleted correctly");
                 return true;
             }else{
                 MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: ");
