@@ -1,104 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="450.0" prefWidth="600.0"
+<BorderPane prefHeight="500.0" prefWidth="700.0"
+            style="-fx-background-color: #1e1e1e;"
             xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.borghisales.salessysten.controllers.ManagementController">
 
+    <top>
+        <VBox alignment="CENTER" spacing="5" style="-fx-padding: 20 0 10 0;">
+            <Label text="PANEL DE GESTIÓN" textFill="WHITE">
+                <font>
+                    <Font name="Segoe UI Semibold" size="28.0" />
+                </font>
+                <effect>
+                    <DropShadow color="#0000004d" height="10.0" radius="4.5" width="10.0" />
+                </effect>
+            </Label>
+            <Separator maxWidth="400" style="-fx-background-color: #444; -fx-opacity: 0.5;"/>
+        </VBox>
+    </top>
+
     <center>
-        <TabPane fx:id="tabPaneManage" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
+        <GridPane alignment="CENTER" hgap="20" vgap="20" style="-fx-padding: 20;">
 
-                <Tab text="MENÚ">
-                    <content>
-                        <BorderPane>
-                            <center>
-                                <VBox alignment="CENTER" spacing="20.0">
-                                    <Button mnemonicParsing="false"
-                                            onAction="#help"
-                                            prefHeight="50.0"
-                                            prefWidth="200.0"
-                                            text="AYUDA" />
-                                    <Button mnemonicParsing="false"
-                                            onAction="#exit"
-                                            prefHeight="50.0"
-                                            prefWidth="200.0"
-                                            text="SALIR" />
-                                </VBox>
-                            </center>
-                        </BorderPane>
-                    </content>
-                </Tab>
+            <Label text="OPERACIONES" textFill="#888" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+                <font><Font name="Segoe UI Bold" size="18"/></font>
+            </Label>
+
+            <Button fx:id="btnSale" text="REGISTRAR VENTA"
+                    onAction="#openGenerateSale"
+                    prefHeight="100.0" prefWidth="180.0"
+                    GridPane.columnIndex="0" GridPane.rowIndex="1"
+                    style="-fx-background-color: #2e3b2e; -fx-text-fill: #a5d6a7; -fx-background-radius: 10; -fx-border-color: #2e7d32; -fx-border-radius: 10;">
+                <font><Font name="Segoe UI Semibold" size="14"/></font>
+            </Button>
+
+            <Button fx:id="btnReport" text="REPORTE VENTAS"
+                    onAction="#openSalesReport"
+                    prefHeight="100.0" prefWidth="180.0"
+                    GridPane.columnIndex="1" GridPane.rowIndex="1"
+                    style="-fx-background-color: #2e3b2e; -fx-text-fill: #a5d6a7; -fx-background-radius: 10; -fx-border-color: #2e7d32; -fx-border-radius: 10;">
+                <font><Font name="Segoe UI Semibold" size="14"/></font>
+            </Button>
 
 
-                <Tab text="VENTAS">
-                    <content>
-                        <BorderPane>
-                            <center>
-                                <VBox alignment="CENTER" spacing="20.0">
-                                    <Button mnemonicParsing="false"
-                                            onAction="#openGenerateSale"
-                                            prefHeight="50.0"
-                                            prefWidth="220.0"
-                                            text="REGISTRAR VENTA" />
-                                </VBox>
-                            </center>
-                        </BorderPane>
-                    </content>
-                </Tab>
+            <Label text="ADMINISTRACIÓN" textFill="#888" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2">
+                <font><Font name="Segoe UI Bold" size="18"/></font>
+                <GridPane.margin><Insets top="10"/></GridPane.margin>
+            </Label>
+
+            <Button fx:id="btnClient" text="CLIENTES"
+                    onAction="#openCustomer"
+                    prefHeight="100.0" prefWidth="113.0"
+                    GridPane.columnIndex="0" GridPane.rowIndex="3"
+                    style="-fx-background-color: #2a313d; -fx-text-fill: #90caf9; -fx-background-radius: 10; -fx-border-color: #1565c0; -fx-border-radius: 10;">
+                <font><Font name="Segoe UI Semibold" size="13"/></font>
+            </Button>
+
+            <Button fx:id="btnProduct" text="PRODUCTOS"
+                    onAction="#openProduct"
+                    prefHeight="100.0" prefWidth="113.0"
+                    GridPane.columnIndex="1" GridPane.rowIndex="3"
+                    style="-fx-background-color: #2a313d; -fx-text-fill: #90caf9; -fx-background-radius: 10; -fx-border-color: #1565c0; -fx-border-radius: 10;">
+                <font><Font name="Segoe UI Semibold" size="13"/></font>
+            </Button>
+
+            <Button fx:id="btnSeller" text="VENDEDORES"
+                    onAction="#openSeller"
+                    prefHeight="100.0" prefWidth="113.0"
+                    GridPane.columnIndex="2" GridPane.rowIndex="3"
+                    style="-fx-background-color: #2a313d; -fx-text-fill: #90caf9; -fx-background-radius: 10; -fx-border-color: #1565c0; -fx-border-radius: 10;">
+                <font><Font name="Segoe UI Semibold" size="13"/></font>
+            </Button>
 
 
-                <Tab text="GESTIÓN">
-                    <content>
-                        <BorderPane>
-                            <center>
-                                <VBox alignment="CENTER" spacing="15.0">
-                                    <Button mnemonicParsing="false"
-                                            onAction="#openCustomer"
-                                            prefHeight="50.0"
-                                            prefWidth="220.0"
-                                            text="CLIENTE" />
+            <Label text="SISTEMA" textFill="#888" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <font><Font name="Segoe UI Bold" size="18"/></font>
+            </Label>
 
-                                    <Button mnemonicParsing="false"
-                                            onAction="#openProduct"
-                                            prefHeight="50.0"
-                                            prefWidth="220.0"
-                                            text="PRODUCTO" />
+            <VBox spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <Button fx:id="btnHelp" text="AYUDA"
+                        onAction="#help"
+                        prefHeight="45.0" prefWidth="113.0"
+                        style="-fx-background-color: #3e2723; -fx-text-fill: #ffccbc; -fx-background-radius: 10; -fx-border-color: #d84315; -fx-border-radius: 10;">
+                    <font><Font name="Segoe UI Semibold" size="12"/></font>
+                </Button>
 
-                                    <Button fx:id="sellerButton"
-                                            mnemonicParsing="false"
-                                            onAction="#openSeller"
-                                            prefHeight="50.0"
-                                            prefWidth="220.0"
-                                            text="VENDEDOR" />
-                                </VBox>
-                            </center>
-                        </BorderPane>
-                    </content>
-                </Tab>
+                <Button fx:id="btnExit" text="SALIR"
+                        onAction="#exit"
+                        prefHeight="45.0" prefWidth="113.0"
+                        style="-fx-background-color: #373737; -fx-text-fill: #ef9a9a; -fx-background-radius: 10; -fx-border-color: #c62828; -fx-border-radius: 10;">
+                    <font><Font name="Segoe UI Semibold" size="12"/></font>
+                </Button>
+            </VBox>
 
-
-                <Tab text="REPORTES">
-                    <content>
-                        <BorderPane>
-                            <center>
-                                <VBox alignment="CENTER" spacing="20.0">
-                                    <Button mnemonicParsing="false"
-                                            onAction="#openSalesReport"
-                                            prefHeight="50.0"
-                                            prefWidth="240.0"
-                                            text="REPORTE DE VENTAS" />
-                                </VBox>
-                            </center>
-                        </BorderPane>
-                    </content>
-                </Tab>
-
-            </tabs>
-        </TabPane>
+        </GridPane>
     </center>
-
 </BorderPane>
