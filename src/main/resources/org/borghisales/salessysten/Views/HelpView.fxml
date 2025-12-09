@@ -35,7 +35,7 @@
                 </image>
             </ImageView>
 
-            <Label prefHeight="34.0" prefWidth="337.0" text="Selecciona una opción de ayuda:">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="589.0" text="Selecciona una opción de ayuda:">
             <font>
                <Font size="23.0" />
             </font></Label>

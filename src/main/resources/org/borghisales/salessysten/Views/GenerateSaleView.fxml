@@ -13,16 +13,16 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="596.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.GenerateSaleController">
-   <AnchorPane layoutX="14.0" prefHeight="630.0" prefWidth="750.0">
+   <AnchorPane prefHeight="664.0" prefWidth="783.0">
       <Label layoutX="249.0" layoutY="14.0" prefHeight="39.0" prefWidth="328.0" text="PUNTO DE VENTA &quot;BORGHI SYSTEM&quot;" underline="false">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <ImageView fitHeight="111.0" fitWidth="117.0" layoutX="50.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="111.0" fitWidth="117.0" layoutX="86.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../../images/img_1.png" />
       </ImageView>
-      <Separator layoutX="6.0" layoutY="135.0" prefHeight="16.0" prefWidth="584.0" />
+      <Separator layoutX="6.0" layoutY="135.0" prefHeight="16.0" prefWidth="772.0" />
       <Label layoutX="257.0" layoutY="53.0" prefHeight="21.0" prefWidth="311.0" text="VENTA DE PRODUCTOS TECNOLÓGICOS">
          <font>
             <Font size="15.0" />
@@ -60,16 +60,38 @@
       <Separator layoutX="-4.0" layoutY="551.0" prefHeight="2.0" prefWidth="590.0" />
       <Button layoutX="55.0" layoutY="570.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="102.0" text="CANCELAR" />
       <Button layoutX="193.0" layoutY="570.0" mnemonicParsing="false" onAction="#generateSale" text="GENERAR VENTA" />
-      <TextField fx:id="total" editable="false" layoutX="618.0" layoutY="570.0" prefWidth="88.0" />
+      <TextField fx:id="total" editable="false" layoutX="440.0" layoutY="567.0" prefWidth="88.0" />
       <Label layoutX="47.0" layoutY="170.0" prefHeight="17.0" prefWidth="168.0" text="IDENTIFICACIÓN CLIENTE:" wrapText="true" />
-      <Label layoutX="51.0" layoutY="204.0" prefHeight="17.0" prefWidth="156.0" text="CODIGO DE PRODUCTO" wrapText="true" />
+      <Label layoutX="51.0" layoutY="204.0" prefHeight="17.0" prefWidth="156.0" text="CODIGO DE PRODUCTO:" wrapText="true" />
       <Label layoutX="55.0" layoutY="238.0" text="PRECIO:" wrapText="true" />
       <Label layoutX="55.0" layoutY="273.0" text="CANTIDAD:" wrapText="true" />
       <Label layoutX="471.0" layoutY="170.0" text="CLIENTE:" wrapText="true" />
       <Label layoutX="468.0" layoutY="204.0" text="PRODUCTO:" wrapText="true" />
       <Label layoutX="471.0" layoutY="238.0" text="EXISTENCIAS:" wrapText="true" />
       <Label layoutX="468.0" layoutY="273.0" text="VENDEDOR:" wrapText="true" />
-      <Label layoutX="527.0" layoutY="574.0" text="VENTA TOTAL" wrapText="true" />
+      <Label layoutX="531.0" layoutY="562.0" wrapText="true" />
       <TextField fx:id="date" editable="false" layoutX="338.0" layoutY="269.0" prefHeight="25.0" prefWidth="102.0" />
+      <Label layoutX="364.0" layoutY="567.0" text="Subtotal:" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="111.0" fitWidth="108.0" layoutX="588.0" layoutY="14.0">
+         <image>
+            <Image url="@../../../../images/2649150.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="total1" editable="false" layoutX="588.0" layoutY="567.0" prefWidth="88.0" />
+      <Label layoutX="554.0" layoutY="567.0" text="IVA:" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="total11" editable="false" layoutX="474.0" layoutY="608.0" prefWidth="88.0" />
+      <Label layoutX="413.0" layoutY="608.0" text="TOTAL:" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
    </AnchorPane>
 </AnchorPane>

@@ -27,6 +27,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private int idSale;
 
     private static int contProducts =1;
+    public static final double IVA = 0.16;
     private static ObservableList<ShoppingCart> products;
 
     private static String sellerName;
@@ -46,7 +47,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Customer cliente;
     private final ProductDAO productDAO = new ProductDAO();
-    private double totalActual=0;
+    private double subtotalActual =0;
 
     @FXML
     private TextField serial;
@@ -66,6 +67,10 @@ public class GenerateSaleController extends MenuController implements Initializa
     private TextField seller;
     @FXML
     private TextField total;
+    @FXML
+    private TextField total1;   // IVA
+    @FXML
+    private TextField total11;  // TOTAL con IVA
     @FXML
     private TextField date;
 
@@ -93,11 +98,14 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
     // Inicializar elementos de la interfaz de usuario.
     private void initializeUIElements() {
-        total.setText("0.0");
+        total.setText("0.0");    // Subtotal
+        total1.setText("0.0");   // IVA
+        total11.setText("0.0");  // Total con IVA
         setSerial();
         seller.setText(sellerName);
         date.setText(String.valueOf(now));
     }
+
     // Dos alertas. Se usan cuando no se encuentra cliente o producto.
     private void configureAlerts() {
         configureAlert(alertCustomer, "Nuevo cliente.", "El cliente no existe.", "¿Desea agregarlo?");
@@ -123,7 +131,9 @@ public class GenerateSaleController extends MenuController implements Initializa
         colProduct.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().product()));
         colQuantity.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().quantity()).asObject());
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
-        colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total()).asObject());
+        colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total() * (1 + IVA)).asObject()
+        );
+
     }
     // Busca a un cliente.
     public void searchCustomer(ActionEvent actionEvent) {
@@ -214,30 +224,42 @@ public class GenerateSaleController extends MenuController implements Initializa
         //Se elimina el TotalClear();
         products.clear();
         total.setText("0.0");
-        totalActual=0;
-
+        total1.setText("0.0");
+        total11.setText("0.0");
+        subtotalActual = 0;
     }
     // Este es el proceso de generar una venta.
     public void generateSale(ActionEvent actionEvent) {
         if (products.isEmpty()) {
             return;
         }
-
         Sales sales = createSalesObject();
-
         if (saveSaleAndDetails(sales)) {
             productDAO.subtractStock(products);
             cleanFieldsAndTable();
             setSerial();
+
+            subtotalActual = 0;
             total.setText("0.0");
+            total1.setText("0.0");
+            total11.setText("0.0");
             products.clear();
             updateReportsController();
         }
+
     }
 
     private Sales createSalesObject() {
-        return new Sales(cliente.idCustomer(), idVendedor, serial.getText(),
-                LocalDate.parse(date.getText()),totalActual, Sales.State.ACTIVE);
+        double ivaActual = subtotalActual * IVA;
+        double totalConIva = subtotalActual + ivaActual;
+        return new Sales(
+                cliente.idCustomer(),
+                idVendedor,
+                serial.getText(),
+                LocalDate.parse(date.getText()),
+                totalConIva,              // ← aquí guardas total con IVA
+                Sales.State.ACTIVE
+        );
     }
 
     private boolean saveSaleAndDetails(Sales sales) {
@@ -280,7 +302,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya está en tu carrito de compraw.");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya está en tu carrito de compra.");
             return;
         }
 
@@ -300,8 +322,16 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
-        totalActual=totalActual+product.total();
-        total.setText(String.format("%.2f", totalActual));
+        // subtotalActual acumula el total de los productos sin IVA
+        subtotalActual += product.total();
+        double ivaActual = subtotalActual * IVA;
+        double totalConIva = subtotalActual + ivaActual;
+        // Subtotal
+        total.setText(String.format("%.2f", subtotalActual));
+        // IVA
+        total1.setText(String.format("%.2f", ivaActual));
+        // Total final con IVA
+        total11.setText(String.format("%.2f", totalConIva));
     }
 
     // Validando datos.
