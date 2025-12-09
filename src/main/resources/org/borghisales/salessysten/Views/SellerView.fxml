@@ -14,11 +14,11 @@
       <Button layoutX="458.0" layoutY="52.0" mnemonicParsing="false" onAction="#addSeller" prefHeight="54.0" prefWidth="232.0" style="-fx-background-color: #43d051; -fx-text-fill: #fff;" text="AGREGAR" />
       <TableView fx:id="tableSellers" layoutX="5.0" layoutY="312.0" prefHeight="325.0" prefWidth="688.0">
         <columns>
-          <TableColumn fx:id="colId" prefWidth="120.0" text="idSeller" />
-          <TableColumn fx:id="colDni" prefWidth="111.0" text="dni" />
-            <TableColumn fx:id="colName" prefWidth="124.0" text="name" />
-            <TableColumn fx:id="colPhone" prefWidth="124.0" text="phone" />
-            <TableColumn fx:id="colState" prefWidth="122.0" text="state" />
+          <TableColumn fx:id="colId" prefWidth="120.0" text="Identificador" />
+          <TableColumn fx:id="colDni" prefWidth="111.0" text="Usuario" />
+            <TableColumn fx:id="colName" prefWidth="124.0" text="Nombre" />
+            <TableColumn fx:id="colPhone" prefWidth="124.0" text="Teléfono" />
+            <TableColumn fx:id="colState" prefWidth="122.0" text="Estado" />
         </columns>
       </TableView>
       <Label layoutX="4.0" layoutY="62.0" prefHeight="21.0" prefWidth="90.0" text="USUARIO:" underline="true">

@@ -155,6 +155,9 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 
 # Entrega del proyecto
 
+## Video presentación
+![Video presentación](./docs/VideoPresentacion.mp4)
+
 ## Diagrama UML
 
 ![Diagrama UML](docs/POS_UML.png)
