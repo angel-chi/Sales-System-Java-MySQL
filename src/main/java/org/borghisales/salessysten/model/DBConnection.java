@@ -21,7 +21,7 @@ public class DBConnection {
             return DriverManager.getConnection(url, user, password);
         } catch (IOException e) {
             e.printStackTrace();
-            MenuController.setAlert(Alert.AlertType.ERROR, "No se ha encontrado el archivo de configuracion para la base de datos");
+            MenuController.setAlert(Alert.AlertType.ERROR, "No se ha encontrado el archivo de configuración para la base de datos");
             return null;
         }
     }
