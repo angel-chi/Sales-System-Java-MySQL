@@ -162,6 +162,11 @@ Integrantes:
 * **Christian Alexander Vargas Llanes**
 * **Said Alfredo Gonzalez Chablé**
 
+# Diagrama UML
+
+![Diagrama UML de pagos](UML_SALES.drawio.png)
+
+
 # ⚠️ Errores
 
 **Error 1: No se encontró o no se pudo cargar la clase principal**
