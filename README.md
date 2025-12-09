@@ -223,7 +223,7 @@ stage.setMinHeight(650);
 
 # ⚙️ Mejoras propuestas
 
-Mejora 1 **IMPLEMENTADA**:
+### Mejora 1 **IMPLEMENTADA**:
 
 Se propuso e implementó una nueva clase para validar los datos de entrada de cada entidad. Por ejemplo, en el apartado del DNI, la entrada deben ser números y no caracteres. Anteriormente, el programa no marcaba ningún error al ingresar cosas diferentes a números. Del mismo modo, se hicieron los cambios en todas las entidades para validar que los datos de entrada fueran los solicitados.
 
@@ -236,7 +236,7 @@ En cuanto a la clasificación, se organiza el código agrupando en una sola clas
 
 Por último, se aplica el Principio de Responsabilidad Única (SRP), ya que antes la validación estaba distribuida dentro de los controladores. Al mover esta lógica a una clase independiente, cada clase cumple una única responsabilidad: InputValidator valida datos, mientras que los controladores se encargan de gestionar la interfaz.
 
-Mejora 2:
+### Mejora 2:
 
 Se propuso una nueva clase para clasificar los productos dependiendo de su categoría (celulares, laptops, accesorios, etc.). El programa actualmente no clasifica los productos por categoría, y esta mejora permitiría buscar de una manera más sencilla los productos deseados, como celulares, audífonos, etc.
 
@@ -245,3 +245,49 @@ Esta mejora se relaciona con la programación orientada a objetos porque impleme
 Se utiliza clasificación porque, en este caso, el código se organizaría de una manera que permite dividir los productos según su categoría, simplificando el programa.
 
 Finalmente, se implementaría encapsulación, ya que el código quedaría en una nueva clase con una única función, la cual sería clasificar los productos, dejando ver únicamente los atributos y métodos necesarios para ser utilizados por otras clases.
+
+### Mejora 3 **IMPLEMENTADA**: Métodos de pago (efectivo / tarjeta) y desglose de totales
+
+***Descripción general***
+
+En un principio, el sistema registraba solo el monto total de la venta, sin distinguir el método de pago utilizado, tampoco había un sistema de descuentos o comisiones dependiendo del método de pago utilizado, y mucho menos existía un sistema que desglosara dichos cambios al monto total de la compra.
+Por lo que se implementó un sistema que permite:
+- Elegir el método de pago en una venta
+- Aplicar reglas distintas para ventas pagadas en efectivo o con tarjeta.
+- Mostrar al usuario el subtotal, descuento/comisión y venta total ya ajustados.
+
+La mejora incluye:
+
+- Un nuevo enum: **PaymentType { EFECTIVO, TARJETA }**.
+- Una clase abstracta **Payment**, que representa un pago genérico y almacena el monto base de la venta.
+- Dos clases concretas que extienden Payment:
+    - **CashPayment**: aplica un descuento para pagos en efectivo.
+    - **CardPayment**: aplica una comisión para pagos con tarjeta.
+- Una clase **PaymentFactory**, responsable de crear el objeto Payment correcto a partir del tipo de pago seleccionado.
+- Modificaciones en el flujo de ventas:
+    - En la UI (Archivo **GenerateSaleView.fxml**):
+        - Se añadió un ComboBox llamado **paymentType** para elegir entre pago en EFECTIVO o TARJETA.
+        - Se añadieron tres campos de lectura:
+            - ***subtotal***: muestra la suma de los productos sin ajustes.
+            - ***paymentAdjustment***: muestra el descuento (valor negativo) o la comisión (valor positivo).
+            - **total**: muestra la venta total después de aplicar el método de pago.
+        - Un Label (***labelAdjustment***) cambia su texto dinámicamente dependiendo si el ajuste corresponde a “Descuento (efectivo)” o “Comisión (tarjeta)”.
+    - En el controlador (Archivo ***GenerateSaleController***):
+        - ***totalPrice*** se utiliza como subtotal (suma de los productos en el carrito).
+        - El método ***calculateFinalAmount()*** usa PaymentFactory para crear el objeto Payment adecuado y calcular el monto final.
+        - El método ***updateTotalField()***:
+            - Actualiza subtotal con el valor de totalPrice.
+            - Calcula el ajuste (finalAmount - totalPrice) y lo muestra en paymentAdjustment.
+            - Actualiza total con el monto final que se guarda en la venta.
+
+
+***Aporte a la Programación Orientada a Objetos***
+
+Los principios de la POO que implementa esta mejora son:
+
+- **Abstracción:**
+  Ya que se implementa la clase abstracta Payment, la cual define el comportamiento general de un método de pago mediante el método calculateFinalAmount(), por lo que solo se necesita conocer esta interfaz en común para todos los tipos de pago que existan.
+- **Encapsulación:**
+  La lógica del programa que define los descuentos y comisiones está contenida dentro de las clases CashPayment y CardPayment, lo cual facilita el mantenimiento al no estar esta lógica en el controlador.
+- **Polimorfismo:**
+  Ya que el controlador solo trabaja con la referencia general Payment, no directamente con las subclases de esta CashPaymet y CardPayment.
