@@ -123,8 +123,7 @@
                             <PieChart fx:id="pieChartProducts" prefHeight="500.0" prefWidth="550.0"/>
 
                             <!-- LineChart -->
-                            <LineChart fx:id="salesLineChart" createSymbols="false" legendVisible="false"
-                                       prefHeight="500.0" prefWidth="550.0">
+                            <LineChart fx:id="salesLineChart" createSymbols="false" legendVisible="false" prefHeight="500.0" prefWidth="550.0">
                                 <xAxis>
                                     <CategoryAxis side="BOTTOM" fx:id="x_time" />
                                 </xAxis>
