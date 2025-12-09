@@ -162,7 +162,7 @@ public class ProductDAO implements CRUD<Product> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error al configurar la tabla de vendedor: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al configurar la tabla de producto: " + e.getMessage());
         }
 
     }

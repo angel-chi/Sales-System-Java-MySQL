@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Traducciones." />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Más y más traducciones.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/ProductDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/SellerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/SellerDAO.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -136,22 +140,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00007" summary="fea: add create seller">
-      <option name="closed" value="true" />
-      <created>1707879323797</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1707879323797</updated>
-    </task>
-    <task id="LOCAL-00008" summary="fea: add update seller">
-      <option name="closed" value="true" />
-      <created>1708049890773</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1708049890773</updated>
     </task>
     <task id="LOCAL-00009" summary="fea: delete seller">
       <option name="closed" value="true" />
@@ -529,7 +517,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765250503831</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Traducciones.">
+      <option name="closed" value="true" />
+      <created>1765250611856</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1765250611856</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Más y más traducciones.">
+      <option name="closed" value="true" />
+      <created>1765250829043</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1765250829043</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -544,7 +548,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: subtract stock" />
     <MESSAGE value="add: report view" />
     <MESSAGE value="feat: filter reports" />
     <MESSAGE value="feat: export reports &#10;add: statistic pie char products" />
@@ -569,6 +572,7 @@
     <MESSAGE value="Correcciones para poder ejecutar desde la terminal." />
     <MESSAGE value="Correcciones." />
     <MESSAGE value="Traducciones." />
-    <option name="LAST_COMMIT_MESSAGE" value="Traducciones." />
+    <MESSAGE value="Más y más traducciones." />
+    <option name="LAST_COMMIT_MESSAGE" value="Más y más traducciones." />
   </component>
 </project>
