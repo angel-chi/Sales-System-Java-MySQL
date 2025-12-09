@@ -138,7 +138,7 @@ La pantalla principal muestra las siguientes ventanas
 <p align="center">
 <img src="src/main/resources/images/PROYECTO-SYSTEMSALES/MENU%202.png" />
 <img src="src/main/resources/images/PROYECTO-SYSTEMSALES/CARRITO%20DE%20COMPRAS.png" />
-<img src="src/main/resources/images/PROYECTO-SYSTEMSALES/CDC%20DESCUENTO.png.png" />
+<img src="src/main/resources/images/PROYECTO-SYSTEMSALES/CDC%20DESCUENTO.png" />
 </p>
 
 * GESTION: Ofrece operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para clientes, productos y vendedores.
@@ -154,7 +154,9 @@ La pantalla principal muestra las siguientes ventanas
 <img src="src/main/resources/images/PROYECTO-SYSTEMSALES/REPORTES%20VENTAS1.png" />
 <img src="src/main/resources/images/PROYECTO-SYSTEMSALES/REPORTE%20VENTAS2.png" />
 </p>
-
+# VIDEO
+https://alumnosuady-my.sharepoint.com/:f:/g/personal/a24216355_alumnos_uady_mx/IgBk0ufzkngPSqZhsgHTjWgAARKpVGoDS4ZfrLV5QiUZVPM?e=mbIGDV
+# DIAGRAMA UML
 
 
 
