@@ -169,6 +169,7 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 
 # Diagrama UML
 
+
 # Identificación de Errores
 ## JavaFx
 ## Pull request
@@ -211,7 +212,6 @@ Además, la estructura garantiza que los nuevos canales de venta solo requieran 
 En el programa actual, la validación y actualización del stock de los productos (por ejemplo, verificar si hay suficientes unidades para una venta o descontar el stock cuando se completa la compra) suele hacerse directamente 
 en los controladores o en código disperso. La propuesta es agrupar toda esa lógica en una clase específica. Esta clase se encargará de verificar si hay stock suficiente de un producto, descontar stock cuando se realiza una venta,
 aumentar stock en caso de devoluciones o correcciones y consultar el stock actual desde la base de datos.
-
 ### Justificación
 Esta mejora apunta a que la lógica relacionada con el stock deje de estar regada en varios controladores y pase a estar encapsulada en una sola clase, que entiende y controla todo lo que tiene que ver con existencias.
 
@@ -223,7 +223,11 @@ por ejemplo:
 * CardPayment → pago con tarjeta
 ### Justificación
 Vemo que cada forma de pago se vuelve una clase con su propia lógica. Por ejemplo, el pago en efectivo es simple, pero el pago con tarjeta podría requerir validaciones extra,
-datos adicionales (número de autorización, últimos dígitos, etc.). Viendo el panorama desde la Programación Orientada a Objetos, hay varios conceptos que aplicamos 
-como la abstracción, la herencia y el polimorfismo.
+datos adicionales (número de autorización, últimos dígitos, etc.). Viendo el panorama desde la Programación Orientada a Objetos, la adición de Payment mejora el programa al
+hacer que la gestión de los pagos sea modular y fácil de extender, aplicando de esta forma el polimorfismo, al mismo tiempo que mantiene la lógica específica de cada pago aislada y protegida, 
+poniendo en prática le encapsulación y la abstracción.
+
+## Implementación en la UI
+
 
 [⬆ Volver al inicio](#title)<br>
