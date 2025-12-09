@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment=" Documentación Errores README.md">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Documentación Implementaciones" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -166,38 +162,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00009" summary="fea: delete seller">
-      <option name="closed" value="true" />
-      <created>1708136121976</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1708136121977</updated>
-    </task>
-    <task id="LOCAL-00010" summary="fea: add table">
-      <option name="closed" value="true" />
-      <created>1708137592864</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1708137592864</updated>
-    </task>
-    <task id="LOCAL-00011" summary="fea: add show table">
-      <option name="closed" value="true" />
-      <created>1708375479370</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1708375479370</updated>
-    </task>
-    <task id="LOCAL-00012" summary="fea: add DAO products">
-      <option name="closed" value="true" />
-      <created>1708890716950</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1708890716950</updated>
     </task>
     <task id="LOCAL-00013" summary="fea: add DAO products">
       <option name="closed" value="true" />
@@ -559,7 +523,39 @@
       <option name="project" value="LOCAL" />
       <updated>1765241599156</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Documentación Implementaciones">
+      <option name="closed" value="true" />
+      <created>1765245051091</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1765245051091</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Documentación Implementaciones">
+      <option name="closed" value="true" />
+      <created>1765245133945</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1765245133945</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Documentación Implementaciones">
+      <option name="closed" value="true" />
+      <created>1765245257399</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1765245257399</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Documentación Implementaciones">
+      <option name="closed" value="true" />
+      <created>1765245340560</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1765245340560</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -574,7 +570,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add: statistic line chart products" />
     <MESSAGE value="add: sales details in reports" />
     <MESSAGE value="refactor: CustomerController, ProductController, SellerController" />
     <MESSAGE value="in progress: cache statistics line chart" />
@@ -599,7 +594,8 @@
     <MESSAGE value="merge" />
     <MESSAGE value="Inicio Documentación README.md" />
     <MESSAGE value=" Documentación Errores README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value=" Documentación Errores README.md" />
+    <MESSAGE value="Documentación Implementaciones" />
+    <option name="LAST_COMMIT_MESSAGE" value="Documentación Implementaciones" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
