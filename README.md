@@ -176,51 +176,48 @@ En la pestaña de generar ventas, este boton no tenia funcionalidad original, su
 Este boton originalmente buscaba abrir directamente el repositorio del proyecto para buscar detalles de este en el propio github.
 Sin embargo, no habria el enlace y en su lugar provocaba una falla en el programa que lo congelaba
 
-# Propuestas
+# Propuestas implementadas
 
-## Incorporacion en base de datos
+## Sistema de Autenticación y Unicidad de Datos
+**Base de datos:** Se agregó el atributo password en la tabla seller para implementar un sistema de autenticación robusto. Adicionalmente, se establecieron restricciones de unicidad tanto para el campo usuario como para el DNI, garantizando que no existan registros duplicados. Se realizaron ajustes en diversas funciones del sistema para mantener la integridad de estos nuevos requisitos.
 
-### Nuevos atributos
+**Implementación:** La función de login fue modificada para operar con usuario y contraseña como credenciales de acceso. Por practicidad y para facilitar las pruebas iniciales del sistema, se estableció que cada DNI funcione como contraseña predeterminada, simplificando el proceso de configuración inicial. Las funciones del CRUD, incluyendo addSeller y sus equivalentes, fueron actualizadas para incorporar el nuevo campo de contraseña. Se implementó además un sistema de validación que verifica que ningún parámetro quede en blanco antes de realizar operaciones en la base de datos, previniendo así la inserción de datos incompletos.
 
-Debido al login, agregamos un atributo de password a la entidad de vendedor. Ademas de hacer que el dni se unico para evitar duplicaciones, al igual que el usuario.
-Para tener una forma de contacto relacionado y que ademas funcione con los involucrados
+**Justificación:** La prevención de duplicaciones en el DNI y el usuario es fundamental para mantener la integridad del sistema de identificación de vendedores. Permitir duplicados generaría serios problemas al momento de identificar y autenticar a los usuarios, potencialmente comprometiendo la seguridad y funcionalidad del sistema. Este cambio también establece congruencia con el sistema de login principal, ya que anteriormente existía una inconsistencia donde no se utilizaba la combinación de usuario y contraseña para el acceso. Con esta implementación, se logra un sistema de autenticación coherente y alineado con las mejores prácticas de seguridad.
 
-### Nueva entidad
+## Reparación y Mejora del Botón de Ayuda
 
-Dado que existe los clientes y vendedores, cuando el stock esta vacio deber�a haber una forma de comprar m�s, por ello se propuso crear una entidad llamada proveedor
-Esto involucra una tabla intermedia, que ser�a la de compraProveedor, en la cual relaciona tanto el proveedor, el producto como el encargado (Vendedor tipo Contador).
-En donde basicamente se registra cuando se compro los nuevos productos, cuando, quien lo autorizo, que productos se compraron, de quien provienen, cuanto costo cada producto
+**Interfaz:** Durante las pruebas iniciales se detectó que el botón de ayuda presentaba fallos en su funcionamiento. Como solución temporal y como un elemento de alivio cómico para el usuario, se implementó una vista alternativa que permitía cerrar el programa de forma rápida y amigable. Posteriormente, se restauró la funcionalidad original del botón, que consiste en dirigir al usuario hacia la documentación del sistema. Esta funcionalidad dual ahora permite tanto acceder a la documentación como al repositorio del proyecto, brindando mayor utilidad al botón.
 
-## Agregar una seguridad en operaciones
+**Implementación:** Se desarrolló una nueva vista junto con su controlador correspondiente para manejar las interacciones del botón de ayuda. Dado que esta funcionalidad no requiere persistencia de datos ni interacción directa con la base de datos, no fue necesario crear un modelo asociado. La implementación se mantuvo simple y enfocada en la presentación y control de la interfaz.
 
-### Eliminacion de objetos
+**Justificación:** Era imperativo darle funcionalidad real al botón help, que originalmente no cumplía con su propósito. Los usuarios necesitan acceso fácil y rápido a la documentación y recursos de ayuda, especialmente cuando enfrentan dudas sobre el uso del sistema. Esta reparación mejora significativamente la experiencia del usuario y la usabilidad general de la aplicación.
 
-Para mejorar la logica de negocio en cuanto a las transacciones se ha agregado un pequeño seguro, esto se basa en evitar desatar un problema en cascada al intentar eliminar un producto, cliente o vendedor, puesto que si estos ya estan relacionados con alguna transaccion esto dejaria un vacio.
-Para solucionar esto, se incorporo un pequeño verificador que busca si este objeto esta asociado con alguna transaccion antes de eliminarlo, de esta forma podria eliminar solo los 'fantasmas' que no han dejado un rastro que afecte a otras entidades.
-Esto se implemento con una consulta anidada que busca algun rastro en las transacciones, esto aplicado para estos 3 principales
+## Encapsulación y Refactorización del Código
 
-### Agregacion de jerarquia en vendedores
+**POO:** Se identificaron múltiples atributos compartidos entre las entidades de vendedores y clientes, lo que representaba una oportunidad clara de aplicar principios de encapsulación. Se creó una interfaz común que agrupa estos atributos compartidos, eliminando la duplicación de código. Además, se detectó que varias entidades utilizaban un atributo ENUM con propiedades idénticas para representar estados. En lugar de mantener múltiples definiciones del mismo ENUM, se centralizó en una única definición común accesible para todas las entidades que lo requieran.
 
-Para mejorar la seguridad, se ha incorporado un atributo similar a un ENUM para la entidad vendedores.
-Esto es una medida de seguridad para evitar darle todo el control a cualquier vendedor. Esto se basa en que ahora los vendedores con el estado 'Vendedor' solo pueden vender, y la pestaña de control para clientes/productos/vendedores e incluso la de reportes se limitara
-Ahora existen por ejemplo los contadores, que no pueden ni manejar el control, pero tienen acceso a los reportes
-El jefe que no puede generar ventas, pero tiene acceso al control y los reportes
-Finalmente el admin que puede ver todo.
+**Patrones:** Como parte de una mejor organización del código y siguiendo patrones de diseño establecidos, se reorganizó la estructura del proyecto separando todas las entidadesDAO en su propia carpeta dedicada dentro del directorio models. Esta separación mejora la legibilidad del código y facilita su mantenimiento futuro.
 
-## Centralizar atributos comunes
+**Implementación:** Se creó una interfaz compartida capaz de encapsular los atributos comunes entre vendedores y clientes. La decisión de utilizar una interfaz en lugar de una superclase abstracta se basó en que las entidades están implementadas como records en Java, lo cual limita las opciones de herencia tradicional. Para el ENUM de estado, se creó una definición única centralizada que reemplazó todas las definiciones individuales que existían previamente en las diferentes entidades. Esto requirió actualizaciones en múltiples controladores y clases derivadas que hacían referencia a los ENUMs específicos de cada entidad, migrándolos todos al ENUM común.
 
-### Atributos similares para vendedores y clientes
-En las entidades para clientes y vendedores hay varios aspectos iguales, como los dni, nombres y otros atributos, por lo que para hacerlo central y seguir las reglas del Poo, se utilizo una interfaz que reune estos atributos comunes, debido a ser records se ocupaba la interfaz para ser compatible
+**Justificación:** La existencia de un ENUM idéntico replicado en múltiples entidades constituía una violación del principio DRY (Don't Repeat Yourself) y generaba riesgo de inconsistencias futuras. Al centralizar esta definición, cualquier modificación o extensión del ENUM se propaga automáticamente a todas las entidades que lo utilizan. La misma lógica aplica para los atributos compartidos entre cliente y vendedor: ambas entidades representan tipos de usuarios con características muy similares, diferenciándose principalmente en su rol dentro del sistema. La encapsulación de estos atributos comunes no solo reduce la duplicación de código sino que también facilita futuras extensiones del sistema y mejora su mantenibilidad.
 
-### Atributo igual en varias entidades
-Para varias entidades que tenian un atributo ENUM basicamente igual, se opto por centralizar este ENUM
-Para la jerarquia de carpetas se realizo un pequeño cambio dentro de models: separando las entidades, Daos y configuracion
+## Sistema de Roles y Control de Acceso
 
-## Nuevas vistas
+**Base de datos:** Se incorporó un nuevo atributo de tipo ENUM en la tabla de vendedores que permite distinguir entre diferentes tipos o categorías de trabajadores. Este atributo establece una jerarquía organizacional dentro del sistema y determina los privilegios de acceso de cada usuario.
 
-### Vista compra
+**Implementación:** Se diseñó e implementó un ENUM representativo que define claramente los diferentes niveles o roles de trabajadores. Cada valor del ENUM está asociado con niveles de acceso específicos que determinan qué vistas, funcionalidades y secciones del sistema puede acceder cada tipo de trabajador. Esta implementación permite un control granular sobre los permisos y capacidades de cada usuario según su rol organizacional.
 
-Esta se basa en el poder comprar y reabaster los stoks con los productos
+**Justificación:** La implementación de un sistema de roles es fundamental para establecer un nivel de seguridad apropiado entre diferentes tipos de trabajadores. No todos los empleados deben tener acceso a todas las funcionalidades del sistema; por ejemplo, un vendedor regular no debería poder acceder a funciones administrativas o de gestión de personal. Este sistema de roles da sentido práctico al sistema de login, transformándolo de un simple mecanismo de identificación a un verdadero sistema de control de acceso basado en privilegios. Además, prepara el sistema para futuras expansiones donde puedan agregarse más roles con diferentes combinaciones de permisos.
+
+## Sistema de Gestión de Compras e Inventario
+
+**Base de datos:** Se diseñó e implementó un subsistema completo para la gestión de compras, que funciona como el complemento lógico al sistema de ventas existente. Se crearon tres nuevas tablas interrelacionadas: una tabla principal de compras, una tabla de productos comprados que detalla los ítems específicos de cada compra, y una tabla de proveedores que registra la información de los suministradores. Estas tablas establecen una relación estructurada que permite rastrear el origen de cada producto en el inventario, vinculando las compras con los productos específicos adquiridos y los proveedores que los suministran.
+
+**Implementación:** Se desarrolló un conjunto completo de componentes para soportar este nuevo subsistema. Esto incluyó la creación de las entidades correspondientes para cada tabla, sus respectivas clases DAO (Data Access Objects) para manejar las operaciones de base de datos, y los controladores necesarios para orquestar la lógica de negocio. Se implementó la lógica completa para agregar productos al inventario a través del proceso de compra, incluyendo validaciones, cálculos de costos, y actualización automática de existencias. El sistema permite registrar cada compra con su fecha, proveedor, productos incluidos, cantidades y precios, manteniendo un historial completo de las transacciones de aprovisionamiento.
+
+**Justificación:** Este cambio proporciona al contador y a los administradores una forma estructurada y profesional de gestionar el inventario desde una perspectiva logística real. En lugar de simplemente agregar productos al sistema de forma arbitraria cuando el stock se agota, ahora existe un proceso formal que documenta cómo y de dónde provienen los productos. Esto es crucial para múltiples aspectos del negocio: permite un mejor control de costos al rastrear los precios de compra, facilita la contabilidad al mantener registros detallados de gastos, mejora las relaciones con proveedores al tener un historial de transacciones, y proporciona datos valiosos para análisis de rentabilidad al poder comparar precios de compra con precios de venta. Es una forma mucho más adecuada y profesional de manejar el ciclo completo del inventario, desde la adquisición hasta la venta.a.
 
 # 📝 Licencia
 
