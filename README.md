@@ -146,10 +146,57 @@ https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b
 https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
 
 # 🛠️ Corrección de Errores
+Durante la revisión inicial del código, se encontraron diversas fallas en el código que debían. La mayoría de estos errores
+perjudicaban la interacción entre el usuario y la aplicación. Para la corrección de estas anomalias, se estudio parte del código
+y se encontró una solución que no afectara con la lógica del programa y/o que ocasionara más errores.
 
-1. .
-2. .
-3. .
+### Corrección botón Help
+En la clase `ManagementController` al presionar el botón, la función help trataba de redirigir a una dirección URL.
+Para la solución de esta problemática se reescribió la función. En lugar de redirigir al usuario, se implementó una nueva ventana
+de advertencia, en ella se escribió la leyenda "Para cualquier duda, leer el manual del software en: https://github.com/Borghii/Sales-System".
+```
+    public void help(ActionEvent actionEvent) {
+        MenuController.setAlert(Alert.AlertType.INFORMATION, "Para cualquier duda, leer el manual del software en: https://github.com/Borghii/Sales-System");
+    }
+```
+### Botón "Cancel"
+De igual forma en la clase `GenerateSaleController` , cuando el carrito de compras se encuentra vacío y al presionar el botón "cancelar" pareciera
+que este no hace nada, lo cual resultaría confuso para el usuario. Es por eso que se implementó la aparición de una ventana en la que se advierte
+que para cancelar alguna compra primero debe haber algo en el carrito.
+
+La solución para este problema fue agregar un if, en donde si la lista de productos estaba vacía, se desprendería una ventana de advertencia
+
+```
+    public void cancel(ActionEvent actionEvent) {
+        if (products.isEmpty()){ //Agrega alerta al botón cancelar //CORRECCIÓN ERROR
+            MenuController.setAlert(Alert.AlertType.INFORMATION, "No se ha ingresado ningún dato a la compra que se pueda cancelar");
+            return;
+        }
+        MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock); //limpia la tabla
+        quantity.getValueFactory().setValue(null);
+        tableSale.getItems().clear();
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
+        total.clear();
+        totalDiscount.clear();
+        cbDiscount.setValue(Discount.NONE);
+
+    }
+```
+
+### Precio modificable 
+
+```
+Código corregido
+```
+
+### Tamaño de las ventanas
+```
+Código corregido
+```
+### Títulos de las ventanas
+
+
+### Botón "Generar venta" 
 
 # 🚧👷‍♀️ Implementaciones
 

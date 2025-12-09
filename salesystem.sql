@@ -88,6 +88,7 @@ CREATE TABLE `sales` (
   `saleDate` date NOT NULL,
   `amount` double NOT NULL,
   `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
+  `discount` varchar(20) DEFAULT 'NONE', --Agrega la columna discount
   PRIMARY KEY (`idSales`),
   KEY `idCustomer` (`idCustomer`),
   KEY `sales_ibfk_2` (`idSeller`),
