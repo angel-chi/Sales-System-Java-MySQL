@@ -168,9 +168,9 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
    
 *La solución fue crear un nuevo proceso del OS el cual ejecuta un comando de linux "xdg-open", solucionando de una manera el problema y no afectando directamente al proyecto.*
   
-**2. El segundo error se ecnontraba en el carrito de compras y también al momento de generar ventas, no permitía añadir productos al carrito para la generar venta(y una vez solucionado, tampoco dejaba generar venta),  el error en ambos casos era ocasionado por que se intentaba hacer un parseDouble a un String con un formato no valido para los doubles(utilizaba comas en vez de puntos), formato devuelto por el metodo format.String.**
+**2. El segundo error se encontraba en el carrito de compras y también al momento de generar ventas, no permitía añadir productos al carrito para la generar venta(y una vez solucionado, tampoco dejaba generar venta),  el error en ambos casos era ocasionado por que se intentaba hacer un parseDouble a un String con un formato no valido para los doubles (utilizaba comas en vez de puntos), formato devuelto por el metodo format.String.**
 
-*La solución fue quitarlo y operar con todos los decimales, unicammente lo truncabamos a dos decimales para lo visual, y la verdadera causante se debe a la configuración de idioma del usuario, si lo tienes en español, el formatString retornaba xx,xx si lo tenías en otro idioma como inglés, retornaba el mismo metódo xx.xx (ya legible por el parceDouble)*
+*La solución fue quitarlo y operar con todos los decimales, unicammente lo truncabamos a dos decimales para lo visual, y la verdadera causante se debe a la configuración de idioma del usuario, si lo tienes en español, el formatString retornaba xx,xx si lo tenías en otro idioma como inglés, retornaba el mismo metódo xx.xx (ya legible por el parseDouble)*
 
 **3. Un tercer error solucionado era el problema de maximizar ventanas, este aunque estuviera de una manera para generarla de acuerdo al contenido, solo minizaba la pestaña al minimo y uno tenía que redimensionar, bueno.**
    
@@ -294,8 +294,11 @@ _**¿Cuál es la relación con POO?**_ En este caso su relación con POO se refl
 # COMO COMPILAR EL PROGRAMA Y DEPENDENCIAS NECESARIAS.
   ## MAVEN:
 Lo principal es descargar la versión adecuada de "MAVEN", esto es posible primero limpiando con:
+
   *sudo apt update*
+  
   *sudo apt install maven*
+  
 La versión con la cual debe coincidir es arriba de la 3.5-3.8
 
 <p align="center">
@@ -304,7 +307,9 @@ La versión con la cual debe coincidir es arriba de la 3.5-3.8
 
 ## JAVA
 Para este proyecto la versión adecuada de java es la JDK 17, logrando esto con:
+
   *sudo apt install openjdk-17-jdk*
+  
   <p align="center">
   <img src="src/main/resources/images/nuevasImg/jdk.png" />
 </p>
