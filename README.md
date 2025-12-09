@@ -160,9 +160,8 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 # AGREGAR DIAGRAMA UML
 
 <p align="center">
-  <img src="" />
+  <img src="src/main/resources/images/nuevasImg/UML.drawio.png" />
 </p>
-
 # 👷‍♀️ Errores encontrados al momento de ejecutar/compilar el proyecto y como se implemento una solución.
 
 **1. Uno de los errores más notables era al oprimir el botón de "Help" este no interactuaba y además cerraba el programa despues de un lapso de tiempo de estar congelado, por su parte una solución fue entender que el proyecto al ser construido en Windows, debía de existir una implementación para LINUX.**
@@ -224,23 +223,6 @@ _**¿Cómo se realizo?**_ Se implemento una funcionalidad para eliminar ventas y
 
 _**¿Cuál es la relación con POO?**_ En este caso su relación con POO se refleja en la estructura de la implementación; donde se usan objetos Sales para poder representar de alguna manera las ventas, por otra parte se encapsula la lógica de acceso a los datos en la clase SalesDAO, y también los controladores (ReportsController y SaleDetailController) logran manejar la interacción con la interfaz y las operaciones sobre los objetos de una manera eficaz y organizada. Esto nos permite que cada clase tenga en si responsabilidades, facilite la reutilización del código e incluso mantenga la lógica modular así como escalable.
 
-# 🤖 Modificaciones realizadas para la interfaz:
-
-  **Se tradujo todas las pestañas/vistas en la interfaz desde el ingles al español
-  Incluyendo el siguiente Formato**
-  
-    - Inicio de Sesión
-      - Menu Principal
-          - Menú
-          - Ventas
-          - Gestión 
-          - Reportes
-          
-  Cabe aclarar que dentro de estas ventanas se tradujo sus dependencias de igual manera, dejandoló de una manera concisa para el Usuario y se vea viable y entendible.
-  
-  **Otros puntos a detallar**
-  Fueron agregados nuevos formatos en este caso botones o implementaciones en diversas dependencias de las ventanas disponibles, como botones para buscar un producto, cliente de alguna manera, eliminación de otros, un botón más visible para poder visualizar donde se encuentra para poder generar una venta, se modifico el tamaño de las ventanas, se implementaron cuadros de textos al hace clic sobre un acción, etc.
-  
 # 💡 Fucionalidades
 
 ## Implementación Inicio de sesión.
@@ -292,28 +274,7 @@ _**¿Cuál es la relación con POO?**_ En este caso su relación con POO se refl
 </p>
 
 
-# COMO COMPILAR EL PROGRAMA Y DEPENDENCIAS NECESARIAS.
-  ## MAVEN:
-Lo principal es descargar la versión adecuada de "MAVEN", esto es posible primero limpiando con:
-  *sudo apt update*
-  *sudo apt install maven*
-La versión con la cual debe coincidir es arriba de la 3.5-3.8
-
-<p align="center">
-  <img src="src/main/resources/images/nuevasImg/mvn.png" />
-</p>
-
-## JAVA
-Para este proyecto la versión adecuada de java es la JDK 17, logrando esto con:
-  *sudo apt install openjdk-17-jdk*
-  <p align="center">
-  <img src="src/main/resources/images/nuevasImg/jdk.png" />
-</p>
-
+# AGREGAR COMO COMPILAR, FUNCIONA?, COMO CORRERLO, INSTALAR MVN, CREAR CON DEPENDENCIAS, ETC.
 # AGREGAR VIDEO
-Se añade link al video de presentación del proyecto:
-
-*LINK:*
-
-
+# AGREGAR MODIFICACIONES EN INTERFAZ.
     
