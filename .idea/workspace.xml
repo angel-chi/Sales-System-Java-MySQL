@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Se agregaron detalles.">
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Detalles estéticos y funcionales.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerarCompraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerarCompraController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/State.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,14 +140,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00013" summary="fea: add DAO products">
-      <option name="closed" value="true" />
-      <created>1708890865984</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1708890865984</updated>
     </task>
     <task id="LOCAL-00014" summary="fea: add FML CustomerView.fxml">
       <option name="closed" value="true" />
@@ -533,7 +525,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765253780105</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Detalles estéticos y funcionales.">
+      <option name="closed" value="true" />
+      <created>1765254046098</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1765254046098</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -548,7 +548,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: export reports &#10;add: statistic pie char products" />
     <MESSAGE value="add: statistic line chart products" />
     <MESSAGE value="add: sales details in reports" />
     <MESSAGE value="refactor: CustomerController, ProductController, SellerController" />
@@ -573,6 +572,7 @@
     <MESSAGE value="Más y más traducciones." />
     <MESSAGE value="Más y cada vez más traducciones." />
     <MESSAGE value="Se agregaron detalles." />
-    <option name="LAST_COMMIT_MESSAGE" value="Se agregaron detalles." />
+    <MESSAGE value="Detalles estéticos y funcionales." />
+    <option name="LAST_COMMIT_MESSAGE" value="Detalles estéticos y funcionales." />
   </component>
 </project>

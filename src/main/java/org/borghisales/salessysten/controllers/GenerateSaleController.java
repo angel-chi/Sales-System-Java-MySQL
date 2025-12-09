@@ -95,6 +95,8 @@ public class GenerateSaleController extends MenuController implements Initializa
         configureAlerts();
         configureTable();
         tableSale.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000, 1);
+        quantity.setValueFactory(valueFactory);
     }
 
     private void initializeUIElements() {
