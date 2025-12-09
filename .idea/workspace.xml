@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Detalles estéticos y funcionales.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/State.java" afterDir="false" />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Traducciones finales, y funcionalidad de interfaz.">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Compras.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Compras.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Proveedor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/entities/Proveedor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,14 +141,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00014" summary="fea: add FML CustomerView.fxml">
-      <option name="closed" value="true" />
-      <created>1709087453212</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1709087453212</updated>
     </task>
     <task id="LOCAL-00015" summary="fea: add CRUD Customers">
       <option name="closed" value="true" />
@@ -533,7 +526,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765254046098</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Traducciones finales, y funcionalidad de interfaz.">
+      <option name="closed" value="true" />
+      <created>1765254439404</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1765254439404</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -548,7 +549,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add: statistic line chart products" />
     <MESSAGE value="add: sales details in reports" />
     <MESSAGE value="refactor: CustomerController, ProductController, SellerController" />
     <MESSAGE value="in progress: cache statistics line chart" />
@@ -573,6 +573,7 @@
     <MESSAGE value="Más y cada vez más traducciones." />
     <MESSAGE value="Se agregaron detalles." />
     <MESSAGE value="Detalles estéticos y funcionales." />
-    <option name="LAST_COMMIT_MESSAGE" value="Detalles estéticos y funcionales." />
+    <MESSAGE value="Traducciones finales, y funcionalidad de interfaz." />
+    <option name="LAST_COMMIT_MESSAGE" value="Traducciones finales, y funcionalidad de interfaz." />
   </component>
 </project>
