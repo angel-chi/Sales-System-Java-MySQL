@@ -157,7 +157,7 @@ public class SellerDAO implements CRUD<Seller> {
                 }
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar al vendedor: " + e.getMessage());
             return false;
         }
 
