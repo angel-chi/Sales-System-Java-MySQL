@@ -154,12 +154,15 @@ https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b
 ## Reports
 https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
 
+# ▶️ Link del video en Youtube
+--Acá va el video--
+
 # 🗄️ Diagrama UML
 <img src="src/main/resources/images/Sales-System-Java-MySQL.drawio.png">
 
 # 🛠️ Corrección de Errores
 Durante la revisión inicial del código, se encontraron diversas fallas en el código que debían. La mayoría de estos errores
-perjudicaban la interacción entre el usuario y la aplicación. Para la corrección de estas anomalias, se estudio parte del código
+perjudicaban la interacción entre el usuario y la aplicación. Para la corrección de estas anomalias, se estudió parte del código
 y se encontró una solución que no afectara con la lógica del programa y/o que ocasionara más errores.
 
 ### Corrección botón Help
@@ -196,7 +199,7 @@ La solución para este problema fue agregar un if, en donde si la lista de produ
 ```
 
 ### Precio modificable 
-Una de las correcciones más útiles que se realisaron fue en la clase `GenerateSaleController`, ya que en el espacio de texto
+Una de las correcciones más útiles que se realizaron fue en la clase `GenerateSaleController`, ya que en el espacio de texto
 designado para la aparición del costo de producto, el usuario podía modificar la cantidad establecida, lo que, para un sistema de ventas resultaría
 en una grave falla. 
 La corrección de este error fue directamente con la manipulación de la interfaz, agregándole una restricción en dicho cuadro de texto.
@@ -204,14 +207,81 @@ La corrección de este error fue directamente con la manipulación de la interfa
       <TextField fx:id="price" editable="false" layoutX="125.0" layoutY="234.0" prefHeight="25.0" prefWidth="117.0" />
 ```
 
-### Tamaño de las ventanas
-```
-Código corregido
-```
-### Títulos de las ventanas
+### Tamaño y títulos de las ventanas
+Para solucionar estos dos problemas en la clase `MenuController` que es donde se encuentra el método para crear las ventanas, se creó un switch que dependiendo de 
+que archivo FXML se le pase al método creará la ventana con un tamaño que permita ver todos los elementos de la interfaz de manera correcta, e hicimos que a las ventanas 
+no se les pueda ajustar el tamaño manualmente para evitar que el usuario dejase fuera de la ventana alguna funcionalidad importante del software.
+De igual manera se agregó que el título de la ventana se genere de acuerdo al caso del switch en el que nos encontremos.
 
+```java
+    switch (fxmlFileName) {
+        case MAIN_VIEW_FXML -> {
+            scene = new Scene(root, 420, 400);
+            stage.setTitle("Registro");
+            stage.setResizable(false);
+        }
+        case MANAGEMENT_VIEW_FXML -> {
+            scene = new Scene(root, 315, 450);
+            stage.setTitle("Administrar");
+            stage.setResizable(false);
+        }
+        case CUSTOMER_VIEW_FXML -> {
+            scene = new Scene(root, 780, 510);
+            stage.setTitle("Cliente");
+            stage.setResizable(false);
+        }
+        case PRODUCT_VIEW_FXML -> {
+            scene = new Scene(root, 780, 520);
+            stage.setTitle("Productos");
+            stage.setResizable(false);
+        }
+        case SELLER_VIEW_FXML ->{
+            scene = new Scene(root, 650, 500);
+            stage.setTitle("Vendedor");
+            stage.setResizable(false);
+        }
+        case REPORT_VIEW_FXML -> {
+            scene = new Scene(root, 1291, 633);
+            stage.setTitle("Reportes");
+            stage.setResizable(false);
+        }
+        case GENERATE_SALE_VIEW_FXML -> {
+            scene = new Scene(root, 590, 600);
+            stage.setTitle("Generar venta");
+            stage.setResizable(false);
+        }
+        default -> {
+            // tamaño por defecto si no coincide con ninguno
+            scene = new Scene(root, 600, 400);
+        }
+    }
+```
 
 ### Botón "Generar venta" 
+De igual manera que sucedía con el boton "Cancel" al presionarlo y tener el carrito de compras vacio este parecia no hacer nada, así que en la clase `GenerateSaleController`
+se modificó el metodo que supervisaba la funcionalidad del boton para que cuando se presione y el carrito de compras esté vacio muestre un pop-up que le informe al usuario
+que no se puede generar una venta con el carrito vacio.
+
+```java
+    public void generateSale(ActionEvent actionEvent) {
+        if (products.isEmpty()) { //Agregar alerta al botón generar venta //CORRECCIÓN ERROR
+            MenuController.setAlert(Alert.AlertType.INFORMATION, "No se puede generar una venta sin ningún producto en el carrito de compras");
+            return;
+        }
+    
+        Sales sales = createSalesObject();  //crea un objeto sales sin pasarle parametros
+    
+        if (saveSaleAndDetails(sales)) { //si se concreta la venta
+            productDAO.subtractStock(products); //quita productos del stock
+            cleanFieldsAndTable(); //se eliminanlos objetos de la tabla
+            setSerial();
+            total.setText("0.0"); //se reinicia el total a cero
+            totalDiscount.setText("0.0");
+            products.clear();
+            updateReportsController(); //Se actualiza la base de datos
+        }
+    }
+```
 
 # 🚧👷‍♀️ Implementaciones
 
@@ -220,7 +290,7 @@ Código corregido
 
 Esta implementación se pensó en la utilidad para las tiendas de poder estar en contacto con sus clientes, de tal forma los clientes
 y la tienda permanecerán conectadas. 
-Con respecto al paradigma de la Programación Orientada a Objetos esta implementación está relacionada directamente con los pilares de la astracción y a encapsulación.
+Con respecto al paradigma de la Programación Orientada a Objetos esta implementación está relacionada directamente con los pilares de la abstracción y a encapsulación.
 
 Para la implementación de esta mejora, se tuvo que modificar la clase `Customer` añadiéndole un nuevo atributo tipo `String` llamado `number`
 ```java
@@ -361,10 +431,86 @@ Finalmente para la visualización de este nuevo parámetro se agregó la columna
  <TableColumn fx:id="colDiscount" minWidth="0.0" prefWidth="94.0" text="DESCUENTO" />
 ```
 
-## Alberto
-- Implementación 1
-- Implementación 2
+## Alberto Osorno
+### Implementación distribuidor a clase `Product`.
 
+Esta implementación se pensó para que el usuario pueda llevar un mejor control de a cuantas empresas le está comprando y no solo saber que productos tiene en su tienda
+Con respecto al paradigma de la Programación Orientada a Objetos esta implementación está relacionada directamente con los pilares de la abstracción y a encapsulación.
+
+Para la implementación de esta mejora, se tuvo que modificar la clase `Product` añadiéndole un nuevo atributo tipo `String` llamado `distributor`
+
+```java
+    public Product(String name, double price, int stock, State state, String distributor){
+        this(0,name,price,stock,state,distributor);
+    }
+```
+Además, tanto en la interfaz como en la base de datos se agregó una nueva columna para el almacenamiento y la visualización de esta información.
+
+**Interfaz:**
+```java
+                   <TableColumn fx:id="colDistributor" prefWidth="111.0" text="DISTRIBUIDOR" />
+```
+
+Ejemplo de cambio en la base de datos:
+```java
+    public static Product fromResultSet(ResultSet rs) throws SQLException {
+    int id = rs.getInt("idProduct");
+    String name = rs.getString("name");
+    double price = rs.getDouble("price");
+    int stock = rs.getInt("stock");
+    State state = Product.State.valueOf(rs.getString("state"));
+    String distributor = rs.getString("distributor");
+    return new Product(id, name, price, stock, state, distributor);
+}
+```
+
+### Implementación de metodos `showNoStockProducts` y `showAllProducts` a la clase `ProductController`
+Esta implementacion se hizo pensando en una comodidad para el usuario, en vez de tener que recorrer toda la lista de los productos que tiene en su tienda al pulsar un botón
+se filtra la base de datos mostrando solo aquellos que ya no tienen inventario, y pulsando otro botón puede regresar a ver todos sus productos nuevamente.
+Con respecto al paradigma de la Programación Orientada a Objetos esta implementacion está directamente con los pilares del encapsulamiento y la abstracción.
+
+Para la implementacion del método se agregó una `ObservableList` a la clase `ProductDAO`, en la cual se filtra toda la lista de los productos y se guardan solo aquellos cuyo
+stock es igual a cero.
+```java 
+    public ObservableList<Product> getProductsWithNoStock(){
+        ObservableList<Product> noStockProducts = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM product WHERE stock = 0";
+
+        try (Connection conn = DBConnection.connection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery()){
+
+            while (rs.next()) {
+                Product product = Product.fromResultSet(rs);
+                noStockProducts.add(product);
+            }
+        } catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al obtener productos sin inventario" + e.getMessage());
+        }
+
+        return noStockProducts;
+    }
+```
+Luego en la clase `ProductController` se creó el metodo `showNoStockProducts`, en el cual se crea una nueva `ObservableList` y se le asignan valores usando el método `getProductsIthNoStock`
+mencionado anteriormente.
+```java 
+    public void showNoStockProducts(ActionEvent actionEvent){
+        ObservableList<Product> noStockProducts = productDAO.getProductsWithNoStock();
+        tableProducts.setItems(noStockProducts);
+    }
+```
+Para el método `showAllProducts` se aprovechó un método que ya existia en la clase `ProductController` llamado `updateTable`.
+```java 
+
+    public void showAllProducts(ActionEvent actionEvent){
+        updateTable();
+    }
+```
+Y en la interfaz se agregaron dos botones nuevos en `ProductView`, cada uno vinculado al método que llama al ser presionado.
+```java
+    <Button layoutX="26" layoutY="220" mnemonicParsing="false" onAction="#showAllProducts" prefHeight="32" prefWidth="200" text="Ver todos los productos"/>
+    <Button layoutX="550" layoutY="220" mnemonicParsing="false" onAction="#showNoStockProducts" prefHeight="32" prefWidth="200" text="Ver productos sin inventario"/>
+```
 
 # 📝 Licencia
 
