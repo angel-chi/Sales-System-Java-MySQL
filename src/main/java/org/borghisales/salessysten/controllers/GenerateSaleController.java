@@ -187,7 +187,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
 
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, product.stock(), 0);
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, product.stock(), 1);
         quantity.setValueFactory(valueFactory);
     }
 
@@ -234,7 +234,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void generateSale(ActionEvent actionEvent) {
-        if (products.isEmpty()) {
+        if (products == null || products.isEmpty()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "No hay productos en la venta.");
             return;
         }
 
@@ -321,13 +322,18 @@ public class GenerateSaleController extends MenuController implements Initializa
 
 
     private String validateInputs() {
-        if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Falta el nombre del cliente o del producto.";
-        } else if (quantity.getValue() == 0) {
+        if (productName.getText().isEmpty()) {
+            return "Debes buscar un producto primero.";
+        }
+        if (customerName.getText().isEmpty()) {
+            return "Debes buscar un cliente antes de generar la venta.";
+        }
+        if (quantity.getValue() == 0) {
             return "La cantidad no puede ser 0.";
         }
         return null;
     }
+
 
     private void setSerial(){
         idSale = 1+salesDAO.IdSale();
