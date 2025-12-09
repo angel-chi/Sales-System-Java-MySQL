@@ -137,17 +137,34 @@ La pantalla principal muestra las siguientes ventanas
 <p align="center">
   <img src="src/main/resources/images/reports.png" />
 </p>
+## Sales
+https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d-83f9b4807ac5
+## Management
+https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b-218c9ca25b10
+## Reports
+https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
 
 # PROYECTO EQUIPO 6
 
 **Integrantes:**
 * **Rivera Manzanero Alessandra Anelisse**
 * **Polanco Casares Fernando**
+---
+##  Link del video
 
 ---
 ##  Diagrama UML
-### Agregar despues 
----
+<details>
+  <summary>Diagrama UML</summary>
+
+  <div style="overflow-x: auto; max-width: 100%;">
+
+    <img src="UML/UML.svg" 
+         alt="Diagrama de Clases UML del Proyecto" 
+         width="1200px" />
+
+  </div>
+</details>
 
 ##  Errores encontrados y soluciones implementadas
 
@@ -174,12 +191,6 @@ La pantalla principal muestra las siguientes ventanas
 | **Solución Implementada** | Asignar a cada ventana su nombre correspondiente.                                                                                                                                                                                                                                                                             |
 | **Implementación**        | Se creo un HashMap llamado fxmlTitles para asignarle a cada ventana su nombre correspondiente. Luego mediante un constructor se inicializa el fxmlTitle, por último en el método `configurateStageCloseEvent` se creó una variable que almacene el título de la ventana padre que debe mostrarse al cerrar la ventana actual. |
 
-### 4. Error (Describir error)
-| Aspecto                   | Detalles      |
-|:--------------------------|:--------------|
-| **Descripción del Error** | Escribir aqui |
-| **Solución Implementada** | Escribir aqui |
-| **Implementación**        | Escribir aqui |
 
 ---
 
@@ -232,12 +243,6 @@ La pantalla principal muestra las siguientes ventanas
 * **Resultado:**
   * Solo los gerentes pueden acceder a la gestión de productos y vendedores, mientras que los vendedores solo pueden realizar ventas y gestionar clientes.
 ---
-## Sales
-https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d-83f9b4807ac5
-## Management
-https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b-218c9ca25b10
-## Reports
-https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
 
 # 📧 Contacto
 Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
