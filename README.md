@@ -291,3 +291,26 @@ Los principios de la POO que implementa esta mejora son:
   La lógica del programa que define los descuentos y comisiones está contenida dentro de las clases CashPayment y CardPayment, lo cual facilita el mantenimiento al no estar esta lógica en el controlador.
 - **Polimorfismo:**
   Ya que el controlador solo trabaja con la referencia general Payment, no directamente con las subclases de esta CashPaymet y CardPayment.
+
+### Mejora 4: Superclase `Person` para `Customer` y `Seller`
+
+***Descripción general***
+
+Actualmente, las entidades Customer y Seller definen por separado atributos muy similares, como dni, name y state.
+Como mejora propuesta, se plantea crear una **superclase abstracta Person** que concentre estos campos y comportamientos comunes, y hacer que:
+
+- Customer extienda Person y añada lo específico del cliente (por ejemplo, address).
+- Seller extienda Person y añada lo específico del vendedor (por ejemplo, phoneNumber, user).
+
+***Aporte a la Programación Orientada a Objetos***
+
+Los principios de la POO que implementa esta mejora son:
+
+- **Herencia:**
+  Permite incluir en Person los atributos y métodos que comparten Customer y Seller, evitando duplicación y facilitando el mantenimiento.
+
+- **Abstracción:**
+  Introduce el concepto genérico de “persona” dentro del sistema, lo cual hace que se pueda trabajar con Person cuando no se  necesita distinguir si se trata de un cliente o de un vendedor.
+
+- **Polimorfismo:**
+  En escenarios futuros sería posible manejar listas de Person y tratar de forma uniforme a clientes y vendedores, permitiendo que cada uno implemente detalles específicos sin cambiar el código que los usa.
