@@ -155,7 +155,7 @@ https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b
 https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
 
 # ▶️ Link del video en Youtube
---Acá va el video--
+https://youtu.be/5sQ6mNgF5-E
 
 # 🗄️ Diagrama UML
 <img src="src/main/resources/images/Sales-System-Java-MySQL.drawio.png">
@@ -435,6 +435,7 @@ Finalmente para la visualización de este nuevo parámetro se agregó la columna
 ### Implementación distribuidor a clase `Product`.
 
 Esta implementación se pensó para que el usuario pueda llevar un mejor control de a cuantas empresas le está comprando y no solo saber que productos tiene en su tienda
+
 Con respecto al paradigma de la Programación Orientada a Objetos esta implementación está relacionada directamente con los pilares de la abstracción y a encapsulación.
 
 Para la implementación de esta mejora, se tuvo que modificar la clase `Product` añadiéndole un nuevo atributo tipo `String` llamado `distributor`
