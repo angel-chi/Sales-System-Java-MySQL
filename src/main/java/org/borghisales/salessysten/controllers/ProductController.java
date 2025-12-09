@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 import org.borghisales.salessysten.model.Brand;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
@@ -53,7 +52,7 @@ public class ProductController extends MenuController implements Initializable {
         initializeComboBox();
         initializeProductData();
 
-        // implementamos UIEfectos****************
+        // Implementamos UIEfectos (Animaciones de botones)
         UIEfectos.styleButtonAdd(btnAdd);
         UIEfectos.styleButtonUpdate(btnUpdate);
         UIEfectos.styleButtonDelete(btnDelete);
@@ -68,41 +67,6 @@ public class ProductController extends MenuController implements Initializable {
         productDAO.getBrands(brandList);
         cbBrand.setItems(brandList);
 
-        styleComboBox(cbState);
-        styleComboBox(cbBrand);
-    }
-
-    private <T> void styleComboBox(ComboBox<T> comboBox) {
-        comboBox.setButtonCell(new ListCell<>() {
-            @Override
-            protected void updateItem(T item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.toString());
-                    setStyle("-fx-text-fill: white;");
-                }
-            }
-        });
-        comboBox.setCellFactory(new Callback<>() {
-            @Override
-            public ListCell<T> call(ListView<T> param) {
-                return new ListCell<>() {
-                    @Override
-                    protected void updateItem(T item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item == null || empty) {
-                            setText(null);
-                            setStyle("-fx-background-color: #333333;");
-                        } else {
-                            setText(item.toString());
-                            setStyle("-fx-background-color: #333333; -fx-text-fill: white;");
-                        }
-                    }
-                };
-            }
-        });
     }
 
     private void initializeTable() {
@@ -119,7 +83,6 @@ public class ProductController extends MenuController implements Initializable {
         colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
         colBrand.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().brandName()));
 
-        // Formato de precio con color y símbolo
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
         colPrice.setCellFactory(tc -> new TableCell<>() {
             @Override
@@ -139,15 +102,112 @@ public class ProductController extends MenuController implements Initializable {
     }
 
     private void initializeProductData() {
-        tableProducts.getItems().clear();
         if (products == null) {
             products = FXCollections.observableArrayList();
-            productDAO.setTable(products);
         }
-        /*Actualiza la tabla de products cada que se abre sin tener que cerrar el programa*/
         products.clear();
         productDAO.setTable(products);
         tableProducts.setItems(products);
+    }
+
+    // validaciones*********************
+    private boolean validarEntradas() {
+        // verifica que no esten vacios los campos
+        if (name.getText().isEmpty() || price.getText().isEmpty() || stock.getText().isEmpty() || cbBrand.getSelectionModel().getSelectedItem() == null) {
+            setAlert(Alert.AlertType.WARNING, "Todos los campos son obligatorios.");
+            return false;
+        }
+        // Validamos el Precio
+        try {
+            double valorPrecio = Double.parseDouble(price.getText());
+            if (valorPrecio < 0) {
+                setAlert(Alert.AlertType.WARNING, "El precio debe ser un numero positivo.");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            setAlert(Alert.AlertType.WARNING, "El precio debe ser un número válido (Ej: 10.50).");
+            return false;
+        }
+
+        // validamos el stock**********
+        try {
+            int valorStock = Integer.parseInt(stock.getText());
+            if (valorStock < 0) {
+                setAlert(Alert.AlertType.WARNING, "El stock no puede ser negativo.");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            setAlert(Alert.AlertType.WARNING, "El stock debe ser un número entero (Ej: 10).");
+            return false;
+        }
+        return true;
+    }
+
+    @FXML
+    public void addProduct(ActionEvent actionEvent) {
+        // se validan las entradas con los criterios previamente establecidos
+        if (!validarEntradas()) return;
+        /*continua si ya se valido lo anterior*/
+        Product product = new Product(
+                name.getText(),
+                cbBrand.getValue().idBrand(),
+                cbBrand.getValue().name(),
+                Double.parseDouble(price.getText()),
+                Integer.parseInt(stock.getText()),
+                cbState.getValue()
+        );
+
+        if (productDAO.create(product)) {
+            cleanCellsScreen(null);
+            updateTable(); // Recarga la tabla
+        }
+    }
+
+    @FXML
+    public void updateProduct(ActionEvent actionEvent) {
+        Product selectedProduct = tableProducts.getSelectionModel().getSelectedItem();
+        if (selectedProduct == null) {
+            setAlert(Alert.AlertType.WARNING, "Seleccione un producto de la tabla para actualizar.");
+            return;
+        }
+
+        if (!validarEntradas()) return;
+
+        // Mantenemos el ID del producto original
+        Product product = new Product(
+                selectedProduct.idProduct(),
+                name.getText(),
+                cbBrand.getValue().idBrand(),
+                cbBrand.getValue().name(),
+                Double.parseDouble(price.getText()),
+                Integer.parseInt(stock.getText()),
+                cbState.getValue()
+        );
+
+        if (productDAO.update(product)) {
+            cleanCellsScreen(null);
+            updateTable();
+        }
+    }
+
+    @FXML
+    public void deleteProduct(ActionEvent actionEvent) {
+        if (name.getText().isEmpty()) {
+            setAlert(Alert.AlertType.WARNING, "Seleccione un producto para eliminar.");
+            return;
+        }
+        if (productDAO.delete(name.getText())) {
+            cleanCellsScreen(null);
+            updateTable();
+        }
+    }
+
+    @FXML
+    public void cleanCellsScreen(ActionEvent actionEvent) {
+        MenuController.cleanCells(name, price, stock);
+        cbBrand.getSelectionModel().clearSelection();
+        cbState.setValue(Product.State.ACTIVE);
+        tableProducts.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -156,75 +216,13 @@ public class ProductController extends MenuController implements Initializable {
         closeCurrentStage(btnReturn);
     }
 
-    public void addProduct(ActionEvent actionEvent) {
-        Brand selectedBrand = cbBrand.getValue();
-        if (selectedBrand == null || name.getText().isEmpty()) return;
-
-        try {
-            Product product = new Product(
-                    name.getText(),
-                    selectedBrand.idBrand(),
-                    selectedBrand.name(),
-                    Double.parseDouble(price.getText()),
-                    Integer.parseInt(stock.getText()),
-                    cbState.getValue()
-            );
-
-            if (productDAO.create(product)) {
-                cleanCellsScreen(null);
-                updateTable();
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Error formato número");
-        }
-    }
-
-    public void updateProduct(ActionEvent actionEvent) {
-        Brand selectedBrand = cbBrand.getValue();
-        Product selectedProduct = tableProducts.getSelectionModel().getSelectedItem();
-
-        if (selectedBrand == null || selectedProduct == null) return;
-
-        try {
-            Product product = new Product(
-                    selectedProduct.idProduct(),
-                    name.getText(),
-                    selectedBrand.idBrand(),
-                    selectedBrand.name(),
-                    Double.parseDouble(price.getText()),
-                    Integer.parseInt(stock.getText()),
-                    cbState.getValue()
-            );
-
-            if (productDAO.update(product)) {
-                cleanCellsScreen(null);
-                updateTable();
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Error formato número");
-        }
-    }
-
-    public void deleteProduct(ActionEvent actionEvent) {
-        if (!name.getText().isEmpty() && productDAO.delete(name.getText())) {
-            cleanCellsScreen(null);
-            updateTable();
-        }
-    }
-
-    public void cleanCellsScreen(ActionEvent actionEvent) {
-        MenuController.cleanCells(name, price, stock);
-        cbBrand.getSelectionModel().clearSelection();
-        cbState.setValue(Product.State.ACTIVE);
-        tableProducts.getSelectionModel().clearSelection();
-    }
-
     private void setCells(Product product){
         name.setText(product.name());
         price.setText(String.valueOf(product.price()));
         stock.setText(String.valueOf(product.stock()));
         cbState.setValue(product.state());
 
+        // Seleccionar la marca correcta
         for(Brand b : cbBrand.getItems()){
             if(b.idBrand() == product.idBrand()){
                 cbBrand.setValue(b);
@@ -234,7 +232,7 @@ public class ProductController extends MenuController implements Initializable {
     }
 
     private void updateTable() {
-        tableProducts.getItems().clear();
+        products.clear();
         productDAO.setTable(products);
         tableProducts.setItems(products);
     }
