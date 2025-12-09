@@ -47,15 +47,15 @@ public class CustomerDAO implements CRUD<Customer> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Customer added correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente agregado/a correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding customer: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar cliente: ");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding customer: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar cliente: " + e.getMessage());
             return false;
         }
     }
@@ -75,15 +75,15 @@ public class CustomerDAO implements CRUD<Customer> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Customer updated correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente actualizado/a correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating customer");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al actualizar el/la cliente");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating customer: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al actualizar el/la cliente: " + e.getMessage());
             return false;
         }
     }
@@ -109,14 +109,14 @@ public class CustomerDAO implements CRUD<Customer> {
             enableConstraintsStmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Customer deleted correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente eliminado/a correctamente");
                 return true;
             } else {
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting customer: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al eliminar el cliente: ");
                 return false;
             }
         } catch (SQLException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting customer: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al eliminar el cliente: " + e.getMessage());
             return false;
         }
     }
@@ -136,7 +136,7 @@ public class CustomerDAO implements CRUD<Customer> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table customer: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al configurar la tabla cliente: " + e.getMessage());
         }
 
     }

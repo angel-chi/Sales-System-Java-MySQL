@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Correcciones.">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" afterDir="false" />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Traducciones.">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/CustomerDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,14 +138,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00004" summary="feature: add login">
-      <option name="closed" value="true" />
-      <created>1707772380456</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1707772380456</updated>
     </task>
     <task id="LOCAL-00005" summary="fea: add crud and classes">
       <option name="closed" value="true" />
@@ -531,7 +523,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765249735538</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Traducciones.">
+      <option name="closed" value="true" />
+      <created>1765249924167</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1765249924167</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -569,8 +569,8 @@
     <MESSAGE value="Se agregó una nueva interfaz de reporte." />
     <MESSAGE value="Correción de errores." />
     <MESSAGE value="Correcciones para poder ejecutar desde la terminal." />
-    <MESSAGE value="Traducciones." />
     <MESSAGE value="Correcciones." />
-    <option name="LAST_COMMIT_MESSAGE" value="Correcciones." />
+    <MESSAGE value="Traducciones." />
+    <option name="LAST_COMMIT_MESSAGE" value="Traducciones." />
   </component>
 </project>
