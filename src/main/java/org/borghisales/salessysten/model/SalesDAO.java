@@ -28,38 +28,37 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching IdSale: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar IdVenta: " + e.getMessage());
             return 1;
         }
     }
-    public boolean SaveSale(Sales sale){
-        String sql = "INSERT INTO sales (idCustomer,idSeller,numberSales,saleDate,amount,state) values(?,?,?,?,?,?)";
+    public int SaveSaleAndGetId(Sales sale){
+        String sql = "INSERT INTO sales (idCustomer,idSeller,numberSales,saleDate,amount,state) VALUES (?,?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            pstmt.setInt(1,sale.idCustomer());
-            pstmt.setInt(2,sale.idSeller());
-            pstmt.setString(3,sale.numberSales());
+            pstmt.setInt(1, sale.idCustomer());
+            pstmt.setInt(2, sale.idSeller());
+            pstmt.setString(3, sale.numberSales());
             pstmt.setDate(4, Date.valueOf(sale.saleDate()));
-            pstmt.setDouble(5,sale.amount());
-            pstmt.setString(6,sale.state().name());
+            pstmt.setDouble(5, sale.amount());
+            pstmt.setString(6, sale.state().name());
 
-            int rows_affected = pstmt.executeUpdate();
+            int rowsAffected = pstmt.executeUpdate();
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Sale saved correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: ");
-                return false;
+            if (rowsAffected > 0) {
+                try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        return rs.getInt(1); // idSales generado
+                    }
+                }
             }
-
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: " + e.getMessage());
-            return false;
+            return -1; // error al obtener id
+        } catch (SQLException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar la venta: " + e.getMessage());
+            return -1;
         }
-
     }
 
     public boolean SaveDetailsSale(ObservableList<ShoppingCart> products, int id){
@@ -84,7 +83,7 @@ public class SalesDAO {
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale details: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar los detalles de la venta: " + e.getMessage());
             return false;
         }
 
@@ -106,47 +105,43 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar ventas : " + e.getMessage());
         }
 
 
     }
 
-    public void setLineChart(XYChart.Series<String, Integer> lineChartData,int year,int month) {
-        String sql = """ 
-                SELECT day(saleDate) as saleDate, count(saleDate) as salesPerDay
-                FROM sales
-                WHERE idSeller=? and year(saleDate) = ? and month(saleDate)=?
-                GROUP BY saleDate;
-                """;
-
-
-        System.out.println("Buscado base de datos");
-
-
+    public void setLineChart(XYChart.Series<String,Integer> series, int year, int month) {
+        series.getData().clear();
         try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
+             PreparedStatement pstmt = conn.prepareStatement(
+                     "SELECT day(saleDate) as saleDate, count(saleDate) as salesPerDay " +
+                             "FROM sales " +
+                             "WHERE idSeller=? and year(saleDate) = ? and month(saleDate)=? " +
+                             "GROUP BY saleDate"
+             )) {
 
             pstmt.setInt(1, MainController.sellerLog.idSeller());
             pstmt.setInt(2, year);
             pstmt.setInt(3, month);
 
-            try (ResultSet rs = pstmt.executeQuery()){
-                while (rs.next()){
-                    XYChart.Data<String,Integer> data = new XYChart.Data<>(String.valueOf(rs.getInt("saleDate")),rs.getInt("salesPerDay"));
-                    lineChartData.getData().add(data);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    XYChart.Data<String,Integer> data = new XYChart.Data<>(
+                            String.valueOf(rs.getInt("saleDate")),
+                            rs.getInt("salesPerDay")
+                    );
+                    series.getData().add(data);
                 }
             }
 
+            System.out.println("LineChart datos para " + month + "/" + year + ": " + series.getData().size());
 
-            ReportsController.setCacheReportLineChart(year,month,lineChartData);
-
-
-
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+        } catch(SQLException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar ventas : " + e.getMessage());
         }
     }
+
 
     public void setTableDetails(ObservableList<ShoppingCart> productsDetails, int idSale) {
         String sql = """ 
@@ -170,8 +165,44 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar ventas : " + e.getMessage());
         }
 
     }
+    public boolean deleteSale(int idSale) {
+        String sqlDetails = "DELETE FROM sales_details WHERE idSales = ?";
+        String sqlSale = "DELETE FROM sales WHERE idSales = ?";
+
+        try (Connection conn = DBConnection.connection()) {
+
+            // Para poder revertir si algo falla
+            conn.setAutoCommit(false);
+
+            // Eliminar detalles
+            try (PreparedStatement pstmt = conn.prepareStatement(sqlDetails)) {
+                pstmt.setInt(1, idSale);
+                pstmt.executeUpdate();
+            }
+
+            // Eliminar venta
+            int rows;
+            try (PreparedStatement pstmt = conn.prepareStatement(sqlSale)) {
+                pstmt.setInt(1, idSale);
+                rows = pstmt.executeUpdate();
+            }
+
+            if (rows > 0) {
+                conn.commit();
+                return true;
+            } else {
+                conn.rollback();
+                return false;
+            }
+
+        } catch (SQLException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al eliminar venta: " + e.getMessage());
+            return false;
+        }
+    }
+
 }

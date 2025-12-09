@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
 
+import org.borghisales.salessysten.controllers.ReportsController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,7 +41,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SI");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
@@ -48,6 +49,8 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
+
+    private double currentTotal = 0;
 
     @FXML
     private TextField serial;
@@ -101,8 +104,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void configureAlerts() {
-        configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
-        configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+        configureAlert(alertCustomer, "Nuevo Cliente", "El cliente no existe", "Desea añadirlo?");
+        configureAlert(alertProduct, "Nuevo Producto", "El producto no existe", "Desea añadirlo?");
     }
 
     private void configureTable() {
@@ -128,94 +131,16 @@ public class GenerateSaleController extends MenuController implements Initializa
         colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total()).asObject());
     }
 
-    public void searchCustomer(ActionEvent actionEvent) {
-        int customerId = Integer.parseInt(codCustomer.getText());
-        customer = customerDAO.searchCustomer(customerId);
-
-        if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
-            customerName.setText(customer.name());
-        } else {
-            handleCustomerNotFound();
-        }
-    }
-
-    private void handleCustomerNotFound() {
-        alertCustomer.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == buttonTypeAccept) {
-                openCustomerManagementView();
-            }
-        });
-    }
-
-    private void openCustomerManagementView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(CUSTOMER_VIEW_FXML));
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        stage = new Stage();
-        stage.setTitle("Manage Customer");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-
-    public void searchProduct(ActionEvent actionEvent) {
-        int productId = Integer.parseInt(codProduct.getText());
-        Product product = productDAO.searchProduct(productId);
-
-        if (product != null) {
-            updateProductFields(product);
-        } else {
-            handleProductNotFound();
-        }
-    }
-
-    private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
-        productName.setText(product.name());
-        stock.setText(String.valueOf(product.stock()));
-        price.setText(String.valueOf(product.price()));
-
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, product.stock(), 0);
-        quantity.setValueFactory(valueFactory);
-    }
-
-    private void handleProductNotFound() {
-        alertProduct.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == buttonTypeAccept) {
-                openProductManagementView();
-            }
-        });
-    }
-
-    private void openProductManagementView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(PRODUCT_VIEW_FXML));
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        stage = new Stage();
-        stage.setTitle("Manage Product");
-        stage.setScene(scene);
-        stage.show();
-    }
-
 
     public void cancel(ActionEvent actionEvent) {
         if (products.isEmpty())return;
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
-        total.clear();
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
+        currentTotal = 0.0;
+        total.setText("0.0");
+        products.clear();
     }
 
     public void generateSale(ActionEvent actionEvent) {
@@ -230,6 +155,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             cleanFieldsAndTable();
             setSerial();
             total.setText("0.0");
+
             products.clear();
             updateReportsController();
         }
@@ -237,14 +163,26 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Sales createSalesObject() {
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
+                LocalDate.parse(date.getText()), currentTotal,
                 Sales.State.ACTIVE);
     }
 
     private boolean saveSaleAndDetails(Sales sales) {
-        boolean saleSaved = salesDAO.SaveSale(sales);
-        boolean detailsSaved = salesDAO.SaveDetailsSale(products, idSale);
-        return saleSaved && detailsSaved;
+        int idSales = salesDAO.SaveSaleAndGetId(sales);
+        if (idSales != -1) {
+            boolean detailsSaved = salesDAO.SaveDetailsSale(products, idSales);
+            if (detailsSaved) {
+                // Mensaje de éxito
+                MenuController.setAlert(Alert.AlertType.INFORMATION, "Venta realizada correctamente");
+                return true;
+            } else {
+                MenuController.setAlert(Alert.AlertType.ERROR, "No se pudieron guardar los detalles de la venta");
+                return false;
+            }
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "No se pudo guardar la venta");
+            return false;
+        }
     }
 
     private void cleanFieldsAndTable() {
@@ -268,8 +206,9 @@ public class GenerateSaleController extends MenuController implements Initializa
     public static void setIdSeller(int idSeller) {
         GenerateSaleController.idSeller = idSeller;
     }
-
+    @FXML
     public void addShoppingCart(ActionEvent actionEvent) {
+
         String errorMessage = validateInputs();
 
         if (errorMessage != null) {
@@ -277,10 +216,10 @@ public class GenerateSaleController extends MenuController implements Initializa
             return;
         }
 
-        ShoppingCart product = createShoppingCartObject();
 
+        ShoppingCart product = createShoppingCartObject();
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya está en tu carrito de compras.");
             return;
         }
 
@@ -300,16 +239,16 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
-        double currentTotal = Double.parseDouble(total.getText()) + product.total();
+        currentTotal += product.total();
         total.setText(String.format("%.2f", currentTotal));
     }
 
 
     private String validateInputs() {
         if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Missing customer name or product name.";
+            return "Falta el nombre del cliente o del producto.";
         } else if (quantity.getValue() == 0) {
-            return "Quantity can't be 0.";
+            return "La cantidad no puede ser 0.";
         }
         return null;
     }
@@ -319,6 +258,85 @@ public class GenerateSaleController extends MenuController implements Initializa
         String formattedId= String.format("%04d", idSale);
         serial.setText(formattedId);
     }
+
+
+
+// ******************************************************************************************
+        /*
+        Implementación de un método en el que a Generate se le agregan 2 botones para seleccionar automaticamente
+        un cliente o producto si el vendedor no conoce, esto facilita el tiempo y es mas ágil.
+         */
+    // Recibe un Customer desde CustomerController
+    private void setCustomerFromManagement(Customer selectedCustomer) {
+        if (selectedCustomer != null) {
+            customer = selectedCustomer;
+            codCustomer.setText(selectedCustomer.dni());
+            customerName.setText(selectedCustomer.name());
+        }
+    }
+
+    // Acción al seleccionar el botón de gestión.
+    @FXML
+    private void openCustomerManagement(ActionEvent event) {
+        openManagementViewModal("cliente");
+    }
+
+    @FXML
+    private void openProductManagement(ActionEvent event) {
+        openManagementViewModal("producto");
+    }
+
+
+
+
+
+    private void openManagementViewModal(String type) {
+        try {
+            String fxmlFile = switch (type.toLowerCase()) {
+                case "cliente" -> CUSTOMER_VIEW_FXML;
+                case "producto" -> PRODUCT_VIEW_FXML;
+                default -> throw new IllegalArgumentException("Tipo no soportado: " + type);
+            };
+
+            FXMLLoader loader = new FXMLLoader(MenuController.class.getResource(fxmlFile));
+            Scene scene = new Scene(loader.load());
+
+            Stage stage = new Stage();
+            stage.setTitle("Consultar " + type.substring(0,1).toUpperCase() + type.substring(1));
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.sizeToScene();
+            stage.centerOnScreen();
+
+            // Configurar listener según el tipo
+            if (type.equalsIgnoreCase("cliente")) {
+                CustomerController controller = loader.getController();
+                controller.setSelectionListener(this::setCustomerFromManagement);
+            } else if (type.equalsIgnoreCase("producto")) {
+                ProductController controller = loader.getController();
+                controller.setSelectionListener(this::setProductFromManagement);
+            }
+
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Método para recibir el producto seleccionado
+    private void setProductFromManagement(Product selectedProduct) {
+        if (selectedProduct != null) {
+            codProduct.setText(String.valueOf(selectedProduct.idProduct()));
+            productName.setText(selectedProduct.name());
+            price.setText(String.valueOf(selectedProduct.price()));
+            stock.setText(String.valueOf(selectedProduct.stock()));
+
+            SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, selectedProduct.stock(), 0);
+            quantity.setValueFactory(valueFactory);
+        }
+    }
+
 
 
 }

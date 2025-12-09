@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="refactor: delete comments">
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Al eliminar una venta no se actualizaba los gráficos, se implemento un método Line que remueve la cache y luego refrezca">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/UML.drawio.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ReportsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ReportsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/CustomerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/ProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/MainView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/reports/sales_report.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/reports/sales_report.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +25,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="bf29ca3b12cdfd1432ec91da2d1ea374ca817f80" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -43,8 +40,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Borghii/Sales-System.git&quot;,
-    &quot;accountId&quot;: &quot;2e699beb-8c26-4f6a-b608-82f45b0371d8&quot;
+    &quot;url&quot;: &quot;https://github.com/angel-chi/Sales-System-Java-MySQL.git&quot;,
+    &quot;accountId&quot;: &quot;faa92da2-c8ac-4687-a104-8b06887f986e&quot;
   }
 }</component>
   <component name="MavenImportPreferences">
@@ -55,13 +52,13 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
-}</component>
+        &quot;associatedIndex&quot;: 3
+        }</component>
   <component name="ProjectId" id="2cCZRvBslVSr90pLulz8ETinDKS" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -74,19 +71,32 @@
     "Application.MainController.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "Hernandez-Fabrizio",
     "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/tomas/Desktop/Sales-System/src/main/resources/images",
+    "last_opened_file_path": "/home/fabri123/Documentos/git-projects/Sales-System-Java-MySQL/src/main/resources/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "MavenSettings"
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/images" />
       <recent name="C:\Users\tomas\Desktop\Sales-System\src\main\resources\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -144,6 +154,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
+      <workItem from="1764975469052" duration="669000" />
+      <workItem from="1765165555757" duration="10150000" />
+      <workItem from="1765240942392" duration="3876000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
@@ -441,8 +454,59 @@
       <option name="project" value="LOCAL" />
       <updated>1713959368643</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="pruebaINTELIJ, no cambia nada">
+      <option name="closed" value="true" />
+      <created>1764975665750</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1764975665750</updated>
+    </task>
+    <task id="LOCAL-00039" summary="pruebaINTELIJ, no cambia nada">
+      <option name="closed" value="true" />
+      <created>1764975783390</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1764975783390</updated>
+    </task>
+    <task id="LOCAL-00040" summary="SEGUNDA ACTUALIZACIÓN DE CORRECIONES. Se corrigió un error el cual al cambiar de pestaña se mantenía el nombre de la clase hija, actualmente solo eran dependientes el Main y Management, pero ya se corrigió. Se corrigió detalle de que al dar doble clic a una venta de reports no se mostraba detalles y además estaba pequeña la ventana, traducción de detallitos y ya se ve bien.">
+      <option name="closed" value="true" />
+      <created>1765170024780</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1765170024780</updated>
+    </task>
+    <task id="LOCAL-00041" summary="TERCERA Y ULTIMA ACTUALIZACIÓN, SE IMPLEMENTO UN MECANISMO ABARCANDO EL ANTERIOR REALIZADO PARA PODER ELIMINAR UNA VENTA YA REALIZADA. TODO ESTO DESDE LA PESTAÑA DE REPORTS, SE MODIFICO UN POCO SalesDAO, se agrego un boton y el poder cancelar en ReportsController y nada más.">
+      <option name="closed" value="true" />
+      <created>1765173468419</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1765173468419</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Se arreglo error en la ventana estadisticas al no ver gráficos, se retorno el método original en SalesDAO, parece todo bien.">
+      <option name="closed" value="true" />
+      <created>1765174259421</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1765174259421</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Al eliminar una venta no se actualizaba los gráficos, se implemento un método Line que remueve la cache y luego refrezca">
+      <option name="closed" value="true" />
+      <created>1765174481994</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1765174481994</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -456,11 +520,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fea: delete seller" />
-    <MESSAGE value="fea: add table" />
-    <MESSAGE value="fea: add show table" />
-    <MESSAGE value="fea: add DAO products" />
-    <MESSAGE value="fea: add FML CustomerView.fxml" />
     <MESSAGE value="fea: add CRUD Customers" />
     <MESSAGE value="feat: add GenerateSale.viw and modify access modifiers" />
     <MESSAGE value="feat: search Customer" />
@@ -481,6 +540,11 @@
     <MESSAGE value="fix: finish optimization linechart" />
     <MESSAGE value="refactor: cleaning code" />
     <MESSAGE value="refactor: delete comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: delete comments" />
+    <MESSAGE value="pruebaINTELIJ, no cambia nada" />
+    <MESSAGE value="SEGUNDA ACTUALIZACIÓN DE CORRECIONES. Se corrigió un error el cual al cambiar de pestaña se mantenía el nombre de la clase hija, actualmente solo eran dependientes el Main y Management, pero ya se corrigió. Se corrigió detalle de que al dar doble clic a una venta de reports no se mostraba detalles y además estaba pequeña la ventana, traducción de detallitos y ya se ve bien." />
+    <MESSAGE value="TERCERA Y ULTIMA ACTUALIZACIÓN, SE IMPLEMENTO UN MECANISMO ABARCANDO EL ANTERIOR REALIZADO PARA PODER ELIMINAR UNA VENTA YA REALIZADA. TODO ESTO DESDE LA PESTAÑA DE REPORTS, SE MODIFICO UN POCO SalesDAO, se agrego un boton y el poder cancelar en ReportsController y nada más." />
+    <MESSAGE value="Se arreglo error en la ventana estadisticas al no ver gráficos, se retorno el método original en SalesDAO, parece todo bien." />
+    <MESSAGE value="Al eliminar una venta no se actualizaba los gráficos, se implemento un método Line que remueve la cache y luego refrezca" />
+    <option name="LAST_COMMIT_MESSAGE" value="Al eliminar una venta no se actualizaba los gráficos, se implemento un método Line que remueve la cache y luego refrezca" />
   </component>
 </project>
