@@ -194,7 +194,6 @@ Pues, la tabla product solo guardaba el ID de la marca (idBrand), pero no el nom
 Entonces el _ProductDAO_ hacía un _SELECT * FROM product_. Al intentar crear el objeto en Java, el sistema buscaba la columna _"brand_name"_, no la encontraba, fallaba construir el objeto y devolvía null.
 <br>**Solución:** Modificamos la consulta SQL en el ProductDAO para utilizar un _INNER JOIN_ .
 
-Consecuencia en UI: El controlador recibía un null, asumía que el producto no existía y lanzaba la alerta, dejando el selector de cantidad (Spinner) bloqueado.
 ### Botón "Ayuda"
 Un error que se detectó fue que cuando se presionaba el botón de "Help" no ocurría nada Originalmente, el código probablemente intentaba usar _Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"))_.<br>
 Y esa línea está muy optimizada para Windows y MacOS. Sin embargo en Linux, Java a menudo no logra comunicarse correctamente con el gestor de ventanas para saber cuál es el navegador predeterminado.
