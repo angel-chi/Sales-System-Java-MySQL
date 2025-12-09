@@ -1,6 +1,5 @@
 package org.borghisales.salessysten.controllers;
 
-import com.sun.tools.javac.Main;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,19 +9,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import org.borghisales.salessysten.model.Customer;
-import org.borghisales.salessysten.model.CustomerDAO;
+import org.borghisales.salessysten.model.Cliente;
+import org.borghisales.salessysten.model.ClienteDAO;
 
-
+import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class CustomerController implements Initializable {
+public class CustomerController extends MenuController implements Initializable {
 
-    private final CustomerDAO customerDAO = new CustomerDAO();
-    private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
-    private static ObservableList<Customer> customers=null;
+    private final ClienteDAO clienteDAO = new ClienteDAO();
+    private final ObservableList<Cliente.Estado> stateList = FXCollections.observableArrayList(Cliente.Estado.ACTIVO, Cliente.Estado.INACTIVO);
+    private static ObservableList<Cliente> clientes=null;
 
     @FXML
     private TextField dni;
@@ -31,19 +29,19 @@ public class CustomerController implements Initializable {
     @FXML
     private TextField address;
     @FXML
-    private ComboBox<Customer.State> cbState;
+    private ComboBox<Cliente.Estado> cbState;
     @FXML
-    private TableView<Customer> tableCustomers;
+    private TableView<Cliente> tableCustomers;
     @FXML
-    private TableColumn<Customer,Integer> colId;
+    private TableColumn<Cliente,Integer> colId;
     @FXML
-    private TableColumn<Customer,String> colDni;
+    private TableColumn<Cliente,String> colDni;
     @FXML
-    private TableColumn<Customer,String> colName;
+    private TableColumn<Cliente,String> colName;
     @FXML
-    private TableColumn<Customer,String> colAddress;
+    private TableColumn<Cliente,String> colAddress;
     @FXML
-    private TableColumn<Customer,Customer.State> colState;
+    private TableColumn<Cliente,Cliente.Estado> colState;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,49 +51,49 @@ public class CustomerController implements Initializable {
     }
     private void initializeCustomerData() {
         tableCustomers.getItems().clear();
-        if (customers == null) {
-            customers = FXCollections.observableArrayList();
-            customerDAO.setTable(customers);
+        if (clientes == null) {
+            clientes = FXCollections.observableArrayList();
+            clienteDAO.setTable(clientes);
         }
-        tableCustomers.setItems(customers);
+        tableCustomers.setItems(clientes);
     }
     private void initializeTable() {
         tableCustomers.setOnMouseClicked(mouseEvent -> {
             if (!tableCustomers.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
-                Customer customer = tableCustomers.getSelectionModel().getSelectedItem();
-                setCells(customer);
+                Cliente cliente = tableCustomers.getSelectionModel().getSelectedItem();
+                setCells(cliente);
             }
         });
 
-        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idCustomer()).asObject());
-        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
-        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
-        colAddress.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().address()));
-        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getId()).asObject());
+        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getNombre()));
+        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getCorreo()));
+        colAddress.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getDireccion()));
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getEstado()));
     }
     private void initializeComboBox() {
-        cbState.setValue(Customer.State.ACTIVE);
+        cbState.setValue(Cliente.Estado.ACTIVO);
         cbState.setItems(stateList);
     }
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
-        if (customerDAO.create(customer)) {
+        Cliente cliente = new Cliente(dni.getText(),name.getText(),address.getText(),cbState.getValue());
+        if (clienteDAO.create(cliente)) {
             MenuController.cleanCells(dni, name, address);
             updateTable();
         }
     }
     @FXML
     public void updateCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
-        if (customerDAO.update(customer)) {
+        Cliente cliente = new Cliente(dni.getText(),name.getText(),address.getText(),cbState.getValue());
+        if (clienteDAO.update(cliente)) {
             MenuController.cleanCells(dni, name, address);
             updateTable();
         }
     }
     @FXML
     public void deleteCustomer(ActionEvent actionEvent) {
-        if (customerDAO.delete(dni.getText())){
+        if (clienteDAO.delete(dni.getText())){
             MenuController.cleanCells(dni,name,address);
             updateTable();
         }
@@ -104,17 +102,22 @@ public class CustomerController implements Initializable {
     public void cleanCellsScreen(ActionEvent actionEvent) {
         MenuController.cleanCells(dni,name,address);
     }
-    private void setCells(Customer customer){
-        name.setText(customer.name());
-        dni.setText(customer.dni());
-        address.setText(customer.address());
-        cbState.setValue(customer.state());
+    private void setCells(Cliente cliente){
+        name.setText(cliente.getNombre());
+        dni.setText(cliente.getCorreo());
+        address.setText(cliente.getDireccion());
+        cbState.setValue(cliente.getEstado());
     }
 
     private void updateTable() {
         tableCustomers.getItems().clear();
-        customerDAO.setTable(customers);
-        tableCustomers.setItems(customers);
+        clienteDAO.setTable(clientes);
+        tableCustomers.setItems(clientes);
     }
 
+    @FXML
+    public void backToMenu(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML, "Management");
+        closeCurrentStage(dni);
+    }
 }

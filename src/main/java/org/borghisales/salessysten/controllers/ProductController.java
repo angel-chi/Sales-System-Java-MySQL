@@ -13,39 +13,40 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import org.borghisales.salessysten.model.Product;
-import org.borghisales.salessysten.model.ProductDAO;
+import org.borghisales.salessysten.model.Producto; // Product -> Producto
+import org.borghisales.salessysten.model.ProductoDAO; // ProductDAO -> ProductoDAO
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProductController implements Initializable {
+public class ProductController extends MenuController implements Initializable {
 
-    private final ProductDAO productDAO = new ProductDAO();
+    private final ProductoDAO productoDAO = new ProductoDAO(); // ProductDAO -> ProductoDAO
 
-    private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
+    private final ObservableList<Producto.Estado> stateList = FXCollections.observableArrayList(Producto.Estado.ACTIVO, Producto.Estado.INACTIVO); // Product.State -> Producto.Estado
 
-    private static ObservableList<Product> products =null;
+    private static ObservableList<Producto> productos =null; // Product -> Producto, products -> productos
     @FXML
-    private ComboBox<Product.State> cbState;
+    private ComboBox<Producto.Estado> cbState; // Product.State -> Producto.Estado
     @FXML
-    private TextField name;
+    private TextField nombre; // name -> nombre
     @FXML
-    private TextField price;
+    private TextField precio; // price -> precio (se mantiene el TextField, pero el acceso a la propiedad es precio)
     @FXML
-    private TextField stock;
+    private TextField existencia; // stock -> existencia
     @FXML
-    private TableView<Product> tableProducts;
+    private TableView<Producto> tableProducts; // Product -> Producto
     @FXML
-    private TableColumn<Product,Integer> colId;
+    private TableColumn<Producto,Integer> colId; // Product -> Producto
     @FXML
-    private TableColumn<Product,String> colName;
+    private TableColumn<Producto,String> colName; // Product -> Producto, colName -> colNombre
     @FXML
-    private TableColumn<Product,Double> colPrice;
+    private TableColumn<Producto,Double> colPrice; // Product -> Producto, colPrice -> colPrecio
     @FXML
-    private TableColumn<Product,Integer> colStock;
+    private TableColumn<Producto,Integer> colStock; // Product -> Producto, colStock -> colExistencia
     @FXML
-    private TableColumn<Product,Product.State> colState;
+    private TableColumn<Producto,Producto.Estado> colState; // Product -> Producto, Product.State -> Producto.Estado, colState -> colEstado
 
 
     @Override
@@ -58,73 +59,77 @@ public class ProductController implements Initializable {
     private void initializeTable() {
         tableProducts.setOnMouseClicked(mouseEvent -> {
             if (!tableProducts.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
-                Product product = tableProducts.getSelectionModel().getSelectedItem();
-                setCells(product);
+                Producto producto = tableProducts.getSelectionModel().getSelectedItem();
+                setCells(producto);
             }
         });
 
-        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idProduct()).asObject());
-        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
-        colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
-        colStock.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().stock()).asObject());
-        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idProducto()).asObject());
+        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().nombre()));
+        colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().precio()).asObject());
+        colStock.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().existencia()).asObject());
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().estado()));
     }
 
     private void initializeComboBox() {
-        cbState.setValue(Product.State.ACTIVE);
+        cbState.setValue(Producto.Estado.ACTIVO); // Product.State.ACTIVE -> Producto.Estado.ACTIVO
         cbState.setItems(stateList);
     }
 
     private void initializeProductData() {
         tableProducts.getItems().clear();
-        if (products == null) {
-            products = FXCollections.observableArrayList();
-            productDAO.setTable(products);
+        if (productos == null) { // products -> productos
+            productos = FXCollections.observableArrayList(); // products -> productos
+            productoDAO.setTable(productos); // productDAO -> productoDAO, products -> productos
         }
-        tableProducts.setItems(products);
+        tableProducts.setItems(productos); // products -> productos
     }
 
     public void addProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                          Integer.parseInt(stock.getText()), cbState.getValue());
-        if (productDAO.create(product)) {
-            MenuController.cleanCells(name,price,stock);
+        Producto producto = new Producto(nombre.getText(),Double.parseDouble(precio.getText()), // name -> nombre, price -> precio
+                          Integer.parseInt(existencia.getText()), cbState.getValue()); // stock -> existencia
+        if (productoDAO.create(producto)) { // productDAO -> productoDAO
+            MenuController.cleanCells(nombre,precio,existencia); // name -> nombre, price -> precio, stock -> existencia
             updateTable();
         }
     }
 
     public void updateProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                Integer.parseInt(stock.getText()), cbState.getValue());
-        if (productDAO.update(product)) {
-            MenuController.cleanCells(name,price,stock);
+        Producto producto = new Producto(nombre.getText(),Double.parseDouble(precio.getText()), // name -> nombre, price -> precio
+                Integer.parseInt(existencia.getText()), cbState.getValue()); // stock -> existencia
+        if (productoDAO.update(producto)) { // productDAO -> productoDAO
+            MenuController.cleanCells(nombre,precio,existencia); // name -> nombre, price -> precio, stock -> existencia
             updateTable();
         }
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
-        if (productDAO.delete(name.getText())) {
-            MenuController.cleanCells(name,price,stock);
+        if (productoDAO.delete(nombre.getText())) { // productDAO -> productoDAO, name -> nombre (manteniendo la lógica original de borrar por nombre)
+            MenuController.cleanCells(nombre,precio,existencia); // name -> nombre, price -> precio, stock -> existencia
             updateTable();
         }
     }
 
     public void cleanCellsScreen(ActionEvent actionEvent) {
-        MenuController.cleanCells(name,price,stock);
+        MenuController.cleanCells(nombre,precio,existencia); // name -> nombre, price -> precio, stock -> existencia
     }
 
-    private void setCells(Product product){
-        name.setText(product.name());
-        price.setText(String.valueOf(product.price()));
-        stock.setText(String.valueOf(product.stock()));
-        cbState.setValue(product.state());
+    private void setCells(Producto producto){ // Product -> Producto
+        nombre.setText(producto.nombre()); // name -> nombre, product.name() -> producto.nombre()
+        precio.setText(String.valueOf(producto.precio())); // price -> precio, product.price() -> producto.precio()
+        existencia.setText(String.valueOf(producto.existencia())); // stock -> existencia, product.stock() -> producto.existencia()
+        cbState.setValue(producto.estado()); // product.state() -> producto.estado()
     }
 
     private void updateTable() {
         tableProducts.getItems().clear();
-        productDAO.setTable(products);
-        tableProducts.setItems(products);
+        productoDAO.setTable(productos); // productDAO -> productoDAO, products -> productos
+        tableProducts.setItems(productos); // products -> productos
     }
 
-
+    @FXML
+    public void backToMenu(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML, "Management");
+        closeCurrentStage(nombre);
+    }
 }

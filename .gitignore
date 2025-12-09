@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
+.idea/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
@@ -11,6 +12,12 @@ target/
 *.iws
 *.iml
 *.ipr
+.idea/copilot.data.migration.agent.xml
+.idea/copilot.data.migration.ask.xml
+.idea/copilot.data.migration.edit.xml
+.idea/copilot.data.migration.ask2agent.xml
+.idea/workspace
+
 
 ### Eclipse ###
 .apt_generated
@@ -36,4 +43,12 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/src/main/java/org/borghisales/salessysten/model/config.properties
+/src/main/resources/config.properties
+
+### Docker ###
+docker-compose.yml
+
+### Se agrega el config.properties ya que contiene el usuari que cree en mi maquina para sql y puede variar ###
+src/main/resources/config.properties
+.idea/workspace.xml
+.idea/workspace.xml

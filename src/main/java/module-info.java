@@ -1,16 +1,20 @@
 module org.borghisales.salessysten {
     requires javafx.controls;
     requires javafx.fxml;
+    requires transitive javafx.base; // Añadido para solucionar advertencias de accesibilidad
     requires java.sql;
     requires org.apache.pdfbox;
     requires java.desktop;
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
     requires jdk.compiler;
+    requires org.apache.commons.collections4;
 
 
     opens org.borghisales.salessysten to javafx.fxml;
     exports org.borghisales.salessysten.controllers;
     opens org.borghisales.salessysten.controllers to javafx.fxml;
     exports org.borghisales.salessysten;
+    exports org.borghisales.salessysten.model;
+    opens org.borghisales.salessysten.model to javafx.fxml;
 }

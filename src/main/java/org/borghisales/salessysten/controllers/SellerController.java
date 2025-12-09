@@ -10,40 +10,47 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import org.borghisales.salessysten.model.Seller;
-import org.borghisales.salessysten.model.SellerDAO;
+import org.borghisales.salessysten.model.Vendedor;
+import org.borghisales.salessysten.model.VendedorDAO;
 
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class SellerController implements Initializable {
-    private final SellerDAO sellerDAO = new SellerDAO();
-    private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
-    private static ObservableList<Seller> sellers = null;
+public class SellerController extends MenuController implements Initializable {
+    private final VendedorDAO vendedorDAO = new VendedorDAO(); // SellerDAO -> VendedorDAO
+    private final ObservableList<Vendedor.Estado> stateList = FXCollections.observableArrayList(Vendedor.Estado.ACTIVO, Vendedor.Estado.INACTIVO); // Seller.State -> Vendedor.Estado
+    private static ObservableList<Vendedor> vendedores = null; // Seller -> Vendedor, sellers -> vendedores
+    private final ObservableList<Vendedor.Rol> roleList = FXCollections.observableArrayList(Vendedor.Rol.VENDEDOR, Vendedor.Rol.ADMINISTRADOR);
 
     @FXML
-    private TextField dni;
+    private TextField identificacion; // dni -> identificacion
     @FXML
-    private TextField name;
+    private TextField nombre; // name -> nombre
     @FXML
-    private TextField phone;
+    private TextField telefono; // phone -> telefono
     @FXML
-    private TextField user;
+    private TextField usuario; // user -> usuario
     @FXML
-    private ComboBox<Seller.State> cbState;
+    private Label labelRol; //Para que desapareza también la etiqueta
     @FXML
-    private TableView<Seller> tableSellers;
+    private ComboBox<Vendedor.Estado> cbState;
     @FXML
-    private TableColumn<Seller,Integer> colId;
+    private ComboBox<Vendedor.Rol>cbRol; //Para que se muestre el rol del vendedor
     @FXML
-    private TableColumn<Seller,String> colDni;
+    private TableView<Vendedor> tableSellers; // Seller -> Vendedor
     @FXML
-    private TableColumn<Seller,String> colName;
+    private TableColumn<Vendedor,Integer> colId; // Seller -> Vendedor
     @FXML
-    private TableColumn<Seller,String> colPhone;
+    private TableColumn<Vendedor,String> colDni; // Seller -> Vendedor
     @FXML
-    private TableColumn<Seller, Seller.State> colState;
+    private TableColumn<Vendedor,String> colName; // Seller -> Vendedor
+    @FXML
+    private TableColumn<Vendedor,String> colPhone; // Seller -> Vendedor
+    @FXML
+    private TableColumn<Vendedor, Vendedor.Estado> colState;
+    @FXML
+    private TableColumn<Vendedor, Vendedor.Rol> colRol;
 
 
 
@@ -58,76 +65,96 @@ public class SellerController implements Initializable {
     private void initializeTable() {
         tableSellers.setOnMouseClicked(mouseEvent -> {
             if (!tableSellers.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
-                Seller seller = tableSellers.getSelectionModel().getSelectedItem();
-                setCells(seller);
+                Vendedor vendedor = tableSellers.getSelectionModel().getSelectedItem(); // Seller -> Vendedor
+                setCells(vendedor);
             }
         });
 
-        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSeller()).asObject());
-        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
-        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
-        colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().phoneNumber()));
-        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getId()).asObject()); // idSeller() -> idVendedor()
+        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getIdentificacion())); // dni() -> identificacion()
+        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getNombre())); // name() -> nombre()
+        colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getTelefono())); // phoneNumber() -> telefono()
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getEstado()));// state() -> estado()
+        colRol.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getRol()));// role() -> rol()
     }
 
     private void initializeComboBox() {
-        cbState.setValue(Seller.State.ACTIVE);
+        cbState.setValue(Vendedor.Estado.ACTIVO); // Seller.State.ACTIVE -> Vendedor.Estado.ACTIVO
         cbState.setItems(stateList);
+
+        cbRol.setItems(roleList);
+        cbRol.setValue(Vendedor.Rol.VENDEDOR);
+
+        //Si el rol del vendedor no es administrador, entonces no podrá cambiar el rol y ni siquiera verlo
+        if(MainController.vendedorLogeado == null || MainController.vendedorLogeado.getRol() != Vendedor.Rol.ADMINISTRADOR){
+            cbRol.setDisable(true);
+            cbRol.setVisible(false);
+            labelRol.setVisible(false);
+        }
     }
 
     private void initializeSellerData() {
         tableSellers.getItems().clear();
-        if (sellers == null) {
-            sellers = FXCollections.observableArrayList();
-            sellerDAO.setTable(sellers);
+        if (vendedores == null) { // sellers -> vendedores
+            vendedores = FXCollections.observableArrayList(); // sellers -> vendedores
+            vendedorDAO.setTable(vendedores); // sellerDAO -> vendedorDAO, sellers -> vendedores
         }
-        tableSellers.setItems(sellers);
+        tableSellers.setItems(vendedores); // sellers -> vendedores
     }
 
 
     public void addSeller(ActionEvent actionEvent){
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
-        if (sellerDAO.create(seller)) {
-            MenuController.cleanCells(dni, name, phone, user);
+        Vendedor vendedor = new Vendedor(identificacion.getText(),nombre.getText(),telefono.getText(), cbState.getValue(),usuario.getText(),cbRol.getValue()); // Seller -> Vendedor, dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
+        if (vendedorDAO.create(vendedor)) { // sellerDAO -> vendedorDAO
+            MenuController.cleanCells(identificacion, nombre, telefono, usuario); // dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
             updateTable();
         }
     }
     public void updateSeller(ActionEvent actionEvent) {
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
-        if (sellerDAO.update(seller)) {
-            MenuController.cleanCells(dni, name, phone, user);
+        Vendedor vendedor = new Vendedor(identificacion.getText(),nombre.getText(),telefono.getText(), cbState.getValue(),usuario.getText(), cbRol.getValue()); // Seller -> Vendedor, dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
+        if (vendedorDAO.update(vendedor)) { // sellerDAO -> vendedorDAO
+            MenuController.cleanCells(identificacion, nombre, telefono, usuario); // dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
             updateTable();
         }
     }
 
     public void deleteSeller(ActionEvent actionEvent) {
-        if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller");
+        if (Objects.equals(identificacion.getText(), MainController.vendedorLogeado.getIdentificacion())){ // dni -> identificacion, sellerLog -> vendedorLogeado, dni() -> identificacion()
+            MenuController.setAlert(Alert.AlertType.ERROR,"No se puede eliminar el vendedor actual"); // Mensaje traducido
             return;
         }
-        if (sellerDAO.delete(dni.getText())){
-            MenuController.cleanCells(dni,name,phone,user);
+        if (vendedorDAO.delete(identificacion.getText())){ // sellerDAO -> vendedorDAO, dni -> identificacion
+            MenuController.cleanCells(identificacion,nombre,telefono,usuario); // dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
             updateTable();
         }
     }
 
     public void cleanCellsScreen(ActionEvent actionEvent) {
-        MenuController.cleanCells(dni,name,phone,user);
+        MenuController.cleanCells(identificacion,nombre,telefono,usuario); // dni -> identificacion, name -> nombre, phone -> telefono, user -> usuario
     }
 
-    private void setCells(Seller seller){
-        dni.setText(seller.dni());
-        name.setText(seller.name());
-        phone.setText(seller.phoneNumber());
-        user.setText(seller.user());
-        cbState.setValue(seller.state());
+    private void setCells(Vendedor vendedor){ // Seller -> Vendedor
+        identificacion.setText(vendedor.getIdentificacion()); // dni -> identificacion
+        nombre.setText(vendedor.getNombre()); // name -> nombre
+        telefono.setText(vendedor.getTelefono()); // phoneNumber -> telefono
+        usuario.setText(vendedor.getUsuario()); // user -> usuario
+        cbState.setValue(vendedor.getEstado());
+
+        //Solo tiene sentido mostrarlo si el comboBox de rol está habilitado
+        if(cbRol != null){
+            cbRol.setValue(vendedor.getRol());
+        }
     }
 
     private void updateTable(){
         tableSellers.getItems().clear();
-        sellerDAO.setTable(sellers);
-        tableSellers.setItems(sellers);
+        vendedorDAO.setTable(vendedores); // sellerDAO -> vendedorDAO, sellers -> vendedores
+        tableSellers.setItems(vendedores); // sellers -> vendedores
     }
 
-
+    @FXML
+    public void backToMenu(ActionEvent actionEvent) {
+        openNewStage(MANAGEMENT_VIEW_FXML, "Management");
+        closeCurrentStage(identificacion);
+    }
 }

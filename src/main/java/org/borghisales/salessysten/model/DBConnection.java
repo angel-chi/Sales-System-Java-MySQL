@@ -3,48 +3,56 @@ package org.borghisales.salessysten.model;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MenuController;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
 public class DBConnection {
 
-    static Connection connection() throws SQLException {
+    static Connection connection() {
         Properties properties = new Properties();
-        try (InputStream input = new FileInputStream("src/main/java/org/borghisales/salessysten/model/config.properties")) {
+
+        // Intenta cargar desde resources/
+        try (InputStream input = DBConnection.class.getClassLoader()
+                .getResourceAsStream("config.properties")) {
+
+            if (input == null) {
+                System.out.println(" No se encontró config.properties en resources/");
+                return null;
+            }
+
             properties.load(input);
+
             String url = properties.getProperty("db.url");
             String user = properties.getProperty("db.user");
             String password = properties.getProperty("db.password");
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
             return DriverManager.getConnection(url, user, password);
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
-            // Manejar la excepción adecuadamente
             return null;
         }
     }
 
     private static boolean verifyDuplicates(String name, String surname){
-        String query = "SELECT* FROM employee_data WHERE NAME = ? AND SURNAME = ?";
+        String query = "SELECT * FROM datos_empleado WHERE NOMBRE = ? AND APELLIDO = ?";
         try (Connection conn = connection();
-             PreparedStatement pstmt = conn.prepareStatement(query) ){
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            pstmt.setString(1,name.strip());
-            pstmt.setString(2,surname.strip());
+            pstmt.setString(1, name.strip());
+            pstmt.setString(2, surname.strip());
 
-            try (ResultSet rs = pstmt.executeQuery()){
-                return !(rs.next());
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return !rs.next();
             }
 
-        }catch(SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Error adding employee: " + e.getMessage());
+        } catch (SQLException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR,
+                    "Error al agregar empleado: " + e.getMessage());
             return false;
         }
-
     }
-
-
-
 }
