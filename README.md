@@ -173,10 +173,6 @@ Se traduce al Español toda la interfaz de usuario de la aplicación.
 # 🎇 Video de Presentación
 Link al OneDrive: https://alumnosuady-my.sharepoint.com/:v:/g/personal/a24216385_alumnos_uady_mx/IQD6Bozz-T15S7YPQUOirR3ZAepX7-okrd70mMSUdGfPCwc?e=jBqyxv&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D.
 
-# 📧 Contacto
-
-Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
-
 # 📝 Licencia
 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
