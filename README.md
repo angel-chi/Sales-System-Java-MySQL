@@ -176,6 +176,13 @@ En la pestaña de generar ventas, este boton no tenia funcionalidad original, su
 Este boton originalmente buscaba abrir directamente el repositorio del proyecto para buscar detalles de este en el propio github.
 Sin embargo, no habria el enlace y en su lugar provocaba una falla en el programa que lo congelaba
 
+# Nueva base de datos
+
+<p align="center">
+  <img src="src/main/resources/images/DB.png" />
+</p>
+
+
 # Propuestas implementadas
 
 ## Sistema de Autenticación y Unicidad de Datos
@@ -202,6 +209,19 @@ Sin embargo, no habria el enlace y en su lugar provocaba una falla en el program
 **Implementación:** Se creó una interfaz compartida capaz de encapsular los atributos comunes entre vendedores y clientes. La decisión de utilizar una interfaz en lugar de una superclase abstracta se basó en que las entidades están implementadas como records en Java, lo cual limita las opciones de herencia tradicional. Para el ENUM de estado, se creó una definición única centralizada que reemplazó todas las definiciones individuales que existían previamente en las diferentes entidades. Esto requirió actualizaciones en múltiples controladores y clases derivadas que hacían referencia a los ENUMs específicos de cada entidad, migrándolos todos al ENUM común.
 
 **Justificación:** La existencia de un ENUM idéntico replicado en múltiples entidades constituía una violación del principio DRY (Don't Repeat Yourself) y generaba riesgo de inconsistencias futuras. Al centralizar esta definición, cualquier modificación o extensión del ENUM se propaga automáticamente a todas las entidades que lo utilizan. La misma lógica aplica para los atributos compartidos entre cliente y vendedor: ambas entidades representan tipos de usuarios con características muy similares, diferenciándose principalmente en su rol dentro del sistema. La encapsulación de estos atributos comunes no solo reduce la duplicación de código sino que también facilita futuras extensiones del sistema y mejora su mantenibilidad.
+
+
+### Diagrama Dao
+
+<p align="center">
+  <img src="src/main/resources/images/Dao.png" />
+</p>
+
+### Diagrama controller
+
+<p align="center">
+  <img src="src/main/resources/images/controller.png" />
+</p>
 
 ## Sistema de Roles y Control de Acceso
 
