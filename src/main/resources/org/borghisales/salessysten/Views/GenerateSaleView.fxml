@@ -78,7 +78,7 @@
       </Label>
       <ImageView fitHeight="111.0" fitWidth="108.0" layoutX="588.0" layoutY="14.0">
          <image>
-            <Image url="@../../../../images/2649150.png" />
+            <Image url="@../../../../images/shoppingcart.jpeg" />
          </image>
       </ImageView>
       <TextField fx:id="total1" editable="false" layoutX="588.0" layoutY="567.0" prefWidth="88.0" />

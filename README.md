@@ -106,6 +106,11 @@ Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder,
   <img src="src/main/resources/images/diagramaBD.png" />
 </p>
 
+# 🗄️ Diagrama UML
+<p align="center">
+  <img src="src/main/resources/images/diagramaUML.jpeg" />
+</p>
+
 
 # 💡 Fucionalidades
 
