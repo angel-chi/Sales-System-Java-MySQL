@@ -34,7 +34,7 @@ public class MainController extends MenuController implements Initializable {
     private void signIn(){
 
         if (SellerDAO.login(user.getText(),password.getText())) {
-            openNewStage(MANAGEMENT_VIEW_FXML, "Management");
+            openNewStage(MANAGEMENT_VIEW_FXML, "MENU");
             closeCurrentStage(user);
         }
     }

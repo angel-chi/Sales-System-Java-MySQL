@@ -26,7 +26,7 @@ public class MenuController {
 
 
     static Alert defaultAlert;
-    static ButtonType acceptButton = new ButtonType("Accept");
+    static ButtonType acceptButton = new ButtonType("ACEPTADO");
     public static HashMap<String, String > filePaths = new HashMap<>();
 
     void closeCurrentStage(Node node) {
@@ -132,7 +132,7 @@ public class MenuController {
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("INFORMACIÓN");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);

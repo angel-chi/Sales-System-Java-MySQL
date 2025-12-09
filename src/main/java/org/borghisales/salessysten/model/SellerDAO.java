@@ -92,17 +92,17 @@ public class SellerDAO implements CRUD<Seller> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller deleted correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "VENDEDOR ELIMINADO CORRECTAMENTE");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "ERROR ELIMINANDO VENDEDOR: ");
                 return false;
             }
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR ELIMINANDO VENDEDOR: " + e.getMessage());
             return false;
         }
 
@@ -124,7 +124,7 @@ public class SellerDAO implements CRUD<Seller> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR CONFIGURANDO LA TABLA DE VENDEDORES: " + e.getMessage());
         }
     }
 
@@ -154,12 +154,12 @@ public class SellerDAO implements CRUD<Seller> {
 
                     return true;
                 }else{
-                    MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;
+                    MenuController.setAlert(Alert.AlertType.ERROR, "USUARIO NO ENCONTRADO") ;
                     return false;
                 }
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR BUSCANDO VENDEDOR: " + e.getMessage());
             return false;
         }
 
