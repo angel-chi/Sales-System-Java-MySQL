@@ -163,7 +163,10 @@ https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793
 
 ---
 ##  Diagrama UML
-
+<details>
+  <summary>Haga clic para ver el Diagrama UML del Proyecto</summary>
+  <img src="UML/UML.svg" alt="Diagrama de Clases UML" width="700px" />
+</details>
 
 
 ##  Errores encontrados y soluciones implementadas
