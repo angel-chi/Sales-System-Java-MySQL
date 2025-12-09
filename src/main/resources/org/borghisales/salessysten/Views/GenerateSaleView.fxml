@@ -30,19 +30,19 @@
 
 
         <Label layoutX="21.0" layoutY="166.0" text="INE CLIENTE:" wrapText="true" />
-        <TextField fx:id="codCustomer" layoutX="125.0" layoutY="166.0" prefHeight="25.0" prefWidth="150.0" />
+        <TextField fx:id="codCustomer"  editable="false" layoutX="125.0" layoutY="166.0" prefHeight="25.0" prefWidth="150.0" />
         <Button layoutX="250.0" layoutY="166.0" mnemonicParsing="false" onAction="#openCustomerManagement" prefHeight="25.0" prefWidth="160.0" text="GESTIONAR CLIENTE" />
         <TextField fx:id="customerName" editable="false" layoutX="496.0" layoutY="166.0" prefHeight="25.0" prefWidth="180.0" />
         <Label layoutX="420.0" layoutY="170.0" text="CLIENTE:" wrapText="true" />
 
         <Label layoutX="21.0" layoutY="204.0" text="COD PROD:" wrapText="true" />
-        <TextField fx:id="codProduct" layoutX="124.0" layoutY="200.0" prefHeight="25.0" prefWidth="150.0" />
+        <TextField fx:id="codProduct"  editable="false" layoutX="124.0" layoutY="200.0" prefHeight="25.0" prefWidth="150.0" />
         <Button layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#openProductManagement" prefHeight="25.0" prefWidth="160.0" text="GESTIONAR PRODUCTO" />
         <TextField fx:id="productName" editable="false" layoutX="496.0" layoutY="199.0" prefHeight="25.0" prefWidth="180.0" />
         <Label layoutX="420.0" layoutY="204.0" text="PRODUCTO:" wrapText="true" />
 
         <Label layoutX="22.0" layoutY="238.0" text="PRECIO:" wrapText="true" />
-        <TextField fx:id="price" layoutX="125.0" layoutY="234.0" prefHeight="25.0" prefWidth="150.0" />
+        <TextField fx:id="price" layoutX="125.0" editable="false"  layoutY="234.0" prefHeight="25.0" prefWidth="150.0" />
         <Label layoutX="420.0" layoutY="238.0" text="DISPONIB:" wrapText="true" />
         <TextField fx:id="stock" editable="false" layoutX="496.0" layoutY="234.0" prefHeight="25.0" prefWidth="180.0" />
 
