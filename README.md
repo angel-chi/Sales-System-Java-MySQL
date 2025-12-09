@@ -239,6 +239,17 @@ Sin embargo, no habria el enlace y en su lugar provocaba una falla en el program
 
 **Justificación:** Este cambio proporciona al contador y a los administradores una forma estructurada y profesional de gestionar el inventario desde una perspectiva logística real. En lugar de simplemente agregar productos al sistema de forma arbitraria cuando el stock se agota, ahora existe un proceso formal que documenta cómo y de dónde provienen los productos. Esto es crucial para múltiples aspectos del negocio: permite un mejor control de costos al rastrear los precios de compra, facilita la contabilidad al mantener registros detallados de gastos, mejora las relaciones con proveedores al tener un historial de transacciones, y proporciona datos valiosos para análisis de rentabilidad al poder comparar precios de compra con precios de venta. Es una forma mucho más adecuada y profesional de manejar el ciclo completo del inventario, desde la adquisición hasta la venta.a.
 
+## 📹 Video de Presentación
+
+[Ver video de presentación del proyecto](https://youtube.com/tu-link-aqui)
+
+### Contenido del video:
+- Introducción del equipo
+- Compilación y ejecución sin IDE
+- Demostración de funcionalidades
+- Explicación de mejoras implementadas
+- Tour por las vistas
+
 # 📝 Licencia
 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
