@@ -214,5 +214,5 @@ Desde la ventana de generaciòn de venta permita decidir si se genera un recibo 
 
 
 ## 🎥 Vìdeo
-[Reza-Ayuso](https://youtu.be/OkKGALtZwkU?si=vBKXfj1smZSz4tzG)
+[Reza-Ayuso](https://youtu.be/8qbM9sLcTbc)
 
