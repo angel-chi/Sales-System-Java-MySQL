@@ -153,5 +153,39 @@ public class ComprasDAO implements CRUD<Compras> {
             return false;
         }
     }
+    public int createAndReturnId(Compras entity) {
+        String sql = """
+        INSERT INTO compras (idProveedor, idSeller, subtotal, stateCompra)
+        VALUES (?,?,?,?)
+        """;
+
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            pstmt.setInt(1, entity.idProveedor());
+            pstmt.setInt(2, entity.idVendedor());
+            pstmt.setDouble(3, entity.subtotal());
+            pstmt.setString(4, entity.estado().name());
+
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                return -1;
+            }
+
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getInt(1); // ✅ ID REAL
+                }
+            }
+
+        } catch (SQLException e) {
+            MenuController.setAlert(
+                    Alert.AlertType.ERROR,
+                    "Error al crear la compra: " + e.getMessage()
+            );
+        }
+        return -1;
+    }
 
 }

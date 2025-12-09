@@ -71,7 +71,7 @@ public class ComprasReportController extends MenuController implements Initializ
         colIdVendedor.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().idVendedor()).asObject());
         colFechaCompra.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().fechaCompra().toString()));
         colMonto.setCellValueFactory(c -> new SimpleDoubleProperty(c.getValue().subtotal()).asObject());
-        colEstado.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().estado().toString()));
+        colEstado.setCellValueFactory(c ->new SimpleStringProperty(c.getValue().estado().name()));
 
         // Columna de acciones con botón "Ver Detalle"
         colAcciones.setCellFactory(col -> new TableCell<Compras, String>() {

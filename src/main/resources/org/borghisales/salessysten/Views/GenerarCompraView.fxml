@@ -55,6 +55,7 @@
             <Label text="Proveedor:" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
             <TextField fx:id="nombreProveedor" editable="false" prefWidth="148.0" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
 
+
             <!-- Fila 2: ID Producto -->
             <Label text="ID Producto:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
             <TextField fx:id="idProducto" prefWidth="117.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
@@ -84,6 +85,7 @@
             <columns>
                 <TableColumn fx:id="colIdProducto" prefWidth="160.0" sortable="false" style="-fx-alignment: CENTER;" text="ID PRODUCTO" />
                 <TableColumn fx:id="colIdProveedor" prefWidth="160.0" sortable="false" style="-fx-alignment: CENTER;" text="ID PROVEEDOR" />
+                <TableColumn fx:id="colIdVendedor" prefWidth="160.0" sortable="false" style="-fx-alignment: CENTER;" text="ID VENDEDOR" />
                 <TableColumn fx:id="colCantidad" prefWidth="160.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
                 <TableColumn fx:id="colPrecio" prefWidth="160.0" style="-fx-alignment: CENTER;" text="PRECIO COMPRA" />
                 <TableColumn fx:id="colSubtotal" prefWidth="158.0" style="-fx-alignment: CENTER;" text="SUBTOTAL" />

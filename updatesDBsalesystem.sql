@@ -42,7 +42,7 @@ CREATE TABLE proveedor (
 CREATE TABLE compras (
   idCompra INT NOT NULL AUTO_INCREMENT,
   idProveedor INT NOT NULL,
-  dniVendedor varchar(8) NOT NULL,
+  idSeller INT NOT NULL,
   subtotal DOUBLE NOT NULL,
   stateCompra ENUM('CANCELADO','COMPLETADO') DEFAULT 'COMPLETADO',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

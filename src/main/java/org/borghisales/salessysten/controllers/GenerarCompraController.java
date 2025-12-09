@@ -27,8 +27,9 @@ public class GenerarCompraController extends MenuController implements Initializ
     private final ProductDAO productDAO = new ProductDAO();
     private final ProveedorDAO proveedorDAO = new ProveedorDAO();
     // Atributos principales
-    private static ObservableList<ComprasDetalles> detalles = FXCollections.observableArrayList();
+    private static final ObservableList<ComprasDetalles> detalles = FXCollections.observableArrayList();
     private Proveedor proveedor;
+    private Seller vendedorLogueado = MainController.sellerLog;
     private final LocalDate now = LocalDate.now();
     // Necesarios para vista
     private Scene scene = null;
@@ -48,10 +49,11 @@ public class GenerarCompraController extends MenuController implements Initializ
     @FXML private TableView<ComprasDetalles> tableCompra;
     // Columnas de la tabla
     @FXML private TableColumn<ComprasDetalles,Integer> colIdProducto;
-    @FXML private TableColumn<ComprasDetalles,Integer> colIdProveedor;
+    @FXML private TableColumn<Proveedor,Integer> colIdProveedor;
     @FXML private TableColumn<ComprasDetalles,Integer> colCantidad;
     @FXML private TableColumn<ComprasDetalles, Double> colPrecio;
     @FXML private TableColumn<ComprasDetalles,Double> colSubtotal;
+   @FXML private TableColumn<Seller,Integer> colIdVendedor;
     //Agregué estos campos faltantes
     @FXML private TextField nombreProveedor;
     @FXML private TextField nombreProducto;
@@ -61,9 +63,9 @@ public class GenerarCompraController extends MenuController implements Initializ
     @FXML private TextField date;
 
     // Configuraciones basicas
-    private Compras crearCompra() {
+    private Compras crearCompra(int id) {
         double subtotal = detalles.stream().mapToDouble(ComprasDetalles::subtotal).sum();
-        return new Compras(proveedor.idProveedor(),MainController.sellerLog.idSeller(),subtotal,Compras.EstadoCompra.COMPLETADO);
+        return new Compras(proveedor.idProveedor(),id,subtotal,Compras.EstadoCompra.COMPLETADO);
     }
 
     @FXML
@@ -78,14 +80,17 @@ public class GenerarCompraController extends MenuController implements Initializ
             return;
         }
 
-        Compras compra = crearCompra();
-        if (comprasDAO.create(compra)) {
-            int idCompra = comprasDAO.IdSale();
+        Compras compra = crearCompra(vendedorLogueado.idSeller());
+        // Usar el método que devuelve el id generado (suponiendo que lo agregaste en ComprasDAO)
+        int idCompra = comprasDAO.createAndReturnId(compra);
+
+        if (idCompra > 0) {
             comprasDAO.saveDetalles(detalles, idCompra);
             MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Compra registrada exitosamente");
-
             // Limpiar
             cancel(e);
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al registrar la compra");
         }
     }
 
@@ -220,7 +225,13 @@ public class GenerarCompraController extends MenuController implements Initializ
         total.setText("0.0");
         tableCompra.setItems(detalles);
 
-        vendedor.setText(MainController.sellerLog.name());
+        // Mostrar nombre del vendedor y su ID en el campo vendedor
+        if (MainController.sellerLog != null) {
+            vendedor.setText(String.format("%s (ID:%d)", MainController.sellerLog.name(), MainController.sellerLog.idSeller()));
+        } else {
+            vendedor.setText("Desconocido");
+        }
+
         date.setText(LocalDate.now().toString());
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000, 1);
         cantidad.setValueFactory(valueFactory);
@@ -234,7 +245,8 @@ public class GenerarCompraController extends MenuController implements Initializ
     private void configureTable() {
         configureTableColumns();
         tableCompra.getItems().clear();
-        detalles = FXCollections.observableArrayList();
+        // NO reasignar 'detalles' para no romper la referencia con la tabla
+        // detalles = FXCollections.observableArrayList(); <-- eliminado
     }
 
 
@@ -247,8 +259,19 @@ public class GenerarCompraController extends MenuController implements Initializ
 
     private void configureTableColumns() {
 
+        // Mostrar idProducto
         colIdProducto.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().idProducto()).asObject());
         colCantidad.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().cantidad()).asObject());
+        colIdProveedor.setCellValueFactory(c ->
+                new SimpleIntegerProperty(
+                        proveedor != null ? proveedor.idProveedor() : 0
+                ).asObject()
+        );
+        colIdVendedor.setCellValueFactory(c ->
+                new SimpleIntegerProperty(
+                        vendedorLogueado != null ? vendedorLogueado.idSeller() : 0
+                ).asObject()
+        );
         colPrecio.setCellValueFactory(c -> new SimpleDoubleProperty(c.getValue().precioCompra()).asObject());
         colSubtotal.setCellValueFactory(c -> new SimpleDoubleProperty(c.getValue().subtotal()).asObject());
     }
