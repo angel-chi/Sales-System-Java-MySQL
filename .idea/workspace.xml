@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Se agregó una nueva interfaz de reporte.">
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Correción de errores.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -515,7 +515,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765201404078</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Correción de errores.">
+      <option name="closed" value="true" />
+      <created>1765240717500</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1765240717500</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -530,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: add search product" />
     <MESSAGE value="perf: improve screen switching time" />
     <MESSAGE value="feat: generate Sale and SaleDetails" />
     <MESSAGE value="fix: format serial and total sale" />
@@ -555,6 +562,7 @@
     <MESSAGE value="Ajuste en las ventanas 'padre' de las nuevas ventanas de las interfaces creadas, corrección de errores." />
     <MESSAGE value="Se agregaron nuevas interfaces. Útiles y funcionales." />
     <MESSAGE value="Se agregó una nueva interfaz de reporte." />
-    <option name="LAST_COMMIT_MESSAGE" value="Se agregó una nueva interfaz de reporte." />
+    <MESSAGE value="Correción de errores." />
+    <option name="LAST_COMMIT_MESSAGE" value="Correción de errores." />
   </component>
 </project>

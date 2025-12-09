@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<!-- StackPane principal -->
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.borghisales.salessysten.controllers.ComprasReportController"
+           prefHeight="900.0" prefWidth="1200.0">
+
+    <!-- TabPane principal -->
+    <TabPane tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+
+            <!-- Tab: HISTORIAL DE COMPRAS -->
+            <Tab text="HISTORIAL DE COMPRAS">
+                <content>
+                    <VBox spacing="15" alignment="TOP_CENTER">
+                        <padding>
+                            <Insets top="20" bottom="20" left="30" right="30"/>
+                        </padding>
+
+                        <HBox spacing="20" alignment="CENTER">
+                            <ImageView fitHeight="87.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../../images/report.png" />
+                                </image>
+                            </ImageView>
+
+                            <Region HBox.hgrow="ALWAYS"/>
+
+                            <!-- Filtros -->
+                            <VBox spacing="5" alignment="CENTER">
+                                <Label text="MONTO" underline="true">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                                <HBox spacing="5" alignment="CENTER">
+                                    <TextField fx:id="minAmount" prefWidth="80.0" promptText="Mín"/>
+                                    <Label text="-">
+                                        <font>
+                                            <Font size="20.0" />
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="maxAmount" prefWidth="80.0" promptText="Máx"/>
+                                </HBox>
+                            </VBox>
+
+                            <VBox spacing="5" alignment="CENTER">
+                                <Label text="FECHA" underline="true">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                                <HBox spacing="5" alignment="CENTER">
+                                    <DatePicker fx:id="minDate" prefWidth="120.0"/>
+                                    <Label text="-">
+                                        <font>
+                                            <Font size="20.0" />
+                                        </font>
+                                    </Label>
+                                    <DatePicker fx:id="maxDate" prefWidth="120.0"/>
+                                </HBox>
+                            </VBox>
+
+                            <Button text="FILTRAR" onAction="#onFilter" prefWidth="94.0" prefHeight="32.0"/>
+                        </HBox>
+
+                        <!-- Tabla de reportes de compras -->
+                        <TableView fx:id="tableReport" prefHeight="650.0" prefWidth="1100.0">
+                            <columns>
+                                <TableColumn fx:id="colIdCompra" prefWidth="110.0" text="ID Compra" />
+                                <TableColumn fx:id="colIdProveedor" prefWidth="110.0" text="ID Proveedor" />
+                                <TableColumn fx:id="colNombreProveedor" prefWidth="200.0" text="Proveedor" />
+                                <TableColumn fx:id="colIdVendedor" prefWidth="110.0" text="ID Vendedor" />
+                                <TableColumn fx:id="colFechaCompra" prefWidth="150.0" text="Fecha Compra" />
+                                <TableColumn fx:id="colMonto" prefWidth="130.0" text="Monto Total" />
+                                <TableColumn fx:id="colEstado" prefWidth="140.0" text="Estado" />
+                                <TableColumn fx:id="colAcciones" prefWidth="148.0" text="Acciones" />
+                            </columns>
+                        </TableView>
+
+                        <HBox spacing="15" alignment="CENTER_RIGHT">
+                            <ComboBox fx:id="cbTypeExport" prefWidth="108.0" promptText="Formato" style="-fx-alignment: CENTER;"/>
+                            <Button text="EXPORTAR" onAction="#onExport" prefWidth="94.0" prefHeight="32.0"/>
+                        </HBox>
+
+                    </VBox>
+                </content>
+            </Tab>
+
+            <!-- Tab: ESTADÍSTICAS -->
+            <Tab text="ESTADÍSTICAS">
+                <content>
+                    <VBox spacing="15" alignment="TOP_CENTER">
+                        <padding>
+                            <Insets top="20" bottom="20" left="30" right="30"/>
+                        </padding>
+
+                        <!-- Títulos de las gráficas -->
+                        <HBox spacing="50" alignment="CENTER">
+                            <Label text="COMPRAS POR PROVEEDOR" underline="true">
+                                <font>
+                                    <Font size="24.0" />
+                                </font>
+                            </Label>
+                            <Label text="COMPRAS EN EL TIEMPO" underline="true">
+                                <font>
+                                    <Font size="24.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+
+                        <!-- Gráficas lado a lado -->
+                        <HBox spacing="20" alignment="CENTER">
+                            <PieChart fx:id="pieChartProveedores" prefHeight="500.0" prefWidth="550.0"/>
+
+                            <LineChart fx:id="comprasLineChart" createSymbols="false" legendVisible="false"
+                                       prefHeight="500.0" prefWidth="550.0">
+                                <xAxis>
+                                    <CategoryAxis side="BOTTOM" fx:id="x_time" />
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis fx:id="y_amountCompras" side="LEFT" />
+                                </yAxis>
+                            </LineChart>
+                        </HBox>
+
+                        <!-- Controles de año y mes -->
+                        <HBox spacing="40" alignment="CENTER">
+                            <!-- Selector de año -->
+                            <VBox spacing="10" alignment="CENTER">
+                                <Label text="AÑO" underline="true">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <HBox spacing="10" alignment="CENTER">
+                                    <Button text="&lt;-" onAction="#subtractYear"/>
+                                    <TextField fx:id="year" alignment="CENTER" editable="false" prefWidth="80.0"/>
+                                    <Button text="-&gt;" onAction="#sumYear"/>
+                                </HBox>
+                            </VBox>
+
+                            <!-- Selector de mes -->
+                            <VBox spacing="10" alignment="CENTER">
+                                <Label text="MES" underline="true">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <HBox spacing="10" alignment="CENTER">
+                                    <Button text="&lt;-" onAction="#subtractMonth"/>
+                                    <TextField fx:id="month" alignment="CENTER" editable="false" prefWidth="80.0"/>
+                                    <Button text="-&gt;" onAction="#sumMonth"/>
+                                </HBox>
+                            </VBox>
+                        </HBox>
+
+                    </VBox>
+                </content>
+            </Tab>
+
+        </tabs>
+    </TabPane>
+
+</StackPane>
