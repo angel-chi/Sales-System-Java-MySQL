@@ -81,7 +81,7 @@ Una vez que hayas configurado la base de datos, puedes ejecutar el proyecto sigu
 1. Clona el Proyecto: Clona este repositorio en tu máquina local utilizando Git o descargando el archivo ZIP.
 2. Importa el Proyecto: Importa el proyecto en tu IDE preferido (como IntelliJ, Eclipse, etc.) como un proyecto Maven existente.
 3. Verifica las Dependencias: Antes de compilar y ejecutar el proyecto, asegúrate de que todas las dependencias estén resueltas correctamente. Esto se puede hacer actualizando Maven o ejecutando el comando mvn clean install desde la línea de comandos en el directorio del proyecto. Esto garantizará que todas las dependencias se descarguen y configuren correctamente.
-4. Compila y Ejecuta: Compila y ejecuta el proyecto desde tu IDE. Asegúrate de ejecutar la clase principal adecuada (si es necesario) para iniciar la aplicación.
+4. Compila y Ejecuta: Compila y ejecuta el proyecto desde tu IDE. Asegúrate de ejecutar la clase principal adecuada (si es necesario) para iniciar la aplicación. Si no, desde la misma línea de comandos, ejecuta el comando mvn javafx:run para lograrlo.
 
 ## Modificación de las Vistas con Scene Builder
 Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder, una herramienta gráfica para diseñar interfaces de usuario JavaFX. Para instalar Scene Builder, sigue estos pasos:
@@ -149,7 +149,12 @@ La pantalla principal muestra las siguientes ventanas: (¡Ya traducidas al espa�
 * Corrección de Nombre de Pestañas: Al cambiar una pestaña se mantenía el nombre de la pestaña cerrada y no de la actual. Se implementa un HashMap en dicho fichero con el nombre de cada ventana y se cambió la lógica de modo que se relacione la pestaña padre con la hija, permitiendo que se mantenga el título de dicha pestaña.
 * Corrección de Help. Anteriormente utilizar esta función crasheaba el programa por completo. Ahora, se implementó una ventana de Ayuda para cumplir su objetivo inicial.
 
-# 🏗️ Nuevas Implementaciones
+# Diagrama UML
+
+<p align="center">
+  <img src="src/main/resources/images/Diagrama%20UML.png" />
+</p>
+
 
 ## AbstractBaseDAO\<T>
 Se implementa la clase base AbstractBaseDAO\<T>, la cual centraliza la lógica repetitiva de las operaciones CRUD. Se aplican dos principios SOLID:

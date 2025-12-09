@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="ultimo ajuste a help. Modifiqué la vista">
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="ajuste para función buscar cliente y buscar ID">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -84,15 +84,22 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "Zapata-Pageau",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/pageaufr/ProyectoModificado/Sales-System-Java-MySQL/src/main/resources/images",
+    "last_opened_file_path": "C:/Users/Vicente/IdeaProjects/Sales-System-Java-MySQL",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -146,6 +153,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.28294.334" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -154,14 +168,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00007" summary="fea: add create seller">
-      <option name="closed" value="true" />
-      <created>1707879323797</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1707879323797</updated>
+      <workItem from="1765252663342" duration="1925000" />
     </task>
     <task id="LOCAL-00008" summary="fea: add update seller">
       <option name="closed" value="true" />
@@ -547,8 +554,19 @@
       <option name="project" value="LOCAL" />
       <updated>1765187852812</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="ajuste para función buscar cliente y buscar ID">
+      <option name="closed" value="true" />
+      <created>1765251270173</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1765251270174</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -562,7 +580,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix: format serial and total sale" />
     <MESSAGE value="feat: subtract stock" />
     <MESSAGE value="add: report view" />
     <MESSAGE value="feat: filter reports" />
@@ -587,6 +604,11 @@
     <MESSAGE value="Error con títulos. No se seteaba correctamente el nombre" />
     <MESSAGE value="errores de botón de help." />
     <MESSAGE value="ultimo ajuste a help. Modifiqué la vista" />
-    <option name="LAST_COMMIT_MESSAGE" value="ultimo ajuste a help. Modifiqué la vista" />
+    <MESSAGE value="ajuste para función buscar cliente y buscar ID" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajuste para función buscar cliente y buscar ID" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
