@@ -160,6 +160,7 @@ Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más d
 Integrantes:
 
 * **Christian Alexander Vargas Llanes**
+* **Said Alfredo Gonzalez Chablé**
 
 # ⚠️ Errores
 
