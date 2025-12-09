@@ -7,15 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
 
-
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -40,7 +37,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SIMON");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
@@ -49,6 +46,12 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
 
+    private double currentSubtotal = 0.0;
+    private double currentDiscount = 0.0;
+    @FXML
+    private TextField subtotal;
+    @FXML
+    private TextField discountAmount;
     @FXML
     private TextField serial;
     @FXML
@@ -72,6 +75,10 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     @FXML
     private Spinner<Integer> quantity;
+
+    @FXML
+    private Spinner<Integer> discountSpinner;
+
     @FXML
     private TableView<ShoppingCart> tableSale;
     @FXML
@@ -91,18 +98,24 @@ public class GenerateSaleController extends MenuController implements Initializa
         initializeUIElements();
         configureAlerts();
         configureTable();
+        initializeDiscountSpinner();
     }
 
     private void initializeUIElements() {
         total.setText("0.0");
+        subtotal.setText("0.00");
+        discountAmount.setText("0.00");
         setSerial();
         seller.setText(sellerName);
         date.setText(String.valueOf(now));
     }
-
+    private void initializeDiscountSpinner() {
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0);
+        discountSpinner.setValueFactory(valueFactory);
+    }
     private void configureAlerts() {
-        configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
-        configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+        configureAlert(alertCustomer, "NUEVO CLIENTE", "EL CLIENTE NO EXISTE", "¿QUIERES AÑADIR UNO?");
+        configureAlert(alertProduct, "NUEVO PRODUCTO", "EL PRODUCTO NO EXISTE", "¿QUIERES AÑADIR UNO?");
     }
 
     private void configureTable() {
@@ -133,7 +146,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         customer = customerDAO.searchCustomer(customerId);
 
         if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
+            setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + customer.name());
             customerName.setText(customer.name());
         } else {
             handleCustomerNotFound();
@@ -149,18 +162,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void openCustomerManagementView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(CUSTOMER_VIEW_FXML));
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        stage = new Stage();
-        stage.setTitle("Manage Customer");
-        stage.setScene(scene);
-        stage.show();
+        MenuController.openNewStage(MenuController.CUSTOMER_VIEW_FXML, "Gestión de Clientes");
     }
 
 
@@ -176,7 +178,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto encontrado: " + product.name());
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
@@ -194,50 +196,107 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void openProductManagementView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(PRODUCT_VIEW_FXML));
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        stage = new Stage();
-        stage.setTitle("Manage Product");
-        stage.setScene(scene);
-        stage.show();
+        MenuController.openNewStage(MenuController.PRODUCT_VIEW_FXML, "Gestión de Productos");
     }
 
+    @FXML
+    public void applyDiscount(ActionEvent actionEvent) {
+        if (currentSubtotal <= 0) {
+            MenuController.setAlert(Alert.AlertType.WARNING,
+                    "No hay productos en el carrito para aplicar descuento");
+            return;
+        }
+
+        int discountPercentage = discountSpinner.getValue();
+
+        if (discountPercentage < 0 || discountPercentage > 100) {
+            MenuController.setAlert(Alert.AlertType.WARNING,
+                    "El descuento debe estar entre 0% y 100%");
+            return;
+        }
+
+        currentDiscount = currentSubtotal * (discountPercentage / 100.0);
+
+
+        double finalTotal = currentSubtotal - currentDiscount;
+
+
+        discountAmount.setText(String.format("%.2f", currentDiscount));
+        total.setText(String.format("%.2f", finalTotal));
+
+        MenuController.setAlert(Alert.AlertType.INFORMATION,
+                String.format("Descuento del %d%% aplicado: $%.2f",
+                        discountPercentage, currentDiscount));
+    }
+    private void calculateTotal() {
+        currentSubtotal = 0.0;
+
+        for (ShoppingCart item : tableSale.getItems()) {
+            currentSubtotal += item.total();
+        }
+
+        subtotal.setText(String.format("%.2f", currentSubtotal));
+
+        applyCurrentDiscount();
+    }
+
+    private void applyCurrentDiscount() {
+        double finalTotal = currentSubtotal - currentDiscount;
+        total.setText(String.format("%.2f", finalTotal));
+    }
+
+    private void clearDiscount() {
+        discountSpinner.getValueFactory().setValue(0);
+        currentDiscount = 0.0;
+        currentSubtotal = 0.0;
+        discountAmount.setText("0.00");
+        subtotal.setText("0.00");
+    }
 
     public void cancel(ActionEvent actionEvent) {
         if (products.isEmpty())return;
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
-        total.clear();
+        clearDiscount();
+        total.setText("0.00");
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta Cancelada");
     }
 
     public void generateSale(ActionEvent actionEvent) {
         if (products.isEmpty()) {
+            MenuController.setAlert(Alert.AlertType.WARNING, "No hay productos en el carrito para generar la venta");
             return;
         }
-
+        if (customer == null) {
+            MenuController.setAlert(Alert.AlertType.WARNING, "Debe buscar un cliente primero");
+            return;
+        }
         Sales sales = createSalesObject();
 
         if (saveSaleAndDetails(sales)) {
             productDAO.subtractStock(products);
             cleanFieldsAndTable();
             setSerial();
+            clearDiscount();
             total.setText("0.0");
             products.clear();
             updateReportsController();
+            MenuController.setAlert(Alert.AlertType.INFORMATION, "¡Venta generada exitosamente!");
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar la venta en la base de datos");
         }
     }
 
     private Sales createSalesObject() {
-        return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
+        //se crea la variable totalText para poder evitar errores con la , al momento de generar la venta
+        String totalText = total.getText().replace(",", ".");
+        return new Sales(
+                customer.idCustomer(),
+                idSeller,
+                serial.getText(),
+                LocalDate.parse(date.getText()),
+                Double.parseDouble(totalText),
                 Sales.State.ACTIVE);
     }
 
@@ -280,7 +339,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya esta en tu carrito");
             return;
         }
 
@@ -288,9 +347,13 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private ShoppingCart createShoppingCartObject() {
-        return new ShoppingCart(contProducts++, codProduct.getText(),
-                productName.getText(), quantity.getValue(),
-                Double.parseDouble(price.getText()));
+        String priceText = price.getText().replace(",", ".");
+        return new ShoppingCart(
+                contProducts++,
+                codProduct.getText(),
+                productName.getText(),
+                quantity.getValue(),
+                Double.parseDouble(priceText));
     }
 
     private boolean isProductAlreadyInCart(ShoppingCart product) {
@@ -300,16 +363,15 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
-        double currentTotal = Double.parseDouble(total.getText()) + product.total();
-        total.setText(String.format("%.2f", currentTotal));
+        calculateTotal();
     }
 
 
     private String validateInputs() {
         if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Missing customer name or product name.";
+            return "Nombre de prodcuto o cliente no encontrado.";
         } else if (quantity.getValue() == 0) {
-            return "Quantity can't be 0.";
+            return "La cantidad no puede ser 0.";
         }
         return null;
     }
