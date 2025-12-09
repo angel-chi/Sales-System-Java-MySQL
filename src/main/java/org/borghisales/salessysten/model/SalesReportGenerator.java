@@ -5,27 +5,17 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.util.List;
 
 import javafx.collections.ObservableList;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-import javafx.collections.ObservableList;
 import org.borghisales.salessysten.controllers.MenuController;
+import org.borghisales.salessysten.model.entities.Sales;
 
 import java.awt.Color;
-import java.io.IOException;
-import java.time.LocalDate;
-
-import java.awt.*;
 import java.io.IOException;
 
 public class SalesReportGenerator {
@@ -46,10 +36,10 @@ public class SalesReportGenerator {
                 writer.append(sale.state().toString()).append("\n");
             }
 
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "CSV Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte CSV generado correctamente en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "CSV Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Reporte CSV generado sin éxito: " + e.getMessage());
         }
     }
     public static void generateExcelReport(ObservableList<Sales> salesList, String outputPath) {
@@ -87,10 +77,10 @@ public class SalesReportGenerator {
                 workbook.write(fileOut);
             }
 
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "EXCEL Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte EXCEL generado exitosamente en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "EXCEL Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Reporte EXCEL generado sin éxito: " + e.getMessage());
         }
     }
     public static void generatePDFReport(ObservableList<Sales> salesList, String outputPath) {
@@ -131,10 +121,10 @@ public class SalesReportGenerator {
             contentStream.close();
 
             document.save(outputPath);
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "PDF Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte PDF generado exitosamente en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "PDF Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Reporte PDF generado sin éxito: " + e.getMessage());
 
         }
     }

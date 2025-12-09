@@ -12,7 +12,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.borghisales.salessysten.model.*;
+import org.borghisales.salessysten.model.dao.CustomerDAO;
+import org.borghisales.salessysten.model.dao.ProductDAO;
+import org.borghisales.salessysten.model.dao.SalesDAO;
+import org.borghisales.salessysten.model.entities.*;
 
 
 import java.io.IOException;
@@ -40,7 +43,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SI");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
@@ -91,6 +94,9 @@ public class GenerateSaleController extends MenuController implements Initializa
         initializeUIElements();
         configureAlerts();
         configureTable();
+        tableSale.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000, 1);
+        quantity.setValueFactory(valueFactory);
     }
 
     private void initializeUIElements() {
@@ -101,8 +107,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void configureAlerts() {
-        configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
-        configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+        configureAlert(alertCustomer, "Nuevo Cliente", "El cliente no existe", "¿Quieres agregar uno nuevo?");
+        configureAlert(alertProduct, "Nuevo Producto", "El producto no existe", "¿Quieres agregar uno nuevo?");
     }
 
     private void configureTable() {
@@ -133,7 +139,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         customer = customerDAO.searchCustomer(customerId);
 
         if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
+            setAlert(Alert.AlertType.CONFIRMATION, "El cliente ha sido encontrado: " + customer.name());
             customerName.setText(customer.name());
         } else {
             handleCustomerNotFound();
@@ -158,7 +164,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Customer");
+        stage.setTitle("Gestionar Cliente");
         stage.setScene(scene);
         stage.show();
     }
@@ -176,12 +182,12 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto encontrado: " + product.name());
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
 
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, product.stock(), 0);
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, product.stock(), 1);
         quantity.setValueFactory(valueFactory);
     }
 
@@ -203,23 +209,33 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Product");
+        stage.setTitle("Gestionar Producto");
         stage.setScene(scene);
         stage.show();
     }
 
 
+    @FXML
     public void cancel(ActionEvent actionEvent) {
-        if (products.isEmpty())return;
-        MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
-        quantity.getValueFactory().setValue(null);
+        // Limpiar la lista de productos
+        products.clear();
+        // Limpiar tabla
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
+        // Limpiar campos
+        MenuController.cleanCells(codCustomer, codProduct, customerName, productName, price, stock);
+        // Resetear cantidad
+        if (quantity.getValueFactory() != null) {
+            quantity.getValueFactory().setValue(1);
+        }
+        // Limpiar total
         total.clear();
+        // Mensaje
+        MenuController.setAlert(Alert.AlertType.INFORMATION, "Venta cancelada");
     }
 
     public void generateSale(ActionEvent actionEvent) {
-        if (products.isEmpty()) {
+        if (products == null || products.isEmpty()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "No hay productos en la venta.");
             return;
         }
 
@@ -238,7 +254,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Sales createSalesObject() {
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
                 LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
-                Sales.State.ACTIVE);
+                State.ACTIVE);
     }
 
     private boolean saveSaleAndDetails(Sales sales) {
@@ -280,7 +296,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya está en tu carrito de compras.");
             return;
         }
 
@@ -306,13 +322,18 @@ public class GenerateSaleController extends MenuController implements Initializa
 
 
     private String validateInputs() {
-        if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Missing customer name or product name.";
-        } else if (quantity.getValue() == 0) {
-            return "Quantity can't be 0.";
+        if (productName.getText().isEmpty()) {
+            return "Debes buscar un producto primero.";
+        }
+        if (customerName.getText().isEmpty()) {
+            return "Debes buscar un cliente antes de generar la venta.";
+        }
+        if (quantity.getValue() == 0) {
+            return "La cantidad no puede ser 0.";
         }
         return null;
     }
+
 
     private void setSerial(){
         idSale = 1+salesDAO.IdSale();

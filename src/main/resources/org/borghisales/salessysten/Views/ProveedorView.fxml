@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<!-- StackPane principal -->
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ProveedorController" prefHeight="650.0" prefWidth="900.0">
+
+    <!-- VBox principal -->
+    <VBox alignment="TOP_CENTER" spacing="20">
+        <padding>
+            <Insets top="30" bottom="30" left="40" right="40"/>
+        </padding>
+
+        <Label alignment="CENTER" text="GESTIÓN DE PROVEEDORES" underline="true">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+
+        <!-- Formulario de entrada con botones -->
+        <GridPane hgap="15" vgap="15" alignment="CENTER" maxWidth="700">
+
+            <!-- Fila 1: NOMBRE -->
+            <Label text="NOMBRE:" underline="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Label>
+            <TextField fx:id="name" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Button text="AÑADIR" onAction="#addProduct" prefWidth="130.0" prefHeight="32.0" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+            <!-- Fila 2: EMAIL -->
+            <Label text="EMAIL:" underline="true" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Label>
+            <TextField fx:id="email" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Button text="ACTUALIZAR" onAction="#updateProduct" prefWidth="130.0" prefHeight="32.0" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+            <!-- Fila 3: ESTADO -->
+            <Label text="ESTADO:" underline="true" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Label>
+            <ComboBox fx:id="state" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <Button text="BORRAR" onAction="#deleteProduct" prefWidth="130.0" prefHeight="32.0" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+
+            <!-- Fila 4: Botón limpiar (sin label) -->
+            <Region GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <Region GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <Button text="LIMPIAR CELDAS" onAction="#cleanCellsScreen" prefWidth="130.0" prefHeight="32.0" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+
+        </GridPane>
+
+        <Separator prefWidth="800.0"/>
+
+        <!-- Tabla de proveedores -->
+        <TableView fx:id="tableProveedor" prefHeight="300.0" prefWidth="800.0">
+            <columns>
+                <TableColumn fx:id="colId" prefWidth="200.0" text="ID Proveedor" />
+                <TableColumn fx:id="colName" prefWidth="200.0" text="Nombre" />
+                <TableColumn fx:id="colEmail" prefWidth="200.0" text="Email" />
+                <TableColumn fx:id="colState" prefWidth="198.0" text="Estado" />
+            </columns>
+        </TableView>
+
+    </VBox>
+
+</StackPane>

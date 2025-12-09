@@ -10,8 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import org.borghisales.salessysten.model.SalesDAO;
-import org.borghisales.salessysten.model.ShoppingCart;
+import org.borghisales.salessysten.model.dao.SalesDAO;
+import org.borghisales.salessysten.model.entities.ShoppingCart;
 
 import java.net.URL;
 import java.util.ResourceBundle;

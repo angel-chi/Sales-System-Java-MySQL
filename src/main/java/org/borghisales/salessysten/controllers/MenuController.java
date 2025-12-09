@@ -21,11 +21,16 @@ public class MenuController {
     public static final String CUSTOMER_VIEW_FXML = VIEWS_DIRECTORY + "CustomerView.fxml";
     public static final String GENERATE_SALE_VIEW_FXML = VIEWS_DIRECTORY + "GenerateSaleView.fxml";
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
+    public static final String HELP_VIEW_FXML = VIEWS_DIRECTORY + "HelpView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
+    public static final String PROVEEDOR_VIEW_FXML = VIEWS_DIRECTORY + "ProveedorView.fxml";
+    public static final String GENERAR_COMPRA_VIEW_FXML = VIEWS_DIRECTORY + "GenerarCompraView.fxml";
+    public static final String COMPRAS_REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ComprasReportView.fxml";
+    public static final String INVENTARIO_VIEW_FXML = VIEWS_DIRECTORY + "InventarioView.fxml";
 
 
     static Alert defaultAlert;
-    static ButtonType acceptButton = new ButtonType("Accept");
+    static ButtonType acceptButton = new ButtonType("Aceptar");
     public static HashMap<String, String > filePaths = new HashMap<>();
 
     void closeCurrentStage(Node node) {
@@ -41,18 +46,26 @@ public class MenuController {
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
+            stage.setMinWidth(800);
+            stage.setMinHeight(600); //Estas dos lineas se agregaron para que al abrir una pestaña nueva se abra con un tamaño fijo
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error al cargar la vista: "+ e.getMessage());
         }
     }
-
+//Se cambió esto para la salida de la ventana help
+    //Se volvió a modificar para la salida desde la ventana de Gestión
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
+                String parentFxml = getFxmlFather(fxmlFileName);
+                if (parentFxml != null) {
+                    // Determinar el título correcto según la ventana padre
+                    String parentTitle = parentFxml.equals(MAIN_VIEW_FXML) ? "Inicio de Sesión" : "Gestión";
+                    openNewStage(parentFxml, parentTitle);
+                }
             });
         }
     }
@@ -63,7 +76,7 @@ public class MenuController {
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("Información");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);

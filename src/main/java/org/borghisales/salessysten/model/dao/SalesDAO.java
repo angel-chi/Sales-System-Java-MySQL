@@ -1,4 +1,4 @@
-package org.borghisales.salessysten.model;
+package org.borghisales.salessysten.model.dao;
 
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
@@ -6,6 +6,9 @@ import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 import org.borghisales.salessysten.controllers.ReportsController;
+import org.borghisales.salessysten.model.DBConnection;
+import org.borghisales.salessysten.model.entities.Sales;
+import org.borghisales.salessysten.model.entities.ShoppingCart;
 
 import java.sql.*;
 
@@ -28,7 +31,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching IdSale: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar IdVenta: " + e.getMessage());
             return 1;
         }
     }
@@ -48,32 +51,32 @@ public class SalesDAO {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Sale saved correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Venta guardada correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar la venta: ");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar la venta: " + e.getMessage());
             return false;
         }
 
     }
-
     public boolean SaveDetailsSale(ObservableList<ShoppingCart> products, int id){
 
         try (Connection conn = DBConnection.connection()){
 
             for (ShoppingCart e:products) {
-                String sql = "INSERT INTO sales_details (idSales,idProduct,quantity, priceSale) values(?,?,?,?)";
+                String sql = "INSERT INTO sales_details (idSales,idProduct,quantity, priceSale, subtotal) values(?,?,?,?,?)";
                 try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
                     pstmt.setInt(1, id);
                     pstmt.setInt(2, Integer.parseInt(e.cod()));
                     pstmt.setInt(3, e.quantity());
                     pstmt.setDouble(4, e.price());
+                    pstmt.setDouble(5, e.price() * e.quantity());
 
                     pstmt.executeUpdate();
 
@@ -84,12 +87,11 @@ public class SalesDAO {
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale details: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar los detalles de la venta: " + e.getMessage());
             return false;
         }
 
     }
-
     public void setTable(ObservableList<Sales> sales) {
         String sql = "SELECT * FROM sales WHERE idSeller = ?";
 
@@ -106,12 +108,11 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar ventas : " + e.getMessage());
         }
 
 
     }
-
     public void setLineChart(XYChart.Series<String, Integer> lineChartData,int year,int month) {
         String sql = """ 
                 SELECT day(saleDate) as saleDate, count(saleDate) as salesPerDay
@@ -133,7 +134,7 @@ public class SalesDAO {
 
             try (ResultSet rs = pstmt.executeQuery()){
                 while (rs.next()){
-                    XYChart.Data<String,Integer> data = new XYChart.Data<>(String.valueOf(rs.getInt("saleDate")),rs.getInt("salesPerDay"));
+                    XYChart.Data<String,Integer> data = new XYChart.Data<>(String.valueOf(rs.getInt("fechaDeVenta")),rs.getInt("ventasPorDía"));
                     lineChartData.getData().add(data);
                 }
             }
@@ -144,10 +145,9 @@ public class SalesDAO {
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar ventas : " + e.getMessage());
         }
     }
-
     public void setTableDetails(ObservableList<ShoppingCart> productsDetails, int idSale) {
         String sql = """ 
                 SELECT ROW_NUMBER() OVER() as nr, sd.idProduct as cod, p.name as product, sd.quantity, sd.priceSale as price, ROUND(sd.quantity *sd.priceSale,2) as total
@@ -170,7 +170,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al buscar ventas : " + e.getMessage());
         }
 
     }

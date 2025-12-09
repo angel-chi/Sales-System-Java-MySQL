@@ -1,12 +1,13 @@
-package org.borghisales.salessysten.model;
+package org.borghisales.salessysten.model.entities;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
 
-public record Sales(int idSales, int idCustomer, int idSeller, String numberSales, LocalDate saleDate, Double amount,State state) {
-    public enum State{ACTIVE,DISACTIVE};
+public record Sales(int idSales, int idCustomer, int idSeller, String numberSales, LocalDate saleDate, Double amount,
+                    State state) {
+    //public enum State{ACTIVE,DISACTIVE};
 
     public Sales(int idCustomer, int idSeller, String numberSales, LocalDate saleDate, Double amount, State state) {
         this(0, idCustomer, idSeller, numberSales, saleDate, amount, state);
