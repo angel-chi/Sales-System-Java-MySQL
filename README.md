@@ -248,5 +248,6 @@ datos adicionales (número de autorización, últimos dígitos, etc.). Viendo el
 hacer que la gestión de los pagos sea modular y fácil de extender, aplicando de esta forma el polimorfismo, al mismo tiempo que mantiene la lógica específica de cada pago aislada y protegida, 
 poniendo en prática le encapsulación y la abstracción.
 
-
+## Video
+[Cen_Couoh](https://alumnosuady-my.sharepoint.com/:v:/g/personal/a21201372_alumnos_uady_mx/IQB4bqLVJ5UvRJgp3_Jcgt8ZAQQndDrhH455lqj4ROjNVVk?e=PG2zYF) <br>
 [⬆ Volver al inicio](#title)<br>
