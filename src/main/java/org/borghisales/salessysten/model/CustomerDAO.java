@@ -8,8 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
-public class CustomerDAO implements CRUD<Customer> {
+public class CustomerDAO extends Validator<Customer> implements CRUD<Customer>{
 
     public Customer searchCustomer(int dni){
         String sql = "SELECT * FROM customer WHERE dni=?";
@@ -29,8 +30,33 @@ public class CustomerDAO implements CRUD<Customer> {
         }
 
     }
+
+
+    ///  Busca si el cliente por su 'name' en la base de datos
+    public Customer searchCustomerName(String name){
+        String sql = "SELECT * FROM customer WHERE name=?";
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setString(1,name);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    return Customer.fromResultSet(rs);
+                }
+                return null;
+            }
+
+        }catch (SQLException e){
+
+            return null;
+        }
+
+    }
     @Override
     public boolean create(Customer entity) {
+        if(!validate(entity))return false;
+
         String sql = "Insert into customer (dni,name,address,state) values(?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
@@ -44,15 +70,15 @@ public class CustomerDAO implements CRUD<Customer> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Customer added correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente agregado correctamente.");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding customer: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar cliente: ");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding customer: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error agregando cliente: " + e.getMessage());
             return false;
         }
     }
@@ -61,6 +87,7 @@ public class CustomerDAO implements CRUD<Customer> {
 
     @Override
     public boolean update(Customer entity) {
+        if(!validate(entity))return false;
         String sql = "UPDATE customer set name=?,address=?,state=? where dni=?";
 
         try(Connection conn = DBConnection.connection();
@@ -75,15 +102,15 @@ public class CustomerDAO implements CRUD<Customer> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Customer updated correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente actualizado correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating customer");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al actualizar cliente");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating customer: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al actualizar cliente: " + e.getMessage());
             return false;
         }
     }
@@ -110,14 +137,14 @@ public class CustomerDAO implements CRUD<Customer> {
             enableConstraintsStmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Customer deleted correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente eliminado correctamente");
                 return true;
             } else {
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting customer: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error eliminando cliente: ");
                 return false;
             }
         } catch (SQLException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting customer: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error elimndo cliente: " + e.getMessage());
             return false;
         }
     }
@@ -139,8 +166,41 @@ public class CustomerDAO implements CRUD<Customer> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table customer: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error asignando la tabla de clientes: " + e.getMessage());
         }
 
+    }
+
+    @Override
+    protected boolean validate(Customer entity) {
+        if(Objects.isNull(entity)){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El cliente no puede estar vacio");
+            return false;
+        }
+
+        if(entity.dni() == null || entity.dni().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El id del cliente no puede estar vacio");
+            return false;
+        } else {
+            for(char c : entity.dni().toCharArray()){
+                if(!Character.isDigit(c)){
+                    MenuController.setAlert(Alert.AlertType.ERROR, "El id del vendedor debe ser una secuencia de numeros");
+                    return false;
+                }
+            }
+        }
+        if(entity.name() == null || entity.name().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del cliente no puede estar vacio");
+            return false;
+        }
+        if(entity.address() == null || entity.address().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "La direccion del cliente no puede estar vacia");
+            return false;
+        }
+        if(entity.state() == null){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El estado del cliente no puede estar vacio");
+            return false;
+        }
+        return true;
     }
 }

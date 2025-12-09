@@ -1,0 +1,54 @@
+[33m1331fc2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mReza-Ayuso[m[33m)[m Primera parte de la traduccion
+[33ma0882ee[m traduccion de interfaz
+[33m4b19574[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/Reza-Ayuso[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;31morigin/Cen_Couoh[m[33m, [m[1;31morigin/Basto-Flores[m[33m, [m[1;32mmain[m[33m)[m Merge pull request #1 from Borghii/dependabot/maven/org.apache.poi-poi-ooxml-5.4.0
+[33made90e1[m build(deps): bump org.apache.poi:poi-ooxml from 5.2.4 to 5.4.0
+[33m3e9dfb0[m Update README.md
+[33ma25915a[m Update README.md
+[33m43a9df4[m Update README.md
+[33mee920b7[m Update README.md
+[33ma9da595[m Merge remote-tracking branch 'origin/main'
+[33md227d66[m add: README
+[33m29a7227[m Create LICENSE
+[33m90fd165[m refactor: delete comments
+[33m711ab09[m refactor: cleaning code
+[33m6ce1204[m refactor: cleaning code
+[33me2ca64d[m Merge remote-tracking branch 'origin/main'
+[33m1609139[m fix: finish optimization linechart
+[33m112790d[m in progress: cache statistics line chart
+[33m434121d[m in progress: cache statistics line chart
+[33m555e53e[m refactor: CustomerController, ProductController, SellerController
+[33m8b43e7b[m add: sales details in reports
+[33mca91d3f[m add: statistic line chart products
+[33mded18de[m feat: export reports add: statistic pie char products
+[33m95129be[m feat: filter reports
+[33me3fa0e0[m add: report view
+[33md8caad3[m feat: subtract stock
+[33m39ea11a[m fix: format serial and total sale
+[33m117974e[m feat: generate Sale and SaleDetails
+[33mdda2128[m perf: improve screen switching time
+[33m6d20686[m feat: add search product
+[33m752a61d[m feat: add search customer
+[33m2275bc2[m feat: add screen add customer
+[33me61e719[m Merge remote-tracking branch 'origin/main'
+[33m2ee82c4[m feat: add screen add customer
+[33mc7a4e6c[m feat: search Customer
+[33mb772ff7[m feat: add GenerateSale.viw and modify access modifiers
+[33m66c8816[m feat: add GenerateSale.viw and modify access modifiers
+[33m5a642db[m fea: add CRUD Customers
+[33mb7a8f59[m fea: add FML CustomerView.fxml
+[33m630ec6d[m fea: add DAO products
+[33ma02e571[m fea: add DAO products
+[33m1ed9952[m fea: add DAO products
+[33m2cbf585[m fea: add Customer
+[33mfb140e4[m fea: add select row in TableView
+[33m4ea235d[m fea: add show table
+[33mffca1d9[m fea: add table
+[33m10c4032[m fea: delete seller
+[33mecd278a[m fea: add update seller
+[33ma890d61[m fea: add create seller
+[33m7dab99f[m fea: add combobox
+[33mdfae434[m fea: add crud and classes
+[33me226b01[m feature: add login
+[33mb861f31[m feature: add login
+[33m4062e3a[m feature: add login
+[33m3d39663[m feature: add login

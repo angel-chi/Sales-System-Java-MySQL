@@ -22,10 +22,10 @@ public class MenuController {
     public static final String GENERATE_SALE_VIEW_FXML = VIEWS_DIRECTORY + "GenerateSaleView.fxml";
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
-
+    public static final String WELCOME_MENU_VIEW_FXML = VIEWS_DIRECTORY + "WelcomeMenuView.fxml";
 
     static Alert defaultAlert;
-    static ButtonType acceptButton = new ButtonType("Accept");
+    static ButtonType acceptButton = new ButtonType("Aceptar");
     public static HashMap<String, String > filePaths = new HashMap<>();
 
     void closeCurrentStage(Node node) {
@@ -41,11 +41,12 @@ public class MenuController {
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
+            stage.setResizable(false); // Aun en duda si hacer esto
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista: "+ e.getMessage());
         }
     }
 
@@ -63,7 +64,7 @@ public class MenuController {
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("Informacion");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);

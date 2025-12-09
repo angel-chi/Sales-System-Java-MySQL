@@ -5,14 +5,13 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
-import org.borghisales.salessysten.controllers.ReportsController;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProductDAO implements CRUD<Product>{
+public class ProductDAO extends Validator<Product> implements CRUD<Product>{
 
     public void subtractStock(ObservableList<ShoppingCart> products){
         String sql = "UPDATE product SET stock = stock - ? WHERE idProduct = ?";
@@ -54,6 +53,8 @@ public class ProductDAO implements CRUD<Product>{
 
     @Override
     public boolean create(Product entity) {
+        if(!validate(entity)) return false;
+
         String sql = "INSERT INTO product (name,price,stock,state) values (?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
@@ -67,16 +68,16 @@ public class ProductDAO implements CRUD<Product>{
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product added correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto agregado correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error agregando producto: ");
                 return false;
             }
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error agregando producto: " + e.getMessage());
             return false;
         }
     }
@@ -84,6 +85,7 @@ public class ProductDAO implements CRUD<Product>{
 
     @Override
     public boolean update(Product entity) {
+       if(!validate(entity)) return false;
         String sql = "UPDATE product set price=?,stock=?,state=? where name=?";
 
         try(Connection conn = DBConnection.connection();
@@ -100,15 +102,15 @@ public class ProductDAO implements CRUD<Product>{
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product updated correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto actualizado correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating product");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando producto");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating product: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando producto: " + e.getMessage());
             return false;
         }
     }
@@ -126,17 +128,17 @@ public class ProductDAO implements CRUD<Product>{
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product deleted correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product eliminado correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting product: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error elimando producto ");
                 return false;
             }
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "You cannot delete this product because you already have a sale with it");
+            MenuController.setAlert(Alert.AlertType.ERROR, "No puedes eiminar este producto porque ya tienes una venta con este.");
             return false;
         }
     }
@@ -157,7 +159,7 @@ public class ProductDAO implements CRUD<Product>{
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error estableciendo la tabla de vendedor: " + e.getMessage());
         }
 
     }
@@ -184,11 +186,28 @@ public class ProductDAO implements CRUD<Product>{
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando las ventas : " + e.getMessage());
         }
 
 
 
     }
+
+    @Override
+    protected boolean validate(Product entity){
+
+        if (entity.price() <= 0){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El precio del producto debe ser mayor que 0.");
+            return false;
+        }
+
+        if (entity.stock() <= 0){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Debes tener almenos una unidad de este producto en tu almacen.");
+            return false;
+        }
+
+        return true;
+    }
+
 
 }

@@ -10,11 +10,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Objects;
 
-public class SellerDAO implements CRUD<Seller> {
+public class SellerDAO extends Validator<Seller> implements CRUD<Seller>{
     @Override
     public boolean create(Seller entity) {
+
+        if(!validate(entity)) return false;
+
         String sql = "INSERT INTO seller (dni,name,phone_number,state,user) values (?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
@@ -29,16 +32,16 @@ public class SellerDAO implements CRUD<Seller> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller added correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor correctamente agregado");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar al vendedor: ");
                 return false;
             }
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar al vendedor: " + e.getMessage());
             return false;
         }
 
@@ -47,6 +50,7 @@ public class SellerDAO implements CRUD<Seller> {
 
     @Override
     public boolean update(Seller entity) {
+        if(!validate(entity)) return false;
         String sql = "UPDATE seller set name=?,phone_number=?,state=?,user=? where dni=?";
 
         try(Connection conn = DBConnection.connection();
@@ -62,15 +66,15 @@ public class SellerDAO implements CRUD<Seller> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller updated correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor actualizado correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al actualizar al vendedor");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al actualizar al vendedor: " + e.getMessage());
             return false;
         }
 
@@ -86,21 +90,22 @@ public class SellerDAO implements CRUD<Seller> {
 
 
             pstmt.setString(1,id);
+            //confirmacion
 
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller deleted correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor correctamente elminado");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error eliminado al vendedor: ");
                 return false;
             }
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error eliminado al vendedor: " + e.getMessage());
             return false;
         }
 
@@ -122,15 +127,15 @@ public class SellerDAO implements CRUD<Seller> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error estableciendo la tabla de vendedor: " + e.getMessage());
         }
     }
 
 
     public static boolean login(String dni,String user){
 
-        if (dni ==null || user ==null || dni.isEmpty()||user.isEmpty() ){
-            MenuController.setAlert(Alert.AlertType.ERROR,"User or passsword empty");
+        if (dni.isEmpty()||user.isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR,"Usuario o contraseña vacios");
             return false;
         }
 
@@ -152,14 +157,64 @@ public class SellerDAO implements CRUD<Seller> {
 
                     return true;
                 }else{
-                    MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;
+                    MenuController.setAlert(Alert.AlertType.ERROR, "Usuario no encontrado") ;
                     return false;
                 }
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando al vendedor: " + e.getMessage());
             return false;
         }
 
+    }
+
+    @Override
+    protected boolean validate(Seller entity) {
+        if(Objects.isNull(entity)){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El vendedor no puede estar vacio");
+            return false;
+        }
+
+        if(entity.dni() == null || entity.dni().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El id del vendedor no puede estar vacio");
+            return false;
+        } else {
+            for(char c : entity.dni().toCharArray()){
+                if(!Character.isDigit(c)){
+                    MenuController.setAlert(Alert.AlertType.ERROR, "El id del vendedor debe ser una secuencia de numeros");
+                    return false;
+                }
+            }
+        }
+        if (entity.name() == null || entity.name().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del vendedor no puede estar vacio");
+            return false;
+        }
+        if(entity.phoneNumber() == null || entity.phoneNumber().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El numero de telefono del vendedor no puede estar vacio");
+            return false;
+        } else {
+            if(!validate_phone(entity)) {
+                MenuController.setAlert(Alert.AlertType.ERROR, "El numero de telefono que intenta ingresar no es valido");
+                return false;
+            }
+        }
+        if(entity.user() == null || entity.user().isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El usuario del vendedor no puede estar vacio");
+            return false;
+        }
+        if(entity.state()==null){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El estado del vendedor no puede estar vacio");
+            return false;
+        }
+        return true;
+    }
+
+    protected boolean validate_phone(Seller entity){
+        if(entity.phoneNumber().length()<= 15 && entity.phoneNumber().length() >= 8)return true;
+        for(char c : entity.phoneNumber().toCharArray()){
+            if(!Character.isDigit(c))return false;
+        }
+        return true;
     }
 }

@@ -9,10 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
 
@@ -24,6 +21,7 @@ public class ProductController implements Initializable {
     private final ProductDAO productDAO = new ProductDAO();
 
     private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
+
 
     private static ObservableList<Product> products =null;
     @FXML
@@ -46,6 +44,7 @@ public class ProductController implements Initializable {
     private TableColumn<Product,Integer> colStock;
     @FXML
     private TableColumn<Product,Product.State> colState;
+    private Object nameText;
 
 
     @Override
@@ -79,12 +78,40 @@ public class ProductController implements Initializable {
         tableProducts.getItems().clear();
         if (products == null) {
             products = FXCollections.observableArrayList();
-            productDAO.setTable(products);
         }
+        products.clear();
+        productDAO.setTable(products);
         tableProducts.setItems(products);
     }
 
+    protected boolean validate_Product(){
+        String nameText = name.getText();
+        if(nameText == null || nameText.isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del producto no puede estar vacio.");
+            return false;
+        }
+        String priceText = price.getText().replace(",", ".");
+        String stockText = stock.getText();
+        try {
+            Double.parseDouble(priceText);
+            price.setText(priceText);
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El precio del producto debe ser un numero.");
+            return false;
+        }
+        try {
+            Integer.parseInt(stockText);
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "La cantidad de existencias del producto debe ser un numero entero.");
+            return false;
+        }
+        return true;
+    }
     public void addProduct(ActionEvent actionEvent) {
+        if(!validate_Product()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar prodcuto");
+            return;
+        }
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                           Integer.parseInt(stock.getText()), cbState.getValue());
         if (productDAO.create(product)) {
@@ -94,6 +121,10 @@ public class ProductController implements Initializable {
     }
 
     public void updateProduct(ActionEvent actionEvent) {
+        if(!validate_Product()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al agregar prodcuto");
+            return;
+        }
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                 Integer.parseInt(stock.getText()), cbState.getValue());
         if (productDAO.update(product)) {
@@ -103,10 +134,23 @@ public class ProductController implements Initializable {
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
-        if (productDAO.delete(name.getText())) {
-            MenuController.cleanCells(name,price,stock);
-            updateTable();
-        }
+        Alert Delete = new Alert(Alert.AlertType.CONFIRMATION);
+        Delete.setTitle("Eliminar");
+        Delete.setHeaderText("¿Estas seguro que quieres realizar esta accion?");
+        Delete.setContentText("Se eliminará el producto: " + name.getText());
+
+        ButtonType Accept = new ButtonType("Sí", ButtonBar.ButtonData.OK_DONE);
+        ButtonType Cancel = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Delete.getButtonTypes().setAll(Accept, Cancel);
+        Delete.showAndWait().ifPresent(button -> {
+
+            if (button == Accept) {
+                if (productDAO.delete(name.getText())) {
+                    MenuController.cleanCells(name, price, stock);
+                    updateTable();
+                }
+            }
+        });
     }
 
     public void cleanCellsScreen(ActionEvent actionEvent) {
@@ -125,6 +169,5 @@ public class ProductController implements Initializable {
         productDAO.setTable(products);
         tableProducts.setItems(products);
     }
-
 
 }

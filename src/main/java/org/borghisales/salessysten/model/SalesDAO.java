@@ -28,15 +28,16 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching IdSale: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando el Id de venta: " + e.getMessage());
             return 1;
         }
     }
-    public boolean SaveSale(Sales sale){
+    public int SaveSale(Sales sale){
+
         String sql = "INSERT INTO sales (idCustomer,idSeller,numberSales,saleDate,amount,state) values(?,?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 
             pstmt.setInt(1,sale.idCustomer());
             pstmt.setInt(2,sale.idSeller());
@@ -48,16 +49,22 @@ public class SalesDAO {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Sale saved correctly");
-                return true;
+                try (ResultSet rs = pstmt.getGeneratedKeys()){
+                    if(rs.next()){
+                        MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Venta guardada correctamente");
+                        return rs.getInt(1);
+                    }
+                }
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error guardando esta venta");
+                return -1;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: ");
-                return false;
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error guardando est venta: ");
+                return -1;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: " + e.getMessage());
-            return false;
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error guardando esta venta: " + e.getMessage());
+            return -1;
         }
 
     }
@@ -74,17 +81,13 @@ public class SalesDAO {
                     pstmt.setInt(2, Integer.parseInt(e.cod()));
                     pstmt.setInt(3, e.quantity());
                     pstmt.setDouble(4, e.price());
-
                     pstmt.executeUpdate();
 
                 }
             }
                 return true;
-
-
-
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale details: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error guaradando los detalles de la venta: " + e.getMessage());
             return false;
         }
 
@@ -106,7 +109,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando ventas : " + e.getMessage());
         }
 
 
@@ -144,7 +147,7 @@ public class SalesDAO {
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando ventas : " + e.getMessage());
         }
     }
 
@@ -170,7 +173,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando ventas : " + e.getMessage());
         }
 
     }

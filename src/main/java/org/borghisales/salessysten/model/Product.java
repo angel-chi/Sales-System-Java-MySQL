@@ -3,7 +3,7 @@ package org.borghisales.salessysten.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public record Product(int idProduct, String name, double price, int stock, State state) {
+public record       Product(int idProduct, String name, double price, int stock, State state) {
     public enum State {ACTIVE(), DISACTIVE()}
 
     public Product(String name, double price, int stock, State state){

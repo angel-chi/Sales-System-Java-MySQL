@@ -1,6 +1,5 @@
 package org.borghisales.salessysten.controllers;
 
-import com.sun.tools.javac.Main;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,7 +14,6 @@ import org.borghisales.salessysten.model.CustomerDAO;
 
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
@@ -95,10 +93,23 @@ public class CustomerController implements Initializable {
     }
     @FXML
     public void deleteCustomer(ActionEvent actionEvent) {
-        if (customerDAO.delete(dni.getText())){
-            MenuController.cleanCells(dni,name,address);
-            updateTable();
-        }
+        Alert Delete = new Alert(Alert.AlertType.CONFIRMATION);
+        Delete.setTitle("Eliminar");
+        Delete.setHeaderText("¿Estas seguro que quieres realizar esta accion?");
+        Delete.setContentText("Se eliminará el cliente: " + name.getText());
+
+        ButtonType Accept = new ButtonType("Sí", ButtonBar.ButtonData.OK_DONE);
+        ButtonType Cancel = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Delete.getButtonTypes().setAll(Accept, Cancel);
+        Delete.showAndWait().ifPresent(button -> {
+
+            if (button == Accept) {
+                if (customerDAO.delete(dni.getText())){
+                    MenuController.cleanCells(dni,name,address);
+                    updateTable();
+                }
+            }
+        });
     }
     @FXML
     public void cleanCellsScreen(ActionEvent actionEvent) {

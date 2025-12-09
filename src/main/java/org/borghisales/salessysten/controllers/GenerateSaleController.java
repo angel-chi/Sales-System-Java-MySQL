@@ -24,7 +24,6 @@ import java.util.ResourceBundle;
 public class GenerateSaleController extends MenuController implements Initializable {
 
     private final SalesDAO salesDAO = new SalesDAO();
-    private int idSale;
 
     private static int contProducts =1;
     private static ObservableList<ShoppingCart> products;
@@ -40,7 +39,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SI");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
@@ -48,6 +47,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
+    private double currentTotal =0;
 
     @FXML
     private TextField serial;
@@ -94,6 +94,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void initializeUIElements() {
+        //quantity.getValueFactory().setValue(0);
         total.setText("0.0");
         setSerial();
         seller.setText(sellerName);
@@ -101,8 +102,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void configureAlerts() {
-        configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
-        configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+        configureAlert(alertCustomer, "Cliente Nuevo", "El cliente no existe", "¿Quieres agregarlo?");
+        configureAlert(alertProduct, "Producto Nuevo", "El producto no existe", "¿Quieres agregarlo?");
     }
 
     private void configureTable() {
@@ -129,15 +130,37 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void searchCustomer(ActionEvent actionEvent) {
-        int customerId = Integer.parseInt(codCustomer.getText());
-        customer = customerDAO.searchCustomer(customerId);
+        try{
+            if(codCustomer.getText() != null && !codCustomer.getText().isBlank()){
+                int customerId = Integer.parseInt(codCustomer.getText());
+                customer = customerDAO.searchCustomer(customerId);
 
-        if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
-            customerName.setText(customer.name());
-        } else {
-            handleCustomerNotFound();
+                if (customer != null) {
+                    setAlert(Alert.AlertType.CONFIRMATION, "Ciente encontrado: " + customer.name());
+                    customerName.setText(customer.name());
+                } else {
+                    handleCustomerNotFound();
+                }
+            }else if(customerName.getText() != null && !customerName.getText().isBlank()){
+                String customerName = this.customerName.getText();
+                customer = customerDAO.searchCustomerName(customerName);
+
+                if(customer != null){
+                    setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + customer.dni());
+                    codCustomer.setText(String.valueOf(customer.dni()));
+                }else{
+                    handleCustomerNotFound();
+                }
+            }else {
+                MenuController.setAlert(Alert.AlertType.ERROR,"Debes ingresar un codigo de cliente o nombre de cliente");
+            }
+
+        }catch (NumberFormatException e){
+            codCustomer.clear();
+            customerName.clear();
+            MenuController.setAlert(Alert.AlertType.ERROR,"El codigo del cliente debe ser un numero");
         }
+
     }
 
     private void handleCustomerNotFound() {
@@ -158,25 +181,30 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Customer");
+        stage.setTitle("Gestionar Cliente");
         stage.setScene(scene);
         stage.show();
     }
 
 
-    public void searchProduct(ActionEvent actionEvent) {
-        int productId = Integer.parseInt(codProduct.getText());
-        Product product = productDAO.searchProduct(productId);
 
-        if (product != null) {
-            updateProductFields(product);
-        } else {
-            handleProductNotFound();
+    public void searchProduct(ActionEvent actionEvent) {
+        try {
+            int productId = Integer.parseInt(codProduct.getText());
+            Product product = productDAO.searchProduct(productId);
+
+            if (product != null) {
+                updateProductFields(product);
+            } else {
+                handleProductNotFound();
+            }
+        }catch (NumberFormatException e){
+            MenuController.setAlert(Alert.AlertType.ERROR,"El codigo del producto debe ser un numero");
         }
     }
 
     private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto encontrado: " + product.name());
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
@@ -203,7 +231,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Product");
+        stage.setTitle("Gestionar Producto");
         stage.setScene(scene);
         stage.show();
     }
@@ -214,7 +242,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta Cancelada");
         total.clear();
     }
 
@@ -237,14 +265,15 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Sales createSalesObject() {
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
+                LocalDate.parse(date.getText()), currentTotal,
                 Sales.State.ACTIVE);
     }
 
     private boolean saveSaleAndDetails(Sales sales) {
-        boolean saleSaved = salesDAO.SaveSale(sales);
-        boolean detailsSaved = salesDAO.SaveDetailsSale(products, idSale);
-        return saleSaved && detailsSaved;
+        int generatedId = salesDAO.SaveSale(sales);
+
+        if(generatedId != -1) return salesDAO.SaveDetailsSale(products, generatedId);
+        return false;
     }
 
     private void cleanFieldsAndTable() {
@@ -280,17 +309,19 @@ public class GenerateSaleController extends MenuController implements Initializa
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya se encuentra en tu carrito de compras");
             return;
         }
+
 
         addToCartAndUpdateTotal(product);
     }
 
     private ShoppingCart createShoppingCartObject() {
+
         return new ShoppingCart(contProducts++, codProduct.getText(),
                 productName.getText(), quantity.getValue(),
-                Double.parseDouble(price.getText()));
+                Double.parseDouble(price.getText().replace(",", ".")));
     }
 
     private boolean isProductAlreadyInCart(ShoppingCart product) {
@@ -300,22 +331,24 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
-        double currentTotal = Double.parseDouble(total.getText()) + product.total();
+        currentTotal += product.total();
         total.setText(String.format("%.2f", currentTotal));
     }
 
 
     private String validateInputs() {
         if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Missing customer name or product name.";
+            return "Nombre de cliente o de producto faltante.";
         } else if (quantity.getValue() == 0) {
-            return "Quantity can't be 0.";
+            return "La cantidad no puede ser 0.";
+        } else if (quantity.getValue() > Integer.parseInt(stock.getText())) {
+            return "La cantidad ingresada supera el stock disponible.";
         }
         return null;
     }
 
     private void setSerial(){
-        idSale = 1+salesDAO.IdSale();
+        int idSale = 1 + salesDAO.IdSale();
         String formattedId= String.format("%04d", idSale);
         serial.setText(formattedId);
     }

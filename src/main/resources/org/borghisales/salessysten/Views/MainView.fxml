@@ -1,34 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
-   <children>
-      <ImageView fitHeight="71.0" fitWidth="73.0" layoutX="224.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/img.png" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="22.0" prefHeight="45.0" prefWidth="200.0" text="SALES SYSTEM" underline="true">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" blendMode="SRC_ATOP" layoutX="94.0" layoutY="111.0" prefHeight="45.0" prefWidth="119.0" text="DNI" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="54.0" layoutY="203.0" prefHeight="45.0" prefWidth="200.0" text="PASSWORD">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <TextField fx:id="user" layoutX="79.0" layoutY="163.0" />
-      <Button layoutX="94.0" layoutY="331.0" mnemonicParsing="false" onAction="#signIn" prefHeight="33.0" prefWidth="119.0" text="SIGN IN" />
-      <PasswordField fx:id="password" layoutX="79.0" layoutY="260.0" />
-   </children>
-</AnchorPane>
+<GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="415.0" style="-fx-background-color: #EEEEEE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.MainController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="21.0" />
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="21.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="31.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
+        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="31.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #364958; -fx-border-width: 5; -fx-border-radius: 6;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <children>
+                <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="373.0">
+                    <children>
+                        <Pane>
+                            <padding>
+                                <Insets top="58.0" />
+                            </padding>
+                        </Pane>
+                        <Label alignment="CENTER" contentDisplay="TOP" style="-fx-font-weight: bold;" text="Sistema de ventas" textFill="#191919">
+                            <font>
+                                <Font name="JetBrains Mono Regular Nerd Font Complete" size="30.0" />
+                            </font>
+                        </Label>
+                        <Pane>
+                            <padding>
+                                <Insets top="40.0" />
+                            </padding>
+                        </Pane>
+                        <GridPane styleClass="login-container" stylesheets="@style.css" VBox.vgrow="ALWAYS">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <VBox.margin>
+                                <Insets bottom="35.0" left="35.0" right="35.0" top="20.0" />
+                            </VBox.margin>
+                            <children>
+                                <TextField fx:id="user" promptText="Usuario" styleClass="modern-field" stylesheets="@style.css" GridPane.rowIndex="1" />
+                        <PasswordField fx:id="password" promptText="Contrasenia" styleClass="modern-field" stylesheets="@style.css" GridPane.rowIndex="3" />
+                                <Label alignment="CENTER" styleClass="prompt-text" text="Iniciar sesion" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                                    <font>
+                                        <Font name="JetBrainsMono NF Regular" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Button mnemonicParsing="false" onAction="#signIn" stylesheets="@style.css" text="Iniciar sesion" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                           <styleClass>
+                              <String fx:value="button-modern" />
+                              <String fx:value="button-info" />
+                           </styleClass></Button>
+                            </children>
+                        </GridPane>
+                    </children>
+                </VBox>
+            </children>
+        </Pane>
+    </children>
+</GridPane>

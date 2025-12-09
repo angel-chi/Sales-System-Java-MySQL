@@ -2,79 +2,91 @@ package org.borghisales.salessysten.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TabPane;
+import javafx.scene.layout.StackPane;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
+import javafx.scene.text.Text;
 
 public class ManagementController extends MenuController implements Initializable {
 
-    private static int lastTab ;
+    //private static int lastTab ;
 
     @FXML
-    private Button sellerButton;
+    private Text dateNow, idVendedor, usuarioVendedor;
+
 
     @FXML
-    private TabPane tabPaneManage;
-
-    @FXML
-    void openSeller(ActionEvent actionEvent){
-        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(SELLER_VIEW_FXML,"Seller");
-        closeCurrentStage(sellerButton);
-    }
-
+    private StackPane mainpage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tabPaneManage.getSelectionModel().select(lastTab);
-    }
-
-    public void openCustomer(ActionEvent actionEvent) {
-        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(CUSTOMER_VIEW_FXML, "Customer");
-        closeCurrentStage(sellerButton);
-
-    }
-
-    public void openProduct(ActionEvent actionEvent) {
-        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(PRODUCT_VIEW_FXML,"Products");
-        closeCurrentStage(sellerButton);
-
+        idVendedor.setText(String.valueOf(MainController.sellerLog.idSeller()));
+        usuarioVendedor.setText(MainController.sellerLog.dni());
+        loadPage(WELCOME_MENU_VIEW_FXML);
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
-        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(GENERATE_SALE_VIEW_FXML,"Shopping cart");
-        closeCurrentStage(sellerButton);
+        loadPage(GENERATE_SALE_VIEW_FXML);
     }
-    public void openSalesReport(ActionEvent actionEvent) {
-        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(REPORT_VIEW_FXML,"Sales");
-        closeCurrentStage(sellerButton);
 
+    public void openCustomer(ActionEvent actionEvent) {
+        loadPage(CUSTOMER_VIEW_FXML);
     }
+
+    public void openProduct(ActionEvent actionEvent) {
+
+        loadPage(PRODUCT_VIEW_FXML);
+    }
+
+    public void openSeller(ActionEvent actionEvent) {
+        loadPage(SELLER_VIEW_FXML);
+    }
+
+    public void openSalesReport(ActionEvent actionEvent) {
+        loadPage(REPORT_VIEW_FXML);
+    }
+
+    public void loadPage(String fxmlFileName) {
+        try {
+            dateNow.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            Parent page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFileName)));
+            mainpage.getChildren().setAll(page);
+        } catch (IOException | NullPointerException e) {
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista: " + e.getMessage());
+        }
+    }
+
 
     public void help(ActionEvent actionEvent) {
-        try {
-            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"The URL could not be opened. Check your internet connection.");
-        }
-
+        new Thread(() -> {
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> {
+                    setAlert(Alert.AlertType.ERROR, "La URL no pudo ser abierta. Revisa tu conexion a internet.");
+                });
+            }
+        }).start();
     }
 
     public void exit(ActionEvent actionEvent) {
-        openNewStage(MAIN_VIEW_FXML,"Login");
-        closeCurrentStage(sellerButton);
+        openNewStage(MAIN_VIEW_FXML,"Inicio de sesion");
+        closeCurrentStage(mainpage);
     }
+
 
 
 }

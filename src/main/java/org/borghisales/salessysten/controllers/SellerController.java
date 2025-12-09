@@ -102,12 +102,26 @@ public class SellerController implements Initializable {
 
     public void deleteSeller(ActionEvent actionEvent) {
         if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller");
+            MenuController.setAlert(Alert.AlertType.ERROR,"No se puede eliminar el vendedor actual");
             return;
-        }
-        if (sellerDAO.delete(dni.getText())){
-            MenuController.cleanCells(dni,name,phone,user);
-            updateTable();
+        } else{
+            Alert Delete = new Alert(Alert.AlertType.CONFIRMATION);
+            Delete.setTitle("Eliminar");
+            Delete.setHeaderText("¿Estas seguro que quieres realizar esta accion?");
+            Delete.setContentText("Se eliminará el vendedor " + name.getText());
+
+            ButtonType Accept = new ButtonType("Sí", ButtonBar.ButtonData.OK_DONE);
+            ButtonType Cancel = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+            Delete.getButtonTypes().setAll(Accept, Cancel);
+            Delete.showAndWait().ifPresent(button -> {
+
+                if (button == Accept) {
+                    if (sellerDAO.delete(dni.getText())){
+                        MenuController.cleanCells(dni,name,phone,user);
+                        updateTable();
+                    }
+                }
+            });
         }
     }
 

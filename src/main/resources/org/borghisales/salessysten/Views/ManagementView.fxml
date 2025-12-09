@@ -1,52 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="407.0" prefWidth="305.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
-   <children>
-      <TabPane fx:id="tabPaneManage" prefHeight="400.0" prefWidth="315.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="MENU">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="525.0">
-                     <children>
-                        <Button layoutX="78.0" layoutY="76.0" mnemonicParsing="false" onAction="#help" prefHeight="70.0" prefWidth="160.0" text="HELP" />
-                        <Button layoutX="78.0" layoutY="219.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="160.0" text="EXIT" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="SALES">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openGenerateSale" prefHeight="70.0" prefWidth="160.0" text="GENERATE SALE" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="MANAGEMENT">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="78.0" layoutY="46.0" mnemonicParsing="false" onAction="#openCustomer" prefHeight="70.0" prefWidth="160.0" text="CUSTOMER" />
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="160.0" text="PRODUCT" />
-                        <Button fx:id="sellerButton" layoutX="78.0" layoutY="264.0" mnemonicParsing="false" onAction="#openSeller" prefHeight="70.0" prefWidth="160.0" text="SELLER" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="REPORTS">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openSalesReport" prefHeight="70.0" prefWidth="160.0" text="SALES REPORT" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
-</AnchorPane>
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1100.0" styleClass="background-main" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="173.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="827.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="623.0" valignment="CENTER" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="300.0" prefHeight="700.0" prefWidth="180.0" styleClass="options-info-bar" stylesheets="@style.css" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <children>
+                <Pane maxWidth="1.7976931348623157E308" prefHeight="72.0" prefWidth="162.0" VBox.vgrow="NEVER">
+                    <children>
+                        <GridPane alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="65.0" prefWidth="181.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.0" minWidth="10.0" prefWidth="114.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Menu sistema de ventas" textAlignment="CENTER" textFill="#364958" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets top="20.0" />
+                                    </GridPane.margin>
+                                </Label>
+                            </children>
+                        </GridPane>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="30.0" top="10.0" />
+                    </VBox.margin>
+                </Pane>
+                <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="672.0" prefWidth="203.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="498.0" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="172.0" vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <GridPane hgap="10.0" maxWidth="300.0" prefWidth="203.0" vgap="10.0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="10.0" prefWidth="52.0" />
+                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="142.0" minWidth="10.0" prefWidth="129.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="-Infinity" minHeight="30.0" prefHeight="60.0" valignment="BOTTOM" vgrow="NEVER" />
+                                <RowConstraints minHeight="30.0" prefHeight="60.0" valignment="CENTER" vgrow="NEVER" />
+                            </rowConstraints>
+                            <children>
+                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#help" styleClass="button-info" stylesheets="@style.css" text="Ayuda" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+                                <SVGPath content="M234.666667,-2.13162821e-14 L234.666667,85.3333333 L192.000667,85.333 L192,42.6666667 L42.6666667,42.6666667 L42.6666667,384 L192,384 L192.000667,341.333 L234.666667,341.333333 L234.666667,426.666667 L-4.26325641e-14,426.666667 L-4.26325641e-14,-2.13162821e-14 L234.666667,-2.13162821e-14 Z M292.418278,112.915055 L392.836556,213.333333 L292.418278,313.751611 L262.248389,283.581722 L311.163,234.666 L106.666667,234.666667 L106.666667,192 L311.163,192 L262.248389,143.084945 L292.418278,112.915055 Z" scaleX="0.07" scaleY="0.07" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                <SVGPath content="M101.212,0c-34.694,0-62.92,28.226-62.92,62.92c0,4.142,3.358,7.5,7.5,7.5c4.142,0,7.5-3.358,7.5-7.5c0-26.423,21.497-47.92,47.92-47.92c26.422,0,47.918,21.497,47.918,47.92c0,26.425-21.496,47.923-47.918,47.923c-0.259,0-0.516,0.013-0.769,0.039c-11.128,0.4-20.088,9.36-20.488,20.487c-0.026,0.253-0.039,0.509-0.039,0.769v30.922c0,4.142,3.358,7.5,7.5,7.5c4.142,0,7.5-3.358,7.5-7.5v-30.922c0-3.471,2.824-6.295,6.296-6.295c34.693,0,62.918-28.227,62.918-62.923C164.13,28.226,135.906,0,101.212,0z" scaleX="0.15" scaleY="0.15" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#exit" styleClass="button-info" stylesheets="@style.css" text="Cerrar sesion" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+                            </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                        </GridPane>
+                        <Accordion maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.hgrow="ALWAYS" GridPane.vgrow="SOMETIMES">
+                            <panes>
+                                <TitledPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@style.css" text="Ventas" textFill="WHITE">
+                                    <content>
+                                        <FlowPane alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" orientation="VERTICAL">
+                                            <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openGenerateSale" prefHeight="40.0" prefWidth="150.0" stylesheets="@style.css" text="Generar venta" />
+                                            </children>
+                                        </FlowPane>
+                                    </content>
+                                </TitledPane>
+                                <TitledPane text="Gestion" textFill="WHITE">
+                                    <content>
+                                        <FlowPane alignment="TOP_CENTER" columnHalignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" orientation="VERTICAL" vgap="10.0">
+                                            <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#openCustomer" prefHeight="40.0" prefWidth="150.0" text="Cliente" />
+                                                <Button mnemonicParsing="false" onAction="#openProduct" prefHeight="40.0" prefWidth="150.0" text="Producto" />
+                                                <Button mnemonicParsing="false" onAction="#openSeller" prefHeight="40.0" prefWidth="150.0" text="Vendedor" />
+                                            </children>
+                                        </FlowPane>
+                                    </content>
+                                </TitledPane>
+                                <TitledPane contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="113.0" prefWidth="173.0" styleClass="accordion-modern" text="Reportes" textFill="WHITE">
+                                    <content>
+                                        <FlowPane alignment="TOP_CENTER" maxWidth="-Infinity" orientation="VERTICAL">
+                                            <children>
+                                                <Button mnemonicParsing="false" onAction="#openSalesReport" prefHeight="40.0" prefWidth="150.0" text="Reporte de ventas" />
+                                            </children>
+                                        </FlowPane>
+                                    </content>
+                                </TitledPane>
+                            </panes>
+                        </Accordion>
+                    </children>
+                </GridPane>
+            </children>
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" top="10.0" />
+         </GridPane.margin>
+        </VBox>
+        <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="811.0" prefWidth="877.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="300.0" minHeight="10.0" prefHeight="102.0" valignment="TOP" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="681.0" minHeight="10.0" prefHeight="681.0" valignment="TOP" vgrow="NEVER" />
+            </rowConstraints>
+            <children>
+            <HBox maxWidth="1.7976931348623157E308" styleClass="options-info-bar" stylesheets="@style.css" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
+               <children>
+                      <GridPane maxHeight="136.0" maxWidth="1.7976931348623157E308" prefHeight="136.0" styleClass="options-info-bar" stylesheets="@style.css" HBox.hgrow="ALWAYS">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="740.0" minWidth="10.0" prefWidth="632.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.0" minWidth="10.0" prefWidth="111.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="0.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                          <children>
+                        <Text fx:id="dateNow" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="dd/mm/yyyy" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                           <children>
+                                    <Label text="ID vendedor: " textFill="#364958">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Label>
+                              <Text fx:id="idVendedor" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="{idUser}">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                           <children>
+                              <Label text="Usuario: " textFill="#364958">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Label>
+                              <Text fx:id="usuarioVendedor" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="{dni}">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Text>
+                           </children>
+                        </HBox>
+                          </children>
+                     <HBox.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </HBox.margin>
+                      </GridPane>
+               </children>
+               <opaqueInsets>
+                  <Insets right="10.0" top="10.0" />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets right="10.0" top="10.0" />
+               </GridPane.margin>
+            </HBox>
+                <StackPane fx:id="mainpage" alignment="TOP_LEFT" prefHeight="636.0" prefWidth="877.0" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="10.0" />
+               </GridPane.margin></StackPane>
+            </children>
+        </GridPane>
+    </children>
+</GridPane>
