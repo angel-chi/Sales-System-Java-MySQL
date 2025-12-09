@@ -9,7 +9,10 @@ import org.borghisales.salessysten.controllers.ReportsController;
 
 import java.sql.*;
 
+// Por qué no se hizo el cambio a este DAO: Está bien diferente al resto, mucho rollo andar buscando la poca relación que
+// tiene con el AbstractBase que hice antes así que mejor que se quede así. Además, ya funciona, pa qué le muevo
 
+// Se realizaron traducciones en los bloques try-catch.
 public class SalesDAO {
 
     public int IdSale(){
@@ -27,8 +30,8 @@ public class SalesDAO {
                 return 1;
             }
 
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching IdSale: " + e.getMessage());
+        } catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error intentando buscar el ID de la venta: " + e.getMessage());
             return 1;
         }
     }
@@ -48,15 +51,15 @@ public class SalesDAO {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Sale saved correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Ventas guardadas correctamente!");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar guardar la venta. ");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar guardar la venta:" + e.getMessage());
             return false;
         }
 
@@ -81,10 +84,8 @@ public class SalesDAO {
             }
                 return true;
 
-
-
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale details: " + e.getMessage());
+        } catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar guardar detalles de la venta: " + e.getMessage());
             return false;
         }
 
@@ -105,10 +106,9 @@ public class SalesDAO {
                 }
             }
 
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+        } catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar buscar ventas: " + e.getMessage());
         }
-
 
     }
 
@@ -120,9 +120,7 @@ public class SalesDAO {
                 GROUP BY saleDate;
                 """;
 
-
-        System.out.println("Buscado base de datos");
-
+        System.out.println("Buscando base de datos...");
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -138,13 +136,10 @@ public class SalesDAO {
                 }
             }
 
-
             ReportsController.setCacheReportLineChart(year,month,lineChartData);
 
-
-
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+        } catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar buscar las ventas: " + e.getMessage());
         }
     }
 
@@ -169,8 +164,8 @@ public class SalesDAO {
                 }
             }
 
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+        } catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al intentar buscar las ventas: " + e.getMessage());
         }
 
     }

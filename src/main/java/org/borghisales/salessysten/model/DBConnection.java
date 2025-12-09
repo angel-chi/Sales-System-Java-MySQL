@@ -21,7 +21,7 @@ public class DBConnection {
             return DriverManager.getConnection(url, user, password);
         } catch (IOException e) {
             e.printStackTrace();
-            // Manejar la excepción adecuadamente
+            // TODO: Manejar la excepción corrcetamente.
             return null;
         }
     }
@@ -39,7 +39,7 @@ public class DBConnection {
             }
 
         }catch(SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Error adding employee: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR,"Error al añadir empleado: " + e.getMessage());
             return false;
         }
 

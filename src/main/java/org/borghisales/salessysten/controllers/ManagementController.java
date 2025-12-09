@@ -6,14 +6,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
-
 import java.awt.*;
 import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ManagementController extends MenuController implements Initializable {
-
+    // Variables
     private static int lastTab ;
 
     @FXML
@@ -25,54 +24,51 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     void openSeller(ActionEvent actionEvent){
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(SELLER_VIEW_FXML,"Seller");
+        openNewStage(SELLER_VIEW_FXML,"Vendedor");
         closeCurrentStage(sellerButton);
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabPaneManage.getSelectionModel().select(lastTab);
     }
-
+    // Todos los open<> siguen el mismo patrón. Guardan la pestaña actual,
+    // abren una nueva ventana y cierran la ventana actual.
     public void openCustomer(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(CUSTOMER_VIEW_FXML, "Customer");
+        openNewStage(CUSTOMER_VIEW_FXML, "Cliente");
         closeCurrentStage(sellerButton);
-
     }
 
     public void openProduct(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(PRODUCT_VIEW_FXML,"Products");
+        openNewStage(PRODUCT_VIEW_FXML,"Productos");
         closeCurrentStage(sellerButton);
-
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(GENERATE_SALE_VIEW_FXML,"Shopping cart");
+        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compra");
         closeCurrentStage(sellerButton);
     }
+
     public void openSalesReport(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(REPORT_VIEW_FXML,"Sales");
+        openNewStage(REPORT_VIEW_FXML,"Ventas");
         closeCurrentStage(sellerButton);
 
     }
-
-    public void help(ActionEvent actionEvent) {
-        try {
-            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"The URL could not be opened. Check your internet connection.");
-        }
-
+    @FXML
+    private void help() {
+        // Registrar que la ventana padre de Help es Management
+        MenuController.rutaArchivos.put(HELP_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        openNewStage(HELP_VIEW_FXML, "Ayuda");
+        closeCurrentStage(tabPaneManage);
     }
 
+    // Salir
     public void exit(ActionEvent actionEvent) {
-        openNewStage(MAIN_VIEW_FXML,"Login");
+        openNewStage(MAIN_VIEW_FXML,"Iniciar Sesión");
         closeCurrentStage(sellerButton);
     }
 

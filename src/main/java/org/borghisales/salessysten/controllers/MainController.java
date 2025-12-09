@@ -17,23 +17,21 @@ public class MainController extends MenuController implements Initializable {
 
     public static Seller sellerLog;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        user.setText("44994806");
 //        password.setText("chimu");
 
-        //In case the user is changed, the reports of that user should be updated.
+        // En caso que el usuario haga cambiado, sus reportes también deberían ser actualizados.
         ReportsController.setSales(null);
         ReportsController.setPieChartData(null);
         ReportsController.setLineChartData(null);
-
     }
 
     @FXML
     private void signIn(){
         if (SellerDAO.login(user.getText(),password.getText())) {
-            openNewStage(MANAGEMENT_VIEW_FXML, "Management");
+            openNewStage(MANAGEMENT_VIEW_FXML, "Gestión");
             closeCurrentStage(user);
         }
     }

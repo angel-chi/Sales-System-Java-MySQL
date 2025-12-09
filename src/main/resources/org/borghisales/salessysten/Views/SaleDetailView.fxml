@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="534.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SaleDetailController">
+<AnchorPane prefHeight="534.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SaleDetailController">
    <children>
       <TableView fx:id="tableSale" prefHeight="496.0" prefWidth="799.0">
          <columns>
-            <TableColumn fx:id="colNro" prefWidth="70.0" sortable="false" style="-fx-alignment: CENTER;" text="NR" />
-            <TableColumn fx:id="colCod" prefWidth="73.0" sortable="false" style="-fx-alignment: CENTER;" text="COD" />
-            <TableColumn fx:id="colProduct" prefWidth="356.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCT" />
-            <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="103.0" style="-fx-alignment: CENTER;" text="QUANTITY" />
-            <TableColumn fx:id="colPrice" prefWidth="102.0" style="-fx-alignment: CENTER;" text="PRICE UNIT" />
+            <TableColumn fx:id="colNro" prefWidth="90.0" sortable="false" style="-fx-alignment: CENTER;" text="NR" />
+            <TableColumn fx:id="colCod" prefWidth="72.0" sortable="false" style="-fx-alignment: CENTER;" text="COD" />
+            <TableColumn fx:id="colProduct" prefWidth="260.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCTO" />
+            <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="180.0" style="-fx-alignment: CENTER;" text="CANTIDAD" />
+            <TableColumn fx:id="colPrice" prefWidth="102.0" style="-fx-alignment: CENTER;" text="PRECIO P/U" />
             <TableColumn fx:id="colTotal" prefWidth="94.0" style="-fx-alignment: CENTER;" text="TOTAL" />
          </columns>
       </TableView>
       <TextField fx:id="totalSale" editable="false" layoutX="693.0" layoutY="501.0" prefHeight="25.0" prefWidth="91.0" />
-      <Label layoutX="619.0" layoutY="504.0" text="TOTAL SALE:" wrapText="true" />
+      <Label layoutX="585.0" layoutY="505.0" text="TOTAL DE VENTA" wrapText="true" />
    </children>
 </AnchorPane>

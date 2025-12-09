@@ -28,13 +28,13 @@ import org.borghisales.salessysten.model.*;
 
 
 import java.net.URL;
-import java.time.Month;
 import java.util.*;
 import java.util.function.Predicate;
-
+// Objetivo: Visualización y filtrado de los reportes de ventas.
 public class ReportsController implements Initializable {
-
-    private static final String[] monthsShowed = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    // Variables
+    private static final String[] mesesMostrados =
+            {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     private static int idxMonth = LocalDate.now().getMonth().getValue()-1;
     private static int yearsShowed = LocalDate.now().getYear();
 
@@ -53,19 +53,14 @@ public class ReportsController implements Initializable {
     private TextField year;
     @FXML
     public TextField month;
-
-
     @FXML
     private LineChart<String,Integer> salesLineChart;
-
     @FXML
     private CategoryAxis x_time;
     @FXML
     private NumberAxis y_amountSales;
-
     @FXML
     private PieChart pieChartProducts;
-
     @FXML
     private DatePicker minDate;
     @FXML
@@ -103,9 +98,7 @@ public class ReportsController implements Initializable {
         }
     }
 
-
-
-    @Override
+    @Override // Configuración de la UI
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupLineChart();
         setupPieChart();
@@ -121,24 +114,24 @@ public class ReportsController implements Initializable {
         for (int i = 1; i <= 30; i++) {
             categories.add(String.valueOf(i));
         }
-
+         // X: Días del mes, Y: Cantidad de Ventas
         x_time.setAutoRanging(false);
         x_time.setCategories(FXCollections.observableArrayList(categories));
-        x_time.setLabel("Days of the month");
-        y_amountSales.setLabel("Sales amount");
+        x_time.setLabel("Días del mes");
+        y_amountSales.setLabel("Cantidad de ventas");
 
         year.setText(String.valueOf(yearsShowed));
-        month.setText(monthsShowed[idxMonth]);
-
+        month.setText(mesesMostrados[idxMonth]);
+        // Carga de datos
         if (lineChartData == null) {
             lineChartData = new XYChart.Series<>();
             salesDAO.setLineChart(lineChartData, Integer.parseInt(year.getText()), idxMonth + 1);
         }
-
+        // Añadir 0 a un día del mes sin ventas
         fillMissingDays(lineChartData);
         salesLineChart.getData().add(lineChartData);
     }
-
+    // Configurar gráfica de pastel.
     private void setupPieChart() {
         if (pieChartData == null) {
             pieChartData = FXCollections.observableArrayList();
@@ -147,14 +140,14 @@ public class ReportsController implements Initializable {
             pieChartData.forEach(data ->
                     data.nameProperty().bind(
                             Bindings.concat(
-                                    data.getName(), " amount: ", (int) data.pieValueProperty().doubleValue()
+                                    data.getName(), " Cantidad: ", (int) data.pieValueProperty().doubleValue()
                             )
                     )
             );
         }
         pieChartProducts.getData().addAll(pieChartData);
     }
-
+    // Mapea los datos del objeto Sales en la tabla.
     private void setupTableView() {
         colIdSales.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSales()).asObject());
         colIdCustomer.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idCustomer()).asObject());
@@ -173,7 +166,7 @@ public class ReportsController implements Initializable {
 
         tableReport.setItems(sales);
     }
-
+    // Configura el evento del doble clic en la tabla de ventas.
     private void setupEventHandlers() {
         tableReport.setOnMouseClicked(mouseEvent -> {
             if (!tableReport.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
@@ -185,7 +178,7 @@ public class ReportsController implements Initializable {
                 try {
                     Scene scene = new Scene(fxmlLoaderSaleDetails.load());
                     Stage stage = new Stage();
-                    stage.setTitle("Sale detail");
+                    stage.setTitle("Detalle de Venta");
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException e) {
@@ -200,10 +193,10 @@ public class ReportsController implements Initializable {
         cbTypeExport.setItems(exportList);
     }
 
-
+    // Filtrado
     public void onFilter(ActionEvent actionEvent) {
         if (sales.isEmpty()){
-            MenuController.setAlert(Alert.AlertType.WARNING,"There are no sales");
+            MenuController.setAlert(Alert.AlertType.WARNING,"No existen ventas.");
             return;
         }
 
@@ -217,11 +210,11 @@ public class ReportsController implements Initializable {
 
 
             if (minAmount >= maxAmount) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct amount intervals");
+                MenuController.setAlert(Alert.AlertType.ERROR,"Configura los intervalos de cantidad correctamente.");
                 return;
             }
             if (minDate.isAfter(maxDate)) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct date intervals");
+                MenuController.setAlert(Alert.AlertType.ERROR,"Configura los intervalos de fecha correctamente.");
                 return;
             }
 
@@ -251,33 +244,33 @@ public class ReportsController implements Initializable {
     }
 
 
-    // Method to add values to the HashMap
+    // Método para agregar los valores al HashMap.
     public static void setCacheReportLineChart(int year, int month, XYChart.Series<String, Integer> lineChartData) {
         if (lineChartData != null) {
-            // Check if the year is already in the HashMap
+            // Verificando si el año ya está en el HashMap.
             if (!cacheReportLineChart.containsKey(year)) {
                 cacheReportLineChart.put(year, new HashMap<>());
             }
-            //  Obtain the map of months for the given year
+            //  Dado un año, obtener un mapa de los meses que corresponden.
             HashMap<Integer, XYChart.Series<String, Integer>> yearData = cacheReportLineChart.get(year);
-            // Check if a series already exists for the given month
+            // Verificar si ya existen series para dicho mes.
             if (!yearData.containsKey(month)) {
-                // Add data series to the map for the given month
+                // Agregar series para ese mes.
                 XYChart.Series<String, Integer> series = new XYChart.Series<>();
                 series.getData().addAll(lineChartData.getData());
-                series.setName(monthsShowed[idxMonth]);
+                series.setName(mesesMostrados[idxMonth]);
                 yearData.put(month, series);
             } else {
-                System.out.println("There is already a series for the year" + year + " and the month " + month + ". No new series will be added");
+                System.out.println("Ya existen series para el año: " + year + " y el mes: " + month + ". No se añadirán nuevas series.");
             }
         } else {
-            System.out.println("Error: lineChartData is null. Cannot add to cache map.");
+            System.out.println("Error: lineChartData está vacío. No se puede añadir al mapa de caché.");
         }
 
         recorrerHashMap();
     }
 
-
+    // Exportar en uno de los formatos disponibles.
     public void onExport(ActionEvent actionEvent) {
         switch (cbTypeExport.getValue()){
             case ".PDF"  -> SalesReportGenerator.generatePDFReport(tableReport.getItems(),"src/main/resources/reports/sales_report.pdf");
@@ -285,133 +278,95 @@ public class ReportsController implements Initializable {
             case ".CSV" -> SalesReportGenerator.generateCSVReport(tableReport.getItems(),"src/main/resources/reports/sales_report.csv");
         }
     }
-
+    // Sumar un año.
     public void sumYear(ActionEvent actionEvent) {
         yearsShowed++;
-
-
         lineChartData.getData().clear();
-
 
         if (checkCache()){
             salesDAO.setLineChart(lineChartData,yearsShowed, idxMonth+1);
-        }else {
+        } else {
             lineChartData.getData().addAll(cacheReportLineChart.get(yearsShowed).get(idxMonth+1).getData());
         }
 
-
-
         fillMissingDays(lineChartData);
-
-
         salesLineChart.getData().clear();
         salesLineChart.getData().add(lineChartData);
-
-
         year.setText(String.valueOf(yearsShowed));
     }
-
+    // Restar un año.
     public void subtractYear(ActionEvent actionEvent) {
         yearsShowed--;
-
-
         lineChartData.getData().clear();
-
 
         if (checkCache()){
             salesDAO.setLineChart(lineChartData,yearsShowed, idxMonth+1);
-        }else {
+        } else {
             lineChartData.getData().addAll(cacheReportLineChart.get(yearsShowed).get(idxMonth+1).getData());
         }
 
-
-
         fillMissingDays(lineChartData);
-
-
         salesLineChart.getData().clear();
         salesLineChart.getData().add(lineChartData);
-
-
-
-
-
         year.setText(String.valueOf(yearsShowed));
     }
-
+    // Sumar un mes.
     public void sumMonth(ActionEvent actionEvent) {
         if (idxMonth==11) return;
 
         idxMonth++;
-
         lineChartData.getData().clear();
-
 
         if (checkCache()){
             salesDAO.setLineChart(lineChartData,Integer.parseInt(year.getText()), idxMonth+1);
-        }else {
+        } else {
             lineChartData.getData().addAll(cacheReportLineChart.get(yearsShowed).get(idxMonth+1).getData());
         }
 
-
-
         fillMissingDays(lineChartData);
-
-
         salesLineChart.getData().clear();
         salesLineChart.getData().add(lineChartData);
-
-
-        month.setText(monthsShowed[idxMonth]);
-
+        month.setText(mesesMostrados[idxMonth]);
     }
-
+    // Restar un mes.
     public void subtractMonth(ActionEvent actionEvent) {
         if (idxMonth==0) return;
         idxMonth--;
 
-
         salesLineChart.getData().remove(lineChartData);
-
-
-
         lineChartData.getData().clear();
-
 
         if (checkCache()){
             salesDAO.setLineChart(lineChartData,Integer.parseInt(year.getText()), idxMonth+1);
-        }else {
+        } else {
             lineChartData.getData().addAll(cacheReportLineChart.get(yearsShowed).get(idxMonth+1).getData());
         }
 
         fillMissingDays(lineChartData);
-
-
         salesLineChart.getData().add(lineChartData);
-
-        month.setText(monthsShowed[idxMonth]);
+        month.setText(mesesMostrados[idxMonth]);
     }
 
-
+    // Recorrer el Hash Map.
     public static void recorrerHashMap() {
         for (Integer year : cacheReportLineChart.keySet()) {
-            System.out.println("Year: " + year);
+            System.out.println("Año: " + year);
             HashMap<Integer, XYChart.Series<String, Integer>> yearData = cacheReportLineChart.get(year);
             for (Integer month : yearData.keySet()) {
-                System.out.println("  Month: " + month);
+                System.out.println("  Mes: " + month);
                 XYChart.Series<String, Integer> series = yearData.get(month);
                 if (series != null) {
                     System.out.println("    Series: " + series.getName());
                     for (XYChart.Data<String, Integer> data : series.getData()) {
-                        System.out.println("      Data: " + data.getXValue() + ", " + data.getYValue());
+                        System.out.println("      Datos: " + data.getXValue() + ", " + data.getYValue());
                     }
                 } else {
-                    System.out.println("    No hay serie asociada para este mes.");
+                    System.out.println("    No hay una serie asociada para este mes.");
                 }
             }
         }
     }
-
+    // Revisar caché.
     private static boolean checkCache() {
         // First, check if the year is not null
         if (cacheReportLineChart.get(yearsShowed) != null) {
@@ -423,34 +378,28 @@ public class ReportsController implements Initializable {
         }
     }
 
-
     public void fillMissingDays(XYChart.Series<String, Integer> lineChartData) {
-        // Create a map to store sales by day
+        // Creando un mapa para guardar ventas por día.
         Map<Integer, Integer> salesByDay = new HashMap<>();
 
-        // Get existing data from the series and store it in the map
+        // Consiguiendo información de las series existentes y agregándola al mapa.
         for (XYChart.Data<String, Integer> data : lineChartData.getData()) {
             int day = Integer.parseInt(data.getXValue());
             int sales = data.getYValue();
             salesByDay.put(day, sales);
         }
 
-        // Iterate over all days of the month and add missing series
-        for (int i = 1; i <= 31; i++) { // Assuming a maximum of 31 days in a month
+        // Iterar sobre todos los días de un mes y agregar series faltantes.
+        for (int i = 1; i <= 31; i++) { // Máximo de 31 días en un mes.
             if (!salesByDay.containsKey(i)) {
-                // If there is no data for this day, add a point with a value of zero
+                // Si no hay datos, agrega uno con 0.
                 XYChart.Data<String, Integer> data = new XYChart.Data<>(String.valueOf(i), 0);
                 lineChartData.getData().add(data);
             }
         }
 
-        // Sort the data in the series by day
+        // Ordenar por día.
         lineChartData.getData().sort(Comparator.comparingInt(data -> Integer.parseInt(data.getXValue())));
     }
-
-
-
-
-
 
 }

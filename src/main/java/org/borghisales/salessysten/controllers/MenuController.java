@@ -22,11 +22,23 @@ public class MenuController {
     public static final String GENERATE_SALE_VIEW_FXML = VIEWS_DIRECTORY + "GenerateSaleView.fxml";
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
-
-
+    public static final String HELP_VIEW_FXML = VIEWS_DIRECTORY + "HelpView.fxml";
     static Alert defaultAlert;
-    static ButtonType acceptButton = new ButtonType("Accept");
-    public static HashMap<String, String > filePaths = new HashMap<>();
+    static ButtonType acceptButton = new ButtonType("Aceptar");
+    public static HashMap<String, String > rutaArchivos = new HashMap<>();
+    public static HashMap<String, String> titulosFxml = new HashMap<>();
+
+    public MenuController(){
+        titulosFxml.put(MAIN_VIEW_FXML,"Iniciar Sesión");
+        titulosFxml.put(MANAGEMENT_VIEW_FXML,"Gestión");
+        titulosFxml.put(SELLER_VIEW_FXML,"Vendedor");
+        titulosFxml.put(PRODUCT_VIEW_FXML,"Productos");
+        titulosFxml.put(CUSTOMER_VIEW_FXML,"Cliente");
+        titulosFxml.put(GENERATE_SALE_VIEW_FXML,"Carrito de compras");
+        titulosFxml.put(REPORT_VIEW_FXML,"Ventas");
+        titulosFxml.put(SALE_DETAIL_VIEW_FXML,"Detalle de venta");
+        titulosFxml.put(HELP_VIEW_FXML,"Ayuda");
+    }
 
     void closeCurrentStage(Node node) {
         Stage stage = (Stage) node.getScene().getWindow();
@@ -39,31 +51,41 @@ public class MenuController {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
+            //Mantener el tamaño al cambiar de pestaña.
+            stage.setMinWidth(500);
+            stage.setMinHeight(700);
+            // Mantiene el tamaño dinámico.
+            stage.setResizable(false);
+            // Centrar ventana.
+            stage.centerOnScreen();
             stage.setTitle(title);
             stage.setScene(scene);
-            configureStageCloseEvent(stage, fxmlFileName, title);
+            configureStageCloseEvent(stage, fxmlFileName);
             stage.show();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista: "+ e.getMessage());
         }
     }
-
-    private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
+    //Configura el evento de cambio de pestaña.
+    //Ahora se hace una relación entre pestaña padre e hija, permitiendo que cada que se abra una ventana se mantenga el título.
+    private void configureStageCloseEvent(Stage stage, String fxmlFileName) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
+                String padreFxml = getFxmlFather(fxmlFileName);
+                String tituloPadre = titulosFxml.getOrDefault(padreFxml, "Ventana");
+                openNewStage(padreFxml, tituloPadre);
             });
         }
     }
 
     String getFxmlFather(String fxml){
-        return filePaths.get(fxml);
+        return rutaArchivos.get(fxml);
     }
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("Información");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);

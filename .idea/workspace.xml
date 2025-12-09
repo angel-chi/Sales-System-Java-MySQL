@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="refactor: delete comments">
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="ajuste para función buscar cliente y buscar ID">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ReportsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ReportsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/CustomerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/ProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/MainView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/reports/sales_report.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/reports/sales_report.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,14 +16,20 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Record" />
         <option value="FxmlFile" />
+        <option value="Interface" />
+        <option value="UML Class" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -43,8 +40,18 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Borghii/Sales-System.git&quot;,
-    &quot;accountId&quot;: &quot;2e699beb-8c26-4f6a-b608-82f45b0371d8&quot;
+    &quot;url&quot;: &quot;https://github.com/angel-chi/Sales-System-Java-MySQL.git&quot;,
+    &quot;accountId&quot;: &quot;774bb135-53b3-461e-b0c4-e7d61a59274f&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;angel-chi&quot;,
+    &quot;repository&quot;: &quot;Sales-System-Java-MySQL&quot;
   }
 }</component>
   <component name="MavenImportPreferences">
@@ -55,13 +62,13 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2cCZRvBslVSr90pLulz8ETinDKS" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -72,17 +79,27 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "Application.MainController.executor": "Run",
+    "DefaultPlantUmlFileTemplate": "UML Class",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Zapata-Pageau",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/tomas/Desktop/Sales-System/src/main/resources/images",
+    "last_opened_file_path": "C:/Users/Vicente/IdeaProjects/Sales-System-Java-MySQL",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "MavenSettings"
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -136,6 +153,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.28294.334" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -144,62 +168,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00001" summary="create project">
-      <option name="closed" value="true" />
-      <created>1707617671752</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1707617671752</updated>
-    </task>
-    <task id="LOCAL-00002" summary="feature: add login">
-      <option name="closed" value="true" />
-      <created>1707622890390</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1707622890390</updated>
-    </task>
-    <task id="LOCAL-00003" summary="feature: add login">
-      <option name="closed" value="true" />
-      <created>1707622903283</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1707622903283</updated>
-    </task>
-    <task id="LOCAL-00004" summary="feature: add login">
-      <option name="closed" value="true" />
-      <created>1707772380456</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1707772380456</updated>
-    </task>
-    <task id="LOCAL-00005" summary="fea: add crud and classes">
-      <option name="closed" value="true" />
-      <created>1707789565050</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1707789565050</updated>
-    </task>
-    <task id="LOCAL-00006" summary="fea: add combobox">
-      <option name="closed" value="true" />
-      <created>1707875046431</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1707875046431</updated>
-    </task>
-    <task id="LOCAL-00007" summary="fea: add create seller">
-      <option name="closed" value="true" />
-      <created>1707879323797</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1707879323797</updated>
+      <workItem from="1765252663342" duration="1925000" />
     </task>
     <task id="LOCAL-00008" summary="fea: add update seller">
       <option name="closed" value="true" />
@@ -441,8 +410,163 @@
       <option name="project" value="LOCAL" />
       <updated>1713959368643</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="refactor: delete comments">
+      <option name="closed" value="true" />
+      <created>1764967949583</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1764967949583</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Se modificaron algunas vistas y botón HELP">
+      <option name="closed" value="true" />
+      <created>1764971574483</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1764971574483</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Se modificaron algunas vistas y botón HELP">
+      <option name="closed" value="true" />
+      <created>1764984670665</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1764984670665</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Se arregló un error que no permitía añadir productos y generar ventas">
+      <option name="closed" value="true" />
+      <created>1764985229747</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1764985229747</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Se actualizaron algunas traducciones">
+      <option name="closed" value="true" />
+      <created>1764985919967</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1764985919967</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Eliminación de Layouts de algunos menús que causaban que no quedara centrado.">
+      <option name="closed" value="true" />
+      <created>1765044793498</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1765044793498</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Eliminación de Layouts de algunos menús que causaban que no quedara centrado.">
+      <option name="closed" value="true" />
+      <created>1765045327905</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1765045327905</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Ajuste interfaces: Se habilitó resize dinámico y se agregaron traducciones">
+      <option name="closed" value="true" />
+      <created>1765048676422</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1765048676422</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Traducciones y ajustes de interfaces faltantes. Queda por revisar el apartado de reportes">
+      <option name="closed" value="true" />
+      <created>1765050143204</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1765050143204</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Correción para conección a SQL">
+      <option name="closed" value="true" />
+      <created>1765050568970</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1765050568970</updated>
+    </task>
+    <task id="LOCAL-00048" summary="correción">
+      <option name="closed" value="true" />
+      <created>1765054466793</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1765054466793</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Se añade interfaz para validar que el usuario no agregue clientes,vendedores o productos vacios">
+      <option name="closed" value="true" />
+      <created>1765068536393</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1765068536393</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Se añade interfaz para validar que el usuario no agregue clientes,vendedores o productos vacios">
+      <option name="closed" value="true" />
+      <created>1765068864890</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1765068864890</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Ya es posible ver los títulos cada que se cambia de pesta{a.">
+      <option name="closed" value="true" />
+      <created>1765129203897</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1765129203898</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Ya es posible ver los títulos cada que se cambia de pesta{a.">
+      <option name="closed" value="true" />
+      <created>1765129305759</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1765129305759</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Error con títulos. No se seteaba correctamente el nombre">
+      <option name="closed" value="true" />
+      <created>1765131469833</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1765131469833</updated>
+    </task>
+    <task id="LOCAL-00054" summary="errores de botón de help.">
+      <option name="closed" value="true" />
+      <created>1765186720794</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1765186720794</updated>
+    </task>
+    <task id="LOCAL-00055" summary="ultimo ajuste a help. Modifiqué la vista">
+      <option name="closed" value="true" />
+      <created>1765187852812</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1765187852812</updated>
+    </task>
+    <task id="LOCAL-00056" summary="ajuste para función buscar cliente y buscar ID">
+      <option name="closed" value="true" />
+      <created>1765251270173</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1765251270174</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -456,20 +580,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fea: delete seller" />
-    <MESSAGE value="fea: add table" />
-    <MESSAGE value="fea: add show table" />
-    <MESSAGE value="fea: add DAO products" />
-    <MESSAGE value="fea: add FML CustomerView.fxml" />
-    <MESSAGE value="fea: add CRUD Customers" />
-    <MESSAGE value="feat: add GenerateSale.viw and modify access modifiers" />
-    <MESSAGE value="feat: search Customer" />
-    <MESSAGE value="feat: add screen add customer" />
-    <MESSAGE value="feat: add search customer" />
-    <MESSAGE value="feat: add search product" />
-    <MESSAGE value="perf: improve screen switching time" />
-    <MESSAGE value="feat: generate Sale and SaleDetails" />
-    <MESSAGE value="fix: format serial and total sale" />
     <MESSAGE value="feat: subtract stock" />
     <MESSAGE value="add: report view" />
     <MESSAGE value="feat: filter reports" />
@@ -481,6 +591,24 @@
     <MESSAGE value="fix: finish optimization linechart" />
     <MESSAGE value="refactor: cleaning code" />
     <MESSAGE value="refactor: delete comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: delete comments" />
+    <MESSAGE value="Se modificaron algunas vistas y botón HELP" />
+    <MESSAGE value="Se arregló un error que no permitía añadir productos y generar ventas" />
+    <MESSAGE value="Se actualizaron algunas traducciones" />
+    <MESSAGE value="Eliminación de Layouts de algunos menús que causaban que no quedara centrado." />
+    <MESSAGE value="Ajuste interfaces: Se habilitó resize dinámico y se agregaron traducciones" />
+    <MESSAGE value="Traducciones y ajustes de interfaces faltantes. Queda por revisar el apartado de reportes" />
+    <MESSAGE value="Correción para conección a SQL" />
+    <MESSAGE value="correción" />
+    <MESSAGE value="Se añade interfaz para validar que el usuario no agregue clientes,vendedores o productos vacios" />
+    <MESSAGE value="Ya es posible ver los títulos cada que se cambia de pesta{a." />
+    <MESSAGE value="Error con títulos. No se seteaba correctamente el nombre" />
+    <MESSAGE value="errores de botón de help." />
+    <MESSAGE value="ultimo ajuste a help. Modifiqué la vista" />
+    <MESSAGE value="ajuste para función buscar cliente y buscar ID" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajuste para función buscar cliente y buscar ID" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
