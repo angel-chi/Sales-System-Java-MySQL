@@ -102,7 +102,7 @@ public class SellerController implements Initializable {
 
     public void addSeller(ActionEvent actionEvent){
         if (dni.getText().isEmpty() || name.getText().isEmpty() || phone.getText().isEmpty() || user.getText().isEmpty() || password.getText().isEmpty()) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "Debe llenar los datos po weon");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Debe llenar los datos");
             ;
         }
         else {
@@ -115,7 +115,7 @@ public class SellerController implements Initializable {
     }
     public void updateSeller(ActionEvent actionEvent) {
         if (dni.getText().isEmpty() || user.getText().isEmpty() || password.getText().isEmpty()) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "Los campos DNI, Usuario o contraseña no pueden ser vacios");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Los campos DNI, Usuario o Contraseña no pueden ser vacios");
             ;
         }
         else {
@@ -129,7 +129,7 @@ public class SellerController implements Initializable {
 
     public void deleteSeller(ActionEvent actionEvent) {
         if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller");
+            MenuController.setAlert(Alert.AlertType.ERROR,"No se puede eliminar el vendedor/a actual");
             return;
         }
         if (sellerDAO.delete(user.getText())){

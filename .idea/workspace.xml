@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Traducciones.">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ComprasReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/ComprasReportController.java" afterDir="false" />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Correcciones.">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/SellerController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,22 +138,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00002" summary="feature: add login">
-      <option name="closed" value="true" />
-      <created>1707622890390</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1707622890390</updated>
-    </task>
-    <task id="LOCAL-00003" summary="feature: add login">
-      <option name="closed" value="true" />
-      <created>1707622903283</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1707622903283</updated>
     </task>
     <task id="LOCAL-00004" summary="feature: add login">
       <option name="closed" value="true" />
@@ -531,7 +515,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765249322767</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Correcciones.">
+      <option name="closed" value="true" />
+      <created>1765249502693</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1765249502693</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Correcciones.">
+      <option name="closed" value="true" />
+      <created>1765249735538</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1765249735538</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -546,7 +546,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix: format serial and total sale" />
     <MESSAGE value="feat: subtract stock" />
     <MESSAGE value="add: report view" />
     <MESSAGE value="feat: filter reports" />
@@ -571,6 +570,7 @@
     <MESSAGE value="Correción de errores." />
     <MESSAGE value="Correcciones para poder ejecutar desde la terminal." />
     <MESSAGE value="Traducciones." />
-    <option name="LAST_COMMIT_MESSAGE" value="Traducciones." />
+    <MESSAGE value="Correcciones." />
+    <option name="LAST_COMMIT_MESSAGE" value="Correcciones." />
   </component>
 </project>
