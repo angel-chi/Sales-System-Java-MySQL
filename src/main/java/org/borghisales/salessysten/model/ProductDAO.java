@@ -42,12 +42,14 @@ public class ProductDAO implements CRUD<Product>{
             pstmt.setInt(1,idProduct);
 
             try (ResultSet rs = pstmt.executeQuery()){
-                rs.next();
-                return Product.fromResultSet(rs);
+                if (rs.next()) {
+                    return Product.fromResultSet(rs);
+                }
+                return null;
             }
 
         }catch (SQLException e){
-
+            e.printStackTrace();
             return null;
         }
     }
@@ -65,18 +67,10 @@ public class ProductDAO implements CRUD<Product>{
             pstmt.setString(4, entity.state().name());
 
             int rows_affected = pstmt.executeUpdate();
-
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product added correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: ");
-                return false;
-            }
-
+            return rows_affected> 0;
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -98,17 +92,11 @@ public class ProductDAO implements CRUD<Product>{
 
 
             int rows_affected = pstmt.executeUpdate();
+            return rows_affected>0;
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product updated correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating product");
-                return false;
-            }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating product: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -125,18 +113,14 @@ public class ProductDAO implements CRUD<Product>{
 
             int rows_affected = pstmt.executeUpdate();
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product deleted correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting product: ");
-                return false;
-            }
+            return rows_affected > 0;
+
+
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "You cannot delete this product because you already have a sale with it");
+            e.printStackTrace();
             return false;
         }
     }
@@ -157,10 +141,11 @@ public class ProductDAO implements CRUD<Product>{
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+            e.printStackTrace();
         }
 
     }
+    // podria moverse este metodo a otra clase que sea ReportDAO para que sea responsabilidad unica
     public static void setPieChart(ObservableList<PieChart.Data> pieChartData) {
         String sql = """ 
                 SELECT p.name, sum(s.quantity) as cant
@@ -184,7 +169,7 @@ public class ProductDAO implements CRUD<Product>{
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            e.printStackTrace();
         }
 
 

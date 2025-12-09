@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.borghisales.salessysten.model.Seller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,11 +23,44 @@ public class MenuController {
     public static final String GENERATE_SALE_VIEW_FXML = VIEWS_DIRECTORY + "GenerateSaleView.fxml";
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
+    public static final String ACCESS_DENIED_VIEW_FXML = VIEWS_DIRECTORY + "AccessDeniedView.fxml";
 
 
     static Alert defaultAlert;
-    static ButtonType acceptButton = new ButtonType("Accept");
+    static ButtonType acceptButton = new ButtonType("Aceptar");
     public static HashMap<String, String > filePaths = new HashMap<>();
+    public static HashMap<String, String> fxmlTitles = new HashMap<>();
+
+    public MenuController(){
+        fxmlTitles.put(MAIN_VIEW_FXML,"Login");
+        fxmlTitles.put(MANAGEMENT_VIEW_FXML,"Gestión");
+        fxmlTitles.put(SELLER_VIEW_FXML,"Vendedor");
+        fxmlTitles.put(PRODUCT_VIEW_FXML,"Productos");
+        fxmlTitles.put(CUSTOMER_VIEW_FXML,"Cliente");
+        fxmlTitles.put(GENERATE_SALE_VIEW_FXML,"Carrito de compras");
+        fxmlTitles.put(REPORT_VIEW_FXML,"Ventas");
+        fxmlTitles.put(SALE_DETAIL_VIEW_FXML,"Detalle de venta");
+        fxmlTitles.put(ACCESS_DENIED_VIEW_FXML, "Acceso Denegado");
+    }
+
+    // Muestra la ventana de acceso denegado
+    public static void showAccessDenied(String message, Seller.Role userRole) {
+        try {
+            AccessDeniedController.setMessage(message);
+            AccessDeniedController.setUserRole(userRole);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(ACCESS_DENIED_VIEW_FXML));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Acceso Denegado");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.showAndWait();
+
+        } catch (IOException | NullPointerException e) {
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista de acceso denegado: "+ e.getMessage());
+        }
+    }
 
     void closeCurrentStage(Node node) {
         Stage stage = (Stage) node.getScene().getWindow();
@@ -45,14 +79,16 @@ public class MenuController {
             stage.show();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista: "+ e.getMessage());
         }
     }
-
+    // Configura el evento de cierre de la ventana para abrir la ventana padre
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
+                String fatherFxml = getFxmlFather(fxmlFileName);
+                String fatherTitle = fxmlTitles.getOrDefault(fatherFxml, "Ventana");
+                openNewStage(fatherFxml, fatherTitle);
             });
         }
     }
@@ -63,7 +99,7 @@ public class MenuController {
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("Información");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);

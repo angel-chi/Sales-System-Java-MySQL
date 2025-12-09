@@ -1,6 +1,5 @@
 package org.borghisales.salessysten.controllers;
 
-import com.sun.tools.javac.Main;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,15 +11,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Customer;
 import org.borghisales.salessysten.model.CustomerDAO;
-
+import org.borghisales.salessysten.model.IValidable;
+import org.borghisales.salessysten.model.CRUD; //usa la interfaz
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class CustomerController implements Initializable {
-
-    private final CustomerDAO customerDAO = new CustomerDAO();
+public class CustomerController implements Initializable, IValidable  {
+    // Depender de la abstraccion (CRUD)
+    private final CRUD<Customer> customerDAO = new CustomerDAO();
     private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
     private static ObservableList<Customer> customers=null;
 
@@ -44,6 +43,24 @@ public class CustomerController implements Initializable {
     private TableColumn<Customer,String> colAddress;
     @FXML
     private TableColumn<Customer,Customer.State> colState;
+
+    @Override
+    public String validarCampos() {
+        String dniText = dni.getText();
+        String nameText = name.getText();
+        String addressText = address.getText();
+        if (IValidable.esCampoVacio(dniText)) {
+            return "El campo usuario del cliente es obligatorio.";
+        }
+        if (IValidable.esCampoVacio(nameText)) {
+            return "El campo Nombre del cliente es obligatorio.";
+        }
+        if (IValidable.esCampoVacio(addressText)) {
+            return "El campo Dirección del cliente es obligatorio.";
+        }
+
+        return null;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,25 +96,44 @@ public class CustomerController implements Initializable {
     }
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
+        String errorMessage = validarCampos();
+        if (errorMessage != null) {
+            MenuController.setAlert(Alert.AlertType.WARNING, errorMessage);
+            return; // Detiene la ejecución si hay errores
+        }
         Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
         if (customerDAO.create(customer)) {
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente añadido con éxito");
             MenuController.cleanCells(dni, name, address);
             updateTable();
+        } else{
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al añadir cliente: Por favor checar el usuario o la información");
         }
     }
     @FXML
     public void updateCustomer(ActionEvent actionEvent) {
+        String errorMessage = validarCampos();
+        if (errorMessage != null) {
+            MenuController.setAlert(Alert.AlertType.WARNING, errorMessage);
+            return; // Detiene la ejecución si hay errores
+        }
         Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
         if (customerDAO.update(customer)) {
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente actualizado con éxito");
             MenuController.cleanCells(dni, name, address);
             updateTable();
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al actualizar cliente. No se encontro el usuario o error de información");
         }
     }
     @FXML
     public void deleteCustomer(ActionEvent actionEvent) {
         if (customerDAO.delete(dni.getText())){
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Cliente eliminado con éxito");
             MenuController.cleanCells(dni,name,address);
             updateTable();
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al borrar cliente. Puede que no tenga ventas asociadas o el usuario es incorrecto");
         }
     }
     @FXML

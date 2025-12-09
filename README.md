@@ -137,13 +137,126 @@ La pantalla principal muestra las siguientes ventanas
 <p align="center">
   <img src="src/main/resources/images/reports.png" />
 </p>
-
 ## Sales
 https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d-83f9b4807ac5
 ## Management
 https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b-218c9ca25b10
 ## Reports
 https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
+
+# PROYECTO EQUIPO 6
+
+**Integrantes:**
+* **Rivera Manzanero Alessandra Anelisse**
+* **Polanco Casares Fernando**
+---
+##  Link del video
+
+### Parte 1 (Rivera):
+[Video Presentacion Proyecto POO](https://youtu.be/4bgbAhCN_bg)
+------
+
+### Parte 2 (Polanco):
+[Presentación Sales System Java](https://youtu.be/d2rRIzC-bNg)
+-----
+
+
+---
+##  Diagrama UML
+<details>
+  <summary>Haga clic para ver el Diagrama UML del Proyecto</summary>
+  <img src="UML/UML.svg" alt="Diagrama de Clases UML" width="700px" />
+</details>
+
+
+##  Errores encontrados y soluciones implementadas
+
+### 1. Error en la Funcionalidad "Help" (Congelación de UI)
+
+| Aspecto                   | Detalles                                                                                                                                                                                                                                                      |
+|:--------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Descripción del Error** | Al hacer clic en la opción "Help" (Ayuda), la interfaz de usuario se congelaba, impidiendo que se abriera el enlace; Concluimos que podría ser error por el sistema operativo .                                                                               |
+| **Solución Implementada** | Se movió la lógica de la apertura del enlace a un hilo en segundo plano para que si no se logra abrir el enlace, no se congele el programa.                                                                                                                   |
+| **Implementación**        | Se agregó un bloque try-catch para verificar si es posible abrir el enlace. La lógica de apertura fue trasladada a otro hilo para evitar la congelación de la UI, permitiendo que la interfaz se maneje mientras la operación externa se ejecuta en paralelo. |
+
+### 2. Error al Agregar Productos (Validación de Precio)
+
+| Aspecto                   | Detalles                                                                                                                                                                                                          |
+|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Descripción del Error** | Al agregar un producto, si el usuario ingresaba texto o dejaba vacío el campo de precio, el programa fallaba al intentar convertir la entrada a un tipo numérico ( `NumberFormatException`).                      |
+| **Solución Implementada** | Implementación de manejo de errores y validación de entrada                                                                                                                                                       |
+| **Implementación**        | Se añadió una validación del campo y un bloque try-catch en el controlador. Si la entrada no es un valor numérico válido, se muestra una alerta al usuario indicándole el error y solicitando una entrada válida. |
+
+### 3. Error al mostrar el nombre de las ventanas (No se actualizaba el título)
+| Aspecto                   | Detalles                                                                                                                                                                                                                                                                                                                      |
+|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Descripción del Error** | Al abrir una ventana nueva y después cerrarla, la nueva ventana mantenía el nombre de la ventana cerrada.                                                                                                                                                                                                                     |
+| **Solución Implementada** | Asignar a cada ventana su nombre correspondiente.                                                                                                                                                                                                                                                                             |
+| **Implementación**        | Se creo un HashMap llamado fxmlTitles para asignarle a cada ventana su nombre correspondiente. Luego mediante un constructor se inicializa el fxmlTitle, por último en el método `configurateStageCloseEvent` se creó una variable que almacene el título de la ventana padre que debe mostrarse al cerrar la ventana actual. |
+
+
+---
+
+##  Modificaciones en la Interfaz de Usuario (UI)
+
+* **Idioma:** Se realizó el cambio del idioma de la interfaz de inglés a español para asegurar que el producto sea completamente accesible y usable para el público objetivo.
+* **Ajuste de Distribución:** Se ajustó la distribución y el diseño en varias ventanas, especialmente en la ventana de reportes, ya que el contenido no se visualizaba completo al abrirla, mejorando la experiencia de usuario.
+
+---
+
+## Implementaciones Propuestas:
+
+### Propuesta Implementada #1: Validación de Campos Mediante Interfaz
+
+* **Objetivo** Fortalecer la solidez de la aplicación previniendo la inserción de datos vacíos o no válidos para atributos esenciales, promoviendo la **integridad de los datos**.
+* **Implementación:**
+    1.  Se creó la interfaz **`IValidable`**.
+    2.  Esta interfaz se implementó en los controladores principales: `SellerController`, `ProductController`, y `CustomerController`.
+    3.  La interfaz obliga a la implementación del método de validación de campos para no permitir agregar elementos con atributos esenciales vacíos.
+* **Resultado:** 
+    1.  No se permiten agregar productos, clientes y vendedores con campos vacíos, informa al usuario que debe de ingresar una entrada válida
+
+### Propuesta Implementada #2: Refactorización Arquitectónica (Principios SOLID: S y D)
+
+#### 1. Separación de Responsabilidades (SOLID: Single Responsibility Principle - SRP)
+
+* **Objetivo:** Asegurar un límite claro y estricto entre la capa de Acceso a Datos (DAO) y la capa de Presentación (Controladores).
+* **Acción:**
+    * Se eliminaron todas las responsabilidades específicas de la Interfaz de Usuario (UI) (llamadas a `MenuController.setAlert()`) de las clases DAO (`CustomerDAO`, `SellerDAO`, `ProductDAO`, `SalesDAO`).
+* **Resultado:**
+    * Las DAOs ahora tienen una Responsabilidad Única: gestionar la persistencia y devolver un simple resultado (`true` para éxito, `false` para fallo, o un objeto de modelo/`null`).
+    * Los Controladores ahora son los responsables de interpretar el resultado del DAO y manejar la lógica de la presentación (mostrar alertas de éxito o error al usuario).
+
+#### 2. Inversión de Dependencias (SOLID: Dependency Inversion Principle - DIP)
+
+* **Objetivo:** Desacoplar los módulos de alto nivel de los módulos de bajo nivel, promoviendo la flexibilidad.
+* **Acción:**
+    * Se modificaron las declaraciones de los Controladores para que dependan de la interfaz abstracta `CRUD<T>` en lugar de depender de la implementación concreta de cada DAO.
+* **Resultado:**
+    * Los módulos de alto nivel (Controladores) ya no dependen directamente de los módulos de bajo nivel (DAOs concretos).
+    * Esto desacopla la aplicación, facilitando la posibilidad de cambiar el mecanismo de persistencia sin la necesidad de modificar el código del Controlador.
+
+### 3. Propuesta Implementada #3: Agrega puestos de vendedor (Seller y Manager)
+* **Objetivo:** Diferenciar entre vendedores y gerentes, otorgando permisos específicos a cada puesto.
+* **Acción:**
+  * Se modificó la base de datos para incluir un nuevo atributo "role" en la tabla "sellers".
+  * Se agregó una verificación al intentar abrir las ventanas de Product y Seller donde solo los gerentes pueden acceder.
+  * Se agregó el atributo "role" al modelo Seller y se ajustaron los métodos de autenticación para considerar este nuevo atributo.
+  * Se actualizó la interfaz de agregar vendedores para incluir la selección del rol (vendedor o gerente).
+* **Resultado:**
+  * Solo los gerentes pueden acceder a la gestión de productos y vendedores, mientras que los vendedores solo pueden realizar ventas y gestionar clientes.
+
+### 4.- Propuesta de Mejora Futura (No Implementada): Módulo de Devoluciones y Cancelaciones
+* **Objetivo:** Implementar un mecanismo que permita corregir errores humanos o gestionar retornos de mercancía, asegurando que el sistema refleje siempre el inventario real y evitando discrepancias entre el dinero en caja y el stock físico.
+* **Estrategia de Implementación Propuesta:**
+
+* *Nuevo Estado Transaccional: Agregar un valor RETURNED (Devuelto) al Enum State de la clase Sales. Esto permitiría marcar una venta como cancelada sin eliminarla físicamente de la base de datos, manteniendo el registro histórico.*
+
+* *Lógica de Reversión de Stock (Logística Inversa): Implementar un método en el SalesController que, al confirmar una devolución, capture la lista de productos de esa venta y llame al ProductDAO para realizar una operación de suma al stock (re-stocking), devolviendo los artículos al inventario disponible.*
+
+* *Seguridad: Habilitar esta función únicamente para el rol de Manager (Gerente) mediante una validación de permisos antes de ejecutar la anulación.*
+
+* *Resultado Esperado: El sistema sería capaz de gestionar el ciclo de vida completo del producto (entrada, venta y retorno), permitiendo auditorías más precisas y evitando la pérdida de inventario por ventas canceladas manualmente*
 
 # 📧 Contacto
 Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).

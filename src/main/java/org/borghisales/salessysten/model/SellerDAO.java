@@ -15,7 +15,7 @@ import java.util.List;
 public class SellerDAO implements CRUD<Seller> {
     @Override
     public boolean create(Seller entity) {
-        String sql = "INSERT INTO seller (dni,name,phone_number,state,user) values (?,?,?,?,?)";
+        String sql = "INSERT INTO seller (dni,name,phone_number,state,user, role) values (?,?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -25,20 +25,15 @@ public class SellerDAO implements CRUD<Seller> {
             pstmt.setString(3, entity.phoneNumber());
             pstmt.setString(4, entity.state().name());
             pstmt.setString(5, entity.user());
+            pstmt.setString(6, entity.role().name());
 
             int rows_affected = pstmt.executeUpdate();
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller added correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: ");
-                return false;
-            }
+            return rows_affected > 0;
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
 
@@ -47,7 +42,7 @@ public class SellerDAO implements CRUD<Seller> {
 
     @Override
     public boolean update(Seller entity) {
-        String sql = "UPDATE seller set name=?,phone_number=?,state=?,user=? where dni=?";
+        String sql = "UPDATE seller set name=?,phone_number=?,state=?,user=?, role=? where dni=?";
 
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -57,20 +52,15 @@ public class SellerDAO implements CRUD<Seller> {
             pstmt.setString(2, entity.phoneNumber());
             pstmt.setString(3, entity.state().name());
             pstmt.setString(4, entity.user());
-            pstmt.setString(5, entity.dni());
+            pstmt.setString(5, entity.role().name());
+            pstmt.setString(6, entity.dni());
 
             int rows_affected = pstmt.executeUpdate();
+            return rows_affected > 0;
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller updated correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller ");
-                return false;
-            }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
 
@@ -88,19 +78,12 @@ public class SellerDAO implements CRUD<Seller> {
             pstmt.setString(1,id);
 
             int rows_affected = pstmt.executeUpdate();
-
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller deleted correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: ");
-                return false;
-            }
+            return rows_affected>0;
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
 
@@ -122,17 +105,12 @@ public class SellerDAO implements CRUD<Seller> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
 
-    public static boolean login(String dni,String user){
-
-        if (dni ==null || user ==null || dni.isEmpty()||user.isEmpty() ){
-            MenuController.setAlert(Alert.AlertType.ERROR,"User or passsword empty");
-            return false;
-        }
+    public static Seller login(String dni,String user){
 
         String query = "SELECT * from seller where dni = ? and user = ?";
 
@@ -145,20 +123,15 @@ public class SellerDAO implements CRUD<Seller> {
             try (ResultSet rs = pstmt.executeQuery()){
                 if (rs.next()){
 
-                    GenerateSaleController.setSellerName(rs.getString("name"));
-                    GenerateSaleController.setIdSeller(rs.getInt("idSeller"));
+                    return Seller.fromResultSet(rs);
 
-                    MainController.sellerLog = Seller.fromResultSet(rs);
-
-                    return true;
                 }else{
-                    MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;
-                    return false;
+                    return null;
                 }
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching seller: " + e.getMessage());
-            return false;
+            e.printStackTrace();
+            return null;
         }
 
     }

@@ -5,28 +5,28 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.util.List;
+//import java.time.LocalDate;
+//import java.util.List;
 
 import javafx.collections.ObservableList;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+//import org.apache.pdfbox.pdmodel.PDDocument;
+//import org.apache.pdfbox.pdmodel.PDPage;
+//import org.apache.pdfbox.pdmodel.PDPageContentStream;
+//import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-import javafx.collections.ObservableList;
+//import javafx.collections.ObservableList;
 import org.borghisales.salessysten.controllers.MenuController;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 
 import java.awt.*;
-import java.io.IOException;
+//import java.io.IOException;
 
 public class SalesReportGenerator {
 
@@ -46,10 +46,10 @@ public class SalesReportGenerator {
                 writer.append(sale.state().toString()).append("\n");
             }
 
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "CSV Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "CSV Reporte generado con exito en  " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "CSV Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "CSV Reporte no generado correctamente: " + e.getMessage());
         }
     }
     public static void generateExcelReport(ObservableList<Sales> salesList, String outputPath) {
@@ -87,10 +87,10 @@ public class SalesReportGenerator {
                 workbook.write(fileOut);
             }
 
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "EXCEL Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "EXCEL Reporte generado con exito en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "EXCEL Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "EXCEL Reporte no generqdo correctamente: " + e.getMessage());
         }
     }
     public static void generatePDFReport(ObservableList<Sales> salesList, String outputPath) {
@@ -131,10 +131,10 @@ public class SalesReportGenerator {
             contentStream.close();
 
             document.save(outputPath);
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "PDF Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "PDF Reporte generado con exito en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "PDF Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "PDF Repore no generado correctamente: " + e.getMessage());
 
         }
     }
@@ -151,8 +151,10 @@ public class SalesReportGenerator {
 
     private static void drawRow(PDPageContentStream contentStream, float x, float y, float width, float rowHeight,
                                 float[] columnWidths, Color backgroundColor, boolean isHeader, String... data) throws IOException {
+        // El método fillReact no existe en PDPageContentStream. Se debe usar addRect seguido de fill.
         contentStream.setNonStrokingColor(backgroundColor);
-        contentStream.fillRect(x, y, width, rowHeight);
+        contentStream.addRect(x, y, width, rowHeight);
+        contentStream.fill();
         contentStream.setNonStrokingColor(Color.BLACK);
         float cellMargin = 5;
 
@@ -162,7 +164,8 @@ public class SalesReportGenerator {
             float cellWidth = columnWidths[i];
 
             float textX = nextX + cellMargin;
-            float textY = y + rowHeight / 2 - 12 / 2; // Font size 12
+            // Se hizo un caste a float
+            float textY = y + rowHeight / 2 - (float) 12 / 2; // Font size 12
             contentStream.beginText();
             contentStream.setFont(PDType1Font.HELVETICA, 12);
             contentStream.newLineAtOffset(textX, textY);

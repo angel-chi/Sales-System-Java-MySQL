@@ -28,7 +28,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching IdSale: " + e.getMessage());
+            e.printStackTrace();
             return 1;
         }
     }
@@ -46,17 +46,11 @@ public class SalesDAO {
             pstmt.setString(6,sale.state().name());
 
             int rows_affected = pstmt.executeUpdate();
+            return rows_affected>0;
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Sale saved correctly");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: ");
-                return false;
-            }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
 
@@ -84,7 +78,7 @@ public class SalesDAO {
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale details: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
 
@@ -106,7 +100,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            e.printStackTrace();
         }
 
 
@@ -121,7 +115,7 @@ public class SalesDAO {
                 """;
 
 
-        System.out.println("Buscado base de datos");
+
 
 
         try (Connection conn = DBConnection.connection();
@@ -144,7 +138,7 @@ public class SalesDAO {
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -170,7 +164,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            e.printStackTrace();
         }
 
     }
