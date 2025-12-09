@@ -376,15 +376,12 @@ public class GenerateSaleController extends MenuController implements Initializa
 
             MenuController.setAlert(Alert.AlertType.INFORMATION, "¡Venta completada!\n" + payment.getDescription());
 
-            // RESETEAR TODO
-            cancel(null); // Reutilizamos el método de limpiar
+            // RESETEAR
+            cancel(null); // Reutilizamos el metodo limpiar
             setSerial();
             updateReportsController();
         }
     }
-
-    // ... (El resto de métodos auxiliares createSalesObject, createPayment, etc. se mantienen igual o se adaptan ligeramente) ...
-    // Asegúrate de copiar el resto de tu lógica de validación aquí abajo.
 
     // NOTA: Métodos auxiliares necesarios
     private ShoppingCart createShoppingCartObject() {
