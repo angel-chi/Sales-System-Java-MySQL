@@ -30,7 +30,7 @@
       <TextField fx:id="serial" editable="false" layoutX="336.0" layoutY="101.0" prefHeight="16.0" prefWidth="117.0" />
       <TextField fx:id="codCustomer" layoutX="125.0" layoutY="166.0" prefHeight="25.0" prefWidth="117.0" />
       <TextField fx:id="codProduct" layoutX="124.0" layoutY="200.0" prefHeight="25.0" prefWidth="117.0" />
-      <TextField fx:id="price" layoutX="125.0" layoutY="234.0" prefHeight="25.0" prefWidth="117.0" />
+      <TextField fx:id="price" editable="false" layoutX="125.0" layoutY="234.0" prefHeight="25.0" prefWidth="117.0" />
       <TextField fx:id="customerName" editable="false" layoutX="438.0" layoutY="166.0" prefHeight="25.0" prefWidth="126.0" />
       <TextField fx:id="productName" editable="false" layoutX="438.0" layoutY="199.0" prefHeight="25.0" prefWidth="126.0" />
       <TextField fx:id="stock" editable="false" layoutX="437.0" layoutY="234.0" prefHeight="25.0" prefWidth="126.0" />

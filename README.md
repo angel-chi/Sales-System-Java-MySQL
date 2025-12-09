@@ -184,9 +184,12 @@ La solución para este problema fue agregar un if, en donde si la lista de produ
 ```
 
 ### Precio modificable 
-
-```
-Código corregido
+Una de las correcciones más útiles que se realisaron fue en la clase `GenerateSaleController`, ya que en el espacio de texto
+designado para la aparición del costo de producto, el usuario podía modificar la cantidad establecida, lo que, para un sistema de ventas resultaría
+en una grave falla. 
+La corrección de este error fue directamente con la manipulación de la interfaz, agregándole una restricción en dicho cuadro de texto.
+```java
+      <TextField fx:id="price" editable="false" layoutX="125.0" layoutY="234.0" prefHeight="25.0" prefWidth="117.0" />
 ```
 
 ### Tamaño de las ventanas
@@ -201,8 +204,149 @@ Código corregido
 # 🚧👷‍♀️ Implementaciones
 
 ## Valeria
-- Implementación 1
-- Implementación 2
+- Implementación número telefónico a clase `Customer`
+Esta implementación se pensó en la utilidad para las tiendas de poder estar en contacto con sus clientes, de tal forma los clientes
+y la tienda permanecerán conectadas. 
+Con respecto al paradigma de la Programación Orientada a Objetos esta implementación está relacionada directamente con los pilares de la astracción y a encapsulación.
+
+Para la implementación de esta mejora, se tuvo que modificar la clase `Customer` añadiéndole un nuevo atributo tipo `String` llamado `number`
+```java
+    public Customer(String dni, String name, String address, State state, String number){
+        this(0,dni,name,address,state,number);
+    }
+```
+Además, tanto en la interfaz como en la base de datos se agregó una nueva columna para el almacenamiento y la visualización de esta información.
+
+**Interfaz:**
+```java
+                       <TableColumn fx:id="colNumber" prefWidth="112.0" resizable="false" text="TELÉFONO" />
+```
+
+Ejemplo de cambio en la base de datos:
+```java
+    //Convierte un registro de la base de datos en un objeto
+    public static Customer fromResultSet(ResultSet rs) throws SQLException { //Un resultSet es una consulta en la base de datos
+        int id = rs.getInt("idCustomer");
+        String dni = rs.getString("dni");
+        String name = rs.getString("name");
+        String address = rs.getString("address");
+        State state = Customer.State.valueOf(rs.getString("state"));
+        String number = rs.getString("number");
+        return new Customer(id, dni, name, address, state, number);
+    }
+```
+
+- Aplicación de descuentos
+La idea de esta implementación se pensó como un sistema de puntos en el que el usuario a partir de dicha cantidad se validará y se le asignará cierto porcentaje de descuento,
+sin embargo y como implementación inicial se pensó en la manera en la que el vendedor sea el que seleccione el tipo de descuento que se le aplicará a la compra del usuario sobre el precio total.
+
+En primer lugar, para la implementación de este dato se creó una clase de tipo `enum` donde se albergaría el descuento que deberá aplicarse.
+```java
+public enum Discount {
+    NONE(0.0),
+    SILVER(0.05),
+    GOLD(0.10),
+    PLATINUM(0.15);
+
+    private final double percentage;
+
+    Discount(double percentage){
+        this.percentage = percentage;
+    }
+
+    public double getPercentage() {
+        return percentage;
+    }
+
+}
+```
+Para la lógica de descuento, primeramente se tuvo que añadir este atributo tipo Discount a la clase `sales`, añadir una columna a la tabla `sales` 
+de la base de datos, que recibiría el Discount y lo convertiría en tipo `String`.
+```java
+    public Sales(int idCustomer, int idSeller, String numberSales, LocalDate saleDate, Double amount, State state, Discount discount) {
+        this(0, idCustomer, idSeller, numberSales, saleDate, amount, state, discount);
+    }
+```
+Seguido de esto, dado que el sistema ya contaba con una lógica para generar precios simplemente se modificó esta función y se creó otra llamada `recalculateTotals` que serviría para que 
+se almacene el precio con y sin el descuento aplicado.
+```java
+//Calcula precios con y sin descuentos
+private void recalculateTotals() {
+double totalSinDescuento = 0;
+double totalConDescuento = 0;
+
+        Discount discount = cbDiscount.getValue();
+        double percent = discount.getPercentage();
+
+        for (ShoppingCart product : products) {
+            double subtotal = product.total();
+            totalSinDescuento += subtotal;
+            totalConDescuento += subtotal - (subtotal * percent);
+        }
+
+        totalDiscount.setText(String.format("%.2f", totalSinDescuento)); //Sin Descuento (subtotal)
+        total.setText(String.format("%.2f", totalConDescuento)); //(total)
+    }
+```
+Modificación
+```java
+    //Suma de precios 1 //mostrar datos con descuento
+    private void addToCartAndUpdateTotalWithDiscount(ShoppingCart product) {
+        products.add(product);
+        tableSale.setItems(products);
+        recalculateTotals();
+    }
+```
+Finalmente se modificó la UI de `GenerateSaleView` y `ReportsView`, agregándole dos nuevos botones y una nueva columna, respectivamente.
+
+```java
+//Botón para seleccionar tipo de descuento
+      <ComboBox fx:id="cbDiscount" layoutX="148.0" layoutY="522.0" prefHeight="24.0" prefWidth="137.0" />
+
+//Cuadro de texto para visualizar el precio con descuento
+      <TextField fx:id="totalDiscount" editable="false" layoutX="495.0" layoutY="522.0" prefHeight="24.0" prefWidth="78.0" />
+```
+
+Ejemplo del cambio en la base de datos:
+
+```java
+//Registra o agrega ventas a la base de datos
+//Ahora se guarda el nombre del descuento aplicado.
+public boolean SaveSale(Sales sale){
+String sql = "INSERT INTO sales (idCustomer,idSeller,numberSales,saleDate,amount,state,discount) values(?,?,?,?,?,?,?)";
+
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1,sale.idCustomer());
+            pstmt.setInt(2,sale.idSeller());
+            pstmt.setString(3,sale.numberSales());
+            pstmt.setDate(4, Date.valueOf(sale.saleDate()));
+            pstmt.setDouble(5,sale.amount());
+            pstmt.setString(6,sale.state().name());
+            pstmt.setString(7,sale.discount().name()); //agregue a la base el descuento
+
+            int rows_affected = pstmt.executeUpdate();
+
+            if (rows_affected>0){
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Venta guardada de manera correcta");
+                return true;
+            }else{
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar la venta: ");
+                return false;
+            }
+
+        }catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar la venta: " + e.getMessage());            return false;
+        }
+
+    }
+```
+
+Finalmente para la visualización de este nuevo parámetro se agregó la columna `Discount` al `ReportsView`.
+```java
+ <TableColumn fx:id="colDiscount" minWidth="0.0" prefWidth="94.0" text="DESCUENTO" />
+```
 
 ## Alberto
 - Implementación 1

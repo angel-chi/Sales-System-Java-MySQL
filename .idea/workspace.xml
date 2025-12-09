@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Inicio Documentación README.md">
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment=" Documentación Errores README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salesystem.sql" beforeDir="false" afterPath="$PROJECT_DIR$/salesystem.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/reports/sales_report.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/reports/sales_report.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -544,7 +543,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765125196466</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Inicio Documentación README.md">
+      <option name="closed" value="true" />
+      <created>1765241472820</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1765241472820</updated>
+    </task>
+    <task id="LOCAL-00057" summary=" Documentación Errores README.md">
+      <option name="closed" value="true" />
+      <created>1765241599156</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1765241599156</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -559,8 +574,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: filter reports" />
-    <MESSAGE value="feat: export reports &#10;add: statistic pie char products" />
     <MESSAGE value="add: statistic line chart products" />
     <MESSAGE value="add: sales details in reports" />
     <MESSAGE value="refactor: CustomerController, ProductController, SellerController" />
@@ -584,7 +597,9 @@
     <MESSAGE value="feat: ajustar diseño y elementos de la UI en GenerateSaleView.fxml" />
     <MESSAGE value="feat: ajustar diseño y elementos de la UI en ManagementView.fxml" />
     <MESSAGE value="merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge" />
+    <MESSAGE value="Inicio Documentación README.md" />
+    <MESSAGE value=" Documentación Errores README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Documentación Errores README.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
