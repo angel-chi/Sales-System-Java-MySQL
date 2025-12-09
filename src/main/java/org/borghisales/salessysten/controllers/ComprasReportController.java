@@ -120,7 +120,7 @@ public class ComprasReportController extends MenuController implements Initializ
 
     private void loadPieChartData() {
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                new PieChart.Data("Proveedor A", 91),
+                new PieChart.Data("Proveedor A", 91), //Son datos ficticios
                 new PieChart.Data("Proveedor B", 3),
                 new PieChart.Data("Proveedor C", 3),
                 new PieChart.Data("Otros", 3)
