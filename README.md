@@ -244,6 +244,10 @@ https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793
   * Solo los gerentes pueden acceder a la gestión de productos y vendedores, mientras que los vendedores solo pueden realizar ventas y gestionar clientes.
 ---
 
+### Link de Polanco: 
+[Presentación Sales System Java](https://youtu.be/d2rRIzC-bNg)
+---
+
 # 📧 Contacto
 Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
 
