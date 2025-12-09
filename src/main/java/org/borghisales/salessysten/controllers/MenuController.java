@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import javafx.animation.FadeTransition;
 import javafx.util.Duration;
 
-
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -61,13 +60,12 @@ public class MenuController {
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
-            fadeIn.play(); // ejecuta la animación
+            fadeIn.play();
 
         } catch (IOException | NullPointerException e) {
             setAlert(Alert.AlertType.WARNING, "Error loading view: " + e.getMessage());
         }
     }
-
 
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
@@ -81,12 +79,18 @@ public class MenuController {
         return filePaths.get(fxml);
     }
 
-    static public void setAlert(Alert.AlertType alertType,String argument){
+    static public void setAlert(Alert.AlertType alertType, String argument){
         defaultAlert = new Alert(alertType);
         defaultAlert.setTitle("Information");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);
+        /*se modifico para que todas las alertas SIEMPRE esten arriba de las ventanas originales*/
+        defaultAlert.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+
+        Stage stage = (Stage) defaultAlert.getDialogPane().getScene().getWindow();
+        stage.setAlwaysOnTop(true);
+
         defaultAlert.showAndWait();
     }
 
