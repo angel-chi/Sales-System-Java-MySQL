@@ -188,9 +188,17 @@ En este caso, para solucionar el problema se realizó lo siguiente:
 * Finalmente hacemos el *git push origin Cen_Couoh* y el git push es aceptado porque el historial de commits está alineado
 
 ## Código
-* Botón "Generar Venta"
-* Historial de ventas
-* Botón "Ayuda"
+### Tabla de gestión de Product
+Este error fue causado por nosostros pues ocurrió después de agregar el atributo **Brand** y evitaba que se vieran los productos en la gestión de estos.<br>
+Pues, la tabla product solo guardaba el ID de la marca (idBrand), pero no el nombre.<br>
+Entonces el _ProductDAO_ hacía un _SELECT * FROM product_. Al intentar crear el objeto en Java, el sistema buscaba la columna _"brand_name"_, no la encontraba, fallaba construir el objeto y devolvía null.
+<br>**Solución:** Modificamos la consulta SQL en el ProductDAO para utilizar un _INNER JOIN_ .
+
+Consecuencia en UI: El controlador recibía un null, asumía que el producto no existía y lanzaba la alerta, dejando el selector de cantidad (Spinner) bloqueado.
+### Botón "Ayuda"
+Un error que se detectó fue que cuando se presionaba el botón de "Help" no ocurría nada Originalmente, el código probablemente intentaba usar _Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"))_.<br>
+Y esa línea está muy optimizada para Windows y MacOS. Sin embargo en Linux, Java a menudo no logra comunicarse correctamente con el gestor de ventanas para saber cuál es el navegador predeterminado.
+<br>**Solución:** Se utilizó _System.getProperty_ para que detecte el navegador predeterminado y así logramos que ese error desapareciera.
 
 # Cambios propuestos
 ## Cambio 1. Clasificación por marca
