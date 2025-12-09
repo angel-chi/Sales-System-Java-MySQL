@@ -87,9 +87,36 @@ public class SellerController extends MenuController implements Initializable {
         tableSellers.setItems(sellers);
     }
 
-    // --- ACCIONES CRUD (Lógica original) ---
+    // VALIDACIONES********************
+    private boolean validarEntradas() {
+        // evita campos vacios
+        if (dni.getText().isEmpty() || name.getText().isEmpty() || phone.getText().isEmpty() || user.getText().isEmpty()) {
+            setAlert(Alert.AlertType.WARNING, "Todos los campos son obligatorios.");
+            return false;
+        }
+
+        // identificador (8 digitos)
+        if (!dni.getText().matches("\\d{8}")) {
+            setAlert(Alert.AlertType.WARNING, "El DNI debe tener exactamente 8 números.");
+            return false;
+        }
+
+        // teléfono (numero de 10 digitos)
+        if (!phone.getText().matches("\\d{10}")) {
+            setAlert(Alert.AlertType.WARNING, "El teléfono debe tener 10 dígitos numéricos.");
+            return false;
+        }
+
+        // Nombre del vendedor
+        if (!name.getText().matches("[a-zA-Z\\s]+")) {
+            setAlert(Alert.AlertType.WARNING, "El nombre solo puede contener letras.");
+            return false;
+        }
+        return true;
+    }
 
     public void addSeller(ActionEvent actionEvent){
+        if (!validarEntradas()) return;
         Seller seller = new Seller(dni.getText(), name.getText(), phone.getText(), cbState.getValue(), user.getText());
         if (sellerDAO.create(seller)) {
             cleanCellsScreen(null); // Usamos cleanCellsScreen para limpiar
