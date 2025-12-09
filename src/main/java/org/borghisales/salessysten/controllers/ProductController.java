@@ -1,6 +1,5 @@
 package org.borghisales.salessysten.controllers;
 
-import javafx.animation.ScaleTransition;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -10,10 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.util.Callback;
-import javafx.util.Duration;
 import org.borghisales.salessysten.model.Brand;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
@@ -29,21 +26,19 @@ public class ProductController extends MenuController implements Initializable {
 
     private static ObservableList<Product> products = null;
 
-    // Componentes FXML
     @FXML private ComboBox<Product.State> cbState;
     @FXML private ComboBox<Brand> cbBrand;
     @FXML private TextField name;
     @FXML private TextField price;
     @FXML private TextField stock;
 
-    // Botones con fx:id para animaciones
+    // Botones
     @FXML private Button btnAdd;
     @FXML private Button btnUpdate;
     @FXML private Button btnDelete;
     @FXML private Button btnClear;
-    @FXML private Button btnReturn; // Nuevo Botón Volver
+    @FXML private Button btnReturn;
 
-    // Tabla
     @FXML private TableView<Product> tableProducts;
     @FXML private TableColumn<Product, Integer> colId;
     @FXML private TableColumn<Product, String> colName;
@@ -58,50 +53,12 @@ public class ProductController extends MenuController implements Initializable {
         initializeComboBox();
         initializeProductData();
 
-        setupAnimations();
-    }
-
-    private void setupAnimations() {
-        // Estilos base y hover
-        setupButtonHover(btnAdd,
-                "-fx-background-color: #2e7d32; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-weight: bold;",
-                "-fx-background-color: #4caf50; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(76,175,80,0.6), 10, 0, 0, 0);");
-
-        setupButtonHover(btnUpdate,
-                "-fx-background-color: #1565c0; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-weight: bold;",
-                "-fx-background-color: #42a5f5; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(33,150,243,0.6), 10, 0, 0, 0);");
-
-        setupButtonHover(btnDelete,
-                "-fx-background-color: #c62828; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-weight: bold;",
-                "-fx-background-color: #ef5350; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(244,67,54,0.6), 10, 0, 0, 0);");
-
-        setupButtonHover(btnClear,
-                "-fx-background-color: #424242; -fx-text-fill: #aaa; -fx-background-radius: 5;",
-                "-fx-background-color: #616161; -fx-text-fill: white; -fx-background-radius: 5;");
-
-        setupButtonHover(btnReturn,
-                "-fx-background-color: transparent; -fx-text-fill: #ffa726; -fx-border-color: #fb8c00; -fx-border-radius: 5; -fx-border-width: 1.5;",
-                "-fx-background-color: #fb8c00; -fx-text-fill: white; -fx-border-color: #fb8c00; -fx-border-radius: 5; -fx-border-width: 1.5; -fx-effect: dropshadow(three-pass-box, rgba(251,140,0,0.5), 10, 0, 0, 0);");
-    }
-
-    private void setupButtonHover(Button btn, String normalStyle, String hoverStyle) {
-        btn.setCursor(Cursor.HAND);
-        btn.setStyle(normalStyle); // Aplicar inicial
-        btn.setOnMouseEntered(e -> {
-            btn.setStyle(hoverStyle);
-            scaleButton(btn, 1.05);
-        });
-        btn.setOnMouseExited(e -> {
-            btn.setStyle(normalStyle);
-            scaleButton(btn, 1.0);
-        });
-    }
-
-    private void scaleButton(Button btn, double scale) {
-        ScaleTransition st = new ScaleTransition(Duration.millis(100), btn);
-        st.setToX(scale);
-        st.setToY(scale);
-        st.play();
+        // implementamos UIEfectos****************
+        UIEfectos.styleButtonAdd(btnAdd);
+        UIEfectos.styleButtonUpdate(btnUpdate);
+        UIEfectos.styleButtonDelete(btnDelete);
+        UIEfectos.styleButtonGray(btnClear);
+        UIEfectos.styleButtonReturn(btnReturn);
     }
 
     private void initializeComboBox() {
@@ -116,7 +73,6 @@ public class ProductController extends MenuController implements Initializable {
     }
 
     private <T> void styleComboBox(ComboBox<T> comboBox) {
-        // Estilo del botón cerrado
         comboBox.setButtonCell(new ListCell<>() {
             @Override
             protected void updateItem(T item, boolean empty) {
