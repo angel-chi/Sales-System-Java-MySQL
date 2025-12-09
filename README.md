@@ -109,7 +109,7 @@ Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder,
 # Cambios 
 El primer cambio que hice es el cambio de idioma a la ventana de inicio de sesion y la ventana de managmente, tambien se cambio el tamaño con el que se abre todo y aparte que los botones y demas cosas se ajustan al tamaño de la ventana asi que si el usuario lo mueve este cambia tambien de tamaño 
 # 💡 Fucionalidades
-
+1. La primera funcionalidad que se agrego es un sistema de roles que permiten que ahora el vendedor tenga un atributo mas que es el role que puede ser normal o ADMIN y la diferencia es que si es ADMIN entonces puede acceder a los reportes y si es normal no
 ## Inicio de sesión
 Para iniciar sesión, se requiere el DNI y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el DNI se asocia con 'dni' y la contraseña con 'user'.
 

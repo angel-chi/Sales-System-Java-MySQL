@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
+import org.borghisales.salessysten.model.Seller;
 
 import java.awt.*;
 import java.net.URI;
@@ -55,6 +56,13 @@ public class ManagementController extends MenuController implements Initializabl
         closeCurrentStage(sellerButton);
     }
     public void openSalesReport(ActionEvent actionEvent) {
+        if (MainController.sellerLog == null ||
+                MainController.sellerLog.role() != Seller.Role.ADMIN) {
+
+            setAlert(Alert.AlertType.WARNING,
+                    "Acceso Denegado, Solo los administradores pueden acceder a los reportes");
+            return;
+        }
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
         MenuController.openNewStage(REPORT_VIEW_FXML,"Ventas");
         closeCurrentStage(sellerButton);

@@ -46,7 +46,6 @@
                         <TextField fx:id="name" HBox.hgrow="ALWAYS"/>
                     </HBox>
 
-
                     <HBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="TELÉFONO:" underline="true" minWidth="90">
                             <font>
@@ -73,6 +72,15 @@
                         </Label>
                         <ComboBox fx:id="cbState" maxWidth="Infinity" HBox.hgrow="ALWAYS" promptText="Seleccione un estado"/>
                     </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="ROL:" underline="true" minWidth="90">
+                            <font>
+                                <Font size="17.0"/>
+                            </font>
+                        </Label>
+                        <ComboBox fx:id="cbRole" maxWidth="Infinity" HBox.hgrow="ALWAYS" promptText="Seleccione un rol"/>
+                    </HBox>
                 </VBox>
 
                 <VBox spacing="10" alignment="TOP_CENTER" minWidth="130" HBox.hgrow="NEVER">
@@ -90,6 +98,7 @@
                     <TableColumn fx:id="colName" text="Nombre" prefWidth="150.0"/>
                     <TableColumn fx:id="colPhone" text="Teléfono" prefWidth="130.0"/>
                     <TableColumn fx:id="colState" text="Estado" prefWidth="110.0"/>
+                    <TableColumn fx:id="colRole" text="Rol" prefWidth="110.0"/>
                 </columns>
                 <columnResizePolicy>
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>

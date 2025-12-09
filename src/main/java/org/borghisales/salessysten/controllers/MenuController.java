@@ -113,6 +113,7 @@ public class MenuController {
             stage.show();
 
         } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
             setAlert(Alert.AlertType.WARNING, "Error en la carga de la ventana: " + e.getMessage());
         }
     }
