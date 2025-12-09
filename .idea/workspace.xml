@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Corrección en alertas.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Link del video a la presentación agregado en Readme.md, entrega final.">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerateSaleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" afterDir="false" />
@@ -148,14 +147,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00017" summary="feat: add GenerateSale.viw and modify access modifiers">
-      <option name="closed" value="true" />
-      <created>1709605795171</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1709605795171</updated>
     </task>
     <task id="LOCAL-00018" summary="feat: search Customer">
       <option name="closed" value="true" />
@@ -541,7 +532,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765255933923</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Link del video a la presentación agregado en Readme.md, entrega final.">
+      <option name="closed" value="true" />
+      <created>1765273373292</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1765273373293</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -556,7 +555,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="in progress: cache statistics line chart" />
     <MESSAGE value="fix: finish optimization linechart" />
     <MESSAGE value="refactor: cleaning code" />
     <MESSAGE value="refactor: delete comments" />
@@ -581,6 +579,7 @@
     <MESSAGE value="Traducciones finales, y funcionalidad de interfaz." />
     <MESSAGE value="Comentarios." />
     <MESSAGE value="Corrección en alertas." />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrección en alertas." />
+    <MESSAGE value="Link del video a la presentación agregado en Readme.md, entrega final." />
+    <option name="LAST_COMMIT_MESSAGE" value="Link del video a la presentación agregado en Readme.md, entrega final." />
   </component>
 </project>
