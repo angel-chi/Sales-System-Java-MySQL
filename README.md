@@ -4,9 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-<p align="center">
-  <img src="img/pantalla-principal.png" alt="Pantalla principal" />
-</p>
+![Captura desde 2025-12-08 23-08-45.png](img/Captura%20desde%202025-12-08%2023-08-45.png)
 
 
 <!-- TOC -->
@@ -29,8 +27,8 @@
 * [📝 Licencia](#-licencia)
 * [📊 Diagrama UML](#Diagrama-UML)
 * [❌ Identificación de errores](#identificación-de-errores)
-  * [Error 1. JavaFX](#JavaFx)
-  * [Error 2. Pull request](#Pull-request)
+  * [Error 1. Error con la base de datos](#Error-con-la-base-de-datos)
+  * [Error 2. Problemas al hacer Git Push](#Problemas-al-hacer-Git-Push)
   * [Error 3. Código](#Código)
     * [Botón "Generar Venta"](#Generar-Venta)
     * [Historial de ventas](#Historial-de-Ventas)
@@ -168,11 +166,32 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
 # Diagrama UML
-
+![UML.drawio(1).png](img/UML.drawio%281%29.png)
 
 # Identificación de Errores
-## JavaFx
-## Pull request
+## Error con la base de datos
+![im2.jpeg](img/im2.jpeg)
+
+Al intentar compilar el programa. surgió una excepción que indicada que MySQL no encontró la tabla "products" en la base
+de datos a la que se encuentra conectada el proyecto, que en nuestro caso es "salesystem". <br>
+El error se solucionó revisando la base de datos y verificando si la tabla existía, el problema era que el script de la 
+base de datos no había sido importado de forma correcta, por lo que se realizó paso a paso este proceso de nuevo y ahora
+todo funcionaba bien.
+## Problemas al hacer Git Push
+![Sin título.jpeg](img/Sin%20t%C3%ADtulo.jpeg)
+Git rechazó el git push porque en la rama en que trabajamos remotamente (Cen_Couoh) tenía commits que no existían en mi copia local.
+En pocas palabras, tenía commits nuevos locales, pero mi compañero ya había subido cambios a la misma rama en GitHub antes de mi push.
+Para evitar perder el trabajo de la otra persona, Git no permite subir directamente y pide primero que se haga un pull.
+En este caso, para solucionar el problema se realizó lo siguiente:
+* Revisar el estado de la rama con *git push*.
+* Limpiar los cambios irrelevantes que del IDE con un *git restore*
+* Hacer un *git pull.rebase false*, de esta forma no se modifican ni borran los commits, simplemente se decide
+  de que forma se combinan.
+* Ahora seleccionamos la rama con un *git checkout Cen_Couoh*
+* Después hacemos *git pull* (De esta forma Git detectó que las ramas divergieron y realizó un merge entre los commits locales y los que estaban en
+  GitHub)
+* Finalmente hacemos el *git push origin Cen_Couoh* y el git push es aceptado porque el historial de commits está alineado
+
 ## Código
 * Botón "Generar Venta"
 * Historial de ventas
