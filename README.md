@@ -154,6 +154,9 @@ https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b
 ## Reports
 https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
 
+# 🗄️ Diagrama UML
+<img src="src/main/resources/images/Sales-System-Java-MySQL.drawio.png">
+
 # 🛠️ Corrección de Errores
 Durante la revisión inicial del código, se encontraron diversas fallas en el código que debían. La mayoría de estos errores
 perjudicaban la interacción entre el usuario y la aplicación. Para la corrección de estas anomalias, se estudio parte del código
