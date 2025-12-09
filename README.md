@@ -221,7 +221,57 @@ _**¿Cómo se realizo?**_ Se implemento una funcionalidad para eliminar ventas y
 
 _**¿Cuál es la relación con POO?**_ En este caso su relación con POO se refleja en la estructura de la implementación; donde se usan objetos Sales para poder representar de alguna manera las ventas, por otra parte se encapsula la lógica de acceso a los datos en la clase SalesDAO, y también los controladores (ReportsController y SaleDetailController) logran manejar la interacción con la interfaz y las operaciones sobre los objetos de una manera eficaz y organizada. Esto nos permite que cada clase tenga en si responsabilidades, facilite la reutilización del código e incluso mantenga la lógica modular así como escalable.
 
-# 📷AGREGAR IMAGENES, DEMOSTRACIONES, COMO QUEDO, FORMATO, ETC.
+# 💡 Fucionalidades
+
+## Implementación Inicio de sesión.
+  Para el inicio de sesión la persona (vendedor) requiere de un usuario (INE Usuario), el cual desde la base de datos podemos verlo relacionado con el "dni", mientras que para la contraseña se emplea el "user"
+<p align="center">
+  <img src="src/main/resources/images/nuevasImg/inicioSesion.png" />
+</p>
+
+## Menú Principal.
+  Desde este punto el usuario puede acceder a las ventanas de Menu, Ventas, Gestión y Reportes. La interfaz no ha sido modificado tanto para este apartado, solo se ha mantenido una visibilidad correcta, pero es eficiente y útil que es lo que se busca.
+<p align="center">
+  <img src="src/main/resources/images/nuevasImg/menuPrincipal.png" />
+</p>
+
+
+## Carrito de Compras.
+  Se accede a él desde el apartado de Generar una venta, se ha modificado para que el cliente no tenga la necesidad de recordar el código, nombre, etc. Para eso se implementa una función la cual ya realiza todo el proceso de buscar y colocar el cliente/producto, la interfaz se vuelve muy intuitiva y eficiente.
+<p align="center">
+  <img src="src/main/resources/images/nuevasImg/carritoCompras.png" />
+</p>
+
+## Administración De Clientes.
+  Es un apartado donde el usuario podra desde agregar, actualizar o eliminar lo relacionado con un cliente, a su vez se implementa un botón para buscar referente a un Nombre/ID/INE, haciendo que obtenga una facilidad de uso (sea más accesible)
+<p align="center">
+  <img src="src/main/resources/images/nuevasImg/pestañaClientes.png" />
+</p>
+
+
+## Administración De Productos.
+  Apartado donde el usuario puede añadir, actualizar o eliminar productos, a su vez se implemento un botón similar para poder buscar un objeto específico 
+<p align="center">
+  <img src="src/main/resources/images/nuevasImg/pestañaProductos.png" />
+</p>
+
+## Administración De Vendedores.
+  Apartado donde el usuario puede añadir, actualizar o eliminar vendedores,modificando asi sus datos, para realizar cambios con la eliminación de alguno, se requiere de una seguridad extra (la contraseña del vendedor).
+<p align="center">
+  <img src="src/main/resources/images/nuevasImg/pestañaVendedores.png" />
+</p>
+
+## Reporte de Ventas.
+  Apartado donde el consultar las ventas realizadas, ver los detalles, consultar los graficos respecto al mes y a su vez obtener la posibilidad de eliminar ventas ya realizadas.
+<p align="center">
+  <img src="src/main/resources/images/nuevasImg/historialVentas.png" />
+</p>
+
+<p align="center">
+  <img src="src/main/resources/images/nuevasImg/pestañaEstadisticas.png" />
+</p>
+
+
 # AGREGAR COMO COMPILAR, FUNCIONA?, COMO CORRERLO, INSTALAR MVN, CREAR CON DEPENDENCIAS, ETC.
 # AGREGAR VIDEO
 # AGREGAR MODIFICACIONES EN INTERFAZ.
