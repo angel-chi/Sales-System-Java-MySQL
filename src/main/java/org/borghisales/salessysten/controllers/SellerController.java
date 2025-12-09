@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Seller;
 import org.borghisales.salessysten.model.SellerDAO;
+import org.borghisales.salessysten.utils.InputValidator;
 
 import java.net.URL;
 import java.util.Objects;
@@ -86,23 +87,44 @@ public class SellerController implements Initializable {
 
 
     public void addSeller(ActionEvent actionEvent){
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
-        if (sellerDAO.create(seller)) {
-            MenuController.cleanCells(dni, name, phone, user);
-            updateTable();
+        String error = InputValidator.validarVendedor(dni.getText(), name.getText(), phone.getText(), user.getText());
+
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
+        } else {
+            Seller seller = new Seller(
+                    dni.getText(),
+                    name.getText(),
+                    phone.getText(),
+                    cbState.getValue(),
+                    user.getText()
+            );
+
+            if (sellerDAO.create(seller)) {
+                MenuController.cleanCells(dni, name, phone, user);
+                updateTable();
+            }
         }
+
     }
+
     public void updateSeller(ActionEvent actionEvent) {
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
-        if (sellerDAO.update(seller)) {
-            MenuController.cleanCells(dni, name, phone, user);
-            updateTable();
+        String error = InputValidator.validarVendedor(dni.getText(), name.getText(), phone.getText(), user.getText());
+
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
+        } else {
+            Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
+            if (sellerDAO.update(seller)) {
+                MenuController.cleanCells(dni, name, phone, user);
+                updateTable();
+            }
         }
     }
 
     public void deleteSeller(ActionEvent actionEvent) {
         if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller");
+            MenuController.setAlert(Alert.AlertType.ERROR,"No se puede eliminar el vendedor actual");
             return;
         }
         if (sellerDAO.delete(dni.getText())){

@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
+import org.borghisales.salessysten.utils.InputValidator;
 
 
 import java.io.IOException;
@@ -40,7 +41,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SÍ");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
@@ -48,6 +49,8 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
+
+    private double totalPrice=0.0;
 
     @FXML
     private TextField serial;
@@ -68,6 +71,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     @FXML
     private TextField total;
     @FXML
+    private ComboBox<PaymentType> paymentType;
+    @FXML
     private TextField date;
 
     @FXML
@@ -86,6 +91,12 @@ public class GenerateSaleController extends MenuController implements Initializa
     private TableColumn<ShoppingCart, Double> colPrice;
     @FXML
     private TableColumn<ShoppingCart,Double> colTotal;
+    @FXML
+    private TextField subtotal;
+    @FXML
+    private TextField paymentAdjustment;
+    @FXML
+    private Label labelAdjustment;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeUIElements();
@@ -98,11 +109,17 @@ public class GenerateSaleController extends MenuController implements Initializa
         setSerial();
         seller.setText(sellerName);
         date.setText(String.valueOf(now));
+        if (paymentType != null) {
+            paymentType.setItems(FXCollections.observableArrayList(PaymentType.values()));
+            paymentType.getSelectionModel().select(PaymentType.EFECTIVO);
+            paymentType.setOnAction(event -> updateTotalField());
+        }
     }
 
+
     private void configureAlerts() {
-        configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
-        configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+        configureAlert(alertCustomer, "Nuevo cliente", "El cliente no existe", "¿Quieres añadirlo?");
+        configureAlert(alertProduct, "Nuevo producto", "El producto no existe", "¿Quieres añadirlo?");
     }
 
     private void configureTable() {
@@ -129,14 +146,19 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void searchCustomer(ActionEvent actionEvent) {
+        String error = InputValidator.validarCódigoCliente(codCustomer.getText());
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
+        } else{
         int customerId = Integer.parseInt(codCustomer.getText());
         customer = customerDAO.searchCustomer(customerId);
 
         if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
+            setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + customer.name());
             customerName.setText(customer.name());
         } else {
             handleCustomerNotFound();
+        }
         }
     }
 
@@ -158,25 +180,30 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Customer");
+        stage.setTitle("Gestión de clientes");
         stage.setScene(scene);
         stage.show();
     }
 
 
     public void searchProduct(ActionEvent actionEvent) {
-        int productId = Integer.parseInt(codProduct.getText());
-        Product product = productDAO.searchProduct(productId);
-
-        if (product != null) {
-            updateProductFields(product);
+        String error = InputValidator.validarCódigoProducto(codProduct.getText());
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
         } else {
-            handleProductNotFound();
+            int productId = Integer.parseInt(codProduct.getText());
+            Product product = productDAO.searchProduct(productId);
+
+            if (product != null) {
+                updateProductFields(product);
+            } else {
+                handleProductNotFound();
+            }
         }
     }
 
     private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto encontrado: " + product.name());
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
@@ -203,7 +230,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Product");
+        stage.setTitle("Gestión de productos");
         stage.setScene(scene);
         stage.show();
     }
@@ -214,7 +241,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
         total.clear();
     }
 
@@ -236,10 +263,17 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private Sales createSalesObject() {
-        return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
-                Sales.State.ACTIVE);
+        double finalAmount = calculateFinalAmount();
+        return new Sales(
+                customer.idCustomer(),
+                idSeller,
+                serial.getText(),
+                LocalDate.parse(date.getText()),
+                finalAmount,
+                Sales.State.ACTIVE
+        );
     }
+
 
     private boolean saveSaleAndDetails(Sales sales) {
         boolean saleSaved = salesDAO.SaveSale(sales);
@@ -270,21 +304,19 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void addShoppingCart(ActionEvent actionEvent) {
-        String errorMessage = validateInputs();
+        String error = InputValidator.validarDatosVenta(customerName.getText(), productName.getText(), price.getText(), quantity.getValue());
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
+        } else {
+            ShoppingCart product = createShoppingCartObject();
 
-        if (errorMessage != null) {
-            MenuController.setAlert(Alert.AlertType.ERROR, errorMessage);
-            return;
+            if (isProductAlreadyInCart(product)) {
+                MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya está en tu carrito");
+                return;
+            }
+
+            addToCartAndUpdateTotal(product);
         }
-
-        ShoppingCart product = createShoppingCartObject();
-
-        if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
-            return;
-        }
-
-        addToCartAndUpdateTotal(product);
     }
 
     private ShoppingCart createShoppingCartObject() {
@@ -300,19 +332,41 @@ public class GenerateSaleController extends MenuController implements Initializa
     private void addToCartAndUpdateTotal(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
-        double currentTotal = Double.parseDouble(total.getText()) + product.total();
-        total.setText(String.format("%.2f", currentTotal));
+        totalPrice += product.total();
+        updateTotalField();
     }
 
+    private void updateTotalField() {
+        double finalAmount = calculateFinalAmount();
+        double adjustment = finalAmount - totalPrice;
 
-    private String validateInputs() {
-        if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Missing customer name or product name.";
-        } else if (quantity.getValue() == 0) {
-            return "Quantity can't be 0.";
+        subtotal.setText(String.format("%.2f", totalPrice));
+
+        PaymentType type = paymentType != null ? paymentType.getValue() : null;
+        if (type == PaymentType.EFECTIVO) {
+            labelAdjustment.setText("Descuento (efectivo):");
+        } else if (type == PaymentType.TARJETA) {
+            labelAdjustment.setText("Comisión (tarjeta):");
+        } else {
+            labelAdjustment.setText("Ajuste:");
         }
-        return null;
+
+        paymentAdjustment.setText(String.format("%+.2f", adjustment));
+
+        total.setText(String.format("%.2f", finalAmount));
     }
+
+
+    private double calculateFinalAmount() {
+        if (paymentType == null) {
+            return totalPrice;
+        }
+        PaymentType selectedType = paymentType.getValue();
+        Payment payment = PaymentFactory.create(selectedType, totalPrice);
+        return payment.calculateFinalAmount();
+    }
+
+
 
     private void setSerial(){
         idSale = 1+salesDAO.IdSale();

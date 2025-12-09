@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Customer;
 import org.borghisales.salessysten.model.CustomerDAO;
+import org.borghisales.salessysten.utils.InputValidator;
 
 
 import java.net.URL;
@@ -79,20 +80,35 @@ public class CustomerController implements Initializable {
     }
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
-        if (customerDAO.create(customer)) {
-            MenuController.cleanCells(dni, name, address);
-            updateTable();
+        String error = InputValidator.validarCliente(dni.getText(), name.getText(), address.getText());
+
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
+        } else {
+            Customer customer = new Customer(dni.getText(), name.getText(), address.getText(), cbState.getValue());
+            if (customerDAO.create(customer)) {
+                MenuController.cleanCells(dni, name, address);
+                updateTable();
+            }
         }
     }
+
+
     @FXML
     public void updateCustomer(ActionEvent actionEvent) {
-        Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
-        if (customerDAO.update(customer)) {
-            MenuController.cleanCells(dni, name, address);
-            updateTable();
+        String error = InputValidator.validarCliente(dni.getText(), name.getText(), address.getText());
+
+        if (!error.equals("Validado")) {
+            MenuController.setAlert(Alert.AlertType.ERROR, error);
+        } else {
+            Customer customer = new Customer(dni.getText(), name.getText(), address.getText(), cbState.getValue());
+            if (customerDAO.update(customer)) {
+                MenuController.cleanCells(dni, name, address);
+                updateTable();
+            }
         }
     }
+
     @FXML
     public void deleteCustomer(ActionEvent actionEvent) {
         if (customerDAO.delete(dni.getText())){

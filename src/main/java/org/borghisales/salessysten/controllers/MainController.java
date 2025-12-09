@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class MainController extends MenuController implements Initializable {
     @FXML
-    private  TextField user;
+    private TextField user;
     @FXML
     private TextField password;
 
@@ -33,7 +33,7 @@ public class MainController extends MenuController implements Initializable {
     @FXML
     private void signIn(){
         if (SellerDAO.login(user.getText(),password.getText())) {
-            openNewStage(MANAGEMENT_VIEW_FXML, "Management");
+            openNewStage(MANAGEMENT_VIEW_FXML, "Gestión");
             closeCurrentStage(user);
         }
     }
