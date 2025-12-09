@@ -16,7 +16,7 @@ ALTER TABLE seller ADD unique(dni);
 ALTER TABLE seller ADD unique(user);
 
 CREATE TABLE estados IF NOT EXISTS{
-`state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',}
+`state` enum('ACTIVO','INACTIVO') DEFAULT 'ACTIVO',}
 
 
 -- Para calcular m�s facil
@@ -35,7 +35,7 @@ CREATE TABLE proveedor (
   idProveedor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   email VARCHAR(255),
-  state ENUM('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
+  state ENUM('ACTIVO','INACTIVO') DEFAULT 'ACTIVO',
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
