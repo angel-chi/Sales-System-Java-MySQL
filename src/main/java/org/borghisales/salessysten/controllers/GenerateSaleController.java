@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class GenerateSaleController extends MenuController implements Initializable {
+public class GenerateSaleController extends MenuController implements Initializable,validacionEntrada{
     // Variables
     private final SalesDAO salesDAO = new SalesDAO();
     private int idSale;
@@ -135,18 +135,34 @@ public class GenerateSaleController extends MenuController implements Initializa
         );
 
     }
-    // Busca a un cliente.
     public void searchCustomer(ActionEvent actionEvent) {
-        int customerId = Integer.parseInt(codCustomer.getText());
+
+        // Campo vacío
+        if (campoVacio(codCustomer)) {
+            mostrarAdvertencia("Debes ingresar una identificación de cliente.");
+            return;
+        }
+
+        // No numérico
+        int customerId;
+        try {
+            customerId = Integer.parseInt(codCustomer.getText().trim());
+        } catch (NumberFormatException e) {
+            mostrarAdvertencia("La identificación del cliente debe ser un número válido.");
+            return;
+        }
+
         cliente = customerDAO.searchCustomer(customerId);
 
         if (cliente != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + cliente.name());
+            setAlert(Alert.AlertType.CONFIRMATION,
+                    "Cliente encontrado: " + cliente.name());
             customerName.setText(cliente.name());
         } else {
             handleCustomerNotFound();
         }
     }
+
     // Si no existe el cliente, recomienda agregarlo.
     private void handleCustomerNotFound() {
         alertCustomer.showAndWait().ifPresent(buttonType -> {
@@ -172,7 +188,20 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
     // Buscar un producto.
     public void searchProduct(ActionEvent actionEvent) {
-        int productId = Integer.parseInt(codProduct.getText());
+
+        if (campoVacio(codProduct)) {
+            mostrarAdvertencia("Debes ingresar un código de producto.");
+            return;
+        }
+
+        int productId;
+        try {
+            productId = Integer.parseInt(codProduct.getText().trim());
+        } catch (NumberFormatException e) {
+            mostrarAdvertencia("El código de producto debe ser un número válido.");
+            return;
+        }
+
         Product product = productDAO.searchProduct(productId);
 
         if (product != null) {
@@ -181,6 +210,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             handleProductNotFound();
         }
     }
+
     // Actualizar la información de un producto, si existe.
     private void updateProductFields(Product product) {
         setAlert(Alert.AlertType.CONFIRMATION, "Producto Encontrado: " + product.name());
