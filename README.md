@@ -204,7 +204,7 @@ Código corregido
 # 🚧👷‍♀️ Implementaciones
 
 ## Valeria Moo
-### ** Implementación número telefónico a clase `Customer`.**
+### Implementación número telefónico a clase `Customer`.
 
 Esta implementación se pensó en la utilidad para las tiendas de poder estar en contacto con sus clientes, de tal forma los clientes
 y la tienda permanecerán conectadas. 
@@ -237,7 +237,7 @@ Ejemplo de cambio en la base de datos:
     }
 ```
 
-### ** Aplicación de descuentos.**
+### Aplicación de descuentos.
 La idea de esta implementación se pensó como un sistema de puntos en el que el usuario a partir de dicha cantidad se validará y se le asignará cierto porcentaje de descuento,
 sin embargo y como implementación inicial se pensó en la manera en la que el vendedor sea el que seleccione el tipo de descuento que se le aplicará a la compra del usuario sobre el precio total.
 
