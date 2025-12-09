@@ -152,19 +152,12 @@ https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793
 ---
 ##  Link del video
 
+### Link de Polanco:
+[Presentación Sales System Java](https://youtu.be/d2rRIzC-bNg)
+
 ---
 ##  Diagrama UML
-<details>
-  <summary>Diagrama UML</summary>
-
-  <div style="overflow-x: auto; max-width: 100%;">
-
-    <img src="UML/UML.svg" 
-         alt="Diagrama de Clases UML del Proyecto" 
-         width="1200px" />
-
-  </div>
-</details>
+<img src="src/main/resources/images/UML.drawio.svg" alt="Logo" width="10000"/>
 
 ##  Errores encontrados y soluciones implementadas
 
@@ -242,10 +235,6 @@ https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793
   * Se actualizó la interfaz de agregar vendedores para incluir la selección del rol (vendedor o gerente).
 * **Resultado:**
   * Solo los gerentes pueden acceder a la gestión de productos y vendedores, mientras que los vendedores solo pueden realizar ventas y gestionar clientes.
----
-
-### Link de Polanco: 
-[Presentación Sales System Java](https://youtu.be/d2rRIzC-bNg)
 ---
 
 # 📧 Contacto
