@@ -154,7 +154,7 @@ y se encontró una solución que no afectara con la lógica del programa y/o que
 En la clase `ManagementController` al presionar el botón, la función help trataba de redirigir a una dirección URL.
 Para la solución de esta problemática se reescribió la función. En lugar de redirigir al usuario, se implementó una nueva ventana
 de advertencia, en ella se escribió la leyenda "Para cualquier duda, leer el manual del software en: https://github.com/Borghii/Sales-System".
-```
+```java
     public void help(ActionEvent actionEvent) {
         MenuController.setAlert(Alert.AlertType.INFORMATION, "Para cualquier duda, leer el manual del software en: https://github.com/Borghii/Sales-System");
     }
@@ -166,7 +166,7 @@ que para cancelar alguna compra primero debe haber algo en el carrito.
 
 La solución para este problema fue agregar un if, en donde si la lista de productos estaba vacía, se desprendería una ventana de advertencia
 
-```
+```java
     public void cancel(ActionEvent actionEvent) {
         if (products.isEmpty()){ //Agrega alerta al botón cancelar //CORRECCIÓN ERROR
             MenuController.setAlert(Alert.AlertType.INFORMATION, "No se ha ingresado ningún dato a la compra que se pueda cancelar");
