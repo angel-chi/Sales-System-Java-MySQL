@@ -5,11 +5,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 
-public record Sales(int idSales, int idCustomer, int idSeller, String numberSales, LocalDate saleDate, Double amount,State state) {
+public record Sales(int idSales, int idCustomer, int idSeller, String numberSales, LocalDate saleDate, Double subtotal,
+                    State state, double total, double iva, double discount) {
     public enum State{ACTIVE,DISACTIVE};
 
-    public Sales(int idCustomer, int idSeller, String numberSales, LocalDate saleDate, Double amount, State state) {
-        this(0, idCustomer, idSeller, numberSales, saleDate, amount, state);
+    public Sales(int idCustomer, int idSeller, String numberSales, LocalDate saleDate, Double subtotal, State state,
+                 double total, double iva, double discount) {
+        this(0, idCustomer, idSeller, numberSales, saleDate, subtotal, state, total, iva, discount);
     }
 
     public static Sales fromResultSet(ResultSet rs) throws SQLException {
@@ -18,8 +20,13 @@ public record Sales(int idSales, int idCustomer, int idSeller, String numberSale
         int idSeller = rs.getInt("idSeller");
         String numberSales = rs.getString("numberSales");
         LocalDate saleDate = rs.getDate("saleDate").toLocalDate();
-        Double amount = rs.getDouble("amount");
+        Double subtotal = rs.getDouble("subtotal");
         State state = State.valueOf(rs.getString("state"));
-        return new Sales(idSales, idCustomer, idSeller, numberSales, saleDate, amount, state);
+        //nuevos atributos
+        double total = rs.getDouble("amount");
+        double iva = rs.getDouble("iva");
+        double discount = rs.getDouble("discount");
+        //
+        return new Sales(idSales, idCustomer, idSeller, numberSales, saleDate, subtotal, state, total, iva, discount);
     }
 }

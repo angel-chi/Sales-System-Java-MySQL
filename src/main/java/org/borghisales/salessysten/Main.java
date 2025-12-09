@@ -19,11 +19,12 @@ public class Main extends Application {
         filePaths.put(CUSTOMER_VIEW_FXML, MANAGEMENT_VIEW_FXML);
         filePaths.put(GENERATE_SALE_VIEW_FXML, MANAGEMENT_VIEW_FXML);
         filePaths.put(REPORT_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        filePaths.put(HELP_VIEW_FXML, MANAGEMENT_VIEW_FXML);
     }
 
     @Override
     public void start(Stage stage) throws IOException {
-        mc.openNewStage(MAIN_VIEW_FXML,"Login");
+        mc.openNewStage(MAIN_VIEW_FXML,"Inicio de Sesión");
     }
 
     public static void main(String[] args) {

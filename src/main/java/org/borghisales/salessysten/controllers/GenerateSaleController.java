@@ -7,15 +7,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
+import org.borghisales.salessysten.util.DiscountRate;
+import org.borghisales.salessysten.util.ViewFiles;
+import org.borghisales.salessysten.model.envio.Envio;
+import org.borghisales.salessysten.model.envio.EnvioExpres;
+import org.borghisales.salessysten.model.envio.EnvioEconomico;
 
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -48,6 +52,11 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
+    //cbox
+    private final ObservableList<DiscountRate> discountList = FXCollections.observableArrayList(DiscountRate.CERO, DiscountRate.DIEZ,
+            DiscountRate.QUINCE, DiscountRate.VEINTE, DiscountRate.CINCUENTA);
+
+    private double finalPrice=0.0;
 
     @FXML
     private TextField serial;
@@ -69,7 +78,16 @@ public class GenerateSaleController extends MenuController implements Initializa
     private TextField total;
     @FXML
     private TextField date;
-
+    //nuevos atributos
+    @FXML
+    private TextField subtotal;
+    @FXML
+    private TextField iva;
+    @FXML
+    private ComboBox<DiscountRate> cbDiscount;
+    @FXML
+    private TextField saving;
+    //
     @FXML
     private Spinner<Integer> quantity;
     @FXML
@@ -84,8 +102,38 @@ public class GenerateSaleController extends MenuController implements Initializa
     private TableColumn<ShoppingCart, Integer> colQuantity;
     @FXML
     private TableColumn<ShoppingCart, Double> colPrice;
+    // nuevos atributos
     @FXML
-    private TableColumn<ShoppingCart,Double> colTotal;
+    private TableColumn<ShoppingCart, Double> colSubtotal;
+    @FXML
+    private TableColumn<ShoppingCart, Double> colTotal;
+
+    //static final para el IVA
+    private static final double IVA_RATE = 0.16;
+
+    @FXML
+    private CheckBox chkEnvioExpres;
+
+    @FXML
+    private CheckBox checkBoxExpres;
+
+    @FXML
+    private Label labelTotal;
+
+    @FXML
+    private Label labelEnvio;
+
+    @FXML
+    private TextField amount;
+
+    @FXML
+    private TextField textFieldEnvio;
+
+    private Sales ventaSeleccionada;
+
+       private double getShippingCost() {
+        return chkEnvioExpres.isSelected() ? 150.0 : 80.0;
+    }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeUIElements();
@@ -95,9 +143,29 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private void initializeUIElements() {
         total.setText("0.0");
+        saving.setText("0.0");
+        subtotal.setText("0.0");
+        iva.setText("0.0");
+        // inicializar costo de envío según el checkbox
+        textFieldEnvio.setText(String.format("%.2f", getShippingCost()));
+
+        // si cambia el checkbox, actualizamos el costo de envío en el textfield
+        chkEnvioExpres.selectedProperty().addListener((obs, oldV, newV) -> {
+            textFieldEnvio.setText(String.format("%.2f", getShippingCost()));
+        });
+
         setSerial();
         seller.setText(sellerName);
         date.setText(String.valueOf(now));
+        initializeComboBox();
+
+    }
+
+
+
+    private void initializeComboBox() {
+        cbDiscount.setValue(DiscountRate.CERO);
+        cbDiscount.setItems(discountList);
     }
 
     private void configureAlerts() {
@@ -125,7 +193,12 @@ public class GenerateSaleController extends MenuController implements Initializa
         colProduct.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().product()));
         colQuantity.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().quantity()).asObject());
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
+        //nuevas columnas en la tabla
+        colSubtotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().subtotal()).asObject());
         colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total()).asObject());
+       //nuevas columnas a la tabla
+
+
     }
 
     public void searchCustomer(ActionEvent actionEvent) {
@@ -149,20 +222,9 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void openCustomerManagementView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(CUSTOMER_VIEW_FXML));
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        stage = new Stage();
-        stage.setTitle("Manage Customer");
-        stage.setScene(scene);
-        stage.show();
+        //utilizamos la clase Tab Controller
+        TabController.openNewTab(CUSTOMER_VIEW_FXML);
     }
-
 
     public void searchProduct(ActionEvent actionEvent) {
         int productId = Integer.parseInt(codProduct.getText());
@@ -194,51 +256,80 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void openProductManagementView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(PRODUCT_VIEW_FXML));
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        stage = new Stage();
-        stage.setTitle("Manage Product");
-        stage.setScene(scene);
-        stage.show();
+        TabController.openNewTab(ViewFiles.PRODUCT_VIEW_FXML);
     }
 
+     public void cancel(ActionEvent actionEvent) {
+        if (products.isEmpty()) return;
 
-    public void cancel(ActionEvent actionEvent) {
-        if (products.isEmpty())return;
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
-        total.clear();
+        products.clear();
+
+        // reset envío
+        textFieldEnvio.setText(String.format("%.2f", getShippingCost()));
+
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
+        total.setText("0.0");
     }
 
     public void generateSale(ActionEvent actionEvent) {
         if (products.isEmpty()) {
+            MenuController.setAlert(Alert.AlertType.WARNING, "No hay productos en el carrito.");
             return;
         }
 
-        Sales sales = createSalesObject();
+        try {
+            // total sin envío (el que ya tienes)
+            double totalSinEnvio = Double.parseDouble(total.getText().replace(",", "."));
 
-        if (saveSaleAndDetails(sales)) {
-            productDAO.subtractStock(products);
-            cleanFieldsAndTable();
-            setSerial();
-            total.setText("0.0");
-            products.clear();
-            updateReportsController();
+
+            // costo de envío según el checkbox
+            double shippingCost = getShippingCost();
+
+            // mostrar envío al usuario
+            textFieldEnvio.setText(String.format("%.2f", shippingCost));
+
+            // total final con envío
+            double totalConEnvio = totalSinEnvio + shippingCost;
+
+            // mostrar total final
+            total.setText(String.format("%.2f", totalConEnvio));
+
+            // crear objeto Sales con total FINAL
+            Sales sale = createSalesObject();
+
+            this.ventaSeleccionada = sale;
+
+            // guardar en BD
+            if (saveSaleAndDetails(sale)) {
+                productDAO.subtractStock(products);
+                cleanFieldsAndTable();
+                setSerial();
+                total.setText("0.0");
+                products.clear();
+                updateReportsController();
+                MenuController.setAlert(Alert.AlertType.INFORMATION, "Venta generada correctamente.");
+            } else {
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar la venta o los detalles.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            MenuController.setAlert(Alert.AlertType.ERROR,
+                    "Ocurrió un error al generar la venta: " + e.getMessage());
         }
     }
 
+    // modificar para crear objeto de sales
     private Sales createSalesObject() {
+
+        //idCustomer, idSeller, numberSales, saleDate, subtotal, state, total, ivaRate, saving)
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
-                Sales.State.ACTIVE);
+                LocalDate.parse(date.getText()), Double.parseDouble(subtotal.getText()),Sales.State.ACTIVE, Double.parseDouble(total.getText()),
+                Double.parseDouble(iva.getText()), Double.parseDouble(saving.getText()) );
+
     }
 
     private boolean saveSaleAndDetails(Sales sales) {
@@ -251,6 +342,9 @@ public class GenerateSaleController extends MenuController implements Initializa
         MenuController.cleanCells(codCustomer, codProduct, customerName, productName, price, stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
+        subtotal.setText("0.0");
+        saving.setText("0.0");
+        iva.setText("0.0");
     }
 
     private void updateReportsController() {
@@ -284,25 +378,58 @@ public class GenerateSaleController extends MenuController implements Initializa
             return;
         }
 
-        addToCartAndUpdateTotal(product);
+        addToCartAndUpdateTotals(product);
     }
 
     private ShoppingCart createShoppingCartObject() {
         return new ShoppingCart(contProducts++, codProduct.getText(),
                 productName.getText(), quantity.getValue(),
-                Double.parseDouble(price.getText()));
+                Double.parseDouble(price.getText()), CalcSaving(),CalcSubtotal()*IVA_RATE, CalcSubtotal(), CalcTotal());
+    }
+
+    private double CalcSubtotal (){
+        double subtotal = quantity.getValue() * Double.parseDouble(price.getText());
+        return Round(subtotal);
+    }
+    private double CalcTotal (){
+        double subtotal = CalcSubtotal();
+        double subtotalIva = subtotal * (1 + IVA_RATE);
+        double discountAmount = subtotalIva * getDiscountRate();
+        double total = subtotalIva - discountAmount;
+        return Round(total);
+    }
+    private double CalcSaving (){
+        double subtotal = CalcSubtotal();
+        double subtotalIva = subtotal * (1 + IVA_RATE);
+        double discountAmount = subtotalIva * getDiscountRate();
+        return discountAmount;
+    }
+    private double Round(double num){
+        String roundStr = String.format("%.2f",num);
+        double round = Double.parseDouble(roundStr);
+        return round;
     }
 
     private boolean isProductAlreadyInCart(ShoppingCart product) {
         return products.stream().anyMatch(e -> Objects.equals(e.cod(), product.cod()));
     }
 
-    private void addToCartAndUpdateTotal(ShoppingCart product) {
+    private void addToCartAndUpdateTotals(ShoppingCart product) {
         products.add(product);
         tableSale.setItems(products);
+        // actualizar totales
+        double currentSubTotal = Double.parseDouble(subtotal.getText()) + product.subtotal();
+        subtotal.setText(String.format("%.2f", currentSubTotal));
         double currentTotal = Double.parseDouble(total.getText()) + product.total();
-        total.setText(String.format("%.2f", currentTotal));
+
+        total.setText(String.format("%.2f", currentTotal )); //campo total de todas las ventas
+        iva.setText(String.format("%.2f", currentSubTotal * IVA_RATE));
+        saving.setText(String.format("%.2f", CalcSaving()));
     }
+
+
+
+
 
 
     private String validateInputs() {
@@ -320,5 +447,55 @@ public class GenerateSaleController extends MenuController implements Initializa
         serial.setText(formattedId);
     }
 
+    //nuevo metodo para el valor del descuento
+    private double getDiscountRate(){
+        DiscountRate dis = cbDiscount.getValue();
+        return dis.getRate();
+    }
+     
+    private Envio obtenerEnvio() {
+        if (chkEnvioExpres.isSelected()) {
+            return new EnvioExpres();
+        }
+        return new EnvioEconomico();
+    }
+
+    private void calcularTotalVenta() {
+        Envio envio;
+        if (checkBoxExpres.isSelected()) {
+            envio = new EnvioExpres();
+        } else {
+            envio = new EnvioEconomico();
+        }
+
+        VentaConEnvio ventaConEnvio = new VentaConEnvio(ventaSeleccionada, envio);
+
+        labelEnvio.setText(String.format("Costo de envío: $%.2f", envio.calcularCosto()));
+
+        labelTotal.setText(String.format("Total: $%.2f", ventaConEnvio.calcularTotal()));
+    }
+
+    public void setVentaSeleccionada(Sales venta) {
+        this.ventaSeleccionada = venta;
+
+        // Inicializar valores
+        actualizarMontos();
+
+        // Escuchar cambios en el CheckBox para actualizar dinámicamente
+        chkEnvioExpres.selectedProperty().addListener((observable, oldValue, newValue) -> actualizarMontos());
+    }
+
+    private void actualizarMontos() {
+        if (ventaSeleccionada == null) return;
+
+        Envio envio = chkEnvioExpres.isSelected() ? new EnvioExpres() : new EnvioEconomico();
+        VentaConEnvio ventaConEnvio = new VentaConEnvio(ventaSeleccionada, envio);
+
+        // Mostrar monto del envío en el TextField
+        textFieldEnvio.setText(String.format("%.2f", envio.calcularCosto()));
+
+        // Mostrar total venta + envío
+        total.setText(String.format("%.2f", ventaConEnvio.calcularTotal()));
+    }
 
 }

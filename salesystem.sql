@@ -174,3 +174,12 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-04-24 17:20:54
+-- Agregar atributos de subtotal, iva y descuento
+
+ALTER TABLE sales
+    ADD COLUMN subtotal DOUBLE NOT NULL DEFAULT 0,
+    ADD COLUMN iva DOUBLE NOT NULL DEFAULT 0,
+    ADD COLUMN discount DOUBLE NOT NULL DEFAULT 0;
+
+
+-- Se deben de agregar las columnas a la base de datos

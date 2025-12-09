@@ -25,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
+import org.borghisales.salessysten.util.ViewFiles;
 
 
 import java.net.URL;
@@ -89,7 +90,7 @@ public class ReportsController implements Initializable {
     @FXML
     private TableColumn<Sales, LocalDate> colSaleDate;
     @FXML
-    private TableColumn<Sales,Double> colAmount;
+    private TableColumn<Sales,Double> colSubtotal;
     @FXML
     private TableColumn<Sales, Sales.State> colState;
 
@@ -161,7 +162,7 @@ public class ReportsController implements Initializable {
         colIdSeller.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSeller()).asObject());
         colNumberSales.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().numberSales()));
         colSaleDate.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().saleDate()));
-        colAmount.setCellValueFactory(p -> new SimpleDoubleProperty((p.getValue().amount())).asObject());
+        colSubtotal.setCellValueFactory(p -> new SimpleDoubleProperty((p.getValue().subtotal())).asObject());
         colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
 
         tableReport.getItems().clear();
@@ -180,17 +181,18 @@ public class ReportsController implements Initializable {
                 int idSales = tableReport.getSelectionModel().getSelectedItem().idSales();
                 SaleDetailController.setIdSale(idSales);
 
-                FXMLLoader fxmlLoaderSaleDetails = new FXMLLoader(MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML));
+                TabController.openNewTab(ViewFiles.SALE_DETAIL_VIEW_FXML);
+                //FXMLLoader fxmlLoaderSaleDetails = new FXMLLoader(MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML));
 
-                try {
-                    Scene scene = new Scene(fxmlLoaderSaleDetails.load());
-                    Stage stage = new Stage();
-                    stage.setTitle("Sale detail");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                //try {
+                    //Scene scene = new Scene(fxmlLoaderSaleDetails.load());
+                   // Stage stage = new Stage();
+                    //stage.setTitle("Sale detail");
+                   // stage.setScene(scene);
+                   // stage.show();
+                //} catch (IOException e) {
+                   // throw new RuntimeException(e);
+                //}
             }
         });
     }
@@ -225,7 +227,7 @@ public class ReportsController implements Initializable {
                 return;
             }
 
-            Predicate<Sales> amountFilter = p -> p.amount() >= minAmount && p.amount() <= maxAmount;
+            Predicate<Sales> amountFilter = p -> p.subtotal() >= minAmount && p.subtotal() <= maxAmount;
             Predicate<Sales> dateFilter = p -> p.saleDate().isAfter(minDate) && p.saleDate().isBefore(maxDate);
 
             tableReport.setItems(FXCollections.observableArrayList(sales.stream()

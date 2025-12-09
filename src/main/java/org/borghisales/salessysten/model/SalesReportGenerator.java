@@ -42,14 +42,14 @@ public class SalesReportGenerator {
                 writer.append(String.valueOf(sale.idSeller())).append(",");
                 writer.append(sale.numberSales()).append(",");
                 writer.append(sale.saleDate().toString()).append(",");
-                writer.append(String.valueOf(sale.amount())).append(",");
+                writer.append(String.valueOf(sale.subtotal())).append(",");
                 writer.append(sale.state().toString()).append("\n");
             }
 
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "CSV Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte CSV generado correctamente en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "CSV Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Reporte CSV generado incorrectamente: " + e.getMessage());
         }
     }
     public static void generateExcelReport(ObservableList<Sales> salesList, String outputPath) {
@@ -73,7 +73,7 @@ public class SalesReportGenerator {
                 row.createCell(2).setCellValue(sale.idSeller());
                 row.createCell(3).setCellValue(sale.numberSales());
                 row.createCell(4).setCellValue(sale.saleDate().toString());
-                row.createCell(5).setCellValue(sale.amount());
+                row.createCell(5).setCellValue(sale.subtotal());
                 row.createCell(6).setCellValue(sale.state().toString());
             }
 
@@ -87,10 +87,10 @@ public class SalesReportGenerator {
                 workbook.write(fileOut);
             }
 
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "EXCEL Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte EXCEL generado correctamente en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "EXCEL Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Reporte EXCEL generado incorrectamente: " + e.getMessage());
         }
     }
     public static void generatePDFReport(ObservableList<Sales> salesList, String outputPath) {
@@ -124,17 +124,17 @@ public class SalesReportGenerator {
                 drawRow(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths, Color.WHITE, false,
                         String.valueOf(sale.idSales()), String.valueOf(sale.idCustomer()),
                         String.valueOf(sale.idSeller()), sale.numberSales(), sale.saleDate().toString(),
-                        String.valueOf(sale.amount()), sale.state().toString());
+                        String.valueOf(sale.subtotal()), sale.state().toString());
                 yPosition -= rowHeight;
             }
 
             contentStream.close();
 
             document.save(outputPath);
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "PDF Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte PDF generado correctamente en" + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "PDF Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Reporte PDF generado incorrectamente: " + e.getMessage());
 
         }
     }
