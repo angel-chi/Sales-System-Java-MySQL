@@ -27,7 +27,7 @@ public record Compras(int idCompra, int idProveedor, int idVendedor, LocalDate f
         int idVendedor = rs.getInt("idSeller");
         double subtotal = rs.getDouble("subtotal");
         LocalDate fecha = rs.getTimestamp("created_at").toLocalDateTime().toLocalDate();
-        EstadoCompra state = EstadoCompra.valueOf(rs.getString("estado"));
+        EstadoCompra state = EstadoCompra.valueOf(rs.getString("stateCompra"));
         return new Compras(idCompra, idProveedor, idVendedor, fecha, subtotal, state);
     }
 
