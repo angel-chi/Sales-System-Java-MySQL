@@ -210,7 +210,7 @@ Desde la ventana de generaciòn de venta permita decidir si se genera un recibo 
 
 ## ⿻ Diagrama UML
 [Diagrama UML](https://drive.google.com/file/d/1XxLzHsK2-wGoHITZquxy-Mo3jaoV9pt7/view?usp=drive_link)
-<img width="766" height="1211" alt="UML drawio" src="https://github.com/user-attachments/assets/27bb96f9-0741-4f11-baf0-865325c5a798" />
+<img width="766" height="1263" alt="UML_RA drawio" src="https://github.com/user-attachments/assets/b1217215-3591-4852-b5bd-3ce5f28ea7d3" />
 
 
 ## 🎥 Vìdeo
