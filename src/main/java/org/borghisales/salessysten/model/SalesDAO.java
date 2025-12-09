@@ -32,34 +32,33 @@ public class SalesDAO {
             return 1;
         }
     }
-    public boolean SaveSale(Sales sale){
-        String sql = "INSERT INTO sales (idCustomer,idSeller,numberSales,saleDate,amount,state) values(?,?,?,?,?,?)";
+    public int SaveSaleAndGetId(Sales sale){
+        String sql = "INSERT INTO sales (idCustomer,idSeller,numberSales,saleDate,amount,state) VALUES (?,?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            pstmt.setInt(1,sale.idCustomer());
-            pstmt.setInt(2,sale.idSeller());
-            pstmt.setString(3,sale.numberSales());
+            pstmt.setInt(1, sale.idCustomer());
+            pstmt.setInt(2, sale.idSeller());
+            pstmt.setString(3, sale.numberSales());
             pstmt.setDate(4, Date.valueOf(sale.saleDate()));
-            pstmt.setDouble(5,sale.amount());
-            pstmt.setString(6,sale.state().name());
+            pstmt.setDouble(5, sale.amount());
+            pstmt.setString(6, sale.state().name());
 
-            int rows_affected = pstmt.executeUpdate();
+            int rowsAffected = pstmt.executeUpdate();
 
-            if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Venta guardada correctamente");
-                return true;
-            }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar la venta: ");
-                return false;
+            if (rowsAffected > 0) {
+                try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        return rs.getInt(1); // idSales generado
+                    }
+                }
             }
-
-        }catch (SQLException e){
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar la venta: " + e.getMessage());
-            return false;
+            return -1; // error al obtener id
+        } catch (SQLException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error al guardar la venta: " + e.getMessage());
+            return -1;
         }
-
     }
 
     public boolean SaveDetailsSale(ObservableList<ShoppingCart> products, int id){

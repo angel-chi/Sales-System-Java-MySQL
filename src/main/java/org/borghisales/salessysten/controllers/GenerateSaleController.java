@@ -260,9 +260,21 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private boolean saveSaleAndDetails(Sales sales) {
-        boolean saleSaved = salesDAO.SaveSale(sales);
-        boolean detailsSaved = salesDAO.SaveDetailsSale(products, idSale);
-        return saleSaved && detailsSaved;
+        int idSales = salesDAO.SaveSaleAndGetId(sales);
+        if (idSales != -1) {
+            boolean detailsSaved = salesDAO.SaveDetailsSale(products, idSales);
+            if (detailsSaved) {
+                // Mensaje de éxito
+                MenuController.setAlert(Alert.AlertType.INFORMATION, "Venta realizada correctamente");
+                return true;
+            } else {
+                MenuController.setAlert(Alert.AlertType.ERROR, "No se pudieron guardar los detalles de la venta");
+                return false;
+            }
+        } else {
+            MenuController.setAlert(Alert.AlertType.ERROR, "No se pudo guardar la venta");
+            return false;
+        }
     }
 
     private void cleanFieldsAndTable() {

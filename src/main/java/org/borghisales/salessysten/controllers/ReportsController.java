@@ -166,19 +166,29 @@ public class ReportsController implements Initializable {
         series.getData().sort(Comparator.comparingInt(d -> Integer.parseInt(d.getXValue())));
     }
     private void setupPieChart() {
-        if (pieChartData == null) {
+        if (pieChartData != null) {
+            pieChartData.clear();
+        } else {
             pieChartData = FXCollections.observableArrayList();
+        }
             ProductDAO.setPieChart(pieChartData);
 
-            pieChartData.forEach(data ->
-                    data.nameProperty().bind(
-                            Bindings.concat(data.getName(), " cantidad: ", (int) data.pieValueProperty().doubleValue())
-                    )
-            );
-        }
+            // Guardar el nombre original en una variable
+            pieChartData.forEach(data -> {
+                String originalName = data.getName(); // nombre original
+                data.nameProperty().bind(
+                        Bindings.createStringBinding(
+                                () -> originalName + " cantidad: " + (int) data.getPieValue(),
+                                data.pieValueProperty()
+                        )
+                );
+            });
         pieChartProducts.getData().clear();
         pieChartProducts.getData().addAll(pieChartData);
-    }
+        pieChartProducts.setLabelsVisible(true);
+        }
+
+
     private void setupTableView() {
         colIdSales.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSales()).asObject());
         colIdCustomer.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idCustomer()).asObject());
@@ -241,6 +251,7 @@ public class ReportsController implements Initializable {
                 MenuController.setAlert(Alert.AlertType.INFORMATION, "Venta eliminada correctamente.");
                 // Actualizar gráfico
                 refreshLineChart();
+                setupPieChart();
             } else {
                 MenuController.setAlert(Alert.AlertType.ERROR, "No se pudo eliminar la venta.");
             }
