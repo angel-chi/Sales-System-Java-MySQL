@@ -29,16 +29,11 @@
 * [❌ Identificación de errores](#identificación-de-errores)
   * [Error 1. Error con la base de datos](#Error-con-la-base-de-datos)
   * [Error 2. Problemas al hacer Git Push](#Problemas-al-hacer-Git-Push)
-  * [Error 3. Código](#Código)
-    * [Botón "Generar Venta"](#Generar-Venta)
-    * [Historial de ventas](#Historial-de-Ventas)
-    * [Botón "Ayuda"](#Botón-Ayuda)
 * [👨🏻‍🔧 Mejoras propuestas](#-cambios-propuestos)
   * [1. Clasificación por marca](#cambio-1-clasificación-por-marca)
   * [2. Modelar el tipo de venta](#cambio-2-modelar-el-tipo-de-venta)
   * [3. Crear una clase para el inventario](#cambio-3-crear-una-clase-para-el-inventario)
   * [4. Crear un manejo de diferentes tipos de pago](#cambio-4-crear-un-manejo-de-diferentes-tipos-de-pago)
-* [💻⚙️ Implementación en la UI](#Implementación-en-la-UI)
 * [🎥 Video de Presentación](#Video-de-Presentación)
 <!-- TOC -->
 
@@ -245,8 +240,6 @@ Vemo que cada forma de pago se vuelve una clase con su propia lógica. Por ejemp
 datos adicionales (número de autorización, últimos dígitos, etc.). Viendo el panorama desde la Programación Orientada a Objetos, la adición de Payment mejora el programa al
 hacer que la gestión de los pagos sea modular y fácil de extender, aplicando de esta forma el polimorfismo, al mismo tiempo que mantiene la lógica específica de cada pago aislada y protegida, 
 poniendo en prática le encapsulación y la abstracción.
-
-## Implementación en la UI
 
 
 [⬆ Volver al inicio](#title)<br>
