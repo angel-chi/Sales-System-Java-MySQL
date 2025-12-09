@@ -58,6 +58,8 @@ public class GenerarCompraController extends MenuController implements Initializ
     @FXML private TextField stockActual;
     @FXML private TextField vendedor;
 
+    @FXML private TextField date;
+
     // Configuraciones basicas
     private Compras crearCompra() {
         double subtotal = detalles.stream().mapToDouble(ComprasDetalles::subtotal).sum();
@@ -217,6 +219,7 @@ public class GenerarCompraController extends MenuController implements Initializ
         tableCompra.setItems(detalles);
 
         vendedor.setText(MainController.sellerLog.name());
+        date.setText(LocalDate.now().toString());
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000, 1);
         cantidad.setValueFactory(valueFactory);
     }

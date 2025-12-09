@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Más y más traducciones.">
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Más y cada vez más traducciones.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salesystem.sql" beforeDir="false" afterPath="$PROJECT_DIR$/salesystem.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/updatesDBsalesystem.sql" beforeDir="false" afterPath="$PROJECT_DIR$/updatesDBsalesystem.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerarCompraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/controllers/GenerarCompraController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerarCompraView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerarCompraView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/Views/GenerateSaleView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,14 +141,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00011" summary="fea: add show table">
-      <option name="closed" value="true" />
-      <created>1708375479370</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1708375479370</updated>
     </task>
     <task id="LOCAL-00012" summary="fea: add DAO products">
       <option name="closed" value="true" />
@@ -533,7 +526,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765251283573</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Más y cada vez más traducciones.">
+      <option name="closed" value="true" />
+      <created>1765252012747</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1765252012747</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -548,7 +549,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add: report view" />
     <MESSAGE value="feat: filter reports" />
     <MESSAGE value="feat: export reports &#10;add: statistic pie char products" />
     <MESSAGE value="add: statistic line chart products" />
@@ -573,6 +573,7 @@
     <MESSAGE value="Correcciones." />
     <MESSAGE value="Traducciones." />
     <MESSAGE value="Más y más traducciones." />
-    <option name="LAST_COMMIT_MESSAGE" value="Más y más traducciones." />
+    <MESSAGE value="Más y cada vez más traducciones." />
+    <option name="LAST_COMMIT_MESSAGE" value="Más y cada vez más traducciones." />
   </component>
 </project>

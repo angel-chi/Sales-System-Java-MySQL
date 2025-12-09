@@ -72,6 +72,7 @@
             <!-- Fila 4: Cantidad -->
             <Label text="Cantidad:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
             <Spinner fx:id="cantidad" prefWidth="117.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <TextField fx:id="date" editable="false" prefWidth="80.0" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
             <Label text="Vendedor:" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
             <TextField fx:id="vendedor" editable="false" prefWidth="148.0" GridPane.columnIndex="4" GridPane.rowIndex="3"/>
         </GridPane>
