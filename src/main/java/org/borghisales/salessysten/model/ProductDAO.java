@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDAO implements CRUD<Product>{
 
@@ -47,36 +49,62 @@ public class ProductDAO implements CRUD<Product>{
             }
 
         }catch (SQLException e){
+            return null;
+        }
+    }
 
+    public Product searchProduct(String productName) {
+        String sql = "SELECT * FROM product WHERE name = ?";
+
+        try(Connection conn = DBConnection.connection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, productName);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                rs.next();
+                return Product.fromResultSet(rs);
+            }
+        }catch (SQLException e){
             return null;
         }
     }
 
     @Override
     public boolean create(Product entity) {
-        String sql = "INSERT INTO product (name,price,stock,state) values (?,?,?,?)";
+        String sql = "INSERT INTO product (name,price,stock,state,garantia) values (?,?,?,?,?)";
 
-        try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
+        try (
+                Connection conn = DBConnection.connection();
+                ){
 
+            if(conn == null) {
+                return false;
+            }
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, entity.name());
             pstmt.setDouble(2, entity.price());
             pstmt.setInt(3, entity.stock());
             pstmt.setString(4, entity.state().name());
+            pstmt.setString(5, entity.garantia().getText());
 
             int rows_affected = pstmt.executeUpdate();
 
+            pstmt.close();
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product added correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto añadido correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error añadiendo el producto: ");
                 return false;
             }
-
-
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: " + e.getMessage());
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+        catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error añadiendo el producto: " + e.getMessage());
             return false;
         }
     }
@@ -84,7 +112,7 @@ public class ProductDAO implements CRUD<Product>{
 
     @Override
     public boolean update(Product entity) {
-        String sql = "UPDATE product set price=?,stock=?,state=? where name=?";
+        String sql = "UPDATE product set price=?,stock=?,state=?,garantia=? where name=?";
 
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -94,21 +122,23 @@ public class ProductDAO implements CRUD<Product>{
             pstmt.setDouble(1, entity.price());
             pstmt.setInt(2, entity.stock());
             pstmt.setString(3, entity.state().name());
-            pstmt.setString(4, entity.name());
+            pstmt.setString(4, entity.garantia().getText());
+            pstmt.setString(5, entity.name());
 
 
             int rows_affected = pstmt.executeUpdate();
 
+            boolean result = false;
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product updated correctly");
-                return true;
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto actualizado correctamente");
+                result = true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating product");
-                return false;
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando el producto");
             }
 
+            return result;
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating product: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando el producto: " + e.getMessage());
             return false;
         }
     }
@@ -126,17 +156,17 @@ public class ProductDAO implements CRUD<Product>{
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product deleted correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Producto eliminado correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting product: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error eliminando el producto");
                 return false;
             }
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "You cannot delete this product because you already have a sale with it");
+            MenuController.setAlert(Alert.AlertType.ERROR, "No puedes eliminar este producto debido a que tienes una venta que lo contiene");
             return false;
         }
     }
@@ -157,7 +187,7 @@ public class ProductDAO implements CRUD<Product>{
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error configurando la tabla de productos" + e.getMessage());
         }
 
     }
@@ -184,11 +214,26 @@ public class ProductDAO implements CRUD<Product>{
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando las ventas: " + e.getMessage());
         }
-
-
-
     }
 
+    public List<Product> getAllProducts() {
+        String sql = "SELECT * FROM product";
+        List<Product> list = new ArrayList<>();
+
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                list.add(Product.fromResultSet(rs));
+            }
+
+        } catch (SQLException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error cargando productos: " + e.getMessage());
+        }
+
+        return list;
+    }
 }

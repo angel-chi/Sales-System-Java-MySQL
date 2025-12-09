@@ -1,15 +1,22 @@
 package org.borghisales.salessysten.controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.scene.Parent;
+
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 public class MenuController {
 
@@ -22,6 +29,7 @@ public class MenuController {
     public static final String GENERATE_SALE_VIEW_FXML = VIEWS_DIRECTORY + "GenerateSaleView.fxml";
     public static final String REPORT_VIEW_FXML = VIEWS_DIRECTORY + "ReportsView.fxml";
     public static final String SALE_DETAIL_VIEW_FXML = VIEWS_DIRECTORY + "SaleDetailView.fxml";
+    public static final String PRODUCTSELECTION_VIEW_FXML = VIEWS_DIRECTORY + "ProductSelection.fxml";
 
 
     static Alert defaultAlert;
@@ -43,11 +51,71 @@ public class MenuController {
             stage.setScene(scene);
             configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
+            stage.setWidth(1000);
+            stage.setHeight(800);
+
+            Platform.runLater(() -> {
+                stage.toFront();
+                stage.requestFocus();
+            });
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista: "+ e.getMessage());
         }
     }
+
+    //Sobrecarga de openNewStage para configurar el controller
+    public Stage openNewStage(String fxmlFileName, String title, boolean modal, Window owner, Consumer<FXMLLoader> loaderConfigurator) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
+
+            // raiz(puede lanzar IOException)
+            Parent root = fxmlLoader.load();
+
+            // configurar el controller si se necesita
+            if (loaderConfigurator != null) {
+                try {
+                    loaderConfigurator.accept(fxmlLoader);
+                } catch (Exception e) {
+                    // evitar que fallos al configurar rompan la apertua
+                    System.err.println("Error configurando controller: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(scene);
+
+            configureStageCloseEvent(stage, fxmlFileName, title);
+
+            stage.setMinWidth(1000);
+            stage.setMinHeight(800);
+
+            if (owner != null) {
+                stage.initOwner(owner);
+            }
+            if (modal) {
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.showAndWait();
+            } else {
+                stage.show();
+            }
+
+            Platform.runLater(() -> {
+                stage.toFront();
+                stage.requestFocus();
+            });
+
+            return stage;
+
+        } catch (IOException | NullPointerException e) {
+            setAlert(Alert.AlertType.WARNING, "Error cargando la vista: " + e.getMessage());
+            return null;
+        }
+    }
+
 
     private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
@@ -61,14 +129,46 @@ public class MenuController {
         return filePaths.get(fxml);
     }
 
-    static public void setAlert(Alert.AlertType alertType,String argument){
-        defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
-        defaultAlert.setHeaderText(null);
-        defaultAlert.getButtonTypes().setAll(acceptButton);
-        defaultAlert.setContentText(argument);
-        defaultAlert.showAndWait();
+    static public void setAlert(Alert.AlertType alertType, String argument) {
+        // SOLUCION -> Alertas siempre encima
+        //Se espera a que el hilo este disponible para evitar problemas de interfaz
+        Platform.runLater(() -> {
+            Alert alert = new Alert(alertType);
+            alert.setTitle("Información");
+            alert.setHeaderText(null);
+            alert.getButtonTypes().setAll(acceptButton);
+            alert.setContentText(argument);
+
+            //Trata de buscar una ventana padre (que este activa)
+            Optional<Window> owner = Window.getWindows().stream()
+                    .filter(Window::isFocused)
+                    .findFirst();
+
+            //Si no hay ventana activa busca la primera que se este mostrando
+            if (!owner.isPresent()) {
+                owner = Window.getWindows().stream()
+                        .filter(Window::isShowing)
+                        .findFirst();
+            }
+            //Asignar ventana padre a la alerta
+            owner.ifPresent(alert::initOwner);
+            //Activa el modal para bloquear
+            alert.initModality(Modality.APPLICATION_MODAL);
+
+            //Cast con stage para aplicar alwaysOnTop
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.setAlwaysOnTop(true);
+
+            // Mostrar y esperar al cierre, al cierre el stage es eliminado
+            alert.showAndWait();
+
+            // Cualquier cosa tratar de quitar el alwaysOntTop
+            try {
+                alertStage.setAlwaysOnTop(false);
+            } catch (Exception ignored) {}
+        });
     }
+
 
     static public void cleanCells(TextField...cells){
         for (TextField e:cells)

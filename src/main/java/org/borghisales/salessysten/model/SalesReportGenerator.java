@@ -46,15 +46,15 @@ public class SalesReportGenerator {
                 writer.append(sale.state().toString()).append("\n");
             }
 
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "CSV Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte CSV generado correctamente en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "CSV Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Reporte CSV generado incorrectamente: " + e.getMessage());
         }
     }
     public static void generateExcelReport(ObservableList<Sales> salesList, String outputPath) {
         try (Workbook workbook = new XSSFWorkbook()) {
-            Sheet sheet = workbook.createSheet("Sales Report");
+            Sheet sheet = workbook.createSheet("Reporte de ventas");
 
             // Crear encabezados de columna
             Row headerRow = sheet.createRow(0);
@@ -87,10 +87,10 @@ public class SalesReportGenerator {
                 workbook.write(fileOut);
             }
 
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "EXCEL Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte de EXCEL generado correctamente en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "EXCEL Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Reporte de EXCEL generado incorrectamente: " + e.getMessage());
         }
     }
     public static void generatePDFReport(ObservableList<Sales> salesList, String outputPath) {
@@ -131,10 +131,10 @@ public class SalesReportGenerator {
             contentStream.close();
 
             document.save(outputPath);
-            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "PDF Report generated successfully at " + outputPath);
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Reporte PDF generado correctamente en " + outputPath);
 
         } catch (IOException e) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "PDF Report generated unsuccessfully: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Reporte PDF generado incorrectamente: " + e.getMessage());
 
         }
     }

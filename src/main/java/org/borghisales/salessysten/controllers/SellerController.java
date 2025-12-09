@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class SellerController implements Initializable {
     private final SellerDAO sellerDAO = new SellerDAO();
-    private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
+    private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVA, Seller.State.INACTIVA);
     private static ObservableList<Seller> sellers = null;
 
     @FXML
@@ -71,7 +71,7 @@ public class SellerController implements Initializable {
     }
 
     private void initializeComboBox() {
-        cbState.setValue(Seller.State.ACTIVE);
+        cbState.setValue(Seller.State.ACTIVA);
         cbState.setItems(stateList);
     }
 
@@ -86,14 +86,62 @@ public class SellerController implements Initializable {
 
 
     public void addSeller(ActionEvent actionEvent){
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
+        String usuario = dni.getText();
+        String nombre = name.getText();
+        String numeroTelefonico = phone.getText();
+        String cont = user.getText();
+
+        if(usuario.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El usuario está en blanco");
+            return;
+        }
+
+        if(nombre.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre está en blanco");
+            return;
+        }
+
+        if(numeroTelefonico.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El número telefónico está en blanco");
+            return;
+        }
+
+        if(cont.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "La contraseña está en blanco");
+        }
+
+        Seller seller = new Seller(usuario, nombre, numeroTelefonico, cbState.getValue(), cont);
         if (sellerDAO.create(seller)) {
             MenuController.cleanCells(dni, name, phone, user);
             updateTable();
         }
     }
     public void updateSeller(ActionEvent actionEvent) {
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
+        String usuario = dni.getText();
+        String nombre = name.getText();
+        String numeroTelefonico = phone.getText();
+        String cont = user.getText();
+
+        if(usuario.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El usuario está en blanco");
+            return;
+        }
+
+        if(nombre.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre está en blanco");
+            return;
+        }
+
+        if(numeroTelefonico.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El número telefónico está en blanco");
+            return;
+        }
+
+        if(cont.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "La contraseña está en blanco");
+        }
+
+        Seller seller = new Seller(usuario, nombre, numeroTelefonico, cbState.getValue(), cont);
         if (sellerDAO.update(seller)) {
             MenuController.cleanCells(dni, name, phone, user);
             updateTable();
@@ -102,7 +150,7 @@ public class SellerController implements Initializable {
 
     public void deleteSeller(ActionEvent actionEvent) {
         if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller");
+            MenuController.setAlert(Alert.AlertType.ERROR,"No se puede eliminar el vendedor actual");
             return;
         }
         if (sellerDAO.delete(dni.getText())){

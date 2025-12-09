@@ -9,25 +9,34 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.SubScene;
+import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class ProductController implements Initializable {
 
     private final ProductDAO productDAO = new ProductDAO();
 
-    private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
+    private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVO, Product.State.INACTIVO);
+
+    private final ObservableList<String> garantiaList =
+            FXCollections.observableArrayList(
+                    Arrays.stream(Product.Garantia.values())
+                            .map(Product.Garantia::getText)
+                            .toList()
+            );
 
     private static ObservableList<Product> products =null;
     @FXML
     private ComboBox<Product.State> cbState;
+    @FXML
+    private ComboBox<String> cbGarantia;
     @FXML
     private TextField name;
     @FXML
@@ -46,6 +55,8 @@ public class ProductController implements Initializable {
     private TableColumn<Product,Integer> colStock;
     @FXML
     private TableColumn<Product,Product.State> colState;
+    @FXML
+    private TableColumn<Product, String> colGarantia;
 
 
     @Override
@@ -68,11 +79,14 @@ public class ProductController implements Initializable {
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
         colStock.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().stock()).asObject());
         colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+        colGarantia.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().garantia().getText()));
     }
 
     private void initializeComboBox() {
-        cbState.setValue(Product.State.ACTIVE);
+        cbState.setValue(Product.State.ACTIVO);
         cbState.setItems(stateList);
+        cbGarantia.setValue(Product.Garantia.SIN_GARANTIA.getText());
+        cbGarantia.setItems(garantiaList);
     }
 
     private void initializeProductData() {
@@ -85,8 +99,30 @@ public class ProductController implements Initializable {
     }
 
     public void addProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                          Integer.parseInt(stock.getText()), cbState.getValue());
+        String nombre = name.getText();
+        double precio = 0.0d;
+        int cantidad = 0;
+
+        if(nombre.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del producto es una cadena vacía");
+            return;
+        }
+
+        try {
+            precio = Double.parseDouble(price.getText());
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El formato del precio es incorrecto");
+            return;
+        }
+
+        try {
+            cantidad = Integer.parseInt(stock.getText());
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El formato de la cantidad es incorrecto");
+            return;
+        }
+
+        Product product = new Product(nombre, precio, cantidad, cbState.getValue(), Product.Garantia.getFromString(cbGarantia.getValue()));
         if (productDAO.create(product)) {
             MenuController.cleanCells(name,price,stock);
             updateTable();
@@ -94,8 +130,30 @@ public class ProductController implements Initializable {
     }
 
     public void updateProduct(ActionEvent actionEvent) {
-        Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
-                Integer.parseInt(stock.getText()), cbState.getValue());
+        String nombre = name.getText();
+        double precio = 0.0d;
+        int cantidad = 0;
+
+        if(nombre.isBlank()) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El nombre del producto es una cadena vacía");
+            return;
+        }
+
+        try {
+            precio = Double.parseDouble(price.getText());
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El formato del precio es incorrecto");
+            return;
+        }
+
+        try {
+            cantidad = Integer.parseInt(stock.getText());
+        } catch (NumberFormatException e) {
+            MenuController.setAlert(Alert.AlertType.ERROR, "El formato de la cantidad es incorrecto");
+            return;
+        }
+
+        Product product = new Product(nombre, precio, cantidad, cbState.getValue(), Product.Garantia.getFromString(cbGarantia.getValue()));
         if (productDAO.update(product)) {
             MenuController.cleanCells(name,price,stock);
             updateTable();
@@ -118,6 +176,7 @@ public class ProductController implements Initializable {
         price.setText(String.valueOf(product.price()));
         stock.setText(String.valueOf(product.stock()));
         cbState.setValue(product.state());
+        cbGarantia.setValue(product.garantia().getText());
     }
 
     private void updateTable() {

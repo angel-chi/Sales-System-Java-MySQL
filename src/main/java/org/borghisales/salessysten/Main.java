@@ -1,6 +1,7 @@
 package org.borghisales.salessysten;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.controllers.MenuController;
 
@@ -20,10 +21,14 @@ public class Main extends Application {
         filePaths.put(GENERATE_SALE_VIEW_FXML, MANAGEMENT_VIEW_FXML);
         filePaths.put(REPORT_VIEW_FXML, MANAGEMENT_VIEW_FXML);
     }
+    public static HostServices HOST_SERVICES;
+
+
 
     @Override
     public void start(Stage stage) throws IOException {
-        mc.openNewStage(MAIN_VIEW_FXML,"Login");
+        HOST_SERVICES = getHostServices();
+        mc.openNewStage(MAIN_VIEW_FXML,"Inicio de sesión");
     }
 
     public static void main(String[] args) {

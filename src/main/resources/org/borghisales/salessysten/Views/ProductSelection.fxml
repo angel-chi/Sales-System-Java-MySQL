@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ProductSelectionController">
+   <children>
+      <AnchorPane prefHeight="616.0" prefWidth="656.0" stylesheets="@CSS/MainView.css" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+         <children>
+            <Separator layoutX="1.0" layoutY="35.0" prefHeight="16.0" prefWidth="989.0" />
+            <Label alignment="CENTER" layoutX="326.0" layoutY="14.0" prefHeight="21.0" prefWidth="327.0" text="SELECCIONAR PRODUCTO">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="codProduct" layoutX="140.0" layoutY="61.0" prefHeight="30.0" prefWidth="117.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="productName" editable="false" layoutX="382.0" layoutY="61.0" prefHeight="33.0" prefWidth="148.0" />
+            <Button layoutX="539.0" layoutY="51.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="54.0" prefWidth="252.0" style="-fx-background-color: #439dd0; -fx-text-fill: #fff;" text="Filtrar" />
+            <Separator layoutX="3.0" layoutY="114.0" prefHeight="16.0" prefWidth="989.0" />
+            <TableView fx:id="tableProducts" layoutX="7.0" layoutY="130.0" prefHeight="617.0" prefWidth="966.0">
+               <columns>
+                  <TableColumn fx:id="colNro" prefWidth="71.0" sortable="false" style="-fx-alignment: CENTER;" text="No" />
+                  <TableColumn fx:id="colCod" prefWidth="92.0" sortable="false" style="-fx-alignment: CENTER;" text="CODIGO" />
+                  <TableColumn fx:id="colProduct" prefWidth="129.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCTO" />
+                  <TableColumn fx:id="colPrice" prefWidth="150.0" sortable="false" style="-fx-alignment: CENTER;" text="PRECIO UNITARIO" />
+                  <TableColumn fx:id="colExistencias" prefWidth="132.0" style="-fx-alignment: CENTER;" text="EXISTENCIAS" />
+                  <TableColumn fx:id="colGarantia" prefWidth="160.0" style="-fx-alignment: CENTER;" text="GARANTIA" />
+               </columns>
+            </TableView>
+            <Separator layoutX="5.0" layoutY="757.0" prefHeight="8.0" prefWidth="989.0" />
+            <Label layoutX="13.0" layoutY="67.0" text="C. PRODUCTO:" wrapText="true">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="268.0" layoutY="68.0" text="PRODUCTO:" wrapText="true">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

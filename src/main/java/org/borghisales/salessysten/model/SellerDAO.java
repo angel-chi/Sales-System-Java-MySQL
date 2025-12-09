@@ -29,16 +29,16 @@ public class SellerDAO implements CRUD<Seller> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller added correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor añadido correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error añadiendo el vendedor: ");
                 return false;
             }
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error añdiendo el vendedor: " + e.getMessage());
             return false;
         }
 
@@ -62,15 +62,15 @@ public class SellerDAO implements CRUD<Seller> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller updated correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor actualizador correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando el vendedor");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando el vendedor: " + e.getMessage());
             return false;
         }
 
@@ -90,17 +90,17 @@ public class SellerDAO implements CRUD<Seller> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller deleted correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Vendedor eliminado correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error eliminando al vendedor: ");
                 return false;
             }
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error eliminando al vendedor: " + e.getMessage());
             return false;
         }
 
@@ -122,7 +122,7 @@ public class SellerDAO implements CRUD<Seller> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error configurando la tabla de vendedores " + e.getMessage());
         }
     }
 
@@ -130,34 +130,41 @@ public class SellerDAO implements CRUD<Seller> {
     public static boolean login(String dni,String user){
 
         if (dni ==null || user ==null || dni.isEmpty()||user.isEmpty() ){
-            MenuController.setAlert(Alert.AlertType.ERROR,"User or passsword empty");
+            MenuController.setAlert(Alert.AlertType.ERROR,"Usuario o contraseña vacía");
             return false;
         }
 
         String query = "SELECT * from seller where dni = ? and user = ?";
 
-        try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(query)  ){
+        try (Connection conn = DBConnection.connection()){
+            if(conn == null) {
+                return false;
+            }
+
+            PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1,dni);
             pstmt.setString(2,user);
 
             try (ResultSet rs = pstmt.executeQuery()){
-                if (rs.next()){
+                boolean result = false;
 
+                if (rs.next()){
                     GenerateSaleController.setSellerName(rs.getString("name"));
                     GenerateSaleController.setIdSeller(rs.getInt("idSeller"));
 
                     MainController.sellerLog = Seller.fromResultSet(rs);
 
-                    return true;
+                    result = true;
                 }else{
-                    MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;
-                    return false;
+                    MenuController.setAlert(Alert.AlertType.ERROR, "Usuario no encontrado") ;
                 }
+
+                pstmt.close();
+                return result;
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando el usuario" + e.getMessage());
             return false;
         }
 

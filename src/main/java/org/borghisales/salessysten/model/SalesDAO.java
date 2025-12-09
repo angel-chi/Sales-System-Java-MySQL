@@ -28,7 +28,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching IdSale: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando la id de la venta: " + e.getMessage());
             return 1;
         }
     }
@@ -36,7 +36,7 @@ public class SalesDAO {
         String sql = "INSERT INTO sales (idCustomer,idSeller,numberSales,saleDate,amount,state) values(?,?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)){
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 
             pstmt.setInt(1,sale.idCustomer());
             pstmt.setInt(2,sale.idSeller());
@@ -48,15 +48,15 @@ public class SalesDAO {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Sale saved correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Ventas guardadas correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error guardando las ventas");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error guardando las ventas " + e.getMessage());
             return false;
         }
 
@@ -66,25 +66,27 @@ public class SalesDAO {
 
         try (Connection conn = DBConnection.connection()){
 
+            if(conn == null) {
+                return false;
+            }
+
             for (ShoppingCart e:products) {
-                String sql = "INSERT INTO sales_details (idSales,idProduct,quantity, priceSale) values(?,?,?,?)";
+                String sql = "INSERT INTO sales_details (idSales,idProduct,quantity, priceSale,descuento) values(?,?,?,?, ?)";
                 try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
                     pstmt.setInt(1, id);
                     pstmt.setInt(2, Integer.parseInt(e.cod()));
                     pstmt.setInt(3, e.quantity());
                     pstmt.setDouble(4, e.price());
+                    pstmt.setDouble(5, 1 - e.discount());
 
                     pstmt.executeUpdate();
-
                 }
             }
-                return true;
 
-
-
+            return true;
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale details: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error guardando los detalles de las ventas: " + e.getMessage());
             return false;
         }
 
@@ -106,7 +108,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando las ventas: " + e.getMessage());
         }
 
 
@@ -144,13 +146,13 @@ public class SalesDAO {
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando las ventas: " + e.getMessage());
         }
     }
 
     public void setTableDetails(ObservableList<ShoppingCart> productsDetails, int idSale) {
         String sql = """ 
-                SELECT ROW_NUMBER() OVER() as nr, sd.idProduct as cod, p.name as product, sd.quantity, sd.priceSale as price, ROUND(sd.quantity *sd.priceSale,2) as total
+                SELECT ROW_NUMBER() OVER() as nr, sd.idProduct as cod, p.name as product, sd.quantity, sd.priceSale as price, ROUND(sd.quantity *sd.priceSale,2) as total, sd.descuento as descuento
                 FROM sales_details sd
                 INNER JOIN product p
                 USING(idProduct)
@@ -170,7 +172,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error buscando las ventas: " + e.getMessage());
         }
 
     }

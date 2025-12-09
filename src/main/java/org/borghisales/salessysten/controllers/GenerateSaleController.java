@@ -1,7 +1,9 @@
 package org.borghisales.salessysten.controllers;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,9 +11,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.borghisales.salessysten.model.*;
 
 
@@ -19,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GenerateSaleController extends MenuController implements Initializable {
@@ -38,10 +43,11 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Scene scene = null;
     private Stage stage;
 
-    private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
-    private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
-    private final ButtonType buttonTypeCancel = new ButtonType("NO");
+    //Se crean al momento ya no son necesarios
+    //private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
+    //private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
+    private final ButtonType buttonTypeAccept = new ButtonType("Sí");
+    private final ButtonType buttonTypeCancel = new ButtonType("No");
 
 
     private final CustomerDAO customerDAO = new CustomerDAO();
@@ -81,15 +87,19 @@ public class GenerateSaleController extends MenuController implements Initializa
     @FXML
     private TableColumn<ShoppingCart,String> colProduct;
     @FXML
+    private TableColumn<ShoppingCart, String> colGarantia;
+    @FXML
     private TableColumn<ShoppingCart, Integer> colQuantity;
     @FXML
     private TableColumn<ShoppingCart, Double> colPrice;
+    @FXML
+    private TableColumn<ShoppingCart, Double> colDescuento;
     @FXML
     private TableColumn<ShoppingCart,Double> colTotal;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeUIElements();
-        configureAlerts();
+        //configureAlerts();
         configureTable();
     }
 
@@ -100,10 +110,20 @@ public class GenerateSaleController extends MenuController implements Initializa
         date.setText(String.valueOf(now));
     }
 
-    private void configureAlerts() {
-        configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
-        configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+    //Nuevo metodo para crear y configurar alert nuevo - Remplazo de configureAlert
+    private Alert createConfiguredAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.getButtonTypes().setAll(buttonTypeAccept, buttonTypeCancel);
+        return alert;
     }
+    //YA NO SE NECESITA -> ELIMINAR DESPUES
+    /*private void configureAlerts() {
+        configureAlert(alertCustomer, "Nuevo cliente", "El cliente no existe", "¿Desea añadirlo?");
+        configureAlert(alertProduct, "Nuevo producto", "El producto no existe", "¿Desea añadirlo?");
+    }*/
 
     private void configureTable() {
         configureTableColumns();
@@ -111,13 +131,13 @@ public class GenerateSaleController extends MenuController implements Initializa
         products = FXCollections.observableArrayList();
     }
 
-
-    private void configureAlert(Alert alert, String title, String header, String content) {
+    //YA NO SE NECESITA -> ELIMINAR DESPUES
+    /*private void configureAlert(Alert alert, String title, String header, String content) {
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.getButtonTypes().setAll(buttonTypeAccept, buttonTypeCancel);
-    }
+    }*/
 
     private void configureTableColumns() {
         colNro.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().nr()).asObject());
@@ -125,26 +145,92 @@ public class GenerateSaleController extends MenuController implements Initializa
         colProduct.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().product()));
         colQuantity.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().quantity()).asObject());
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
-        colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total()).asObject());
+        colDescuento.setCellValueFactory(p -> new SimpleDoubleProperty( customer.membresia().applyDiscount( p.getValue().price())  ).asObject());
+        colTotal.setCellValueFactory(p -> new SimpleDoubleProperty( p.getValue().total() ).asObject());
+        colGarantia.setCellValueFactory(p -> new SimpleStringProperty(productDAO.searchProduct(p.getValue().product()).garantia().toString()));
     }
 
     public void searchCustomer(ActionEvent actionEvent) {
-        int customerId = Integer.parseInt(codCustomer.getText());
-        customer = customerDAO.searchCustomer(customerId);
+        String codText = codCustomer.getText() == null ? "" : codCustomer.getText().trim();
+        String nameText = customerName.getText() == null ? "" : customerName.getText().trim();
 
-        if (customer != null) {
-            setAlert(Alert.AlertType.CONFIRMATION, "Customer found: " + customer.name());
-            customerName.setText(customer.name());
-        } else {
-            handleCustomerNotFound();
+        if (codText.isBlank() && nameText.isBlank()) {
+            setAlert(Alert.AlertType.ERROR, "Debe ingresar un codigo o un nombre para buscar");
+            return;
         }
+
+        Customer found = null;
+
+        if (!codText.isBlank()) {
+            try {
+                int customerId = Integer.parseInt(codText);
+                found = customerDAO.searchCustomer(customerId);
+
+                if (found != null) {
+                    //Encontrar por id
+                    setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + found.name());
+                    customer = found;
+                    customerName.setText(found.name());
+                    return;
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
+
+        String nameToSearch = !nameText.isBlank() ? nameText : codText;
+
+        if (!nameToSearch.isBlank()) {
+            found = customerDAO.searchCustomer(nameToSearch);
+            if (found != null) {
+                setAlert(Alert.AlertType.CONFIRMATION, "Cliente encontrado: " + found.name());
+                customer = found;
+                codCustomer.setText(String.valueOf(found.dni()));
+                customerName.setText(found.name());
+                return;
+            }
+        }
+
+        handleCustomerNotFound();
     }
 
     private void handleCustomerNotFound() {
-        alertCustomer.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == buttonTypeAccept) {
-                openCustomerManagementView();
+        //SOLUCION A TIPO DISTINTO DE ALERTA -> CustomerNotFound siempre encima
+        //Esperar hilo disponible
+        Platform.runLater(() -> {
+
+            //Se crea un nuevo alert configurado
+            Alert alertCustomer = createConfiguredAlert(
+                    "Nuevo cliente",
+                    "El cliente no existe",
+                    "¿Desea añadirlo?"
+            );
+
+            //Busar la mejor opcion como vista padre empezando por ventanas activas
+            Optional<Window> owner = Window.getWindows().stream()
+                    .filter(Window::isFocused)
+                    .findFirst();
+            //Si no hay ventanas activas buscar en ventanas abiertas
+            if (owner.isEmpty()) {
+                owner = Window.getWindows().stream()
+                        .filter(Window::isShowing)
+                        .findFirst();
             }
+            // La asignación de owner nuevo
+            owner.ifPresent(alertCustomer::initOwner);
+
+            Stage alertStage = (Stage) alertCustomer.getDialogPane().getScene().getWindow();
+
+            alertStage.setAlwaysOnTop(true);
+            //Mostrar el alert
+            alertCustomer.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == buttonTypeAccept) {
+                    openCustomerManagementView();
+                }
+            });
+            //quitar alwaysOnTop por si acaso
+            try {
+                alertStage.setAlwaysOnTop(false);
+            } catch (Exception ignored) {}
         });
     }
 
@@ -158,16 +244,28 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Customer");
+        stage.setTitle("Manejar clientes");
         stage.setScene(scene);
         stage.show();
     }
 
 
     public void searchProduct(ActionEvent actionEvent) {
-        int productId = Integer.parseInt(codProduct.getText());
-        Product product = productDAO.searchProduct(productId);
+        if(codProduct.getText().isBlank()) {
+            setAlert(Alert.AlertType.ERROR, "El texto a buscar es una cadena vacía");
+            return;
+        }
+        int productId;
 
+        try {
+            productId = Integer.parseInt(codProduct.getText());
+        }
+        catch(NumberFormatException e) {
+            setAlert(Alert.AlertType.ERROR, "El texto a buscar no es un número entero.\nPor favor ingrese únicamente números.");
+            return;
+        }
+
+        Product product = productDAO.searchProduct(productId);
         if (product != null) {
             updateProductFields(product);
         } else {
@@ -176,7 +274,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void updateProductFields(Product product) {
-        setAlert(Alert.AlertType.CONFIRMATION, "Product found: " + product.name());
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto encontrado: " + product.name());
         productName.setText(product.name());
         stock.setText(String.valueOf(product.stock()));
         price.setText(String.valueOf(product.price()));
@@ -186,10 +284,42 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void handleProductNotFound() {
-        alertProduct.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == buttonTypeAccept) {
-                openProductManagementView();
+        //NOTA -> Misma solucion aplicada que en CustomerNotFound
+        //SOLUCION A TIPO DISTINTO DE ALERTA-> ProductNotFound siempre encima
+
+        Alert alertProduct = createConfiguredAlert(
+                "Nuevo producto",
+                "El producto no existe",
+                "¿Desea añadirlo?"
+        );
+        //Esperar hilo disponible
+        Platform.runLater(() -> {
+            //Busar la mejor opcion como vista padre empezando por ventanas activas
+            Optional<Window> owner = Window.getWindows().stream()
+                    .filter(Window::isFocused)
+                    .findFirst();
+            //Si no hay ventanas activas buscar en ventanas abiertas
+            if (owner.isEmpty()) {
+                owner = Window.getWindows().stream()
+                        .filter(Window::isShowing)
+                        .findFirst();
             }
+            owner.ifPresent(alertProduct::initOwner);
+
+            //Cast con stage para AlwaysOnTop
+            Stage alertStage = (Stage) alertProduct.getDialogPane().getScene().getWindow();
+
+            alertStage.setAlwaysOnTop(true);
+            //Mostrar el alert
+            alertProduct.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == buttonTypeAccept) {
+                    openProductManagementView();
+                }
+            });
+            //Una vez termina quitar alwaysOnTop por si acaso
+            try {
+                alertStage.setAlwaysOnTop(false);
+            } catch (Exception ignored) {}
         });
     }
 
@@ -203,7 +333,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         }
 
         stage = new Stage();
-        stage.setTitle("Manage Product");
+        stage.setTitle("Manejar producto:");
         stage.setScene(scene);
         stage.show();
     }
@@ -214,8 +344,8 @@ public class GenerateSaleController extends MenuController implements Initializa
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
-        total.clear();
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
+        total.setText("0.0");
     }
 
     public void generateSale(ActionEvent actionEvent) {
@@ -225,6 +355,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
         Sales sales = createSalesObject();
 
+        setSerial();
         if (saveSaleAndDetails(sales)) {
             productDAO.subtractStock(products);
             cleanFieldsAndTable();
@@ -238,7 +369,7 @@ public class GenerateSaleController extends MenuController implements Initializa
     private Sales createSalesObject() {
         return new Sales(customer.idCustomer(), idSeller, serial.getText(),
                 LocalDate.parse(date.getText()), Double.parseDouble(total.getText()),
-                Sales.State.ACTIVE);
+                Sales.State.ACTIVA);
     }
 
     private boolean saveSaleAndDetails(Sales sales) {
@@ -280,7 +411,7 @@ public class GenerateSaleController extends MenuController implements Initializa
         ShoppingCart product = createShoppingCartObject();
 
         if (isProductAlreadyInCart(product)) {
-            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            MenuController.setAlert(Alert.AlertType.ERROR, "Este producto ya se encuentra en el carrito");
             return;
         }
 
@@ -288,9 +419,13 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private ShoppingCart createShoppingCartObject() {
+
         return new ShoppingCart(contProducts++, codProduct.getText(),
-                productName.getText(), quantity.getValue(),
-                Double.parseDouble(price.getText()));
+                productName.getText(),
+                quantity.getValue(),
+                Double.parseDouble(price.getText()),
+                customer.membresia().getDiscount()
+        );
     }
 
     private boolean isProductAlreadyInCart(ShoppingCart product) {
@@ -307,9 +442,9 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private String validateInputs() {
         if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
-            return "Missing customer name or product name.";
+            return "Nombre del cliente o producto no encontrado";
         } else if (quantity.getValue() == 0) {
-            return "Quantity can't be 0.";
+            return "La cantidad no puede ser 0.";
         }
         return null;
     }
@@ -319,6 +454,37 @@ public class GenerateSaleController extends MenuController implements Initializa
         String formattedId= String.format("%04d", idSale);
         serial.setText(formattedId);
     }
+
+    public void acceptSelectedProduct(Product product) {
+        if (product == null) return;
+
+        codProduct.setText(String.valueOf(product.idProduct()));
+        productName.setText(product.name());
+        price.setText(String.valueOf(product.price()));
+        stock.setText(String.valueOf(product.stock()));
+
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, product.stock(), 0);
+        quantity.setValueFactory(valueFactory);
+
+        setAlert(Alert.AlertType.CONFIRMATION, "Producto seleccionado: " + product.name());
+    }
+
+    @FXML
+    public void openProductSelectionView(ActionEvent actionEvent) {
+        Window ownerWindow = serial.getScene() != null ? serial.getScene().getWindow() : null;
+
+        openNewStage(
+                PRODUCTSELECTION_VIEW_FXML,
+                "Seleccionar producto",
+                true,
+                ownerWindow,
+                loader -> {
+                    ProductSelectionController controller = loader.getController();
+                    controller.setParentController(this);
+                }
+        );
+    }
+
 
 
 }
