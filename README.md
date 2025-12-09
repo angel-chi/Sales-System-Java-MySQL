@@ -320,3 +320,7 @@ Los principios de la POO que implementa esta mejora son:
 
 - **Polimorfismo:**
   En escenarios futuros sería posible manejar listas de Person y tratar de forma uniforme a clientes y vendedores, permitiendo que cada uno implemente detalles específicos sin cambiar el código que los usa.
+
+# Video Presentación
+
+Link de Youtube: https://youtu.be/evwqr0dbEGo
