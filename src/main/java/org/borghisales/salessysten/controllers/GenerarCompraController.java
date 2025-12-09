@@ -36,7 +36,7 @@ public class GenerarCompraController extends MenuController implements Initializ
     // Configuraciones
     private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
     private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
-    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeAccept = new ButtonType("SI");
     private final ButtonType buttonTypeCancel = new ButtonType("NO");
     // Campos para agregar nuevos
     @FXML private TextField idProducto;
