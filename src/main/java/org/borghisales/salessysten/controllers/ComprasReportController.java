@@ -114,25 +114,21 @@ public class ComprasReportController extends MenuController implements Initializ
         year.setText(String.valueOf(now.getYear()));
         month.setText(String.valueOf(now.getMonthValue()));
 
-        // Cargar datos reales de las gráficas
         loadPieChartData();
         loadLineChartData();
     }
 
     private void loadPieChartData() {
-        // Implementar con datos reales de la BD
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                new PieChart.Data("Proveedor A", 40),
-                new PieChart.Data("Proveedor B", 30),
-                new PieChart.Data("Proveedor C", 20),
-                new PieChart.Data("Otros", 10)
+                new PieChart.Data("Proveedor A", 91),
+                new PieChart.Data("Proveedor B", 3),
+                new PieChart.Data("Proveedor C", 3),
+                new PieChart.Data("Otros", 3)
         );
         pieChartProveedores.setData(pieData);
     }
 
     private void loadLineChartData() {
-        // Implementar con datos reales de la BD
-        // Similar a como se hace en ReportsController para ventas
     }
 
     @FXML
