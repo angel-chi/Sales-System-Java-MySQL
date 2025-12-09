@@ -149,13 +149,6 @@ La pantalla principal muestra las siguientes ventanas: (¡Ya traducidas al espa�
 * Corrección de Nombre de Pestañas: Al cambiar una pestaña se mantenía el nombre de la pestaña cerrada y no de la actual. Se implementa un HashMap en dicho fichero con el nombre de cada ventana y se cambió la lógica de modo que se relacione la pestaña padre con la hija, permitiendo que se mantenga el título de dicha pestaña.
 * Corrección de Help. Anteriormente utilizar esta función crasheaba el programa por completo. Ahora, se implementó una ventana de Ayuda para cumplir su objetivo inicial.
 
-# Diagrama UML
-
-<p align="center">
-  <img src="src/main/resources/images/Diagrama%20UML.png" />
-</p>
-
-
 ## AbstractBaseDAO\<T>
 Se implementa la clase base AbstractBaseDAO\<T>, la cual centraliza la lógica repetitiva de las operaciones CRUD. Se aplican dos principios SOLID:
 * SSP (Single Responsability Principle): La clase base se encarga únicamente de la gestión de conexiones, manejo de excepciones SQL y ejecución de sentencias, mientras que sus hijas solo definen consultas específicas y mapeo de objetos!
