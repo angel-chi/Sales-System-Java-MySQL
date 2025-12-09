@@ -37,7 +37,6 @@ public class AccessDeniedController implements Initializable {
         stage.close();
     }
 
-    // Métodos estáticos para configurar el mensaje antes de abrir la ventana
     public static void setMessage(String message) {
         customMessage = message;
     }

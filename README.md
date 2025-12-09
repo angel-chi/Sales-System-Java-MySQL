@@ -168,19 +168,18 @@ La pantalla principal muestra las siguientes ventanas
 | **Implementación**        | Se añadió una validación del campo y un bloque try-catch en el controlador. Si la entrada no es un valor numérico válido, se muestra una alerta al usuario indicándole el error y solicitando una entrada válida. |
 
 ### 3. Error al mostrar el nombre de las ventanas (No se actualizaba el título)
-| Aspecto                   | Detalles      |
-|:--------------------------|:--------------|
-| **Descripción del Error** | Escribir aqui |
-| **Solución Implementada** | Escribir aqui |
-| **Implementación**        | Escribir aqui |
-
-### 4. Error (describir error)
 | Aspecto                   | Detalles                                                                                                                                                                                                                                                                                                                      |
 |:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Descripción del Error** | Al abrir una ventana nueva y después cerrarla, la nueva ventana mantenía el nombre de la ventana cerrada.                                                                                                                                                                                                                     |
 | **Solución Implementada** | Asignar a cada ventana su nombre correspondiente.                                                                                                                                                                                                                                                                             |
 | **Implementación**        | Se creo un HashMap llamado fxmlTitles para asignarle a cada ventana su nombre correspondiente. Luego mediante un constructor se inicializa el fxmlTitle, por último en el método `configurateStageCloseEvent` se creó una variable que almacene el título de la ventana padre que debe mostrarse al cerrar la ventana actual. |
 
+### 4. Error (Describir error)
+| Aspecto                   | Detalles      |
+|:--------------------------|:--------------|
+| **Descripción del Error** | Escribir aqui |
+| **Solución Implementada** | Escribir aqui |
+| **Implementación**        | Escribir aqui |
 
 ---
 
@@ -223,6 +222,15 @@ La pantalla principal muestra las siguientes ventanas
     * Los módulos de alto nivel (Controladores) ya no dependen directamente de los módulos de bajo nivel (DAOs concretos).
     * Esto desacopla la aplicación, facilitando la posibilidad de cambiar el mecanismo de persistencia sin la necesidad de modificar el código del Controlador.
 
+### 3. Propuesta Implementada #3: Agrega puestos de vendedor (Seller y Manager)
+* **Objetivo:** Diferenciar entre vendedores y gerentes, otorgando permisos específicos a cada puesto.
+* **Acción:**
+  * Se modificó la base de datos para incluir un nuevo atributo "role" en la tabla "sellers".
+  * Se agregó una verificación al intentar abrir las ventanas de Product y Seller donde solo los gerentes pueden acceder.
+  * Se agregó el atributo "role" al modelo Seller y se ajustaron los métodos de autenticación para considerar este nuevo atributo.
+  * Se actualizó la interfaz de agregar vendedores para incluir la selección del rol (vendedor o gerente).
+* **Resultado:**
+  * Solo los gerentes pueden acceder a la gestión de productos y vendedores, mientras que los vendedores solo pueden realizar ventas y gestionar clientes.
 ---
 ## Sales
 https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d-83f9b4807ac5
