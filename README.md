@@ -231,7 +231,7 @@ Sin embargo, no habria el enlace y en su lugar provocaba una falla en el program
 
 **Justificación:** La implementación de un sistema de roles es fundamental para establecer un nivel de seguridad apropiado entre diferentes tipos de trabajadores. No todos los empleados deben tener acceso a todas las funcionalidades del sistema; por ejemplo, un vendedor regular no debería poder acceder a funciones administrativas o de gestión de personal. Este sistema de roles da sentido práctico al sistema de login, transformándolo de un simple mecanismo de identificación a un verdadero sistema de control de acceso basado en privilegios. Además, prepara el sistema para futuras expansiones donde puedan agregarse más roles con diferentes combinaciones de permisos.
 
-## Sistema de Gestión de Compras e Inventario
+## Sistema de Gestión de Compras e Inventario.
 
 **Base de datos:** Se diseñó e implementó un subsistema completo para la gestión de compras, que funciona como el complemento lógico al sistema de ventas existente. Se crearon tres nuevas tablas interrelacionadas: una tabla principal de compras, una tabla de productos comprados que detalla los ítems específicos de cada compra, y una tabla de proveedores que registra la información de los suministradores. Estas tablas establecen una relación estructurada que permite rastrear el origen de cada producto en el inventario, vinculando las compras con los productos específicos adquiridos y los proveedores que los suministran.
 
