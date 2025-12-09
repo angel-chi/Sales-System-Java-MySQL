@@ -3,50 +3,65 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="407.0" prefWidth="305.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
-   <children>
-      <TabPane fx:id="tabPaneManage" prefHeight="400.0" prefWidth="315.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="MENU">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="525.0">
-                     <children>
-                        <Button layoutX="78.0" layoutY="76.0" mnemonicParsing="false" onAction="#help" prefHeight="70.0" prefWidth="160.0" text="HELP" />
-                        <Button layoutX="78.0" layoutY="219.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="160.0" text="EXIT" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="SALES">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openGenerateSale" prefHeight="70.0" prefWidth="160.0" text="GENERATE SALE" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="MANAGEMENT">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="78.0" layoutY="46.0" mnemonicParsing="false" onAction="#openCustomer" prefHeight="70.0" prefWidth="160.0" text="CUSTOMER" />
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="160.0" text="PRODUCT" />
-                        <Button fx:id="sellerButton" layoutX="78.0" layoutY="264.0" mnemonicParsing="false" onAction="#openSeller" prefHeight="70.0" prefWidth="160.0" text="SELLER" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="REPORTS">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openSalesReport" prefHeight="70.0" prefWidth="160.0" text="SALES REPORT" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Rectangle?>
+<AnchorPane
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="org.borghisales.salessysten.controllers.ManagementController"
+        minWidth="1000.0"
+        minHeight="800.0">
+    <ImageView fx:id="cinta" AnchorPane.topAnchor="0"  AnchorPane.rightAnchor="0"
+               fitHeight="50" preserveRatio="false" pickOnBounds="true" fitWidth="1080"
+    />
+    <ImageView fx:id="uadyLogo" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="5" fitHeight="50" preserveRatio="true" fitWidth="50"/>
+
+    <HBox
+            AnchorPane.rightAnchor="20"
+            AnchorPane.topAnchor="10"
+            prefHeight="50"
+    >
+        <Button text="Ayuda" prefWidth="90" prefHeight="30" onAction="#openHelp"/>
+        <Button text="Cerrar Sesión" prefHeight="30" prefWidth="120" onAction="#exit"/>
+    </HBox>
+    <VBox   alignment="CENTER"
+            AnchorPane.bottomAnchor="0"
+            AnchorPane.topAnchor="50"
+            AnchorPane.rightAnchor="0"
+            AnchorPane.leftAnchor="0"
+            spacing="30"
+    >
+        <HBox alignment="CENTER" spacing="1">
+            <ImageView fx:id="carritoShop" fitWidth="65" fitHeight="65" preserveRatio="true"/>
+            <Label text="VENTAS" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
+        </HBox>
+
+        <Button text="Generar venta" prefWidth="120" prefHeight="50" onAction="#openGenerateSale"/>
+
+        <HBox alignment="CENTER" spacing="5">
+            <ImageView fx:id="tuerca" fitWidth="32" fitHeight="32" preserveRatio="true"/>
+            <Label text="GESTIÓN Y CATÁLOGO" style="-fx-font-size: 25px; -fx-font-weight: bold;"/>
+        </HBox>
+
+        <HBox spacing="5" alignment="CENTER">
+            <Button text="Clientes" prefWidth="110" prefHeight="50" onAction="#openCustomer"/>
+            <Button text="Productos" prefWidth="110" prefHeight="50" onAction="#openProduct"/>
+            <Button text="Vendedores" prefWidth="110" prefHeight="50" onAction="#openSeller"/>
+        </HBox>
+
+        <HBox alignment="CENTER" spacing="5">
+            <ImageView fx:id="reportes" fitWidth="32" fitHeight="32" preserveRatio="true"/>
+            <Label text="REPORTES" style="-fx-font-size: 25px; -fx-font-weight: bold;"/>
+        </HBox>
+        <Button text="Generar reporte" prefWidth="150" prefHeight="50" onAction="#openSalesReport"/>
+
+
+
+
+    </VBox>
+
+
+
+
 </AnchorPane>
+

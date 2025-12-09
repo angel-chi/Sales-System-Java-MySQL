@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class SellerController implements Initializable {
+public class SellerController extends MenuController implements Initializable {
     private final SellerDAO sellerDAO = new SellerDAO();
     private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
     private static ObservableList<Seller> sellers = null;
@@ -88,25 +88,25 @@ public class SellerController implements Initializable {
     public void addSeller(ActionEvent actionEvent){
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
         if (sellerDAO.create(seller)) {
-            MenuController.cleanCells(dni, name, phone, user);
+            cleanCells(dni, name, phone, user);             //por si rompo el codigo, aqui habia un MenuController.
             updateTable();
         }
     }
     public void updateSeller(ActionEvent actionEvent) {
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
         if (sellerDAO.update(seller)) {
-            MenuController.cleanCells(dni, name, phone, user);
+            cleanCells(dni, name, phone, user);         //por si rompo el codigo, aqui habia un MenuController.
             updateTable();
         }
     }
 
     public void deleteSeller(ActionEvent actionEvent) {
         if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
-            MenuController.setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller");
+            setAlert(Alert.AlertType.ERROR,"No se puede eliminar al vendedor en uso"); //por si rompo el codigo, aqui habia un MenuController.
             return;
         }
         if (sellerDAO.delete(dni.getText())){
-            MenuController.cleanCells(dni,name,phone,user);
+            cleanCells(dni,name,phone,user);                //por si rompo el codigo, aqui habia un MenuController.
             updateTable();
         }
     }

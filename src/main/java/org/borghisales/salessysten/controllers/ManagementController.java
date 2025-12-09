@@ -5,75 +5,93 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import java.awt.*;
-import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ManagementController extends MenuController implements Initializable {
 
-    private static int lastTab ;
+    @FXML
+    private  ImageView uadyLogo;
+    @FXML
+    private ImageView reportes;
+    @FXML
+    private ImageView tuerca;
+    @FXML
+    private ImageView carritoShop;
+    @FXML
+    private ImageView cinta;
 
     @FXML
     private Button sellerButton;
 
-    @FXML
-    private TabPane tabPaneManage;
 
     @FXML
     void openSeller(ActionEvent actionEvent){
-        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(SELLER_VIEW_FXML,"Seller");
-        closeCurrentStage(sellerButton);
+        requestPassword();
+        if (correctPassword) {
+            openNewStage(SELLER_VIEW_FXML, "Vendedor", 650, 600, false);
+            closeCurrentStage((Button) actionEvent.getSource());
+        }
+        correctPassword = false;
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tabPaneManage.getSelectionModel().select(lastTab);
+
+        Image img = new Image(getClass().getResource("/images/cinta.jpg").toString());
+        cinta.setImage(img);
+
+        Image img2 = new Image(getClass().getResource("/images/carritoshop.png").toString());
+        carritoShop.setImage(img2);
+
+        Image img3 = new Image(getClass().getResource("/images/tuerca.png").toString());
+        tuerca.setImage(img3);
+
+        Image img4 = new Image(getClass().getResource("/images/reportes.png").toString());
+        reportes.setImage(img4);
+
+        Image img5 = new Image(getClass().getResource("/images/uady.png").toString());
+        uadyLogo.setImage(img5);
+
+
     }
 
-    public void openCustomer(ActionEvent actionEvent) {
-        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(CUSTOMER_VIEW_FXML, "Customer");
-        closeCurrentStage(sellerButton);
 
+
+    public void openCustomer(ActionEvent actionEvent) {
+        openNewStage(CUSTOMER_VIEW_FXML, "Clientes", 1000, 800, false);
+        closeCurrentStage((Button) actionEvent.getSource());
     }
 
     public void openProduct(ActionEvent actionEvent) {
-        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(PRODUCT_VIEW_FXML,"Products");
-        closeCurrentStage(sellerButton);
-
+        openNewStage(PRODUCT_VIEW_FXML,"Productos", 800, 800, false);
+        closeCurrentStage((Button) actionEvent.getSource());
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
-        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(GENERATE_SALE_VIEW_FXML,"Shopping cart");
-        closeCurrentStage(sellerButton);
+
+        openNewStage(GENERATE_SALE_VIEW_FXML,"Carrito de compra", 700, 700, false);
+        closeCurrentStage((Button) actionEvent.getSource());
     }
+
     public void openSalesReport(ActionEvent actionEvent) {
-        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(REPORT_VIEW_FXML,"Sales");
-        closeCurrentStage(sellerButton);
+        openNewStage(REPORT_VIEW_FXML,"Ventas", 1500, 1025, false);
+        closeCurrentStage((Button) actionEvent.getSource());
 
     }
 
-    public void help(ActionEvent actionEvent) {
-        try {
-            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"The URL could not be opened. Check your internet connection.");
-        }
-
+    public void openHelp(ActionEvent actionEvent) {
+        openNewStage(HELP_VIEW_FXML,"Ayuda", 575, 620, false);
+        closeCurrentStage((Button) actionEvent.getSource());
     }
 
     public void exit(ActionEvent actionEvent) {
-        openNewStage(MAIN_VIEW_FXML,"Login");
-        closeCurrentStage(sellerButton);
+
+        closeCurrentStage((Button) actionEvent.getSource());
+        openNewStage(MAIN_VIEW_FXML, "Inicio de sesión", 400, 500, false);
     }
 
 

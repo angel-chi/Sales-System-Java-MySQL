@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.borghisales.salessysten.controllers.HelpController" prefWidth="600" prefHeight="500">
+
+    <Button text="Cerrar ventana" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10"
+            prefHeight="35" prefWidth="120" onAction="#exitWindow" />
+
+    <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="60" AnchorPane.leftAnchor="20"
+          AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+
+        <Label text="Centro de Ayuda" underline="true">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+
+        <!-- Contacto y soporte -->
+        <TitledPane text="Contacto y soporte" expanded="true" collapsible="false">
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <HBox spacing="10">
+                    <ImageView fx:id="email" fitWidth="24" fitHeight="24" preserveRatio="true"/>
+                    <Label text="Email: example@example.com"/>
+                </HBox>
+                <HBox spacing="10">
+                    <ImageView fx:id="telefono" fitWidth="24" fitHeight="24" preserveRatio="true"/>
+                    <Label text="Teléfono: 999-999-9999"/>
+                </HBox>
+            </VBox>
+        </TitledPane>
+
+        <!-- Acerca del programa -->
+        <TitledPane text="Acerca del programa" expanded="true" collapsible="false">
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <Label text="Nombre: Punto de Venta"/>
+                <Label text="Versión: 2.0"/>
+                <Label text="Autor del programa: Borghii"/>
+                <Label text="Colaboradores: Cristian Sanchez, Alberto Novelo"/>
+                <Label text="Desarrollado para la Universidad Autónoma de Yucatán"/>
+                <ImageView fx:id="uadyy" fitWidth="100" fitHeight="70" preserveRatio="true"/>
+            </VBox>
+        </TitledPane>
+
+        <!-- Recursos -->
+        <TitledPane text="Recursos" expanded="true" collapsible="false">
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <HBox spacing="10">
+                    <ImageView fx:id="github" fitWidth="24" fitHeight="24" preserveRatio="true"/>
+                    <TextField text="Repositorio: https://github.com/angel-chi/Sales-System-Java-MySQL/branches" editable="false" HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+        </TitledPane>
+    </VBox>
+
+</AnchorPane>

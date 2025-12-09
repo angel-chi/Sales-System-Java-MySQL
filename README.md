@@ -110,40 +110,53 @@ Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder,
 # 💡 Fucionalidades
 
 ## Inicio de sesión
-Para iniciar sesión, se requiere el DNI y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el DNI se asocia con 'dni' y la contraseña con 'user'.
+Para iniciar sesión, se requiere el Usuario y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el Usuario se asocia con 'dni' y la contraseña con 'user'.
 
 <p align="center">
   <img src="src/main/resources/images/login.png" />
 </p>
 
 ## Pantalla principal
-La pantalla principal muestra las siguientes ventanas
-* Menu: incluyen la posibilidad de salir o visitar la documentación
-<p align="center">
-  <img src="src/main/resources/images/menu.png" />
-</p>
 
-* Sales: Permite generar nuevas ventas.
-<p align="center">
-  <img src="src/main/resources/images/sales.png" />
-</p>
-
-* Management: Ofrece operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para clientes, productos y vendedores.
+* Control de punto de venta: Ofrece el acceso completo al usuario a todas las interfaces disponibles del punto de venta organizada en 3 secciones principales: VENTAS, GESTIÓN Y CATÁLOGO, REPORTES. Proporcionando una interfaz amigable con el usuario
 <p align="center">
   <img src="src/main/resources/images/management.png" />
 </p>
 
-* Reports: Aquí se encuentran las operaciones de reportes y estadísticas relacionadas.
+## Generar Venta
+
+* En este apartado el usuario podra generar sus ventas añadiendo el codigo del producto y el usuario del cliente, todo mediante una interfaz amigable con el usuario
 <p align="center">
-  <img src="src/main/resources/images/reports.png" />
+  <img src="src/main/resources/images/generarVenta.png" />
 </p>
 
-## Sales
-https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d-83f9b4807ac5
-## Management
-https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b-218c9ca25b10
-## Reports
-https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
+## Clientes
+* En este apartado el usuario podra llevar un control de sus clientes, podra añadir o actualizar, en dado caso de querer eliminar un cliente debera ingresar la clave unica de administrador para poder realizar dicha acción
+<p align="center">
+  <img src="src/main/resources/images/controlClientes.png" />
+</p>
+
+## Productos
+* En este apartado el usuario podra añadir, eliminar o actualizar el inventario de productos del punto de venta
+<p align="center">
+  <img src="src/main/resources/images/productos.png" />
+</p>
+
+## Vendedores
+* En este apartado, el administrador del punto de venta, quien se espera que sea el dueño del loca, podra eliminar a sus vendedores (empleados) o actualizar la informacion de los mismos, unicamente el o las personas que tengan la clave unica de acceso, podran acceder a este apartado
+<p align="center">
+  <img src="src/main/resources/images/vendedor.png" />
+</p>
+
+## Cierre de ventas
+* En este apartado, los vendedores podran hacer su corte y obtener un .PDF, .XLSX o .CSV con el registro de todas las ventas realizadas hasta el momento de la consulta, al igual que una estadistica para mayor claridad
+<p align="center">
+  <img src="src/main/resources/images/reportesHistorial.png" />
+</p>
+
+<p align="center">
+  <img src="src/main/resources/images/reportesEst.png" />
+</p>
 
 # 📧 Contacto
 Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
@@ -154,3 +167,141 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
 [⬆ Volver al inicio](#title)<br>
+
+
+<h1 align="center" id="title"> README equipo 3 (nuestros aportes)</h1>
+
+## 📊 Diagrama UML
+
+![image alt](https://github.com/angel-chi/Sales-System-Java-MySQL/blob/9c4cf0bf42704f11ab4cc64c8afaddc3c6a9a313/UML.png)
+
+
+## ⬇️ Instalacion de Maven
+
+1. Actualiza los repositorios usando: _sudo apt uptdate_
+2. Instala Maven usando: _sudo apt install Maven_
+3. Verifica la instalación usando: _mvn -version_
+_Si se imprime algo similar a esto, la instalación fue correcta (nota: Revisar que la versón de Maven sea igual o superio a v3.8 y Java version igual a v17)
+
+![image alt](https://github.com/angel-chi/Sales-System-Java-MySQL/blob/2f4832054a223c41183e473d574709fdc230f15d/mvn.png)
+
+
+## 🔨 Instrucciones para construir y ejecutar sin IDE
+
+1. Compila y empaqueta el proyecto usando: _mvn clean install_
+(Esto limpia compilaciones previas, compila el código, corre pruebas y genera el .jar )
+2. Ejecuta la aplicación JavaFX usando: _mvn javafx:run_
+
+
+## 🪲 Errores encontrados y su solución
+
+Error 1: Se terminaba la ejecución del programa y cerraba IntelliJ 
+- _**¿Cuándo ocurrió?:**_ Al presionar el botón del help de la interfaz de _Control del punto de venta_ (Error de ejecución).
+- _**Causa:**_ Trata de redirigir  al usuario al repositorio de github pero por alguna razón la librería no conseguía hacerlo y se quedaba congelada, sospechamos que fue debido al sistema operativo.
+- _**Solución:**_ Reconstruimos totalmente la función del botón de help, la cual ya no manda directo al usuario a un repositorio de github, si no que ahora abre una interfaz de soporte implementada en el propio programa donde se proporciona todo lo necesario al usuario respecto a un servicio de ayuda.
+
+Error 2: Creación de ventanas emergentes con tamaño erróneo 
+- _**¿Cuándo ocurrió?:**_ Cada que se abría una nueva ventana (Error de ejecución).
+- _**Causa:**_ No se inicializaba un tamaño mínimo a la hora de llamar al método que creaba las pestañas.
+- _**Solución:**_ Se añadió 2 parametros extras a [openNewStage] para definir un tamaño mínimo a la hora de crear una nueva ventana.
+
+Error 3: Error al generar una venta 
+- _**¿Cuándo ocurrió?:**_ Cuando añadias una venta (Error de ejecución).
+- _**Causa:**_ Idioma de la computadora, si se encuentra en ingles parece no generar error pero si se encuentra en español si, esto debido a que en ingles se usa comas para separar enteros de decimales y en español se usa punto decimal.
+- _**Solución:**_ El método Double.parseDouble esperaba un punto decimal en su valor y recibía una coma, por lo que antes de que el método reciba el valor retornado por price.getText() se añadió un .replace(",", ".") concatenado a price.getText() para sustituir la coma por punto decimal y asi Double.parseDouble reciba un parametro valído
+
+
+## 💱 Cambios en la UI
+
+Traducción del programa de ingles a español:
+  _Se tradujeron las siguientes interfaces y todos sus elementos visibles por el usuario:_
+  - Login -> Inicio de Sesión
+  - Management -> Control de punto de venta
+  - Shopping cart -> Carrito de compra
+  - Customer -> Clientes
+  - Products -> Productos
+  - Seller -> Vendedor
+  - Sales -> Ventas
+
+Cambios para que la UI sea entendible por cualquier usuario:
+  Se tradujeron las interfaces mencionadas en el punto anterior, tambien se reestructuro la interfaz de _Control de punto de venta_, de tal forma se eliminaron los paneles “Menu, Sales, Management, Reports” y se decidió integrar todas sus funcionalidades individuales en una misma interfaz para que el usuario tenga mayor facilidad para acceder a cada ventana del sistema.
+
+  
+## 💡 Propuestas de mejora
+
+Mejora 1: Implementar búsqueda de clientes por ID 
+
+_**¿Qué mejora hicimos?**_ Agregamos una función que permite buscar un cliente ingresando únicamente su ID. La búsqueda se realiza desde la interfaz del sistema y utiliza el DAO para obtener los datos desde la base. 
+
+_**¿Por qué la hicimos?**_ Para que el usuario pueda rellenar los datos de un cliente de manera sencilla y poder editar algún campo que desee.  
+
+_**Relación con POO:**_ 
+
+- Abstracción: El controlador solo solicita al DAO los datos dando solo el id sin saber cómo se hace internamente la consulta SQL.
+
+
+Mejora 2: Añadir una verificación para acceder a funciones sensibles 
+
+_**¿Qué mejora hicimos?**_ Implementamos un sistema de autenticación que pide una contraseña antes de permitir el acceso a la interfaz de Vendedores (donde se muestran datos privados) y antes de ejecutar la función de eliminar clientes en la interfaz de Clientes. Esta verificación se hace mediante un método compartido. 
+
+_**¿Por qué la hicimos?**_ Para proteger información delicada y evitar modificaciones o eliminaciones no autorizadas. Con esto, se mejora la seguridad del sistema sin tener que repetir la misma lógica en cada controlador. 
+
+_**Relación con POO:**_
+- Herencia: El método que valida la contraseña se creó en la clase MenuController, y los demás controladores heredan dicho método. Esto evita duplicar código y permite reutilizar un comportamiento común entre varias clases. 
+
+
+Mejora 3: Agregar una alerta que avise de stock proximo a agotarse por producto (Solo propuesta)
+
+_**¿Qué mejora hicimos?**_ Implementamos un sistema de alertas que notifica al usuario cuando el inventario de un producto está por agotarse. El sistema revisa el stock disponible y, si está por debajo de un límite definido, muestra un aviso en la interfaz.
+
+_**¿Por qué la hicimos?**_ Para evitar inventarios vacios y mejorar la gestión de los productos. Con la alerta, el administrador o vendedor puede tomar decisiones como reabastecer productos, ajustar pedidos o informar a los clientes. Esto aumenta la eficiencia del punto de venta y reduce pérdidas por falta de disponibilidad.
+
+_**Relación con POO:**_
+- Herencia: Este método puede extenderse a todos los productos o principalmente a los productos que nos interesa tener un stock suficiente para abstecer la demanda directamente comunicandose con la clase GenerateSaleController para que cada vez que se genere una venta, detectar si los productos que nos interesa heredar este metodo se encuentran por debajo del umbral de stock minimo que deseamos tener y asi, ejecutar el aviso.
+
+
+Mejora 4: Crear la posibilidad de añadir descuentos a productos seleccionados (Solo propuesta)
+
+_**¿Qué mejora hicimos?**_ Se implementó la opción de aplicar descuentos a productos específicos dentro del sistema. Ahora, cuando se quiera registrar una venta, el usuario puede visualizar si un producto cuenta con descuento y ver reflejado el precio final de este producto ya con el descuento incluido.
+
+_**¿Por qué la hicimos?**_ Para ofrecer una mejor flexibilidad en el manejo de los productos que se ofrecen del usuario, permitiendo que si el administrador desea implementar descuentos por cualquier motivo, estos ya se vean reflejados a la hora de generar una venta.
+
+_**Relación con POO:**_
+- Polimorfismo: El metodo a la hora de implementarse a los productos deseados, puede responder de distintas formas según lo que el administrador indique, ya sea aplicando un descuento fijo a los productos, un porcentaje sobre el total o promociones 2x1, 3x2, étc.
+
+
+## 🌀 Implementación de mejoras en la UI
+
+De las propuestas mencionadas implementamos la verificación para acceder a funciones sensibles y la búsqueda de clientes mediante ID: 
+
+- _**Verificación para acceder a funciones sensibles:**_ El usuario vera reflejada esta mejora cuando trate de acceder a la interfaz de vendedores, al momento de presionar el botón para abrir dicha interfaz, el sistema le pedirá una contraseña única la cual solo tendrá acceso si el propietario del sistema se la proporciono, en este caso se espera que sea el dueño del local donde se este usando este punto de venta. Esta contraseña también se le va a pedir si trata de borrar un cliente del sistema.
+
+- _**Búsqueda de clientes mediante ID:**_ El usuario vera esta mejora en la interfaz de Clientes, únicamente deberá ingresar el id del cliente y presionar el boton de buscar, de esta forma, automáticamente se rellenaran todos los campos con la información del cliente. 
+
+- De forma extra agregamos un botón de cerrar ventana en todas las interfaces aplicando herencia, todos los controladores heredan de MenuController por lo que se creó un método que cierre la ventana actual y habrá la anterior y se heredó en todas las interfaces.
+
+
+## 🎥 Video del proyecto
+
+**Link:** https://youtu.be/_y2rClTut1U
+
+
+## 💼 Integrantes del equipo
+
+Jarib Alberto Novelo Hernández
+- **Matricula**: 24216374
+- **Usuario de github**: novelo03
+- **Rol desempeñado**: Desarrollé el menú de Help, creando su Controller, View y metodo para abrir la ventana en ManagementController, tambien la implementación de la funcionalidad de requestPassword, que es un filtro extra para abrir o realizar acciones que requieran de una verificación extra antes de ejecutarse, fue implementada siguiendo la relación de herencia en POO, ya que puede ser heredada e implementada a cualquier función de cualquier clase de la cual herede MenuController. Me encargué de corregir errores (menú help y openNewStage no funcionando correctamente y desplegando la ventana nueva en un tamaño poco practico), me encargué de la traducción de interfaces que a su vez sean más facil de interpretar por cualquier usuario y reutilización de codigo ya existente.
+
+Cristian Uriel Sanchez Sanchez
+- **Matricula**: 21203170
+- **Usuario de github**: Cristian271
+- **Rol desempeñado**: Re estructure el codigo de todas los archivos fxml para que se facilite la manipulación y se puedan agregar funcionalidades nuevas mas facilmente, Desarrolle una interfaz de menu completamente nueva, asegurandome que sea amigable con el usuario. Realice traducciones de una buena parte de las interfaces, repare errorres criticos como: Error al generar venta y Desahabilite el boton de help para dar lugar a que mi compañero desarrolle una solución a ese problema. Tambien añadí la funcionalidad de buscar a un usuario a través de su id y se auto rellenen todos los campos con sus datos y asi facilitar la edición o eliminación del cliente.
+
+
+
+[⬆ Volver al inicio](#title)<br>
+
+
+
+

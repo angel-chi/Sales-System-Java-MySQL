@@ -18,7 +18,9 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class CustomerController implements Initializable {
+import static org.borghisales.salessysten.controllers.MenuController.*;
+
+public class CustomerController extends MenuController implements Initializable {
 
     private final CustomerDAO customerDAO = new CustomerDAO();
     private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
@@ -44,7 +46,8 @@ public class CustomerController implements Initializable {
     private TableColumn<Customer,String> colAddress;
     @FXML
     private TableColumn<Customer,Customer.State> colState;
-
+    @FXML
+    private TextField idSearch;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeTable();
@@ -77,11 +80,29 @@ public class CustomerController implements Initializable {
         cbState.setValue(Customer.State.ACTIVE);
         cbState.setItems(stateList);
     }
+
+    @FXML
+    public void searchCustomer(ActionEvent event) {
+        int id = Integer.parseInt(idSearch.getText());
+        Customer customer = customerDAO.searchById(id);
+
+        if (customer != null) {
+            dni.setText(customer.dni());
+            name.setText(customer.name());
+            address.setText(customer.address());
+            cbState.setValue(customer.state());
+        } else {
+            setAlert(Alert.AlertType.INFORMATION, "Cliente no registrado en la base de datos");
+        }
+    }
+
+
+
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
         Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
         if (customerDAO.create(customer)) {
-            MenuController.cleanCells(dni, name, address);
+            cleanCells(dni, name, address);
             updateTable();
         }
     }
@@ -89,15 +110,19 @@ public class CustomerController implements Initializable {
     public void updateCustomer(ActionEvent actionEvent) {
         Customer customer = new Customer(dni.getText(),name.getText(),address.getText(),cbState.getValue());
         if (customerDAO.update(customer)) {
-            MenuController.cleanCells(dni, name, address);
+            cleanCells(dni, name, address);
             updateTable();
         }
     }
     @FXML
     public void deleteCustomer(ActionEvent actionEvent) {
-        if (customerDAO.delete(dni.getText())){
-            MenuController.cleanCells(dni,name,address);
-            updateTable();
+        requestPassword();
+        if(correctPassword) {
+            if (customerDAO.delete(dni.getText())) {
+                cleanCells(dni, name, address);
+                updateTable();
+            }
+            correctPassword = false;
         }
     }
     @FXML
@@ -116,5 +141,8 @@ public class CustomerController implements Initializable {
         customerDAO.setTable(customers);
         tableCustomers.setItems(customers);
     }
+
+
+
 
 }

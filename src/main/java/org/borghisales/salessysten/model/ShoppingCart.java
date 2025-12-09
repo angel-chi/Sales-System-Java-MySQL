@@ -2,10 +2,11 @@ package org.borghisales.salessysten.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
 
 public record ShoppingCart(int nr, String cod, String product, int quantity, double price, double total){
     public ShoppingCart(int nr, String cod, String product, int quantity, double price) {
-        this(nr, cod, product, quantity, price, Double.parseDouble(String.format("%.2f",quantity*price)));
+        this(nr, cod, product, quantity, price, Double.parseDouble(String.format(Locale.US, "%.2f",quantity*price)));
     }
     public static ShoppingCart fromResultSet(ResultSet rs) throws SQLException {
         int nr = rs.getInt("nr");

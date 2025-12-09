@@ -16,7 +16,7 @@ import org.borghisales.salessysten.model.ShoppingCart;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SaleDetailController implements Initializable {
+public class SaleDetailController extends MenuController implements Initializable {
 
 
 

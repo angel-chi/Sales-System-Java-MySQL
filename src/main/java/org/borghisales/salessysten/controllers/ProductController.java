@@ -19,7 +19,7 @@ import org.borghisales.salessysten.model.ProductDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProductController implements Initializable {
+public class ProductController extends MenuController implements Initializable {
 
     private final ProductDAO productDAO = new ProductDAO();
 
@@ -88,7 +88,7 @@ public class ProductController implements Initializable {
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                           Integer.parseInt(stock.getText()), cbState.getValue());
         if (productDAO.create(product)) {
-            MenuController.cleanCells(name,price,stock);
+            cleanCells(name,price,stock);                        //por si rompo el codigo, aqui habia un MenuController.
             updateTable();
         }
     }
@@ -97,20 +97,20 @@ public class ProductController implements Initializable {
         Product product = new Product(name.getText(),Double.parseDouble(price.getText()),
                 Integer.parseInt(stock.getText()), cbState.getValue());
         if (productDAO.update(product)) {
-            MenuController.cleanCells(name,price,stock);
+            cleanCells(name,price,stock);                   //por si rompo el codigo, aqui habia un MenuController.
             updateTable();
         }
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
         if (productDAO.delete(name.getText())) {
-            MenuController.cleanCells(name,price,stock);
+            cleanCells(name,price,stock);                               //por si rompo el codigo, aqui habia un MenuController.
             updateTable();
         }
     }
 
     public void cleanCellsScreen(ActionEvent actionEvent) {
-        MenuController.cleanCells(name,price,stock);
+        cleanCells(name,price,stock);                       //por si rompo el codigo, aqui habia un MenuController.
     }
 
     private void setCells(Product product){

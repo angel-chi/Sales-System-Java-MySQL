@@ -32,9 +32,9 @@ import java.time.Month;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class ReportsController implements Initializable {
+public class ReportsController extends MenuController implements Initializable {
 
-    private static final String[] monthsShowed = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    private static final String[] monthsShowed = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     private static int idxMonth = LocalDate.now().getMonth().getValue()-1;
     private static int yearsShowed = LocalDate.now().getYear();
 
@@ -124,8 +124,8 @@ public class ReportsController implements Initializable {
 
         x_time.setAutoRanging(false);
         x_time.setCategories(FXCollections.observableArrayList(categories));
-        x_time.setLabel("Days of the month");
-        y_amountSales.setLabel("Sales amount");
+        x_time.setLabel("Dias del mes");
+        y_amountSales.setLabel("Productos vendidos");
 
         year.setText(String.valueOf(yearsShowed));
         month.setText(monthsShowed[idxMonth]);
@@ -180,17 +180,7 @@ public class ReportsController implements Initializable {
                 int idSales = tableReport.getSelectionModel().getSelectedItem().idSales();
                 SaleDetailController.setIdSale(idSales);
 
-                FXMLLoader fxmlLoaderSaleDetails = new FXMLLoader(MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML));
-
-                try {
-                    Scene scene = new Scene(fxmlLoaderSaleDetails.load());
-                    Stage stage = new Stage();
-                    stage.setTitle("Sale detail");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                openNewStage(MenuController.SALE_DETAIL_VIEW_FXML, "Detalles de venta", 800, 575, false);
             }
         });
     }
@@ -203,7 +193,7 @@ public class ReportsController implements Initializable {
 
     public void onFilter(ActionEvent actionEvent) {
         if (sales.isEmpty()){
-            MenuController.setAlert(Alert.AlertType.WARNING,"There are no sales");
+            setAlert(Alert.AlertType.WARNING,"Sin ventas"); //por si rompo el codigo, aqui habia un MenuController.
             return;
         }
 
@@ -217,11 +207,11 @@ public class ReportsController implements Initializable {
 
 
             if (minAmount >= maxAmount) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct amount intervals");
+                setAlert(Alert.AlertType.ERROR,"Establece correctamente el intervalo de ventas");     //por si rompo el codigo, aqui habia un MenuController.
                 return;
             }
             if (minDate.isAfter(maxDate)) {
-                MenuController.setAlert(Alert.AlertType.ERROR,"Set correct date intervals");
+                setAlert(Alert.AlertType.ERROR,"Establece correctamente el intervalo de dias");   //por si rompo el codigo, aqui habia un MenuController.
                 return;
             }
 
@@ -234,7 +224,7 @@ public class ReportsController implements Initializable {
                     .toList()));
 
         } catch (NumberFormatException e) {
-            MenuController.setAlert(Alert.AlertType.WARNING,e.getMessage());
+            setAlert(Alert.AlertType.WARNING,e.getMessage());           //por si rompo el codigo, aqui habia un MenuController.
         }
     }
 
