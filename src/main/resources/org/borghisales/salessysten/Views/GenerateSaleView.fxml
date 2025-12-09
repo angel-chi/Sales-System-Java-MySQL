@@ -128,14 +128,33 @@
             </padding>
 
             <Separator/>
+
+            <!-- SECCIÓN DE DESCUENTO -->
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="DESCUENTO (%):" minWidth="120"/>
+                <Spinner fx:id="discountSpinner" prefWidth="100" editable="true"/>
+                <Button text="APLICAR DESCUENTO" prefWidth="150" onAction="#applyDiscount"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Label text="DESCUENTO APLICADO:"/>
+                <TextField fx:id="discountAmount" editable="false" prefWidth="110"/>
+            </HBox>
+
             <HBox spacing="12" alignment="CENTER_LEFT">
                 <Button text="CANCELAR" prefWidth="120" onAction="#cancel"/>
                 <Button text="GENERAR VENTA" prefWidth="150" onAction="#generateSale"/>
 
                 <Region HBox.hgrow="ALWAYS"/>
 
-                <Label text="TOTAL DE LA VENTA"/>
-                <TextField fx:id="total" editable="false" prefWidth="110"/>
+                <Label text="SUBTOTAL:" minWidth="80"/>
+                <TextField fx:id="subtotal" editable="false" prefWidth="110"/>
+            </HBox>
+
+            <HBox spacing="12" alignment="CENTER_RIGHT">
+                <Label text="TOTAL DE LA VENTA:" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                <TextField fx:id="total" editable="false" prefWidth="110"
+                           style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
             </HBox>
         </VBox>
     </bottom>

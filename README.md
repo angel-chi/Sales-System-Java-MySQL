@@ -109,9 +109,17 @@ Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder,
 # Cambios 
 El primer cambio que hice es el cambio de idioma a la ventana de inicio de sesion y la ventana de managmente, tambien se cambio el tamaño con el que se abre todo y aparte que los botones y demas cosas se ajustan al tamaño de la ventana asi que si el usuario lo mueve este cambia tambien de tamaño 
 # 💡 Fucionalidades
-1. La primera funcionalidad que se agrego es un sistema de roles que permiten que ahora el vendedor tenga un atributo mas que es el role que puede ser normal o ADMIN y la diferencia es que si es ADMIN entonces puede acceder a los reportes y si es normal no
+1. Implementación de un campo (atributo) en la tabla seller para designar el un rol al vendedor (ADMIN o NORMAL)
+2. Poder cambiar el rol del vendedor desde la ventana de gestion de vendedores
+3. Ajustes dinamicos de todos los campos en la ventana
+4. Distintas medidas de ventanas para una mejor experiencia
+5. Traduccion de la interfaz a español
+6. Descuento de 0% a 100% para un producto añadido en el carrito de venta y su descuento como el valor pos descuento actualizado
+
+# Errores eliminados
+1. Se elimino el error del tamaño de la pantalla al abrir cada ventana y se soluciono con un switch en la funcion que abre las ventanas para que cada una de ellas tenga un distinto tamaño
 ## Inicio de sesión
-Para iniciar sesión, se requiere el DNI y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el DNI se asocia con 'dni' y la contraseña con 'user'.
+Para iniciar sesión, se requiere el Usuario y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el Usuario se asocia con 'dni' y la contraseña con 'user'.
 
 <p align="center">
   <img src="src/main/resources/images/login.png" />
