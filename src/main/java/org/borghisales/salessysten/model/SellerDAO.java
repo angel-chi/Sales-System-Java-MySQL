@@ -15,7 +15,7 @@ import java.util.List;
 public class SellerDAO implements CRUD<Seller> {
     @Override
     public boolean create(Seller entity) {
-        String sql = "INSERT INTO seller (dni,name,phone_number,state,user, role) values (?,?,?,?,?)";
+        String sql = "INSERT INTO seller (dni,name,phone_number,state,user, role) values (?,?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){

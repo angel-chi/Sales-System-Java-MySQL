@@ -96,6 +96,7 @@ public class SellerController implements Initializable, IValidable{
         colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
         colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().phoneNumber()));
         colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+        colRole.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().role()));
     }
 
     private void initializeComboBox() {
