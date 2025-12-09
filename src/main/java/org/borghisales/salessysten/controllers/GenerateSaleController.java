@@ -71,6 +71,8 @@ public class GenerateSaleController extends MenuController implements Initializa
     @FXML
     private TextField total;
     @FXML
+    private ComboBox<PaymentType> paymentType;
+    @FXML
     private TextField date;
 
     @FXML
@@ -89,6 +91,12 @@ public class GenerateSaleController extends MenuController implements Initializa
     private TableColumn<ShoppingCart, Double> colPrice;
     @FXML
     private TableColumn<ShoppingCart,Double> colTotal;
+    @FXML
+    private TextField subtotal;
+    @FXML
+    private TextField paymentAdjustment;
+    @FXML
+    private Label labelAdjustment;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeUIElements();
@@ -101,7 +109,13 @@ public class GenerateSaleController extends MenuController implements Initializa
         setSerial();
         seller.setText(sellerName);
         date.setText(String.valueOf(now));
+        if (paymentType != null) {
+            paymentType.setItems(FXCollections.observableArrayList(PaymentType.values()));
+            paymentType.getSelectionModel().select(PaymentType.EFECTIVO);
+            paymentType.setOnAction(event -> updateTotalField());
+        }
     }
+
 
     private void configureAlerts() {
         configureAlert(alertCustomer, "Nuevo cliente", "El cliente no existe", "¿Quieres añadirlo?");
@@ -249,10 +263,17 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private Sales createSalesObject() {
-        return new Sales(customer.idCustomer(), idSeller, serial.getText(),
-                LocalDate.parse(date.getText()), totalPrice,
-                Sales.State.ACTIVE);
+        double finalAmount = calculateFinalAmount();
+        return new Sales(
+                customer.idCustomer(),
+                idSeller,
+                serial.getText(),
+                LocalDate.parse(date.getText()),
+                finalAmount,
+                Sales.State.ACTIVE
+        );
     }
+
 
     private boolean saveSaleAndDetails(Sales sales) {
         boolean saleSaved = salesDAO.SaveSale(sales);
@@ -312,8 +333,40 @@ public class GenerateSaleController extends MenuController implements Initializa
         products.add(product);
         tableSale.setItems(products);
         totalPrice += product.total();
-        total.setText(String.format("%.2f", totalPrice));
+        updateTotalField();
     }
+
+    private void updateTotalField() {
+        double finalAmount = calculateFinalAmount();
+        double adjustment = finalAmount - totalPrice;
+
+        subtotal.setText(String.format("%.2f", totalPrice));
+
+        PaymentType type = paymentType != null ? paymentType.getValue() : null;
+        if (type == PaymentType.EFECTIVO) {
+            labelAdjustment.setText("Descuento (efectivo):");
+        } else if (type == PaymentType.TARJETA) {
+            labelAdjustment.setText("Comisión (tarjeta):");
+        } else {
+            labelAdjustment.setText("Ajuste:");
+        }
+
+        paymentAdjustment.setText(String.format("%+.2f", adjustment));
+
+        total.setText(String.format("%.2f", finalAmount));
+    }
+
+
+    private double calculateFinalAmount() {
+        if (paymentType == null) {
+            return totalPrice;
+        }
+        PaymentType selectedType = paymentType.getValue();
+        Payment payment = PaymentFactory.create(selectedType, totalPrice);
+        return payment.calculateFinalAmount();
+    }
+
+
 
     private void setSerial(){
         idSale = 1+salesDAO.IdSale();

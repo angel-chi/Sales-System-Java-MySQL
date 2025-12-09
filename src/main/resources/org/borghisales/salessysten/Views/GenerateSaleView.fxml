@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ComboBox?>
 
 <AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.GenerateSaleController">
    <AnchorPane prefHeight="500.0" prefWidth="500.0">
@@ -46,6 +47,8 @@
       <Button layoutX="226.0" layoutY="166.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="25.0" prefWidth="80.0" text="BUSCAR" />
       <Button layoutX="226.0" layoutY="200.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="25.0" prefWidth="80.0" text="BUSCAR" />
       <Button layoutX="226.0" layoutY="234.0" mnemonicParsing="false" onAction="#addShoppingCart" prefHeight="25.0" prefWidth="80.0" text="AÑADIR" />
+      <Label layoutX="327.0" layoutY="308.0" text="TIPO DE PAGO:" wrapText="true" />
+      <ComboBox fx:id="paymentType" layoutX="417.0" layoutY="304.0" prefWidth="143.0" />
       <Separator layoutX="-2.0" layoutY="318.0" prefHeight="16.0" prefWidth="590.0" />
       <TableView fx:id="tableSale" layoutX="12.0" layoutY="335.0" prefHeight="208.0" prefWidth="568.0">
          <columns>
@@ -69,6 +72,10 @@
       <Label layoutX="326.0" layoutY="204.0" text="PRODUCTO:" wrapText="true" />
       <Label layoutX="326.0" layoutY="238.0" text="DISPONIBLES:" wrapText="true" />
       <Label layoutX="327.0" layoutY="274.0" text="VENDEDOR:" wrapText="true" />
+      <Label layoutX="360.0" layoutY="535.0" text="SUBTOTAL:" />
+      <TextField fx:id="subtotal" editable="false" layoutX="472.0" layoutY="531.0" prefWidth="88.0" />
+      <Label fx:id="labelAdjustment" layoutX="330.0" layoutY="548.0" text="AJUSTE:" />
+      <TextField fx:id="paymentAdjustment" editable="false" layoutX="472.0" layoutY="546.0" prefWidth="88.0" />
       <Label layoutX="381.0" layoutY="564.0" text="VENTA TOTAL:" wrapText="true" />
       <TextField fx:id="date" editable="false" layoutX="226.0" layoutY="269.0" prefHeight="25.0" prefWidth="80.0" />
    </AnchorPane>
