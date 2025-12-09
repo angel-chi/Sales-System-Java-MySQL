@@ -213,13 +213,22 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
 
+    @FXML
     public void cancel(ActionEvent actionEvent) {
-        if (products.isEmpty())return;
-        MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
-        quantity.getValueFactory().setValue(null);
+        // Limpiar la lista de productos
+        products.clear();
+        // Limpiar tabla
         tableSale.getItems().clear();
-        MenuController.setAlert(Alert.AlertType.INFORMATION,"Venta cancelada");
+        // Limpiar campos
+        MenuController.cleanCells(codCustomer, codProduct, customerName, productName, price, stock);
+        // Resetear cantidad
+        if (quantity.getValueFactory() != null) {
+            quantity.getValueFactory().setValue(1);
+        }
+        // Limpiar total
         total.clear();
+        // Mensaje
+        MenuController.setAlert(Alert.AlertType.INFORMATION, "Venta cancelada");
     }
 
     public void generateSale(ActionEvent actionEvent) {

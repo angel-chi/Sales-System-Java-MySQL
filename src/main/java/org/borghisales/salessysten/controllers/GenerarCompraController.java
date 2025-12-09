@@ -191,6 +191,8 @@ public class GenerarCompraController extends MenuController implements Initializ
         cantidad.getValueFactory().setValue(1);
 
         proveedor = null;
+        // Mensaje
+        MenuController.setAlert(Alert.AlertType.INFORMATION, "Compra cancelada");
     }
 
     private void actualizarTotal() {
