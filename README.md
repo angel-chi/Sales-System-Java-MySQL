@@ -4,9 +4,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-<p align="center">
-  <img src="src/main/resources/images/shopping cart.png" />
-</p>
+![Captura desde 2025-12-08 23-08-45.png](img/Captura%20desde%202025-12-08%2023-08-45.png)
+
 
 <!-- TOC -->
 * [📑 Descripcion](#-descripcion)
@@ -26,16 +25,24 @@
         * [Reports](#reports)
 * [📧 Contacto](#-contacto)
 * [📝 Licencia](#-licencia)
+* [📊 Diagrama UML](#Diagrama-UML)
+* [❌ Identificación de errores](#identificación-de-errores)
+  * [Error 1. Error con la base de datos](#Error-con-la-base-de-datos)
+  * [Error 2. Problemas al hacer Git Push](#Problemas-al-hacer-Git-Push)
+* [👨🏻‍🔧 Mejoras propuestas](#-cambios-propuestos)
+  * [1. Clasificación por marca](#cambio-1-clasificación-por-marca)
+  * [2. Modelar el tipo de venta](#cambio-2-modelar-el-tipo-de-venta)
+  * [3. Crear una clase para el inventario](#cambio-3-crear-una-clase-para-el-inventario)
+  * [4. Crear un manejo de diferentes tipos de pago](#cambio-4-crear-un-manejo-de-diferentes-tipos-de-pago)
+* [🎥 Video de Presentación](#Video-de-Presentación)
 <!-- TOC -->
 
 # 📑 Descripcion
-Este proyecto es una herramienta que diseñé para mejorar mis habilidades con el lenguaje Java, centrándome en la gestión de ventas para vendedores. Utiliza los patrones de diseño MVC (Modelo-Vista-Controlador) y DAO (Data Access Object) para una arquitectura robusta y modular.
+Este proyecto surge como parte de nuestro proceso de aprendizaje de Java y Programación Orientada a Objetos, con la idea de construir algo más real que solo ejercicios: un pequeño sistema de ventas que pueda gestionar productos, clientes y vendedores. Más que solo “que funcione”, lo usamos para practicar cosas que sí se aplican en proyectos serios: **separación por capas, trabajo con base de datos y organización del código.**
 
-Con esta aplicación, puedes iniciar sesión como vendedor, administrar tus productos y clientes, así como realizar ventas de manera sencilla. Además, cuenta con una sección de reportes donde puedes ver detalles de tus ventas, filtrarlas y generar informes personalizados.
+A lo largo del desarrollo buscamos aplicar POO, el patrón MVC para organizar la lógica, las vistas y los modelos; y un manejo más ordenado del acceso a datos usando clases específicas para comunicarnos con la base de datos. También aprovechamos el proyecto para practicar herramientas de la vida real como Git/GitHub, trabajo en equipo, revisión de código y documentación, entre otros aspectos.
 
-Todos los datos se almacenan de forma segura en una base de datos MySQL, utilizando el patrón DAO para separar la lógica de acceso a datos de la lógica de negocio. Esto garantiza un código más limpio, mantenible y escalable.
-
-Además, hay una sección de estadísticas que te muestra cuántas ventas has realizado de cada producto y cómo han variado a lo largo del tiempo, utilizando el patrón MVC para separar la lógica de presentación de la lógica de negocio y la manipulación de datos.
+En resumen, este proyecto no solo es una aplicación para gestionar ventas, sino también un laboratorio donde experimentamis y pusimos en práctica diseño de software, colaboración y lo aprendido a lo largo de este semestre, todas estas son cosas que nos van a servir en proyectos más grandes y profesionales.
 
 # 💻 Entorno
 
@@ -152,5 +159,95 @@ Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en 
 # 📝 Licencia
 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
+
+# Diagrama UML
+![UML.drawio(1).png](img/UML.drawio%281%29.png)
+
+# Identificación de Errores
+## Error con la base de datos
+![im2.jpeg](img/im2.jpeg)
+
+Al intentar compilar el programa. surgió una excepción que indicada que MySQL no encontró la tabla "products" en la base
+de datos a la que se encuentra conectada el proyecto, que en nuestro caso es "salesystem". <br>
+El error se solucionó revisando la base de datos y verificando si la tabla existía, el problema era que el script de la 
+base de datos no había sido importado de forma correcta, por lo que se realizó paso a paso este proceso de nuevo y ahora
+todo funcionaba bien.
+## Problemas al hacer Git Push
+![Sin título.jpeg](img/Sin%20t%C3%ADtulo.jpeg)
+Git rechazó el git push porque en la rama en que trabajamos remotamente (Cen_Couoh) tenía commits que no existían en mi copia local.
+En pocas palabras, tenía commits nuevos locales, pero mi compañero ya había subido cambios a la misma rama en GitHub antes de mi push.
+Para evitar perder el trabajo de la otra persona, Git no permite subir directamente y pide primero que se haga un pull.
+En este caso, para solucionar el problema se realizó lo siguiente:
+* Revisar el estado de la rama con *git push*.
+* Limpiar los cambios irrelevantes que del IDE con un *git restore*
+* Hacer un *git pull.rebase false*, de esta forma no se modifican ni borran los commits, simplemente se decide
+  de que forma se combinan.
+* Ahora seleccionamos la rama con un *git checkout Cen_Couoh*
+* Después hacemos *git pull* (De esta forma Git detectó que las ramas divergieron y realizó un merge entre los commits locales y los que estaban en
+  GitHub)
+* Finalmente hacemos el *git push origin Cen_Couoh* y el git push es aceptado porque el historial de commits está alineado
+
+## Código
+### Tabla de gestión de Product
+Este error fue causado por nosostros pues ocurrió después de agregar el atributo **Brand** y evitaba que se vieran los productos en la gestión de estos.<br>
+Pues, la tabla product solo guardaba el ID de la marca (idBrand), pero no el nombre.<br>
+Entonces el _ProductDAO_ hacía un _SELECT * FROM product_. Al intentar crear el objeto en Java, el sistema buscaba la columna _"brand_name"_, no la encontraba, fallaba construir el objeto y devolvía null.
+<br>**Solución:** Modificamos la consulta SQL en el ProductDAO para utilizar un _INNER JOIN_ .
+
+### Botón "Ayuda"
+Un error que se detectó fue que cuando se presionaba el botón de "Help" no ocurría nada Originalmente, el código probablemente intentaba usar _Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"))_.<br>
+Y esa línea está muy optimizada para Windows y MacOS. Sin embargo en Linux, Java a menudo no logra comunicarse correctamente con el gestor de ventanas para saber cuál es el navegador predeterminado.
+<br>**Solución:** Se utilizó _System.getProperty_ para que detecte el navegador predeterminado y así logramos que ese error desapareciera.
+
+# Cambios propuestos
+## Cambio 1. Clasificación por marca
+### Descripción del cambio
+
+Se implementará un nuevo apartado para **Product**, este será el apartado **brand** para gestionar las marcas de los productos y que se puedan clasificar por esa caracteristica. <br>
+Se creará una nueva entidad Brand (reflejada en la base de datos sql como una tabla independiente) y se relacionará de manera directa en la tabla product mediante una **_Foreign Key_**. <br>
+El proposito de esto es que, al registrar o editar un producto, la marca se seleccione desde un catálogo dinámico cargado desde la base de datos, en lugar de ingresarse como texto libre, 
+facilitando el proceso y evitando el "error humano" o la creación de marcas inexistentes. 
+
+### Justificación 
+Desde el punto de vista de la Programación Orientada a Objetos (POO), la implementación de la clase **_Brand_** como atributo de **_Product_** es lógico debido a que:<br>
+1. En lugar de tratar la marca como un tipo de dato primitivo (String), se eleva a la categoría de Objeto, pues en el mundo real, una "Marca" es una entidad con identidad propia (un ID) y atributos (un nombre). Al crear la clase **_Brand_**, se refleja de mejor manera el modelo de negocio, permitiendo interactuar con atributos concretos en lugar de datos sueltos.
+2. De igual manera, entra la **escalabilidad** pues en el mundo real no existe un numero finito y determinado de marcas, por lo que si llega una nueva es tan sencillo como agregarla a la **base de datos** y el cambio se verá reflejado.
+3. Esto facilita futuras expansiones, como generar reportes de ventas filtrados específicamente por el ID de una marca o gestionar atributos adicionales del fabricante sin afectar la estructura del producto.
+
+## Cambio 2. Modelar el tipo de venta
+### Descripción del cambio
+En este cambio se propone ampliar la clase Sales para que, además de la información básica de la venta (id del cliente, id del vendedor, fecha, monto y estado), también guarde el tipo de venta que se realizó.
+Para eso se agrega un nuevo atributo llamado **Type**, a _Sales_, de tipo **_TipoDeVenta_**, donde TipoDeVenta es un enum definido con dos valores: EN_TIENDA (venta física) y
+EN_LINEA (venta en línea).
+
+### Justificación
+Este cambio busca que el sistema entienda explícitamente qué tipo de venta se está registrando, en lugar de tratar todas las ventas igual o depender de cadenas de texto. 
+Al guardar el tipo de venta dentro de la clase Sales, se vuelve mucho más sencillo diferenciar entre ventas físicas y en línea, así como en caso de requerirlo, aplicar reglas distintas 
+según el tipo de venta (promociones, descuentos, etc.)<br>
+Desde la Programación Orientada a Objetos, la implementación del tipo de venta mediante un enum representa una ventaja porque pertenece al modelo del dominio. Esta práctica centraliza la
+clasificación de las ventas (EN_TIENDA/EN_LINEA), ofreciendo mayor seguridad de datos y claridad de código. 
+Además, la estructura garantiza que los nuevos canales de venta solo requieran la adición de nuevos valores al enum, sin alterar la clase Sales directamente.
+
+## Cambio 3. Crear una clase para el Inventario 
+### Descripción del cambio
+En el programa actual, la validación y actualización del stock de los productos (por ejemplo, verificar si hay suficientes unidades para una venta o descontar el stock cuando se completa la compra) suele hacerse directamente 
+en los controladores o en código disperso. La propuesta es agrupar toda esa lógica en una clase específica. Esta clase se encargará de verificar si hay stock suficiente de un producto, descontar stock cuando se realiza una venta,
+aumentar stock en caso de devoluciones o correcciones y consultar el stock actual desde la base de datos.
+### Justificación
+Esta mejora apunta a que la lógica relacionada con el stock deje de estar regada en varios controladores y pase a estar encapsulada en una sola clase, que entiende y controla todo lo que tiene que ver con existencias.
+
+## Cambio 4. Crear un manejo de diferentes tipos de pago
+### Descripción del cambio
+La idea es crear una superclase **"Pago"**, que represente un pago genérico, y luego crear subclases para cada tipo de pago que maneje el sistema,
+por ejemplo:
+* CashPayment → pago en efectivo
+* CardPayment → pago con tarjeta
+### Justificación
+Vemo que cada forma de pago se vuelve una clase con su propia lógica. Por ejemplo, el pago en efectivo es simple, pero el pago con tarjeta podría requerir validaciones extra,
+datos adicionales (número de autorización, últimos dígitos, etc.). Viendo el panorama desde la Programación Orientada a Objetos, la adición de Payment mejora el programa al
+hacer que la gestión de los pagos sea modular y fácil de extender, aplicando de esta forma el polimorfismo, al mismo tiempo que mantiene la lógica específica de cada pago aislada y protegida, 
+poniendo en prática le encapsulación y la abstracción.
+
+## Video: [Cen_Couoh](https://alumnosuady-my.sharepoint.com/:v:/g/personal/a21201372_alumnos_uady_mx/IQB4bqLVJ5UvRJgp3_Jcgt8ZAQQndDrhH455lqj4ROjNVVk?e=PG2zYF) <br>
 
 [⬆ Volver al inicio](#title)<br>

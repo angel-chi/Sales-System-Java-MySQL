@@ -6,9 +6,9 @@ import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 import org.borghisales.salessysten.controllers.ReportsController;
+import javafx.scene.chart.PieChart;
 
 import java.sql.*;
-
 
 public class SalesDAO {
 
@@ -33,7 +33,8 @@ public class SalesDAO {
         }
     }
     public boolean SaveSale(Sales sale){
-        String sql = "INSERT INTO sales (idCustomer,idSeller,numberSales,saleDate,amount,state) values(?,?,?,?,?,?)";
+        String sql = "INSERT INTO sales (idCustomer, idSeller, numberSales, saleDate, amount, state /*payment_type*/) " +
+                "VALUES(?, ?, ?, ?, ?, ?)"; //falta otro si se agrega
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -44,6 +45,7 @@ public class SalesDAO {
             pstmt.setDate(4, Date.valueOf(sale.saleDate()));
             pstmt.setDouble(5,sale.amount());
             pstmt.setString(6,sale.state().name());
+            //pstmt.setString(7, sale.paymentType().name());
 
             int rows_affected = pstmt.executeUpdate();
 
@@ -120,9 +122,7 @@ public class SalesDAO {
                 GROUP BY saleDate;
                 """;
 
-
         System.out.println("Buscado base de datos");
-
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -172,6 +172,30 @@ public class SalesDAO {
         }catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
         }
+    }
+    public void setPieChart(ObservableList<PieChart.Data> pieChartData) {
+        String sql = """ 
+                SELECT p.name, sum(s.quantity) as cant
+                FROM product p
+                INNER JOIN sales_details s
+                USING (idProduct)
+                WHERE s.idSales in (SELECT idSales FROM sales where idSeller=?)
+                GROUP BY s.idProduct;
+                """;
 
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1, MainController.sellerLog.idSeller());
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    pieChartData.add(new PieChart.Data(rs.getString("name"),rs.getInt("cant")));
+                }
+            }
+
+        }catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error generando gráfico pastel: " + e.getMessage());
+        }
     }
 }

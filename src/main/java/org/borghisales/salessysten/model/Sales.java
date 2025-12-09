@@ -4,12 +4,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+public record Sales(
+        int idSales,
+        int idCustomer,
+        int idSeller,
+        String numberSales,
+        LocalDate saleDate,
+        Double amount,
+        State state,
+        PaymentType paymentType
+) {
+    public enum State { ACTIVE, DISACTIVE }
 
-public record Sales(int idSales, int idCustomer, int idSeller, String numberSales, LocalDate saleDate, Double amount,State state) {
-    public enum State{ACTIVE,DISACTIVE};
+    public enum PaymentType { CASH, CARD }
 
-    public Sales(int idCustomer, int idSeller, String numberSales, LocalDate saleDate, Double amount, State state) {
-        this(0, idCustomer, idSeller, numberSales, saleDate, amount, state);
+    public Sales(int idCustomer, int idSeller, String numberSales,
+                 LocalDate saleDate, Double amount,
+                 State state, PaymentType paymentType) {
+        this(0, idCustomer, idSeller, numberSales, saleDate, amount, state, paymentType);
     }
 
     public static Sales fromResultSet(ResultSet rs) throws SQLException {
@@ -20,6 +32,10 @@ public record Sales(int idSales, int idCustomer, int idSeller, String numberSale
         LocalDate saleDate = rs.getDate("saleDate").toLocalDate();
         Double amount = rs.getDouble("amount");
         State state = State.valueOf(rs.getString("state"));
-        return new Sales(idSales, idCustomer, idSeller, numberSales, saleDate, amount, state);
+
+        String paymentTypeStr = rs.getString("payment_type");
+        PaymentType paymentType = PaymentType.valueOf(paymentTypeStr);
+
+        return new Sales(idSales, idCustomer, idSeller, numberSales, saleDate, amount, state, paymentType);
     }
 }

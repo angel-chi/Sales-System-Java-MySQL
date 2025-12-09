@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
 --
--- Host: salesdb.mysql.database.azure.com    Database: salesystem
+-- Host: localhost    Database: salesystem
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.44-0ubuntu0.24.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `brand`
+--
+
+DROP TABLE IF EXISTS `brand`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `brand` (
+                         `idBrand` int NOT NULL AUTO_INCREMENT,
+                         `name` varchar(100) NOT NULL,
+                         PRIMARY KEY (`idBrand`),
+                         UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `brand`
+--
+
+LOCK TABLES `brand` WRITE;
+/*!40000 ALTER TABLE `brand` DISABLE KEYS */;
+INSERT INTO `brand` VALUES (8,'Amazon'),(16,'Anker'),(4,'Apple'),(22,'Arlo'),(24,'Boosted'),(17,'Canon'),(25,'Dell'),(7,'DJI'),(9,'Fitbit'),(11,'GoPro'),(6,'HP'),(20,'Husqvarna'),(10,'iRobot'),(3,'LG'),(19,'Logitech'),(1,'Marca Blanca'),(14,'Nest'),(13,'NVIDIA'),(21,'Razer'),(18,'Ring'),(2,'Samsung'),(5,'Sony'),(12,'TP-Link'),(23,'Withings'),(15,'Xiaomi');
+/*!40000 ALTER TABLE `brand` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `customer`
 --
 
@@ -23,13 +48,13 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
-  `idCustomer` int NOT NULL AUTO_INCREMENT,
-  `dni` varchar(8) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `address` varchar(30) DEFAULT NULL,
-  `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
-  PRIMARY KEY (`idCustomer`),
-  UNIQUE KEY `dni_UNIQUE` (`dni`)
+                            `idCustomer` int NOT NULL AUTO_INCREMENT,
+                            `dni` varchar(8) NOT NULL,
+                            `name` varchar(20) NOT NULL,
+                            `address` varchar(30) DEFAULT NULL,
+                            `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
+                            PRIMARY KEY (`idCustomer`),
+                            UNIQUE KEY `dni_UNIQUE` (`dni`)
 ) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,14 +76,17 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
-  `idProduct` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `price` double NOT NULL,
-  `stock` int NOT NULL,
-  `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
-  PRIMARY KEY (`idProduct`),
-  UNIQUE KEY `uk_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3;
+                           `idProduct` int NOT NULL AUTO_INCREMENT,
+                           `name` varchar(50) NOT NULL,
+                           `idBrand` int NOT NULL,
+                           `price` double NOT NULL,
+                           `stock` int NOT NULL,
+                           `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
+                           PRIMARY KEY (`idProduct`),
+                           UNIQUE KEY `uk_name` (`name`),
+                           KEY `idx_brand` (`idBrand`),
+                           CONSTRAINT `fk_product_brand` FOREIGN KEY (`idBrand`) REFERENCES `brand` (`idBrand`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +95,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Laptop Dell XPS 15',1899.99,7,'ACTIVE'),(2,'Smartphone Samsung Galaxy S22',999.99,19,'ACTIVE'),(3,'Smart TV LG OLED C1 55\"',1499.99,12,'ACTIVE'),(4,'Tablet Apple iPad Pro 12.9\"',1099.99,15,'ACTIVE'),(5,'Wireless Headphones Sony WH-1000XM4',400,8,'ACTIVE'),(6,'Gaming Console Sony PlayStation 5',499.99,10,'ACTIVE'),(7,'Smartwatch Apple Watch Series 7',399.99,29,'ACTIVE'),(8,'Desktop PC HP Pavilion',899.99,8,'ACTIVE'),(9,'Drone DJI Mavic Air 2',799.99,0,'ACTIVE'),(10,'Camera Sony Alpha A7 III',1999.99,5,'ACTIVE'),(11,'Smart Speaker Amazon Echo',99.99,4,'DISACTIVE'),(12,'Fitness Tracker Fitbit Charge 5',149.99,3,'DISACTIVE'),(13,'Wireless Earbuds Apple AirPods Pro',249.99,12,'DISACTIVE'),(14,'Robot Vacuum Cleaner iRobot Roomba',299.99,6,'DISACTIVE'),(15,'Action Camera GoPro Hero 10',449.99,0,'DISACTIVE'),(16,'Wireless Router TP-Link Archer AX6000',299.99,13,'ACTIVE'),(17,'External SSD Samsung T7 1TB',169.99,22,'ACTIVE'),(18,'Monitor Dell UltraSharp U2720Q 27\"',449.99,0,'ACTIVE'),(19,'Graphics Card NVIDIA GeForce RTX 3080',699.99,8,'ACTIVE'),(20,'Smart Thermostat Nest Learning Thermostat',249.99,15,'ACTIVE'),(21,'Electric Scooter Xiaomi Mi Electric Scooter Pro 2',499.99,10,'ACTIVE'),(22,'Wireless Mouse Logitech MX Master 3',99.99,0,'ACTIVE'),(23,'Portable Charger Anker PowerCore 26800mAh',59.99,25,'ACTIVE'),(24,'VR Headset Oculus Quest 2',299.99,18,'ACTIVE'),(25,'Compact Camera Canon PowerShot G7 X Mark III',699.99,10,'ACTIVE'),(26,'Smart Doorbell Ring Video Doorbell Pro',199.99,5,'DISACTIVE'),(27,'Wireless Keyboard Logitech K780',79.99,8,'DISACTIVE'),(29,'Portable Projector Anker Nebula Capsule II',399.99,6,'DISACTIVE'),(30,'Robot Lawn Mower Husqvarna Automower 315X',1499.99,7,'DISACTIVE'),(31,'E-Reader Amazon Kindle Paperwhite',129.99,10,'DISACTIVE'),(32,'Gaming Mouse Razer DeathAdder V2',69,15,'DISACTIVE'),(33,'Wireless Security Camera Arlo Pro 4',249.99,18,'DISACTIVE'),(34,'Smart Scale Withings Body+',79.99,20,'ACTIVE'),(35,'Electric Skateboard Boosted Stealth',1599.99,8,'DISACTIVE');
+INSERT INTO `product` VALUES (1,'Laptop Dell XPS 15',25,1899.99,1,'ACTIVE'),(2,'Smartphone Samsung Galaxy S22',2,999.99,19,'ACTIVE'),(3,'Smart TV LG OLED C1 55\"',3,1499.99,10,'ACTIVE'),(4,'Tablet Apple iPad Pro 12.9\"',4,1099.99,15,'ACTIVE'),(5,'Wireless Headphones Sony WH-1000XM4',5,400,8,'ACTIVE'),(6,'Gaming Console Sony PlayStation 5',5,499.99,10,'ACTIVE'),(7,'Smartwatch Apple Watch Series 7',4,399.99,29,'ACTIVE'),(8,'Desktop PC HP Pavilion',6,899.99,8,'ACTIVE'),(9,'Drone DJI Mavic Air 2',7,799.99,0,'ACTIVE'),(10,'Camera Sony Alpha A7 III',5,1999.99,5,'ACTIVE'),(11,'Smart Speaker Amazon Echo',8,99.99,4,'DISACTIVE'),(12,'Fitness Tracker Fitbit Charge 5',9,149.99,3,'DISACTIVE'),(13,'Wireless Earbuds Apple AirPods Pro',4,249.99,12,'DISACTIVE'),(14,'Robot Vacuum Cleaner iRobot Roomba',10,299.99,6,'DISACTIVE'),(15,'Action Camera GoPro Hero 10',11,449.99,0,'DISACTIVE'),(16,'Wireless Router TP-Link Archer AX6000',12,299.99,13,'ACTIVE'),(17,'External SSD Samsung T7 1TB',2,169.99,22,'ACTIVE'),(18,'Monitor Dell UltraSharp U2720Q 27\"',25,449.99,0,'ACTIVE'),(19,'Graphics Card NVIDIA GeForce RTX 3080',13,699.99,8,'ACTIVE'),(20,'Smart Thermostat Nest Learning Thermostat',14,249.99,15,'ACTIVE'),(21,'Electric Scooter Xiaomi Mi Electric Scooter Pro 2',15,499.99,10,'ACTIVE'),(22,'Wireless Mouse Logitech MX Master 3',19,99.99,0,'ACTIVE'),(23,'Portable Charger Anker PowerCore 26800mAh',16,59.99,25,'ACTIVE'),(24,'VR Headset Oculus Quest 2',1,299.99,18,'ACTIVE'),(25,'Compact Camera Canon PowerShot G7 X Mark III',17,699.99,10,'ACTIVE'),(26,'Smart Doorbell Ring Video Doorbell Pro',18,199.99,5,'DISACTIVE'),(27,'Wireless Keyboard Logitech K780',19,79.99,8,'DISACTIVE'),(29,'Portable Projector Anker Nebula Capsule II',16,399.99,6,'DISACTIVE'),(30,'Robot Lawn Mower Husqvarna Automower 315X',20,1499.99,7,'DISACTIVE'),(31,'E-Reader Amazon Kindle Paperwhite',8,129.99,10,'DISACTIVE'),(32,'Gaming Mouse Razer DeathAdder V2',21,69,15,'DISACTIVE'),(33,'Wireless Security Camera Arlo Pro 4',22,249.99,18,'DISACTIVE'),(34,'Smart Scale Withings Body+',23,79.99,20,'ACTIVE'),(35,'Electric Skateboard Boosted Stealth',24,1599.99,8,'DISACTIVE'),(36,'iPhone 17',4,1234,10,'ACTIVE');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,19 +107,20 @@ DROP TABLE IF EXISTS `sales`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sales` (
-  `idSales` int NOT NULL AUTO_INCREMENT,
-  `idCustomer` int DEFAULT NULL,
-  `idSeller` int DEFAULT NULL,
-  `numberSales` varchar(244) NOT NULL,
-  `saleDate` date NOT NULL,
-  `amount` double NOT NULL,
-  `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
-  PRIMARY KEY (`idSales`),
-  KEY `idCustomer` (`idCustomer`),
-  KEY `sales_ibfk_2` (`idSeller`),
-  CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`idCustomer`) REFERENCES `customer` (`idCustomer`),
-  CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`idSeller`) REFERENCES `seller` (`idSeller`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3;
+                         `idSales` int NOT NULL AUTO_INCREMENT,
+                         `idCustomer` int DEFAULT NULL,
+                         `idSeller` int DEFAULT NULL,
+                         `numberSales` varchar(244) NOT NULL,
+                         `saleDate` date NOT NULL,
+                         `amount` double NOT NULL,
+                         `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
+                         `payment_type` enum('CASH','CARD') NOT NULL DEFAULT 'CASH',
+                         PRIMARY KEY (`idSales`),
+                         KEY `idCustomer` (`idCustomer`),
+                         KEY `sales_ibfk_2` (`idSeller`),
+                         CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`idCustomer`) REFERENCES `customer` (`idCustomer`),
+                         CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`idSeller`) REFERENCES `seller` (`idSeller`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +129,7 @@ CREATE TABLE `sales` (
 
 LOCK TABLES `sales` WRITE;
 /*!40000 ALTER TABLE `sales` DISABLE KEYS */;
-INSERT INTO `sales` VALUES (2,17,31,'0002','2024-04-06',1049.97,'ACTIVE'),(3,12,31,'0003','2024-04-06',2599.95,'ACTIVE'),(4,12,31,'0004','2024-04-06',1349.97,'ACTIVE'),(5,4,31,'0005','2024-04-07',2099.94,'ACTIVE'),(6,4,31,'0006','2024-04-08',1749.95,'ACTIVE'),(7,4,31,'0007','2024-04-09',1749.95,'ACTIVE'),(8,4,31,'0008','2024-04-01',799.98,'ACTIVE'),(9,4,31,'0009','2024-04-01',10999.9,'ACTIVE'),(10,3,31,'0010','2024-04-06',1899.81,'ACTIVE'),(11,3,31,'0011','2024-04-03',1999.98,'ACTIVE'),(12,3,31,'0012','2024-04-04',999.99,'ACTIVE'),(13,5,31,'0013','2024-03-06',1499.99,'ACTIVE'),(14,5,31,'0014','2024-03-06',1499.99,'ACTIVE'),(15,5,31,'0015','2024-03-06',1499.99,'ACTIVE'),(16,5,31,'0016','2024-03-07',4399.96,'ACTIVE'),(17,5,31,'0017','2024-03-08',4399.96,'ACTIVE'),(18,4,31,'0018','2024-04-06',699.98,'ACTIVE'),(19,4,31,'0019','2024-04-16',699.98,'ACTIVE'),(20,5,31,'0020','2024-03-06',5699.97,'ACTIVE'),(21,5,31,'0021','2024-03-25',699.98,'ACTIVE'),(22,14,31,'0022','2023-04-10',6749.85,'ACTIVE'),(23,25,31,'0023','2024-04-10',199.98,'ACTIVE'),(24,35,31,'0024','2024-04-10',999.99,'ACTIVE'),(25,34,31,'0025','2024-04-10',999.99,'ACTIVE'),(26,4,31,'0026','2024-04-24',12549.85,'ACTIVE'),(27,10,31,'0027','2024-04-24',36949.69,'ACTIVE');
+INSERT INTO `sales` VALUES (2,17,31,'0002','2024-04-06',1049.97,'ACTIVE','CASH'),(3,12,31,'0003','2024-04-06',2599.95,'ACTIVE','CASH'),(4,12,31,'0004','2024-04-06',1349.97,'ACTIVE','CASH'),(5,4,31,'0005','2024-04-07',2099.94,'ACTIVE','CASH'),(6,4,31,'0006','2024-04-08',1749.95,'ACTIVE','CASH'),(7,4,31,'0007','2024-04-09',1749.95,'ACTIVE','CASH'),(8,4,31,'0008','2024-04-01',799.98,'ACTIVE','CASH'),(9,4,31,'0009','2024-04-01',10999.9,'ACTIVE','CASH'),(10,3,31,'0010','2024-04-06',1899.81,'ACTIVE','CASH'),(11,3,31,'0011','2024-04-03',1999.98,'ACTIVE','CASH'),(12,3,31,'0012','2024-04-04',999.99,'ACTIVE','CASH'),(13,5,31,'0013','2024-03-06',1499.99,'ACTIVE','CASH'),(14,5,31,'0014','2024-03-06',1499.99,'ACTIVE','CASH'),(15,5,31,'0015','2024-03-06',1499.99,'ACTIVE','CASH'),(16,5,31,'0016','2024-03-07',4399.96,'ACTIVE','CASH'),(17,5,31,'0017','2024-03-08',4399.96,'ACTIVE','CASH'),(18,4,31,'0018','2024-04-06',699.98,'ACTIVE','CASH'),(19,4,31,'0019','2024-04-16',699.98,'ACTIVE','CASH'),(20,5,31,'0020','2024-03-06',5699.97,'ACTIVE','CASH'),(21,5,31,'0021','2024-03-25',699.98,'ACTIVE','CASH'),(22,14,31,'0022','2023-04-10',6749.85,'ACTIVE','CASH'),(23,25,31,'0023','2024-04-10',199.98,'ACTIVE','CASH'),(24,35,31,'0024','2024-04-10',999.99,'ACTIVE','CASH'),(25,34,31,'0025','2024-04-10',999.99,'ACTIVE','CASH'),(26,4,31,'0026','2024-04-24',12549.85,'ACTIVE','CASH'),(27,10,31,'0027','2024-04-24',36949.69,'ACTIVE','CASH'),(29,3,1,'0028','2025-12-08',3799.98,'ACTIVE','CASH'),(30,3,1,'0030','2025-12-08',3799.98,'ACTIVE','CASH'),(31,4,1,'0031','2025-12-08',2999.98,'ACTIVE','CASH'),(32,3,1,'0032','2025-12-08',3799.98,'ACTIVE','CASH'),(33,3,1,'0033','2025-12-08',3799.98,'ACTIVE','CASH');
 /*!40000 ALTER TABLE `sales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,17 +141,17 @@ DROP TABLE IF EXISTS `sales_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sales_details` (
-  `idSalesDetails` int NOT NULL AUTO_INCREMENT,
-  `idSales` int DEFAULT NULL,
-  `idProduct` int DEFAULT NULL,
-  `quantity` int NOT NULL,
-  `priceSale` double NOT NULL,
-  PRIMARY KEY (`idSalesDetails`),
-  KEY `idProduct` (`idProduct`),
-  KEY `sales_ibfk` (`idSales`),
-  CONSTRAINT `sales_details_ibfk_2` FOREIGN KEY (`idProduct`) REFERENCES `product` (`idProduct`),
-  CONSTRAINT `sales_ibfk` FOREIGN KEY (`idSales`) REFERENCES `sales` (`idSales`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb3;
+                                 `idSalesDetails` int NOT NULL AUTO_INCREMENT,
+                                 `idSales` int DEFAULT NULL,
+                                 `idProduct` int DEFAULT NULL,
+                                 `quantity` int NOT NULL,
+                                 `priceSale` double NOT NULL,
+                                 PRIMARY KEY (`idSalesDetails`),
+                                 KEY `idProduct` (`idProduct`),
+                                 KEY `sales_ibfk` (`idSales`),
+                                 CONSTRAINT `sales_details_ibfk_2` FOREIGN KEY (`idProduct`) REFERENCES `product` (`idProduct`),
+                                 CONSTRAINT `sales_ibfk` FOREIGN KEY (`idSales`) REFERENCES `sales` (`idSales`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +160,7 @@ CREATE TABLE `sales_details` (
 
 LOCK TABLES `sales_details` WRITE;
 /*!40000 ALTER TABLE `sales_details` DISABLE KEYS */;
-INSERT INTO `sales_details` VALUES (2,2,5,3,349.99),(3,3,7,4,399.99),(4,3,2,1,999.99),(5,4,15,3,449.99),(6,5,5,6,349.99),(7,6,5,5,349.99),(8,7,5,5,349.99),(9,8,7,2,399.99),(10,9,16,5,299.99),(11,9,1,5,1899.99),(12,10,22,19,99.99),(13,11,2,2,999.99),(14,12,2,1,999.99),(15,13,3,1,1499.99),(16,14,3,1,1499.99),(17,15,3,1,1499.99),(18,16,4,4,1099.99),(19,17,4,4,1099.99),(20,18,5,2,349.99),(21,19,5,2,349.99),(22,20,1,3,1899.99),(23,21,5,2,349.99),(24,22,18,12,449.99),(25,22,15,3,449.99),(26,23,22,1,99.99),(27,23,11,1,99.99),(28,24,2,1,999.99),(29,25,2,1,999.99),(30,26,5,7,400),(31,26,8,10,899.99),(32,26,12,5,149.99),(33,27,2,5,999.99),(34,27,9,15,799.99),(35,27,1,5,1899.99),(36,27,10,5,1999.99),(37,27,15,1,449.99);
+INSERT INTO `sales_details` VALUES (2,2,5,3,349.99),(3,3,7,4,399.99),(4,3,2,1,999.99),(5,4,15,3,449.99),(6,5,5,6,349.99),(7,6,5,5,349.99),(8,7,5,5,349.99),(9,8,7,2,399.99),(10,9,16,5,299.99),(11,9,1,5,1899.99),(12,10,22,19,99.99),(13,11,2,2,999.99),(14,12,2,1,999.99),(15,13,3,1,1499.99),(16,14,3,1,1499.99),(17,15,3,1,1499.99),(18,16,4,4,1099.99),(19,17,4,4,1099.99),(20,18,5,2,349.99),(21,19,5,2,349.99),(22,20,1,3,1899.99),(23,21,5,2,349.99),(24,22,18,12,449.99),(25,22,15,3,449.99),(26,23,22,1,99.99),(27,23,11,1,99.99),(28,24,2,1,999.99),(29,25,2,1,999.99),(30,26,5,7,400),(31,26,8,10,899.99),(32,26,12,5,149.99),(33,27,2,5,999.99),(34,27,9,15,799.99),(35,27,1,5,1899.99),(36,27,10,5,1999.99),(37,27,15,1,449.99),(41,30,1,2,1899.99),(42,31,3,2,1499.99),(43,32,1,2,1899.99),(44,33,1,2,1899.99);
 /*!40000 ALTER TABLE `sales_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,14 +172,14 @@ DROP TABLE IF EXISTS `seller`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `seller` (
-  `idSeller` int NOT NULL AUTO_INCREMENT,
-  `dni` varchar(8) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `phone_number` varchar(10) DEFAULT NULL,
-  `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
-  `user` varchar(16) DEFAULT NULL,
-  PRIMARY KEY (`idSeller`),
-  UNIQUE KEY `idx_uk` (`dni`)
+                          `idSeller` int NOT NULL AUTO_INCREMENT,
+                          `dni` varchar(8) NOT NULL,
+                          `name` varchar(20) NOT NULL,
+                          `phone_number` varchar(10) DEFAULT NULL,
+                          `state` enum('ACTIVE','DISACTIVE') DEFAULT 'ACTIVE',
+                          `user` varchar(16) DEFAULT NULL,
+                          PRIMARY KEY (`idSeller`),
+                          UNIQUE KEY `idx_uk` (`dni`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -173,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-24 17:20:54
+-- Dump completed on 2025-12-08 20:06:22
