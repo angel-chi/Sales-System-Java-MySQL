@@ -157,7 +157,10 @@ La pantalla principal muestra las siguientes ventanas
 # VIDEO
 https://alumnosuady-my.sharepoint.com/:f:/g/personal/a24216355_alumnos_uady_mx/IgBk0ufzkngPSqZhsgHTjWgAARKpVGoDS4ZfrLV5QiUZVPM?e=mbIGDV
 # DIAGRAMA UML
+<p align="center">
+  <img src="src/main/resources/images/PROYECTO-SYSTEMSALES/proyectofinalPoo.drawio.png" />
 
+</p>
 
 
 
