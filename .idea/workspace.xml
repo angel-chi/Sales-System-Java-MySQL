@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Traducciones.">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/dao/CustomerDAO.java" afterDir="false" />
-    </list>
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="Traducciones." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -138,22 +136,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707617517378</updated>
-    </task>
-    <task id="LOCAL-00005" summary="fea: add crud and classes">
-      <option name="closed" value="true" />
-      <created>1707789565050</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1707789565050</updated>
-    </task>
-    <task id="LOCAL-00006" summary="fea: add combobox">
-      <option name="closed" value="true" />
-      <created>1707875046431</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1707875046431</updated>
     </task>
     <task id="LOCAL-00007" summary="fea: add create seller">
       <option name="closed" value="true" />
@@ -531,7 +513,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765249924167</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Traducciones.">
+      <option name="closed" value="true" />
+      <created>1765250268133</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1765250268133</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Traducciones.">
+      <option name="closed" value="true" />
+      <created>1765250503831</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1765250503831</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
