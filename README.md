@@ -206,7 +206,7 @@ Dentro del nuevo diseño de la interfaz dentro de las ventanas de esta se añadi
 Cada que se genere una nueva venta el programa actualizarà la existencia del producto, haciendo que al entrar nuevamente a generar una venta diferente la cantidad del producto vendido se haya reducido.
 
 #### Propuesta (no implementada) Generar un recibo
-Desde la ventana de generaciòn de venta permita decidir si se genera un recibo o no, asì que se deberìa implementar una funciòn, que dependiendo del nùmero de serie se acceda al registro de lo que se incluyo en esa venta, escribienod en la factura cada unidad de lo que fue comprado, el precio y los datos del cliente, vendedor y cada producto. Y està tendrà el mismo funcionamiento para cualquier registro de venta pero los resultados cambiaràn dependiendo del nùmero de serie de la venta.
+Desde la ventana de generaciòn de venta permita decidir si se genera un recibo o no, asì que se deberìa implementar una funciòn, que dependiendo del nùmero de serie se acceda al registro de lo hizo se incluyo en esa venta, escribienod en la factura cada unidad de lo que fue comprado, el precio y los datos del cliente, vendedor y cada producto. Y està tendrà el mismo funcionamiento para cualquier registro de venta pero los resultados cambiaràn dependiendo del nùmero de serie de la venta.
 
 ## ⿻ Diagrama UML
 [Diagrama UML](https://drive.google.com/file/d/1XxLzHsK2-wGoHITZquxy-Mo3jaoV9pt7/view?usp=drive_link)
