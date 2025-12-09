@@ -152,19 +152,19 @@ https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793
 ---
 ##  Link del video
 
+### Parte 1 (Rivera):
+[Video Presentacion Proyecto POO](https://youtu.be/4bgbAhCN_bg)
+------
+
+### Parte 2 (Polanco):
+[Presentación Sales System Java](https://youtu.be/d2rRIzC-bNg)
+-----
+
+
 ---
 ##  Diagrama UML
-<details>
-  <summary>Diagrama UML</summary>
 
-  <div style="overflow-x: auto; max-width: 100%;">
 
-    <img src="UML/UML.svg" 
-         alt="Diagrama de Clases UML del Proyecto" 
-         width="1200px" />
-
-  </div>
-</details>
 
 ##  Errores encontrados y soluciones implementadas
 
@@ -242,11 +242,18 @@ https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793
   * Se actualizó la interfaz de agregar vendedores para incluir la selección del rol (vendedor o gerente).
 * **Resultado:**
   * Solo los gerentes pueden acceder a la gestión de productos y vendedores, mientras que los vendedores solo pueden realizar ventas y gestionar clientes.
----
 
-### Link de Polanco: 
-[Presentación Sales System Java](https://youtu.be/d2rRIzC-bNg)
----
+### 4.- Propuesta de Mejora Futura (No Implementada): Módulo de Devoluciones y Cancelaciones
+* **Objetivo:** Implementar un mecanismo que permita corregir errores humanos o gestionar retornos de mercancía, asegurando que el sistema refleje siempre el inventario real y evitando discrepancias entre el dinero en caja y el stock físico.
+* **Estrategia de Implementación Propuesta:**
+
+* *Nuevo Estado Transaccional: Agregar un valor RETURNED (Devuelto) al Enum State de la clase Sales. Esto permitiría marcar una venta como cancelada sin eliminarla físicamente de la base de datos, manteniendo el registro histórico.*
+
+* *Lógica de Reversión de Stock (Logística Inversa): Implementar un método en el SalesController que, al confirmar una devolución, capture la lista de productos de esa venta y llame al ProductDAO para realizar una operación de suma al stock (re-stocking), devolviendo los artículos al inventario disponible.*
+
+* *Seguridad: Habilitar esta función únicamente para el rol de Manager (Gerente) mediante una validación de permisos antes de ejecutar la anulación.*
+
+* *Resultado Esperado: El sistema sería capaz de gestionar el ciclo de vida completo del producto (entrada, venta y retorno), permitiendo auditorías más precisas y evitando la pérdida de inventario por ventas canceladas manualmente*
 
 # 📧 Contacto
 Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
