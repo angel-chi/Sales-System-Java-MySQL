@@ -150,6 +150,7 @@ La pantalla principal muestra las siguientes ventanas: (¡Ya traducidas al espa�
 Se implementa la clase base AbstractBaseDAO\<T>, la cual centraliza la lógica repetitiva de las operaciones CRUD. Se aplican dos principios SOLID:
 * SSP (Single Responsability Principle): La clase base se encarga únicamente de la gestión de conexiones, manejo de excepciones SQL y ejecución de sentencias, mientras que sus hijas solo definen consultas específicas y mapeo de objetos!
 * OCP (Open / Closed Principle): El sistema está abierto a la extensión pero cerrado a la modificación de la lógica base de persistencia.
+
 A su vez, se utilizó el patrón de diseño Template Method Pattern, porque la clase abstracta define el "esqueleto", delegando los pasos específicos a las subclases concretas.
 
 ## AbstractCRUDController\<T>
@@ -157,7 +158,7 @@ Se crea la clase AbstractCRUDController\<T> con el mismo objetivo que el punto a
 * DRY (Don't Repeat Yourself): Se eliminó una cantidad magistral de lógica repetida en la validación de formularios, limpieza de campos, actualización de tablas y manejo de alertas de usuario.
 * Polimorfismo: Aprovechando el polimorfismo de Java, un controlador base puede gestionar el flujo de cualquier entidad (Product, Customer, Seller).
 
-## validacionEntrada
+## validacionEntrada()
 Se implementa un interface con un método para validar si un campo es vacío. Ideal para poder implementarse a lo largo del código.
 
 ## Menú de Help
