@@ -9,21 +9,21 @@
 </p>
 
 <!-- TOC -->
-* [📑 Descripcion](#-descripcion)
+* [📑 Descripción](#-descripcion)
 * [💻 Entorno](#-entorno)
-* [🚀 Instalacion](#-instalacion)
+* [🚀 Instalación](#-instalacion)
     * [Instalacion del JDK 17](#instalación-del-jdk-17)
-    * [Configuracion de la Base de Datos](#configuración-de-la-base-de-datos)
-    * [Ejecucion del Proyecto](#ejecución-del-proyecto)
-    * [Modificacion de las Vistas con Scene Builder](#modificación-de-las-vistas-con-scene-builder)
-* [🧬 Estructura Basica](#-estructura-basica)
+    * [Configuración de la Base de Datos](#configuración-de-la-base-de-datos)
+    * [Ejecución del Proyecto](#ejecución-del-proyecto)
+    * [Modificación de las Vistas con Scene Builder](#modificación-de-las-vistas-con-scene-builder)
+* [🧬 Estructura Básica](#-estructura-basica)
 * [🗄️ Diagrama de Base de Datos](#-diagrama-de-base-de-datos)
 * [💡 Fucionalidades](#-fucionalidades)
-    * [Inicio de Sesion](#inicio-de-sesión)
+    * [Inicio de Sesión](#inicio-de-sesión)
     * [Pantalla Principal](#pantalla-principal)
-        * [Sales](#sales)
-        * [Management](#management)
-        * [Reports](#reports)
+        * [Ventas](#sales)
+        * [Administración](#management)
+        * [Reportes](#reports)
 * [📧 Contacto](#-contacto)
 * [📝 Licencia](#-licencia)
 <!-- TOC -->
@@ -146,14 +146,14 @@ La pantalla principal muestra las siguientes ventanas: (¡Ya traducidas al espa�
 
 # 🏗️ Nuevas Implementaciones
 
-## AbstractBaseDAO<T>
-Se implementa la clase base AbstractBaseDAO<T>, la cual centraliza la lógica repetitiva de las operaciones CRUD. Se aplican dos principios SOLID:
+## AbstractBaseDAO\<T>
+Se implementa la clase base AbstractBaseDAO\<T>, la cual centraliza la lógica repetitiva de las operaciones CRUD. Se aplican dos principios SOLID:
 * SSP (Single Responsability Principle): La clase base se encarga únicamente de la gestión de conexiones, manejo de excepciones SQL y ejecución de sentencias, mientras que sus hijas solo definen consultas específicas y mapeo de objetos!
 * OCP (Open / Closed Principle): El sistema está abierto a la extensión pero cerrado a la modificación de la lógica base de persistencia.
 A su vez, se utilizó el patrón de diseño Template Method Pattern, porque la clase abstracta define el "esqueleto", delegando los pasos específicos a las subclases concretas.
 
-## AbstractCRUDController<T>
-Se crea la clase AbstractCRUDController<T> con el mismo objetivo que el punto anterior, estandarizar el flujo de interacción en las vistas de gestión. Otros principios que se utilizan son:
+## AbstractCRUDController\<T>
+Se crea la clase AbstractCRUDController\<T> con el mismo objetivo que el punto anterior, estandarizar el flujo de interacción en las vistas de gestión. Otros principios que se utilizan son:
 * DRY (Don't Repeat Yourself): Se eliminó una cantidad magistral de lógica repetida en la validación de formularios, limpieza de campos, actualización de tablas y manejo de alertas de usuario.
 * Polimorfismo: Aprovechando el polimorfismo de Java, un controlador base puede gestionar el flujo de cualquier entidad (Product, Customer, Seller).
 
