@@ -1,5 +1,6 @@
 package org.borghisales.salessysten.controllers;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -7,6 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,7 +28,7 @@ public class MenuController {
 
 
     static Alert defaultAlert;
-    static ButtonType acceptButton = new ButtonType("Accept");
+    static ButtonType acceptButton = new ButtonType("ACEPTADO");
     public static HashMap<String, String > filePaths = new HashMap<>();
 
     void closeCurrentStage(Node node) {
@@ -34,26 +37,117 @@ public class MenuController {
     }
 
 
-    public void openNewStage(String fxmlFileName, String title) {
+    public static void openNewStage(String fxmlFileName, String title) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
-            Scene scene = new Scene(fxmlLoader.load());
+            FXMLLoader loader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
+            Parent root = loader.load();
+
             Stage stage = new Stage();
             stage.setTitle(title);
-            stage.setScene(scene);
-            configureStageCloseEvent(stage, fxmlFileName, title);
+
+            // Variables para dimensiones
+            double width, height, minWidth, minHeight;
+
+            // Switch case para determinar tamaños según la ventana que se abra
+            String from, titleForReturn;
+
+            switch (fxmlFileName) {
+                case MAIN_VIEW_FXML:
+                    width = 1200;
+                    height = 800;
+                    minWidth = 900;
+                    minHeight = 500;
+                    from = null;
+                    titleForReturn = null;
+                    break;
+                case MANAGEMENT_VIEW_FXML:
+                    width = 1200;
+                    height = 900;
+                    minWidth = 900;
+                    minHeight = 500;
+                    from = MAIN_VIEW_FXML;
+                    titleForReturn = "INICIO DE SESION";
+                    break;
+                case SELLER_VIEW_FXML:
+                    width = 1200;
+                    height = 800;
+                    minWidth = 800;
+                    minHeight = 500;
+                    from = MANAGEMENT_VIEW_FXML;
+                    titleForReturn = "Menu";
+                    break;
+                case PRODUCT_VIEW_FXML:
+                    width = 1100;
+                    height = 700;
+                    minWidth = 850;
+                    minHeight = 550;
+                    from = MANAGEMENT_VIEW_FXML;
+                    titleForReturn = "Menu";
+                    break;
+                case CUSTOMER_VIEW_FXML:
+                    width = 1000;
+                    height = 650;
+                    minWidth = 800;
+                    minHeight = 500;
+                    from = MANAGEMENT_VIEW_FXML;
+                    titleForReturn = "Menu";
+                    break;
+                case GENERATE_SALE_VIEW_FXML:
+                    width = 1800;
+                    height = 1200;
+                    minWidth = 1000;
+                    minHeight = 600;
+                    from = MANAGEMENT_VIEW_FXML;
+                    titleForReturn = "Menu";
+                    break;
+                case REPORT_VIEW_FXML:
+                    width = 2000;
+                    height = 1800;
+                    minWidth = 1500;
+                    minHeight = 1000;
+                    from = MANAGEMENT_VIEW_FXML;
+                    titleForReturn = "Menu";
+                    break;
+                case SALE_DETAIL_VIEW_FXML:
+                    width = 1200;
+                    height = 1000;
+                    minWidth = 700;
+                    minHeight = 500;
+                    from = REPORT_VIEW_FXML;
+                    titleForReturn = "Reporte";
+                    break;
+                default:
+                    width = 1200;
+                    height = 700;
+                    minWidth = 900;
+                    minHeight = 500;
+                    from = null;
+                    titleForReturn = null;
+                    break;
+            }
+            stage.setWidth(width);
+            stage.setHeight(height);
+            stage.setMinWidth(minWidth);
+            stage.setMinHeight(minHeight);
+
+            stage.setScene(new Scene(root));
             stage.show();
 
-        } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error loading the view: "+ e.getMessage());
-        }
-    }
+            // Evento para manejar el cierre de ventanas de manera correcta.
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent windowEvent) {
+                    stage.close();
+                    if(titleForReturn == null) return;
+                    if(from == null) return;
 
-    private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
-        if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
-            stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName),title);
+                    openNewStage(from, titleForReturn);
+                }
             });
+
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+            setAlert(Alert.AlertType.WARNING, "Error en la carga de la ventana: " + e.getMessage());
         }
     }
 
@@ -63,7 +157,7 @@ public class MenuController {
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
-        defaultAlert.setTitle("Information");
+        defaultAlert.setTitle("INFORMACIÓN");
         defaultAlert.setHeaderText(null);
         defaultAlert.getButtonTypes().setAll(acceptButton);
         defaultAlert.setContentText(argument);

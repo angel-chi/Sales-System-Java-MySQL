@@ -3,11 +3,11 @@ package org.borghisales.salessysten.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public record Product(int idProduct, String name, double price, int stock, State state) {
-    public enum State {ACTIVE(), DISACTIVE()}
+public record Product(int idProduct, String name, double price, int stock, State state, String marca) {
+    public enum State {ACTIVO(), INACTIVO()}
 
-    public Product(String name, double price, int stock, State state){
-        this(0,name,price,stock,state);
+    public Product(String name, double price, int stock, State state, String marca){
+        this(0,name,price,stock,state, marca);
     }
 
     public static Product fromResultSet(ResultSet rs) throws SQLException {
@@ -16,7 +16,8 @@ public record Product(int idProduct, String name, double price, int stock, State
         double price = rs.getDouble("price");
         int stock = rs.getInt("stock");
         State state = Product.State.valueOf(rs.getString("state"));
-        return new Product(id, name, price, stock, state);
+        String marca = rs.getString("marca");
+        return new Product(id, name, price, stock, state, marca);
     }
 
 

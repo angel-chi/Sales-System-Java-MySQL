@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 <p align="center">
-  <img src="src/main/resources/images/shopping cart.png" />
+  <img src="src/main/resources/images/PROYECTO-SYSTEMSALES/CDC2.png" />
 </p>
 
 <!-- TOC -->
@@ -106,48 +106,78 @@ Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder,
   <img src="src/main/resources/images/diagramaBD.png" />
 </p>
 
-
+# Cambios 
+El primer cambio que hice es el cambio de idioma a la ventana de inicio de sesion y la ventana de managmente, tambien se cambio el tamaño con el que se abre todo y aparte que los botones y demas cosas se ajustan al tamaño de la ventana asi que si el usuario lo mueve este cambia tambien de tamaño 
 # 💡 Fucionalidades
+1. Implementación de un campo (atributo) en la tabla seller para designar el un rol al vendedor (ADMIN o NORMAL), se usa encapsulamiento ya que el método update() en SellerDAO encapsula la lógica de actualización en la base de datos.
+2. Poder cambiar el rol del vendedor desde la ventana de gestion de vendedores
+3. Ajustes dinamicos de todos los campos en la ventana
+4. Distintas medidas de ventanas para una mejor experiencia
+5. Traduccion de la interfaz a español
+6. Descuento de 0% a 100% para un producto añadido en el carrito de venta y su descuento como el valor pos descuento actualizado este usa encapsulamiento ya que tiene variables privadas
 
+# Errores eliminados
+1. Se elimino el error del tamaño de la pantalla al abrir cada ventana y se soluciono con un switch en la funcion que abre las ventanas para que cada una de ellas tenga un distinto tamaño
+2. Error del voton de cancelar ventas que no funcionaba y se corrigio para que quite la venta ya añadida
+3. El nombre de la pestaña cuando vuelves no era el correcto y se tuvo que cambiar
 ## Inicio de sesión
-Para iniciar sesión, se requiere el DNI y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el DNI se asocia con 'dni' y la contraseña con 'user'.
+Para iniciar sesión, se requiere el Usuario y la contraseña del vendedor. En la base de datos, estos corresponden a los atributos del vendedor(seller), donde el Usuario se asocia con 'dni' y la contraseña con 'user'.
 
 <p align="center">
-  <img src="src/main/resources/images/login.png" />
+  <img src="src/main/resources/images/PROYECTO-SYSTEMSALES/INCIO%20DE%20SESION.png" />
 </p>
 
 ## Pantalla principal
 La pantalla principal muestra las siguientes ventanas
 * Menu: incluyen la posibilidad de salir o visitar la documentación
 <p align="center">
-  <img src="src/main/resources/images/menu.png" />
+  <img src="src/main/resources/images/PROYECTO-SYSTEMSALES/MENU%201.png" />
 </p>
 
-* Sales: Permite generar nuevas ventas.
+* VENTAS: Permite generar nuevas ventas.
 <p align="center">
-  <img src="src/main/resources/images/sales.png" />
+<img src="src/main/resources/images/PROYECTO-SYSTEMSALES/MENU%202.png" />
+<img src="src/main/resources/images/PROYECTO-SYSTEMSALES/CARRITO%20DE%20COMPRAS.png" />
+<img src="src/main/resources/images/PROYECTO-SYSTEMSALES/CDC%20DESCUENTO.png" />
 </p>
 
-* Management: Ofrece operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para clientes, productos y vendedores.
+* GESTION: Ofrece operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para clientes, productos y vendedores.
 <p align="center">
-  <img src="src/main/resources/images/management.png" />
+  <img src="src/main/resources/images/PROYECTO-SYSTEMSALES/MENU%203.png" />
+<img src="src/main/resources/images/PROYECTO-SYSTEMSALES/GESTION%20CLIENTES.png" />
+<img src="src/main/resources/images/PROYECTO-SYSTEMSALES/GC2.png" />
 </p>
 
-* Reports: Aquí se encuentran las operaciones de reportes y estadísticas relacionadas.
+* REPORTES: Aquí se encuentran las operaciones de reportes y estadísticas relacionadas.
 <p align="center">
-  <img src="src/main/resources/images/reports.png" />
+  <img src="src/main/resources/images/PROYECTO-SYSTEMSALES/MENU%204.png" />
+<img src="src/main/resources/images/PROYECTO-SYSTEMSALES/REPORTES%20VENTAS1.png" />
+<img src="src/main/resources/images/PROYECTO-SYSTEMSALES/REPORTE%20VENTAS2.png" />
+</p>
+# VIDEO
+https://alumnosuady-my.sharepoint.com/:f:/g/personal/a24216355_alumnos_uady_mx/IgBk0ufzkngPSqZhsgHTjWgAARKpVGoDS4ZfrLV5QiUZVPM?e=mbIGDV
+# DIAGRAMA UML
+<p align="center">
+  <img src="src/main/resources/images/PROYECTO-SYSTEMSALES/proyectofinalPoo.drawio.png" />
+
 </p>
 
-## Sales
-https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d-83f9b4807ac5
-## Management
-https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b-218c9ca25b10
-## Reports
-https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
+# Cambios (Alejandro)
 
-# 📧 Contacto
-Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
+Se han implementado cambios para mejorar el dinamismo de la UI y proveer más información más completa con respecto a los clientes para un hipotético uso.
 
+# Funcionalidades implementadas
+
+1. Se implementó el atributo "marca" a los productos para mostrar la información de modo más completo al usuario. Se aplicó encapsulación en el atributo debido a que en el DAO se encuentra la lógica necesaria para actualizar los datos de este campo.
+2. Se implementó el atributo "email" a los clientes para mejorar la comunicación de los mismos con los vendedores en un caso de uso hipotético. De igual manera se aplicó el encapsulamiento debido a que en la capa DAO se encuentra la lógica necesaria para modificar el campo.
+
+# Errores corregidos
+
+1. El primer error con el que me enfrenté en el código fue que no funcionaba el botón de la sección help del primer menú luego de inicar sesión. Lo solucioné por medio de la biblioteca de HostService de JavaFX, usando la fucnión showDocument para abrir el link al repositorio de GitHub.
+2. El segundo error con el que me enfrenté fue el hecho de que el programa no tenía un modo de pasar entre ventanas sin loguearse continuamente (es decir, si entrabas a una ventana no podías salir de la misma y para volver atraś tenías que reiniciar el programa). Lo que hice fue construir un event handler para el caso en el que hubiera un cierre de ventana para redirigr a la ventana anterior.
+
+# Cambios sugeridos
+Pues uno de los cambios principales que sugiero sería crear una clase "BaseController" para que sirva a modo de padre con todas las clases controlador, ya que algunas comparten ciertos métodos y atributos que se podrían beneficiar de ser heredados de una clase padre.
 
 # 📝 Licencia
 

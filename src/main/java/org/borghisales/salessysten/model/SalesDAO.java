@@ -84,7 +84,7 @@ public class SalesDAO {
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale details: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR GUARDANDO DETALLES DE VENTAS: " + e.getMessage());
             return false;
         }
 
@@ -106,7 +106,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR BSUCANDO VENTAS : " + e.getMessage());
         }
 
 
@@ -144,7 +144,7 @@ public class SalesDAO {
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR BUSCANDO VENTAS : " + e.getMessage());
         }
     }
 
@@ -170,7 +170,7 @@ public class SalesDAO {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR BUSCANDO VENTAS  : " + e.getMessage());
         }
 
     }

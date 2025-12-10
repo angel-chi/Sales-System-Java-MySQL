@@ -15,7 +15,7 @@ import java.util.List;
 public class SellerDAO implements CRUD<Seller> {
     @Override
     public boolean create(Seller entity) {
-        String sql = "INSERT INTO seller (dni,name,phone_number,state,user) values (?,?,?,?,?)";
+        String sql = "INSERT INTO seller (dni,name,phone_number,state,user,role) values (?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -24,21 +24,22 @@ public class SellerDAO implements CRUD<Seller> {
             pstmt.setString(2, entity.name());
             pstmt.setString(3, entity.phoneNumber());
             pstmt.setString(4, entity.state().name());
-            pstmt.setString(5, entity.user());
+            pstmt.setString(5, entity.role().name());
+            pstmt.setString(6, entity.user());
 
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller added correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "VENDEDOR AGREGADO");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error AGREGANDO VENDEDOR: ");
                 return false;
             }
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error AGREGANDO VENDEDOR: " + e.getMessage());
             return false;
         }
 
@@ -47,7 +48,7 @@ public class SellerDAO implements CRUD<Seller> {
 
     @Override
     public boolean update(Seller entity) {
-        String sql = "UPDATE seller set name=?,phone_number=?,state=?,user=? where dni=?";
+        String sql = "UPDATE seller set name=?,phone_number=?,state=?,user=?, role=? where dni=?";
 
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -57,20 +58,21 @@ public class SellerDAO implements CRUD<Seller> {
             pstmt.setString(2, entity.phoneNumber());
             pstmt.setString(3, entity.state().name());
             pstmt.setString(4, entity.user());
-            pstmt.setString(5, entity.dni());
+            pstmt.setString(5, entity.role().name());
+            pstmt.setString(6, entity.dni());
 
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller updated correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, " Vendedor actualizado correctamente");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando el vendedor ");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error actualizando al vendedor: " + e.getMessage());
             return false;
         }
 
@@ -90,17 +92,17 @@ public class SellerDAO implements CRUD<Seller> {
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller deleted correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "VENDEDOR ELIMINADO CORRECTAMENTE");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "ERROR ELIMINANDO VENDEDOR: ");
                 return false;
             }
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR ELIMINANDO VENDEDOR: " + e.getMessage());
             return false;
         }
 
@@ -122,7 +124,7 @@ public class SellerDAO implements CRUD<Seller> {
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR CONFIGURANDO LA TABLA DE VENDEDORES: " + e.getMessage());
         }
     }
 
@@ -130,7 +132,7 @@ public class SellerDAO implements CRUD<Seller> {
     public static boolean login(String dni,String user){
 
         if (dni ==null || user ==null || dni.isEmpty()||user.isEmpty() ){
-            MenuController.setAlert(Alert.AlertType.ERROR,"User or passsword empty");
+            MenuController.setAlert(Alert.AlertType.ERROR,"Usuario o Contraseña Vacia");
             return false;
         }
 
@@ -152,12 +154,12 @@ public class SellerDAO implements CRUD<Seller> {
 
                     return true;
                 }else{
-                    MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;
+                    MenuController.setAlert(Alert.AlertType.ERROR, "USUARIO NO ENCONTRADO") ;
                     return false;
                 }
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR BUSCANDO VENDEDOR: " + e.getMessage());
             return false;
         }
 

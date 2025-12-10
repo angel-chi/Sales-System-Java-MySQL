@@ -54,7 +54,7 @@ public class ProductDAO implements CRUD<Product>{
 
     @Override
     public boolean create(Product entity) {
-        String sql = "INSERT INTO product (name,price,stock,state) values (?,?,?,?)";
+        String sql = "INSERT INTO product (name,price,stock,state,marca) values (?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -63,20 +63,21 @@ public class ProductDAO implements CRUD<Product>{
             pstmt.setDouble(2, entity.price());
             pstmt.setInt(3, entity.stock());
             pstmt.setString(4, entity.state().name());
+            pstmt.setString(5, entity.marca());
 
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product added correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "PRODUCTO AÑADIDO CORRECTAMENTE");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "ERROR AÑADIENDO PRODUCTO: ");
                 return false;
             }
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error adding product: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR AÑADIENDO PRODUCTO: " + e.getMessage());
             return false;
         }
     }
@@ -84,7 +85,7 @@ public class ProductDAO implements CRUD<Product>{
 
     @Override
     public boolean update(Product entity) {
-        String sql = "UPDATE product set price=?,stock=?,state=? where name=?";
+        String sql = "UPDATE product set price=?,stock=?,state=?,marca=? where name=?";
 
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -94,21 +95,22 @@ public class ProductDAO implements CRUD<Product>{
             pstmt.setDouble(1, entity.price());
             pstmt.setInt(2, entity.stock());
             pstmt.setString(3, entity.state().name());
-            pstmt.setString(4, entity.name());
+            pstmt.setString(4, entity.marca());
+            pstmt.setString(5, entity.name());
 
 
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product updated correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "PRODUCTO ACTUALIZADO CORRECTAMENTE");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating product");
+                MenuController.setAlert(Alert.AlertType.ERROR, "ERROR ACTUALIZANDO PRODUCTO");
                 return false;
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating product: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR ACTUALIZANDO PRODUCTO: " + e.getMessage());
             return false;
         }
     }
@@ -126,17 +128,17 @@ public class ProductDAO implements CRUD<Product>{
             int rows_affected = pstmt.executeUpdate();
 
             if (rows_affected>0){
-                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Product deleted correctly");
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "PRODUCTO ELIMINADO CORRECTAMENTE");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting product: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "ERROR ELIMANDO PRODUCTO: ");
                 return false;
             }
 
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "You cannot delete this product because you already have a sale with it");
+            MenuController.setAlert(Alert.AlertType.ERROR, "No puedes eliminar este producto porque ya tienes una venta con él");
             return false;
         }
     }
@@ -157,7 +159,7 @@ public class ProductDAO implements CRUD<Product>{
 
             }
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR CONFIGURANDO LA TABLA DE VENDEDORES: " + e.getMessage());
         }
 
     }
@@ -184,7 +186,7 @@ public class ProductDAO implements CRUD<Product>{
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "ERROR BUSACNOD VENTAS : " + e.getMessage());
         }
 
 
