@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class SellerController implements Initializable {
     private final SellerDAO sellerDAO = new SellerDAO();
-    private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
+    private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVO, Seller.State.INACTIVO);
     private static ObservableList<Seller> sellers = null;
 
     @FXML
@@ -74,7 +74,7 @@ public class SellerController implements Initializable {
     }
 
     private void initializeComboBox() {
-        cbState.setValue(Seller.State.ACTIVE);
+        cbState.setValue(Seller.State.ACTIVO);
         cbState.setItems(stateList);
     }
 
@@ -143,7 +143,7 @@ public class SellerController implements Initializable {
 
     public void cleanCellsScreen(ActionEvent actionEvent) {
         MenuController.cleanCells(dni, name, phone, user);
-        cbState.setValue(Seller.State.ACTIVE);
+        cbState.setValue(Seller.State.ACTIVO);
         cbRole.setValue(Seller.Role.NORMAL);
         tableSellers.getSelectionModel().clearSelection();
     }

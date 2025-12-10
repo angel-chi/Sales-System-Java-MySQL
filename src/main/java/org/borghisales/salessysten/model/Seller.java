@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public record Seller(int idSeller, String dni, String name, String phoneNumber, State state, String user, Role role) {
-    public enum State {ACTIVE(), DISACTIVE()}
+    public enum State {ACTIVO(), INACTIVO()}
     public enum Role {NORMAL, ADMIN}
     public Seller(String dni, String name, String phoneNumber, State state, Role role, String user) {
         this(0, dni, name, phoneNumber, state, user, role);
@@ -21,4 +21,3 @@ public record Seller(int idSeller, String dni, String name, String phoneNumber, 
         return new Seller(id, dni, name, phoneNumber, state, user, role);
     }
 }
-

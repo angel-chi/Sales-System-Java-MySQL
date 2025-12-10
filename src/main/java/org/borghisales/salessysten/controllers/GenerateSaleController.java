@@ -297,7 +297,7 @@ public class GenerateSaleController extends MenuController implements Initializa
                 serial.getText(),
                 LocalDate.parse(date.getText()),
                 Double.parseDouble(totalText),
-                Sales.State.ACTIVE);
+                Sales.State.ACTIVO);
     }
 
     private boolean saveSaleAndDetails(Sales sales) {

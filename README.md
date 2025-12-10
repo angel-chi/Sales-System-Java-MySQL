@@ -162,8 +162,22 @@ https://alumnosuady-my.sharepoint.com/:f:/g/personal/a24216355_alumnos_uady_mx/I
 
 </p>
 
+# Cambios (Alejandro)
 
+Se han implementado cambios para mejorar el dinamismo de la UI y proveer más información más completa con respecto a los clientes para un hipotético uso.
 
+# Funcionalidades implementadas
+
+1. Se implementó el atributo "marca" a los productos para mostrar la información de modo más completo al usuario. Se aplicó encapsulación en el atributo debido a que en el DAO se encuentra la lógica necesaria para actualizar los datos de este campo.
+2. Se implementó el atributo "email" a los clientes para mejorar la comunicación de los mismos con los vendedores en un caso de uso hipotético. De igual manera se aplicó el encapsulamiento debido a que en la capa DAO se encuentra la lógica necesaria para modificar el campo.
+
+# Errores corregidos
+
+1. El primer error con el que me enfrenté en el código fue que no funcionaba el botón de la sección help del primer menú luego de inicar sesión. Lo solucioné por medio de la biblioteca de HostService de JavaFX, usando la fucnión showDocument para abrir el link al repositorio de GitHub.
+2. El segundo error con el que me enfrenté fue el hecho de que el programa no tenía un modo de pasar entre ventanas sin loguearse continuamente (es decir, si entrabas a una ventana no podías salir de la misma y para volver atraś tenías que reiniciar el programa). Lo que hice fue construir un event handler para el caso en el que hubiera un cierre de ventana para redirigr a la ventana anterior.
+
+# Cambios sugeridos
+Pues uno de los cambios principales que sugiero sería crear una clase "BaseController" para que sirva a modo de padre con todas las clases controlador, ya que algunas comparten ciertos métodos y atributos que se podrían beneficiar de ser heredados de una clase padre.
 
 # 📝 Licencia
 

@@ -12,6 +12,7 @@ import java.awt.*;
 import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
+import static org.borghisales.salessysten.Main.hostServices;
 
 public class ManagementController extends MenuController implements Initializable {
 
@@ -71,18 +72,16 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void help(ActionEvent actionEvent) {
         try {
-            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
+            hostServices.showDocument("https://github.com/angel-chi/Sales-System-Java-MySQL/branches");
         } catch (Exception e) {
             e.printStackTrace();
-            setAlert(Alert.AlertType.ERROR,"The URL could not be opened. Check your internet connection.");
+            setAlert(Alert.AlertType.ERROR,"La URL no puede ser abierta, comprueba tu conexión a internet");
         }
 
     }
 
     public void exit(ActionEvent actionEvent) {
-        openNewStage(MAIN_VIEW_FXML,"Login");
+        openNewStage(MAIN_VIEW_FXML,"Inicio de sesión");
         closeCurrentStage(sellerButton);
     }
-
-
 }

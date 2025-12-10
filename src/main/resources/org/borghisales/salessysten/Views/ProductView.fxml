@@ -38,6 +38,16 @@
                         <TextField fx:id="name" HBox.hgrow="ALWAYS"/>
                     </HBox>
 
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="MARCA:" underline="true" minWidth="60">
+                            <font>
+                                <Font size="17.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="marca" HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
                     <HBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="PRECIO:" underline="true" minWidth="60">
                             <font>
@@ -81,6 +91,7 @@
                 <columns>
                     <TableColumn fx:id="colId" text="IdProducto" prefWidth="120.0"/>
                     <TableColumn fx:id="colName" text="Nombre" prefWidth="150.0"/>
+                    <TableColumn fx:id="colMarca" text="Marca" prefWidth="150.0"/>
                     <TableColumn fx:id="colPrice" text="Precio" prefWidth="120.0"/>
                     <TableColumn fx:id="colStock" text="Existencias" prefWidth="120.0"/>
                     <TableColumn fx:id="colState" text="Estado" prefWidth="120.0"/>

@@ -54,7 +54,7 @@ public class ProductDAO implements CRUD<Product>{
 
     @Override
     public boolean create(Product entity) {
-        String sql = "INSERT INTO product (name,price,stock,state) values (?,?,?,?)";
+        String sql = "INSERT INTO product (name,price,stock,state,marca) values (?,?,?,?,?)";
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -63,6 +63,7 @@ public class ProductDAO implements CRUD<Product>{
             pstmt.setDouble(2, entity.price());
             pstmt.setInt(3, entity.stock());
             pstmt.setString(4, entity.state().name());
+            pstmt.setString(5, entity.marca());
 
             int rows_affected = pstmt.executeUpdate();
 
@@ -84,7 +85,7 @@ public class ProductDAO implements CRUD<Product>{
 
     @Override
     public boolean update(Product entity) {
-        String sql = "UPDATE product set price=?,stock=?,state=? where name=?";
+        String sql = "UPDATE product set price=?,stock=?,state=?,marca=? where name=?";
 
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -94,7 +95,8 @@ public class ProductDAO implements CRUD<Product>{
             pstmt.setDouble(1, entity.price());
             pstmt.setInt(2, entity.stock());
             pstmt.setString(3, entity.state().name());
-            pstmt.setString(4, entity.name());
+            pstmt.setString(4, entity.marca());
+            pstmt.setString(5, entity.name());
 
 
             int rows_affected = pstmt.executeUpdate();

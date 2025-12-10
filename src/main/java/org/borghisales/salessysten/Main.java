@@ -1,6 +1,7 @@
 package org.borghisales.salessysten;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.controllers.MenuController;
 
@@ -10,6 +11,8 @@ import static org.borghisales.salessysten.controllers.MenuController.*;
 
 public class Main extends Application {
     MenuController mc = new MenuController();
+    public static HostServices hostServices;
+
     @Override
     public void init() throws Exception {
         super.init();
@@ -24,6 +27,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         mc.openNewStage(MAIN_VIEW_FXML,"INICIO DE SESION");
+        hostServices = getHostServices();
     }
 
     public static void main(String[] args) {

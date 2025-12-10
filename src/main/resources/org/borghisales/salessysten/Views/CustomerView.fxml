@@ -61,6 +61,15 @@
                     </HBox>
 
                     <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="CORREO:" underline="true" minWidth="80">
+                            <font>
+                                <Font size="17.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="email" HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="ESTADO:" underline="true" minWidth="80">
                             <font>
                                 <Font size="17.0"/>
@@ -82,6 +91,7 @@
                     <TableColumn fx:id="colId" text="IDCliente" prefWidth="100.0"/>
                     <TableColumn fx:id="colDni" text="Usuario" prefWidth="120.0"/>
                     <TableColumn fx:id="colName" text="Nombre" prefWidth="180.0"/>
+                    <TableColumn fx:id="colEmail" text="Correo" prefWidth="180.0"/>
                     <TableColumn fx:id="colAddress" text="Dirección" prefWidth="200.0"/>
                     <TableColumn fx:id="colState" text="Estado" prefWidth="120.0"/>
                 </columns>
